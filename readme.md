@@ -32,3 +32,10 @@ In production, there is currently no preferred way for daemonizing the server.
 * **Sascha Zimmermann** <zimsa@uni-koblenz.de> Developer
 
 Please use our [Slack](https://iwm-unimedmainz.slack.com/messages/general/) for communication and [Trello](https://trello.com/b/NhCAw37H/gsa-softwareentwicklung) for Development-related Task-Tracking. There is also a [Trello Board](https://trello.com/b/GNS8jOrk/gsa-allgemein) for more general purposes.
+
+## Links
+* GitLab https://gitlab.uni-koblenz.de/iwm/gsa-online-plus
+* Project-Slack https://iwm-unimedmainz.slack.com/messages/general/
+* Software-Development Trello-Board https://trello.com/b/NhCAw37H/gsa-softwareentwicklung
+* General Trello-Board https://trello.com/b/GNS8jOrk/gsa-allgemein
+* BSCW https://bscw.uni-koblenz.de/bscw/bscw.cgi/3262854?client_size=1855x971
