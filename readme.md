@@ -31,7 +31,14 @@ In production, there is currently no preferred way for daemonizing the server.
 * **Marco Brack** <mbrack@uni-koblenz.de> Developer
 * **Sascha Zimmermann** <zimsa@uni-koblenz.de> Developer
 
-Please use our [Slack](https://iwm-unimedmainz.slack.com/messages/general/) for communication and [Trello](https://trello.com/b/NhCAw37H/gsa-softwareentwicklung) for Development-related Task-Tracking. There is also a [Trello Board](https://trello.com/b/GNS8jOrk/gsa-allgemein) for more general purposes.
+* **Peter Ferdinand** <ferdinand@uni-koblenz.de> Head of IWM
+* **Sergei Pachtchenko** <gektor@uni-koblenz.de>
+* **Ingo Dahn** <dahn@uni-koblenz.de>
+* **Astrid Wirth**
+* **Katje Böhme**
+* **Rüdiger Zwerenz**
+
+Please use our [Slack](https://iwm-unimedmainz.slack.com/messages/general/) or email for communication and [Trello](https://trello.com/b/NhCAw37H/gsa-softwareentwicklung) for Development-related Task-Tracking. There is also a [Trello Board](https://trello.com/b/GNS8jOrk/gsa-allgemein) for more general purposes.
 
 ## Links
 * GitLab https://gitlab.uni-koblenz.de/iwm/gsa-online-plus
