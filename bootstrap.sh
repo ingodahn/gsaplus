@@ -2,7 +2,7 @@
 
 apt-get -y update
 
-apt-get install -y mongodb ruby-dev zlib1g-dev libsqlite3-dev nodejs build-essential libxml2 libxml2-dev libxslt1-dev npm fish
+apt-get install -y mongodb ruby-dev zlib1g-dev libsqlite3-dev nodejs build-essential libxml2 libxml2-dev libxslt1-dev nodejs nodejs-legacy npm git fish
 gem install bundler
 gem install rails
 npm install -g bower
