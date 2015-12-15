@@ -22,5 +22,8 @@ module GSAOnlinePlus
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Include bower-dependencies in asset-pipeline
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
   end
 end
