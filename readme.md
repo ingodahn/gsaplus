@@ -17,6 +17,8 @@ Please make sure to run everything but git inside the VM, to ensure compatibilit
 
 In production, there is currently no preferred way for daemonizing the server.
 
+If you make changes to the Gem- or Bower-Dependencies, you'll have to run `bundle install` or `bower install` respectively.
+
 ## Glossary
 * **User** Abstract term for a person using the system
 * **Patient** Primary users of the system
