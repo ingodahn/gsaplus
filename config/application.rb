@@ -24,6 +24,6 @@ module GSAOnlinePlus
     config.active_record.raise_in_transactional_callbacks = true
 
     # Include bower-dependencies in asset-pipeline
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
   end
 end

@@ -20,4 +20,4 @@
 .vagrant
 
 # Ignore Bower
-vendor/assets/components
+vendor/assets/bower_components
