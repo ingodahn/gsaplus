@@ -10,11 +10,15 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
- *= require tether/src/css/tether
- *= require bootstrap/scss/bootstrap
  */
+//= require_tree .
+//= require_self
+//= require tether/src/css/tether
+//= require bootstrap/scss/bootstrap
+//= require bootstrap-material-design/scss/bootstrap-material-design
+
+$brand-primary: #0f0;
 
 @import "tether/src/css/tether";
-@import "bootstrap/scss/bootstrap";
+// @import "bootstrap/scss/bootstrap";
+@import "bootstrap-material-design/scss/bootstrap-material-design";
