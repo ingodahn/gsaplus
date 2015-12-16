@@ -12,7 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require tether/src/css/tether
  *= require bootstrap/scss/bootstrap
  */
 
-@import "bootstrap/scss/bootstrap"
+@import "tether/src/css/tether";
+@import "bootstrap/scss/bootstrap";
