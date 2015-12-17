@@ -36,9 +36,9 @@ If you make changes to the Gem- or Bower-Dependencies, you'll have to run `bundl
 * **Peter Ferdinand** <ferdinand@uni-koblenz.de> Head of IWM
 * **Sergei Pachtchenko** <gektor@uni-koblenz.de>
 * **Ingo Dahn** <dahn@uni-koblenz.de>
-* **Astrid Wirth**
-* **Katje Böhme**
-* **Rüdiger Zwerenz**
+* **Astrid Wirth** <astrid.wirth@unimedizin-mainz.de>
+* **Katje Böhme** <katja.boehme@unimedizin-mainz.de>
+* **Rüdiger Zwerenz** <ruediger.zwerenz@unimedizin-mainz.de>
 
 Please use our [Slack](https://iwm-unimedmainz.slack.com/messages/general/) or email for communication and [Trello](https://trello.com/b/NhCAw37H/gsa-softwareentwicklung) for Development-related Task-Tracking. There is also a [Trello Board](https://trello.com/b/GNS8jOrk/gsa-allgemein) for more general purposes.
 
