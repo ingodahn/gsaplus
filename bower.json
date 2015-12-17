@@ -19,10 +19,6 @@
   "dependencies": {
     "bootstrap": "v4.0.0-alpha.2",
     "font-awesome": "fontawesome#~4.5.0",
-    "tether": "~1.1.1",
-    "bootstrap-material-design": "v4-dev"
-  },
-  "resolutions": {
-    "bootstrap": "v4-dev"
+    "tether": "~1.1.1"
   }
 }
