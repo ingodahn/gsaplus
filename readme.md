@@ -54,4 +54,4 @@ Please use our [Slack](https://iwm-unimedmainz.slack.com/messages/general/) or e
 * Project-Slack https://iwm-unimedmainz.slack.com/messages/general/
 * Software-Development Trello-Board https://trello.com/b/NhCAw37H/gsa-softwareentwicklung
 * General Trello-Board https://trello.com/b/GNS8jOrk/gsa-allgemein
-* BSCW https://bscw.uni-koblenz.de/bscw/bscw.cgi/3262854?client_size=1855x971
+* BSCW https://bscw.uni-koblenz.de/bscw/bscw.cgi/3262854
