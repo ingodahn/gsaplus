@@ -19,6 +19,13 @@ In production, there is currently no preferred way for daemonizing the server.
 
 If you make changes to the Gem- or Bower-Dependencies, you'll have to run `bundle install` or `bower install` respectively.
 
+## Git Workflow & Version Numbers
+Our development follows a simplified version of the git branchng model found [here](http://nvie.com/posts/a-successful-git-branching-model/). The **master** branch contains only production-ready releases. The **development** branch contains the latest (working) development state, accumulating changes until a new release is merged into **master**. Commits on **master** are tagged with a [semver](http://semver.org/) version number. **origin/master** is write-protected for non-master users on GitLab to prevent accidental pushs.
+
+**Feature branches** are temporary branches which should be used for the development of one specific, self-contained feature. They may be pushed to origin, but may remain local for a developer. **Feature branches** are always branched off and merged back into **development**. Reusing of **feature branches** is permitted. It is also possible to perform (small) changes directly on **development**.
+
+Hotfix and release branches may be used in future, but we'll see if we can do without first.
+
 ## Glossary
 * **User** Abstract term for a person using the system
 * **Patient** Primary users of the system
