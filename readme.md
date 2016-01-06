@@ -2,22 +2,22 @@
 Code repo for the GSA Online Plus Project.
 
 ## Set up
-We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed.
+We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed. Our base box is [Scotch Box](https://box.scotch.io/).
 
-In production, the bootstrap.sh-script may be used as a guideline for installing dependencies, but should not be run directly.
+It has yet to be decided if we'll replicate the box environment on the production server or if we'll run the Vagrant VM there too.
+
+Use `vagrant ssh` to ssh into the VM. The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver. You will have to `composer install` to fetch php-dependencies and `php artisan migrate` to migrate the database at least once before the server is fully operational.
+
+We use the provided Scotch Box MySQL Databse, the application is configured accordingly (in `config/database.php`).
 
 ### Depenedencies
+* Virtual Box (https://www.virtualbox.org/)
 * Vagrant (https://www.vagrantup.com/)
-* *Vagrant-Cachier* (optional, https://github.com/fgrehm/vagrant-cachier)
 
 ## Running
-Use `vagrant ssh` to ssh into the VM. The project directory is symlinked into `/vagrant`; changes made on the host will also be made on the client and vice versa. Use `bin/rake` for running Rake tasks and `bin/rails` for running rails. The server can be startet with `bin/rails server -b 0.0.0.0` and will be available to the host on http://localhost:3000.
+The application is automatically served by an Apache Server. It should be available to the host at <http://192.168.33.10/>. The Scotch Box testpage (containing some very useful information about the VM's configuration) is available at <http://192.168.33.10/scotchbox.php>.
 
-Please make sure to run everything but git inside the VM, to ensure compatibility. Even if you have rails installed on the host, running it's scaffolding-functions may be harmful if the host- and the target-version differ.
-
-In production, there is currently no preferred way for daemonizing the server.
-
-If you make changes to the Gem- or Bower-Dependencies, you'll have to run `bundle install` or `bower install` respectively.
+Please make sure to run everything but editing and git inside the VM, to ensure compatibility. Even if you have laravel etc. installed on the host, running it's scaffolding-functions may be harmful if the host- and the target-version differ.
 
 ## Glossary
 * **User** Abstract term for a person using the system
