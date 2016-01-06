@@ -6,7 +6,7 @@ We use Vagrant for setting up a virtual machine in development. Clone this repo 
 
 It has yet to be decided if we'll replicate the box environment on the production server or if we'll run the Vagrant VM there too.
 
-Use `vagrant ssh` to ssh into the VM. The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver. You will have to `composer install` to fetch php-dependencies and `php artisan migrate` to migrate the database at least once before the server is fully operational.
+Use `vagrant ssh` to ssh into the VM. The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver. You will have to `composer install` to fetch php-dependencies and `php artisan migrate` (yes, you really want to) to migrate the database at least once before the server is fully operational.
 
 We use the provided Scotch Box MySQL Databse, the application is configured accordingly (in `config/database.php`).
 
