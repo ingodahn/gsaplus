@@ -1,27 +1,50 @@
-## Laravel PHP Framework
+# GSA Online Plus
+Code repo for the GSA Online Plus Project.
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Set up
+We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+In production, the bootstrap.sh-script may be used as a guideline for installing dependencies, but should not be run directly.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+### Depenedencies
+* Vagrant (https://www.vagrantup.com/)
+* *Vagrant-Cachier* (optional, https://github.com/fgrehm/vagrant-cachier)
 
-## Official Documentation
+## Running
+Use `vagrant ssh` to ssh into the VM. The project directory is symlinked into `/vagrant`; changes made on the host will also be made on the client and vice versa. Use `bin/rake` for running Rake tasks and `bin/rails` for running rails. The server can be startet with `bin/rails server -b 0.0.0.0` and will be available to the host on http://localhost:3000.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Please make sure to run everything but git inside the VM, to ensure compatibility. Even if you have rails installed on the host, running it's scaffolding-functions may be harmful if the host- and the target-version differ.
 
-## Contributing
+In production, there is currently no preferred way for daemonizing the server.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+If you make changes to the Gem- or Bower-Dependencies, you'll have to run `bundle install` or `bower install` respectively.
 
-## Security Vulnerabilities
+## Glossary
+* **User** Abstract term for a person using the system
+* **Patient** Primary users of the system
+* **Therapist** Supervise patients. There will be very few in the system.
+* **Administrator** Administer the system
+* **Assignment** Weekly writing-tasks for patients
+* **Assignment-Template** Contain the task description for an assignment and may be reused
+* **Code** Registration-codes, provide patients with a convenient way for registration
+* **Response** Response of a therapist to a completed assignment
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## People and Communications
+* **Marco Brack** <mbrack@uni-koblenz.de> Developer
+* **Sascha Zimmermann** <zimsa@uni-koblenz.de> Developer
 
-### License
+* **Peter Ferdinand** <ferdinand@uni-koblenz.de> Head of IWM
+* **Sergei Pachtchenko** <gektor@uni-koblenz.de>
+* **Ingo Dahn** <dahn@uni-koblenz.de>
+* **Astrid Wirth** <astrid.wirth@unimedizin-mainz.de>
+* **Katje Böhme** <katja.boehme@unimedizin-mainz.de>
+* **Rüdiger Zwerenz** <ruediger.zwerenz@unimedizin-mainz.de>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Please use our [Slack](https://iwm-unimedmainz.slack.com/messages/general/) or email for communication and [Trello](https://trello.com/b/NhCAw37H/gsa-softwareentwicklung) for Development-related Task-Tracking. There is also a [Trello Board](https://trello.com/b/GNS8jOrk/gsa-allgemein) for more general purposes.
+
+## Links
+* GitLab https://gitlab.uni-koblenz.de/iwm/gsa-online-plus
+* Project-Slack https://iwm-unimedmainz.slack.com/messages/general/
+* Software-Development Trello-Board https://trello.com/b/NhCAw37H/gsa-softwareentwicklung
+* General Trello-Board https://trello.com/b/GNS8jOrk/gsa-allgemein
+* BSCW https://bscw.uni-koblenz.de/bscw/bscw.cgi/3262854?client_size=1855x971
