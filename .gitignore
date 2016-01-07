@@ -147,6 +147,9 @@ bootstrap/cache/*
 .env.*.php
 .env.php
 .env
+public/css
+public/js
+public/fonts
 
 ### Vagrant ###
 .vagrant/
