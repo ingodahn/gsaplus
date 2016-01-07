@@ -10,6 +10,10 @@ SSH into the VM (`vagrant ssh` or use vagrant@192.168.33.10 with password *vagra
 
 We use the provided Scotch Box MySQL Databse, the application is configured accordingly (in `config/database.php`).
 
+### Common Errors
+* *Permission denied*, *File does not exist* and other File-Errors: Sometimes the gitignore excludes directories that need to exist for the application. This is a configuration error and should be reported to <mbrack@uni-koblenz.de>.
+* *You don't have permission to access / on this server.* The VM is not running and you are once again pestering some random server on the internet. Use `vagrant up` in the project dir to start the VM.
+
 ### Depenedencies
 * Virtual Box (https://www.virtualbox.org/)
 * Vagrant (https://www.vagrantup.com/)
