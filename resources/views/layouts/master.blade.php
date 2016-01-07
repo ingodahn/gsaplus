@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="de">
   <head>
     @include('layouts.head')
   </head>
