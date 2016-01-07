@@ -136,7 +136,14 @@ app/storage/
 # Laravel 5 & Lumen specific
 bootstrap/cache/*
 !bootstrap/cache/.keep
-storage/
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/storage/app/*
+!/storage/framework/sessions/.keep
+!/storage/framework/views/.keep
+!/storage/logs/.keep
+!/storage/app/.keep
 .env.*.php
 .env.php
 .env
