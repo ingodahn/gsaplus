@@ -2,11 +2,11 @@
 Code repo for the GSA Online Plus Project.
 
 ## Set up
-We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed. Our base box is [Scotch Box](https://box.scotch.io/).
+We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed. Our base box is [Scotch Box](https://box.scotch.io/). The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver.
 
 It has yet to be decided if we'll replicate the box environment on the production server or if we'll run the Vagrant VM there too.
 
-Use `vagrant ssh` to ssh into the VM. The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver. You will have to `composer install` to fetch php-dependencies and `php artisan migrate` (yes, you really want to) to migrate the database at least once before the server is fully operational.
+SSH into the VM (`vagrant ssh` or use vagrant@192.168.33.10 with password *vagrant* with your own client). Copy the .env.example file to .env (`cp .env.example .env`) and generate a new app-key with `php artisan key:generate`. Then `composer install` to fetch php-dependencies and `php artisan migrate` to migrate the database.
 
 We use the provided Scotch Box MySQL Databse, the application is configured accordingly (in `config/database.php`).
 
