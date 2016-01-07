@@ -6,9 +6,7 @@ We use Vagrant for setting up a virtual machine in development. Clone this repo 
 
 It has yet to be decided if we'll replicate the box environment on the production server or if we'll run the Vagrant VM there too.
 
-SSH into the VM (`vagrant ssh` or use vagrant@192.168.33.10 with password *vagrant* with your own client). `composer install` to fetch php-dependencies. Then copy the .env.example file to .env (`cp .env.example .env`) and generate a new app-key with `php artisan key:generate`. Finally run `php artisan migrate` to migrate the database.
-
-Optional (for now): Run `npm install` to fetch frontend-dependencies and `gulp` to compile/copy them to the public-dir.
+SSH into the VM (`vagrant ssh` or use vagrant@192.168.33.10 with password *vagrant* with your own client). `composer install` to fetch php-dependencies. Then copy the .env.example file to .env (`cp .env.example .env`) and generate a new app-key with `php artisan key:generate`. Next, run `php artisan migrate` to migrate the database. Run `npm install` to fetch frontend-dependencies and finally `gulp` to compile/copy them to the public-dir.
 
 We use the provided Scotch Box MySQL Databse, the application is configured accordingly (in `config/database.php`).
 
