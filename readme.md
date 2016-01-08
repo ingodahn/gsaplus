@@ -11,8 +11,6 @@ SSH into the VM (`vagrant ssh` or use vagrant@192.168.33.10 with password *vagra
 ``` bash
 cd /var/www # Change to the project dir inside the VM
 composer install # Fetch php-dependencies
-cp .env.example .env # Create your own .env-configuration from a template
-php artisan key:generate # Generate a new app-key
 php artisan migrate # Migrate the database
 npm install # Fetch frontend-dependencies
 gulp # Compile/copy frontend-dependencies into public
