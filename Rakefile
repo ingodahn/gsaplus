@@ -21,6 +21,7 @@ end
 task :fonts do
   `mkdir -p public/fonts/`
   `cp -r bower_components/bootstrap-sass/assets/fonts/bootstrap/. public/fonts`
+  `cp -r bower_components/font-awesome/fonts/. public/fonts`
 end
 
 task :clean do
