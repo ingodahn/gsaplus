@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     config.vm.provider "virtualbox" do |v|
         v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/var_www", "1"]
     end
-    config.vm.provision "shell", inline: "gem install sass"
+    config.vm.provision "shell", inline: "/home/vagrant/.rbenv/shims/gem install sass"
 
 
     # Optional NFS. Make sure to remove other synced_folder line too
