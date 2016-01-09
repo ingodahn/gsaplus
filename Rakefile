@@ -14,13 +14,13 @@ end
 
 task :js do
   `mkdir -p public/js/`
-  `cp node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js public/js/`
-  `cp node_modules/jquery/dist/jquery.min.js public/js/`
+  `cp bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js public/js/`
+  `cp bower_components/jquery/dist/jquery.min.js public/js/`
 end
 
 task :fonts do
   `mkdir -p public/fonts/`
-  `cp -r node_modules/bootstrap-sass/assets/fonts/bootstrap/. public/fonts`
+  `cp -r bower_components/bootstrap-sass/assets/fonts/bootstrap/. public/fonts`
 end
 
 task :clean do

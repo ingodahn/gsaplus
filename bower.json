@@ -1,0 +1,16 @@
+{
+  "name": "gsa-online-plus",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

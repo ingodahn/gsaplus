@@ -159,3 +159,4 @@ public/fonts
 
 # Sass
 .sass-cache
+bower_components
