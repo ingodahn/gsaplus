@@ -12,8 +12,8 @@ SSH into the VM (`vagrant ssh` or use vagrant@192.168.33.10 with password *vagra
 cd /var/www # Change to the project dir inside the VM
 composer install # Fetch php-dependencies
 php artisan migrate # Migrate the database
-npm install # Fetch frontend-dependencies
-gulp # Compile/copy frontend-dependencies into public
+bower install # Fetch frontend-dependencies
+rake # Compile/copy frontend-dependencies into public
 ```
 
 ### Common Errors
@@ -21,8 +21,20 @@ gulp # Compile/copy frontend-dependencies into public
 * *You don't have permission to access / on this server.* The VM is not running and you are once again pestering some random server on the internet. Use `vagrant up` in the project dir to start the VM. On some occasions you'll have do reboot the host machine prior to that (not sure why, but it seems to help).
 
 ### Depenedencies
+For the VM
+
 * Virtual Box (https://www.virtualbox.org/)
 * Vagrant (https://www.vagrantup.com/)
+
+For the Application
+
+* The usual laravel dependencies
+* sass (gem)
+
+### bower/rake vs. npm/gulp
+By default, laravel uses gulp as taskrunner and npm to fetch frontend-dependencies (and gulp + gulp-bindings itself). Unfortunately, npm uses symlinks, which are disabled on windows for shared vagrant folders. The laravel documentation recommends to use `npm install --no-bin-links`, which should cause npm to avoid symlinks, but because of [npm issue #9224](https://slack-redir.net/link?url=https%3A%2F%2Fgithub.com%2Fnpm%2Fnpm%2Fissues%2F9224) this only produced other errors (i.e. *Maximum call stack size exceeded*). Another possible fix suggested online was to enable symlinks in the Vagrantfile and start the shell in administrator-mode on windows. On some occasions, this would work, but more often than not there would be varying errors, possibly related to race conditions in npm (version 3.5.3 at the time).
+
+Thus, we decided replace npm with bower for managing frontend-dependencies and gulp by rake for task running (compiling sass, copying assets).
 
 ## Running
 The application is automatically served by an Apache Server. It should be available to the host at <http://192.168.33.10/>. The Scotch Box testpage (containing some very useful information about the VM's configuration) is available at <http://192.168.33.10/scotchbox.php>.
