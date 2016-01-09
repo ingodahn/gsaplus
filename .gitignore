@@ -153,3 +153,9 @@ public/fonts
 
 ### Vagrant ###
 .vagrant/
+
+
+### Custom ###
+
+# Sass
+.sass-cache
