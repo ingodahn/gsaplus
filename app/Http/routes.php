@@ -15,6 +15,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/register', function () {
+    return view('register-greeting');
+});
+
+Route::get('/register/greeting', function () {
+    return view('register-greeting');
+});
+
+Route::get('/register/commit', function () {
+    return view('register-commit');
+});
+
+Route::get('/register/data', function () {
+    return view('register-data');
+});
+
+Route::get('/register/day', function () {
+    return view('register-day');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
