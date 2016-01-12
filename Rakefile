@@ -9,7 +9,7 @@ task :watch do
 end
 
 task :sass do
-  `sass --update resources/assets/sass/:public/css/`
+  puts `sass --update resources/assets/sass/:public/css/`
 end
 
 task :js do

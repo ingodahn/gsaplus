@@ -19,6 +19,7 @@ rake # Compile/copy frontend-dependencies into public
 ### Common Errors
 * *Permission denied*, *File does not exist* and other File-Errors: Sometimes the gitignore excludes directories that need to exist for the application. This is a configuration error and should be reported to <mbrack@uni-koblenz.de>.
 * *You don't have permission to access / on this server.* The VM is not running and you are once again pestering some random server on the internet. Use `vagrant up` in the project dir to start the VM. On some occasions you'll have do reboot the host machine prior to that (not sure why, but it seems to help).
+* VM not accessible at all, or loading infinitely: Reload VM. This seems to happen after suspending the host.
 
 ### Depenedencies
 For the VM
@@ -39,7 +40,12 @@ Thus, we decided replace npm with bower for managing frontend-dependencies and g
 ## Running
 The application is automatically served by an Apache Server. It should be available to the host at <http://192.168.33.10/>. The Scotch Box testpage (containing some very useful information about the VM's configuration) is available at <http://192.168.33.10/scotchbox.php>.
 
+## Contribution
 Please make sure to run everything but editing and git inside the VM, to ensure compatibility. Even if you have laravel etc. installed on the host, running it's scaffolding-functions may be harmful if the host- and the target-version differ.
+
+Please use the git branching model described here: <http://nvie.com/posts/a-successful-git-branching-model/>. Our main branch is `development`, accordingly. Adhere to [Semantic versioning](http://semver.org/) for version numbers.
+
+Use `composer install` after modifying backend dpendencies, `php artisan migrate` after making modifications to the databse or models, `bower install` + `rake` after modifying frontend-dependencies and just `rake` after modifying frontend-code. You may have to include scss-fragments in the main app.scss and set up the Rakefile to `cp` scripts and fonts from the bower-directory to the public-directory. Also remember to include JavaScript-files in the main template head.
 
 ## Glossary
 * **User** Abstract term for a person using the system
