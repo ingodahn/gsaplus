@@ -19,6 +19,7 @@ end
 desc "Publish all javascript assets"
 task :js do
   `mkdir -p public/js/`
+  `cp -r resources/assets/js/. public/js/`
   `cp bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js public/js/`
   `cp bower_components/jquery/dist/jquery.min.js public/js/`
 end
