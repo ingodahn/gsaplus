@@ -1,5 +1,8 @@
 @extends('layouts.master')
 @section('title', 'Zusage')
+@section('additional-head')
+  <script src="/js/commit-enable.js" charset="utf-8"></script>
+@endsection
 
 @section('content')
   <div class="container">
@@ -15,25 +18,25 @@
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="" id="commit-check-1">
+        <input type="checkbox" value="" class="commit-checkbox">
         Ich bin bereit die Plattform GSA Online Plus regelmäßig zu besuchen
       </label>
     </div>
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="" id="commit-check-2">
+        <input type="checkbox" value="" class="commit-checkbox">
         Ich bin bereit für 12 Wochen lang jede Woche ca. 45 Minuten Zeit zu investieren
       </label>
     </div>
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="" id="commit-check-3">
+        <input type="checkbox" value="" class="commit-checkbox">
         Ich bin bereit regelmäßig einen kurzen Fragebogen zu beantworten
       </label>
     </div>
 
     <div class="pull-right">
-      <a class="btn btn-accent disabled" href="/register/data">Weiter</a>
+      <a class="btn btn-accent disabled" id="commit-next" href="/register/data">Weiter</a>
     </div>
   </div>
 @endsection
