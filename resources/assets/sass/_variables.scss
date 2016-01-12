@@ -5,3 +5,10 @@ $brand-success: $md-light-green-500;
 $brand-info: $md-light-blue-500;
 $brand-warning: $md-orange-500;
 $brand-danger: $md-red-400;
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
