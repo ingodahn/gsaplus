@@ -9,7 +9,7 @@
 
   li:not(:last-child):after {
     content: " > ";
-    font-weight: inherit;
+    font-weight: normal;
     color: $text-muted;
   }
 
