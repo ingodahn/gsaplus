@@ -9,12 +9,16 @@
 
   li:not(:last-child):after {
     content: " > ";
-    font-weight: normal;
+    font-weight: inherit;
     color: $text-muted;
   }
 
   li.active {
     color: $text-color;
     font-weight: bold;
+  }
+
+  li.done {
+    color: $text-color;
   }
 }
