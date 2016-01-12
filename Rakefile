@@ -20,6 +20,7 @@ desc "Publish all javascript assets"
 task :js do
   `mkdir -p public/js/`
   `cp -r resources/assets/js/. public/js/`
+  `cp bower_components/bootstrap-validator/dist/validator.min.js public/js/`
   `cp bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js public/js/`
   `cp bower_components/jquery/dist/jquery.min.js public/js/`
 end
@@ -28,6 +29,7 @@ desc "Publish all font assets"
 task :fonts do
   `mkdir -p public/fonts/`
   `cp -r bower_components/bootstrap-sass/assets/fonts/bootstrap/. public/fonts`
+  `cp -r bower_components/bootstrap-sass/assets/fonts/bootstrap/. public/fonts/bootstrap` # For bootstrap-validator
   `cp -r bower_components/font-awesome/fonts/. public/fonts`
 end
 

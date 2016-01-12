@@ -16,6 +16,7 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.6",
     "font-awesome": "~4.5.0",
-    "material-colors": "shuhei/material-colors#~1.0.0"
+    "material-colors": "shuhei/material-colors#~1.0.0",
+    "bootstrap-validator": "1000hz/bootstrap-validator#~0.9.0"
   }
 }
