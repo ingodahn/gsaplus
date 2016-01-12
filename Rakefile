@@ -4,8 +4,8 @@ task assets: [:sass, :js, :fonts]
 
 task :watch do
   puts "Night gathers, and now my watch begins."
-  `sass --watch resources/assets/sass/:public/css/`
-  puts "My watch has ended."
+  trap('SIGINT') { puts " My watch has ended."; exit }
+  sh "sass --watch resources/assets/sass/:public/css/"
 end
 
 task :sass do
