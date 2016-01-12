@@ -3,8 +3,11 @@ $brand-primary-dark: $md-blue-700;
 $brand-accent: $md-light-green-500;
 $brand-success: $md-light-green-500;
 $brand-info: $md-light-blue-500;
+$brand-info-lighter: $md-light-blue-50;
 $brand-warning: $md-orange-500;
-$brand-danger: $md-red-400;
+$brand-warning-lighter: $md-orange-100;
+$brand-danger: $md-red-500;
+$brand-danger-lighter: $md-red-100;
 
 $gray-base:              #000 !default;
 $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
