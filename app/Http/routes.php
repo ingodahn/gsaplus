@@ -31,10 +31,6 @@ Route::get('/register/data', function () {
     return view('register-data');
 });
 
-Route::get('/register/day', function () {
-    return view('register-day');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
