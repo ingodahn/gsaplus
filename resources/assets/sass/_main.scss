@@ -26,3 +26,9 @@
 hr {
   border-color: #e0e0e0;
 }
+
+.btn-accent {
+  @extend .btn-default;
+  background-color: $brand-accent;
+  color: white;
+}
