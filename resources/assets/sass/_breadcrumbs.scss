@@ -1,0 +1,20 @@
+.breadcrumbs {
+  padding-left: 8px;
+  margin-bottom: 24px;
+
+  li {
+    color: $text-muted;
+    display:inline;
+  }
+
+  li:not(:last-child):after {
+    content: " > ";
+    font-weight: normal;
+    color: $text-muted;
+  }
+
+  li.active {
+    color: $text-color;
+    font-weight: bold;
+  }
+}
