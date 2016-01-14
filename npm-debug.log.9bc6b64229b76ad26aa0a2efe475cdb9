@@ -1,0 +1,52 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'rebuild',
+1 verbose cli   'node-sass' ]
+2 info using npm@3.3.6
+3 info using node@v5.0.0
+4 info readInstalled object
+5 verbose rebuild path, id [ '/var/www/node_modules/node-sass', 'node-sass@3.4.2' ]
+6 silly rebuild set [ '/var/www/node_modules/node-sass' ]
+7 info build /var/www/node_modules/node-sass
+8 info lifecycle node-sass@3.4.2~preinstall: node-sass@3.4.2
+9 silly lifecycle node-sass@3.4.2~preinstall: no script for preinstall, continuing
+10 info linkStuff node-sass@3.4.2
+11 silly linkStuff node-sass@3.4.2 has /var/www/node_modules as its parent node_modules
+12 verbose linkBins node-sass@3.4.2
+13 verbose link bins [ { 'node-sass': 'bin/node-sass' },
+13 verbose link bins   '/var/www/node_modules/.bin',
+13 verbose link bins   false ]
+14 verbose linkMans node-sass@3.4.2
+15 verbose rebuildBundles node-sass@3.4.2
+16 verbose rebuildBundles [ 'minimist', 'mkdirp' ]
+17 verbose rebuild bundle /var/www/node_modules/node-sass/node_modules/minimist
+18 info build /var/www/node_modules/node-sass/node_modules/minimist
+19 silly gentlyRm /var/www/node_modules/.bin/node-sass is being purged
+20 verbose gentlyRm don't care about contents; nuking /var/www/node_modules/.bin/node-sass
+21 info lifecycle minimist@0.0.8~preinstall: minimist@0.0.8
+22 silly lifecycle minimist@0.0.8~preinstall: no script for preinstall, continuing
+23 info linkStuff minimist@0.0.8
+24 silly linkStuff minimist@0.0.8 has /var/www/node_modules/node-sass/node_modules as its parent node_modules
+25 verbose linkBins minimist@0.0.8
+26 verbose linkMans minimist@0.0.8
+27 verbose rebuildBundles minimist@0.0.8
+28 info lifecycle minimist@0.0.8~install: minimist@0.0.8
+29 silly lifecycle minimist@0.0.8~install: no script for install, continuing
+30 info lifecycle minimist@0.0.8~postinstall: minimist@0.0.8
+31 silly lifecycle minimist@0.0.8~postinstall: no script for postinstall, continuing
+32 verbose stack Error: EPROTO: protocol error, symlink '../node-sass/bin/node-sass' -> '/var/www/node_modules/.bin/node-sass'
+32 verbose stack     at Error (native)
+33 verbose cwd /var/www
+34 error Linux 3.13.0-55-generic
+35 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "rebuild" "node-sass"
+36 error node v5.0.0
+37 error npm  v3.3.6
+38 error path ../node-sass/bin/node-sass
+39 error code EPROTO
+40 error errno -71
+41 error syscall symlink
+42 error EPROTO: protocol error, symlink '../node-sass/bin/node-sass' -> '/var/www/node_modules/.bin/node-sass'
+43 error If you need help, you may report this error at:
+43 error     <https://github.com/npm/npm/issues>
+44 verbose exit [ -71, true ]
