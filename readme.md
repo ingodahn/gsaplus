@@ -28,7 +28,7 @@ For the Application (on guest system)
 
 * The usual laravel dependencies
 * sass (gem)
-* phpunit (*optional*, see `provision.sh` for install instructions)
+* phpunit (*optional*, see [provision.sh](provision.sh) for install instructions)
 
 
 # Running
@@ -54,7 +54,7 @@ Note that this is only a slight modification of the install process. Also, it is
 ## For developers
 This is actually the same process for developers and non-developers, but developers are expected to know which of the individual commands are required and which not, thus saving time ;-).
 
-Use `composer install` after modifying backend dependencies, `php artisan migrate` after making modifications to the databse or models, `bower install` + `rake` after modifying frontend-dependencies and just `rake` after modifying frontend-code. You may have to include scss-fragments in the main app.scss and set up the Rakefile to `cp` scripts and fonts from the bower-directory to the public-directory. Also remember to include JavaScript-files in the main template head.
+Use `composer install` after modifying backend dependencies, `php artisan migrate` after making modifications to the databse or models, `bower install` + `rake` after modifying frontend-dependencies and just `rake` after modifying frontend-code. You may have to include scss-fragments in the main app.scss and set up the Rakefile to `cp` scripts and fonts from the bower-directory to the [public](public)-directory. Also remember to include JavaScript-files in the main template head.
 
 Please make sure to run everything but editing and git inside the VM, to ensure compatibility. Even if you have laravel etc. installed on the host, running it's scaffolding-functions may be harmful if the host- and the target-version differ.
 
