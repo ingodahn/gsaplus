@@ -22,15 +22,16 @@ rake # Compile/copy frontend-dependencies into public
 * VM not accessible at all, or loading infinitely: Reload VM. This seems to happen after suspending the host.
 
 ### Depenedencies
-For the VM
+For the VM (on host system)
 
 * Virtual Box (https://www.virtualbox.org/)
 * Vagrant (https://www.vagrantup.com/)
 
-For the Application
+For the Application (on guest system)
 
 * The usual laravel dependencies
 * sass (gem)
+* phpunit (*optional*, see `provision.sh` for install instructions)
 
 ### bower/rake vs. npm/gulp
 By default, laravel uses gulp as taskrunner and npm to fetch frontend-dependencies (and gulp + gulp-bindings itself). Unfortunately, npm uses symlinks, which are disabled on windows for shared vagrant folders. The laravel documentation recommends to use `npm install --no-bin-links`, which should cause npm to avoid symlinks, but because of [npm issue #9224](https://slack-redir.net/link?url=https%3A%2F%2Fgithub.com%2Fnpm%2Fnpm%2Fissues%2F9224) this only produced other errors (i.e. *Maximum call stack size exceeded*). Another possible fix suggested online was to enable symlinks in the Vagrantfile and start the shell in administrator-mode on windows. On some occasions, this would work, but more often than not there would be varying errors, possibly related to race conditions in npm (version 3.5.3 at the time).
