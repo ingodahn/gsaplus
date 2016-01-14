@@ -52,7 +52,7 @@ rake # Compile/copy frontend-dependencies into public
 Note that this is only a slight modification of the install process. Also, it is very likely that all of the steps are neccessary, but this is a surefire way to get you up to date. Feel free to drop commands once you get more comfortable with the process.
 
 ## For developers
-This is actually the same process for developers and non-developers, but developers are expected to know which of the individual commands are required and which not, thus saving time ;-).
+This is actually the same process for developers and non-developers, but developers are expected to know which of the individual commands are actually required and which not, thus saving time ;-).
 
 Use `composer install` after modifying backend dependencies, `php artisan migrate` after making modifications to the databse or models, `bower install` + `rake` after modifying frontend-dependencies and just `rake` after modifying frontend-code. You may have to include scss-fragments in the main app.scss and set up the Rakefile to `cp` scripts and fonts from the bower-directory to the [public](public)-directory. Also remember to include JavaScript-files in the main template head.
 
