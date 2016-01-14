@@ -5,6 +5,7 @@
     @yield('additional-head')
   </head>
   <body>
+    @include('layouts.alerts')
     @include('layouts.header')
     @yield('content')
     @include('layouts.footer')

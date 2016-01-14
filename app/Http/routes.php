@@ -12,6 +12,8 @@
 */
 
 Route::get('/', function () {
+    Alert::danger('Errrorororororo')->flash();
+    Alert::success('You have successfully created an alert!')->flash();
     return view('welcome');
 });
 
