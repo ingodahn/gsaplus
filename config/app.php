@@ -156,6 +156,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom Providers
+         */
+         Prologue\Alerts\AlertsServiceProvider::class,
+
+
     ],
 
     /*
@@ -201,6 +207,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Alert'     => Prologue\Alerts\Facades\Alert::class,
 
     ],
 

@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('title', 'Testpage')
+@section('title', 'Willkommen')
 
 @section('content')
   <div class="container greeting">
   <p>
-    Dies ist die Testversion! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
   </div>
 
@@ -23,10 +23,10 @@
       <h2>Registrierung</h2>
       <form>
         <div class="form-group">
-          <label for="exampleInputCode">Persönlicher Code</label>
+          <label for="code">Persönlicher Code</label>
           <a href="#"><i class="fa fa-question-circle"></i></a>
 
-          <input type="email" class="form-control" id="exampleInputCode" placeholder="Code">
+          <input type="email" class="form-control" id="code" placeholder="Code">
         </div>
         <button type="submit" class="btn btn-primary">zur Registrierung</button>
       </form>

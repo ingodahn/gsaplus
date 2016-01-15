@@ -1,7 +1,4 @@
-# GSA Online Plus
-Code repo for the GSA Online Plus Project.
-
-## Set up
+# Set up
 We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed. Our base box is [Scotch Box](https://box.scotch.io/). The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver.
 
 It has yet to be decided if we'll replicate the box environment on the production server or if we'll run the Vagrant VM there too.
@@ -16,32 +13,55 @@ bower install # Fetch frontend-dependencies
 rake # Compile/copy frontend-dependencies into public
 ```
 
-### Common Errors
+## Common Errors
 * *Permission denied*, *File does not exist* and other File-Errors: Sometimes the gitignore excludes directories that need to exist for the application. This is a configuration error and should be reported to <mbrack@uni-koblenz.de>.
 * *You don't have permission to access / on this server.* The VM is not running and you are once again pestering some random server on the internet. Use `vagrant up` in the project dir to start the VM. On some occasions you'll have do reboot the host machine prior to that (not sure why, but it seems to help).
+* VM not accessible at all, or loading infinitely: Reload VM. This seems to happen after suspending the host.
 
-### Depenedencies
-For the VM
+## Depenedencies
+For the VM (on host system)
 
 * Virtual Box (https://www.virtualbox.org/)
 * Vagrant (https://www.vagrantup.com/)
 
-For the Application
+For the Application (on guest system)
 
 * The usual laravel dependencies
 * sass (gem)
+* phpunit (*optional*, see [provision.sh](provision.sh) for install instructions)
 
-### bower/rake vs. npm/gulp
-By default, laravel uses gulp as taskrunner and npm to fetch frontend-dependencies (and gulp + gulp-bindings itself). Unfortunately, npm uses symlinks, which are disabled on windows for shared vagrant folders. The laravel documentation recommends to use `npm install --no-bin-links`, which should cause npm to avoid symlinks, but because of [npm issue #9224](https://slack-redir.net/link?url=https%3A%2F%2Fgithub.com%2Fnpm%2Fnpm%2Fissues%2F9224) this only produced other errors (i.e. *Maximum call stack size exceeded*). Another possible fix suggested online was to enable symlinks in the Vagrantfile and start the shell in administrator-mode on windows. On some occasions, this would work, but more often than not there would be varying errors, possibly related to race conditions in npm (version 3.5.3 at the time).
 
-Thus, we decided replace npm with bower for managing frontend-dependencies and gulp by rake for task running (compiling sass, copying assets).
-
-## Running
+# Running
 The application is automatically served by an Apache Server. It should be available to the host at <http://192.168.33.10/>. The Scotch Box testpage (containing some very useful information about the VM's configuration) is available at <http://192.168.33.10/scotchbox.php>.
+
+## For non-developers
+Follow these steps to update to the current development version (provided you did an install before, see above if not):
+
+``` bash
+git checkout development # Change to development branch
+git pull origin development # Update project code
+vagrant reload --provision # Update VM
+vagrant ssh # ssh into VM
+cd /var/www # Change to the project dir inside the VM
+composer install # Fetch php-dependencies
+php artisan migrate # Migrate the database
+bower install # Fetch frontend-dependencies
+rake # Compile/copy frontend-dependencies into public
+```
+
+Note that this is only a slight modification of the install process. Also, it is very likely that all of the steps are neccessary, but this is a surefire way to get you up to date. Feel free to drop commands once you get more comfortable with the process.
+
+## For developers
+This is actually the same process for developers and non-developers, but developers are expected to know which of the individual commands are actually required and which not, thus saving time ;-).
+
+Use `composer install` after modifying backend dependencies, `php artisan migrate` after making modifications to the databse or models, `bower install` + `rake` after modifying frontend-dependencies and just `rake` after modifying frontend-code. You may have to include scss-fragments in the [main app.scss](resources/assets/sass/_main.scss) and set up the [Rakefile](Rakefile) to `cp` scripts and fonts from the bower-directory to the [public](public)-directory. Also remember to include JavaScript-files in the [main template head](resources/views/layouts/head.blade.php).
 
 Please make sure to run everything but editing and git inside the VM, to ensure compatibility. Even if you have laravel etc. installed on the host, running it's scaffolding-functions may be harmful if the host- and the target-version differ.
 
-## Glossary
+Please use the git branching model described here: <http://nvie.com/posts/a-successful-git-branching-model/>. Our main branch is `development`, accordingly. Adhere to [Semantic versioning](http://semver.org/) for version numbers.
+
+
+# Glossary
 * **User** Abstract term for a person using the system
 * **Patient** Primary users of the system
 * **Therapist** Supervise patients. There will be very few in the system.
@@ -51,7 +71,7 @@ Please make sure to run everything but editing and git inside the VM, to ensure 
 * **Code** Registration-codes, provide patients with a convenient way for registration
 * **Response** Response of a therapist to a completed assignment
 
-## People and Communications
+# People and Communications
 * **Marco Brack** <mbrack@uni-koblenz.de> Developer
 * **Sascha Zimmermann** <zimsa@uni-koblenz.de> Developer
 
@@ -64,7 +84,7 @@ Please make sure to run everything but editing and git inside the VM, to ensure 
 
 Please use our [Slack](https://iwm-unimedmainz.slack.com/messages/general/) or email for communication and [Trello](https://trello.com/b/NhCAw37H/gsa-softwareentwicklung) for Development-related Task-Tracking. There is also a [Trello Board](https://trello.com/b/GNS8jOrk/gsa-allgemein) for more general purposes.
 
-## Links
+# Links
 * GitLab https://gitlab.uni-koblenz.de/iwm/gsa-online-plus
 * Project-Slack https://iwm-unimedmainz.slack.com/messages/general/
 * Software-Development Trello-Board https://trello.com/b/NhCAw37H/gsa-softwareentwicklung

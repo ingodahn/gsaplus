@@ -1,0 +1,110 @@
+//== Colors
+//
+//## Custom color definitions
+$brand-primary: $md-blue-500;
+$brand-primary-dark: $md-blue-700;
+$brand-accent: $md-light-green-500;
+
+$brand-success: $md-light-green-500;
+$brand-success-dark: $md-light-green-700;
+$brand-success-darker: $md-light-green-900;
+$brand-success-light: $md-light-green-300;
+$brand-success-lighter: $md-light-green-50;
+
+$brand-info: $md-light-blue-500;
+$brand-info-dark: $md-light-blue-700;
+$brand-info-darker: $md-light-blue-900;
+$brand-info-light: $md-light-blue-300;
+$brand-info-lighter: $md-light-blue-50;
+
+$brand-warning: $md-orange-500;
+$brand-warning-dark: $md-orange-700;
+$brand-warning-darker: $md-orange-900;
+$brand-warning-light: $md-orange-300;
+$brand-warning-lighter: $md-orange-50;
+
+$brand-danger: $md-red-500;
+$brand-danger-dark: $md-red-700;
+$brand-danger-darker: $md-red-900;
+$brand-danger-light: $md-red-300;
+$brand-danger-lighter: $md-red-50;
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:               #fff !default;
+//** Global text color on `<body>`.
+$text-color:            $gray-dark !default;
+
+//** Global textual link color.
+$link-color:            $brand-primary !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($link-color, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:        $font-family-sans-serif !default;
+
+$font-size-base:          14px !default;
+$font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-small:         ceil(($font-size-base * 0.85)) !default; // ~12px
+
+$font-size-h1:            floor(($font-size-base * 2.6)) !default; // ~36px
+$font-size-h2:            floor(($font-size-base * 2.15)) !default; // ~30px
+$font-size-h3:            ceil(($font-size-base * 1.7)) !default; // ~24px
+$font-size-h4:            ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-h5:            $font-size-base !default;
+$font-size-h6:            ceil(($font-size-base * 0.85)) !default; // ~12px
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        1.428571429 !default; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family:    inherit !default;
+$headings-font-weight:    500 !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;
+
+
+
+//== States
+//
+//## Primarily used for alerts
+$state-success-text:             $text-color;
+$state-success-bg:               $brand-success-light;
+// $state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%) !default;
+
+$state-info-text:                $text-color;
+$state-info-bg:                  $brand-info-light;
+// $state-info-border:              darken(adjust-hue($state-info-bg, -10), 7%) !default;
+
+$state-warning-text:             $text-color;
+$state-warning-bg:               $brand-warning-light;
+// $state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%) !default;
+
+$state-danger-text:              white;
+$state-danger-bg:                $brand-danger-light;
+// $state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%) !default;

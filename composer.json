@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "prologue/alerts": "^0.4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -36,7 +37,7 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
-            "php -r \"copy('.env.example', '.env');\"",
+            "php -r \"if (!file_exists('.env')) copy('.env.example', '.env');\"",
             "php artisan key:generate",
             "php artisan clear-compiled",
             "php artisan optimize"

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ea1fee525914154e6d6bbf071697b5a1",
-    "content-hash": "8b1485987e7c5949da82435d403e52e8",
+    "hash": "3c366810ce6faf0598a15cce2c88e9aa",
+    "content-hash": "549e750023a252c16b55464dae9e0aa8",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -784,6 +784,56 @@
                 "random"
             ],
             "time": "2015-12-10 14:48:13"
+        },
+        {
+            "name": "prologue/alerts",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:driesvints/Alerts.git",
+                "reference": "f4ea1e784070f43ddd12dab732552809e54ff7d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/driesvints/Alerts/zipball/f4ea1e784070f43ddd12dab732552809e54ff7d5",
+                "reference": "f4ea1e784070f43ddd12dab732552809e54ff7d5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5",
+                "illuminate/session": "~5",
+                "illuminate/support": "~5",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Prologue\\Alerts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dries Vints",
+                    "email": "dries.vints@gmail.com",
+                    "homepage": "http://driesvints.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Prologue Alerts is a package that handles global site messages.",
+            "keywords": [
+                "alerts",
+                "laravel",
+                "messages"
+            ],
+            "time": "2015-04-13 17:27:18"
         },
         {
             "name": "psr/log",

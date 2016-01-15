@@ -1,7 +1,7 @@
 .jumbotron-title {
-  background-color: #F44336;
+  background-color: $brand-primary-dark;
   color: #FFF;
-  margin-bottom: 0;
+  margin-bottom: 32px;
   text-align: center;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -14,7 +14,6 @@
 }
 
 .greeting {
-  margin-top: 32px;
   margin-bottom: 32px;
 }
 
@@ -26,4 +25,22 @@
 
 hr {
   border-color: #e0e0e0;
+}
+
+.btn-accent {
+  @extend .btn-default;
+  background-color: $brand-accent;
+  color: white;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
+.alerts-container {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  left: 0;
+  z-index: 1;
 }
