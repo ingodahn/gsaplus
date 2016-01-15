@@ -24,8 +24,8 @@
       </div>
 
       <div class="form-group">
-        <label for="eMail" class="control-label">E-Mail Adresse</label>
-        <input type="email" class="form-control" id="eMail" placeholder="hansmaul@springfield.net" data-error="Bruh, that email address aint valid" required>
+        <label for="email" class="control-label">E-Mail Adresse</label>
+        <input type="email" class="form-control" id="email" placeholder="hansmaul@springfield.net" data-error="Bruh, that email address aint valid" required>
       </div>
 
       <div class="form-group">
