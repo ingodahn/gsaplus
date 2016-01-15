@@ -19,24 +19,24 @@
       <h3>Ihre Daten</h3>
 
       <div class="form-group">
-        <label for="registerName" class="control-label">Name</label>
-        <input type="text" class="form-control" id="registerName" placeholder="Hans Maulwurf" required>
+        <label for="name" class="control-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Hans Maulwurf" required>
       </div>
 
       <div class="form-group">
-        <label for="registerEmail" class="control-label">E-Mail Adresse</label>
-        <input type="email" class="form-control" id="registerEmail" placeholder="hansmaul@springfield.net" data-error="Bruh, that email address aint valid" required>
+        <label for="eMail" class="control-label">E-Mail Adresse</label>
+        <input type="email" class="form-control" id="eMail" placeholder="hansmaul@springfield.net" data-error="Bruh, that email address aint valid" required>
       </div>
 
       <div class="form-group">
-        <label for="registerPassword" class="control-label">Passwort</label>
+        <label for="password" class="control-label">Passwort</label>
         <div class="form-inline row">
           <div class="form-group col-sm-6">
-            <input type="password" data-minlength="6" class="form-control width-100" id="registerPassword" placeholder="hunter2" required>
+            <input type="password" data-minlength="6" class="form-control width-100" id="password" placeholder="hunter2" required>
             <span class="help-block">Ihr Passwort muss mindestens 6 Zeichen lang sein</span>
           </div>
           <div class="form-group col-sm-6">
-            <input type="password" class="form-control width-100" id="registerPasswordConfirm" data-match="#registerPassword" data-match-error="Die Passwörter stimmen nicht überein" placeholder="Passwort wiederholen" required>
+            <input type="password" class="form-control width-100" id="passwordConfirm" data-match="#password" data-match-error="Die Passwörter stimmen nicht überein" placeholder="Passwort wiederholen" required>
           </div>
         </div>
       </div>
@@ -46,43 +46,43 @@
       <div class="form-group">
         <div class="radio">
           <label>
-            <input type="radio" name="day" value="MONDAY" required>
+            <input type="radio" name="day_of_week" value="MONDAY" required>
             Montag
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="day" value="TUESDAY" required>
+            <input type="radio" name="day_of_week" value="TUESDAY" required>
             Dienstag
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="day" value="WEDNESDAY" required>
+            <input type="radio" name="day_of_week" value="WEDNESDAY" required>
             Mittwoch
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="day" value="THURSDAY" required>
+            <input type="radio" name="day_of_week" value="THURSDAY" required>
             Donnerstag
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="day" value="FRIDAY" required>
+            <input type="radio" name="day_of_week" value="FRIDAY" required>
             Freitag
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="day" value="SATURADAY" required>
+            <input type="radio" name="day_of_week" value="SATURADAY" required>
             Samstag
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="day" value="SUNDAY" required>
+            <input type="radio" name="day_of_week" value="SUNDAY" required>
             Sonntag
           </label>
         </div>

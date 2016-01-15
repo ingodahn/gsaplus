@@ -23,10 +23,10 @@
       <h2>Registrierung</h2>
       <form>
         <div class="form-group">
-          <label for="exampleInputCode">Persönlicher Code</label>
+          <label for="code">Persönlicher Code</label>
           <a href="#"><i class="fa fa-question-circle"></i></a>
 
-          <input type="email" class="form-control" id="exampleInputCode" placeholder="Code">
+          <input type="email" class="form-control" id="code" placeholder="Code">
         </div>
         <button type="submit" class="btn btn-primary">zur Registrierung</button>
       </form>
