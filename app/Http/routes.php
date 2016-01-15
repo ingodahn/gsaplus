@@ -15,20 +15,20 @@ Route::get('/', function () {
     return view('gate.start_page');
 });
 
-Route::get('/register', function () {
-    return view('register.greeting');
+Route::get('/welcome', function () {
+    return view('register.welcome');
 });
 
-Route::get('/register/greeting', function () {
-    return view('register.greeting');
+Route::get('/register/welcome', function () {
+    return view('register.welcome');
 });
 
-Route::get('/register/commit', function () {
-    return view('register.commit');
+Route::get('/register/accept', function () {
+    return view('register.accept');
 });
 
-Route::get('/register/data', function () {
-    return view('register.data');
+Route::get('/register/patient_data', function () {
+    return view('register.patient_data');
 });
 
 /*
