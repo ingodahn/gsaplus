@@ -11,7 +11,7 @@
       <li>3. Daten</li>
     </ol>
 
-    <p>Sehr geehrter Teilnehmer, sehr geehrte Teilnehmerin,
+    <p>Sehr geehrter Teilnehmer, sehr geehrte Teilnehmerin,</p>
 
     <p>im Rahmen unseres internetbasierten Nachsorgeprogramms möchte ich mich als Ihr Online-Therapeut vorstellen, der Sie nun die nächsten 12 Wochen bei der beruflichen Wiedereingliederung begleiten und unterstützen wird. Ich möchte Sie anregen, mir Ihre Erwartungen und Erfahrungen bei der Rückkehr an den Arbeitsplatz in Form eines Blogs schriftlich mitzuteilen. Wie wir aus wissenschaftlichen Studien wissen, hilft das regelmäßige Aufschreiben dabei, besser mit Belastungen und Stress umzugehen. Zusätzlich habe ich dadurch die Möglichkeit, Ihnen Rückmeldungen, Anregungen und ggf. auch Hilfestellungen zu geben.</p>
 
