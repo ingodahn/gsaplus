@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 // require_once ('..\..\Models\Cookie.php');
 require_once ('Controller.php');
 
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 use App\Models;
 use App\Http\Controllers;
@@ -119,7 +121,7 @@ class GateController extends Controller
 	public function from_welcome()
 	{
 
-		//return view(gate.accept);
+		return view('gate.accept');
 
 
 	}
@@ -181,6 +183,7 @@ class GateController extends Controller
 	 * 
 	 * Mit diesen Informationen wird die Seite zur Erfassung der Patientendaten
 	 * aufgebaut und ausgeliefert.
+	 * Aufgerufen von: /Accepted
 	 */
 	public function req_patient_data()
 	{
@@ -193,6 +196,7 @@ class GateController extends Controller
 		//Wochentag unter Verwendung von Days.
 		//get_available_days()
 		//Zeige Seite PatientenDaten
+		return view('gate.patient_data');
 
 
 	}
@@ -219,11 +223,11 @@ class GateController extends Controller
 	 * Die Anzahl der Slots für den gewählten Tag wird um 1 vermindert:
 	 * Days.decrease_day(gewählter Tag)
 	 * 
-	 * @param Code
-	 * @param Name
-	 * @param Password
-	 * @param eMail
-	 * @param Day
+	 * @param code
+	 * @param name
+	 * @param password
+	 * @param email
+	 * @param day
 	 */
 	public function save_patient_data($Code, $Name, $Password, $eMail, $Day)
 	{
@@ -252,12 +256,13 @@ class GateController extends Controller
 	 * System prüft, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
 	 * Die Begrüßungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
 	 * informiert
+	 * Aufgerufen von: /StartRegistration
 	 * 
 	 * @param Code
 	 */
+	 
 	public function start_registration(String $Code)
 	{
-
 		//if (Cookie.code already registered) {
 		// return View::make(system.info_message)
 		//-> where ('Text',"Dieser Code wurde
@@ -265,7 +270,7 @@ class GateController extends Controller
 		//anmelden");
 		// Result: CodeStatus="registered";
 		//} else if (Code not yet registered) {
-		// return view(gate.welcome);
+		return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
 		//} else {
 		//  return View::make(system.

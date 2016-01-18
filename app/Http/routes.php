@@ -17,6 +17,9 @@
 
 Route::get('/', 'GateController@enter_system');
 //Route::get('/', 'GateController@enter_system(Cookie $cookie)');
+Route::post('/test', function () {
+  return "Hallo World";
+});
 Route::post('/StartRegistration', 'GateController@start_registration');
 Route::get('/ResetPassword', 'GateController@reset_password');
 Route::post('/CheckLoginPassword', 'GateController@check_login_password');
