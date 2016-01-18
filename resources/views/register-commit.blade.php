@@ -14,24 +14,24 @@
       <li>3. Daten</li>
     </ol>
 
-    <p>Unsere verbindliche Zusage zur Teilnahme an diesem Projekt ist Ihnen sehr wichtig:</p>
+    <p>Ihre verbindliche Zusage zur Teilnahme an unserem Projekt ist uns sehr wichtig:</p>
 
     <div class="checkbox">
       <label>
         <input type="checkbox" value="" class="commit-checkbox">
-        Ich bin bereit die Plattform GSA Online Plus regelmäßig zu besuchen
+        Ich bin bereit, die Plattform GSA online plus regelmäßig zu besuchen
       </label>
     </div>
     <div class="checkbox">
       <label>
         <input type="checkbox" value="" class="commit-checkbox">
-        Ich bin bereit für 12 Wochen lang jede Woche ca. 45 Minuten Zeit zu investieren
+        Ich bin bereit, für 12 Wochen lang jede Woche ca. 45 Minuten Zeit zu investieren
       </label>
     </div>
     <div class="checkbox">
       <label>
         <input type="checkbox" value="" class="commit-checkbox">
-        Ich bin bereit regelmäßig einen kurzen Fragebogen zu beantworten
+        Ich bin bereit, regelmäßig einen kurzen Fragebogen zu beantworten
       </label>
     </div>
 

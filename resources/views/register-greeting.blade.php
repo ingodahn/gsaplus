@@ -11,13 +11,19 @@
       <li>3. Daten</li>
     </ol>
 
-    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+    <p>Sehr geehrter Teilnehmer, sehr geehrte Teilnehmerin,
 
-    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+    <p>im Rahmen unseres internetbasierten Nachsorgeprogramms möchte ich mich als Ihr Online-Therapeut vorstellen, der Sie nun die nächsten 12 Wochen bei der beruflichen Wiedereingliederung begleiten und unterstützen wird. Ich möchte Sie anregen, mir Ihre Erwartungen und Erfahrungen bei der Rückkehr an den Arbeitsplatz in Form eines Blogs schriftlich mitzuteilen. Wie wir aus wissenschaftlichen Studien wissen, hilft das regelmäßige Aufschreiben dabei, besser mit Belastungen und Stress umzugehen. Zusätzlich habe ich dadurch die Möglichkeit, Ihnen Rückmeldungen, Anregungen und ggf. auch Hilfestellungen zu geben.</p>
 
-    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+    <p>Ich möchte Sie daher bitten, sich jede Woche zu einem festen Termin ca. 45 Minuten Zeit zu nehmen, um in Ihr persönliches Tagebuch zu schreiben, d.h. konkrete Begegnungen mit anderen Menschen aus Ihrem Arbeitsalltag zu schildern. Es geht dabei um Ihre Wünsche und Erwartungen an andere Menschen und darum, wie die anderen und Sie selbst reagieren.</p>
 
-    <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then</p>
+    <p>Sie werden von mir jede Woche einen kurzen, auf Sie zugeschnittenen Themenvorschlag erhalten. Ich werde Ihren Tagebucheintrag dann jeweils innerhalb von 24 Stunden lesen und beantworten. In meiner Antwort werde ich Ihnen Anregungen und Hinweise geben, die Ihnen helfen sollen, mit belastenden Situationen am Arbeitsplatz anders umzugehen.</p>
+
+    <p>Sollten Sie zurzeit arbeitsunfähig sein, können Sie sich bei Ihren Schilderungen auch auf vergangene Situationen beziehen oder Ihre Erwartungen an die zukünftige Situation am Arbeitsplatz beschreiben.</p>
+
+    <p>Ich freue mich darauf, Sie in den nächsten Wochen bei Ihrer beruflichen Rückkehr begleiten zu können.</p>
+
+    <p>Im Folgenden Anmeldeverfahren werden Sie nun gebeten, Ihre Zusage zur Teilnahme zu bestätigen, sich mit einem anonymen Benutzernamen und Passwort zu registrieren und einen persönlichen Schreibtag festzulegen.</p>
 
     <div class="pull-right">
       <a class="btn btn-accent" href="/register/commit">Weiter</a>
