@@ -260,8 +260,8 @@ class GateController extends Controller
 	 * 
 	 * @param Code
 	 */
-	 
-	public function start_registration(String $Code)
+	public function start_registration()
+	// public function start_registration(String $Code)
 	{
 		//if (Cookie.code already registered) {
 		// return View::make(system.info_message)
