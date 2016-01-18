@@ -21,7 +21,7 @@
   <div class="row vdivide">
     <div class="col-md-4">
       <h2>Registrierung</h2>
-      <form>
+      <form action="/StartRegistration" method="post">
         <div class="form-group">
           <label for="code">Persönlicher Code</label>
           <a href="#"><i class="fa fa-question-circle"></i></a>
