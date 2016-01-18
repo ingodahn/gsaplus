@@ -161,6 +161,10 @@ return [
          */
          Prologue\Alerts\AlertsServiceProvider::class,
 
+        /*
+         * Provider for PhpStorm
+         */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
