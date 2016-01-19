@@ -12,7 +12,7 @@
     </ol>
 
     {{-- All active form content must stay in this form for frontend and backend processing --}}
-    <form data-toggle="validator" role="form" action="#" method="post">
+    <form id="registration-form" data-parsley-validate role="form" action="#" method="post">
 
       <h3>Schreibtag</h3>
 
@@ -24,15 +24,18 @@
 
       <p>Ich schreibe meinen Tagebuch in Zukunft wöchentlich am:</p>
 
-      <select class="form-control">
-        <option>Montag</option>
-        <option>Dienstag</option>
-        <option>Mittwoch</option>
-        <option>Donnerstag</option>
-        <option>Freitag</option>
-        <option>Samstag</option>
-        <option>Sonntag</option>
-      </select>
+      <div class="form-group">
+        <label for="day_of_week" class="control-label">Wochentag</label>
+        <select name="day_of_week" class="form-control" required>
+          <option>Montag</option>
+          <option>Dienstag</option>
+          <option>Mittwoch</option>
+          <option>Donnerstag</option>
+          <option>Freitag</option>
+          <option>Samstag</option>
+          <option>Sonntag</option>
+        </select>
+      </div>
 
 
       <h3>Ihre Daten</h3>
@@ -46,24 +49,25 @@
       <p>Bitte wählen Sie einen Benutzernamen und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>
 
       <div class="form-group">
-        <label for="registerName" class="control-label">Name</label>
-        <input type="text" class="form-control" id="registerName" placeholder="Hans Maulwurf" required>
+        <label for="name" class="control-label">Name</label>
+        <input name="name" type="text" class="form-control" placeholder="Hans Maulwurf" required>
       </div>
 
       <div class="form-group">
-        <label for="registerEmail" class="control-label">E-Mail Adresse</label>
-        <input type="email" class="form-control" id="registerEmail" placeholder="hansmaul@springfield.net" data-error="Bruh, that email address aint valid" required>
+        <label for="email" class="control-label">E-Mail Adresse</label>
+        <input name="email" type="email" class="form-control" placeholder="hansmaul@springfield.net" required>
       </div>
 
       <div class="form-group">
-        <label for="registerPassword" class="control-label">Passwort</label>
+        <label for="password" class="control-label">Passwort</label>
+
         <div class="form-inline row">
           <div class="form-group col-sm-6">
-            <input type="password" data-minlength="6" class="form-control width-100" id="registerPassword" placeholder="hunter2" required>
-            <span class="help-block">Ihr Passwort muss mindestens 6 Zeichen lang sein</span>
+            <input name="password" id="password" type="password" data-minlength="6" class="form-control width-100" placeholder="hunter2" required>
           </div>
+
           <div class="form-group col-sm-6">
-            <input type="password" class="form-control width-100" id="registerPasswordConfirm" data-match="#registerPassword" data-match-error="Die Passwörter stimmen nicht überein" placeholder="Passwort wiederholen" required>
+            <input type="password" class="form-control width-100" data-match="#registerPassword" placeholder="Passwort wiederholen" required data-parsley-equalto="#password">
           </div>
         </div>
       </div>

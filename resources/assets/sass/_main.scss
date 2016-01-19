@@ -44,3 +44,8 @@ hr {
   left: 0;
   z-index: 1;
 }
+
+.parsley-errors-list {
+  color: $brand-danger;
+  margin-top: 8px;
+}
