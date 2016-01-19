@@ -39,3 +39,9 @@ task :clean do
   `rm -rf public/fonts/`
   `rm -rf public/js/`
 end
+
+task update: [:assets] do
+  sh "composer install"
+  sh "php artisan migrate"
+  sh "bower install"
+end
