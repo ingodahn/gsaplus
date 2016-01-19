@@ -24,50 +24,15 @@
 
       <p>Ich schreibe meinen Tagebuch in Zukunft wöchentlich am:</p>
 
-      <div class="form-group">
-        <div class="radio">
-          <label>
-            <input type="radio" name="day" value="MONDAY" required>
-            Montag
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="day" value="TUESDAY" required>
-            Dienstag
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="day" value="WEDNESDAY" required>
-            Mittwoch
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="day" value="THURSDAY" required>
-            Donnerstag
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="day" value="FRIDAY" required>
-            Freitag
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="day" value="SATURADAY" required>
-            Samstag
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="day" value="SUNDAY" required>
-            Sonntag
-          </label>
-        </div>
-      </div>
+      <select class="form-control">
+        <option>Montag</option>
+        <option>Dienstag</option>
+        <option>Mittwoch</option>
+        <option>Donnerstag</option>
+        <option>Freitag</option>
+        <option>Samstag</option>
+        <option>Sonntag</option>
+      </select>
 
 
       <h3>Ihre Daten</h3>
