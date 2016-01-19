@@ -1,5 +1,5 @@
 desc "Shortcut for assets-task"
-task default: %w[assets]
+task default: %w[update]
 
 desc "Compile sass and publish all assets"
 task assets: [:sass, :js, :fonts]
