@@ -260,28 +260,29 @@ class GateController extends Controller
 	 * 
 	 * @param Code
 	 */
-	public function start_registration()
-	// public function start_registration(String $Code)
-	{
-		//if (Cookie.code already registered) {
-		// return View::make(system.info_message)
-		//-> where ('Text',"Dieser Code wurde
-		//bereits registriert, Sie können sich
-		//anmelden");
+	
+	public function start_registration(Request $request) {
+	    $code = $request->input('Code');
+		if (! $code) {
+			return $this->missing_input('Code',$request);
+		}
+		//if ($code == "AAA") {
+		//if (code already registered) {
+		// return View::make(system.info_message)-> where ('Text',"Dieser Code wurde bereits registriert, Sie können sich anmelden");
 		// Result: CodeStatus="registered";
 		//} else if (Code not yet registered) {
 		return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
 		//} else {
-		//  return View::make(system.
-		//info_message) -> where ('Text',"Der
-		//einegegebene Code ist nicht korrekt.
-		//Hilfe zur Code-Eingabe:...");
-		// result: CodeStatus="incorrect";
+		//  return View::make(system.info_message) -> where ('Text',"Der einegegebene Code ist nicht korrekt. Hilfe zur Code-Eingabe:...");
+		// Result: CodeStatus="incorrect";
 		//}
-		//return sim.CodeStatus;
+        //}
 
-
+	}
+	
+	function missing_input($par,$request) {
+		return "Missing Parameter ".$par." In Request START:".$request.":END";
 	}
 
 }
