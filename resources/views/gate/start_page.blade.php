@@ -23,10 +23,10 @@
       <h2>Registrierung</h2>
       <form action="/StartRegistration" method="post">
         <div class="form-group">
-          <label for="code">Persönlicher Code</label>
+          <label for="Code">Persönlicher Code</label>
           <a href="#"><i class="fa fa-question-circle"></i></a>
 
-          <input class="form-control" name="Code" id="code" placeholder="Code">
+          <input name="Code" class="form-control" placeholder="Code">
         </div>
         <button type="submit" class="btn btn-primary">zur Registrierung</button>
       </form>
