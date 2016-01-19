@@ -43,10 +43,7 @@ git pull origin development # Update project code
 vagrant reload --provision # Update VM
 vagrant ssh # ssh into VM
 cd /var/www # Change to the project dir inside the VM
-composer install # Fetch php-dependencies
-php artisan migrate # Migrate the database
-bower install # Fetch frontend-dependencies
-rake # Compile/copy frontend-dependencies into public
+rake # Update all dependencies and assets
 ```
 
 Note that this is only a slight modification of the install process. Also, it is very likely that all of the steps are neccessary, but this is a surefire way to get you up to date. Feel free to drop commands once you get more comfortable with the process.
