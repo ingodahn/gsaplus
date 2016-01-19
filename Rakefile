@@ -19,10 +19,13 @@ end
 desc "Publish all javascript assets"
 task :js do
   `mkdir -p public/js/`
+  `mkdir -p public/js/i18n`
   `cp -r resources/assets/js/. public/js/`
   `cp bower_components/bootstrap-validator/dist/validator.min.js public/js/`
   `cp bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js public/js/`
   `cp bower_components/jquery/dist/jquery.min.js public/js/`
+  `cp bower_components/parsleyjs/dist/parsley.min.js public/js/`
+  `cp bower_components/parsleyjs/dist/i18n/de.js public/js/i18n/`
 end
 
 desc "Publish all font assets"
