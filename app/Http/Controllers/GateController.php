@@ -9,6 +9,8 @@ use Illuminate\Routing\Controller;
 
 use App\Models;
 use App\Http\Controllers;
+use Prologue\Alerts\Facades\Alert;
+
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem
  * Registrierungs- und Anmeldeprozess.
@@ -266,18 +268,22 @@ class GateController extends Controller
 		if (! $code) {
 			return $this->missing_input('Code',$request);
 		}
-		//if ($code == "AAA") {
+		if ($code == "AAA") {
 		//if (code already registered) {
-		// return View::make(system.info_message)-> where ('Text',"Dieser Code wurde bereits registriert, Sie können sich anmelden");
+			Alert::warning('Dieser Code wurde bereits registriert, Sie können sich anmelden.')->flash();
+			return $this->enter_system();
+		//View::make(system.info_message)-> where ('Text',"Dieser Code wurde bereits registriert, Sie können sich anmelden");
 		// Result: CodeStatus="registered";
-		//} else if (Code not yet registered) {
-		return view('gate.welcome');
+		} else if ($code == "BBB") {
+		//(Code not yet registered) {
+			return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
-		//} else {
+		} else {
+			Alert::warning('Der einegegebene Code '.$code.' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
+			return $this->enter_system();
 		//  return View::make(system.info_message) -> where ('Text',"Der einegegebene Code ist nicht korrekt. Hilfe zur Code-Eingabe:...");
 		// Result: CodeStatus="incorrect";
-		//}
-        //}
+		}
 
 	}
 	
