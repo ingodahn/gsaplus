@@ -21,12 +21,12 @@
   <div class="row vdivide">
     <div class="col-md-4">
       <h2>Registrierung</h2>
-      <form>
+      <form action="/StartRegistration" method="post">
         <div class="form-group">
-          <label for="exampleInputCode">Persönlicher Code</label>
+          <label for="Code">Persönlicher Code</label>
           <a href="#"><i class="fa fa-question-circle"></i></a>
 
-          <input type="email" class="form-control" id="exampleInputCode" placeholder="Code">
+          <input name="Code" class="form-control" placeholder="Code">
         </div>
         <button type="submit" class="btn btn-primary">zur Registrierung</button>
       </form>

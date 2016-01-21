@@ -26,7 +26,7 @@
     <p>Im Folgenden Anmeldeverfahren werden Sie nun gebeten, Ihre Zusage zur Teilnahme zu bestätigen, sich mit einem anonymen Benutzernamen und Passwort zu registrieren und einen persönlichen Schreibtag festzulegen.</p>
 
     <div class="pull-right">
-      <a class="btn btn-accent" href="/register/commit">Weiter</a>
+      <a class="btn btn-accent" href="/register/accept">Weiter</a>
     </div>
   </div>
 @endsection
