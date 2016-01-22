@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 // require_once ('..\..\Models\Cookie.php');
 require_once ('Controller.php');
+//require_once('Days.php');
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -99,20 +100,27 @@ class GateController extends Controller
 	 * 
 	 * @param cookie
 	 */
-	 public function enter_system()
+	 public function enter_system(Request $request)
 	// public function enter_system(Cookie $cookie)
 	{
-
-		//if ((cookie.stay_logged_inn) && (Code
+		// $session=$request->session();
+		//ID $code = $request->session()->get('Code');
+		$code = "BBB";
+		$days = new Days;
+		//if ((cookie.stay_logged_in) && (Code
 		//is registered)) {
+		if ( $code == "AAA") {
 		// Result: "relogin";
-		//} else if (Days.day_available())  {
-		return view('gate.start_page');
+			return "relogin";
+		} else if ($days->day_available())  {
+			return view('gate.start_page')->with('RegistrationPossible',true);
 		// Result: "registrationPossible";
-		//} else {
-		//return view(gate.login_only);
+		} else {
+		// return "registrationImpossible";
+			return view('gate.start_page')->with('RegistrationPossible',false);
+		//	return view(gate.login_only);
 		//Result:"registrationImpossible";
-		//}
+		}
 
 
 	}
@@ -265,6 +273,7 @@ class GateController extends Controller
 	
 	public function start_registration(Request $request) {
 	    $code = $request->input('Code');
+		// \Session::put('Code',$code);
 		if (! $code) {
 			return $this->missing_input('Code',$request);
 		}

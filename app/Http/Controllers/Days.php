@@ -12,7 +12,7 @@ namespace App\Http\Controllers;
  * @version 1.0
  * @created 13-Jan-2016 15:50:31
  */
-class Days extends string
+class Days
 {
 
 	function __construct()
@@ -35,7 +35,7 @@ class Days extends string
 		//if (get_available_days() == {})
 		// return false;
 		//} else {
-		// return true;
+		return true;
 		//}
 
 
