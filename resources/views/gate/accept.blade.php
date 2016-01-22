@@ -36,7 +36,7 @@
     </div>
 
     <div class="pull-right">
-      <a class="btn btn-accent disabled" id="commit-next" href="/register/patient_data">Weiter</a>
+      <a class="btn btn-accent disabled" id="commit-next" href="/Accepted">Weiter</a>
     </div>
   </div>
 @endsection
