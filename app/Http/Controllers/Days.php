@@ -33,9 +33,9 @@ class Days
 	{
 
 		//if (get_available_days() == {})
-		// return false;
+			return false;
 		//} else {
-		return true;
+		// return true;
 		//}
 
 

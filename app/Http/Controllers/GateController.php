@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-// require_once ('..\..\Models\Cookie.php');
-require_once ('Controller.php');
-//require_once('Days.php');
-
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+// use Validator, Input, Redirect; 
 
 use App\Models;
 use App\Http\Controllers;
@@ -93,8 +93,7 @@ class GateController extends Controller
 	 * gesetzt wäre.</li>
 	 * 	<li>Ist StayLoggindIn==true so wird zum Tagebuch schreiben weitergeleitet.
 	 * </li>
-	 * 	<li>Gibt es keine freien Tage so wird so wird die Seite Login_only
-	 * ausgeliefert</li>
+	 * 	<li>Gibt es keine freien Tage so wird so wird die Startseite mit Kontaktmöglichkeit statt mit Registrierung ausgeliefert</li>
 	 * 	<li>Ansonsten wird die Seite Startseite ausgeliefert</li>
 	 * </ol>
 	 * 
@@ -103,7 +102,7 @@ class GateController extends Controller
 	 public function enter_system(Request $request)
 	// public function enter_system(Cookie $cookie)
 	{
-		// $session=$request->session();
+		//ID $session=$request->session();
 		//ID $code = $request->session()->get('Code');
 		$code = "BBB";
 		$days = new Days;
@@ -118,7 +117,6 @@ class GateController extends Controller
 		} else {
 		// return "registrationImpossible";
 			return view('gate.start_page')->with('RegistrationPossible',false);
-		//	return view(gate.login_only);
 		//Result:"registrationImpossible";
 		}
 
@@ -232,6 +230,7 @@ class GateController extends Controller
 	 * Es wird vermerkt, dass der Code registriert ist
 	 * Die Anzahl der Slots für den gewählten Tag wird um 1 vermindert:
 	 * Days.decrease_day(gewählter Tag)
+	 * Danach wird auf die Patienten-Homepage weitergeleitet.
 	 * 
 	 * @param code
 	 * @param name
@@ -239,9 +238,14 @@ class GateController extends Controller
 	 * @param email
 	 * @param day
 	 */
-	public function save_patient_data($Code, $Name, $Password, $eMail, $Day)
+	public function save_patient_data(Request $request)
+	// public function save_patient_data($Code, $Name, $Password, $eMail, $Day)
 	{
-
+		$Code=\Session::get('Code');
+		$Name=$request->input('name');
+		$Password=$request->input('password');
+		$eMail=$request->input('email');
+		$Day=$request->input('day_of_week');
 		//if (Name or eMail already in use) {
 		//Result: Registered=false;
 		//return View::make(system.info-message) -
@@ -251,11 +255,13 @@ class GateController extends Controller
 		//Result: Registered=true;
 		//Patient.code=Code;
 		//Patient.user_name=Name;
-		//Patient.assword=Password;
+		//Patient.password=Password;
 		//Patient.eMail=eMail;
 		//Patient.day=Day;
 		//save Patient;
-		//return view(gate.registration_success).
+		return 'Code: '.$Code.' Name: '.$Name.' Password: '.$Password.'eMail: '.$eMail.' Day: '.$Day;
+		// confirmation_message 'registration_success';
+		// redirect /Home
 		//}
 
 
@@ -272,8 +278,15 @@ class GateController extends Controller
 	 */
 	
 	public function start_registration(Request $request) {
+		// $this->validate($request, ['Code' => 'required']);
+		// Versuch nach Cookbook:
+		$rules=array('Code' => 'required');
+		$validation=Validator::make(Input::all(),$rules);
+		if ($validation->fails()) {
+			return Redirect::to('/')->withErrors($validation)->withInput();
+		}
 	    $code = $request->input('Code');
-		// \Session::put('Code',$code);
+		\Session::put('Code',$code);
 		if (! $code) {
 			return $this->missing_input('Code',$request);
 		}
@@ -285,6 +298,7 @@ class GateController extends Controller
 		// Result: CodeStatus="registered";
 		} else if ($code == "BBB") {
 		//(Code not yet registered) {
+		//	return \Session::get('Code');
 			return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
 		} else {
