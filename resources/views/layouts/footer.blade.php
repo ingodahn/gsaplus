@@ -9,6 +9,5 @@
             <li><a href="#">Impressum</a></li>
           </ul>
     </nav>
-  </footer>
-</div>
-</div>
+  </div>
+</footer>
