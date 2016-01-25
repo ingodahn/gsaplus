@@ -35,8 +35,8 @@
       <h2>Login</h2>
       <form>
         <div class="form-group">
-          <label for="exampleInputEmail1">Nutzername oder Email</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+          <label for="exampleInputEmail1">Benutzername oder E-Mail Adresse</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="E-Mail">
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Passwort</label>
