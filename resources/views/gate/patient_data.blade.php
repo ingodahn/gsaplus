@@ -49,7 +49,7 @@
       <p>Bitte wählen Sie einen Benutzernamen und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>
 
       <div class="form-group">
-        <label for="name" class="control-label">Name</label>
+        <label for="name" class="control-label">Benutzername</label>
         <input name="name" type="text" class="form-control" placeholder="Hans Maulwurf" required>
       </div>
 
