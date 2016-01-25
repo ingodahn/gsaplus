@@ -3,6 +3,15 @@
 return [
 
     /*
+     * The administrator of the site (gsa online plus). Arrays aren't supported
+     * in the .env file -> use multiple variables.
+     */
+    'admin' => [
+        'email' => env('ADMIN_EMAIL', 'admin@localhost.com'),
+        'name'  => env('ADMIN_NAME', 'Administrator')
+    ],
+
+    /*
     |--------------------------------------------------------------------------
     | Mail Driver
     |--------------------------------------------------------------------------
@@ -54,7 +63,10 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => [
+        'address' => env('SITE_EMAIL', 'system@localhost.com'),
+        'name' => 'GSA Online Plus - System'
+    ],
 
     /*
     |--------------------------------------------------------------------------
