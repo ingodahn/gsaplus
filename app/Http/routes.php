@@ -16,8 +16,6 @@
 // });
 
 Route::get('/', 'GateController@enter_system');
-//Route::get('/', 'GateController@enter_system(Cookie $cookie)');
-
 Route::post('/StartRegistration', 'GateController@start_registration');
 Route::get('/ResetPassword', 'GateController@reset_password');
 Route::post('/CheckLoginPassword', 'GateController@check_login_password');
@@ -29,6 +27,7 @@ Route::get('/FromWelcome', 'GateController@from_welcome');
 Route::get('/Accepted', 'GateController@req_patient_data');
 Route::post('/SavePatientData', 'GateController@save_patient_data');
 Route::get('/GetResetCode', 'GateController@get_reset_code');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +41,9 @@ Route::get('/GetResetCode', 'GateController@get_reset_code');
 */
 
 Route::group(['middleware' => ['web']], function () {
+	Route::get('userform', function()
+	{
+	 return View::make('userform');
+	});
     //
 });

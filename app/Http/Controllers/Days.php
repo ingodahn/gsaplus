@@ -33,7 +33,7 @@ class Days
 	{
 
 		//if (get_available_days() == {})
-			return false;
+			return true;
 		//} else {
 		// return true;
 		//}
@@ -63,7 +63,8 @@ class Days
 	}
 
 	/**
-	 * Es wird die Liste aller Tage T zurückgegeben für die this.T > 0 ist.
+	 * Es wird die Liste aller der Tage T zurückgegeben für die es wenigstens einen freien Slot gibt. 
+	 * Die Liste hat die Form ["Sonntag",...,"Donnerstag"].
 	 */
 	public function get_available_days()
 	{
@@ -75,6 +76,7 @@ class Days
 		//   push(day,available_days);
 		//}}
 		//return day_list;
+		return array("Sonntag","Dienstag","Donnerstag");
 
 
 
@@ -83,18 +85,22 @@ class Days
 	/**
 	 * Es wird eine Liste aus der Datenbank geholt die angibt, für welchen Tag
 	 * wieviele Slots verfügbar sind.
+	 * Der Rückgabewert hat die Form einer Liste wie ["Sonntag"=>3,..,"Donnerstag"=>5]. 
+	 * In der Liste sind alle Tage von Sonntag bis Donnerstag genau einmal vertreten.
 	 */
-	private function get_days()
+	public function get_days()
 	{
 	}
 
 	/**
 	 * Für jeden Tag wird in der Datenbank die Anzahl der verfügbaren Tage gespeichert.
-	 * 
+	 * Für jeden Tag wird in der Datenbank die Anzahl der verfügbaren Tage gespeichert.
+	 * Das Argument wird in der Form einer Liste der Form ["Sonntag"=>3,..,"Donnerstag"=>5] übergeben. 
+	 * In der Liste sind alle Tage von Sonntag bis Donnerstag genau einmal vertreten.
 	 * 
 	 * @param day_list
 	 */
-	private function set_days($day_list)
+	public function set_days($day_list)
 	{
 	}
 

@@ -195,17 +195,16 @@ class GateController extends Controller
 	 */
 	public function req_patient_data()
 	{
-
-		//if (! Days.days_available()) {
-		// Generic.home();
-		// return;
-		//}
+		$days = new Days;
+		if (! $days->day_available()) {
+			return Redirect::to('/');
+		}
 		//Setze Auswahlliste  Patientendaten.
 		//Wochentag unter Verwendung von Days.
-		//get_available_days()
+		$day_of_week=$days->get_available_days();
 		//Zeige Seite PatientenDaten
-		return view('gate.patient_data');
-
+		return $day_of_week;
+		// return view('gate.patient_data')->with('day_of_week',$day_of_week);
 
 	}
 
