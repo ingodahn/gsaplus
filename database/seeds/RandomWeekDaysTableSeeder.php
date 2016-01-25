@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Jenssegers\Date\Date;
 use App\WeekDay;
 
-class WeekDaysTableSeeder extends Seeder
+class RandomWeekDaysTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
