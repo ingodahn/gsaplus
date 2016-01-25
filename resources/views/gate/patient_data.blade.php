@@ -56,24 +56,24 @@
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="email" class="control-label">E-Mail Adresse</label>
-          <input name="email" id="email" type="email" class="form-control" class="width-100" placeholder="hansmaul@springfield.net" required>
+          <input name="email" id="email" type="email" class="form-control width-100" placeholder="hansmaul@springfield.net" required>
         </div>
 
         <div class="form-group col-sm-6">
           <label class="control-label">Wiederholen</label>
-          <input type="email" class="form-control" placeholder="hansmaul@springfield.net" class="width-100" required data-parsley-equalto="#email">
+          <input type="email" placeholder="hansmaul@springfield.net" class="form-control width-100" required data-parsley-equalto="#email">
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="password" class="control-label">Passwort</label>
-          <input name="password" id="password" type="password" data-minlength="6" class="form-control width-100" placeholder="hunter2" required minlength="6">
+          <input name="password" id="password" type="password" class="form-control width-100" placeholder="hunter2" required minlength="6">
         </div>
 
         <div class="form-group col-sm-6">
           <label class="control-label">Wiederholen</label>
-          <input type="password" class="form-control width-100" data-match="#registerPassword" placeholder="Passwort wiederholen" required minlength="6" data-parsley-equalto="#password">
+          <input type="password" class="form-control width-100" placeholder="Passwort wiederholen" required minlength="6" data-parsley-equalto="#password">
         </div>
       </div>
 
