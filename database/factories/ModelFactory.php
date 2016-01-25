@@ -67,3 +67,13 @@ $factory->define(App\AssignmentTemplate::class, function (Faker\Generator $faker
         'text' => $faker->text()
     ];
 });
+
+$factory->define(App\WeekDay::class, function (Faker\Generator $faker) {
+    $date = Carbon::createFromTimeStamp($faker->dateTime()->getTimestamp());
+
+    return [
+        'number' => $date->dayOfWeek,
+        'name' => $date->format('l'),
+        'free_time_slots' => $faker->numberBetween($min = 0, $max = 10)
+    ];
+});
