@@ -7,8 +7,8 @@ return [
      * in the .env file -> use multiple variables.
      */
     'admin' => [
-        'email' => env('ADMIN_EMAIL', 'admin@localhost.com'),
-        'name'  => env('ADMIN_NAME', 'Administrator')
+        'address' => env('MAIL_ADMIN_ADDRESS', 'admin@localhost.com'),
+        'name'  => env('MAIL_ADMIN_NAME', 'Administrator')
     ],
 
     /*
@@ -64,8 +64,8 @@ return [
     */
 
     'from' => [
-        'address' => env('SITE_EMAIL', 'system@localhost.com'),
-        'name' => 'GSA Online Plus - System'
+        'name' => env('MAIL_APP_NAME', 'System GSA Online Plus'),
+        'address' => env('MAIL_APP_ADDRESS', 'system@localhost.com')
     ],
 
     /*
