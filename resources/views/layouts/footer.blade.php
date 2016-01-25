@@ -1,7 +1,14 @@
 <hr>
 <footer>
   <div class="container">
-    <p><a href="https://gitlab.uni-koblenz.de/iwm/gsa-online-plus">Institut für Wissensmedien, Universität Koblenz-Landau</a></p>
+    <nav class="navbar navbar-footer">
+          <ul class="nav navbar-nav">
+            <li><a href="https://gitlab.uni-koblenz.de/iwm/gsa-online-plus">Über das Projekt</a></li>
+            <li><a href="#">Kontakt</a></li>
+            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Impressum</a></li>
+          </ul>
+    </nav>
   </footer>
 </div>
 </div>
