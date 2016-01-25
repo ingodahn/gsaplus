@@ -58,17 +58,15 @@
         <input name="email" type="email" class="form-control" placeholder="hansmaul@springfield.net" required>
       </div>
 
-      <div class="form-group">
-        <label for="password" class="control-label">Passwort</label>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="password" class="control-label">Passwort</label>
+          <input name="password" id="password" type="password" data-minlength="6" class="form-control width-100" placeholder="hunter2" required minlength="6">
+        </div>
 
-        <div class="form-inline row">
-          <div class="form-group col-sm-6">
-            <input name="password" id="password" type="password" data-minlength="6" class="form-control width-100" placeholder="hunter2" required minlength="6">
-          </div>
-
-          <div class="form-group col-sm-6">
-            <input type="password" class="form-control width-100" data-match="#registerPassword" placeholder="Passwort wiederholen" required minlength="6" data-parsley-equalto="#password">
-          </div>
+        <div class="form-group col-sm-6">
+          <label class="control-label">Wiederholen</label>
+          <input type="password" class="form-control width-100" data-match="#registerPassword" placeholder="Passwort wiederholen" required minlength="6" data-parsley-equalto="#password">
         </div>
       </div>
 
