@@ -12,6 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(WeekDaysTableSeeder::class);
+
         $admin = factory(App\Admin::class, 4)
             ->create()
             ->each(function (App\Admin $a) {
