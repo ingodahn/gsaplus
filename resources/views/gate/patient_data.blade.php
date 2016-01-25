@@ -53,9 +53,16 @@
         <input name="name" type="text" class="form-control" placeholder="Hans Maulwurf" required>
       </div>
 
-      <div class="form-group">
-        <label for="email" class="control-label">E-Mail Adresse</label>
-        <input name="email" type="email" class="form-control" placeholder="hansmaul@springfield.net" required>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label for="email" class="control-label">E-Mail Adresse</label>
+          <input name="email" id="email" type="email" class="form-control" class="width-100" placeholder="hansmaul@springfield.net" required>
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label class="control-label">Wiederholen</label>
+          <input type="email" class="form-control" placeholder="hansmaul@springfield.net" class="width-100" required data-parsley-equalto="#email">
+        </div>
       </div>
 
       <div class="row">
