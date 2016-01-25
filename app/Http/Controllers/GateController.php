@@ -204,7 +204,7 @@ class GateController extends Controller
 		$day_of_week=$days->get_available_days();
 		//Zeige Seite PatientenDaten
 		return $day_of_week;
-		// return view('gate.patient_data')->with('day_of_week',$day_of_week);
+		// return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
 
 	}
 
