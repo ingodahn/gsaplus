@@ -18,38 +18,39 @@
 
   <div class="container">
 
-  <div class="row vdivide">
-    <div class="col-md-4">
-      <h2>Registrierung</h2>
-      <form action="/StartRegistration" method="post">
-        <div class="form-group">
-          <label for="Code">Persönlicher Code</label>
-          <a href="#"><i class="fa fa-question-circle"></i></a>
+    <div class="row vdivide">
+      <div class="col-md-4">
+        <h2>Registrierung</h2>
+        <form action="/StartRegistration" method="post">
+          <div class="form-group">
+            <label for="Code">Persönlicher Code</label>
+            <a href="#"><i class="fa fa-question-circle"></i></a>
 
-          <input name="Code" class="form-control" placeholder="Code">
-        </div>
-        <button type="submit" class="btn btn-primary">zur Registrierung</button>
-      </form>
-    </div>
-    <div class="col-md-8">
-      <h2>Login</h2>
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Nutzername oder Email</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Passwort</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort">
-        </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Eingeloggt bleiben
-          </label>
-          <a href="#"><i class="fa fa-question-circle"></i></a>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button> <a href="#">Passwort vergessen?</a>
-      </form>
+            <input name="Code" class="form-control" placeholder="Code">
+          </div>
+          <button type="submit" class="btn btn-primary">zur Registrierung</button>
+        </form>
+      </div>
+      <div class="col-md-8">
+        <h2>Login</h2>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nutzername oder Email</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Passwort</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort">
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Eingeloggt bleiben
+            </label>
+            <a href="#"><i class="fa fa-question-circle"></i></a>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button> <a href="#">Passwort vergessen?</a>
+        </form>
+      </div>
     </div>
   </div>
 @endsection
