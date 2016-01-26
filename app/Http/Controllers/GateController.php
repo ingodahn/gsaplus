@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
+use Session;
 // use Validator, Input, Redirect; 
 
 use App\Models;
@@ -128,7 +129,7 @@ class GateController extends Controller
 	 */
 	public function from_welcome()
 	{
-
+	
 		return view('gate.accept');
 
 
@@ -240,7 +241,7 @@ class GateController extends Controller
 	public function save_patient_data(Request $request)
 	// public function save_patient_data($Code, $Name, $Password, $eMail, $Day)
 	{
-		$Code=\Session::get('Code');
+		$Code=Session::get('Code');
 		$Name=$request->input('name');
 		$Password=$request->input('password');
 		$eMail=$request->input('email');
@@ -258,7 +259,12 @@ class GateController extends Controller
 		//Patient.eMail=eMail;
 		//Patient.day=Day;
 		//save Patient;
-		return 'Code: '.$Code.' Name: '.$Name.' Password: '.$Password.'eMail: '.$eMail.' Day: '.$Day;
+		if (Session::has('Code')) {
+			$hc='T';
+		} else {
+			$hc='F';
+		}
+		return 'Code: '.$hc.$Code.' Name: '.$Name.' Password: '.$Password.'eMail: '.$eMail.' Day: '.$Day;
 		// confirmation_message 'registration_success';
 		// redirect /Home
 		//}
@@ -285,7 +291,8 @@ class GateController extends Controller
 			return Redirect::to('/')->withErrors($validation)->withInput();
 		}
 	    $code = $request->input('Code');
-		\Session::put('Code',$code);
+		// Alternativ: Input::get('Code');
+		Session::put('Code',$code);
 		if (! $code) {
 			return $this->missing_input('Code',$request);
 		}
@@ -297,7 +304,6 @@ class GateController extends Controller
 		// Result: CodeStatus="registered";
 		} else if ($code == "BBB") {
 		//(Code not yet registered) {
-		//	return \Session::get('Code');
 			return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
 		} else {
