@@ -13,6 +13,7 @@
 
     {{-- All active form content must stay in this form for frontend and backend processing --}}
     <form id="registration-form" data-parsley-validate role="form" action="/SavePatientData" method="post">
+      {{ csrf_field() }}
 
       <h3>Schreibtag</h3>
 
