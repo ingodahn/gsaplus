@@ -101,12 +101,12 @@ class GateController extends Controller
 	 * @param cookie
 	 */
 	 public function enter_system(Request $request)
-	// public function enter_system(Cookie $cookie)
 	{
 		//ID $session=$request->session();
 		//ID $code = $request->session()->get('Code');
 		$code = "BBB";
 		$days = new Days;
+		// return dd($days->get_available_days());
 		//if ((cookie.stay_logged_in) && (Code
 		//is registered)) {
 		if ( $code == "AAA") {
@@ -304,6 +304,7 @@ class GateController extends Controller
 		// Result: CodeStatus="registered";
 		} else if ($code == "BBB") {
 		//(Code not yet registered) {
+			// return Redirect::to('/welcome');
 			return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
 		} else {

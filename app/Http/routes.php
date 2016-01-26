@@ -28,6 +28,10 @@ Route::get('/Accepted', 'GateController@req_patient_data');
 Route::post('/SavePatientData', 'GateController@save_patient_data');
 Route::get('/GetResetCode', 'GateController@get_reset_code');
 
+Route::get('/welcome', function() {
+	return Session::get('Code');
+});
+
 
 /*
 |--------------------------------------------------------------------------
