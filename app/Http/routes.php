@@ -31,6 +31,7 @@ Route::get('/FromWelcome', 'GateController@from_welcome');
 Route::get('/Accepted', 'GateController@req_patient_data');
 Route::post('/SavePatientData', 'GateController@save_patient_data');
 Route::get('/GetResetCode', 'GateController@get_reset_code');
+Route::post('/set_slots', 'PatientListController@set_slots');
 
 Route::get('/welcome', function() {
 	return Session::get('Code');
