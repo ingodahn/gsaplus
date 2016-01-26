@@ -1,0 +1,81 @@
+<?php
+
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+use Carbon\Carbon;
+use App\WeekDay;
+use App\Http\Controllers\Days;
+
+class DaysTest extends TestCase
+{
+    use DatabaseMigrations;
+
+    /**
+     * @var Days
+     */
+    private $days;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->seed('ConstantWeekDaysTableSeeder');
+        $this->days = new Days;
+    }
+
+    public function testDayAvailable() {
+        $this->assertEquals(true, $this->days->day_available(), 'Error: plenty of time slots available but method reports none');
+
+        $this->nullifyAvailableDays();
+
+        $this->assertEquals(false, $this->days->day_available(), 'Error: no time slot available but method says otherwise');
+    }
+
+    public function testDecreaseDay() {
+        $this->days->decrease_day('Montag');
+        $this->assertEquals(1, WeekDay::where('name', '=', 'Montag')->first()->free_time_slots);
+
+        /**
+         * TODO: setup mail to avoid connection error
+         */
+
+        /**
+         * $days->decrease_day(Carbon::MONDAY);
+         * $this->assertEquals(0, WeekDay::find(Carbon::MONDAY)->free_time_slots);
+        */
+
+        /**
+         * TODO: test if email was sent
+         */
+
+    }
+
+    public function testGetAvailableDays() {
+        $expected = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+        $availableDays = $this->days->get_available_days();
+
+        foreach ($expected as $expectedDay) {
+            $this->assertContains($expectedDay, $availableDays, 'Error: returned time slots are not correct');
+        }
+
+        /**
+         * TODO: setup mail to avoid connection error
+         */
+
+        /**
+         * $this->days->decrease_day('Sonntag');
+         * $availableDays = $this->days->get_available_days();
+         * $this->assertNotContains('Sonntag', $availableDays, 'Error: no free time slots on sunday but method says otherwise');
+        */
+    }
+
+    private function nullifyAvailableDays () {
+        foreach (WeekDay::all() as $day) {
+            $day->free_time_slots = 0;
+            $day->save();
+        }
+    }
+
+}

@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Berlin',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'de',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,6 +166,13 @@ return [
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
+        /*
+         * A library to help you work with dates in multiple languages, based on Carbon.
+         *
+         * See https://github.com/jenssegers/date
+         */
+        Jenssegers\Date\DateServiceProvider::class,
+
     ],
 
     /*
@@ -212,6 +219,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Alert'     => Prologue\Alerts\Facades\Alert::class,
+        'Date'      => Jenssegers\Date\Date::class,
 
     ],
 

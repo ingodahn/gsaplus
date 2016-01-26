@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   $this->call(RandomWeekDaysTableSeeder::class);
+
         $admin = factory(App\Admin::class, 4)
             ->create()
             ->each(function (App\Admin $a) {
