@@ -3,6 +3,11 @@
 
 @section('content')
   <div class="container">
+
+    <div class="bs-callout bs-callout-danger">
+      {{!! json_encode($DayOfWeek) !!}}
+    </div>
+
     <h2>Registrierung</h2>
 
     <ol class="breadcrumbs">
