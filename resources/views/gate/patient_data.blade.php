@@ -3,6 +3,11 @@
 
 @section('content')
   <div class="container">
+
+    <div class="bs-callout bs-callout-danger">
+      {{!! json_encode($DayOfWeek) !!}}
+    </div>
+
     <h2>Registrierung</h2>
 
     <ol class="breadcrumbs">
@@ -13,6 +18,7 @@
 
     {{-- All active form content must stay in this form for frontend and backend processing --}}
     <form id="registration-form" data-parsley-validate role="form" action="/SavePatientData" method="post">
+      {{ csrf_field() }}
 
       <h3>Schreibtag</h3>
 

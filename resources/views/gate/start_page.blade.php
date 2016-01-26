@@ -21,7 +21,9 @@
     <div class="row vdivide">
       <div class="col-md-4">
         <h2>Registrierung</h2>
+        @if ($RegistrationPossible)
         <form action="/StartRegistration" method="post">
+          {{ csrf_field() }}
           <div class="form-group">
             <label for="Code">Persönlicher Code</label>
             <a href="#"><i class="fa fa-question-circle"></i></a>
@@ -30,10 +32,17 @@
           </div>
           <button type="submit" class="btn btn-primary">zur Registrierung</button>
         </form>
+        @else
+          <p>
+            Zur Zeit sind keine Plätze frei, yadda yadda. Sie können jedoch das Team kontaktieren, bla bla.
+          </p>
+          <a href="/ContactTeam" class="btn btn-warning">Team kontaktieren</a>
+        @endif
       </div>
       <div class="col-md-8">
         <h2>Login</h2>
         <form>
+          {{ csrf_field() }}
           <div class="form-group">
             <label for="exampleInputEmail1">Benutzername oder E-Mail Adresse</label>
             <input type="email" class="form-control" id="exampleInputEmail1" placeholder="E-Mail">
