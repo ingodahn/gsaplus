@@ -1,15 +1,15 @@
-<div class="jumbotron jumbotron-title">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
-    <div class="row">
-      <!-- <div class="col-md-2 col-md-offset-2">
-        <img src="logo.png" alt="GSA Online Plus Logo" width="100%"/>
-      </div> -->
-      <div class="col-md-6 col-md-offset-3">
-        <h1>GSA Online Plus</h1>
-        <p>
-          Gesundheitsstraining Stressbewältigung am Arbeitsplatz
-        </p>
-      </div>
-    </div>
+    <img src="img/logo.svg" alt="GSA Online Plus Logo" class="nav-logo"/>
   </div>
-</div>
+</nav>
+
+<script type="text/javascript">
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+      $('nav').addClass('shrink');
+    } else {
+      $('nav').removeClass('shrink');
+    }
+  });
+</script>
