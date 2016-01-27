@@ -41,17 +41,18 @@ class AuxController extends Controller
 	 */
 	public function home(Request $request)
 	{
-
-		//if (session_info.role == 'therapist') {
-		//patient_list = new Patient_list;
+		$days = new Days;
+		//if (Session::get('Role') == 'therapist') {
+		//	$PatientListModel = array();
+		//	$PatientListModel['Slots'] = $days->get_days();
+		// 	return view('patient_list)->with($PatientListModel);
 		//patient_list.show(session_info.
 		//page_definition);
-		//} else if (session_info.role ==
+		//} else if (Session::get('Role') ==
 		//'patient')
 		//{
 		// diary.show();
-		//} else {Anmelder.enter_system(Cookie);
-		$days = new Days;
+		//} else {
 		if ($days->day_available())  {
 			return view('gate.start_page')->with('RegistrationPossible',true);
 		// Result: "registrationPossible";

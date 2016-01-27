@@ -85,33 +85,21 @@ class GateController extends Controller
 	}
 
 	/**
-	 * Beim ersten Aufruf wird geprüft
+	 * Beim Aufruf wird geprüft
 	 * <ol>
-	 * 	<li>Ob der Cookie gesetzt ist</li>
-	 * 	<li>Wenn ja ob der Parameter StayLoggedIn auf true steht</li>
-	 * 	<li>Es wird geprüft, ob der Code im Cookie registriert ist.</li>
-	 * 	<li>Schlägt einer dieser Tests fehl wird verfahren als ob der Cookie nicht
-	 * gesetzt wäre.</li>
-	 * 	<li>Ist StayLoggindIn==true so wird zum Tagebuch schreiben weitergeleitet.
-	 * </li>
-	 * 	<li>Gibt es keine freien Tage so wird so wird die Startseite mit Kontaktmöglichkeit statt mit Registrierung ausgeliefert</li>
-	 * 	<li>Ansonsten wird die Seite Startseite ausgeliefert</li>
+	 * 	<li> Ist der Benutzer angemeldet und die Session aktiv (sollte der Fall sein, wenn StayLoggedIn=true), so wird er auf seine Homepage /Home weitergeleitet.
+	 * 	<li> Gibt es keine freien Tage so wird so wird die Startseite mit Kontaktmöglichkeit statt mit Registrierung ausgeliefert</li>
+	 * 	<li> Ansonsten wird die Seite Startseite ausgeliefert</li>
 	 * </ol>
 	 * 
-	 * @param cookie
 	 */
 	 public function enter_system(Request $request)
 	{
-		//ID $session=$request->session();
-		//ID $code = $request->session()->get('Code');
-		$code = "BBB";
 		$days = new Days;
-		// return dd($days->get_available_days());
-		//if ((cookie.stay_logged_in) && (Code
-		//is registered)) {
-		if ( $code == "AAA") {
-		// Result: "relogin";
-			return "relogin";
+		//if ( Session is valid )) {
+		if ( Session::get('Role') ) {
+			return Redirect::to('/Home');
+			// Result: "relogin";
 		} else if ($days->day_available())  {
 			return view('gate.start_page')->with('RegistrationPossible',true);
 		// Result: "registrationPossible";
@@ -298,19 +286,16 @@ class GateController extends Controller
 		}
 		if ($code == "AAA") {
 		//if (code already registered) {
-			Alert::warning('Dieser Code wurde bereits registriert, Sie können sich anmelden.')->flash();
-			return $this->enter_system();
-		//View::make(system.info_message)-> where ('Text',"Dieser Code wurde bereits registriert, Sie können sich anmelden");
+			Alert::warning('Dieser Code wurde bereits registriert, Sie k&ouml;nen sich anmelden.')->flash();
+			return Redirect::to('/');
 		// Result: CodeStatus="registered";
 		} else if ($code == "BBB") {
 		//(Code not yet registered) {
-			// return Redirect::to('/welcome');
 			return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
 		} else {
 			Alert::warning('Der einegegebene Code '.$code.' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
-			return $this->enter_system();
-		//  return View::make(system.info_message) -> where ('Text',"Der einegegebene Code ist nicht korrekt. Hilfe zur Code-Eingabe:...");
+			return Redirect::to('/');
 		// Result: CodeStatus="incorrect";
 		}
 
