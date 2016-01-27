@@ -2,7 +2,7 @@ desc "Shortcut for assets-task"
 task default: %w[update]
 
 desc "Compile sass and publish all assets"
-task assets: [:sass, :js, :fonts]
+task assets: [:sass, :js, :fonts, :images]
 
 desc "Compile and publish sass automatically (watch)"
 task :watch do
@@ -36,11 +36,18 @@ task :fonts do
   `cp -r bower_components/font-awesome/fonts/. public/fonts`
 end
 
+desc "Publish all image assets"
+task :images do
+  `mkdir -p public/img/`
+  `cp -r resources/assets/img/. public/img`
+end
+
 desc "Delete published assets"
 task :clean do
   `rm -rf public/css/`
   `rm -rf public/fonts/`
   `rm -rf public/js/`
+  `rm -rf public/img/`
 end
 
 task update: [:assets] do

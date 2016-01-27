@@ -150,6 +150,7 @@ bootstrap/cache/*
 public/css
 public/js
 public/fonts
+public/img
 
 ### Vagrant ###
 .vagrant/
