@@ -101,8 +101,9 @@ class GateController extends Controller
 			return Redirect::to('/Home');
 			// Result: "relogin";
 		} else if ($days->day_available())  {
+			// Result: "registrationPossible";
+			Session::put('SessionStatus','RegistrationPossible');
 			return view('gate.start_page')->with('RegistrationPossible',true);
-		// Result: "registrationPossible";
 		} else {
 		// return "registrationImpossible";
 			return view('gate.start_page')->with('RegistrationPossible',false);
@@ -117,7 +118,10 @@ class GateController extends Controller
 	 */
 	public function from_welcome()
 	{
-	
+		if ( Session::get('SessionStatus') != 'CodeUnregistered') {
+			return Redirect::to('/');
+		}
+		Session::put('SessionStatus','Accepted');
 		return view('gate.accept');
 
 
@@ -186,6 +190,9 @@ class GateController extends Controller
 	{
 		$days = new Days;
 		if (! $days->day_available()) {
+			return Redirect::to('/');
+		}
+		if ( Session::get('SessionStatus') != 'Accepted') {
 			return Redirect::to('/');
 		}
 		//Setze Auswahlliste  Patientendaten.
@@ -278,6 +285,9 @@ class GateController extends Controller
 		if ($validation->fails()) {
 			return Redirect::to('/')->withErrors($validation)->withInput();
 		}
+		if ( Session::get('SessionStatus') != 'RegistrationPossible') {
+			return Redirect::to('/');
+		}
 	    $code = $request->input('Code');
 		// Alternativ: Input::get('Code');
 		Session::put('Code',$code);
@@ -291,6 +301,7 @@ class GateController extends Controller
 		// Result: CodeStatus="registered";
 		} else if ($code == "BBB") {
 		//(Code not yet registered) {
+			Session::put('SessionStatus','CodeUnregistered');
 			return view('gate.welcome');
 		// Result: CodeStatus="unregistered";
 		} else {
@@ -304,6 +315,7 @@ class GateController extends Controller
 	function missing_input($par,$request) {
 		return "Missing Parameter ".$par." In Request START:".$request.":END";
 	}
+	
 
 }
 ?>
