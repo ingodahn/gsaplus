@@ -13,7 +13,9 @@ class CreateCodesTable extends Migration
     public function up()
     {
         Schema::create('codes', function (Blueprint $table) {
-            $table->string('id', 3);
+            $table->string('id', 3)->unique();
+
+            $table->primary('id');
         });
     }
 
