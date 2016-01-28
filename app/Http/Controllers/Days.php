@@ -4,22 +4,31 @@
 namespace App\Http\Controllers;
 
 use App\WeekDay;
+use App\Helper;
 use Illuminate\Support\Facades\Mail;
 
 /**
  * Es wird persistent genau ein Objekt dieser Klasse benÃ¶tigt. In den Attributen
  * Sonntag...Donnerstag wird gespeichert, wieviele Patienten sich fÃ¼r diesen Tag
  * neu registrieren dÃ¼rfen.
+ *
  * @author dahn
  * @version 1.0
  * @created 13-Jan-2016 15:50:31
  */
 class Days
 {
+	// [name] = number
+	private $days_map;
+
+	function __construct()
+	{
+		$this->days_map = Helper::generate_date_map();
+	}
 
 	/**
 	 * Es wird true zurÃ¼ckgegeben wenn es wenigstens einen Tag gibt, fÃ¼r den eine
-	 * Registrierung mÃ¼glich ist, sonst false
+	 * Registrierung mÃ¶glich ist, sonst false
 	 */
 	public function day_available()
 	{
@@ -30,8 +39,8 @@ class Days
 	 * Die Anzahl der Slots fÃ¼r den Tag wird um eins vermindert. Wenn kein Slot Ã¼brig
 	 * ist wird der Admin benachrichtigt.
 	 * 
-	 * @param day	bitte die Konstanten Carbon::MONDAY ... Carbon::SUNDAY
-	 * 				oder den Namen des Wochentags (als String) benutzen
+	 * @param day	Carbon::MONDAY ... Carbon::SUNDAY (0..6)
+	 * 				oder der Name des Wochentags
 	 */
 	public function decrease_day($day)
 	{
@@ -46,8 +55,9 @@ class Days
 	}
 
 	/**
-	 * Es wird die Liste aller der Tage T zurückgegeben für die es wenigstens einen freien Slot gibt. 
-	 * Die Liste hat die Form ["Sonntag",...,"Donnerstag"].
+	 * Es wird die Liste aller der Tage T zurÃ¼ckgegeben fÃ¼r die es wenigstens einen freien Slot gibt.
+	 * Die Liste hat die Form
+	 * 		["Sonntag", ... , "Donnerstag"].
 	 */
 	public function get_available_days()
 	{
@@ -55,25 +65,56 @@ class Days
 	}
 
 	/**
-	 * Es wird eine Liste aus der Datenbank geholt die angibt, für welchen Tag
-	 * wieviele Slots verfügbar sind.
-	 * Der Rückgabewert hat die Form einer Liste wie ["Sonntag"=>3,..,"Donnerstag"=>5]. 
+	 * Es wird eine Liste aus der Datenbank geholt die angibt, fÃ¼r welchen Tag
+	 * wieviele Slots verfÃ¼gbar sind.
+	 *
+	 * Der RÃ¼ckgabewert hat die Form einer Liste wie
+ * 			["Sonntag" => 3, ... , "Donnerstag" => 5]
+	 * .
+	 *
 	 * In der Liste sind alle Tage von Sonntag bis Donnerstag genau einmal vertreten.
 	 */
 	public function get_days()
 	{
+		$days = [];
+
+		foreach (WeekDay::all() as $day) {
+			$days[$day->name] = $day->free_time_slots;
+		}
+
+		return $days;
 	}
 
 	/**
-	 * Für jeden Tag wird in der Datenbank die Anzahl der verfügbaren Tage gespeichert.
-	 * Für jeden Tag wird in der Datenbank die Anzahl der verfügbaren Tage gespeichert.
-	 * Das Argument wird in der Form einer Liste der Form ["Sonntag"=>3,..,"Donnerstag"=>5] übergeben. 
+	 * FÃ¼r jeden Tag wird in der Datenbank die Anzahl der verfÃ¼gbaren Tage gespeichert.
+	 *
+	 * Das Argument wird in der Form einer Liste der Form
+ * 			["Sonntag"=>3, ... ,"Donnerstag"=>5]
+	 *
+	 * Ã¼bergeben.
+	 *
 	 * In der Liste sind alle Tage von Sonntag bis Donnerstag genau einmal vertreten.
 	 * 
 	 * @param day_list
 	 */
 	public function set_days($day_list)
 	{
+		foreach ($day_list as $day => $free_time_slots) {
+			if (!$entry = $this->get_week_day($day)) {
+				// add an entry if none exists
+				if (array_key_exists($day, $this->days_map)){
+					$entry = new WeekDay();
+
+					$entry->number = $this->days_map[$day];
+					$entry->name = $day;
+				} else {
+					return;
+				}
+			}
+
+			$entry->free_time_slots = $free_time_slots;
+			$entry->save();
+		}
 	}
 
 	/**
@@ -85,10 +126,13 @@ class Days
 	 * @return the appropriate eloquent model
 	 */
 	private function get_week_day($day) {
+		// don't query all days - search by primary key (faster)
 		if (is_int($day) && $day >= 0 && $day <= 6) {
-			$entry = WeekDay::find($day); // don't query all days - search by primary key (faster)
+			$entry = WeekDay::find($day);
+		} else if (array_key_exists($day, $this->days_map)) {
+			$entry = WeekDay::find($this->days_map[$day]);
 		} else {
-			$entry = WeekDay::where('name', '=', $day)->first();
+			$entry = null;
 		}
 
 		return $entry;
