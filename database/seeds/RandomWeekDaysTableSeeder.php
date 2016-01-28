@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Jenssegers\Date\Date;
 use App\WeekDay;
+use App\Helper;
 
 class RandomWeekDaysTableSeeder extends Seeder
 {
@@ -13,23 +14,16 @@ class RandomWeekDaysTableSeeder extends Seeder
      */
     public function run()
     {
+        $days = Helper::generate_date_map();
+
         $faker = Faker\Factory::create();
-        $date = new Date('next Sunday');
-
-        $days = array();
-
-        // generate an array containing the days names
-        for ($i = 0; $i < 7; $i++) {
-            $days[] = $date->format('l');
-            $date = $date->add('1 day');
-        }
 
         // generate an entry for every day and set a random number of free time slots
-        foreach (range(0,6) as $day) {
+        foreach ($days as $day => $number) {
             $entry = new WeekDay();
 
-            $entry->number = $day;
-            $entry->name = $days[$day];
+            $entry->number = $number;
+            $entry->name = $day;
             $entry->free_time_slots = $faker->numberBetween($min = 0, $max = 10);
 
             $entry->save();

@@ -77,3 +77,9 @@ $factory->define(App\WeekDay::class, function (Faker\Generator $faker) {
         'free_time_slots' => $faker->numberBetween($min = 0, $max = 10)
     ];
 });
+
+$factory->define(App\Code::class, function () {
+   return [
+        'id' => strtoupper(str_random(3))
+    ];
+});
