@@ -15,9 +15,7 @@
     // return view('welcome');
 // });
 
-Route::get('/patient_list', function () {
-    return view('patient_list');
-});
+
 
 
 
@@ -26,6 +24,8 @@ Route::get('/welcome', function() {
 	return Session::get('Code');
 });
 
+Route::post('/set_slots', 'PatientListController@set_slots');
+Route::get('/patient_list', 'PatientListController@show');
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +51,5 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/Accepted', 'GateController@req_patient_data');
 	Route::post('/SavePatientData', 'GateController@save_patient_data');
 	Route::get('/GetResetCode', 'GateController@get_reset_code');
-	Route::post('/set_slots', 'PatientListController@set_slots');
 
 });

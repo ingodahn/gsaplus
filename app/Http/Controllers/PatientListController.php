@@ -128,7 +128,8 @@ class PatientListController extends Controller
 		$days=new Days;
 		$days->set_days($Days);
 		//this.show(page_definition;
-		return dd($Days);
+		$Days1=$days->get_days();
+		return dd($Days1);
 
 	}
 
@@ -175,17 +176,18 @@ class PatientListController extends Controller
 	 * 
 	 * @param page_definition
 	 */
-	public function show(Page_definition $page_definition = this.old_page_definition)
-	{
-
+	 public function show(Request $request) {
+	//	public function show(Page_definition $page_definition = this.old_page_definition) {
 		//Zeige Seite patient_list mit
+		$days=new Days;
+		$Slots = $days->get_days();
 		// Slots von Days,
 		// Filter von page_definition.filter,
 		// Patientenliste von this.
 		//patients(page_definition),
 		// session_info.
 		//page_definition=page_definition
-
+		return view('patient_list');
 
 
 	}
