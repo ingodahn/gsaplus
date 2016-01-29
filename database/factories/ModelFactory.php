@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Patient::class, function (Faker\Generator $faker) {
     return [
-        'code' => str_random(10),
+        'code' => strtoupper(str_random(6)),
         'assignment_day' => $faker->numberBetween($min = 0, $max = 6),
         'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3)
     ];
