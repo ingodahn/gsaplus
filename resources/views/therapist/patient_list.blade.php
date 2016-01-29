@@ -5,7 +5,7 @@
   <div class="container">
 
     <h2>Slots</h2>
-    <form class="" action="/set_slots" method="post">
+    <form class="" action="/SetSlots" method="post">
       <div class="row">
         <div class="col-md-2">
           <div class="input-group">

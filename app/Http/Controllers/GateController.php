@@ -268,8 +268,8 @@ class GateController extends Controller
 	/**
 	 * Start des Registrierungsprozesses.
 	 *
-	 * System prÃ¼ft, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
-	 * Die BegrÃ¼ÃŸungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
+	 * System prüft, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
+	 * Die Begrüßungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
 	 * informiert
 	 *
 	 * Aufgerufen von: /StartRegistration
@@ -282,7 +282,9 @@ class GateController extends Controller
 		$validation = Validator::make(Input::all(), $rules);
 
 		if ($validation->fails()) {
-			return Redirect::back()->withErrors($validation)->withInput();
+			// return Redirect::back()->withErrors($validation)->withInput();
+			Alert::warning('Bitte geben Sie den Code ein, den Sie f&uuml;r die Teilnahme an der Studie erhalten haben.')->flash();
+			return redirect('/');
 		}
 
 		if ( Session::get('SessionStatus') != 'RegistrationPossible') {
@@ -293,11 +295,6 @@ class GateController extends Controller
 	    $code = $request->input('Code');
 
 		$request->session()->put('Code',$code);
-
-		// sinnlose Abfrage? (Validator fÃ¤ngt diesen Fall doch schon ab?)
-		if (!$code) {
-			return $this->missing_input('Code',$request);
-		}
 
 		if (Patient::where('code', $code)->first() !== null) {
 			//if (code already registered) {
@@ -322,10 +319,5 @@ class GateController extends Controller
 
 	}
 	
-	function missing_input($par,$request) {
-		return "Missing Parameter ".$par." In Request START:".$request.":END";
-	}
-	
-
 }
 ?>

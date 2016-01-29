@@ -24,7 +24,7 @@ Route::get('/welcome', function() {
 	return Session::get('Code');
 });
 
-Route::post('/set_slots', 'PatientListController@set_slots');
+Route::post('/SetSlots', 'PatientListController@set_slots');
 Route::get('/patient_list', 'PatientListController@show');
 
 /*

@@ -45,12 +45,13 @@ class AuxController extends Controller
 		//if (Session::get('Role') == 'therapist') {
 		//	$PatientListModel = array();
 		//	$PatientListModel['Slots'] = $days->get_days();
-		// 	return view('patient_list)->with($PatientListModel);
+		// 	return view('therapist.patient_list)->with($PatientListModel);
 		//patient_list.show(session_info.
 		//page_definition);
 		//} else if (Session::get('Role') ==
 		//'patient')
 		//{
+			return view('patient.diary');
 		// diary.show();
 		//} else {
 		if ($days->day_available())  {

@@ -187,7 +187,7 @@ class PatientListController extends Controller
 		//patients(page_definition),
 		// session_info.
 		//page_definition=page_definition
-		return view('patient_list');
+		return view('therapist.patient_list');
 
 
 	}
