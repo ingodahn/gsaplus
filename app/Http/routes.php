@@ -19,6 +19,10 @@ Route::get('/patient_list', function () {
     return view('patient_list');
 });
 
+Route::get('/parallax', function () {
+    return view('parallax');
+});
+
 Route::get('/', 'GateController@enter_system');
 Route::post('/StartRegistration', 'GateController@start_registration');
 Route::get('/ResetPassword', 'GateController@reset_password');

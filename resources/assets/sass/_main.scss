@@ -11,7 +11,7 @@ nav.navbar{
 }
 
 nav.navbar.shrink {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 1.0);
 }
 
 .nav-logo {
@@ -25,10 +25,10 @@ nav.navbar.shrink {
 }
 
 body {
-  margin-top: 560px;
-  background-image: url("../img/bg.jpg");
-  background-color: #cccccc;
-  background-size: 100% auto;
+  margin-top: 140px;
+  // background-image: url("../img/bg.jpg");
+  // background-color: #cccccc;
+  // background-size: 100% auto;
 }
 
 .register-login {
