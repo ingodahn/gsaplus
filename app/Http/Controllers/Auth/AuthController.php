@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 
+use Session;
+
 use App\Http\Controllers\Days;
 
 class AuthController extends Controller
@@ -61,6 +63,12 @@ class AuthController extends Controller
      */
     public function showLoginForm()
     {
-        return view('gate.start_page', ['RegistrationPossible' => (new Days())->day_available()]);
+        $days = new Days();
+
+        if ($days->day_available()) {
+            Session::put('SessionStatus','RegistrationPossible');
+        }
+
+        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()]);
     }
 }
