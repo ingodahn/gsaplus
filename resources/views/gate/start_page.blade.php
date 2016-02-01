@@ -16,7 +16,9 @@
   </div>
   </div> --}}
 
-  <div class="parallax-window parallax-window-nav" data-parallax="scroll" data-image-src="/img/bg2.jpg"></div>
+  <div class="parallax-window parallax-window-nav vertical-center" data-parallax="scroll" data-image-src="/img/bg2.jpg">
+    <a href="#"><i class="fa fa-youtube-play"></i></a>
+  </div>
 
   <div class="container register-login">
 

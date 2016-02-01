@@ -23,6 +23,12 @@ $parallax-window-height: 600px;
 .parallax-window-nav {
   margin-top: -$nav-height - $navbar-padding-bottom;
   min-height: $parallax-window-height + $nav-height;
+  a {
+    color: $gray-lighter;
+    // Offset button by half of navbar's size since it moves the percieved center
+    margin-top: ($nav-height + $navbar-padding-bottom) / 2;
+  }
+  font-size: 94pt;
 }
 
 .register-login {
@@ -68,4 +74,10 @@ hr {
 .parsley-errors-list {
   color: $brand-danger;
   margin-top: 8px;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
