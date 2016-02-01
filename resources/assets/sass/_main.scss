@@ -1,52 +1,37 @@
-nav.navbar{
-  background-color: rgba(255, 255, 255, 0.5);
-  padding-bottom: 10px;
-   // Animation
-   -webkit-transition: all 0.4s ease;
-   transition: all 0.4s ease;
-}
+$navbar-padding-bottom: 10px;
 
-.navbar-fixed-top {
+.navbar {
   border-width: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding-bottom: $navbar-padding-bottom;
+  margin-bottom: 0px;
 }
 
-nav.navbar.shrink {
-  background-color: rgba(255, 255, 255, 1.0);
-}
+$nav-height: 100px;
 
 .nav-logo {
-  height: 120px;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
+  height: $nav-height;
 }
 
-.shrink .nav-logo {
-  height: 80px;
+$parallax-window-height: 600px;
+
+.parallax-window {
+  background: transparent;
+  min-height: $parallax-window-height;
 }
 
-body {
-  margin-top: 140px;
-  // background-image: url("../img/bg.jpg");
-  // background-color: #cccccc;
-  // background-size: 100% auto;
+.parallax-window-nav {
+  margin-top: -$nav-height - $navbar-padding-bottom;
+  min-height: $parallax-window-height + $nav-height;
 }
 
 .register-login {
   background-color: rgba(255, 255, 255, 0.8);
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 20px;
+  padding: 40px;
 }
 
 
 
-
-
-.jumbotron-video {
-  /*background-color: #212121;*/
-  background-color: #B6B6B6;
-  padding: 0 0 0 0;
-}
 
 .greeting {
   margin-bottom: 32px;

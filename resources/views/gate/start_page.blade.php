@@ -16,6 +16,8 @@
   </div>
   </div> --}}
 
+  <div class="parallax-window parallax-window-nav" data-parallax="scroll" data-image-src="/img/bg2.jpg"></div>
+
   <div class="container register-login">
 
     <div class="row vdivide">
@@ -62,4 +64,7 @@
       </div>
     </div>
   </div>
+
+  {{-- <div class="parallax-window" data-parallax="scroll" data-image-src="/img/bg.jpg"></div> --}}
+
 @endsection
