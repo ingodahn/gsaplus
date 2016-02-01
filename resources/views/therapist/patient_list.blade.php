@@ -6,6 +6,7 @@
 
     <h2>Slots</h2>
     <form class="" action="/SetSlots" method="post">
+      {{ csrf_field() }}
       <div class="row">
         <div class="col-md-2">
           <div class="input-group">
