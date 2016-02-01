@@ -89,3 +89,6 @@ hr {
   align-items: center;
   justify-content: center;
 }
+
+// Magic fix for video-modals in Firefox (http://stackoverflow.com/a/27441661)
+.modal.fade .modal-dialog{transform:none !important;}
