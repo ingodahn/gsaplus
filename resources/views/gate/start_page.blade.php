@@ -41,19 +41,19 @@
       </div>
       <div class="col-md-8">
         <h2>Login</h2>
-        <form>
+        <form action="/CheckLoginPassword" method="post" data-parsley-validate>
           {{ csrf_field() }}
           <div class="form-group">
-            <label for="exampleInputEmail1">Benutzername oder E-Mail Adresse</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="E-Mail">
+            <label for="NameOrEmail">Benutzername oder E-Mail Adresse</label>
+            <input name="NameOrEmail" class="form-control" placeholder="Benutzername oder E-Mail" required>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Passwort</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Passwort">
+            <label for="Password">Passwort</label>
+            <input name="Password" type="password" class="form-control" placeholder="Passwort" required>
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox"> Eingeloggt bleiben
+              <input name="StayLoggedIn" type="checkbox"> Eingeloggt bleiben
             </label>
             <a href="#"><i class="fa fa-question-circle"></i></a>
           </div>
