@@ -10,12 +10,6 @@
       <div class="row">
         <div class="col-md-2">
           <div class="input-group">
-            <span class="input-group-addon">So</span>
-            <input name="So_slots" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="input-group">
             <span class="input-group-addon">Mo</span>
             <input name="Mo_slots"  type="number" class="form-control" value="{{$Slots['Montag']}}">
           </div>
@@ -36,6 +30,12 @@
           <div class="input-group">
             <span class="input-group-addon">Do</span>
             <input name="Do_slots"  type="number" class="form-control" value="{{$Slots['Donnerstag']}}">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="input-group">
+            <span class="input-group-addon">So</span>
+            <input name="So_slots" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
           </div>
         </div>
         <div class="col-md-2">
