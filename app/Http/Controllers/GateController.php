@@ -231,10 +231,10 @@ class GateController extends Controller
 		if ($userExists) {
 			//Result: Registered=false;
 			Alert::danger("Ihre Registrierung ist leider fehlgeschlagen. Bitte w&auml;hlen Sie einen anderen Benutzernamen.")->flash();
-
-			return view('gate.patient_data')->with(['DayOfWeek' => $day]);
-//			return View::make(system.info-message) -> with('text',"Ihre Registrierung ist
-//					leider fehlgeschlagen, Bitte wählen Sie einen anderen Benutzernamen");
+			$days = new Days;
+			$day_of_week=$days->get_available_days();
+			//Zeige Seite PatientenDaten
+			return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
 		} else {
 			$dateMap = Helper::generate_date_map();
 
