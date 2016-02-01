@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Session;
- 
+
 
 use App\Models;
 use App\Http\Controllers;
@@ -22,7 +22,7 @@ use Prologue\Alerts\Facades\Alert;
  * 	<li> Liste sortieren und </li>
  * 	<li>filtern.</li>
  * </ul>
- * page_definition enthält die Beschreibung der aktuellen Sortier- und
+ * page_definition enthï¿½lt die Beschreibung der aktuellen Sortier- und
  * Filterparameter
  * @author dahn
  * @version 1.0
@@ -42,7 +42,7 @@ class PatientListController extends Controller
 
 
 	/**
-	 * Liefert Seite mit allen Patienten mit der bisher gewählten Sortierung
+	 * Liefert Seite mit allen Patienten mit der bisher gewï¿½hlten Sortierung
 	 */
 	public function delete_filter()
 	{
@@ -86,7 +86,7 @@ class PatientListController extends Controller
 	 *  Find all Patients where page_definition.filter_field is in relation
 	 * page_definition.filter_relation to page_definition.filter_value sorted by
 	 * page_definition.sorted_by
-	 * 
+	 *
 	 * @param page_definition
 	 */
 	private function patients(Page_definition $page_definition)
@@ -95,7 +95,7 @@ class PatientListController extends Controller
 
 	/**
 	 * Modifiziere den gesetzten Filter und zeige die Seite neu an.
-	 * 
+	 *
 	 * @param filter
 	 */
 	public function set_filter(Filter $filter)
@@ -112,7 +112,7 @@ class PatientListController extends Controller
 	/**
 	 * Days wird im System modifiziert und die Seite mit der Patientenliste (der der
 	 * Slots-Teil davon) wird neu aufgebaut
-	 * 
+	 *
 	 * @param days
 	 */
 	public function set_slots(Request $request)
@@ -128,14 +128,15 @@ class PatientListController extends Controller
 		$days=new Days;
 		$days->set_days($Days);
 		//this.show(page_definition;
-		return dd($Days);
+		$Days1=$days->get_days();
+		return dd($Days1);
 
 	}
 
 	/**
-	 * sort_field wird ersetzt. Wenn sort_field dabei nicht geändert wird, wird
-	 * sort_order geändert
-	 * 
+	 * sort_field wird ersetzt. Wenn sort_field dabei nicht geï¿½ndert wird, wird
+	 * sort_order geï¿½ndert
+	 *
 	 * @param sort_field
 	 */
 	public function set_sort(Sort $sort_field)
@@ -172,20 +173,21 @@ class PatientListController extends Controller
 	 * )
 	 * Seite setzt Cookie.
 	 * last_url="patient_list/show?'page_definition'=page_definition"
-	 * 
+	 *
 	 * @param page_definition
 	 */
-	public function show(Page_definition $page_definition = this.old_page_definition)
-	{
-
+	 public function show(Request $request) {
+	//	public function show(Page_definition $page_definition = this.old_page_definition) {
 		//Zeige Seite patient_list mit
+		$days=new Days;
+		$Slots = $days->get_days();
 		// Slots von Days,
 		// Filter von page_definition.filter,
 		// Patientenliste von this.
 		//patients(page_definition),
 		// session_info.
 		//page_definition=page_definition
-
+		return view('therapist.patient_list')->with('Slots', $Slots);
 
 
 	}

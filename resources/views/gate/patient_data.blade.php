@@ -4,10 +4,6 @@
 @section('content')
   <div class="container">
 
-    <div class="bs-callout bs-callout-danger">
-      {{!! json_encode($DayOfWeek) !!}}
-    </div>
-
     <h2>Registrierung</h2>
 
     <ol class="breadcrumbs">
@@ -33,13 +29,9 @@
       <div class="form-group">
         <label for="day_of_week" class="control-label">Wochentag</label>
         <select name="day_of_week" class="form-control" required>
-          <option>Montag</option>
-          <option>Dienstag</option>
-          <option>Mittwoch</option>
-          <option>Donnerstag</option>
-          <option>Freitag</option>
-          <option>Samstag</option>
-          <option>Sonntag</option>
+          @@foreach($DayOfWeek as $available_day)
+            <option>{{$available_day}}</option>
+          @endforeach
         </select>
       </div>
 

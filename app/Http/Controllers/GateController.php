@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Input;
 use Session;
 // use Validator, Input, Redirect; 
 
+use App\Code;
+use App\User;
+use App\Patient;
+
+use Carbon\Carbon;
+
+use App\Helper;
+
 use App\Models;
 use App\Http\Controllers;
 use Prologue\Alerts\Facades\Alert;
@@ -16,8 +24,10 @@ use Prologue\Alerts\Facades\Alert;
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem
  * Registrierungs- und Anmeldeprozess.
- * Neben den angegebenen Operationen wird für jedes Signal eine Methode benötigt
+ *
+ * Neben den angegebenen Operationen wird fÃ¼r jedes Signal eine Methode benÃ¶tigt
  * die den entsprechenden https-Aufruf mit den Signalparametern verarbeitet.
+ *
  * @author dahn
  * @version 1.0
  * @created 13-Jan-2016 15:50:31
@@ -33,44 +43,11 @@ class GateController extends Controller
 	{
 	}
 
-
-
-	/**
-	 * wenn Username oder Password falsch sind wird Zugriff verweigert.
-	 * Ansonsten wird Zugriff erlaubt und Code und StayLoggedin weirden im Cookie
-	 * gespeichert.
-	 * 
-	 * @param NameOrEmail
-	 * @param Password
-	 * @param StayLoggedIn
-	 */
-	public function check_login_password(String $NameOrEmail, String $Password, boolean $StayLoggedIn)
-	{
-
-		//if (incorrect name or password) {
-		//Result: AccessAllowed=false;
-		// return View::make(system.info_message)
-		//-> where ('Text',"Falscher Benutzername
-		//oder Passwort, bitte noch einmal
-		//versuchen");
-		//} else {
-		//Result: AccesAllowed=true;;
-		//Store Code and Cookie.code
-		// Store StayLoggedIn in Cookie.
-		//stay_loggedin;
-		// Create SessionInfo;
-		// AuxController@home();
-		//}
-
-
-
-	}
-
 	/**
 	 * 
 	 * @param Code
 	 */
-	private function code_status(String $Code)
+	private function code_status($code)
 	{
 
 		//if (Code == "BBB") {
@@ -85,36 +62,27 @@ class GateController extends Controller
 	}
 
 	/**
-	 * Beim ersten Aufruf wird geprüft
+	 * Beim Aufruf wird geprÃ¼ft
+	 *
 	 * <ol>
-	 * 	<li>Ob der Cookie gesetzt ist</li>
-	 * 	<li>Wenn ja ob der Parameter StayLoggedIn auf true steht</li>
-	 * 	<li>Es wird geprüft, ob der Code im Cookie registriert ist.</li>
-	 * 	<li>Schlägt einer dieser Tests fehl wird verfahren als ob der Cookie nicht
-	 * gesetzt wäre.</li>
-	 * 	<li>Ist StayLoggindIn==true so wird zum Tagebuch schreiben weitergeleitet.
-	 * </li>
-	 * 	<li>Gibt es keine freien Tage so wird so wird die Startseite mit Kontaktmöglichkeit statt mit Registrierung ausgeliefert</li>
-	 * 	<li>Ansonsten wird die Seite Startseite ausgeliefert</li>
+	 * 	<li> Ist der Benutzer angemeldet und die Session aktiv (sollte der Fall sein,
+	 * 			wenn StayLoggedIn=true), so wird er auf seine Homepage /Home weitergeleitet.
+	 * 	<li> Gibt es keine freien Tage so wird so wird die Startseite mit KontaktmÃ¶glichkeit
+	 * 			statt mit Registrierung ausgeliefert</li>
+	 * 	<li> Ansonsten wird die Seite Startseite ausgeliefert</li>
 	 * </ol>
-	 * 
-	 * @param cookie
 	 */
 	 public function enter_system(Request $request)
 	{
-		//ID $session=$request->session();
-		//ID $code = $request->session()->get('Code');
-		$code = "BBB";
 		$days = new Days;
-		// return dd($days->get_available_days());
-		//if ((cookie.stay_logged_in) && (Code
-		//is registered)) {
-		if ( $code == "AAA") {
-		// Result: "relogin";
-			return "relogin";
+		//if ( Session is valid )) {
+		if ( Session::get('Role') ) {
+			return Redirect::to('/Home');
+			// Result: "relogin";
 		} else if ($days->day_available())  {
+			// Result: "registrationPossible";
+			Session::put('SessionStatus','RegistrationPossible');
 			return view('gate.start_page')->with('RegistrationPossible',true);
-		// Result: "registrationPossible";
 		} else {
 		// return "registrationImpossible";
 			return view('gate.start_page')->with('RegistrationPossible',false);
@@ -129,17 +97,18 @@ class GateController extends Controller
 	 */
 	public function from_welcome()
 	{
-	
+		if ( Session::get('SessionStatus') != 'CodeUnregistered') {
+			return Redirect::to('/');
+		}
+		Session::put('SessionStatus','Accepted');
 		return view('gate.accept');
-
-
 	}
 
 	/**
 	 * 
 	 * @param ResetCode
 	 */
-	public function get_reset_code(String $ResetCode)
+	public function get_reset_code($resetCode)
 	{
 
 		//if (ResetCode == "BBB-Reset") {
@@ -153,15 +122,16 @@ class GateController extends Controller
 	}
 
 	/**
-	 * Es wird geprüft, ob die Mail-Adresse registriert ist. Wenn ja wird ein Reset-
-	 * Code dafür angelegt, eine Mail wird verschickt.
-	 * Um die vorhandenen Mailadressen zu schützen wird der Benutzer In jedem Fall
-	 * darüber informiert, dass eine Mail verschickt wurde, auch wenn dies nicht der
+	 * Es wird geprÃ¼ft, ob die Mail-Adresse registriert ist. Wenn ja wird ein Reset-
+	 * Code dafÃ¼r angelegt, eine Mail wird verschickt.
+	 *
+	 * Um die vorhandenen Mailadressen zu schÃ¼tzen wird der Benutzer In jedem Fall
+	 * darÃ¼ber informiert, dass eine Mail verschickt wurde, auch wenn dies nicht der
 	 * Fall ist, weil die Mail-Adresse nicht registriert war.
 	 * 
 	 * @param Mail
 	 */
-	public function mail_for_password(String $Mail)
+	public function mail_for_password($email)
 	{
 
 		//return View::make(gate.mail_sent) ->
@@ -184,20 +154,24 @@ class GateController extends Controller
 	}
 
 	/**
-	 * Auf dem Server werden die verfügbaren Tage berechnet:
+	 * Auf dem Server werden die verfÃ¼gbaren Tage berechnet:
 	 * Days.get_available_days()
 	 * 
-	 * Wenn keine Tage verfügbar sind wird zur Startseite zurückgesprungen die dann
-	 * die Information anzeigt, dass eine Registrierung nicht möglich ist.
+	 * Wenn keine Tage verfÃ¼gbar sind wird zur Startseite zurÃ¼ckgesprungen die dann
+	 * die Information anzeigt, dass eine Registrierung nicht mÃ¶glich ist.
 	 * 
 	 * Mit diesen Informationen wird die Seite zur Erfassung der Patientendaten
 	 * aufgebaut und ausgeliefert.
+	 *
 	 * Aufgerufen von: /Accepted
 	 */
 	public function req_patient_data()
 	{
 		$days = new Days;
 		if (! $days->day_available()) {
+			return Redirect::to('/');
+		}
+		if ( Session::get('SessionStatus') != 'Accepted') {
 			return Redirect::to('/');
 		}
 		//Setze Auswahlliste  Patientendaten.
@@ -224,12 +198,13 @@ class GateController extends Controller
 	 * 	<li>Name</li>
 	 * 	<li>Passwort1</li>
 	 * 	<li>Email1</li>
-	 * 	<li>gewählter Tag</li>
+	 * 	<li>gewÃ¤hlter Tag</li>
 	 * 	<li>Zeit der Registrierung</li>
 	 * </ol>
+	 *
 	 * Es wird vermerkt, dass der Code registriert ist
-	 * Die Anzahl der Slots für den gewählten Tag wird um 1 vermindert:
-	 * Days.decrease_day(gewählter Tag)
+	 * Die Anzahl der Slots fÃ¼r den gewÃ¤hlten Tag wird um 1 vermindert:
+	 * Days.decrease_day(gewÃ¤hlter Tag)
 	 * Danach wird auf die Patienten-Homepage weitergeleitet.
 	 * 
 	 * @param code
@@ -241,84 +216,108 @@ class GateController extends Controller
 	public function save_patient_data(Request $request)
 	// public function save_patient_data($Code, $Name, $Password, $eMail, $Day)
 	{
-		$Code=Session::get('Code');
-		$Name=$request->input('name');
-		$Password=$request->input('password');
-		$eMail=$request->input('email');
-		$Day=$request->input('day_of_week');
+		$code = $request->session()->get('Code');
+		$name = $request->input('name');
+		$password = $request->input('password');
+		$email = $request->input('email');
+		$day = $request->input('day_of_week');
+
+		$userExists = User::where(function($query) use($email, $name) {
+			$query->where('email', '=', $email)
+				->orWhere('name', '=', $name);
+		})->first();
+
 		//if (Name or eMail already in use) {
-		//Result: Registered=false;
-		//return View::make(system.info-message) -
-		//> with('text',"Ihre Registrierung ist
-		//leider fehlgeschlagen, Bitte wählen Sie einen anderen Benutzernamen");
-		//} else {
-		//Result: Registered=true;
-		//Patient.code=Code;
-		//Patient.user_name=Name;
-		//Patient.password=Password;
-		//Patient.eMail=eMail;
-		//Patient.day=Day;
-		//save Patient;
-		if (Session::has('Code')) {
-			$hc='T';
+		if ($userExists) {
+			//Result: Registered=false;
+			Alert::danger("Ihre Registrierung ist leider fehlgeschlagen. Bitte wÃ¤hlen Sie einen anderen Benutzernamen.")->flash();
+
+			return view('gate.patient_data')->with(['DayOfWeek' => $day]);
+//			return View::make(system.info-message) -> with('text',"Ihre Registrierung ist
+//					leider fehlgeschlagen, Bitte wÃ¤hlen Sie einen anderen Benutzernamen");
 		} else {
-			$hc='F';
+			$dateMap = Helper::generate_date_map();
+
+			//Result: Registered=true;
+			$user = new User;
+			$user->name = $name;
+			$user->email = $email;
+			$user->password = bcrypt($password);
+			$user->registration_date = Carbon::create();
+
+			$user->save();
+
+			$patient = new Patient;
+			$patient->code = $code;
+			$patient->assignment_day = $dateMap[$day];
+			$patient->assignment_day_changes_left = 1;
+
+			$patient->save();
+
+			$patient->user()->save($user);
+
+			$days = new Days;
+			$days->decrease_day($day);
+
+			// confirmation_message 'registration_success';
+			Alert::info('Sie haben sich erfolgreich registriert und kÃ¶nnen sich nun einloggen.');
+			return redirect('/');
 		}
-		return 'Code: '.$hc.$Code.' Name: '.$Name.' Password: '.$Password.'eMail: '.$eMail.' Day: '.$Day;
-		// confirmation_message 'registration_success';
-		// redirect /Home
-		//}
-
-
 	}
 
 	/**
 	 * Start des Registrierungsprozesses.
+	 *
 	 * System prüft, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
 	 * Die Begrüßungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
 	 * informiert
+	 *
 	 * Aufgerufen von: /StartRegistration
-	 * 
-	 * @param Code
 	 */
 	
 	public function start_registration(Request $request) {
 		// $this->validate($request, ['Code' => 'required']);
 		// Versuch nach Cookbook:
-		$rules=array('Code' => 'required');
-		$validation=Validator::make(Input::all(),$rules);
+		$rules = array('Code' => 'required');
+		$validation = Validator::make(Input::all(), $rules);
+
 		if ($validation->fails()) {
-			return Redirect::to('/')->withErrors($validation)->withInput();
+			// return Redirect::back()->withErrors($validation)->withInput();
+			Alert::warning('Bitte geben Sie den Code ein, den Sie f&uuml;r die Teilnahme an der Studie erhalten haben.')->flash();
+			return redirect('/');
 		}
-	    $code = $request->input('Code');
+
+		if ( Session::get('SessionStatus') != 'RegistrationPossible') {
+			return redirect('/');
+		}
+
 		// Alternativ: Input::get('Code');
-		Session::put('Code',$code);
-		if (! $code) {
-			return $this->missing_input('Code',$request);
-		}
-		if ($code == "AAA") {
-		//if (code already registered) {
-			Alert::warning('Dieser Code wurde bereits registriert, Sie können sich anmelden.')->flash();
-			return $this->enter_system();
-		//View::make(system.info_message)-> where ('Text',"Dieser Code wurde bereits registriert, Sie können sich anmelden");
-		// Result: CodeStatus="registered";
-		} else if ($code == "BBB") {
-		//(Code not yet registered) {
-			// return Redirect::to('/welcome');
+	    $code = $request->input('Code');
+
+		$request->session()->put('Code',$code);
+
+		if (Patient::where('code', $code)->first() !== null) {
+			//if (code already registered) {
+
+			Alert::warning('Dieser Code wurde bereits registriert, Sie k&ouml;nen sich anmelden.')->flash();
+			return redirect('/');
+
+			// Result: CodeStatus="registered";
+		} else if (Code::find($code) !== null) {
+			//(Code not yet registered) {
+
+			$request->session()->put('SessionStatus', 'CodeUnregistered');
 			return view('gate.welcome');
-		// Result: CodeStatus="unregistered";
+
+			// Result: CodeStatus="unregistered";
 		} else {
 			Alert::warning('Der einegegebene Code '.$code.' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
-			return $this->enter_system();
-		//  return View::make(system.info_message) -> where ('Text',"Der einegegebene Code ist nicht korrekt. Hilfe zur Code-Eingabe:...");
-		// Result: CodeStatus="incorrect";
+			return redirect('/');
+
+			// Result: CodeStatus="incorrect";
 		}
 
 	}
 	
-	function missing_input($par,$request) {
-		return "Missing Parameter ".$par." In Request START:".$request.":END";
-	}
-
 }
 ?>

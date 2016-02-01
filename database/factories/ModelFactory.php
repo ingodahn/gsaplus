@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Patient::class, function (Faker\Generator $faker) {
     return [
-        'code' => str_random(10),
+        'code' => strtoupper(str_random(6)),
         'assignment_day' => $faker->numberBetween($min = 0, $max = 6),
         'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3)
     ];
@@ -75,5 +75,11 @@ $factory->define(App\WeekDay::class, function (Faker\Generator $faker) {
         'number' => $date->dayOfWeek,
         'name' => $date->format('l'),
         'free_time_slots' => $faker->numberBetween($min = 0, $max = 10)
+    ];
+});
+
+$factory->define(App\Code::class, function () {
+   return [
+        'id' => strtoupper(str_random(3))
     ];
 });
