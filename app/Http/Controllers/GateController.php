@@ -230,7 +230,7 @@ class GateController extends Controller
 		//if (Name or eMail already in use) {
 		if ($userExists) {
 			//Result: Registered=false;
-			Alert::danger("Ihre Registrierung ist leider fehlgeschlagen. Bitte wÃ¤hlen Sie einen anderen Benutzernamen.")->flash();
+			Alert::danger("Ihre Registrierung ist leider fehlgeschlagen. Bitte w&auml;hlen Sie einen anderen Benutzernamen.")->flash();
 
 			return view('gate.patient_data')->with(['DayOfWeek' => $day]);
 //			return View::make(system.info-message) -> with('text',"Ihre Registrierung ist
@@ -260,7 +260,7 @@ class GateController extends Controller
 			$days->decrease_day($day);
 
 			// confirmation_message 'registration_success';
-			Alert::info('Sie haben sich erfolgreich registriert und kÃ¶nnen sich nun einloggen.');
+			Alert::info('Sie haben sich erfolgreich registriert und k&ouml;nnen sich nun einloggen.');
 			return redirect('/');
 		}
 	}
@@ -268,8 +268,8 @@ class GateController extends Controller
 	/**
 	 * Start des Registrierungsprozesses.
 	 *
-	 * System prüft, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
-	 * Die Begrüßungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
+	 * System prÃ¼t, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
+	 * Die BegrÃ¼ungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
 	 * informiert
 	 *
 	 * Aufgerufen von: /StartRegistration
