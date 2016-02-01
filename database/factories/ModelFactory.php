@@ -16,9 +16,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     $loginDate = $faker->dateTimeBetween($registrationDate, $endDate = 'now');
 
     return [
-        'name' => $faker->name,
+        'name' => $faker->userName,
         'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
+        'password' => bcrypt('password'), // str_random(10)
         'remember_token' => str_random(10),
         'last_login' => $loginDate,
         'registration_date' => $registrationDate,
