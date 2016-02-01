@@ -24,9 +24,12 @@ $parallax-window-height: 600px;
   margin-top: -$nav-height - $navbar-padding-bottom;
   min-height: $parallax-window-height + $nav-height;
   a {
-    color: $gray-lighter;
+    color: $red-youtube;
     // Offset button by half of navbar's size since it moves the percieved center
     margin-top: ($nav-height + $navbar-padding-bottom) / 2;
+  }
+  a:hover {
+    color: $red-youtube-hover;
   }
   font-size: 94pt;
 }
@@ -34,6 +37,11 @@ $parallax-window-height: 600px;
 .register-login {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 40px;
+}
+
+.modal-video {
+  display: flex;
+  justify-content: center;
 }
 
 

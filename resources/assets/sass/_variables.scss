@@ -36,6 +36,9 @@ $gray:                   lighten($gray-base, 33.5%) !default; // #555
 $gray-light:             lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter:           lighten($gray-base, 85.0%);
 
+$red-youtube: #cd201f;
+$red-youtube-hover: lighten($red-youtube, 10%);
+
 
 
 //== Scaffolding

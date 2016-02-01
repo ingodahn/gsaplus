@@ -16,8 +16,35 @@
   </div>
   </div> --}}
 
+
+  <div id="intro-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Intro Video" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        {{-- <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Willkommen bei GSA Online Plus</h4>
+        </div> --}}
+        <div class="modal-body modal-video videoWrapper">
+          <iframe width="560" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      var src = 'http://www.youtube.com/v/LS-VPyLaJFM&amp;autoplay=1';
+      $('#intro-modal').modal('show');
+      $('#intro-modal iframe').attr('src', src);
+    }
+
+    $('#intro-modal').on('hidden.bs.modal', function () {
+      $('#intro-modal iframe').removeAttr('src');
+    });
+  </script>
+
   <div class="parallax-window parallax-window-nav vertical-center" data-parallax="scroll" data-image-src="/img/bg2.jpg">
-    <a href="#"><i class="fa fa-youtube-play"></i></a>
+    <a href="javascript:openModal()"><i class="fa fa-youtube-play"></i></a>
   </div>
 
   <div class="container register-login">
