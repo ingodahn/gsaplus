@@ -2,33 +2,46 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
+use App\Http\Controllers\Days;
 
 class AuthController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Registration & Login Controller
+    |  Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
+    | This controller handles the the authentication of existing users.
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesUsers, ThrottlesLogins;
 
     /**
      * Where to redirect users after login / registration.
-     *
-     * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/Home';
+
+    /**
+     * Show login page when user logged out.
+     */
+    protected $redirectAfterLogout = "/Login";
+
+    /**
+     * The view containing the login form.
+     */
+    protected $loginView = 'gate.start_page';
+
+    /**
+     * Check the name when authenticating a user.
+     *
+     * The value is equal to the column name (of the users table) and
+     * the name of the field in the login form.
+     */
+    protected $username = 'name';
 
     /**
      * Create a new authentication controller instance.
@@ -41,32 +54,13 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Show the application login form - overwrite the default implementation and tell
+     * the view if the registration process is available.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function showLoginForm()
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        return view('gate.start_page', ['RegistrationPossible' => (new Days())->day_available()]);
     }
 }

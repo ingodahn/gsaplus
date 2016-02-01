@@ -7,11 +7,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Session;
+use Illuminate\Support\Facades\Auth;
 // use Validator, Input, Redirect; 
 
 use App\Code;
 use App\User;
 use App\Patient;
+
+use App\Http\Controllers\Days;
 
 use Carbon\Carbon;
 
@@ -74,22 +77,11 @@ class GateController extends Controller
 	 */
 	 public function enter_system(Request $request)
 	{
-		$days = new Days;
-		//if ( Session is valid )) {
-		if ( Session::get('Role') ) {
-			return Redirect::to('/Home');
-			// Result: "relogin";
-		} else if ($days->day_available())  {
-			// Result: "registrationPossible";
-			Session::put('SessionStatus','RegistrationPossible');
-			return view('gate.start_page')->with('RegistrationPossible',true);
+		if (Auth::check()) {
+			return redirect('/Home');
 		} else {
-		// return "registrationImpossible";
-			return view('gate.start_page')->with('RegistrationPossible',false);
-		//Result:"registrationImpossible";
+			return redirect('/Login');
 		}
-
-
 	}
 
 	/**
