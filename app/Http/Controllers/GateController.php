@@ -260,8 +260,8 @@ class GateController extends Controller
 			$days->decrease_day($day);
 
 			// confirmation_message 'registration_success';
-			Alert::info('Sie haben sich erfolgreich registriert und k&ouml;nnen sich nun einloggen.');
-			return redirect('/');
+			Alert::info('Sie haben sich erfolgreich registriert.');
+			return view('patient.diary');
 		}
 	}
 
