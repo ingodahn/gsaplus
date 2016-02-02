@@ -5,7 +5,12 @@
     <div class="container">
 
         <h2>Backend</h2>
-        Dies ist das Backend. Es enth&auml;lt eine &Uuml;bersicht aller (Patienten-)Profile. <a href="/Logout">Ausloggen.</a>
+        <p>Dies ist das provisorische Administratoren-Backend.</p>
+		<ul>
+			<li><a href="/AdminCodes">Codes</a></li>
+			<li><a href="/AdminPatients">Patienten</a></li>
+			<li><a href="/Logout">Ausloggen.</a></li>
+		</ul>
 
     </div>
 @endsection
