@@ -32,7 +32,11 @@ class AdminController extends Controller
 		$codes = [];
 
 		foreach (Code::all() as $code) {
-			$codes[$code->id] = 'status';
+			if (Patient::where('code', $code->value)->first() != null) {
+				$codes[$code->value] = 'registriert';
+			} else {
+				$codes[$code->value] = 'nicht registriert';
+			}
 		}
 
 		return dd($codes);

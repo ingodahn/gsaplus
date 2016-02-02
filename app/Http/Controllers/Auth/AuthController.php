@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 use Session;
+use Prologue\Alerts\Facades\Alert;
 
 use App\Http\Controllers\Days;
 
@@ -69,6 +70,6 @@ class AuthController extends Controller
             Session::put('SessionStatus','RegistrationPossible');
         }
 
-        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()]);
+        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()])->with('alert_messages', Alert::all());
     }
 }

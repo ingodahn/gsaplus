@@ -80,7 +80,7 @@ class GateController extends Controller
 		if (Auth::check()) {
 			return redirect('/Home');
 		} else {
-			return redirect('/Login');
+			return Redirect::to('/Login')->with('alert_messages', Alert::all());
 		}
 	}
 
@@ -276,11 +276,11 @@ class GateController extends Controller
 		if ($validation->fails()) {
 			// return Redirect::back()->withErrors($validation)->withInput();
 			Alert::warning('Bitte geben Sie den Code ein, den Sie f&uuml;r die Teilnahme an der Studie erhalten haben.')->flash();
-			return redirect('/');
+			return Redirect::to('/Login');
 		}
 
 		if ( Session::get('SessionStatus') != 'RegistrationPossible') {
-			return redirect('/');
+			return Redirect::to('/Login');
 		}
 
 		// Alternativ: Input::get('Code');
@@ -292,10 +292,10 @@ class GateController extends Controller
 			//if (code already registered) {
 
 			Alert::warning('Dieser Code wurde bereits registriert, Sie k&ouml;nen sich anmelden.')->flash();
-			return redirect('/');
+			return Redirect::to('/Login');
 
 			// Result: CodeStatus="registered";
-		} else if (Code::find($code) !== null) {
+		} else if (Code::where('value', $code)->first() !== null) {
 			//(Code not yet registered) {
 
 			$request->session()->put('SessionStatus', 'CodeUnregistered');
@@ -304,7 +304,7 @@ class GateController extends Controller
 			// Result: CodeStatus="unregistered";
 		} else {
 			Alert::warning('Der einegegebene Code '.$code.' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
-			return redirect('/');
+			return Redirect::to('/Login');
 
 			// Result: CodeStatus="incorrect";
 		}
