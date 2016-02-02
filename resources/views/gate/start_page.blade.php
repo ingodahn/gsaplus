@@ -41,7 +41,7 @@
       </div>
       <div class="col-md-8">
         <h2>Login</h2>
-        <form action="/CheckLoginPassword" method="post" data-parsley-validate>
+        <form action="/Login" method="post" data-parsley-validate>
           {{ csrf_field() }}
           <div class="form-group">
             <label for="name">Benutzername</label>
