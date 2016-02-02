@@ -1,11 +1,21 @@
 <?php
 
+/* 
+| Preliminary routes for development
+| To be removed or put under middleware control
+| for production
+*/
 Route::get('/welcome', function() {
 	return Session::get('Code');
 });
 
 Route::post('/SetSlots', 'PatientListController@set_slots');
 Route::get('/patient_list', 'PatientListController@show');
+Route::get('/admin_home',function() {
+	return view('admin.home');
+});
+Route::get('/AdminCodes','AdminController@admin_codes');
+Route::get('/AdminPatients','AdminController@admin_patients');
 
 /*
 |--------------------------------------------------------------------------
