@@ -43,9 +43,9 @@ class AdminController extends Controller
 	}
 
 	/**
-	 * Zeigt die Liste aller Patienten mit ihrem Status
+	 * Zeigt die Liste aller Benutzer mit ihrer Rolle
 	 */
-	public function admin_patients()
+	public function admin_users()
 	{
 	}
 

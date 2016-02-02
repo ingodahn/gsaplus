@@ -8,7 +8,7 @@
         <p>Dies ist das provisorische Administratoren-Backend.</p>
 		<ul>
 			<li><a href="/AdminCodes">Codes</a></li>
-			<li><a href="/AdminPatients">Patienten</a></li>
+			<li><a href="/AdminUsers">Benutzer und Rollen</a></li>
 			<li><a href="/Logout">Ausloggen.</a></li>
 		</ul>
 
