@@ -47,6 +47,16 @@ class AdminController extends Controller
 	 */
 	public function admin_patients()
 	{
+		$info = [];
+
+		foreach (Patient::all() as $patient) {
+			$info[$patient->user->name]['Code'] = $patient->code;
+			$info[$patient->user->name]['Tagebuchtag'] = $patient->assignment_day;
+			$info[$patient->user->name]['Änderungen möglich'] = $patient->assignment_day_changes_left;
+			$info[$patient->user->name]['Therapeut'] = $patient->therapist->user->name;
+		}
+
+		dd($info);
 	}
 
 }
