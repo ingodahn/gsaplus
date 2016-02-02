@@ -15,7 +15,7 @@ Route::get('/admin_home',function() {
 	return view('admin.home');
 });
 Route::get('/AdminCodes','AdminController@admin_codes');
-Route::get('/AdminPatients','AdminController@admin_patients');
+Route::get('/AdminUsers','AdminController@admin_users');
 
 /*
 |--------------------------------------------------------------------------
