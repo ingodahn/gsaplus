@@ -1,5 +1,8 @@
 @extends('layouts.master')
 @section('title', 'Willkommen')
+@section('additional-head')
+  <script src="/js/intro-modal.js" charset="utf-8"></script>
+@endsection
 
 @section('content')
 
@@ -12,18 +15,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-    function openModal() {
-      var src = 'http://www.youtube.com/v/LS-VPyLaJFM&amp;autoplay=1';
-      $('#intro-modal').modal('show');
-      $('#intro-modal iframe').attr('src', src);
-    }
-
-    $('#intro-modal').on('hidden.bs.modal', function () {
-      $('#intro-modal iframe').removeAttr('src');
-    });
-  </script>
 
   <div class="parallax-window parallax-window-nav vertical-center" data-parallax="scroll" data-image-src="/img/bg2.jpg">
     <a href="javascript:openModal()"><i class="fa fa-youtube-play"></i></a>
