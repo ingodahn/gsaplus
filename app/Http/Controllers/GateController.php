@@ -7,11 +7,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Session;
+use Illuminate\Support\Facades\Auth;
 // use Validator, Input, Redirect; 
 
 use App\Code;
 use App\User;
 use App\Patient;
+
+use App\Http\Controllers\Days;
 
 use Carbon\Carbon;
 
@@ -74,22 +77,11 @@ class GateController extends Controller
 	 */
 	 public function enter_system(Request $request)
 	{
-		$days = new Days;
-		//if ( Session is valid )) {
-		if ( Session::get('Role') ) {
-			return Redirect::to('/Home');
-			// Result: "relogin";
-		} else if ($days->day_available())  {
-			// Result: "registrationPossible";
-			Session::put('SessionStatus','RegistrationPossible');
-			return view('gate.start_page')->with('RegistrationPossible',true);
+		if (Auth::check()) {
+			return redirect('/Home');
 		} else {
-		// return "registrationImpossible";
-			return view('gate.start_page')->with('RegistrationPossible',false);
-		//Result:"registrationImpossible";
+			return Redirect::to('/Login')->with('alert_messages', Alert::all());
 		}
-
-
 	}
 
 	/**
@@ -230,11 +222,11 @@ class GateController extends Controller
 		//if (Name or eMail already in use) {
 		if ($userExists) {
 			//Result: Registered=false;
-			Alert::danger("Ihre Registrierung ist leider fehlgeschlagen. Bitte wÃ¤hlen Sie einen anderen Benutzernamen.")->flash();
-
-			return view('gate.patient_data')->with(['DayOfWeek' => $day]);
-//			return View::make(system.info-message) -> with('text',"Ihre Registrierung ist
-//					leider fehlgeschlagen, Bitte wÃ¤hlen Sie einen anderen Benutzernamen");
+			Alert::danger("Ihre Registrierung ist leider fehlgeschlagen. Bitte w&auml;hlen Sie einen anderen Benutzernamen.")->flash();
+			$days = new Days;
+			$day_of_week=$days->get_available_days();
+			//Zeige Seite PatientenDaten
+			return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
 		} else {
 			$dateMap = Helper::generate_date_map();
 
@@ -260,16 +252,16 @@ class GateController extends Controller
 			$days->decrease_day($day);
 
 			// confirmation_message 'registration_success';
-			Alert::info('Sie haben sich erfolgreich registriert und kÃ¶nnen sich nun einloggen.');
-			return redirect('/');
+			Alert::info('Sie haben sich erfolgreich registriert.');
+			return view('patient.diary');
 		}
 	}
 
 	/**
 	 * Start des Registrierungsprozesses.
 	 *
-	 * System prüft, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
-	 * Die Begrüßungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
+	 * System prÃ¼t, ob der Code in der Datenbank vorhanden und noch nicht belegt ist.
+	 * Die BegrÃ¼ungsseite wird im Erfolgsfall angezeigt. Ansonsten wird der Benutzer
 	 * informiert
 	 *
 	 * Aufgerufen von: /StartRegistration
@@ -284,11 +276,11 @@ class GateController extends Controller
 		if ($validation->fails()) {
 			// return Redirect::back()->withErrors($validation)->withInput();
 			Alert::warning('Bitte geben Sie den Code ein, den Sie f&uuml;r die Teilnahme an der Studie erhalten haben.')->flash();
-			return redirect('/');
+			return Redirect::to('/Login');
 		}
 
 		if ( Session::get('SessionStatus') != 'RegistrationPossible') {
-			return redirect('/');
+			return Redirect::to('/Login');
 		}
 
 		// Alternativ: Input::get('Code');
@@ -300,10 +292,10 @@ class GateController extends Controller
 			//if (code already registered) {
 
 			Alert::warning('Dieser Code wurde bereits registriert, Sie k&ouml;nen sich anmelden.')->flash();
-			return redirect('/');
+			return Redirect::to('/Login');
 
 			// Result: CodeStatus="registered";
-		} else if (Code::find($code) !== null) {
+		} else if (Code::where('value', $code)->first() !== null) {
 			//(Code not yet registered) {
 
 			$request->session()->put('SessionStatus', 'CodeUnregistered');
@@ -312,7 +304,7 @@ class GateController extends Controller
 			// Result: CodeStatus="unregistered";
 		} else {
 			Alert::warning('Der einegegebene Code '.$code.' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
-			return redirect('/');
+			return Redirect::to('/Login');
 
 			// Result: CodeStatus="incorrect";
 		}

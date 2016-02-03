@@ -18,7 +18,7 @@ class CodesTableSeeder extends Seeder
 
         foreach (['AAA', 'BBB', 'CCC'] as $id) {
             $code = new Code;
-            $code->id = $id;
+            $code->value = $id;
             $code->save();
         }
     }
