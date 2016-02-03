@@ -9,10 +9,6 @@ Route::get('/welcome', function() {
 	return Session::get('Code');
 });
 
-Route::get('/parallax', function () {
-    return view('parallax');
-});
-
 Route::post('/SetSlots', 'PatientListController@set_slots');
 Route::get('/patient_list', 'PatientListController@show');
 Route::get('/admin_home',function() {
