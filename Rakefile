@@ -50,8 +50,12 @@ task :clean do
   `rm -rf public/img/`
 end
 
-task update: [:assets] do
+desc "Executes bower install"
+task :bower_install do
+  sh "bower install"
+end
+
+task update: [:bower_install, :assets] do
   sh "composer install"
   sh "php artisan migrate"
-  sh "bower install"
 end
