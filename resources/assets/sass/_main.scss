@@ -1,7 +1,11 @@
 $navbar-padding-bottom: 10px;
+$navbar-border: 1px;
 
 .navbar-default {
   border-width: 0;
+  border-bottom-width: $navbar-border;
+  border-radius: 0;
+  border-color: #999999;
   background-color: rgba(white, 0.6);
   padding-bottom: $navbar-padding-bottom;
   margin-bottom: 0px;
@@ -22,12 +26,12 @@ $parallax-window-height: 600px;
 }
 
 .parallax-window-nav {
-  margin-top: -$nav-height - $navbar-padding-bottom;
-  min-height: $parallax-window-height + $nav-height;
+  margin-top: -$nav-height - $navbar-padding-bottom - $navbar-border;
+  min-height: $parallax-window-height + $nav-height + $navbar-border;
   a {
     color: $red-youtube;
     // Offset button by half of navbar's size since it moves the percieved center
-    margin-top: ($nav-height + $navbar-padding-bottom) / 2;
+    margin-top: ($nav-height + $navbar-padding-bottom + $navbar-border) / 2;
   }
   a:hover {
     color: $red-youtube-hover;
