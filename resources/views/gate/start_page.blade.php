@@ -38,7 +38,10 @@
         </form>
         @else
           <p>
-            Zur Zeit sind keine Plätze frei, yadda yadda. Sie können jedoch das Team kontaktieren, bla bla.
+            Leider sind derzeit alle verfügbaren Online-Nachsorge-Plätze vergeben. Wir hoffen, Ihnen in den nächsten Wochen einen freien Platz anbieten zu können.
+          </p>
+		  <p>
+            Nutzen Sie das Kontaktformular um Ihre Kontaktdaten zu hinterlegen. Wir werden Ihnen Materialien zur Nachsorge sowie Informationen über die freien Plätze zusenden.
           </p>
           <a href="/ContactTeam" class="btn btn-warning">Team kontaktieren</a>
         @endif
