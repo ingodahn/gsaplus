@@ -15,7 +15,8 @@ class Helper {
 
         $days = array();
 
-        for ($i = 0; $i < 7; $i++) {
+        // valid days: Sunday ... Thursday
+        foreach (range(0,4) as $i) {
             $days[$date->format('l')] = $i;
             $date = $date->add('1 day');
         }

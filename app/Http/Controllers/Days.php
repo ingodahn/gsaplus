@@ -127,7 +127,7 @@ class Days
 	 */
 	private function get_week_day($day) {
 		// don't query all days - search by primary key (faster)
-		if (is_int($day) && $day >= 0 && $day <= 6) {
+		if (is_int($day) && $day >= 0 && $day <= 4) {
 			$entry = WeekDay::find($day);
 		} else if (array_key_exists($day, $this->days_map)) {
 			$entry = WeekDay::find($this->days_map[$day]);
