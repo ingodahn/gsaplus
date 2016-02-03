@@ -53,7 +53,10 @@ class AdminController extends Controller
 			$info[$patient->user->name]['Code'] = $patient->code;
 			$info[$patient->user->name]['Tagebuchtag'] = $patient->assignment_day;
 			$info[$patient->user->name]['Änderungen möglich'] = $patient->assignment_day_changes_left;
-			$info[$patient->user->name]['Therapeut'] = $patient->therapist->user->name;
+
+			if ($patient->therapist !== null) {
+				$info[$patient->user->name]['Therapeut'] = $patient->therapist->user->name;
+			}
 		}
 
 		dd($info);
