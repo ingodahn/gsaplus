@@ -48,30 +48,30 @@
 
       <div class="form-group">
         <label for="name" class="control-label">Benutzername</label>
-        <input name="name" type="text" class="form-control" placeholder="Hans Maulwurf" required>
+        <input name="name" type="text" class="form-control" placeholder="mrhyde63" required>
       </div>
 
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="email" class="control-label">E-Mail Adresse</label>
-          <input name="email" id="email" type="email" class="form-control width-100" placeholder="hansmaul@springfield.net" required>
+          <input name="email" id="email" type="email" class="form-control width-100" placeholder="w.meyer@web.de" required>
         </div>
 
         <div class="form-group col-sm-6">
           <label class="control-label">Wiederholen</label>
-          <input type="email" placeholder="hansmaul@springfield.net" class="form-control width-100" required data-parsley-equalto="#email">
+          <input type="email" placeholder="w.meyer@web.de" class="form-control width-100" required data-parsley-equalto="#email">
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="password" class="control-label">Passwort</label>
-          <input name="password" id="password" type="password" class="form-control width-100" placeholder="hunter2" required minlength="6">
+          <input name="password" id="password" type="password" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6">
         </div>
 
         <div class="form-group col-sm-6">
           <label class="control-label">Wiederholen</label>
-          <input type="password" class="form-control width-100" placeholder="Passwort wiederholen" required minlength="6" data-parsley-equalto="#password">
+          <input type="password" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
         </div>
       </div>
 
