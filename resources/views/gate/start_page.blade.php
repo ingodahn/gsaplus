@@ -2,28 +2,10 @@
 @section('title', 'Willkommen')
 
 @section('content')
-  {{-- <div class="container greeting "> --}}
-  {{-- <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-  </div>
-
-  <div class="jumbotron jumbotron-video">
-  <div class="container">
-    <div class="videoWrapper">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/X9otDixAtFw" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
-  </div> --}}
-
 
   <div id="intro-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Intro Video" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        {{-- <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title">Willkommen bei GSA Online Plus</h4>
-        </div> --}}
         <div class="modal-body modal-video videoWrapper">
           <iframe width="560" height="315" frameborder="0" allowfullscreen></iframe>
         </div>
