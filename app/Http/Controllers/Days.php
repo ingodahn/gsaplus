@@ -49,9 +49,9 @@ class Days
 		$entry->free_time_slots--;
 		$entry->save();
 
-		if ($entry->free_time_slots <= 0) {
+		/* if ($entry->free_time_slots <= 0) {
 			$this->send_mail($entry);
-		}
+		} */
 	}
 
 	/**
