@@ -38,7 +38,7 @@
         </form>
         @else
           <p>
-            Leider sind derzeit alle verfügbaren Online-Nachsorge-Plätze vergeben. Wir hoffen, Ihnen in den nächsten Wochen einen freien Platz anbieten zu können.
+            Leider sind derzeit alle verfügbaren Plätze in der Online-Nachsorge vergeben. Wir hoffen, Ihnen in den nächsten Wochen einen freien Platz anbieten zu können.
           </p>
 		  <p>
             Nutzen Sie das Kontaktformular um Ihre Kontaktdaten zu hinterlegen. Wir werden Ihnen Materialien zur Nachsorge sowie Informationen über die freien Plätze zusenden.

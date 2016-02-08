@@ -23,7 +23,7 @@
 
     <p>Ich freue mich darauf, Sie in den nächsten Wochen bei Ihrer beruflichen Rückkehr begleiten zu können.</p>
 
-    <p>Im Folgenden Anmeldeverfahren werden Sie nun gebeten, Ihre Zusage zur Teilnahme zu bestätigen, sich mit einem anonymen Benutzernamen und Passwort zu registrieren und einen persönlichen Schreibtag festzulegen.</p>
+    <p>Im folgenden Anmeldeverfahren werden Sie nun gebeten, Ihre Zusage zur Teilnahme zu bestätigen, sich mit einem anonymen Benutzernamen und Passwort zu registrieren und einen persönlichen Schreibtag festzulegen.</p>
 
     <div class="pull-right">
       <a class="btn btn-accent" href="/FromWelcome">Weiter</a>
