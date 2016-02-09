@@ -6,7 +6,7 @@
 
     <h2>Tagebuch</h2>
     <p>
-      Dies ist das Tagebuch. Es enth&auml;lt eine &Uuml;bersicht aller geplanten und geschriebenen Eintr&auml;ge mit ihrem jeweiligen Status.
+      Dies ist das Tagebuch. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
     </p>
 
     <p>
