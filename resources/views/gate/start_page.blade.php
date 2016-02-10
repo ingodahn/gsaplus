@@ -64,7 +64,7 @@
             </label>
             <a href="#"><i class="fa fa-question-circle"></i></a>
           </div>
-          <button type="submit" class="btn btn-primary">Login</button> <a href="#">Passwort vergessen?</a>
+          <button type="submit" class="btn btn-primary">Login</button> <a href="/password/email">Passwort vergessen?</a>
         </form>
       </div>
     </div>

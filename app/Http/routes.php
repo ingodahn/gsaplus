@@ -44,6 +44,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/Login', 'Auth\AuthController@postLogin');
 
 	Route::get('/Logout', 'Auth\AuthController@logout');
+
+	// Password reset link request routes...
+	Route::get('password/email', 'Auth\PasswordController@getEmail');
+	Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+	// Password reset routes...
+	Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+	Route::post('password/reset', 'Auth\PasswordController@postReset');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
