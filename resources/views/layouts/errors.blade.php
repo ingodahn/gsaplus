@@ -1,5 +1,5 @@
 <div class="container alerts-container">
-  @if (count($errors))
+  @if (isset($errors) && count($errors))
     @foreach($errors->all() as $error)
       <div class="alert alert-dismissible alert-danger" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
