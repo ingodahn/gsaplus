@@ -20,6 +20,14 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
+    // overwrite the default views (auth.passwords. ...)
+    protected $linkRequestView = 'gate.passwords.password';
+
+    protected $resetView = 'gate.passwords.reset';
+
+    // redirect to /Home when procedure is complete
+    protected $redirectTo = '/Home';
+
     /**
      * Create a new password controller instance.
      *
