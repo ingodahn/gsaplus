@@ -243,6 +243,7 @@ class GateController extends Controller
 			$patient->code = $code;
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;
+			$patient->patient_status = 'P020';
 
 			$patient->save();
 
