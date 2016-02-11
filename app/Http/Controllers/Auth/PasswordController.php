@@ -42,7 +42,7 @@ class PasswordController extends Controller
     }
 
     /**
-     * Change: don't send mails if patient status isn't P130
+     * Change: don't send mails if patient status is >= P130
      */
     public function postEmail(Request $request)
     {
