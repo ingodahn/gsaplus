@@ -157,6 +157,7 @@ public/img
 
 
 ### Custom ###
+/storage/framework/cache/*
 
 # Sass
 .sass-cache
