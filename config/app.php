@@ -173,6 +173,11 @@ return [
          */
         Jenssegers\Date\DateServiceProvider::class,
 
+        /*
+         * A library supporting the use of an ajax table.
+         */
+        Yajra\Datatables\DatatablesServiceProvider::class,
+
     ],
 
     /*
@@ -220,6 +225,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Alert'     => Prologue\Alerts\Facades\Alert::class,
         'Date'      => Jenssegers\Date\Date::class,
+        'Datatables' => Yajra\Datatables\Datatables::class,
 
     ],
 

@@ -52,8 +52,13 @@ Route::group(['middleware' => ['web']], function () {
 	// Password reset routes...
 	Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 	Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/Home', 'AuxController@home');
 });
+
+Route::any('datatables/data', 'DatatablesController@anyData')->name('datatables.data');
+Route::get('datatables', 'DatatablesController@getIndex')->name('datatables');
