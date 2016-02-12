@@ -16,6 +16,7 @@ Route::get('/admin_home',function() {
 });
 Route::get('/AdminCodes','AdminController@admin_codes');
 Route::get('/AdminUsers','AdminController@admin_users');
+Route::get('/Diary/{name}','DiaryController@show(name)');
 
 /*
 |--------------------------------------------------------------------------
