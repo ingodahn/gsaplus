@@ -4,15 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Admin extends User
 {
 
-    /**
-     * Get the appropriate user instance.
-     */
-    public function user()
-    {
-        return $this->morphOne('App\User', 'userable');
-    }
+    protected static $singleTableType = 'admin';
 
 }

@@ -27,25 +27,24 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Patient::class, function (Faker\Generator $faker) {
-    return [
+
+$factory->define(App\Patient::class, function (Faker\Generator $faker) use ($factory) {
+    $user = $factory->raw(App\User::class);
+
+    return array_merge($user, [
         'code' => strtoupper(str_random(6)),
         'assignment_day' => $faker->numberBetween($min = 0, $max = 6),
         'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3),
         'patient_status' => 'P130'
-    ];
+    ]);
 });
 
-$factory->define(App\Therapist::class, function (Faker\Generator $faker) {
-    return [
-
-    ];
+$factory->define(App\Therapist::class, function (Faker\Generator $faker) use ($factory) {
+    return $factory->raw(App\User::class);
 });
 
-$factory->define(App\Admin::class, function (Faker\Generator $faker) {
-    return [
-
-    ];
+$factory->define(App\Admin::class, function (Faker\Generator $faker) use ($factory) {
+    return $factory->raw(App\User::class);
 });
 
 $factory->define(App\Assignment::class, function (Faker\Generator $faker) {

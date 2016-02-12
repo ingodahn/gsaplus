@@ -16,21 +16,14 @@ class DatabaseSeeder extends Seeder
         $this->call(RandomWeekDaysTableSeeder::class);
 
         $admin = factory(App\Admin::class, 4)
-            ->create()
-            ->each(function (App\Admin $a) {
-                $a->user()->save(factory(App\User::class)->make());
-            });
+            ->create();
 
         $therapists = factory(App\Therapist::class, 4)
-            ->create()
-            ->each(function (App\Therapist $t) {
-                $t->user()->save(factory(App\User::class)->make());
-            });
+            ->create();
 
         $patients = factory(App\Patient::class, 20)
             ->create()
             ->each(function (App\Patient $p) {
-                $p->user()->save(factory(App\User::class)->make());
                 App\Therapist::all()->random()->patients()->save($p);
             });
 

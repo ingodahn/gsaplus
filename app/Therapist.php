@@ -4,8 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Therapist extends Model
+class Therapist extends User
 {
+
+    protected static $singleTableType = 'therapist';
+
     /**
      * Get the responses to our assignments.
      */
@@ -22,11 +25,4 @@ class Therapist extends Model
         return $this->hasMany('App\Patient');
     }
 
-    /**
-     * Get the appropriate user instance.
-     */
-    public function user()
-    {
-        return $this->morphOne('App\User', 'userable');
-    }
 }

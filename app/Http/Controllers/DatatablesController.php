@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Patient;
 
 use Yajra\Datatables\Datatables;
 
@@ -30,6 +30,6 @@ class DatatablesController extends Controller
      */
     public function anyData()
     {
-        return Datatables::of(User::select('*'))->make(true);
+        return Datatables::of(Patient::select('*'))->make(true);
     }
 }

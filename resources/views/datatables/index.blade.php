@@ -4,11 +4,13 @@
     <table class="table table-bordered" id="users-table">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Created At</th>
-            <th>Updated At</th>
+            <th>Last Login</th>
+            <th>Registration Date</th>
+            <th>Code</th>
+            <th>Assignment Day</th>
+            <th>Status</th>
         </tr>
         </thead>
     </table>
@@ -22,11 +24,13 @@
             serverSide: true,
             ajax: '{!! route('datatables.data') !!}',
             columns: [
-                { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
-                { data: 'created_at', name: 'created_at' },
-                { data: 'updated_at', name: 'updated_at' }
+                { data: 'last_login', name: 'last_login' },
+                { data: 'registration_date', name: 'registration_date' },
+                { data: 'code', name: 'code' },
+                { data: 'assignment_day', name: 'assignment_day' },
+                { data: 'patient_status', name: 'patient_status' },
             ]
         });
     });

@@ -42,12 +42,12 @@ class AuxController extends Controller
 	 */
 	public function home(Request $request)
 	{
-		switch (get_class($request->user()->userable)) {
-			case 'App\Patient':
+		switch ($request->user()->type) {
+			case 'patient':
 				return view('patient.diary');
-			case 'App\Admin':
+			case 'admin':
 				return view('admin.home');
-			case 'App\Therapist':
+			case 'therapist':
 				$days = new Days;
 				$patientListModel = array();
 				$patientListModel['Slots'] = $days->get_days();

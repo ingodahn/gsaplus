@@ -214,7 +214,7 @@ class GateController extends Controller
 		$email = $request->input('email');
 		$day = $request->input('day_of_week');
 
-		$userExists = User::where(function($query) use($email, $name) {
+		$userExists = Patient::where(function($query) use($email, $name) {
 			$query->where('email', '=', $email)
 				->orWhere('name', '=', $name);
 		})->first();
@@ -231,23 +231,17 @@ class GateController extends Controller
 			$dateMap = Helper::generate_date_map();
 
 			//Result: Registered=true;
-			$user = new User;
-			$user->name = $name;
-			$user->email = $email;
-			$user->password = bcrypt($password);
-			$user->registration_date = Carbon::create();
-
-			$user->save();
-
 			$patient = new Patient;
+			$patient->name = $name;
+			$patient->email = $email;
+			$patient->password = bcrypt($password);
+			$patient->registration_date = Carbon::create();
 			$patient->code = $code;
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;
 			$patient->patient_status = 'P020';
 
 			$patient->save();
-
-			$patient->user()->save($user);
 
 			$days = new Days;
 			$days->decrease_day($day);

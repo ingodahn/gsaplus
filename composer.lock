@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "efb157bd3c2f681fa8b43e4a68f39436",
-    "content-hash": "eebfb65c1769fcd2291637a80013ed4b",
+    "hash": "9c93f93a826c361705d21799b57fb512",
+    "content-hash": "6bb4316f77654b4222aa6b5a80ef926c",
     "packages": [
         {
             "name": "caouecs/laravel4-lang",
@@ -961,6 +961,21 @@
                 "schedule"
             ],
             "time": "2015-01-11 23:07:46"
+        },
+        {
+            "name": "nanigans/single-table-inheritance",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nanigans/single-table-inheritance.git",
+                "reference": "master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nanigans\\SingleTableInheritance\\": "src/"
+                }
+            }
         },
         {
             "name": "nesbot/carbon",
