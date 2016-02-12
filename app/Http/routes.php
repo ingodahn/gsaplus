@@ -8,7 +8,10 @@
 Route::get('/welcome', function() {
 	return Session::get('Code');
 });
-
+// Contact form route
+	Route::get('/ContactTeam','ContactController@contact_team');
+	Route::post('/SendMessage','ContactController@send_message');
+	
 Route::post('/SetSlots', 'PatientListController@set_slots');
 Route::get('/patient_list', 'PatientListController@show');
 Route::get('/admin_home',function() {
@@ -53,6 +56,8 @@ Route::group(['middleware' => ['web']], function () {
 	// Password reset routes...
 	Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 	Route::post('password/reset', 'Auth\PasswordController@postReset');
+	
+	
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
