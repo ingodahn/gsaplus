@@ -13,12 +13,21 @@ class CodesTableSeeder extends Seeder
      */
     public function run()
     {
-        $codes = factory(App\Code::class, 100)
-            ->create();
+        $codes = [];
+
+        foreach (range(0,100) as $num) {
+            $codes[] = strtoupper(str_random(3));
+        }
 
         foreach (range('A','Z') as $letter) {
+            $codes[] = str_repeat($letter, 3);
+        }
+
+        $unique_codes = array_unique($codes);
+
+        foreach ($unique_codes as $unique_code) {
             $code = new Code;
-            $code->value = str_repeat($letter, 3);
+            $code->value = $unique_code;
             $code->save();
         }
     }
