@@ -45,7 +45,8 @@
         </div>
       </form>
     </p>
-
+	<p>Hier kommt die Patientenliste hin</p>
+	{!! $PatientList !!}
     <p>
       <a href="/Logout" class="btn btn-warning">Logout</a>
     </p>

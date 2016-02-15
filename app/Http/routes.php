@@ -5,6 +5,8 @@
 | To be removed or put under middleware control
 | for production
 */
+
+
 Route::get('/welcome', function() {
 	return Session::get('Code');
 });
@@ -19,7 +21,7 @@ Route::get('/admin_home',function() {
 });
 Route::get('/AdminCodes','AdminController@admin_codes');
 Route::get('/AdminUsers','AdminController@admin_users');
-Route::get('/Diary/{name}','DiaryController@show(name)');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +59,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 	Route::post('password/reset', 'Auth\PasswordController@postReset');
 	
-	
+	// Experimental
+	Route::get('/Diary/{name?}','DiaryController@show');
+	Route::get('/Profile/{name?}','PatientController@profile');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
