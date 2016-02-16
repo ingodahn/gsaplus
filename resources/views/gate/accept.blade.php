@@ -35,6 +35,8 @@
       </label>
     </div>
 
+    <p>Bitte bestätigen Sie alle drei Aussagen und klicken Sie anschließend auf "Weiter".</p>
+
     <div class="pull-right">
       <a class="btn btn-accent disabled" id="commit-next" href="/Accepted">Weiter</a>
     </div>

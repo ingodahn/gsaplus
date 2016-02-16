@@ -9,8 +9,8 @@
             {!! csrf_field() !!}
 
             <div class="form-group">
-                <label for="email">Email</label>
-                <input name="email" type="email" value="{{ old('email') }}" class="form-control" placeholder="EMail" required>
+                <label for="email">E-Mail Adresse</label>
+                <input name="email" type="email" value="{{ old('email') }}" class="form-control" placeholder="Ihre E-Mail Adresse" required>
             </div>
 
             @if (Session::get('status'))
