@@ -60,5 +60,4 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/Home', 'AuxController@home');
 });
 
-Route::any('datatables/data', 'DatatablesController@anyData')->name('datatables.data');
-Route::get('datatables', 'DatatablesController@getIndex')->name('datatables');
+Route::any('patient_list/data', 'PatientListController@anyData')->name('datatables.data');
