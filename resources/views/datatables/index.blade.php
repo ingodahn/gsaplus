@@ -5,12 +5,10 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Email</th>
-            <th>Last Login</th>
-            <th>Registration Date</th>
+            <th>E-mail</th>
             <th>Code</th>
-            <th>Assignment Day</th>
-            <th>Status</th>
+            <th>Tagebuchtag</th>
+            <th>Überfällig</th>
         </tr>
         </thead>
     </table>
@@ -26,11 +24,9 @@
             columns: [
                 { data: 'name', name: 'name' },
                 { data: 'email', name: 'email' },
-                { data: 'last_login', name: 'last_login' },
-                { data: 'registration_date', name: 'registration_date' },
                 { data: 'code', name: 'code' },
                 { data: 'assignment_day', name: 'assignment_day' },
-                { data: 'patient_status', name: 'patient_status' },
+                { data: 'overdue', name: 'overdue' },
             ]
         });
     });
