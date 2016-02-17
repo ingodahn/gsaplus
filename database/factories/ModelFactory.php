@@ -33,9 +33,11 @@ $factory->define(App\Patient::class, function (Faker\Generator $faker) use ($fac
 
     return array_merge($user, [
         'code' => strtoupper(str_random(6)),
-        'assignment_day' => $faker->numberBetween($min = 0, $max = 6),
-        'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3),
-        'patient_status' => 'P130'
+        'assignment_day' => $faker->numberBetween($min = 0, $max = 4),
+        'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3)
+
+        // patient status should be determined - not cached
+        // 'patient_status' => 'P130'
     ]);
 });
 
