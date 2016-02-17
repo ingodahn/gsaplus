@@ -14,7 +14,7 @@ class RandomWeekDaysTableSeeder extends Seeder
      */
     public function run()
     {
-        $days = Helper::generate_date_map();
+        $days = Helper::generate_day_name_map();
 
         $faker = Faker\Factory::create();
 
