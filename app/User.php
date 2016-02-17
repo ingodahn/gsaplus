@@ -19,7 +19,7 @@ class User extends Authenticatable
 
     protected static $singleTableSubclasses = [Patient::class, Admin::class, Therapist::class];
 
-    protected static $persisted = ['name', 'email', 'password', 'last_login'];
+    protected static $persisted = ['name', 'email', 'password', 'last_login', 'is_random'];
 
     /**
      * The attributes that are mass assignable.
