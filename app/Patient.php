@@ -10,7 +10,9 @@ class Patient extends User
     protected static $singleTableType = 'patient';
 
     protected static $persisted = ['code', 'assignment_day', 'assignment_day_changes_left',
-        'patient_status', 'registration_date', 'therapist_id' ];
+        // patient status should be determined - not cached
+        // 'patient_status',
+        'registration_date', 'therapist_id' ];
 
     /**
      * Get our assignments (all - independent of state).
