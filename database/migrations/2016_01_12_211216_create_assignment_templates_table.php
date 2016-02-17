@@ -18,7 +18,7 @@ class CreateAssignmentTemplatesTable extends Migration
             $table->string('text');
             $table->string('title');
 
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

@@ -17,11 +17,12 @@ class CreateAssignmentsTable extends Migration
 
             $table->dateTime('assigned_on');
             $table->text('patient_text');
+            $table->boolean('state');
 
             $table->integer('assignment_template_id')->unsigned();
             $table->integer('patient_id')->unsigned();
 
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 
