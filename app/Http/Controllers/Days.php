@@ -23,7 +23,7 @@ class Days
 
 	function __construct()
 	{
-		$this->days_map = Helper::generate_date_map();
+		$this->days_map = Helper::generate_day_name_map();
 	}
 
 	/**

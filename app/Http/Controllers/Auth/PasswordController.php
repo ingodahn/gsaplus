@@ -48,9 +48,7 @@ class PasswordController extends Controller
     {
         $p = Patient::where('email', $request->input('email'))->first();
 
-        if ($p !== null
-                && $p->patient_status !== 'P130'
-                && $p->patient_status !== 'P140') {
+        if ($p !== null && !$p->is_random) {
             return $this->sendResetLinkEmail($request);
         } else {
             return view('gate.passwords.password');

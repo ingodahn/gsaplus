@@ -228,7 +228,7 @@ class GateController extends Controller
 			//Zeige Seite PatientenDaten
 			return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
 		} else {
-			$dateMap = Helper::generate_date_map();
+			$dateMap = Helper::generate_day_name_map();
 
 			//Result: Registered=true;
 			$patient = new Patient;
@@ -239,7 +239,7 @@ class GateController extends Controller
 			$patient->code = $code;
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;
-			$patient->patient_status = 'P020';
+			$patient->is_random = false;
 
 			$patient->save();
 
