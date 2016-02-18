@@ -30,7 +30,9 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label for="Code">Persönlicher Code</label>
-            <a href="#"><i class="fa fa-question-circle"></i></a>
+            <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+              <i class="fa fa-question-circle"></i>
+            </a>
 
             <input name="Code" class="form-control" placeholder="Code">
           </div>
@@ -62,7 +64,9 @@
             <label>
               <input name="remember" type="checkbox"> Eingeloggt bleiben
             </label>
-            <a href="#"><i class="fa fa-question-circle"></i></a>
+            <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+              <i class="fa fa-question-circle"></i>
+            </a>
           </div>
           <button type="submit" class="btn btn-primary">Login</button> <a href="/password/email">Passwort vergessen?</a>
         </form>
