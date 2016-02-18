@@ -11,6 +11,7 @@
         </p>
 
         <form action="/SendMessage" method="post" enctype="text/plain">
+          {{ csrf_field() }}
           <div class="form-group">
             <label for="name" class="control-label">Name</label>
             <input name="name" type="text" placeholder="Dr. XTC">
