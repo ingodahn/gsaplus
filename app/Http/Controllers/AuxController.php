@@ -44,14 +44,13 @@ class AuxController extends Controller
 	{
 		switch ($request->user()->type) {
 			case 'patient':
-				return view('patient.diary')->with('name',$request->user()->name);
+				return view('patient.diary')-> with('name',$request->user()->name);
 			case 'admin':
 				return view('admin.home');
 			case 'therapist':
 				$days = new Days;
 				$patientListModel = array();
 				$patientListModel['Slots'] = $days->get_days();
-				$patientListModel['PatientList']="<p><a href=\"/Diary/test-p\">test-p</a></p>";
 				return view('therapist.patient_list')->with($patientListModel);
 		}
 	}

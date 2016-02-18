@@ -206,12 +206,12 @@ class DiaryController extends Controller
 	{
 		// Setting default parameter
 		if (! $name) {
-			$name = Auth::user()-> name;
+			$name = Auth::user()->name;
 		}
 		/**
 		* If the user is a patient, he can only see his own diary
 		*/
-		if (get_class($request->user()->userable) == 'App\Patient' && Auth::user()->name != $name) {
+		if ($request->user()->type === 'patient' && Auth::user()->name !== $name) {
 			return Redirect::to('/');
 		}
 		// return $name;

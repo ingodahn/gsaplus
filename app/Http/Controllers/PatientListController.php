@@ -209,7 +209,6 @@ class PatientListController extends Controller
 		//page_definition=page_definition
 		
 		$params['Slots']=$Slots;
-		$params['PatientList']='<p><a href="/Diary/test-p">test-p</a></p>';
 		// return view('therapist.patient_list')->with('Slots', $Slots);
 		return view('therapist.patient_list')->with($params);
 

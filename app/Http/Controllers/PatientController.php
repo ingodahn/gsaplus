@@ -58,7 +58,7 @@ class PatientController extends Controller
 	public function profile(Request $request,$name=NULL)
 	{
 		if (! $name) {
-			$name=Auth::user()-> name;
+			$name=Auth::user()->name;
 		}
 		// if (role of current user is patient && ! $name==Auth::user()-> name) {
 		//	Redirect::to('/');
@@ -66,7 +66,7 @@ class PatientController extends Controller
 		//$patient=Patient(name);
 		$profile_user_model=[];
 		$profile_user_model['Name']=$name;
-		$profile_user_model['Role']=get_class($request->user()->userable);
+		$profile_user_model['Role']=$request->user()->type;
 		// $profile_user_model['Patient']=Patient($name);
 		return view('patient.patient_profile')-> with($profile_user_model);
 	}
