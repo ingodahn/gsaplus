@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Prologue\Alerts\Facades\Alert;
+
 
 /**
  * @author dahn
@@ -74,12 +77,20 @@ class ContactController extends Controller
 	{
 		$eMail=$request->input('eMail');
 		$subject=$request->input('subject');
-		$message=$request->input('message');
-		//Send Message to team;
-		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt');
+		$bodyMessage=$request->input('message');
+
+		Mail::send('emails.contact_mail_sent', ['bodyMessage' => $bodyMessage, 'subject' => $subject],
+			function ($message) use ($eMail, $subject) {
+				// no from part needed - the sites name and email address can be found
+				// under 'mail.from' in file config/mail.php
+				$message->to($eMail)->subject("Ihre Anfrage");
+			});
+
+		// Send Message to team;
+		// alert doesn't work with more than one redirect
+		// Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
+
 		return Redirect::to('/Home');
-
-
 	}
 
 }
