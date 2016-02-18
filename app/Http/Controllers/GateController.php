@@ -246,8 +246,11 @@ class GateController extends Controller
 			$days = new Days;
 			$days->decrease_day($day);
 
+			Auth::login($patient);
+
 			// confirmation_message 'registration_success';
 			Alert::info('Sie haben sich erfolgreich registriert.');
+
 			return view('patient.diary')->with('name',$name);
 		}
 	}
