@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 
-use App\User;
+use App\Patient;
 
 class PasswordController extends Controller
 {
@@ -46,13 +46,9 @@ class PasswordController extends Controller
      */
     public function postEmail(Request $request)
     {
-        $entry = User::where('email', $request->input('email'))->first();
+        $p = Patient::where('email', $request->input('email'))->first();
 
-        $u = $entry->userable;
-
-        if (get_class($u) == 'App\Patient'
-                && $u->patient_status !== 'P130'
-                && $u->patient_status !== 'P140') {
+        if ($p !== null && !$p->is_random) {
             return $this->sendResetLinkEmail($request);
         } else {
             return view('gate.passwords.password');

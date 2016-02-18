@@ -21,7 +21,7 @@ class CreateResponsesTable extends Migration
             $table->integer('assignment_id')->unsigned();
             $table->integer('therapist_id')->unsigned();
 
-            $table->timestamps();
+            $table->nullableTimestamps();
         });
     }
 

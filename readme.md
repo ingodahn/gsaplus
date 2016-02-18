@@ -44,6 +44,9 @@ vagrant reload --provision # Update VM
 vagrant ssh # ssh into VM
 cd /var/www # Change to the project dir inside the VM
 rake # Update all dependencies and assets
+rake db_refresh_and_seed # if some database tables have changed (old data will be removed)
+# or
+rake db_reset_and_seed # if tables were removed or added (old data will be lost)
 ```
 
 Note that this is only a slight modification of the install process. Also, it is very likely that all of the steps are neccessary, but this is a surefire way to get you up to date. Feel free to drop commands once you get more comfortable with the process.

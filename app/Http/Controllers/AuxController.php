@@ -7,8 +7,6 @@ use Illuminate\Routing\Controller;
 use App\Models;
 use App\Http\Controllers;
 use Prologue\Alerts\Facades\Alert;
-use Session;
-use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Days;
 
@@ -44,12 +42,12 @@ class AuxController extends Controller
 	 */
 	public function home(Request $request)
 	{
-		switch (get_class($request->user()->userable)) {
-			case 'App\Patient':
-				return view('patient.diary')-> with('name',Auth::user()-> name);
-			case 'App\Admin':
+		switch ($request->user()->type) {
+			case 'patient':
+				return view('patient.diary')->with('name',$request->user()->name);
+			case 'admin':
 				return view('admin.home');
-			case 'App\Therapist':
+			case 'therapist':
 				$days = new Days;
 				$patientListModel = array();
 				$patientListModel['Slots'] = $days->get_days();

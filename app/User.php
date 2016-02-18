@@ -3,9 +3,24 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
+
+use App\Patient;
+use App\Admin;
+use App\Therapist;
 
 class User extends Authenticatable
 {
+    use SingleTableInheritanceTrait;
+
+    protected $table = "users";
+
+    protected static $singleTableTypeField = 'type';
+
+    protected static $singleTableSubclasses = [Patient::class, Admin::class, Therapist::class];
+
+    protected static $persisted = ['name', 'email', 'password', 'last_login', 'is_random'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,11 +39,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * Get the appropriate object of type Admin / Therapist / Patient.
-     */
-    public function userable()
-    {
-        return $this->morphTo();
-    }
 }

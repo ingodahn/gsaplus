@@ -1,15 +1,22 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Session;
 
+use App\Http\Requests;
+use Yajra\Datatables\Datatables;
 
 use App\Models;
+use App\Helper;
+use App\Patient;
+
 use App\Http\Controllers;
 use Prologue\Alerts\Facades\Alert;
 
@@ -207,6 +214,29 @@ class PatientListController extends Controller
 		return view('therapist.patient_list')->with($params);
 
 
+	}
+
+	/**
+	 * Process datatables ajax request.
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function anyData()
+	{
+		$days_map = Helper::generate_day_number_map();
+
+		return Datatables::of(Patient::select('*'))
+			->addColumn('overdue', function ($patient) {
+				if ($patient->assignments()->get()->last()->state === 0) {
+					return "ja";
+				} else {
+					return "nein";
+				}
+			})
+			->edit_column('assignment_day', function($row) use ($days_map) {
+				return $days_map[$row->assignment_day];
+			})
+			->make(true);
 	}
 
 }
