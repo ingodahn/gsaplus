@@ -226,7 +226,8 @@ class PatientListController extends Controller
 
 		return Datatables::of(Patient::select('*'))
 			->addColumn('overdue', function ($patient) {
-				if ($patient->assignments()->get()->last()->state === 0) {
+				if ($patient->assignments()->get()->last() !== null
+						&& $patient->assignments()->get()->last()->state === 0) {
 					return "ja";
 				} else {
 					return "nein";
