@@ -13,16 +13,16 @@
         <form action="/SendMessage" method="post">
           {{ csrf_field() }}
           <div class="form-group">
-            <label for="name" class="control-label">Name</label>
-            <input name="name" type="text" class="form-control" placeholder="Dr. XTC"></input>
+            <label for="eMail" class="control-label">E-Mail</label>
+            <input name="eMail" type="text" class="form-control" placeholder="dr_xtc@drogen24.onion"></input>
           </div>
           <div class="form-group">
-            <label for="mail" class="control-label">E-Mail</label>
-            <input name="mail" type="text" class="form-control" placeholder="dr_xtc@drogen24.onion"></input>
+            <label for="subject" class="control-label">Betreff</label>
+            <input name="subject" type="text" class="form-control" placeholder="Wadde hadde dudeda?"></input>
           </div>
           <div class="form-group">
-            <label for="text" class="control-label">Nachricht</label>
-            <textarea name="text" type="textarea" rows="5" class="form-control" placeholder="Sehr geehrter Dr Ogen..."></textarea>
+            <label for="message" class="control-label">Nachricht</label>
+            <textarea name="message" type="textarea" rows="5" class="form-control" placeholder="Sehr geehrter Dr Ogen..."></textarea>
           </div>
           <button type="submit" class="btn btn-primary pull-right">Absenden</button>
         </form>
