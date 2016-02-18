@@ -59,3 +59,26 @@ task update: [:bower_install, :assets] do
   sh "composer install"
   sh "php artisan migrate"
 end
+
+desc "apply minor db changes - all data will be removed - run if tables weren't removed or added"
+task :db_refresh do
+  sh "php artisan migrate:refresh"
+end
+
+desc "apply major db changes - all data will be removed - run if tables were added or removed"
+task :db_reset do
+  sh "mysql scotchbox < ./database/sql/drop_all_tables.sql"
+  sh "composer dump-autoload"
+  sh "php artisan migrate"
+end
+
+desc "seed codes, week days and test data"
+task :db_seed do
+  sh "php artisan db:seed"
+end
+
+desc "apply minor db changes and seed test data - all data will be removed"
+task db_refresh_and_seed: [:db_refresh, :db_seed]
+
+desc "apply major db changes and seed test data - all data will be removed"
+task db_reset_and_seed: [:db_reset, :db_seed]
