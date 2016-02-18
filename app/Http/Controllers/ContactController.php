@@ -41,9 +41,30 @@ class ContactController extends Controller
 	}
 
 	/**
+	 * Zeigt ein Formular zum verfassen von Mails an eine reihe von Patienten an
+	 * 
+	 * @param list_of_patients
+	 */
+	public function mail_editor($list_of_patients)
+	{
+		return view('system.mail_editor');
+	}
+
+	/**
+	 * Sendet eine Mail an eine Liste von Patienten
+	 * 
+	 * @param list_of_names
+	 * @param mail_subject
+	 * @param mail_body
+	 */
+	public function message_to_patients($list_of_names, $mail_subject, $mail_body)
+	{
+	}
+	
+	/**
 	 * Die Nachricht mit angegebenem subject, Absender und message wird an das team
 	 * geschickt und
-	 * Es wird mit alert bestätigt, dass eine Nachricht an das Team geschickt wurde.
+	 * Es wird mit alert bestÃ¤tigt, dass eine Nachricht an das Team geschickt wurde.
 	 * 
 	 * @param eMail
 	 * @param subject
@@ -55,7 +76,7 @@ class ContactController extends Controller
 		$subject=$request->input('subject');
 		$message=$request->input('message');
 		//Send Message to team;
-		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt');
+		Alert::info('Ihre Nachricht wurde an das Projektteam Ã¼bermittelt');
 		return Redirect::to('/Home');
 
 

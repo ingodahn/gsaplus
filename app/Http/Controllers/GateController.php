@@ -254,7 +254,7 @@ class GateController extends Controller
 
 			// confirmation_message 'registration_success';
 			Alert::info('Sie haben sich erfolgreich registriert.');
-			return view('patient.diary');
+			return view('patient.diary')->with('name',$name);
 		}
 	}
 
