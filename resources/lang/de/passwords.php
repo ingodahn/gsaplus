@@ -15,9 +15,8 @@ return [
 
     'password' => 'Passwörter müssen mindestens 6 Zeichen lang sein und korrekt bestätigt werden.',
     'reset'    => 'Das Passwort wurde zurückgesetzt!',
-    'sent'     => 'Sie müssten in Kürze eine EMail erhalten. Bitte folgen Sie dem
-                    enthaltenen Link um Ihr Passwort zurückzusetzen.',
+    'sent'     => 'Sofern die eingegebene Adresse bei uns registriert ist erhalten Sie in Kürze eine E-Mail. Bitte folgen Sie dem darin enthaltenen Link um Ihr Passwort zurückzusetzen.',
     'token'    => 'Der Passwort-Wiederherstellungs-Schlüssel ist ungültig oder abgelaufen.',
-    'user'     => 'Es konnte leider kein Nutzer mit dieser E-Mail Adresse gefunden werden.',
+    'user'     => 'Sofern die eingegebene Adresse bei uns registriert ist erhalten Sie in Kürze eine E-Mail. Bitte folgen Sie dem darin enthaltenen Link um Ihr Passwort zurückzusetzen.',
 
 ];
