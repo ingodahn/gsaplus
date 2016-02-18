@@ -79,18 +79,27 @@ class ContactController extends Controller
 		$subject=$request->input('subject');
 		$bodyMessage=$request->input('message');
 
-		Mail::send('emails.contact_mail_sent', ['bodyMessage' => $bodyMessage, 'subject' => $subject],
+		$eMailTeam = config('mail.team.address');
+		// $nameTeam = config('mail.team.name');
+
+		Mail::raw($bodyMessage, function ($message) use ($eMail, $eMailTeam, $subject) {
+				// no from part needed - the sites name and email address can be found
+				// under 'mail.from' in file config/mail.php
+				$message->from($eMail)->to($eMailTeam, 'Team GSA Online Plus')->subject($subject);
+			});
+
+		// uncomment to send confirmation
+		/* Mail::send('emails.contact_mail_sent', ['bodyMessage' => $bodyMessage, 'subject' => $subject],
 			function ($message) use ($eMail, $subject) {
 				// no from part needed - the sites name and email address can be found
 				// under 'mail.from' in file config/mail.php
 				$message->to($eMail)->subject("Ihre Anfrage");
-			});
+			}); */
 
-		// Send Message to team;
 		// alert doesn't work with more than one redirect
-		// Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
+		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
 
-		return Redirect::to('/Home');
+		return view('system.contact_form');
 	}
 
 }

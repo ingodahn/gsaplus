@@ -11,6 +11,11 @@ return [
         'name'  => env('MAIL_ADMIN_NAME', 'Administrator')
     ],
 
+    'team' => [
+        'address' => env('MAIL_TEAM_ADDRESS', 'team@localhost.com'),
+        'name' => env('MAIL_TEAM_NAME', 'Team')
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Mail Driver
