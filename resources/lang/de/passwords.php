@@ -17,6 +17,6 @@ return [
     'reset'    => 'Das Passwort wurde zurückgesetzt!',
     'sent'     => 'Sofern die eingegebene Adresse bei uns registriert ist erhalten Sie in Kürze eine E-Mail. Bitte folgen Sie dem darin enthaltenen Link um Ihr Passwort zurückzusetzen.',
     'token'    => 'Der Passwort-Wiederherstellungs-Schlüssel ist ungültig oder abgelaufen.',
-    'user'     => 'Sofern die eingegebene Adresse bei uns registriert ist erhalten Sie in Kürze eine E-Mail. Bitte folgen Sie dem darin enthaltenen Link um Ihr Passwort zurückzusetzen.',
+    'user'     => 'Es konnte leider kein Nutzer mit dieser E-Mail Adresse gefunden werden.',
 
 ];

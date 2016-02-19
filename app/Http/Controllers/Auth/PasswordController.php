@@ -51,7 +51,7 @@ class PasswordController extends Controller
         if ($p !== null && !$p->is_random) {
             return $this->sendResetLinkEmail($request);
         } else {
-            return view('gate.passwords.password');
+            return redirect()->back()->with('status', trans('passwords.sent'));
         }
     }
 
