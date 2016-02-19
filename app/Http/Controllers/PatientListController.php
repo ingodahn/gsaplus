@@ -50,74 +50,6 @@ class PatientListController extends Controller
 
 
 	/**
-	 * Liefert Seite mit allen Patienten mit der bisher gew�hlten Sortierung
-	 */
-	public function delete_filter()
-	{
-
-		//page_definition..filter={sort_field:
-		//'UserName', filter_relation: 'contains',
-		//filter_value=''}
-		//this.show(page_definition);
-
-
-	}
-
-	/**
-	 * Holt die page_definition aus der session_info oder setzt eine Default-
-	 * page_definition
-	 * page_definition = session_info.page_definition oder page_definition = Alle
-	 * Patienten sortiert nach UserName
-	 */
-	private function old_page_definition()
-	{
-
-		//var page_definition = new
-		//Page_definition;
-		//if (session_info.page_definition) {
-		// page_definition = session_info.
-		//page_definition;
-		//} else {
-		// page_definitionr= {filter:
-		//{filter_field: "UserName",
-		//filter_relation: 'contains',
-		//filter_value:''}, sort: {sort_field:
-		//'UserName', sort_order: 'ascending'}};
-		//}
-		//return page_definition;
-
-
-	}
-
-	/**
-	 * return table of
-	 *  Find all Patients where page_definition.filter_field is in relation
-	 * page_definition.filter_relation to page_definition.filter_value sorted by
-	 * page_definition.sorted_by
-	 *
-	 * @param page_definition
-	 */
-	private function patients(Page_definition $page_definition)
-	{
-	}
-
-	/**
-	 * Modifiziere den gesetzten Filter und zeige die Seite neu an.
-	 *
-	 * @param filter
-	 */
-	public function set_filter(Filter $filter)
-	{
-
-		//page_definition=this.
-		//old_page_definition();
-		//page_definition.filter=filter;
-		//this.show(page_definition);
-
-
-	}
-
-	/**
 	 * Days wird im System modifiziert und die Seite mit der Patientenliste (der der
 	 * Slots-Teil davon) wird neu aufgebaut
 	 *
@@ -131,85 +63,33 @@ class PatientListController extends Controller
 			'Mittwoch' => $request->input('Mi_slots'),
 			'Donnerstag' => $request->input('Do_slots')
 		];
-		//page_definition=this.
-		//old_page_definition();
+
 		$days=new Days;
 		$days->set_days($Days);
-		//this.show(page_definition;
 		$Days1=$days->get_days();
 		return dd($Days1);
 
 	}
 
-	/**
-	 * sort_field wird ersetzt. Wenn sort_field dabei nicht ge�ndert wird, wird
-	 * sort_order ge�ndert
-	 *
-	 * @param sort_field
-	 */
-	public function set_sort(Sort $sort_field)
-	{
-
-		//page_definition=this.
-		//old_page_definition();
-		//if (page_definition.sort.sort_field ==
-		//sort_field) {
-		// change page_definition.sort.sort_order;
-		//
-		//} else {
-		// page_definition.sort.sort_field =
-		//sort_field;
-		// page_definition.sort.sort_order =
-		//'ascending';
-		//}
-		//this.show(page_definition);
-
-
-	}
 
 	/**
 	 * 'Liefere Seite patient_list'(
 	 * <ul>
 	 * 	<li>'Slots'(Days)</li>
-	 * 	<li>'Filter'(page_definition)</li>
 	 * 	<li>patients(</li>
 	 * </ul>
-	 *  this.patients(page_definition)
-	 * <ul>
-	 * 	<li>page_definition</li>
-	 * </ul>
 	 * )
-	 * Seite setzt Cookie.
-	 * last_url="patient_list/show?'page_definition'=page_definition"
+	 * Tabelle patient_list von datatable
 	 *
-	 * @param page_definition
 	 */
 	 public function show(Request $request) {
-	//	public function show(Page_definition $page_definition = this.old_page_definition) {
 		//Zeige Seite patient_list mit
 		$days=new Days;
 		$Slots = $days->get_days();
 		// Slots von Days,
-		// Filter von page_definition.filter,
-		
-		// $info = [];
-
-		// foreach (Patient::all() as $patient) {
-			// $info[$patient->user->name]['Code'] = $patient->code;
-			// $info[$patient->user->name]['Tagebuchtag'] = $patient->assignment_day;
-			// $info[$patient->user->name]['Änderungen möglich'] = $patient->assignment_day_changes_left;
-
-			// if ($patient->therapist !== null) {
-				// $info[$patient->user->name]['Therapeut'] = $patient->therapist->user->name;
-			// }
-		// }
-		// Patientenliste von this.
-		//patients(page_definition),
-		// session_info.
-		//page_definition=page_definition
+		// Patientenliste von datatable
 		
 		$params['Slots']=$Slots;
-		// return view('therapist.patient_list')->with('Slots', $Slots);
 		return view('therapist.patient_list')->with($params);
 
 
@@ -219,6 +99,15 @@ class PatientListController extends Controller
 	 * Process datatables ajax request.
 	 *
 	 * @return \Illuminate\Http\JsonResponse
+	 * Die folgenden Spalten werden benötigt:
+	 * Auswahl - checkbox für die Auswahl von Massenaktionen (Mail)
+	 * Name (name): Benutzername des Patienten - Link zu Diary/{name}
+	 * Code (code) - Code des Patienten
+	 * Status (status): Status des Patienten P010...P130, idealerweise als Text, evtl nur als Kürzel P.... als Zeichenkette sortierbar nach P... .
+	 * Überfällig (overdue) - Wert der Form "<Anzahl der überfälligen Einträge>/<Aktuelle Wochennr. = Anzahl der bereits gestellten Aufgaben>" Sortierbar nach numerischem Wert dieses bruches
+	 * Zuletzt aktiv (last_activity) - Datum des letzten Zugriffs auf eine Seite des Systems außer der Startseite
+	 * Therapeut (therapist) - Benutzername des Therapeuten oder leer
+	 *
 	 */
 	public function anyData()
 	{
