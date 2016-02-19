@@ -30,7 +30,7 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label for="Code">Persönlicher Code</label>
-            <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+            <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Persönlicher Code" data-content="Die Registrierung ist nur mit einem Code möglich, den Sie im Rahmen des GSA online plus Programms erhalten haben. Bitte wenden Sie sich bei Problemen an unser Team. Nutzen Sie hierzu den Menüpunkt 'Kontakt'.">
               <i class="fa fa-question-circle"></i>
             </a>
 
@@ -64,7 +64,7 @@
             <label>
               <input name="remember" type="checkbox"> Eingeloggt bleiben
             </label>
-            <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">
+            <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Eingeloggt bleiben" data-content="Wenn diese Funktion aktiviert wird, bleiben Sie über einen längeren Zeitraum eingeloggt und gelangen direkt auf Ihre persönliche Seite und sehen dieses Anmeldebildschirm nicht. Sie bleiben so lange eingeloggt, bis Sie sich aktiv ausloggen. Wir raten davon ab, diese Funktion zu aktivieren, wenn wenn Sie sich an einem öffentlichen oder gemeinsam genutzten Gerät einloggen.">
               <i class="fa fa-question-circle"></i>
             </a>
           </div>
