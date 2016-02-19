@@ -125,6 +125,10 @@ class PatientListController extends Controller
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
 			})
+			->edit_column('name', function($row) {
+				$name = $row->name;
+				return '<a href="/Diary/'.$name.'">'.$name.'</a>';
+			})
 			->make(true);
 	}
 
