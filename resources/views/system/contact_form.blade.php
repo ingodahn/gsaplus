@@ -25,7 +25,7 @@
             <textarea name="message" rows="5" class="form-control" placeholder="Sehr geehrter Dr Ogen..."></textarea>
           </div>
           <button type="submit" class="btn btn-primary pull-right">Absenden</button>
-          <button class="btn btn-primary pull-right" style="margin-right: 10px;" href="/Home">Zurück</button>
+          <a class="btn btn-primary pull-right" style="margin-right: 10px;" href="/Home">Zurück</a>
         </form>
 
     </div>
