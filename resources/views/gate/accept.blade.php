@@ -35,7 +35,9 @@
       </label>
     </div>
 
-    <p>Bitte bestätigen Sie alle drei Aussagen und klicken Sie anschließend auf "Weiter".</p>
+    <div class="bs-callout bs-callout-info">
+      <p>Bitte bestätigen Sie alle drei Aussagen und klicken Sie anschließend auf "Weiter".</p>
+    </div>
 
     <div class="pull-right">
       <a class="btn btn-accent disabled" id="commit-next" href="/Accepted">Weiter</a>
