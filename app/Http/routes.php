@@ -30,15 +30,19 @@ Route::get('/AdminUsers','AdminController@admin_users');
 */
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'GateController@enter_system');
-	Route::post('/StartRegistration', 'GateController@start_registration');
-	Route::get('/ResetPassword', 'GateController@reset_password');
+
 	Route::get('/ContactTeam', 'ContactController@contact_team');
 	Route::post('/SendMessage', 'ContactController@send_message');
+
+	Route::get('/ResetPassword', 'GateController@reset_password');
 	Route::post('/MailForPassword', 'GateController@mail_for_password');
-	Route::get('/FromWelcome', 'GateController@from_welcome');
-	Route::get('/Accepted', 'GateController@req_patient_data');
-	Route::post('/SavePatientData', 'GateController@save_patient_data');
-	Route::get('/GetResetCode', 'GateController@get_reset_code');
+
+	// Registration routes...
+	Route::post('/Register', 'GateController@start_registration');
+	Route::get('/registration/welcome', 'GateController@show_welcome');
+	Route::get('/registration/agreement', 'GateController@from_welcome');
+	Route::get('/registration/form', 'GateController@req_patient_data');
+	Route::post('/registration/form', 'GateController@save_patient_data');
 
 	// Authentication routes...
 	Route::get('/Login', 'Auth\AuthController@getLogin');

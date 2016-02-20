@@ -67,9 +67,10 @@ class AuthController extends Controller
         $days = new Days();
 
         if ($days->day_available()) {
-            Session::put('SessionStatus','RegistrationPossible');
+            Session::put('last_reg_page','start');
         }
 
-        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()])->with('alert_messages', Alert::all());
+        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()])
+                ->with('alert_messages', Alert::all());
     }
 }

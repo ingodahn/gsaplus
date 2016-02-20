@@ -38,16 +38,77 @@ use Prologue\Alerts\Facades\Alert;
 class GateController extends Controller
 {
 
-	function __construct()
-	{
-	}
+	// Name -> Schritt (nr.)
+	private $page_string_map;
 
-	function __destruct()
+	// Reihenfolge der Schritte
+	protected static $PAGE_START = 0;
+	protected static $PAGE_WELCOME = 1;
+	protected static $PAGE_ACCEPT = 2;
+	protected static $PAGE_FORM = 3;
+
+	// Der bis dato weiteste Schritt
+	// (wenn man mal bei Schritt 3 war, kann man immer zu den Schritten 1-3 oder zum nächsten Schritt (4) gehen)
+	private $current_page_key = 'last_reg_page';
+	private $current_code_key = 'code';
+
+	public function __construct()
 	{
+		$this->page_string_map = [GateController::$PAGE_START => 'start',
+			GateController::$PAGE_WELCOME => 'welcome',
+			GateController::$PAGE_ACCEPT => 'accept',
+			GateController::$PAGE_FORM => 'form'];
 	}
 
 	/**
-	 * 
+	 * Bestimmt den bisher weitesten Schritt (Session) und prüft, ob der nächste
+	 * Schritt verfügbar ist.
+	 *
+	 * @param $to
+	 * 			der nächste Schritt
+	 * @return bool
+	 * 			ob der nächste Schritt verfügbar ist
+	 */
+	private function is_valid_step_to($to) {
+		$current_page_string = Session::get($this->current_page_key);
+		// $current_page_is_unknown = (!$current_page_string === null || $current_page_string === '' ||
+		//	!in_array($current_page_string, $this->page_string_map));
+
+		$current_page = // $current_page_is_unknown ? null :
+			array_flip($this->page_string_map)[$current_page_string];
+		$code_is_unknown = Session::get($this->current_code_key) === null
+			|| Session::get($this->current_code_key === '');
+
+
+		// code has to be known
+		if (!$code_is_unknown || $current_page === GateController::$PAGE_START) {
+			// the transition to the next or the previous state is valid
+			if ($to <= $current_page + 1) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Ermittelt den weitesten Schritt (max($to_save, << current step >>)) und
+	 * legt diesen in der Session ab.
+	 *
+	 * @param $to_save
+	 * 			der nächste Schritt
+	 */
+	private function save_furthest_step($to_save) {
+		$current_page_string = Session::get($this->current_page_key);
+		$current_page = array_flip($this->page_string_map)[$current_page_string];
+
+		if ($to_save > $current_page) {
+			Session::put($this->current_page_key, $this->page_string_map[$to_save]);
+		}
+	}
+
+	/**
+	 *
 	 * @param Code
 	 */
 	private function code_status($code)
@@ -75,7 +136,7 @@ class GateController extends Controller
 	 * 	<li> Ansonsten wird die Seite Startseite ausgeliefert</li>
 	 * </ol>
 	 */
-	 public function enter_system(Request $request)
+	public function enter_system(Request $request)
 	{
 		if (Auth::check()) {
 			return redirect('/Home');
@@ -89,28 +150,12 @@ class GateController extends Controller
 	 */
 	public function from_welcome()
 	{
-		if ( Session::get('SessionStatus') != 'CodeUnregistered') {
+		if ($this->is_valid_step_to(GateController::$PAGE_ACCEPT)) {
+			$this->save_furthest_step(GateController::$PAGE_ACCEPT);
+			return view('gate.accept');
+		} else {
 			return Redirect::to('/');
 		}
-		Session::put('SessionStatus','Accepted');
-		return view('gate.accept');
-	}
-
-	/**
-	 * 
-	 * @param ResetCode
-	 */
-	public function get_reset_code($resetCode)
-	{
-
-		//if (ResetCode == "BBB-Reset") {
-		//Trace("Zur Profilseite");
-		//sim.ResetCodeCorrect=true;
-		//} else {
-		//dialog.ResetCodeIncorrect.Show=true;;
-		//}
-
-
 	}
 
 	/**
@@ -120,7 +165,7 @@ class GateController extends Controller
 	 * Um die vorhandenen Mailadressen zu schützen wird der Benutzer In jedem Fall
 	 * darüber informiert, dass eine Mail verschickt wurde, auch wenn dies nicht der
 	 * Fall ist, weil die Mail-Adresse nicht registriert war.
-	 * 
+	 *
 	 * @param Mail
 	 */
 	public function mail_for_password($email)
@@ -148,10 +193,10 @@ class GateController extends Controller
 	/**
 	 * Auf dem Server werden die verfügbaren Tage berechnet:
 	 * Days.get_available_days()
-	 * 
+	 *
 	 * Wenn keine Tage verfügbar sind wird zur Startseite zurückgesprungen die dann
 	 * die Information anzeigt, dass eine Registrierung nicht möglich ist.
-	 * 
+	 *
 	 * Mit diesen Informationen wird die Seite zur Erfassung der Patientendaten
 	 * aufgebaut und ausgeliefert.
 	 *
@@ -159,20 +204,24 @@ class GateController extends Controller
 	 */
 	public function req_patient_data()
 	{
-		$days = new Days;
-		if (! $days->day_available()) {
-			return Redirect::to('/');
-		}
-		if ( Session::get('SessionStatus') != 'Accepted') {
-			return Redirect::to('/');
-		}
-		//Setze Auswahlliste  Patientendaten.
-		//Wochentag unter Verwendung von Days.
-		$day_of_week=$days->get_available_days();
-		//Zeige Seite PatientenDaten
-		// return $day_of_week;
-		return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
+		if ($this->is_valid_step_to(GateController::$PAGE_FORM)) {
+			$days = new Days;
+			if (!$days->day_available()) {
+				return Redirect::to('/');
+			}
 
+			//Setze Auswahlliste  Patientendaten.
+			//Wochentag unter Verwendung von Days.
+			$day_of_week = $days->get_available_days();
+			//Zeige Seite PatientenDaten
+			// return $day_of_week;
+
+			$this->save_furthest_step(GateController::$PAGE_FORM);
+
+			return view('gate.patient_data')->with('DayOfWeek', $day_of_week);
+		} else {
+			return Redirect::to('/');
+		}
 	}
 
 	public function reset_password()
@@ -198,7 +247,7 @@ class GateController extends Controller
 	 * Die Anzahl der Slots für den gewählten Tag wird um 1 vermindert:
 	 * Days.decrease_day(gewählter Tag)
 	 * Danach wird auf die Patienten-Homepage weitergeleitet.
-	 * 
+	 *
 	 * @param code
 	 * @param name
 	 * @param password
@@ -206,9 +255,9 @@ class GateController extends Controller
 	 * @param day
 	 */
 	public function save_patient_data(Request $request)
-	// public function save_patient_data($Code, $Name, $Password, $eMail, $Day)
+		// public function save_patient_data($Code, $Name, $Password, $eMail, $Day)
 	{
-		$code = $request->session()->get('Code');
+		$code = $request->session()->get($this->current_code_key);
 		$name = $request->input('name');
 		$password = $request->input('password');
 		$email = $request->input('email');
@@ -264,50 +313,53 @@ class GateController extends Controller
 	 *
 	 * Aufgerufen von: /StartRegistration
 	 */
-	
+
 	public function start_registration(Request $request) {
-		// $this->validate($request, ['Code' => 'required']);
-		// Versuch nach Cookbook:
-		$rules = array('Code' => 'required');
-		$validation = Validator::make(Input::all(), $rules);
+		if ($this->is_valid_step_to(GateController::$PAGE_WELCOME)) {
+			// $this->validate($request, ['Code' => 'required']);
+			// Versuch nach Cookbook:
+			$rules = array('Code' => 'required');
+			$validation = Validator::make(Input::all(), $rules);
 
-		if ($validation->fails()) {
-			// return Redirect::back()->withErrors($validation)->withInput();
-			Alert::warning('Bitte geben Sie den Code ein, den Sie f&uuml;r die Teilnahme an der Studie erhalten haben.')->flash();
-			return Redirect::to('/Login');
-		}
+			if ($validation->fails()) {
+				// return Redirect::back()->withErrors($validation)->withInput();
+				Alert::warning('Bitte geben Sie den Code ein, den Sie f&uuml;r die Teilnahme an der Studie erhalten haben.')->flash();
+				return Redirect::to('/Login');
+			}
 
-		if ( Session::get('SessionStatus') != 'RegistrationPossible') {
-			return Redirect::to('/Login');
-		}
+			// Alternativ: Input::get('Code');
+			$code = $request->input('Code');
 
-		// Alternativ: Input::get('Code');
-	    $code = $request->input('Code');
+			$request->session()->put($this->current_code_key, $code);
 
-		$request->session()->put('Code',$code);
+			if (Patient::where('code', $code)->first() !== null) {
+				//if (code already registered) {
 
-		if (Patient::where('code', $code)->first() !== null) {
-			//if (code already registered) {
+				Alert::warning('Dieser Code wurde bereits registriert, Sie k&ouml;nen sich anmelden.')->flash();
+				return Redirect::to('/Login');
 
-			Alert::warning('Dieser Code wurde bereits registriert, Sie k&ouml;nen sich anmelden.')->flash();
-			return Redirect::to('/Login');
+				// Result: CodeStatus="registered";
+			} else if (Code::where('value', $code)->first() !== null) {
+				//(Code not yet registered) {
 
-			// Result: CodeStatus="registered";
-		} else if (Code::where('value', $code)->first() !== null) {
-			//(Code not yet registered) {
+				return Redirect::to('/registration/welcome');
+				// Result: CodeStatus="unregistered";
+			} else {
+				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
+				return Redirect::to('/Login');
 
-			$request->session()->put('SessionStatus', 'CodeUnregistered');
-			return view('gate.welcome');
-
-			// Result: CodeStatus="unregistered";
+				// Result: CodeStatus="incorrect";
+			}
 		} else {
-			Alert::warning('Der einegegebene Code '.$code.' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
 			return Redirect::to('/Login');
-
-			// Result: CodeStatus="incorrect";
 		}
-
 	}
-	
+
+	public function show_welcome() {
+		$this->save_furthest_step(GateController::$PAGE_WELCOME);
+
+		return view('gate.welcome');
+	}
+
 }
 ?>
