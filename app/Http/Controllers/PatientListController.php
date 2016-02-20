@@ -103,9 +103,11 @@ class PatientListController extends Controller
 	 * Auswahl - checkbox für die Auswahl von Massenaktionen (Mail)
 	 * Name (name): Benutzername des Patienten - Link zu Diary/{name}
 	 * Code (code) - Code des Patienten
+	 * Woche (patientWeek) - Woche der Intervention (0...13)
+	 * Tagebuchtag (assignment_day) - gewählter Schreibtag
 	 * Status (status): Status des Patienten P010...P130, idealerweise als Text, evtl nur als Kürzel P.... als Zeichenkette sortierbar nach P... .
 	 * Überfällig (overdue) - Wert der Form "<Anzahl der überfälligen Einträge>/<Aktuelle Wochennr. = Anzahl der bereits gestellten Aufgaben>" Sortierbar nach numerischem Wert dieses bruches
-	 * Zuletzt aktiv (last_activity) - Datum des letzten Zugriffs auf eine Seite des Systems außer der Startseite
+	 * Zuletzt aktiv (lastActivity) - Datum des letzten Zugriffs auf eine Seite des Systems außer der Startseite
 	 * Therapeut (therapist) - Benutzername des Therapeuten oder leer
 	 *
 	 */
@@ -157,7 +159,7 @@ class PatientListController extends Controller
 			})
 			-> addColumn('therapist', function($row) {
 				$therapist=$row->therapist->name;
-				if ($therapist) {
+				if ($therapist !== null) {
 					return $therapist;
 				} else {
 					return "";
