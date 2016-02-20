@@ -23,10 +23,13 @@
         ajax: '{!! route('datatables.data') !!}',
         columns: [
           { data: 'name', name: 'name' },
-          { data: 'email', name: 'email' },
           { data: 'code', name: 'code' },
+		  { data: 'patientWeek', name: 'patientWeek' },
           { data: 'assignment_day', name: 'assignment_day' },
-          { data: 'overdue', name: 'overdue', orderable: false, searchable: false },
+		  { data: 'patientStatus', name: 'patientStatus' },
+          { data: 'overdue', name: 'overdue', orderable: true, searchable: false },
+		  { data: 'lastActivity', name: 'lastActivity' },
+		  { data: 'therapist', name: 'therapist' }
         ]
       });
     });
@@ -89,10 +92,13 @@
         <thead>
         <tr>
           <th>Name</th>
-          <th>E-Mail</th>
           <th>Code</th>
-          <th>Tagebuchtag</th>
+		  <th>Woche</th>
+		  <th>Tagebuchtag</th>
+          <th>Status</th>
           <th>Überfällig</th>
+		  <th>Zuletzt aktiv</th>
+		  <th>Therapeut</th>
         </tr>
         </thead>
       </table>
