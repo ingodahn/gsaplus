@@ -67,6 +67,18 @@ class PatientController extends Controller
 		$profile_user_model=[];
 		$profile_user_model['Name']=$name;
 		$profile_user_model['Role']=$request->user()->type;
+		$Patient=[];
+		$patient['assignment_da']='Mittwoch';
+		$patient['assignmentDayChagesLeft']=0;
+		$patient['code']='XXX';
+		$patient['dateFromClinics']='1.1.2000';
+		$patient['lastActivity']='1.1.2016';
+		$patient['notes']='Notizen der Therapeuten';
+		$patient['patientWeek']=13;
+		$patient['personalInformation']='Informationen vom Patienten';
+		$patient['status']='P130';
+		$patient['therapist']='Kein Therapeut';
+		$profile_user_model['Patient']=$patient;
 		// $profile_user_model['Patient']=Patient($name);
 		return view('patient.patient_profile')-> with($profile_user_model);
 	}
