@@ -1,24 +1,15 @@
 <?php
-require_once ('DayOfWeek.php');
-require_once ('PatientListEntry.php');
-require_once ('Patient.php');
-
 namespace App\Models;
 
-
-
-use App\Models;
-use Therapeuten\DataModel;
-use System;
 /**
  * @author dahn
- * @version 1.0
+ * @version 1.1
  * @created 21-Feb-2016 10:29:31
  */
-class PatientInfo extends PatientListEntry, Patient
+class PatientInfo
 {
 
-	function __construct()
+	function __construct($name)
 	{
 	}
 
@@ -65,6 +56,7 @@ class PatientInfo extends PatientListEntry, Patient
 	 */
 	public function name()
 	{
+		return $name;
 	}
 
 	/**
