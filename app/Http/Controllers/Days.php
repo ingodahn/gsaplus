@@ -8,9 +8,8 @@ use App\Helper;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * Es wird persistent genau ein Objekt dieser Klasse benötigt. In den Attributen
- * Sonntag...Donnerstag wird gespeichert, wieviele Patienten sich für diesen Tag
- * neu registrieren dürfen.
+ * In den Attributen Sonntag...Donnerstag wird gespeichert, wieviele Patienten
+ * sich für diesen Tag neu registrieren dürfen.
  *
  * @author dahn
  * @version 1.0
@@ -49,6 +48,7 @@ class Days
 		$entry->free_time_slots--;
 		$entry->save();
 
+		// TODO: einkommentieren
 		/* if ($entry->free_time_slots <= 0) {
 			$this->send_mail($entry);
 		} */
