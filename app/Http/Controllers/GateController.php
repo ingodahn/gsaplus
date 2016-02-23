@@ -290,7 +290,10 @@ class GateController extends Controller
 				return Redirect::to('/Login');
 			} else if ($this->code_status($code) === $this->CODE_UNREGISTERED) {
 				// code isn't yet registered
-				return Redirect::to('/registration/welcome');
+				/* TODO: better URLs
+				return Redirect::to('/registration/welcome'); */
+				$this->save_furthest_step(GateController::$PAGE_WELCOME);
+				return view('gate.welcome');
 			} else {
 				// code is incorrect
 				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
@@ -302,12 +305,12 @@ class GateController extends Controller
 		}
 	}
 
+	// TODO: better URLs - use method - see routes ('/registration/welcome') */
 	/**
 	 * Zeigt die Willkommensseite. Mit Hilfe dieser Methode kann die
 	 * Seite direkt aufgerufen werden.
 	 */
 	public function show_welcome() {
-		$this->save_furthest_step(GateController::$PAGE_WELCOME);
 		return view('gate.welcome');
 	}
 

@@ -26,7 +26,10 @@
     <p>Im folgenden Anmeldeverfahren werden Sie nun gebeten, Ihre Zusage zur Teilnahme zu bestätigen, sich mit einem anonymen Benutzernamen und Passwort zu registrieren und einen persönlichen Schreibtag festzulegen.</p>
 
     <div class="pull-right">
-      <a class="btn btn-accent" href="/registration/agreement">Weiter</a>
+      <a class="btn btn-accent" href="/FromWelcome">Weiter</a>
+      <!-- TODO: better URLs
+        <a ... href="/registration/agreement">
+      -->
     </div>
   </div>
 @endsection

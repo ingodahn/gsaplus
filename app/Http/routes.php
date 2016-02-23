@@ -38,11 +38,18 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/MailForPassword', 'GateController@mail_for_password');
 
 	// Registration routes...
-	Route::post('/Register', 'GateController@start_registration');
+	/* urls: as should be
+	Route::post('/register', 'GateController@start_registration');
 	Route::get('/registration/welcome', 'GateController@show_welcome');
 	Route::get('/registration/agreement', 'GateController@from_welcome');
 	Route::get('/registration/form', 'GateController@req_patient_data');
-	Route::post('/registration/form', 'GateController@save_patient_data');
+	Route::post('/registration/form', 'GateController@save_patient_data'); */
+
+	/* urls: conform to model (...) */
+	Route::post('/StartRegistration', 'GateController@start_registration');
+	Route::get('/FromWelcome', 'GateController@from_welcome');
+	Route::get('/Accepted', 'GateController@req_patient_data');
+	Route::post('/SavePatientData', 'GateController@save_patient_data');
 
 	// Authentication routes...
 	Route::get('/Login', 'Auth\AuthController@getLogin');

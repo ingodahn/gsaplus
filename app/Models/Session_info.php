@@ -1,5 +1,4 @@
 <?php
-require_once ('Page_definition.php');
 
 namespace App\Models;
 
@@ -15,7 +14,7 @@ class Session_info
 {
 
 	/**
-	 * Speichert aktuelle Sortierung und Filterung der Patientenliste für die aktuelle
+	 * Speichert aktuelle Sortierung und Filterung der Patientenliste fï¿½r die aktuelle
 	 * Sitzung
 	 */
 	public $page_definition;
