@@ -79,7 +79,7 @@ class GateController extends Controller
 
 		// code has to be known
 		if (!$code_is_unknown || $current_page === GateController::$PAGE_START) {
-			// the transition to the next or the previous state is valid
+			// the transition to the next or a previous state is valid
 			if ($to <= $current_page + 1) {
 				return true;
 			}
@@ -173,7 +173,7 @@ class GateController extends Controller
 		$days = new Days;
 
 		if ($this->is_valid_step_to(GateController::$PAGE_FORM)
-				&& $days->day_available() === true) {
+			&& $days->day_available() === true) {
 			$available_days = $days->get_available_days();
 
 			$this->save_furthest_step(GateController::$PAGE_FORM);
@@ -220,8 +220,8 @@ class GateController extends Controller
 		//if (Name or eMail already in use) {
 		if ($nameExists || $emailExists) {
 			$message = "Ihre Registrierung ist leider fehlgeschlagen.".
-						($nameExists ? "Bitte w&auml;hlen Sie einen anderen Benutzernamen." :
-						"Bitte überprüfen Sie die eingegebene E-Mail-Adresse.");
+				($nameExists ? "Bitte w&auml;hlen Sie einen anderen Benutzernamen." :
+					"Bitte überprüfen Sie die eingegebene E-Mail-Adresse.");
 
 			$days = new Days;
 			$day_of_week=$days->get_available_days();
@@ -305,7 +305,7 @@ class GateController extends Controller
 		}
 	}
 
-	// TODO: better URLs - use method - see routes ('/registration/welcome') */
+	// TODO: better URLs - use method - see routes ('/registration/welcome')
 	/**
 	 * Zeigt die Willkommensseite. Mit Hilfe dieser Methode kann die
 	 * Seite direkt aufgerufen werden.

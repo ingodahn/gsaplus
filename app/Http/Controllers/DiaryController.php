@@ -51,11 +51,11 @@ class DiaryController extends Controller
 	 * </ul>
 	 * Ansonsten bleibt der Status unverändert
 	 * Es wird keine Seite an den Client zurückgegeben.
-	 * 
+	 *
 	 * @param Content
 	 * @param Id
 	 */
-	public function auto_save($Content, int $Id)
+	public function auto_save($Content, $Id)
 	{
 	}
 
@@ -76,21 +76,21 @@ class DiaryController extends Controller
 
 	/**
 	 * Zeige den vorhergehenden Eintrag
-	 * 
+	 *
 	 * @param week
 	 * @param patient
 	 */
-	public function diary_back(int $week, $patient)
+	public function diary_back($week, $patient)
 	{
 	}
 
 	/**
 	 * Zeige den folgenden Eintrag
-	 * 
+	 *
 	 * @param week
 	 * @param patient
 	 */
-	public function diary_forward(int $week, $patient)
+	public function diary_forward($week, $patient)
 	{
 	}
 
@@ -102,10 +102,10 @@ class DiaryController extends Controller
 	 * oder nicht:
 	 * P030, P040, P080, P090: Editierbar
 	 * Sonst nicht editierbar
-	 * 
+	 *
 	 * @param WeekNr
 	 */
-	public function entry(int $WeekNr)
+	public function entry($WeekNr)
 	{
 	}
 
@@ -141,10 +141,10 @@ class DiaryController extends Controller
 	 * 	<li>Aktuelle Folgeaufgabe versäumt: Aufgabe nicht editierbar und Hinweis auf
 	 * Versäumnis</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param entry_id
 	 */
-	public function get_response(int $entry_id)
+	public function get_response($entry_id)
 	{
 
 		//if (not actual assignment) {
@@ -164,7 +164,7 @@ class DiaryController extends Controller
 	/**
 	 * Speichere das assignment_text-Argument mit Titel assignment_ title als neue
 	 * Schreibaufgabe ab
-	 * 
+	 *
 	 * @param assignment_text
 	 * @param assignment_title
 	 */
@@ -179,27 +179,27 @@ class DiaryController extends Controller
 	 * 	<li>von P030 oder P040 auf P050 bzw.</li>
 	 * 	<li>von P080 oder P090 auf P100 abgeändert.</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param Text
 	 * @param Id
 	 */
-	public function save_response($Text, int $Id)
+	public function save_response($Text, $Id)
 	{
 	}
 
 	/**
 	 * Wähle die Afgabe mit dem angegebenen Titel aus und trage den Aufgaben-text in
 	 * entry.problem ein
-	 * 
+	 *
 	 * @param assignment_id
 	 */
-	public function select_assignment(int $assignment_id)
+	public function select_assignment($assignment_id)
 	{
 	}
 
 	/**
 	 * Zeigt das Tagebuch des Patienten mit dem Benutzernamen name
-	 * 
+	 *
 	 * @param name
 	 */
 	public function show(Request $request,$name=NULL)
@@ -209,15 +209,16 @@ class DiaryController extends Controller
 			$name = Auth::user()->name;
 		}
 		/**
-		* If the user is a patient, he can only see his own diary
-		*/
-		if ($request->user()->type === 'patient' && Auth::user()->name !== $name) {
+		 * If the user is a patient, he can only see his own diary
+		 *
+		 * TODO: remove null check
+		 */
+		if ($name && $request->user() !== null
+			&& $request->user()->type === 'patient' && Auth::user()->name !== $name) {
 			return Redirect::to('/');
 		}
 		// return $name;
 		return view('patient.diary')->with('name',$name);
-
-
 	}
 
 }

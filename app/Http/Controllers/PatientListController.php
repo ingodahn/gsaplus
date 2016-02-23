@@ -82,13 +82,13 @@ class PatientListController extends Controller
 	 * Tabelle patient_list von datatable
 	 *
 	 */
-	 public function show(Request $request) {
+	public function show(Request $request) {
 		//Zeige Seite patient_list mit
 		$days=new Days;
 		$Slots = $days->get_days();
 		// Slots von Days,
 		// Patientenliste von datatable
-		
+
 		$params['Slots']=$Slots;
 		return view('therapist.patient_list')->with($params);
 
@@ -142,7 +142,7 @@ class PatientListController extends Controller
 				);
 
 				if ($patient->assignments()->get()->last() !== null
-						&& $patient->assignments()->get()->last()->state === 0) {
+					&& $patient->assignments()->get()->last()->state === 0) {
 					return $status_info["P070"];
 				} else {
 					return $status_info["P050"];
@@ -158,9 +158,8 @@ class PatientListController extends Controller
 				return "none";
 			})
 			-> addColumn('therapist', function($row) {
-				$therapist=$row->therapist->name;
-				if ($therapist !== null) {
-					return $therapist;
+				if ($row->therapist !== null) {
+					return $row->therapist->name;
 				} else {
 					return "";
 				}

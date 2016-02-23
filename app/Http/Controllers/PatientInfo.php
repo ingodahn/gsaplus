@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Patient;
+
 /**
  * @author dahn
  * @version 1.1
@@ -9,18 +11,16 @@ namespace App\Models;
 class PatientInfo
 {
 
-	function __construct($name)
+	private $patient;
+
+	function __construct(Patient $patient)
 	{
+		$this->patient = $patient;
 	}
-
-	function __destruct()
-	{
-	}
-
-
 
 	public function assignment_day()
 	{
+		return $this->patient->assignment_day;
 	}
 
 	/**
@@ -28,6 +28,7 @@ class PatientInfo
 	 */
 	public function assignmentDayChangesLeft()
 	{
+		return $this->patient->assignment_day_changes_left;
 	}
 
 	/**
@@ -35,6 +36,7 @@ class PatientInfo
 	 */
 	public function code()
 	{
+		return $this->patient->code;
 	}
 
 	/**
@@ -42,6 +44,7 @@ class PatientInfo
 	 */
 	public function dateFromClinics()
 	{
+
 	}
 
 	/**
@@ -56,7 +59,7 @@ class PatientInfo
 	 */
 	public function name()
 	{
-		return $name;
+		return $this->patient->name;
 	}
 
 	/**
@@ -92,6 +95,7 @@ class PatientInfo
 	 */
 	public function status()
 	{
+		// Status berechnen
 	}
 
 	/**
@@ -99,6 +103,7 @@ class PatientInfo
 	 */
 	public function therapist()
 	{
+		return $this->patient->therapist->name;
 	}
 
 }
