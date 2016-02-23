@@ -14,7 +14,7 @@
 
   <script>
     $(function() {
-      $('#users-table').DataTable({
+      $('#PatientList').DataTable({
         "language": {
           "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/German.json"
         },
@@ -85,7 +85,7 @@
     <h2>Patientenliste</h2>
 
     <div class="container" style="padding-top: 20px;">
-      <table class="table table-bordered" id="users-table">
+      <table class="table table-bordered" id="PatientList">
         <thead>
         <tr>
           <th>Name</th>
