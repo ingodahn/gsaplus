@@ -103,9 +103,11 @@ class PatientListController extends Controller
 	 * Auswahl - checkbox für die Auswahl von Massenaktionen (Mail)
 	 * Name (name): Benutzername des Patienten - Link zu Diary/{name}
 	 * Code (code) - Code des Patienten
+	 * Woche (patientWeek) - Woche der Intervention (0...13)
+	 * Tagebuchtag (assignment_day) - gewählter Schreibtag
 	 * Status (status): Status des Patienten P010...P130, idealerweise als Text, evtl nur als Kürzel P.... als Zeichenkette sortierbar nach P... .
 	 * Überfällig (overdue) - Wert der Form "<Anzahl der überfälligen Einträge>/<Aktuelle Wochennr. = Anzahl der bereits gestellten Aufgaben>" Sortierbar nach numerischem Wert dieses bruches
-	 * Zuletzt aktiv (last_activity) - Datum des letzten Zugriffs auf eine Seite des Systems außer der Startseite
+	 * Zuletzt aktiv (lastActivity) - Datum des letzten Zugriffs auf eine Seite des Systems außer der Startseite
 	 * Therapeut (therapist) - Benutzername des Therapeuten oder leer
 	 *
 	 */
@@ -114,16 +116,57 @@ class PatientListController extends Controller
 		$days_map = Helper::generate_day_number_map();
 
 		return Datatables::of(Patient::select('*'))
-			->addColumn('overdue', function ($patient) {
+			->removeColumn('email')
+			->addColumn('patientStatus', function ($patient) {
+				$status_info=array(
+					"P010"=>"P010: Nicht registriert",
+					"P020"=>"P020: Registriert",
+					"P025"=>"P025: Entlassungsdatum erfasst",
+					"P030"=>"P030: Erste Aufgabe erhalten",
+					"P040"=>"P040: Erste Aufgabe bearbeitet",
+					"P045"=>"P045: Erste Aufgabe gemahnt",
+					"P050"=>"P050: Erste Aufgabe abgeschickt",
+					"P060"=>"P060: Erste Aufgabe kommentiert",
+					"P065"=>"P065: Erste Aufgabe Kommentar bewertet",
+					"P070"=>"P070: Erste Aufgabe versäumt",
+					"P075"=>"P075: Aktuelle Folgeaufgabe definiert",
+					"P080"=>"P080: Aktuelle Folgeaufgabe erhalten",
+					"P090"=>"P090: Aktuelle Folgeaufgabe bearbeitet",
+					"P095"=>"P095: Aktuelle Folgeaufgabe gemahnt",
+					"P100"=>"P100: Aktuelle Folgeaufgabe abgeschickt",
+					"P110"=>"P110: Aktuelle Folgeaufgabe kommentiert",
+					"P115"=>"P115: Aktuelle Folgeaufgabe Kommentar bewertet",
+					"P120"=>"P120: Aktuelle Folgeaufgabe versäumt",
+					"P130"=>"P130: Mitarbeit beendet",
+					"P140"=>"P140: Interventionszeit beendet"
+				);
+
 				if ($patient->assignments()->get()->last() !== null
 						&& $patient->assignments()->get()->last()->state === 0) {
-					return "ja";
+					return $status_info["P070"];
 				} else {
-					return "nein";
+					return $status_info["P050"];
 				}
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
+			})
+			-> addColumn('patientWeek', function($row) {
+				return "0";
+			})
+			-> addColumn('lastActivity', function($row) {
+				return "none";
+			})
+			-> addColumn('therapist', function($row) {
+				$therapist=$row->therapist->name;
+				if ($therapist !== null) {
+					return $therapist;
+				} else {
+					return "";
+				}
+			})
+			-> addColumn('overdue', function($row) {
+				return "0%";
 			})
 			->edit_column('name', function($row) {
 				$name = $row->name;
