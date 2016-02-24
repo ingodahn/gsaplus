@@ -45,9 +45,11 @@ class DatabaseSeeder extends Seeder
 
         $patients = factory(App\Patient::class, 20)
             ->make()
-            ->each(function (App\Patient $p) {
+            ->each(function (App\Patient $p) use ($faker) {
                 $p->timestamps = false;
                 $p->is_random = true;
+                $p->personal_information = $faker->realText();
+                $p->notes_of_therapist = $faker->realText();
                 $p->save();
             });;
 
@@ -118,9 +120,16 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
+            // date of departure has to be between the registration date und the first assignment
+            $patient->date_from_clinics =
+                $faker->dateTimeBetween($patient->registration_date,
+                    $patient->assignments->sortBy('assigned_on')->first()->assigned_on);
             // the login date needs to be coherent
             // -> assume that the patient has viewed the last assignment
-            $patient->last_login = $faker->dateTimeBetween($patient->assignments()->get()->last()->assigned_on, 'now');
+            $patient->last_login = $faker->dateTimeBetween(
+                $patient->assignments()->get()->sortBy('assigned_on')->last()->assigned_on, 'now');
+            // assume user didn't logout
+            $patient->last_activity = $faker->dateTimeBetween($patient->last_login, 'now');
             // save the registration date, login date
             $patient->save();
         }
