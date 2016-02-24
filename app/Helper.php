@@ -29,17 +29,7 @@ class Helper {
      */
     public static function generate_day_number_map()
     {
-        $date = new Date('next Sunday');
-
-        $days = array();
-
-        // valid days: Sunday ... Thursday
-        foreach (range(0,4) as $i) {
-            $days[$i] = $date->format('l');
-            $date = $date->add('1 day');
-        }
-
-        return $days;
+        return array_flip(Helper::generate_day_name_map());
     }
 
 }
