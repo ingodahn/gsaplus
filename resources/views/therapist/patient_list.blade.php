@@ -24,12 +24,12 @@
         columns: [
           { data: 'name', name: 'name' },
           { data: 'code', name: 'code' },
-		  { data: 'patientWeek', name: 'patientWeek' },
+		  { data: 'patient_week', name: 'patientWeek', orderable: false, searchable: false },
           { data: 'assignment_day', name: 'assignment_day' },
-		  { data: 'patientStatus', name: 'patientStatus' },
-          { data: 'overdue', name: 'overdue', orderable: true, searchable: false },
-		  { data: 'lastActivity', name: 'lastActivity' },
-		  { data: 'therapist', name: 'therapist' }
+		  { data: 'patient_status', name: 'patientStatus', orderable: false, searchable: false },
+          { data: 'overdue', name: 'overdue', orderable: false, searchable: false },
+		  { data: 'last_activity', name: 'lastActivity', orderable: false, searchable: false },
+		  { data: 'therapist', name: 'therapist', orderable: false, searchable: false }
         ]
       });
     });
