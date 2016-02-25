@@ -25,7 +25,7 @@
           { data: 'selection', name: 'selection'},
           { data: 'name', name: 'name' },
           { data: 'code', name: 'code' },
-		  { data: 'patient_week', name: 'patientWeek', orderable: false, searchable: false },
+		  { data: 'patientWeek', name: 'patientWeek', orderable: false, searchable: false },
           { data: 'assignment_day', name: 'assignment_day' },
 		  { data: 'patient_status', name: 'patientStatus', orderable: false, searchable: false },
           { data: 'overdue', name: 'overdue', orderable: false, searchable: false },
@@ -87,6 +87,7 @@
 
     <hr/>
     <h2>Patientenliste</h2>
+    <h3>!! Bitte noch nicht suchen oder sortieren !!</h3>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
       <div class="container" style="padding-top: 20px;">

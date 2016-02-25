@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
+
 use Session;
 
 use App\Http\Requests;
@@ -141,7 +142,8 @@ class PatientListController extends Controller
 				return '<input type="checkbox" name="list_of_names[]" value="'.$name.'"></input>';
 			})
 			->addColumn('overdue', function($row) {
-				return "0%";
+				$patient_info = new PatientInfo($row);
+				return $patient_info->overdue();
 			})
 			->edit_column('name', function($row) {
 				$name = $row->name;

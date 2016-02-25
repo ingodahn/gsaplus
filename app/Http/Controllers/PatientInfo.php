@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Patient;
+use Carbon\Carbon;
 
 /**
  * @author dahn
@@ -146,20 +147,22 @@ class PatientInfo
 	 */
 	public function patientWeek()
 	{
-        // -> Ausgangsdatum: Entlassungsdatum
+        /*// -> Ausgangsdatum: Entlassungsdatum
         // -> nächster Schreibtag: Anfang der ersten Woche
         // -> dann die Differenz bis heute berechnen (nat. < 12 Wochen, ansonsten
 		//    ist die Intervention bereits vorbei)
         // -> es muss noch kein assignment existieren, also auch nicht mit arbeiten
         $date_of_departure = $this->patient->date_from_clinics;
 
-        $first_assignment_day = Carbon::parse($date_of_departure->toDateTimeString());
+        // $first_assignment_day = Carbon::parse($date_of_departure->toDateTimeString());
+		$first_assignment_day =  $date_of_departure->copy();
         $first_assignment_day->startOfWeek();
         $first_assignment_day->addDays($this->patient->assignment_day);
 
         $weeks_passed = Carbon::now()->diffInWeeks($first_assignment_day);
 
-		return $weeks_passed;
+		return $weeks_passed;*/
+		return 0;
 	}
 
 	/**
