@@ -48,9 +48,13 @@ class ContactController extends Controller
 	 * 
 	 * @param list_of_patients
 	 */
-	public function mail_editor($list_of_patients)
+	public function mail_editor(Request $request)
 	{
-		return view('system.mail_editor');
+		// return dd($request);
+		$list_of_patients = $request->input('list_of_names');
+		$listS=implode(', ',$list_of_patients);
+		// return dd($list_of_patients);
+		return view('system.mail_editor')->with('ListOfPatients',$listS);
 	}
 
 	/**
@@ -60,8 +64,18 @@ class ContactController extends Controller
 	 * @param mail_subject
 	 * @param mail_body
 	 */
-	public function message_to_patients($list_of_names, $mail_subject, $mail_body)
+	public function message_to_patients(Request $request)
 	{
+		$list_of_names=$request->input('list_of_names');
+		$mail_subject=$request->input('mail_subject');
+		$mail_body=$request->input('mail_body');
+		$patient_names=explode(', ',$list_of_names);
+		foreach ($patient_names as $name){
+			// Send mail
+		}
+		// Alert not shown
+		Alert::info('Die Mails wurden verschickt.')->flash();
+		return Redirect::to('/Home');
 	}
 	
 	/**

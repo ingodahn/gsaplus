@@ -18,6 +18,7 @@ use App\Helper;
 use App\Patient;
 
 use App\Http\Controllers;
+
 use Prologue\Alerts\Facades\Alert;
 
 
@@ -152,17 +153,20 @@ class PatientListController extends Controller
 				return $days_map[$row->assignment_day];
 			})
 			-> addColumn('patientWeek', function($row) {
-				return "0";
+				$patient_info = new PatientInfo($row);
+				return $patient_info->patientWeek();
 			})
 			-> addColumn('lastActivity', function($row) {
-				return "none";
+				$patient_info = new PatientInfo($row);
+				return $patient_info->lastActivity();
 			})
 			-> addColumn('therapist', function($row) {
-				if ($row->therapist !== null) {
-					return $row->therapist->name;
-				} else {
-					return "";
-				}
+				$patient_info = new PatientInfo($row);
+				return $patient_info->therapist();
+			})
+			-> addColumn('selection', function($row){
+				$name=$row->name;
+				return '<input type="checkbox" name="list_of_names[]" value="'.$name.'"></input>';
 			})
 			-> addColumn('overdue', function($row) {
 				return "0%";

@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace App\Http\Controllers;
 
 use App\Patient;
 
@@ -52,6 +52,7 @@ class PatientInfo
 	 */
 	public function lastActivity()
 	{
+			return 'never';
 	}
 
 	/**
@@ -81,6 +82,7 @@ class PatientInfo
 	 */
 	public function patientWeek()
 	{
+		return 1;
 	}
 
 	/**
@@ -103,6 +105,7 @@ class PatientInfo
 	 */
 	public function therapist()
 	{
+
 		return $this->patient->therapist->name;
 	}
 

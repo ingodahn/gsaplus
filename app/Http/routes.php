@@ -65,9 +65,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 	Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-	// Experimental
+	// Experimental for M2
 	Route::get('/Diary/{name?}','DiaryController@show');
 	Route::get('/Profile/{name?}','PatientController@profile');
+	Route::post('/SendMail','ContactController@message_to_patients');
+	Route::post('/MassAction/mail','ContactController@mail_editor');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {

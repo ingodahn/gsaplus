@@ -22,6 +22,7 @@
         serverSide: true,
         ajax: '{!! route('datatables.data') !!}',
         columns: [
+          { data: 'selection', name: 'selection'},
           { data: 'name', name: 'name' },
           { data: 'code', name: 'code' },
 		  { data: 'patientWeek', name: 'patientWeek', orderable: false, searchable: false },
@@ -86,23 +87,27 @@
 
     <hr/>
     <h2>Patientenliste</h2>
-
-    <div class="container" style="padding-top: 20px;">
-      <table class="table table-bordered" id="PatientList">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Code</th>
-		  <th>Woche</th>
-		  <th>Tagebuchtag</th>
-          <th>Status</th>
-          <th>Überfällig</th>
-		  <th>Zuletzt aktiv</th>
-		  <th>Therapeut</th>
-        </tr>
-        </thead>
-      </table>
-    </div>
+    <form action="/MassAction/mail" method="post">
+      {{ csrf_field() }}
+      <div class="container" style="padding-top: 20px;">
+        <table class="table table-bordered" id="PatientList">
+          <thead>
+          <tr>
+            <th>Auswahl</th>
+            <th>Name</th>
+            <th>Code</th>
+            <th>Woche</th>
+            <th>Tagebuchtag</th>
+            <th>Status</th>
+            <th>Überfällig</th>
+            <th>Zuletzt aktiv</th>
+            <th>Therapeut</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <button type="submit" class="btn btn-primary pull-right">Mail an ausgew&auml;hlte Patienten</button>
+    </form>
 
   </div>
 @endsection
