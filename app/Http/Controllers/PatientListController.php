@@ -118,36 +118,8 @@ class PatientListController extends Controller
 
 		return Datatables::of(Patient::select('*'))
 			->removeColumn('email')
-			->addColumn('patientStatus', function ($patient) {
-				$status_info=array(
-					"P010"=>"P010: Nicht registriert",
-					"P020"=>"P020: Registriert",
-					"P025"=>"P025: Entlassungsdatum erfasst",
-					"P030"=>"P030: Erste Aufgabe erhalten",
-					"P040"=>"P040: Erste Aufgabe bearbeitet",
-					"P045"=>"P045: Erste Aufgabe gemahnt",
-					"P050"=>"P050: Erste Aufgabe abgeschickt",
-					"P060"=>"P060: Erste Aufgabe kommentiert",
-					"P065"=>"P065: Erste Aufgabe Kommentar bewertet",
-					"P070"=>"P070: Erste Aufgabe versäumt",
-					"P075"=>"P075: Aktuelle Folgeaufgabe definiert",
-					"P080"=>"P080: Aktuelle Folgeaufgabe erhalten",
-					"P090"=>"P090: Aktuelle Folgeaufgabe bearbeitet",
-					"P095"=>"P095: Aktuelle Folgeaufgabe gemahnt",
-					"P100"=>"P100: Aktuelle Folgeaufgabe abgeschickt",
-					"P110"=>"P110: Aktuelle Folgeaufgabe kommentiert",
-					"P115"=>"P115: Aktuelle Folgeaufgabe Kommentar bewertet",
-					"P120"=>"P120: Aktuelle Folgeaufgabe versäumt",
-					"P130"=>"P130: Mitarbeit beendet",
-					"P140"=>"P140: Interventionszeit beendet"
-				);
-
-				if ($patient->assignments()->get()->last() !== null
-					&& $patient->assignments()->get()->last()->state === 0) {
-					return $status_info["P070"];
-				} else {
-					return $status_info["P050"];
-				}
+			->addColumn('patient_status', function ($patient) {
+				return "TODO";
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
@@ -168,7 +140,7 @@ class PatientListController extends Controller
 				$name=$row->name;
 				return '<input type="checkbox" name="list_of_names[]" value="'.$name.'"></input>';
 			})
-			-> addColumn('overdue', function($row) {
+			->addColumn('overdue', function($row) {
 				return "0%";
 			})
 			->edit_column('name', function($row) {

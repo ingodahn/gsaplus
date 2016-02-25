@@ -24,6 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('code');
             $table->tinyInteger('assignment_day');
             $table->tinyInteger('assignment_day_changes_left');
+            $table->dateTime('date_from_clinics');
+            $table->dateTime('last_activity');
+            $table->text('personal_information');
+            $table->text('notes_of_therapist');
 
             // patient status should be determined - not cached
             // $table->enum('patient_status', ['P010', 'P020', 'P025', 'P030', 'P040', 'P045', 'P050', 'P060',
