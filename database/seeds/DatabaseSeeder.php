@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($patients as $patient) {
             // every patient has a random number of assignments
-            $assignment_count = rand(1,10);
+            $assignment_count = rand(2,10);
             // choose random therapist
             $therapist = App\Therapist::all()->random();
             $therapist->patients()->save($patient);
@@ -65,16 +65,20 @@ class DatabaseSeeder extends Seeder
             $patient->registration_date = Carbon::now()->startOfWeek()
                     ->subWeeks($assignment_count + rand(1,3));
 
+            $end = Carbon::now()->startOfWeek()->next($patient->assignment_day)->isPast()
+                        ? $assignment_count : $assignment_count-1;
+
             // create a bunch of successive assignments
-            for ($count = 1; $count <= $assignment_count; $count++) {
+            for ($count = 1; $count <= $end; $count++) {
                 // the assignment should happen in the past /
                 // the assignment should happen during work hours
                 $assignment_date = Carbon::now()->startOfWeek()->addHours(rand(8,18));
 
                 // use the chosen weekday
-                $assignment_date->addDays($patient->assignment_day);
+                $assignment_date->next($patient->assignment_day);
+
                 // assignments should be successive
-                $assignment_date->subWeeks($assignment_count - $count + 1);
+                $assignment_date->subWeeks($assignment_count - $count);
 
                 // create the actual assignment
                 $assignment = factory(App\Assignment::class)->make();
@@ -116,10 +120,11 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
+            $first_assignment = $patient->assignments->sortBy('assigned_on')->first();
             // date of departure has to be between the registration date und the first assignment
             $patient->date_from_clinics =
-                $faker->dateTimeBetween($patient->registration_date,
-                    $patient->assignments->sortBy('assigned_on')->first()->assigned_on);
+                $faker->dateTimeBetween($first_assignment->assigned_on->copy()->startOfWeek()->subWeek(),
+                    $patient->assignments->sortBy('assigned_on')->first()->assigned_on->copy()->startOfWeek());
                 // the login date needs to be coherent
             // -> assume that the patient has viewed the last assignment
             $patient->last_login = $faker->dateTimeBetween(
