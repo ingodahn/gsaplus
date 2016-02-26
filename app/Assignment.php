@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
+
+    protected $dates = ['created_at', 'updated_at', 'assigned_on'];
+
     /**
      * Get the underlying template.
      */
