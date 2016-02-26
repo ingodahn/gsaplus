@@ -57,29 +57,34 @@ class PatientController extends Controller
 	 */
 	public function profile(Request $request,$name=NULL)
 	{
+	//	return dd($request->user());
 		if (! $name) {
 			$name=Auth::user()->name;
 		}
-		// if (role of current user is patient && ! $name==Auth::user()-> name) {
-		//	Redirect::to('/');
-		// }
+		$user_role=$request->user()->type;
+		if ($user_role == 'patient' &&  $name!=Auth::user()-> name) {
+			return	Redirect::to('/');
+		}
 		//$patient=Patient(name);
+		$thisPatient = \App\Patient::where('name', $name)->first();
+		$patient_info = new PatientInfo($thisPatient);
 		$profile_user_model=[];
 		$profile_user_model['Name']=$name;
-		$profile_user_model['Role']=$request->user()->type;
+		$profile_user_model['Role']=$user_role;
 		$Patient=[];
-		$patient['assignment_da']='Mittwoch';
-		$patient['assignmentDayChagesLeft']=0;
-		$patient['code']='XXX';
-		$patient['dateFromClinics']='1.1.2000';
-		$patient['lastActivity']='1.1.2016';
-		$patient['notes']='Notizen der Therapeuten';
-		$patient['patientWeek']=13;
-		$patient['personalInformation']='Informationen vom Patienten';
-		$patient['status']='P130';
-		$patient['therapist']='Kein Therapeut';
+		$patient['assignment_day']=$patient_info->assignment_day();
+		$patient['assignmentDayChagesLeft']=$patient_info->assignmentDayChangesLeft();
+		$patient['code']=$patient_info->code();
+		$patient['dateFromClinics']=$patient_info->dateFromClinics();
+		$patient['lastActivity']=$patient_info->lastActivity();
+		$patient['notes']=$patient_info->notes();
+		$patient['patientWeek']=$patient_info->patientWeek();
+		$patient['personalInformation']=$patient_info->personalInformation();
+		$patient['status']=$patient_info->status();
+		$patient['therapist']=$patient_info->therapist();
 		$profile_user_model['Patient']=$patient;
 		// $profile_user_model['Patient']=Patient($name);
+		// return dd($profile_user_model);
 		return view('patient.patient_profile')-> with($profile_user_model);
 	}
 

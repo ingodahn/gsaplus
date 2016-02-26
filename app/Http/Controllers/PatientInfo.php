@@ -185,6 +185,7 @@ class PatientInfo
         // -> then check if an assignment exists for that week
         // ...
         // which parameters do matter?
+		return 'TODO';
 
 
 	}
