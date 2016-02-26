@@ -4,23 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Input;
-use Session;
-
 use App\Http\Requests;
 use Yajra\Datatables\Datatables;
 
 use App\Models;
 use App\Helper;
 use App\Patient;
-
-use App\Http\Controllers;
-use Prologue\Alerts\Facades\Alert;
-
-
 
 /**
  * Diese Klasse implementiert alle Aktionen, die der Therapeut auf der

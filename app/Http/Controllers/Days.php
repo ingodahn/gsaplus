@@ -3,9 +3,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+
 use App\WeekDay;
 use App\Helper;
-use Illuminate\Support\Facades\Mail;
 
 /**
  * In den Attributen Sonntag...Donnerstag wird gespeichert, wieviele Patienten
