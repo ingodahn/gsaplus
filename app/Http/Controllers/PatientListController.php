@@ -119,8 +119,13 @@ class PatientListController extends Controller
 
 		return Datatables::of(Patient::select('*'))
 			->removeColumn('email')
-			->addColumn('patient_status', function ($patient) {
-				return "TODO";
+			->addColumn('patient_status', function ($row) {
+				$patient_info = new PatientInfo($row);
+				return $patient_info->status();
+			})
+			->addColumn('status_of_next_assignment', function($row){
+				$patient_info = new PatientInfo($row);
+				return $patient_info->status_of_next_assignment();
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];

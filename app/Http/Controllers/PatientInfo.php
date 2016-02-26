@@ -191,6 +191,14 @@ class PatientInfo
 	}
 
 	/**
+	 * Status der Aufgabe der Folgewoche
+	 */
+
+	public function status_of_next_assignment() {
+		return "E010: Undefiniert";
+	}
+
+	/**
 	 * Benutzername des Therapeuten
 	 */
 	public function therapist()

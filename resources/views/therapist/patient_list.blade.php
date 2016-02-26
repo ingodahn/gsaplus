@@ -28,6 +28,7 @@
 		  { data: 'patientWeek', name: 'patientWeek', orderable: false, searchable: false },
           { data: 'assignment_day', name: 'assignment_day' },
 		  { data: 'patient_status', name: 'patientStatus', orderable: false, searchable: false },
+          { data: 'status_of_next_assignment', name: 'status_of_next_assignment', orderable: false, searchable: false },
           { data: 'overdue', name: 'overdue', orderable: false, searchable: false },
 		  { data: 'last_activity', name: 'lastActivity', orderable: false, searchable: false },
 		  { data: 'therapist', name: 'therapist', orderable: false, searchable: false }
@@ -100,6 +101,7 @@
             <th>Woche</th>
             <th>Tagebuchtag</th>
             <th>Status</th>
+            <th>N&auml;chste Aufgabe</th>
             <th>Überfällig</th>
             <th>Zuletzt aktiv</th>
             <th>Therapeut</th>
