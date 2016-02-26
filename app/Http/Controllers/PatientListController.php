@@ -107,29 +107,35 @@ class PatientListController extends Controller
 		return Datatables::of(Patient::select('*'))
 			->removeColumn('email')
 			->addColumn('patient_status', function ($patient) {
-				return "TODO";
+				$patient_info = new PatientInfo($patient);
+
+				return $patient_info->status_info()[$patient_info->status()];
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
 			})
-			->addColumn('patient_week', function($row) {
-				return "0";
+			->addColumn('patient_week', function($patient) {
+				$patient_info = new PatientInfo($patient);
+
+				return $patient_info->patient_week();
 			})
-			->addColumn('last_activity', function($row) {
-				return "none";
+			->addColumn('last_activity', function($patient) {
+				$patient_info = new PatientInfo($patient);
+
+				return $patient_info->last_activity();
 			})
-			->addColumn('therapist', function($row) {
-				if ($row->therapist !== null) {
-					return $row->therapist->name;
-				} else {
-					return "";
-				}
+			->addColumn('therapist', function($patient) {
+				$patient_info = new PatientInfo($patient);
+
+				return $patient_info->therapist()->name;
 			})
-			->addColumn('overdue', function($row) {
-				return "0%";
+			->addColumn('overdue', function($patient) {
+				$patient_info = new PatientInfo($patient);
+
+				return round($patient_info->overdue() * 100, 0);
 			})
-			->edit_column('name', function($row) {
-				$name = $row->name;
+			->edit_column('name', function($patient) {
+				$name = $patient->name;
 				return '<a href="/Diary/'.$name.'">'.$name.'</a>';
 			})
 			->make(true);
