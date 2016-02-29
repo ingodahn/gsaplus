@@ -18,14 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password', 60);
-            $table->dateTime('last_login');
+            $table->dateTime('last_login')->nullable();
             $table->dateTime('registration_date');
 
             $table->string('code');
             $table->tinyInteger('assignment_day');
             $table->tinyInteger('assignment_day_changes_left');
-            $table->dateTime('date_from_clinics');
-            $table->dateTime('last_activity');
+            $table->dateTime('date_from_clinics')->nullable();
+            $table->dateTime('last_activity')->nullable();
             $table->text('personal_information');
             $table->text('notes_of_therapist');
 
