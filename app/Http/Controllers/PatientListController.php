@@ -29,16 +29,6 @@ use App\Models\PatientStatus;
 class PatientListController extends Controller
 {
 
-	function __construct()
-	{
-	}
-
-	function __destruct()
-	{
-	}
-
-
-
 	/**
 	 * Days wird im System modifiziert und die Seite mit der Patientenliste (der der
 	 * Slots-Teil davon) wird neu aufgebaut
@@ -58,7 +48,6 @@ class PatientListController extends Controller
 		$days->set_days($Days);
 		$Days1=$days->get_days();
 		return dd($Days1);
-
 	}
 
 
@@ -80,9 +69,8 @@ class PatientListController extends Controller
 		// Patientenliste von datatable
 
 		$params['Slots']=$Slots;
+
 		return view('therapist.patient_list')->with($params);
-
-
 	}
 
 	/**
@@ -114,16 +102,16 @@ class PatientListController extends Controller
 				return $days_map[$row->assignment_day];
 			})
 			->addColumn('patient_week', function($patient) {
-				return $patient->patient_week();
+				return $patient->patient_week() === -1 ? "-" : $patient->patient_week();
 			})
 			->addColumn('last_activity', function($patient) {
 				return $patient->last_activity;
 			})
 			->addColumn('therapist', function($patient) {
-				return $patient->therapist->name;
+				return $patient->therapist !== null ? $patient->therapist->name : "-";
 			})
 			->addColumn('overdue', function($patient) {
-				return round($patient->overdue() * 100, 0);
+				return round($patient->overdue() * 100, 0)."%";
 			})
 			->edit_column('name', function($patient) {
 				$name = $patient->name;

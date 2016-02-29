@@ -238,6 +238,7 @@ class GateController extends Controller
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;
 			$patient->is_random = false;
+			$patient->date_from_clinics = null;
 
 			$patient->save();
 
