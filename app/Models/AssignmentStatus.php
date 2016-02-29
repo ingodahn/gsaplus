@@ -9,7 +9,7 @@
 namespace App\Models;
 
 
-class EntryStatus
+class AssignmentStatus
 {
 
     const ASSIGNMENT_IS_NOT_DEFINED = "E010";
@@ -41,25 +41,21 @@ class EntryStatus
 
     public static function to_patient_status($entry_status) {
         switch ($entry_status) {
-            case ASSIGNMENT_IS_NOT_DEFINED:
-                return PatientStatus::UNKNOWN;
-            case THERAPIST_SAVED_ASSIGNMENT:
-                return PatientStatus::UNKNOWN;
-            case PATIENT_GOT_ASSIGNMENT:
+            case AssignmentStatus::PATIENT_GOT_ASSIGNMENT:
                 return PatientStatus::PATIENT_GOT_ASSIGNMENT;
-            case PATIENT_EDITED_ASSIGNMENT:
+            case AssignmentStatus::PATIENT_EDITED_ASSIGNMENT:
                 return PatientStatus::PATIENT_EDITED_ASSIGNMENT;
-            case PATIENT_FINISHED_ASSIGNMENT:
+            case AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT:
                 return PatientStatus::PATIENT_FINISHED_ASSIGNMENT;
-            case THERAPIST_COMMENTED_ASSIGNMENT:
+            case AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT:
                 return PatientStatus::THERAPIST_COMMENTED_ASSIGNMENT;
-            case PATIENT_RATED_COMMENT:
+            case AssignmentStatus::PATIENT_RATED_COMMENT:
                 return PatientStatus::PATIENT_RATED_COMMENT;
-            case SYSTEM_REMINDED_OF_ASSIGNMENT:
+            case AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT:
                 return PatientStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
-            case ASSIGNMENT_IS_NOT_REQUIRED:
-                return PatientStatus::UNKNOWN;
         }
+
+        return PatientStatus::UNKNOWN;
     }
 
 }

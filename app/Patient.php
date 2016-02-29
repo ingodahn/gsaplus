@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\AssignmentStatus;
 
 use Carbon\Carbon;
 use App\Models\PatientStatus;
@@ -16,11 +16,6 @@ class Patient extends User
         // patient status should be determined - not cached
         // 'patient_status',
         'last_activity', 'personal_information', 'notes_of_therapist', 'registration_date', 'therapist_id' ];
-
-    const INTERVENTION_PERIOD_IN_WEEKS = "12";
-
-    // system reminds patient after ... days to do the assignment
-    const REMINDER_PERIOD_IN_DAYS = "5";
 
     /**
      * Get our assignments (all - independent of state).
@@ -56,9 +51,10 @@ class Patient extends User
      */
     public function overdue()
     {
+        $assignment_count = $this->ordered_assignments()->count();
         $overdue = $this->assignments()->whereDoesntHave('response')->count();
 
-        return $overdue / $this->ordered_assignments()->count();
+        return $assignment_count > 0 ? $overdue / $assignment_count : 0;
     }
 
     /**
@@ -68,7 +64,7 @@ class Patient extends User
     public function patient_week()
     {
         // -> Ausgangsdatum: Entlassungsdatum
-        // -> nächster Schreibtag: Anfang der ersten Woche
+        // -> nächster Schreibtag: in der ersten Woche danach
         // -> 0-te Woche ist die bis zum ersten Schreibtag
         // -> dann die Differenz vom ersten Schreibtag bis heute berechnen
         //    (in Wochen - nat. hächstens 12 Wochen zählen, ansonsten
@@ -77,7 +73,6 @@ class Patient extends User
 
         // Anmerkung: es muss noch kein assignment existieren, also auch nicht mit arbeiten
         // die Wochen zählen, nicht die Aufgaben
-        // -> System funktioniert, falls etwas schief läuft
 
         // shouldn't happen... (day is set during registration)
         if ($this->assignment_day === null) {
@@ -93,7 +88,7 @@ class Patient extends User
             // und der Patient bereits entlassen wurde
             return 0;
         } else {
-            // n-te Woche bei n-1 Wochen Differenz (für n>0)
+            // n+1-te Woche bei n Wochen Differenz
             // Bsp. 1 Tag nach dem ersten Schreibtag -> 0 Wochen Differenz -> 1-te Woche
             return Carbon::now()->startOfDay()->diffInWeeks($this->first_assignment_day()) + 1;
         }
@@ -104,31 +99,11 @@ class Patient extends User
      */
     public function status()
     {
-        // Status berechnen
-
-        // first assignment is assigned on the week after departure
-        // -> check in which week the patient is
-        //      (beginning and end of week is the assignment day)
-        // -> then check if an assignment exists for that week
-        // ...
-        // which parameters do matter?
-
-        // Aufgabe wird am Schreibtag bekannt gegeben (für alle Aufgaben)
+        // Aufgabe wird am Schreibtag bekannt gegeben (gilt für alle Aufgaben)
         // der Patient sollte die Aufgabe am selben Tag beantworten
-        // wenn er das nicht tut, bekommt er eine Erinnerung vom System (5 Tage danach)
+        // ansonsten bekommt er eine Erinnerung vom System (5 Tage danach - konfigurierbar)
         // der Patient kann dann bis zum nächsten Schreibtag antworten
         // am nächsten Schreibtag gilt die Aufgabe als versäumt
-
-        // Carbon - helpful methods:
-        // - between($1, $2) - determines if the instance is between two others
-        // - isSameDay($1)
-        // - max($1)
-        // - next($day) - Datum des nächsten $day (Wochentag)
-
-        // WICHTIG: erstmal bis P030
-
-        // TODO: code block too huge... clean up
-        // reduce db access?
 
         $patient_week = $this->patient_week();
 
@@ -153,34 +128,11 @@ class Patient extends User
                 $actual_assignment = $this->ordered_assignments()->get($this->patient_week() - 1);
 
                 if ($actual_assignment === null) {
-                    // shouldn't happen... but
-                    // TODO: what should we return if something went wrong?
+                    // shouldn't happen... but...
                     return $is_first_week ? PatientStatus::DATE_OF_DEPARTURE_SET :
-                        null;
+                        PatientStatus::UNKNOWN;
                 } else {
-                    if ($actual_assignment->response === null) {
-                        if ($actual_assignment->state === true) {
-                            // patient has finished assignment
-                            return PatientStatus::PATIENT_FINISHED_ASSIGNMENT;
-                        } else if (Carbon::now()->gt($actual_assignment->assigned_on->
-                                    copy()->addDays(config('gsa.reminder_period_in_days')))) {
-                            // patient was reminded by system and didn't submit any text
-                            // TODO: check if this is really the case! -> check reminders
-                            return PatientStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
-                        } else if ($actual_assignment->patient_text !== null
-                            && strcmp($actual_assignment->patient_text, "") !== 0) {
-                            // patient has provided some text
-                            return PatientStatus::PATIENT_EDITED_ASSIGNMENT;
-                        } else {
-                            return PatientStatus::PATIENT_GOT_ASSIGNMENT;
-                        }
-                    } else {
-                        if ($actual_assignment->response->rating !== null) {
-                            return PatientStatus::PATIENT_RATED_COMMENT;
-                        } else {
-                            return PatientStatus::THERAPIST_COMMENTED_ASSIGNMENT;
-                        }
-                    }
+                    return AssignmentStatus::to_patient_status($actual_assignment->status());
                 }
         }
     }
