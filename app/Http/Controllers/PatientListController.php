@@ -10,6 +10,7 @@ use Yajra\Datatables\Datatables;
 use App\Models;
 use App\Helper;
 use App\Patient;
+use App\Models\PatientStatus;
 
 /**
  * Diese Klasse implementiert alle Aktionen, die der Therapeut auf der
@@ -107,32 +108,22 @@ class PatientListController extends Controller
 		return Datatables::of(Patient::select('*'))
 			->removeColumn('email')
 			->addColumn('patient_status', function ($patient) {
-				$patient_info = new PatientInfo($patient);
-
-				return $patient_info->status_info()[$patient_info->status()];
+				return PatientStatus::$STATUS_INFO[$patient->status()];
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
 			})
 			->addColumn('patient_week', function($patient) {
-				$patient_info = new PatientInfo($patient);
-
-				return $patient_info->patient_week();
+				return $patient->patient_week();
 			})
 			->addColumn('last_activity', function($patient) {
-				$patient_info = new PatientInfo($patient);
-
-				return $patient_info->last_activity();
+				return $patient->last_activity;
 			})
 			->addColumn('therapist', function($patient) {
-				$patient_info = new PatientInfo($patient);
-
-				return $patient_info->therapist()->name;
+				return $patient->therapist->name;
 			})
 			->addColumn('overdue', function($patient) {
-				$patient_info = new PatientInfo($patient);
-
-				return round($patient_info->overdue() * 100, 0);
+				return round($patient->overdue() * 100, 0);
 			})
 			->edit_column('name', function($patient) {
 				$name = $patient->name;
