@@ -69,6 +69,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/SendMail','ContactController@message_to_patients');
 	Route::post('/MassAction/mail','ContactController@mail_editor');
 	Route::post('/SaveProfile','PatientController@save_profile');
+	Route::post('CancelIntervention','PatientController@cancel_intervention');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {

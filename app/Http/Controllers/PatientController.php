@@ -35,15 +35,15 @@ class PatientController extends Controller
 	 * 
 	 * @param name
 	 */
-	public function cancel_intervention($name)
+	public function cancel_intervention(Request $request)
 	{
-
+		$name=$request->input('name');
 		//$patient=Patient(name);
 		//$patient->patientStatus="P130";
 		//Save $patient;
 		//Alert('Zusammenarbeit mit Patient '.
 		//name.' beendet');
-		//return Redirec::to('/diary/'.name);
+		return Redirect::to('/Home');
 
 
 	}
