@@ -11,9 +11,9 @@
       Dies ist das Profil von <em>{{ $Name }}</em> aus der Sicht des Benutzers mit der Rolle {{ $Role }}.
     </p>
 
-
+    <hr>
+    <h3>Notizen des Therapeuten</h3>
     @if ($Role == 'therapist')
-      <h3>Notizen des Therapeuten</h3>
       <p>{{ $Patient['notes'] }}</p>
     @else
       <p>Die Notizen des Therapeuten bleiben unsichtbar</p>
@@ -37,6 +37,11 @@
               $('#datetimepicker1').datetimepicker();
           });
       </script>
+      <p>
+        <div class="form-group">
+          <button type="submit" class="btn">Entlassungsdatum setzen</button>
+        </div>
+      </p>
     </form>
 
 
