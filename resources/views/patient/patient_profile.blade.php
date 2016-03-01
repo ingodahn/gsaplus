@@ -77,12 +77,14 @@
     <form data-parsley-validate role="form" action="/patient/{{$Name}}/dateFromClinics" method="post">
       {{ csrf_field() }}
         <div class="form-group">
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
+          <div class='input-group date' id='datetimepicker1'>
+            {{-- <label for="dateFromClinics" class="control-label">Entlassungsdatum</label> --}}
+            <input name="dateFromClinics" type='text' class="form-control">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </input>
+          </div>
         </div>
       <script type="text/javascript">
           $(function () {
