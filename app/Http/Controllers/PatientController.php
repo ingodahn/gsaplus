@@ -32,7 +32,7 @@ class PatientController extends Controller
 
 	/**
 	 * Bricht die Intervention für den Patienten mit dem angegebenen Benutzernamen ab,
-	 * 
+	 *
 	 * @param name
 	 */
 	public function cancel_intervention($name)
@@ -52,7 +52,7 @@ class PatientController extends Controller
 	 * Zeigt die Profilseite des Patienten mit dem angegebenen Benutzernamen an. Ist
 	 * name nicht angegeben, so muss die Rolle des benutzers 'patient' sein und es
 	 * wird die Profilseite des aktuellen Patienten angezeigt.
-	 * 
+	 *
 	 * @param name
 	 */
 	public function profile(Request $request,$name=NULL)
@@ -81,7 +81,7 @@ class PatientController extends Controller
 		$patient['patientWeek']=$patient_info->patientWeek();
 		$patient['personalInformation']=$patient_info->personalInformation();
 		$patient['status']=$patient_info->status();
-		$patient['therapist']=$patient_info->therapist();
+		// $patient['therapist']=$patient_info->therapist();
 		$profile_user_model['Patient']=$patient;
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);
@@ -92,7 +92,7 @@ class PatientController extends Controller
 	 * Das Profil wird mit den geänderten Daten aktualisiert. Bei Passwortänderung
 	 * wird vorher geprüft ob das alte Passwort korrekt ist. Anschließend wird zur
 	 * Homepage des Benutzers weitergeleitet.
-	 * 
+	 *
 	 * @param name
 	 * @param date_from_clinics
 	 * @param new_password
