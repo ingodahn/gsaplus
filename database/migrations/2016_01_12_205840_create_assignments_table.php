@@ -15,7 +15,9 @@ class CreateAssignmentsTable extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->tinyInteger('week');
             $table->dateTime('assigned_on');
+            $table->text('assignment_text');
             $table->text('patient_text');
             $table->boolean('state');
 

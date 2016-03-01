@@ -89,16 +89,26 @@ class DatabaseSeeder extends Seeder
 
                 $assignment->assigned_on = $assignment_date;
 
+                // assignments mustn't be assigned yet
+                // -> an assignment is saved for a specific week
+                // -> details are filled in later
+                $assignment->week = $count;
+
                 // 60% chance: the patient completed the assignment
                 //(the patient sent in a final text)
                 $saved = rand(0,10) <= 6;
                 $saved ? $assignment->state = true : $assignment->state = false;
 
+                // choose random template
+                $template = App\AssignmentTemplate::all()->random();
+
+                // 75% chance: the templates text wasn't modified
+                $assignment->assignment_text = (rand(0,3) === 0) ? $faker->realText() : $template->text;
+
                 // save assignment to DB
                 $assignment->save();
 
-                // choose random template
-                App\AssignmentTemplate::all()->random()->assignments()->save($assignment);
+                $template->assignments()->save($assignment);
                 $patient->assignments()->save($assignment);
 
                 // generate response if patient has finished assignment

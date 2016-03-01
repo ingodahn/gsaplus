@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('assignment_day_changes_left');
             $table->dateTime('date_from_clinics')->nullable();
             $table->dateTime('last_activity')->nullable();
+            $table->dateTime('intervention_ended_on')->nullable();
             $table->text('personal_information');
             $table->text('notes_of_therapist');
 
