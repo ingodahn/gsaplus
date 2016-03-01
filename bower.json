@@ -18,6 +18,7 @@
     "font-awesome": "~4.5.0",
     "material-colors": "shuhei/material-colors#~1.0.0",
     "parsleyjs": "~2.2.0",
-    "parallax.js": "~1.4.2"
+    "parallax.js": "~1.4.2",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
   }
 }
