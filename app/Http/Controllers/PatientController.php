@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Patient;
+
 /**
  * Die Klasse zeigt das Profil des Patienten an und erlaubt Veränderungen daran.
  * @author dahn
@@ -59,26 +61,25 @@ class PatientController extends Controller
 			return	Redirect::to('/');
 		}
 		//$patient=Patient(name);
-		$thisPatient = \App\Patient::where('name', $name)->first();
-		$patient_info = new PatientInfo($thisPatient);
+		$patient = Patient::where('name', $name)->first();
 		$profile_user_model=[];
 		$profile_user_model['Name']=$name;
 		$profile_user_model['Role']=$user_role;
-		$Patient=[];
-		$patient['assignment_day']=$patient_info->assignment_day();
-		$patient['assignmentDayChagesLeft']=$patient_info->assignmentDayChangesLeft();
-		$patient['code']=$patient_info->code();
-		$patient['dateFromClinics']=$patient_info->dateFromClinics();
-		$patient['lastActivity']=$patient_info->lastActivity();
-		$patient['notes']=$patient_info->notes();
-		$patient['patientWeek']=$patient_info->patientWeek();
-		$patient['personalInformation']=$patient_info->personalInformation();
-		$patient['status']=$patient_info->status();
-		$patient['therapist']=$patient_info->therapist();
+		$patient_info=[];
+		$patient_info['assignment_day']=$patient->assignment_day;
+		$patient_info['assignmentDayChagesLeft']=$patient->assignment_day_changes_left;
+		$patient_info['code']=$patient->code;
+		$patient_info['dateFromClinics']=$patient->date_from_clinics;
+		$patient_info['lastActivity']=$patient->last_activity;
+		$patient_info['notes']=$patient->notes_of_therapist;
+		$patient_info['patientWeek']=$patient->patient_week();
+		$patient_info['personalInformation']=$patient->personal_information;
+		$patient_info['status']=$patient->status();
+		$patient_info['therapist']=$patient->therapist === null ? null : $patient->therapist->name;
 		$profile_user_model['Patient']=$patient;
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);
-		return view('patient.patient_profile')-> with($profile_user_model);
+		return view('patient.patient_profile')->with($profile_user_model);
 	}
 
 	/**
