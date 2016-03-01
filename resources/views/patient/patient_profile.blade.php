@@ -133,6 +133,12 @@
     </form>
 
     <hr>
+    <h3>Intervention beenden</h3>
+    <p>
+      <a href="/CancelIntervention" class="btn btn-danger">Intervention beenden</a>
+    </p>
+
+    <hr>
     <p>
       <a href="/Logout" class="btn btn-warning">Ausloggen.</a>
     </p>
