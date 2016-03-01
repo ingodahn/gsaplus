@@ -27,7 +27,6 @@ class AssignmentStatus
     const UNKNOWN = "E000";
 
     public static $STATUS_INFO = array(
-        "E000"=>"E000: Unbekannt",
         "E010"=>"E010: Aufgabe nicht definiert",
         "E015"=>"E015: Aufgabe definiert",
         "E020"=>"E020: Aufgabe gestellt",
@@ -39,8 +38,8 @@ class AssignmentStatus
         "E100"=>"E100: Aufgabe nicht erforderlich"
     );
 
-    public static function to_patient_status($entry_status) {
-        switch ($entry_status) {
+    public static function to_patient_status($assignment_status) {
+        switch ($assignment_status) {
             case AssignmentStatus::PATIENT_GOT_ASSIGNMENT:
                 return PatientStatus::PATIENT_GOT_ASSIGNMENT;
             case AssignmentStatus::PATIENT_EDITED_ASSIGNMENT:
