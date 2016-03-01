@@ -15,6 +15,9 @@
     <p>
       Dies ist das Profil von <strong>{{ $Name }}</strong> aus der Sicht des Benutzers mit der Rolle <code>{{ $Role }}</code>.
     </p>
+    <p>
+      <a href="/Logout" class="btn btn-warning">Ausloggen.</a>
+    </p>
 
     <hr>
     <h3>Notizen des Therapeuten</h3>
@@ -136,11 +139,6 @@
     <h3>Intervention beenden</h3>
     <p>
       <a href="/CancelIntervention" class="btn btn-danger">Intervention beenden</a>
-    </p>
-
-    <hr>
-    <p>
-      <a href="/Logout" class="btn btn-warning">Ausloggen.</a>
     </p>
 
   </div>
