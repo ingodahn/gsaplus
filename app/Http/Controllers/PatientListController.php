@@ -16,6 +16,7 @@ use Yajra\Datatables\Datatables;
 use App\Models;
 use App\Helper;
 use App\Patient;
+use App\Models\PatientStatus;
 
 use App\Http\Controllers;
 use Prologue\Alerts\Facades\Alert;
@@ -123,7 +124,7 @@ class PatientListController extends Controller
 			->addColumn('status_of_next_assignment', function($row){
 				// $patient->status_of_next_assignment()
 				return "TODO";
-			}
+			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
 			})
