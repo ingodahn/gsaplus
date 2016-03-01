@@ -16,7 +16,7 @@
       Dies ist das Profil von <strong>{{ $Name }}</strong> aus der Sicht des Benutzers mit der Rolle <code>{{ $Role }}</code>.
     </p>
     <p>
-      <a href="/Logout" class="btn btn-warning">Ausloggen.</a>
+      <a href="/Logout" class="btn btn-warning">Ausloggen</a>
     </p>
 
     <hr>
@@ -34,6 +34,7 @@
       {{ csrf_field() }}
       <div class="form-group">
         <label for="therapist" class="control-label">Therapeut</label>
+        {{-- TODO: Set value to current therapist --}}
         <input name="therapist" type="text" class="form-control" placeholder="dr_ogen" required>
       </div>
       <p>
@@ -56,7 +57,7 @@
           <i class="fa fa-question-circle"></i>
         </a>
         <select name="day_of_week" class="form-control" required>
-          <?php // TODO: Use available dates like in patient_data ?>
+          {{-- TODO: Use available dates like in patient_data --}}
           <option>Montag</option>
           <option>Dienstag</option>
           <option>Mittwoch</option>
@@ -79,7 +80,7 @@
         <div class="form-group">
           <div class='input-group date' id='datetimepicker1'>
             {{-- <label for="dateFromClinics" class="control-label">Entlassungsdatum</label> --}}
-            <input name="dateFromClinics" type='text' class="form-control">
+            <input name="dateFromClinics" type='text' value="{{ $Patient['dateFromClinics'] }}" class="form-control">
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -128,7 +129,7 @@
     <form data-parsley-validate role="form" action="/patient/{{$Name}}/personalInformation" method="post">
       <div class="form-group">
         <label for="personalInformation" class="control-label">Informationen</label>
-        <textarea name="personalInformation" rows="5" class="form-control" placeholder="Hat eine Meinung zu Earl Grey."></textarea>
+        <textarea name="personalInformation" rows="5" value="{{ $Patient['personalInformation'] }}" class="form-control" placeholder="Hat eine Meinung zu Earl Grey."></textarea>
       </div>
       <p>
         <div class="form-group">
