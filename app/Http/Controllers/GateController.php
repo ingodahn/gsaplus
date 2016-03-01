@@ -2,23 +2,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
-use Session;
 use Illuminate\Support\Facades\Auth;
-
-use App\Code;
-use App\Patient;
-
-use App\Http\Controllers\Days;
+use Session;
 
 use Carbon\Carbon;
 
+use App\Code;
+use App\Patient;
 use App\Helper;
-
 use App\Models;
+
 use Prologue\Alerts\Facades\Alert;
 
 /**
@@ -242,6 +238,7 @@ class GateController extends Controller
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;
 			$patient->is_random = false;
+			$patient->date_from_clinics = null;
 
 			$patient->save();
 

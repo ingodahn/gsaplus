@@ -3,15 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Input;
-use Session;
 use Illuminate\Support\Facades\Auth;
-
-
-use App\Http\Controllers;
 
 use App\Code;
 use App\Patient;

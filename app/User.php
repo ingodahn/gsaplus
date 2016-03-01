@@ -21,6 +21,9 @@ class User extends Authenticatable
 
     protected static $persisted = ['name', 'email', 'password', 'last_login', 'is_random'];
 
+    protected $dates = ['created_at', 'updated_at', 'last_login' ,
+                            'registration_date', 'date_from_clinics', 'last_activity'];
+
     /**
      * The attributes that are mass assignable.
      *

@@ -55,27 +55,30 @@ class DatabaseSeeder extends Seeder
 
         foreach ($patients as $patient) {
             // every patient has a random number of assignments
-            $assignment_count = rand(1,10);
+            $assignment_count = rand(2,10);
             // choose random therapist
             $therapist = App\Therapist::all()->random();
             $therapist->patients()->save($patient);
 
             // the registration happened before the first assignment
-            $patient->registration_date = Carbon::parse('last Sunday');
             // add 1-3 weeks between the registration and the first assignment
-            $patient->registration_date->subWeeks($assignment_count + rand(1,3));
+            $patient->registration_date = Carbon::now()->startOfWeek()
+                    ->subWeeks($assignment_count + rand(1,3));
+
+            $end = Carbon::now()->startOfWeek()->next($patient->assignment_day)->isPast()
+                        ? $assignment_count : $assignment_count-1;
 
             // create a bunch of successive assignments
-            for ($count = 1; $count <= $assignment_count; $count++) {
-                // the assignment should happen in the past
-                $assignment_date = Carbon::parse('last Sunday');
+            for ($count = 1; $count <= $end; $count++) {
+                // the assignment should happen in the past /
                 // the assignment should happen during work hours
-                $assignment_date->addHours(rand(8,18));
+                $assignment_date = Carbon::now()->startOfWeek()->addHours(rand(8,18));
 
                 // use the chosen weekday
-                $assignment_date->addDays($patient->assignment_day);
+                $assignment_date->next($patient->assignment_day);
+
                 // assignments should be successive
-                $assignment_date->subWeeks($assignment_count - $count + 1);
+                $assignment_date->subWeeks($assignment_count - $count);
 
                 // create the actual assignment
                 $assignment = factory(App\Assignment::class)->make();
@@ -86,16 +89,26 @@ class DatabaseSeeder extends Seeder
 
                 $assignment->assigned_on = $assignment_date;
 
+                // assignments mustn't be assigned yet
+                // -> an assignment is saved for a specific week
+                // -> details are filled in later
+                $assignment->week = $count;
+
                 // 60% chance: the patient completed the assignment
                 //(the patient sent in a final text)
                 $saved = rand(0,10) <= 6;
                 $saved ? $assignment->state = true : $assignment->state = false;
 
+                // choose random template
+                $template = App\AssignmentTemplate::all()->random();
+
+                // 75% chance: the templates text wasn't modified
+                $assignment->assignment_text = (rand(0,3) === 0) ? $faker->realText() : $template->text;
+
                 // save assignment to DB
                 $assignment->save();
 
-                // choose random template
-                App\AssignmentTemplate::all()->random()->assignments()->save($assignment);
+                $template->assignments()->save($assignment);
                 $patient->assignments()->save($assignment);
 
                 // generate response if patient has finished assignment
@@ -106,10 +119,7 @@ class DatabaseSeeder extends Seeder
 
                     // response is created within 48 hours
                     // (this may result in responses late at night ^^)
-                    $response_date = Carbon::parse($assignment_date->toDateTimeString());
-                    $response_date->addHours(rand(0,48) - $assignment_date->hour);
-
-                    $response->date = $response_date;
+                    $response->date = $assignment_date->copy()->addHours(rand(0,48) - $assignment_date->hour);
 
                     $response->save();
 
@@ -120,11 +130,12 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
+            $first_assignment = $patient->assignments->sortBy('assigned_on')->first();
             // date of departure has to be between the registration date und the first assignment
             $patient->date_from_clinics =
-                $faker->dateTimeBetween($patient->registration_date,
-                    $patient->assignments->sortBy('assigned_on')->first()->assigned_on);
-            // the login date needs to be coherent
+                $faker->dateTimeBetween($first_assignment->assigned_on->copy()->startOfWeek()->subWeek(),
+                    $patient->assignments->sortBy('assigned_on')->first()->assigned_on->copy()->startOfWeek());
+                // the login date needs to be coherent
             // -> assume that the patient has viewed the last assignment
             $patient->last_login = $faker->dateTimeBetween(
                 $patient->assignments()->get()->sortBy('assigned_on')->last()->assigned_on, 'now');
