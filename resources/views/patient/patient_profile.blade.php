@@ -25,11 +25,28 @@
     @endif
 
     <hr>
+    <h3>Therapeut</h3>
+    <form data-parsley-validate role="form" action="/patient/{{$Name}}/therapist" method="post">
+      {{-- TODO: Mit einem select machen --}}
+      {{ csrf_field() }}
+      <div class="form-group">
+        <label for="therapist" class="control-label">Therapeut</label>
+        <input name="therapist" type="text" class="form-control" placeholder="dr_ogen" required>
+      </div>
+      <p>
+        <div class="form-group">
+          <button type="submit" class="btn">Tagebuchtag setzen</button>
+        </div>
+      </p>
+    </form>
+
+    <hr>
     <h3>Tagebuchtag</h3>
     <p>
       Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChagesLeft'] }} Änderungen</strong>.
     </p>
     <form data-parsley-validate role="form" action="/patient/{{$Name}}/assignment_day" method="post">
+      {{ csrf_field() }}
       <div class="form-group">
         <label for="day_of_week" class="control-label">Wochentag</label>
         <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Warum sind nicht alle Wochentage wählbar?" data-content="Wir möchten, dass Sie nach dem Schreiben Ihres Blog möglichst innerhalb von 24 h eine Rückmeldung Ihres Online-Therapeuten erhalten. Da wir dies jedoch nur von Montag bis Freitag mit begrenzten Kapazitäten zusagen können, sind nicht alle Tage als Schreibtage wählbar.">
