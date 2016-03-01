@@ -63,6 +63,21 @@
       </div>
     </form>
 
+
+    <hr>
+    <h3>Persönliche Informationen</h3>
+    <form data-parsley-validate role="form" action="/patient/{{$Name}}/personalInformation" method="post">
+      <div class="form-group">
+        <label for="personalInformation" class="control-label">Informationen</label>
+        <textarea name="personalInformation" rows="5" class="form-control" placeholder="Hat eine Meinung zu Earl Grey."></textarea>
+      </div>
+      <p>
+        <div class="form-group">
+          <button type="submit" class="btn">Informationen ändern</button>
+        </div>
+      </p>
+    </form>
+
     <hr>
     <p>
       <a href="/Logout" class="btn btn-warning">Ausloggen.</a>
