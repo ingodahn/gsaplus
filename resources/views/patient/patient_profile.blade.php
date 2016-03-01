@@ -4,11 +4,16 @@
 @section('content')
   <div class="container">
 
-    <h2>{{ $Name }} <small>({{ $Patient['code'] }})</small></h2>
+    <h2>
+      {{ $Name }}
+      <small>
+        (code: <code>{{ $Patient['code'] }}</code>, status: <code>{{ $Patient['status'] }}</code>)
+      </small>
+    </h2>
 
 
     <p>
-      Dies ist das Profil von <em>{{ $Name }}</em> aus der Sicht des Benutzers mit der Rolle {{ $Role }}.
+      Dies ist das Profil von <strong>{{ $Name }}</strong> aus der Sicht des Benutzers mit der Rolle <code>{{ $Role }}</code>.
     </p>
 
     <hr>
