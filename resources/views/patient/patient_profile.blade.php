@@ -24,6 +24,33 @@
       <p>Die Notizen des Therapeuten bleiben unsichtbar</p>
     @endif
 
+    <hr>
+    <h3>Tagebuchtag</h3>
+    <p>
+      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChagesLeft'] }} Änderungen</strong>.
+    </p>
+    <form data-parsley-validate role="form" action="/patient/{{$Name}}/assignment_day" method="post">
+      <div class="form-group">
+        <label for="day_of_week" class="control-label">Wochentag</label>
+        <a href="javascript:void(0)" data-toggle="popover" data-trigger="focus" title="Warum sind nicht alle Wochentage wählbar?" data-content="Wir möchten, dass Sie nach dem Schreiben Ihres Blog möglichst innerhalb von 24 h eine Rückmeldung Ihres Online-Therapeuten erhalten. Da wir dies jedoch nur von Montag bis Freitag mit begrenzten Kapazitäten zusagen können, sind nicht alle Tage als Schreibtage wählbar.">
+          <i class="fa fa-question-circle"></i>
+        </a>
+        <select name="day_of_week" class="form-control" required>
+          <?php // TODO: Use available dates like in patient_data ?>
+          <option>Montag</option>
+          <option>Dienstag</option>
+          <option>Mittwoch</option>
+          <option>Donnerstag</option>
+          <option>Freitag</option>
+        </select>
+      </div>
+      <p>
+        <div class="form-group">
+          <button type="submit" class="btn">Tagebuchtag setzen</button>
+        </div>
+      </p>
+    </form>
+
 
     <hr>
     <h3>Entlassungsdatum setzen</h3>
