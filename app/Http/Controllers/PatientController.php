@@ -97,11 +97,19 @@ class PatientController extends Controller
 	 * @param date_from_clinics
 	 * @param new_password
 	 * @param notes
+	 * @param old_password
 	 * @param personal_information
 	 * @param therapist
 	 */
-	public function save_profile($name, $date_from_clinics, $new_password, $notes, $personal_information, $therapist)
+	public function save_profile(Request $request)
 	{
+		$name=$request->input('name');
+		$date_from_clinics=$request->input('dateFromClinics');
+		$new_password=$request->input('newPassword');
+		$notes=$request->input('notes');
+		$old_password=$request->input('oldPassword');
+		$personal_information=$request->input('personalInformation');
+		$therapist=$request->input('therapist');
 
 		//$patient=Patient(name);
 		//if ($request->'oldPassword' != Password
@@ -118,7 +126,7 @@ class PatientController extends Controller
 		//save $patient to database;
 		//alert("Profil für ".$name."
 		//aktualisiert.");
-		//Redirect::to('/Home');
+		Redirect::to('/Home');
 
 
 
