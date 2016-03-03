@@ -12,26 +12,27 @@
   <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.0.2/js/responsive.bootstrap.min.js"></script>
 
+  <script src="//cdn.datatables.net/plug-ins/1.10.11/sorting/datetime-moment.js"></script>
+
   <script>
     $(function() {
       $('#PatientList').DataTable({
         "language": {
           "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/German.json"
         },
-        processing: true,
-        serverSide: true,
+        stateSave: true,
         ajax: '{!! route('datatables.data') !!}',
         columns: [
           { data: 'selection', name: 'selection', orderable: false, searchable: false},
           { data: 'name', name: 'name' },
           { data: 'code', name: 'code' },
-		  { data: 'patient_week', name: 'patient_week', orderable: false, searchable: false },
+		  { data: 'patient_week', name: 'patient_week' },
           { data: 'assignment_day', name: 'assignment_day' },
-		  { data: 'patient_status', name: 'patient_status', orderable: false, searchable: false },
-          { data: 'status_of_next_assignment', name: 'status_of_next_assignment', orderable: false, searchable: false },
-          { data: 'overdue', name: 'overdue', orderable: false, searchable: false },
-		  { data: 'last_activity', name: 'last_activity', orderable: false, searchable: false },
-		  { data: 'therapist', name: 'therapist', orderable: false, searchable: false }
+		  { data: 'patient_status', name: 'patient_status' },
+          { data: 'status_of_next_assignment', name: 'status_of_next_assignment' },
+          { data: 'overdue', name: 'overdue' },
+		  { data: 'last_activity', name: 'last_activity' },
+		  { data: 'therapist', name: 'therapist' }
         ]
       });
     });
@@ -88,7 +89,6 @@
 
     <hr/>
     <h2>Patientenliste</h2>
-    <h3>!! Bitte noch nicht suchen oder sortieren !!</h3>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
       <div class="container" style="padding-top: 20px;">
