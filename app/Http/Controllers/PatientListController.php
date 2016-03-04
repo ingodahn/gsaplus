@@ -17,6 +17,7 @@ use App\Models;
 use App\Helper;
 use App\Patient;
 use App\Models\PatientStatus;
+use App\Models\AssignmentStatus;
 
 use App\Http\Controllers;
 use Prologue\Alerts\Facades\Alert;
@@ -121,9 +122,8 @@ class PatientListController extends Controller
 			->addColumn('patient_status', function ($patient) {
 				return PatientStatus::$STATUS_INFO[$patient->status()];
 			})
-			->addColumn('status_of_next_assignment', function($row){
-				// $patient->status_of_next_assignment()
-				return "TODO";
+			->addColumn('status_of_next_assignment', function($patient){
+				return AssignmentStatus::$STATUS_INFO[$patient->status_of_next_assignment()];
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
