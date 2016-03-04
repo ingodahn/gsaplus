@@ -73,12 +73,12 @@
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="password" class="control-label">Passwort</label>
-          <input name="password" id="password" type="password" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6">
+          <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6">
         </div>
 
         <div class="form-group col-sm-6">
           <label class="control-label">Wiederholen</label>
-          <input type="password" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
+          <input type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
         </div>
       </div>
 
