@@ -16,7 +16,7 @@
 
     <p>Ihre verbindliche Zusage zur Teilnahme an unserem Projekt ist uns sehr wichtig:</p>
 
-    <div class="checkbox"  style="margin-top: 15px;">
+    <div class="checkbox" style="margin-top: 15px;">
       <label>
         <input type="checkbox" value="" class="commit-checkbox">
         Ich bin bereit, die Plattform GSA-online plus regelmäßig zu besuchen
