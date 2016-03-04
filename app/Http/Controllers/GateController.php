@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 use App\Code;
 use App\Patient;
+use App\Therapist;
 use App\Helper;
 use App\Models;
 
@@ -239,6 +240,8 @@ class GateController extends Controller
 			$patient->assignment_day_changes_left = 1;
 			$patient->is_random = false;
 			$patient->date_from_clinics = null;
+
+			$patient->therapist()->associate(Therapist::orderByRaw("RAND()")->get()->first());
 
 			$patient->save();
 
