@@ -67,7 +67,21 @@ class Patient extends User
      * @return the current assignment
      */
     public function current_assignment() {
-        return $this->ordered_assignments()->get($this->patient_week() - 1);
+        return $this->assignment_for_week($this->patient_week());
+    }
+
+    /**
+     * Returns the next assignment (for the next assignment day).
+     */
+    public function next_assignment() {
+        return $this->assignment_for_week($this->patient_week() + 1);
+    }
+
+    /**
+     * Returns the assignment for the given week.
+     */
+    public function assignment_for_week($week) {
+        return $this->ordered_assignments()->get($week - 1);
     }
 
     /**
@@ -208,6 +222,21 @@ class Patient extends User
                 } else {
                     return AssignmentStatus::to_patient_status($current_assignment->status());
                 }
+        }
+    }
+
+    /**
+     * Returns the status of the next assignment.
+     */
+    public function status_of_next_assignment() {
+        if ($this->intervention_ended_on !== null || $this->patient_week() === 12) {
+            return AssignmentStatus::ASSIGNMENT_IS_NOT_REQUIRED;
+        } else {
+            if ($this->next_assignment() === null) {
+                return AssignmentStatus::ASSIGNMENT_IS_NOT_DEFINED;
+            } else {
+                return $this->next_assignment()->status();
+            }
         }
     }
 
