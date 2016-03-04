@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Patient;
+use App\Therapist;
 
 /**
  * Die Klasse zeigt das Profil des Patienten an und erlaubt Veränderungen daran.
@@ -75,7 +76,8 @@ class PatientController extends Controller
 		$patient_info['patientWeek']=$patient->patient_week();
 		$patient_info['personalInformation']=$patient->personal_information;
 		$patient_info['status']=$patient->status();
-		$patient_info['therapist']=$patient->therapist === null ? null : $patient->therapist->name;
+		$patient_info['therapist']=$patient->therapist === null ? "-" : $patient->therapist->name;
+		$patient_info['listOfTherapists']=array_pluck(Therapist::all()->sortBy('name')->toArray(),'name');
 		$profile_user_model['Patient']=$patient;
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);
@@ -121,9 +123,6 @@ class PatientController extends Controller
 		//alert("Profil für ".$name."
 		//aktualisiert.");
 		Redirect::to('/Home');
-
-
-
 	}
 
 }
