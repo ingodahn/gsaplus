@@ -25,7 +25,6 @@
             <textarea name="message" rows="5" class="form-control" placeholder="Ich will gerne mit dir gehen, aber ich weiß nicht, wie ich herabkommen kann. Wenn du kommst, so bring jedesmal einen Strang Seide mit, daraus will ich eine Leiter flechten, und wenn die fertig ist, so steige ich herunter, und du nimmst mich auf dein Pferd."></textarea>
           </div>
           <button type="submit" class="btn btn-primary pull-right">Absenden</button>
-          <a class="btn btn-primary pull-right" style="margin-right: 10px;" href="/Home">Zurück</a>
         </form>
 
     </div>
