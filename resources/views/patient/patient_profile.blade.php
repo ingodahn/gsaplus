@@ -49,7 +49,7 @@
     <p>
       Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChagesLeft'] }} Änderungen</strong>.
     </p>
-    <form data-parsley-validate role="form" action="/patient/{{$Name}}/assignment_day" method="post">
+    <form data-parsley-validate role="form" action="/patient/{{$Name}}/day_of_week" method="post">
       {{ csrf_field() }}
       <div class="form-group">
         <label for="day_of_week" class="control-label">Wochentag</label>
