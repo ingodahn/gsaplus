@@ -2,7 +2,7 @@ desc "Shortcut for assets-task"
 task default: %w[update]
 
 desc "Compile sass and publish all assets"
-task assets: [:sass, :js, :fonts, :images]
+task assets: [:sass, :js, :fonts, :images, :css]
 
 desc "Compile and publish sass automatically (watch)"
 task :watch do
@@ -20,12 +20,21 @@ desc "Publish all javascript assets"
 task :js do
   `mkdir -p public/js/`
   `mkdir -p public/js/i18n`
+
   `cp -r resources/assets/js/. public/js/`
+
   `cp bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js public/js/`
   `cp bower_components/jquery/dist/jquery.min.js public/js/`
+
   `cp bower_components/parallax.js/parallax.min.js public/js/`
+
   `cp bower_components/parsleyjs/dist/parsley.min.js public/js/`
   `cp bower_components/parsleyjs/dist/i18n/de.js public/js/i18n/`
+
+  `cp bower_components/datatables.net/js/jquery.dataTables.min.js public/js/dataTables.min.js`
+  `cp bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js public/js/`
+  `cp bower_components/datatables.net-responsive/js/dataTables.responsive.min.js public/js/`
+  `cp bower_components/datatables.net-responsive-bs/js/responsive.bootstrap.js public/js/dataTables.responsive.bootstrap.js`
 end
 
 desc "Publish all font assets"
@@ -40,6 +49,12 @@ desc "Publish all image assets"
 task :images do
   `mkdir -p public/img/`
   `cp -r resources/assets/img/. public/img`
+end
+
+desc "Publish all precompiled css assets"
+task :css do
+  sh "cp bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css public/css/"
+  sh "cp bower_components/datatables.net-responsive-bs/css/responsive.bootstrap.min.css public/css/datatables.responsive.bootstrap.min.css"
 end
 
 desc "Delete published assets"
