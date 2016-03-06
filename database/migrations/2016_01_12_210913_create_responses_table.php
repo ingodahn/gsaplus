@@ -17,6 +17,7 @@ class CreateResponsesTable extends Migration
 
             $table->dateTime('date');
             $table->string('text');
+            $table->tinyInteger('rating');
 
             $table->integer('assignment_id')->unsigned();
             $table->integer('therapist_id')->unsigned();

@@ -2,13 +2,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 use App\Models;
-use App\Http\Controllers;
-use Prologue\Alerts\Facades\Alert;
-
-use App\Http\Controllers\Days;
 
 /**
  * @author dahn

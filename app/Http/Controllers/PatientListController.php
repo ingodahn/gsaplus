@@ -8,7 +8,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
-
 use Session;
 
 use App\Http\Requests;
@@ -17,9 +16,10 @@ use Yajra\Datatables\Datatables;
 use App\Models;
 use App\Helper;
 use App\Patient;
+use App\Models\PatientStatus;
+use App\Models\AssignmentStatus;
 
 use App\Http\Controllers;
-
 use Prologue\Alerts\Facades\Alert;
 
 
@@ -119,39 +119,33 @@ class PatientListController extends Controller
 
 		return Datatables::of(Patient::select('*'))
 			->removeColumn('email')
-			->addColumn('patient_status', function ($row) {
-				$patient_info = new PatientInfo($row);
-				return $patient_info->status();
+			->addColumn('patient_status', function ($patient) {
+				return PatientStatus::$STATUS_INFO[$patient->status()];
 			})
-			->addColumn('status_of_next_assignment', function($row){
-				$patient_info = new PatientInfo($row);
-				return $patient_info->status_of_next_assignment();
+			->addColumn('status_of_next_assignment', function($patient){
+				return AssignmentStatus::$STATUS_INFO[$patient->status_of_next_assignment()];
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
 			})
-			-> addColumn('patientWeek', function($row) {
-				$patient_info = new PatientInfo($row);
-				return $patient_info->patientWeek();
+			->addColumn('patient_week', function($patient) {
+				return $patient->patient_week() === -1 ? "-" : $patient->patient_week();
 			})
-			-> addColumn('lastActivity', function($row) {
-				$patient_info = new PatientInfo($row);
-				return $patient_info->lastActivity();
+			->addColumn('last_activity', function($patient) {
+				return $patient->last_activity;
 			})
-			-> addColumn('therapist', function($row) {
-				$patient_info = new PatientInfo($row);
-				return $patient_info->therapist();
+			->addColumn('therapist', function($patient) {
+				return $patient->therapist !== null ? $patient->therapist->name : "-";
 			})
 			-> addColumn('selection', function($row){
 				$name=$row->name;
 				return '<input type="checkbox" name="list_of_names[]" value="'.$name.'"></input>';
 			})
-			->addColumn('overdue', function($row) {
-				$patient_info = new PatientInfo($row);
-				return $patient_info->overdue();
+			->addColumn('overdue', function($patient) {
+				return round($patient->overdue() * 100, 0)."%";
 			})
-			->edit_column('name', function($row) {
-				$name = $row->name;
+			->edit_column('name', function($patient) {
+				$name = $patient->name;
 				return '<a href="/Diary/'.$name.'">'.$name.'</a>';
 			})
 			->make(true);

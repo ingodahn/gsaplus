@@ -10,7 +10,7 @@ use Therapeuten\DataModel;
  * @version 1.0
  * @created 13-Jan-2016 15:50:31
  */
-class Session_info
+class SessionInfo
 {
 
 	/**

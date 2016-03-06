@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Input;
-use Session;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Prologue\Alerts\Facades\Alert;
 
+use App\Patient;
 
 /**
  * @author dahn
@@ -66,13 +61,27 @@ class ContactController extends Controller
 	 */
 	public function message_to_patients(Request $request)
 	{
-		$list_of_names=$request->input('list_of_names');
-		$mail_subject=$request->input('mail_subject');
-		$mail_body=$request->input('mail_body');
-		$patient_names=explode(', ',$list_of_names);
-		foreach ($patient_names as $name){
-			// Send mail
-		}
+		$list_of_names = $request->input('list_of_names');
+		$mail_subject = $request->input('mail_subject');
+		$mail_body = $request->input('mail_body');
+
+		$list_of_names = str_replace(' ', '', $list_of_names);
+
+		// sort both collections by name
+		$patient_names = collect(explode(',', $list_of_names))->sort()->flatten();
+		$patient_mails = array_pluck(Patient::whereIn('name', $patient_names)->get()->sortBy('name'), 'email');
+
+		Mail::raw($mail_body, function ($message) use ($patient_names, $patient_mails, $mail_subject) {
+			// no from part needed - the sites name and email address can be found
+			// under 'mail.from' in file config/mail.php
+			for ($i = 0; $i < count($patient_mails); $i++) {
+				// works because collections are sorted (see above)
+				$message->to($patient_mails[$i], $patient_names->toArray()[$i]);
+			}
+
+			$message->subject($mail_subject);
+		});
+
 		// Alert not shown
 		Alert::info('Die Mails wurden verschickt.')->flash();
 		return Redirect::to('/Home');

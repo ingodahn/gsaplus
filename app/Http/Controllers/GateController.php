@@ -2,23 +2,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
-use Session;
 use Illuminate\Support\Facades\Auth;
-
-use App\Code;
-use App\Patient;
-
-use App\Http\Controllers\Days;
+use Session;
 
 use Carbon\Carbon;
 
+use App\Code;
+use App\Patient;
+use App\Therapist;
 use App\Helper;
-
 use App\Models;
+
 use Prologue\Alerts\Facades\Alert;
 
 /**
@@ -220,7 +217,7 @@ class GateController extends Controller
 		//if (Name or eMail already in use) {
 		if ($nameExists || $emailExists) {
 			$message = "Ihre Registrierung ist leider fehlgeschlagen.".
-				($nameExists ? "Bitte w&auml;hlen Sie einen anderen Benutzernamen." :
+				($nameExists ? "Bitte wählen Sie einen anderen Benutzernamen." :
 					"Bitte überprüfen Sie die eingegebene E-Mail-Adresse.");
 
 			$days = new Days;
@@ -242,6 +239,9 @@ class GateController extends Controller
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;
 			$patient->is_random = false;
+			$patient->date_from_clinics = null;
+
+			$patient->therapist()->associate(Therapist::orderByRaw("RAND()")->get()->first());
 
 			$patient->save();
 
@@ -275,7 +275,7 @@ class GateController extends Controller
 
 			if ($validation->fails()) {
 				// return Redirect::back()->withErrors($validation)->withInput();
-				Alert::warning('Bitte geben Sie den Code ein, den Sie f&uuml;r die Teilnahme an der Studie erhalten haben.')->flash();
+				Alert::warning('Bitte geben Sie den Code ein, den Sie für die Teilnahme an der Studie erhalten haben.')->flash();
 				return Redirect::to('/Login');
 			}
 
@@ -286,7 +286,7 @@ class GateController extends Controller
 
 			if ($this->code_status($code) === $this->CODE_REGISTERED) {
 				// code is already registered
-				Alert::warning('Dieser Code wurde bereits registriert, Sie k&ouml;nen sich anmelden.')->flash();
+				Alert::warning('Dieser Code wurde bereits registriert. Bitte loggen Sie sich mit Ihrem Benutzernamen und Passwort ein.')->flash();
 				return Redirect::to('/Login');
 			} else if ($this->code_status($code) === $this->CODE_UNREGISTERED) {
 				// code isn't yet registered
