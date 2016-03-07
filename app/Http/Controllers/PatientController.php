@@ -78,7 +78,7 @@ class PatientController extends Controller
 		$patient_info['status']=$patient->status();
 		$patient_info['therapist']=$patient->therapist === null ? "-" : $patient->therapist->name;
 		$patient_info['listOfTherapists']=array_pluck(Therapist::all()->sortBy('name')->toArray(),'name');
-		$profile_user_model['Patient']=$patient;
+		$profile_user_model['Patient']=$patient_info;
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);
 		return view('patient.patient_profile')->with($profile_user_model);
