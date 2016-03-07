@@ -15,10 +15,10 @@ $nav-height: 100px;
 
 .nav-logo {
   height: $nav-height;
-  margin-left: -12px; // Fix for border in logo graphic
+  padding-top: 5px;
 }
 
-$parallax-window-height: 600px;
+$parallax-window-height: 400px;
 
 .parallax-window {
   background: transparent;
@@ -41,7 +41,7 @@ $parallax-window-height: 600px;
 
 .register-login {
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 40px;
+  padding: 20px;
 }
 
 .modal-video {
