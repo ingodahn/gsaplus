@@ -13,6 +13,15 @@ bower install # Fetch frontend-dependencies
 rake # Compile/copy frontend-dependencies into public
 ```
 
+## Cron
+If you are not using Vagrant, add the following cron job:
+
+``` bash
+* * * * * php /var/www/artisan schedule:run >> /dev/null 2>&1
+```
+
+You may need to change the path for the `artisan`-script (it's in this project's root). See <https://laravel.com/docs/master/scheduling>. The schedule at `app/Console/Kernel.php` has a test-command that should log a message to `storage/logs/laravel.log` every day. You can change the rate to `->everyMinute()` for testing.
+
 ## Common Errors
 * *Permission denied*, *File does not exist* and other File-Errors: Sometimes the gitignore excludes directories that need to exist for the application. This is a configuration error and should be reported to <mbrack@uni-koblenz.de>.
 * *You don't have permission to access / on this server.* The VM is not running and you are once again pestering some random server on the internet. Use `vagrant up` in the project dir to start the VM. On some occasions you'll have do reboot the host machine prior to that (not sure why, but it seems to help).
