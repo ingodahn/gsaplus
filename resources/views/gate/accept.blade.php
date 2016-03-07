@@ -14,6 +14,11 @@
       <li>3. Daten</li>
     </ol>
 
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
+      </div>
+    </div>
+
     <p>Ihre verbindliche Zusage zur Teilnahme an unserem Projekt ist uns sehr wichtig:</p>
 
     <div class="checkbox" style="margin-top: 15px;">

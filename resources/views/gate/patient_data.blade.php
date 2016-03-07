@@ -12,6 +12,11 @@
       <li class="active">3. Daten</li>
     </ol>
 
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
+      </div>
+    </div>
+
     {{-- All active form content must stay in this form for frontend and backend processing --}}
     <form id="registration-form" data-parsley-validate role="form" action="/SavePatientData" method="post">
       <!-- TODO: better URLs

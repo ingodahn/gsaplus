@@ -11,6 +11,11 @@
       <li>3. Daten</li>
     </ol>
 
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+      </div>
+    </div>
+
     <p>Sehr geehrter Teilnehmer, sehr geehrte Teilnehmerin,</p>
 
     <p>im Rahmen unseres internetbasierten Nachsorgeprogramms stelle ich mich hiermit als Ihr Online-Therapeut vor, der Sie nun die nächsten 12 Wochen bei Ihrem beruflichen Wiedereinstieg begleiten und unterstützen wird. Ich möchte Sie anregen, mir Ihre Erwartungen und Erfahrungen bei der Rückkehr an den Arbeitsplatz in Form von wöchtentlichen Tagebucheinträgen schriftlich mitzuteilen. Aus wissenschaftlichen Studien wissen wir, dass regelmäßiges Aufschreiben hilft, besser mit Belastungen und Stress umzugehen.</p>
