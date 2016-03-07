@@ -70,7 +70,7 @@
         </div>
 
         <div class="form-group col-sm-6">
-          <label class="control-label">Wiederholen</label>
+          <label class="control-label">E-Mail wiederholen</label>
           <input type="email" placeholder="w.meyer@web.de" class="form-control width-100" required data-parsley-equalto="#email">
         </div>
       </div>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="form-group col-sm-6">
-          <label class="control-label">Wiederholen</label>
+          <label class="control-label">Passwort wiederholen</label>
           <input type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
         </div>
       </div>
