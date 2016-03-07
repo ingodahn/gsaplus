@@ -9,6 +9,11 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=775", "fmode=664"]
     config.vm.provision "shell", path: "provision.sh"
 
+    $script = <<-SCRIPT
+      (crontab -l ; echo "* * * * * php /var/www/artisan schedule:run >> /dev/null 2>&1") | crontab
+    SCRIPT
+    config.vm.provision "shell", inline: $script, privileged: false
+
 
     # Optional NFS. Make sure to remove other synced_folder line too
     #config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
