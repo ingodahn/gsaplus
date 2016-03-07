@@ -1,6 +1,5 @@
-<footer>
+<footer class="footer">
   <div class="container">
-    <hr>
     <nav class="navbar navbar-footer">
           <ul class="nav navbar-nav">
             <li><a href="https://gitlab.uni-koblenz.de/iwm/gsa-online-plus">Über das Projekt</a></li>
