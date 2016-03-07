@@ -98,3 +98,17 @@ hr {
 
 // Magic fix for video-modals in Firefox (http://stackoverflow.com/a/27441661)
 .modal.fade .modal-dialog{transform:none !important;}
+
+// Popover typography
+
+.popover{
+    max-width: 500px; /* Max Width of the popover (depending on the container!) */
+}
+
+.popover-title {
+    font-size: 15px;
+
+}
+.popover-content {
+    font-size: 15px;
+}
