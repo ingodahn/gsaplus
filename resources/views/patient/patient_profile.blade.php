@@ -127,6 +127,7 @@
     <hr>
     <h3>Persönliche Informationen</h3>
     <form data-parsley-validate role="form" action="/patient/{{$Name}}/personalInformation" method="post">
+      {{ csrf_field() }}
       <div class="form-group">
         <label for="personalInformation" class="control-label">Informationen</label>
         <textarea name="personalInformation" rows="5" value="{{ $Patient['personalInformation'] }}" class="form-control" placeholder="Hat eine Meinung zu Earl Grey."></textarea>
