@@ -21,19 +21,19 @@
 
     <p>Ihre verbindliche Zusage zur Teilnahme an unserem Projekt ist uns sehr wichtig:</p>
 
-    <div class="checkbox" style="margin-top: 15px;">
+    <div class="checkbox accept">
       <label>
         <input type="checkbox" value="" class="commit-checkbox">
         Ich bin bereit, die Plattform GSA-online plus regelmäßig zu besuchen
       </label>
     </div>
-    <div class="checkbox" style="margin-top: 15px;">
+    <div class="checkbox accept">
       <label>
         <input type="checkbox" value="" class="commit-checkbox">
         Ich bin bereit, für einen Zeitraum von 12 Wochen einmal wöchentlich ca. 45 Minuten Zeit zu investieren
       </label>
     </div>
-    <div class="checkbox" style="margin-top: 15px;">
+    <div class="checkbox accept">
       <label>
         <input type="checkbox" value="" class="commit-checkbox">
         Ich bin bereit, regelmäßig einen kurzen Fragebogen zu beantworten
