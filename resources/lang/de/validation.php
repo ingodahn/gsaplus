@@ -106,7 +106,9 @@ return [
     */
 
     'attributes' => [
-        //
+        'eMail' => 'E-Mail-Adresse',
+        'subject' => 'Betreff',
+        'message' => 'Nachricht'
     ],
 
 ];

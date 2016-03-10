@@ -9,6 +9,8 @@ use Prologue\Alerts\Facades\Alert;
 
 use App\Patient;
 
+use Validator;
+
 /**
  * @author dahn
  * @version 1.0
@@ -98,6 +100,18 @@ class ContactController extends Controller
 	 */
 	public function send_message(Request $request)
 	{
+		$validator = Validator::make($request->all(), [
+			'eMail' => 'required|email',
+			'subject' => 'required',
+			'message' => 'required'
+		]);
+
+		if ($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator)
+				->withInput();
+		}
+
 		$eMail=$request->input('eMail');
 		$subject=$request->input('subject');
 		$bodyMessage=$request->input('message');
