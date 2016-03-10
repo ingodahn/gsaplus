@@ -71,7 +71,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/SendMail','ContactController@message_to_patients');
 	Route::post('/MassAction/mail','ContactController@mail_editor');
 	// Route::post('/SaveProfile','PatientController@save_profile');
-	Route::post('CancelIntervention','PatientController@cancel_intervention');
 
 	// patient profile: routes for post requests
 	Route::group(['prefix' => '/patient/{patient}'], function () {
@@ -80,6 +79,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('dateFromClinics', 'PatientController@save_date_from_clinics');
 		Route::post('password', 'PatientController@save_password');
 		Route::post('personalInformation', 'PatientController@save_personal_information');
+		Route::get('cancelIntervention', 'PatientController@cancel_intervention');
 	});
 
 });
