@@ -4,6 +4,7 @@
 @section('content')
   <div class="container">
 
+
     <h2>
       {{ $Name }}
       <small>
@@ -27,6 +28,7 @@
       <p>Die Notizen des Therapeuten bleiben unsichtbar</p>
     @endif
 
+
     <hr>
     <h3>Therapeut</h3>
     <form data-parsley-validate role="form" action="/patient/{{$Name}}/therapist" method="post">
@@ -46,6 +48,7 @@
         </div>
       </p>
     </form>
+
 
     <hr>
     <h3>Tagebuchtag</h3>
@@ -148,11 +151,13 @@
       </p>
     </form>
 
+
     <hr>
     <h3>Intervention beenden</h3>
     <p>
       <a href="/patient/{{$Name}}/cancelIntervention" class="btn btn-danger">Intervention beenden</a>
     </p>
+
 
   </div>
 @endsection
