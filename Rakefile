@@ -25,8 +25,9 @@ task :js do
   `cp bower_components/jquery/dist/jquery.min.js public/js/`
   `cp bower_components/parallax.js/parallax.min.js public/js/`
   `cp bower_components/parsleyjs/dist/parsley.min.js public/js/`
-  `cp bower_components/parsleyjs/dist/i18n/de.js public/js/i18n/`
+  `cp bower_components/parsleyjs/dist/i18n/de.js public/js/i18n/parsley-de.js`
   `cp bower_components/moment/min/moment.min.js public/js/`
+  `cp bower_components/moment/locale/de.js public/js/i18n/moment-de.js`
   `cp bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js public/js/`
 end
 

@@ -86,7 +86,7 @@
         <div class="form-group">
           <div class='input-group date' id='datetimepicker1'>
             {{-- <label for="dateFromClinics" class="control-label">Entlassungsdatum</label> --}}
-            <input name="dateFromClinics" type='text' value="{{ $Patient['dateFromClinics'] }}" class="form-control">
+            <input name="dateFromClinics" type='text' value="{{ $Patient['dateFromClinics'] }}" class="form-control" required>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -95,7 +95,10 @@
         </div>
       <script type="text/javascript">
           $(function () {
-              $('#datetimepicker1').datetimepicker();
+              $('#datetimepicker1').datetimepicker({
+                locale: 'de',
+                format: 'DD.MM.YYYY'
+              });
           });
       </script>
       <p>
