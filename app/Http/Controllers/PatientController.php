@@ -6,6 +6,15 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Patient;
 use App\Therapist;
+use App\Helper;
+
+use Carbon\Carbon;
+
+use Hash;
+
+use Prologue\Alerts\Facades\Alert;
+
+use Illuminate\Support\Facades\Redirect;
 
 /**
  * Die Klasse zeigt das Profil des Patienten an und erlaubt Veränderungen daran.
@@ -67,7 +76,7 @@ class PatientController extends Controller
 		$profile_user_model['Name']=$name;
 		$profile_user_model['Role']=$user_role;
 		$patient_info=[];
-		$patient_info['assignment_day']=$patient->assignment_day;
+		$patient_info['assignment_day']=Helper::generate_day_number_map()[$patient->assignment_day];
 		$patient_info['assignmentDayChagesLeft']=$patient->assignment_day_changes_left;
 		$patient_info['code']=$patient->code;
 		$patient_info['dateFromClinics']=$patient->date_from_clinics;
@@ -123,6 +132,95 @@ class PatientController extends Controller
 		//alert("Profil für ".$name."
 		//aktualisiert.");
 		Redirect::to('/Home');
+	}
+
+	public function save_therapist(Request $request, Patient $patient) {
+		$name_of_therapist = $request->input('therapist');
+
+		$therapist = Therapist::where('name', $name_of_therapist)->first();
+
+		if ($therapist === null && $patient->therapist() !== null) {
+			$patient->therapist()->dissociate();
+
+			Alert::warning('Ein Therapeut mit dem Namen '. $name_of_therapist .
+							' ist nicht registriert. Der Therapeut wurde somit zurückgesetzt.')->flash();
+		} else {
+			$patient->therapist()->associate($therapist);
+
+			Alert::info('Der Therapeut wurde erfolgreich geändert.')->flash();
+		}
+
+		$patient->save();
+
+		return Redirect::back();
+	}
+
+	public function save_day_of_week(Request $request, Patient $patient) {
+		// Sonntag, ..., Donnerstag
+		$day_of_week = $request->input('day_of_week');
+
+		$day_number = Helper::generate_day_name_map()[$day_of_week];
+
+		if ($day_number !== null) {
+			$patient->assignment_day = $day_number;
+			$patient->save();
+
+			Alert::info('Der Schreibtag wurde erfolgreich geändert.')->flash();
+
+			return Redirect::back();
+		} else {
+			Alert:error('Der angegebene Schreibtag ist ungültig.')->flash();
+
+			return Redirect::back();
+		}
+	}
+
+	public function save_date_from_clinics(Request $request, Patient $patient) {
+		// format: yyyy-mm-dd
+		$date_from_clinics_string = $request->input('dateFromClinics');
+
+		$date_from_clinics = Carbon::createFromFormat('Y-m-d', $date_from_clinics_string);
+
+		if ($date_from_clinics !== null) {
+			$patient->date_from_clinics = $date_from_clinics;
+
+			Alert::info('Das Entlassungsdatum wurde erfolgreich geändert.')->flash();
+		} else {
+			Alert::error('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->flash();
+		}
+
+		return Redirect::back();
+	}
+
+	public function save_password(Request $request, Patient $patient) {
+		$old_password = $request->input('oldPassword');
+		$password = $request->input('newPassword');
+
+		if (Hash::check($old_password, $patient->password)) {
+			$patient->password = bcrypt($password);
+			$patient->save();
+
+			Alert::info('Das Passwort wurde erfolgreich geändert.')->flash();
+		} else {
+			Alert::danger('Das eingegebene Passwort ist nicht korrekt.')->flash();
+		}
+
+		return Redirect::back();
+	}
+
+	public function save_personal_information(Request $request, Patient $patient) {
+		$personal_information = $request->input('personalInformation');
+
+		if ($personal_information !== '') {
+			$patient->personal_information = $personal_information;
+			$patient->save();
+
+			Alert::info('Die persönlichen Notizen wurden erfolgreich geändert.')->flash();
+		} else {
+			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
+		}
+
+		return Redirect::back();
 	}
 
 }
