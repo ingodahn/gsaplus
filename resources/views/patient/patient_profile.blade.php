@@ -22,7 +22,18 @@
     @if ($isTherapist)
       <hr>
       <h3>Notizen</h3>
-      <p>{{ $Patient['notes'] }}</p>
+      <form data-parsley-validate role="form" action="/patient/{{$Name}}/notes" method="post">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <label for="notes" class="control-label">Notizen</label>
+          <textarea name="notes" rows="5" class="form-control">{{ $Patient['notes'] }}</textarea>
+        </div>
+        <p>
+          <div class="form-group">
+            <button type="submit" class="btn">Notizen ändern</button>
+          </div>
+        </p>
+      </form>
     @endif
 
 
