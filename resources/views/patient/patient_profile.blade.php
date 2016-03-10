@@ -42,7 +42,7 @@
       </div>
       <p>
         <div class="form-group">
-          <button type="submit" class="btn">Tagebuchtag setzen</button>
+          <button type="submit" class="btn">Therapeut setzen</button>
         </div>
       </p>
     </form>
