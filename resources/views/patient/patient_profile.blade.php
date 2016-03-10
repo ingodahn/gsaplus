@@ -26,7 +26,7 @@
         {{ csrf_field() }}
         <div class="form-group">
           <label for="notes" class="control-label">Notizen</label>
-          <textarea name="notes" rows="5" class="form-control">{{ $Patient['notes'] }}</textarea>
+          <textarea name="notes" rows="5" class="form-control" placeholder="Hat eine zu krasse Meinung zu Earl Grey.">{{ $Patient['notes'] }}</textarea>
         </div>
         <p>
           <div class="form-group">
