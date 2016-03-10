@@ -16,9 +16,6 @@
 
 
     <p>
-      Dies ist das Profil von <strong>{{ $Name }}</strong> aus der Sicht des Benutzers mit der Rolle <code>{{ $Role }}</code>.
-    </p>
-    <p>
       <a href="/Logout" class="btn btn-warning">Ausloggen</a>
     </p>
 
