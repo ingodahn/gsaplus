@@ -80,6 +80,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('password', 'PatientController@save_password');
 		Route::post('personalInformation', 'PatientController@save_personal_information');
 		Route::get('cancelIntervention', 'PatientController@cancel_intervention');
+		Route::post('notes', 'PatientController@save_notes_of_therapist');
 	});
 
 });

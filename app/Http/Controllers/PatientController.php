@@ -117,7 +117,9 @@ class PatientController extends Controller
 	}
 
 	public function save_day_of_week(Request $request, Patient $patient) {
-		if ($patient->assignment_day_changes_left > 0) {
+		$is_therapist = ($request->user()->type === 'therapist');
+
+		if ($patient->assignment_day_changes_left > 0 || $is_therapist) {
 			// Sonntag, ..., Donnerstag
 			$day_of_week = $request->input('day_of_week');
 
@@ -125,6 +127,7 @@ class PatientController extends Controller
 
 			if ($day_number !== null) {
 				$patient->assignment_day = $day_number;
+				$is_therapist ?: $patient->assignment_day_changes_left -= 1 ;
 				$patient->save();
 
 				Alert::info('Der Schreibtag wurde erfolgreich geändert.')->flash();
@@ -182,6 +185,21 @@ class PatientController extends Controller
 			$patient->save();
 
 			Alert::info('Die persönlichen Notizen wurden erfolgreich geändert.')->flash();
+		} else {
+			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
+		}
+
+		return Redirect::back();
+	}
+
+	public function save_notes_of_therapist(Request $request, Patient $patient) {
+		$notes_of_therapist = $request->input('notes');
+
+		if ($notes_of_therapist !== '') {
+			$patient->notes_of_therapist = $notes_of_therapist;
+			$patient->save();
+
+			Alert::info('Die Notizen wurden erfolgreich geändert.')->flash();
 		} else {
 			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
 		}
