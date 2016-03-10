@@ -1,16 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Patientenliste')
 @section('additional-head')
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/dataTables.bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/datatables.responsive.bootstrap.min.css"/>
 
-  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+  <script src="/js/dataTables.min.js"></script>
+  <script src="/js/dataTables.bootstrap.min.js"></script>
 
-  <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
-
-  <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.0.2/js/responsive.bootstrap.min.js"></script>
+  <script src="/js/dataTables.responsive.min.js"></script>
+  <script src="/js/dataTables.responsive.bootstrap.js"></script>
 
   <script src="//cdn.datatables.net/plug-ins/1.10.11/sorting/datetime-moment.js"></script>
 
@@ -18,7 +16,7 @@
     $(function() {
       $('#PatientList').DataTable({
         "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/German.json"
+          "url": "/js/dataTable-german.json"
         },
         stateSave: true,
         ajax: '{!! route('datatables.data') !!}',

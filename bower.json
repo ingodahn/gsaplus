@@ -18,6 +18,10 @@
     "font-awesome": "~4.5.0",
     "material-colors": "shuhei/material-colors#~1.0.0",
     "parsleyjs": "~2.2.0",
-    "parallax.js": "~1.4.2"
+    "parallax.js": "~1.4.2",
+    "datatables.net": "~1.10.11",
+    "datatables.net-bs": "~1.10.11",
+    "datatables.net-responsive": "~2.0.2",
+    "datatables.net-responsive-bs": "~2.0.2"
   }
 }
