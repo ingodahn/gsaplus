@@ -67,6 +67,7 @@ class PatientController extends Controller
 		$profile_user_model['Name'] = $name;
 		$profile_user_model['Role'] = $user_role;
 		$profile_user_model['isTherapist'] = $user_role == "therapist";
+		$profile_user_model['isPatient'] = $user_role == "patient";
 
 		$patient_info=[];
 		$patient_info['assignment_day'] = Helper::generate_day_number_map()[$patient->assignment_day];
