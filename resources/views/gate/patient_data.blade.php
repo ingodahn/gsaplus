@@ -36,7 +36,7 @@
           <i class="fa fa-question-circle"></i>
         </a>
         <select name="day_of_week" class="form-control" required>
-          @@foreach($DayOfWeek as $available_day)
+          @foreach($DayOfWeek as $available_day)
             <option>{{$available_day}}</option>
           @endforeach
         </select>

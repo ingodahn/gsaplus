@@ -35,7 +35,7 @@
         <label for="therapist" class="control-label">Therapeut</label>
         <select name="therapist" class="form-control" required>
           <option>{{ $Patient['therapist'] }}</option>
-          @@foreach(array_diff($Patient['listOfTherapists'], [$Patient['therapist']]) as $therapist)
+          @foreach(array_diff($Patient['listOfTherapists'], [$Patient['therapist']]) as $therapist)
             <option>{{$therapist}}</option>
           @endforeach
         </select>
@@ -66,7 +66,7 @@
         </a>
         <select name="day_of_week" class="form-control" required>
           <option>{{ $Patient['assignment_day'] }}</option>
-          @@foreach(array_diff($Patient['available_days'], [$Patient['assignment_day']]) as $day)
+          @foreach(array_diff($Patient['available_days'], [$Patient['assignment_day']]) as $day)
             <option>{{ $day }}</option>
           @endforeach
         </select>
