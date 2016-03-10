@@ -15,7 +15,8 @@ class Patient extends User
     protected static $persisted = ['code', 'assignment_day', 'assignment_day_changes_left', 'date_from_clinics',
         // patient status should be determined - not cached
         // 'patient_status',
-        'last_activity', 'personal_information', 'notes_of_therapist', 'registration_date', 'therapist_id' ];
+        'last_activity', 'personal_information', 'notes_of_therapist', 'registration_date', 'therapist_id',
+        'intervention_ended_on' ];
 
     /**
      * Get our assignments (all - independent of state).
@@ -90,7 +91,7 @@ class Patient extends User
      * @return the week the intervention ended or null (if intervention is still running)
      */
     public function intervention_ended_in_week() {
-        return intervention_ended_on !== null ? $this->week_for_date($this->intervention_ended_on) : null;
+        return $this->intervention_ended_on !== null ? $this->week_for_date($this->intervention_ended_on) : null;
     }
 
     /**
@@ -195,6 +196,10 @@ class Patient extends User
         // ansonsten bekommt er eine Erinnerung vom System (5 Tage danach - konfigurierbar)
         // der Patient kann dann bis zum nächsten Schreibtag antworten
         // am nächsten Schreibtag gilt die Aufgabe als versäumt
+
+        if ($this->intervention_ended_on !== null) {
+            return PatientStatus::INTERVENTION_ENDED;
+        }
 
         $patient_week = $this->patient_week();
 
