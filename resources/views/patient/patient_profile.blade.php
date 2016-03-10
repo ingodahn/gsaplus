@@ -76,7 +76,7 @@
         Änderungen.
       @endif
     </p>
-    @if($Patient['assignmentDayChangesLeft'] > 0 || isTherapist)
+    @if($Patient['assignmentDayChangesLeft'] > 0 || $isTherapist)
       <form data-parsley-validate role="form" action="/patient/{{$Name}}/day_of_week" method="post">
         {{ csrf_field() }}
         <div class="form-group">
