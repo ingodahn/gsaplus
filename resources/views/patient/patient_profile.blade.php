@@ -50,7 +50,7 @@
     <hr>
     <h3>Tagebuchtag</h3>
     <p>
-      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChagesLeft'] }} Änderungen</strong>.
+      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChangesLeft'] }} Änderungen</strong>.
     </p>
     <form data-parsley-validate role="form" action="/patient/{{$Name}}/day_of_week" method="post">
       {{ csrf_field() }}
