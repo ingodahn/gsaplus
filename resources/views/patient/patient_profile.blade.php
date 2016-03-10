@@ -30,12 +30,15 @@
     <hr>
     <h3>Therapeut</h3>
     <form data-parsley-validate role="form" action="/patient/{{$Name}}/therapist" method="post">
-      {{-- TODO: Mit einem select machen --}}
       {{ csrf_field() }}
       <div class="form-group">
         <label for="therapist" class="control-label">Therapeut</label>
-        {{-- TODO: Set value to current therapist --}}
-        <input name="therapist" type="text" class="form-control" placeholder="dr_ogen" required>
+        <select name="therapist" class="form-control" required>
+          <option>{{ $Patient['therapist'] }}</option>
+          @@foreach(array_diff($Patient['listOfTherapists'], [$Patient['therapist']]) as $therapist)
+            <option>{{$therapist}}</option>
+          @endforeach
+        </select>
       </div>
       <p>
         <div class="form-group">
