@@ -60,12 +60,10 @@
           <i class="fa fa-question-circle"></i>
         </a>
         <select name="day_of_week" class="form-control" required>
-          {{-- TODO: Use available dates like in patient_data --}}
-          <option>Montag</option>
-          <option>Dienstag</option>
-          <option>Mittwoch</option>
-          <option>Donnerstag</option>
-          <option>Freitag</option>
+          <option>{{ $Patient['assignment_day'] }}</option>
+          @@foreach(array_diff($Patient['available_days'], [$Patient['assignment_day']]) as $day)
+            <option>{{ $day }}</option>
+          @endforeach
         </select>
       </div>
       <p>
