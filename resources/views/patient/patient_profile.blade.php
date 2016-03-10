@@ -163,7 +163,7 @@
         {{ csrf_field() }}
         <div class="form-group">
           <label for="personalInformation" class="control-label">Informationen</label>
-          <textarea name="personalInformation" rows="5" value="{{ $Patient['personalInformation'] }}" class="form-control" placeholder="Hat eine Meinung zu Earl Grey."></textarea>
+          <textarea name="personalInformation" rows="5" class="form-control" placeholder="Ich habe eine Meinung zu Earl Grey.">{{ $Patient['personalInformation'] }}</textarea>
         </div>
         <p>
           <div class="form-group">
