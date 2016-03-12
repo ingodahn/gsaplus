@@ -241,8 +241,6 @@ class GateController extends Controller
 			$patient->is_random = false;
 			$patient->date_from_clinics = null;
 
-			$patient->therapist()->associate(Therapist::orderByRaw("RAND()")->get()->first());
-
 			$patient->save();
 
 			$days = new Days;
