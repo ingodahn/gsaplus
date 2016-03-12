@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('password', 60);
             $table->dateTime('last_login')->nullable();
-            $table->dateTime('registration_date');
 
+            $table->dateTime('registration_date');
             $table->string('code');
             $table->tinyInteger('assignment_day');
             $table->tinyInteger('assignment_day_changes_left');

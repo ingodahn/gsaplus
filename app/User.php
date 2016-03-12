@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
+use Jenssegers\Date\Date;
+
 use App\Patient;
 use App\Admin;
 use App\Therapist;
@@ -22,7 +24,17 @@ class User extends Authenticatable
     protected static $persisted = ['name', 'email', 'password', 'last_login', 'is_random'];
 
     protected $dates = ['created_at', 'updated_at', 'last_login' ,
-                            'registration_date', 'date_from_clinics', 'last_activity'];
+                            'registration_date', 'date_from_clinics', 'last_activity', 'intervention_ended_on'];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 
     /**
      * The attributes that are mass assignable.
