@@ -13,6 +13,9 @@
           <iframe width="560" height="315" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-danger" data-dismiss="modal">Close</a>
+      </div>
     </div>
   </div>
 
