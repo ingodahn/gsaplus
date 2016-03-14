@@ -61,18 +61,19 @@ class RemindUsersOfAssignment extends Command
      */
     public function handle()
     {
-        if ($this->option(self::OPTION_ALL)) {
+        if ($this->option(self::OPTION_FIRST) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_FIRST);
+        }
+
+        if ($this->option(self::OPTION_NEW) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_NEW);
+        }
+
+        if ($this->option(self::OPTION_DUE) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForDueAssignments();
-            $this->sendRemindersForMissedAssignments();
-        } else if ($this->option(self::OPTION_FIRST)) {
-            $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_FIRST);
-        } else if ($this->option(self::OPTION_NEW)) {
-            $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_NEW);
-        } else if ($this->option(self::OPTION_DUE)) {
-            $this->sendRemindersForDueAssignments();
-        } else if ($this->option(self::OPTION_MISSED)) {
+        }
+
+        if ($this->option(self::OPTION_MISSED) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForMissedAssignments();
         }
     }
