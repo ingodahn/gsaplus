@@ -18,7 +18,6 @@
         "language": {
           "url": "/js/dataTable-german.json"
         },
-        stateSave: true,
         ajax: '{!! route('datatables.data') !!}',
         columns: [
           { data: 'selection', name: 'selection', orderable: false, searchable: false},
