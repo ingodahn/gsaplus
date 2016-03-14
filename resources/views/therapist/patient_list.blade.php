@@ -74,14 +74,17 @@
               <input name="So_slots" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
             </div>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-2">
             <button type="submit" class="btn btn-primary">Setzen</button>
-          </div>
-          <div class="col-md-1">
-            <a href="/Logout" class="btn btn-warning pull-right">Logout</a>
           </div>
         </div>
       </form>
+    </p>
+
+    <hr>
+    <p>
+      <a href="/" class="btn btn-default">Home</a>
+      <a href="/Logout" class="btn btn-warning">Logout</a>
     </p>
 
     <hr/>
