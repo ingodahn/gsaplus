@@ -136,7 +136,7 @@ class ContactController extends Controller
 		// alert doesn't work with more than one redirect
 		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
 
-		return Redirect::back();
+		return redirect("/");
 	}
 
 }
