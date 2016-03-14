@@ -12,8 +12,10 @@ function openModal() {
   startVideo();
 }
 
-$('#intro-modal').on('hidden.bs.modal', function () {
-  stopVideo();
+$(function(){
+  $('#intro-modal').on('hidden.bs.modal', function () {
+    stopVideo();
+  });
 });
 
 window.onload = function() {
