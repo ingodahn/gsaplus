@@ -113,7 +113,7 @@ class PatientController extends Controller
 
 		$patient->save();
 
-		return Redirect::back();
+		return Redirect::to("/");
 	}
 
 	public function save_day_of_week(Request $request, Patient $patient) {
@@ -138,7 +138,7 @@ class PatientController extends Controller
 			Alert::danger("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->flash();
 		}
 
-		return Redirect::back();
+		return Redirect::to("/");
 	}
 
 	public function save_date_from_clinics(Request $request, Patient $patient) {
@@ -158,7 +158,7 @@ class PatientController extends Controller
 			Alert::info('Das Entlassungsdatum wurde erfolgreich geändert.')->flash();
 		}
 
-		return Redirect::back();
+		return Redirect::to("/");
 	}
 
 	public function save_password(Request $request, Patient $patient) {
@@ -174,7 +174,7 @@ class PatientController extends Controller
 			Alert::danger('Das eingegebene Passwort ist nicht korrekt.')->flash();
 		}
 
-		return Redirect::back();
+		return Redirect::to("/");
 	}
 
 	public function save_personal_information(Request $request, Patient $patient) {
@@ -189,7 +189,7 @@ class PatientController extends Controller
 			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
 		}
 
-		return Redirect::back();
+		return Redirect::to("/");
 	}
 
 	public function save_notes_of_therapist(Request $request, Patient $patient) {
@@ -204,7 +204,7 @@ class PatientController extends Controller
 			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
 		}
 
-		return Redirect::back();
+		return Redirect::to("/");
 	}
 
 }
