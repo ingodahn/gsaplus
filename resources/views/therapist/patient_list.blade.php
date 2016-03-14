@@ -86,12 +86,13 @@
       <a href="/" class="btn btn-default">Home</a>
       <a href="/Logout" class="btn btn-warning">Logout</a>
     </p>
+  </div>
 
+  <div class="container-fluid">
     <hr/>
     <h2>Patientenliste</h2>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
-      <div class="container" style="padding-top: 20px;">
         <table class="table table-bordered" id="PatientList">
           <thead>
           <tr>
@@ -108,7 +109,6 @@
           </tr>
           </thead>
         </table>
-      </div>
       <button type="submit" class="btn btn-primary pull-right">Mail an ausgew&auml;hlte Patienten</button>
     </form>
 
