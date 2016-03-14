@@ -1,9 +1,21 @@
-function openModal() {
+function startVideo() {
   var src = 'https://www.youtube.com/embed/LS-VPyLaJFM?html5=1&autoplay=1';
-  $('#intro-modal').modal('show');
   $('#intro-modal iframe').attr('src', src);
 }
 
+function stopVideo() {
+  $('#intro-modal iframe').attr('src', "about:blank");
+}
+
+function openModal() {
+  $('#intro-modal').modal('show');
+  startVideo();
+}
+
 $('#intro-modal').on('hidden.bs.modal', function () {
-  $('#intro-modal iframe').removeAttr('src');
+  stopVideo();
 });
+
+window.onload = function() {
+  stopVideo();
+};
