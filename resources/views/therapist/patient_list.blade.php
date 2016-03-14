@@ -18,7 +18,6 @@
         "language": {
           "url": "/js/dataTable-german.json"
         },
-        stateSave: true,
         ajax: '{!! route('datatables.data') !!}',
         columns: [
           { data: 'selection', name: 'selection', orderable: false, searchable: false},
@@ -75,21 +74,25 @@
               <input name="So_slots" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
             </div>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-2">
             <button type="submit" class="btn btn-primary">Setzen</button>
-          </div>
-          <div class="col-md-1">
-            <a href="/Logout" class="btn btn-warning pull-right">Logout</a>
           </div>
         </div>
       </form>
     </p>
 
+    <hr>
+    <p>
+      <a href="/" class="btn btn-default">Home</a>
+      <a href="/Logout" class="btn btn-warning">Logout</a>
+    </p>
+  </div>
+
+  <div class="container-fluid">
     <hr/>
     <h2>Patientenliste</h2>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
-      <div class="container" style="padding-top: 20px;">
         <table class="table table-bordered" id="PatientList">
           <thead>
           <tr>
@@ -106,7 +109,6 @@
           </tr>
           </thead>
         </table>
-      </div>
       <button type="submit" class="btn btn-primary pull-right">Mail an ausgew&auml;hlte Patienten</button>
     </form>
 

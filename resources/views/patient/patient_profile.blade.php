@@ -180,6 +180,11 @@
       <a href="/patient/{{$Name}}/cancelIntervention" class="btn btn-danger">Intervention beenden</a>
     </p>
 
+    <hr>
+    <p>
+      <a href="/" class="btn btn-default">Abbrechen</a>
+    </p>
+
 
   </div>
 @endsection
