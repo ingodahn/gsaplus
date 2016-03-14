@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\GateController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -67,7 +68,8 @@ class AuthController extends Controller
         $days = new Days();
 
         if ($days->day_available()) {
-            Session::put('last_reg_page','start');
+            Session::put(GateController::PAGE_SESSION_KEY,
+                GateController::PAGE_STRING_MAP[GateController::PAGE_START]);
         }
 
         return view('gate.start_page', ['RegistrationPossible' => $days->day_available()])
