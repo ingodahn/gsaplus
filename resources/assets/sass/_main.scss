@@ -29,6 +29,9 @@ $parallax-window-height: 400px;
 .parallax-window-nav {
   margin-top: -$nav-height - $navbar-padding-bottom - $navbar-border;
   min-height: $parallax-window-height + $nav-height + $navbar-border;
+  @media (max-height: 640px) {
+    min-height: ($parallax-window-height / 2) + $nav-height + $navbar-border;
+  }
   a {
     color: $red-youtube;
     // Offset button by half of navbar's size since it moves the percieved center

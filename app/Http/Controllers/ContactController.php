@@ -42,7 +42,7 @@ class ContactController extends Controller
 
 	/**
 	 * Zeigt ein Formular zum verfassen von Mails an eine reihe von Patienten an
-	 * 
+	 *
 	 * @param list_of_patients
 	 */
 	public function mail_editor(Request $request)
@@ -56,7 +56,7 @@ class ContactController extends Controller
 
 	/**
 	 * Sendet eine Mail an eine Liste von Patienten
-	 * 
+	 *
 	 * @param list_of_names
 	 * @param mail_subject
 	 * @param mail_body
@@ -88,12 +88,12 @@ class ContactController extends Controller
 		Alert::info('Die Mails wurden verschickt.')->flash();
 		return Redirect::to('/Home');
 	}
-	
+
 	/**
 	 * Die Nachricht mit angegebenem subject, Absender und message wird an das team
 	 * geschickt und
 	 * Es wird mit alert bestätigt, dass eine Nachricht an das Team geschickt wurde.
-	 * 
+	 *
 	 * @param eMail
 	 * @param subject
 	 * @param message
@@ -136,7 +136,7 @@ class ContactController extends Controller
 		// alert doesn't work with more than one redirect
 		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
 
-		return Redirect::back();
+		return redirect("/");
 	}
 
 }

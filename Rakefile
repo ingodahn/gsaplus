@@ -29,12 +29,16 @@ task :js do
   `cp bower_components/parallax.js/parallax.min.js public/js/`
 
   `cp bower_components/parsleyjs/dist/parsley.min.js public/js/`
-  `cp bower_components/parsleyjs/dist/i18n/de.js public/js/i18n/`
+  `cp bower_components/parsleyjs/dist/i18n/de.js public/js/i18n/parsley-de.js`
 
   `cp bower_components/datatables.net/js/jquery.dataTables.min.js public/js/dataTables.min.js`
   `cp bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js public/js/`
   `cp bower_components/datatables.net-responsive/js/dataTables.responsive.min.js public/js/`
   `cp bower_components/datatables.net-responsive-bs/js/responsive.bootstrap.js public/js/dataTables.responsive.bootstrap.js`
+
+  `cp bower_components/moment/min/moment.min.js public/js/`
+  `cp bower_components/moment/locale/de.js public/js/i18n/moment-de.js`
+  `cp bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js public/js/`
 end
 
 desc "Publish all font assets"

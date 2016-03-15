@@ -41,7 +41,7 @@
           <i class="fa fa-question-circle"></i>
         </a>
         <select name="day_of_week" class="form-control" required>
-          @@foreach($DayOfWeek as $available_day)
+          @foreach($DayOfWeek as $available_day)
             <option>{{$available_day}}</option>
           @endforeach
         </select>
@@ -65,6 +65,18 @@
 
       <div class="row">
         <div class="form-group col-sm-6">
+          <label for="password" class="control-label">Passwort</label>
+          <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6">
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label class="control-label">Passwort wiederholen</label>
+          <input type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-sm-6">
           <label for="email" class="control-label">E-Mail Adresse</label>
           <input name="email" id="email" type="email" class="form-control width-100" placeholder="w.meyer@web.de" required>
         </div>
@@ -75,17 +87,9 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label for="password" class="control-label">Passwort</label>
-          <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6">
-        </div>
-
-        <div class="form-group col-sm-6">
-          <label class="control-label">Passwort wiederholen</label>
-          <input type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
-        </div>
-      </div>
+      <p><b>Hinweis:</b>
+        Speichern Sie Ihr Passwort nicht im Browser wenn andere Benutzer diesen Rechner unter dem selben Namen nutzen können.
+      </p>
 
       <div class="form-group">
         <button type="submit" class="btn btn-primary pull-right">Absenden</button>

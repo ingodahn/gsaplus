@@ -7,9 +7,12 @@
 <script src="/js/jquery.min.js" charset="utf-8"></script>
 <script src="/js/bootstrap.min.js" charset="utf-8"></script>
 <script src="/js/parsley.min.js" charset="utf-8"></script>
+<script src="/js/i18n/parsley-de.js" charset="utf-8"></script>
 <script src="/js/parallax.min.js" charset="utf-8"></script>
-<script src="/js/i18n/de.js" charset="utf-8"></script>
 <script src="/js/enables.js" charset="utf-8"></script>
+<script src="/js/moment.min.js" charset="utf-8"></script>
+<script src="/js/i18n/moment-de.js" charset="utf-8"></script>
+<script src="/js/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
 <link rel="stylesheet" href="/css/app.css" media="screen" charset="utf-8">
 
 <!--[if lt IE 9]>

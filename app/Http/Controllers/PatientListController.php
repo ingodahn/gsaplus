@@ -132,7 +132,7 @@ class PatientListController extends Controller
 				return $patient->patient_week() === -1 ? "-" : $patient->patient_week();
 			})
 			->addColumn('last_activity', function($patient) {
-				return $patient->last_activity;
+				return $patient->last_activity != null ? $patient->last_activity->format('d.m.Y') : "";
 			})
 			->addColumn('therapist', function($patient) {
 				return $patient->therapist !== null ? $patient->therapist->name : "-";
