@@ -9,6 +9,7 @@ $navbar-border: 1px;
   background-color: rgba(white, 0.6);
   padding-bottom: $navbar-padding-bottom;
   margin-bottom: 0px;
+  z-index: 2;
 }
 
 $nav-height: 100px;
@@ -17,6 +18,10 @@ $nav-height: 100px;
   height: $nav-height;
   padding-top: 5px;
   margin-left: -5px; // Correct for the internal margin of the logo
+}
+
+.navbar-nav {
+  margin-top: $nav-height / 4; // Stupid hack because vertical centering is too hard
 }
 
 $parallax-window-height: 400px;
