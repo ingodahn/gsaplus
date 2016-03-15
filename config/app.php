@@ -178,6 +178,12 @@ return [
          */
         Yajra\Datatables\DatatablesServiceProvider::class,
 
+        /*
+         * Registers different view composers
+         * (e.g. the \App\Http\ViewComposers\UserRoleComposer)
+         */
+        App\Providers\ComposerServiceProvider::class,
+
     ],
 
     /*
