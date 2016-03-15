@@ -27,7 +27,10 @@ $parallax-window-height: 400px;
 }
 
 .parallax-window-nav {
-  margin-top: -$nav-height - $navbar-padding-bottom - $navbar-border;
+  position: relative;
+  $nav-total-height: $nav-height + $navbar-padding-bottom + $navbar-border;
+  top: -$nav-total-height;
+  margin-bottom: -$nav-total-height;
   min-height: $parallax-window-height + $nav-height + $navbar-border;
   @media (max-height: 640px) {
     min-height: ($parallax-window-height / 2) + $nav-height + $navbar-border;
