@@ -6,12 +6,15 @@
 
 
     <h2>
-      {{ $Name }}
-      @if($isTherapist)
+      Profil von {{ $Name }}
       <small>
-        (code: <code>{{ $Patient['code'] }}</code>, status: <code>{{ $Patient['status'] }}</code>)
+        (
+        @if($isTherapist)
+          code: <code>{{ $Patient['code'] }}</code>,
+        @endif
+        status: <code>{{ $Patient['status'] }}</code>
+        )
       </small>
-    @endif
     </h2>
 
 
@@ -37,15 +40,9 @@
     @endif
 
 
-    <hr>
-    <h3>Therapeut</h3>
-    @if($isPatient)
-      @if($Patient['therapist'] == "-")
-        Ihnen wurde noch kein Therapeut zugewiesen.
-      @else
-        Ihr Therapeut ist <strong>{{$Patient['therapist']}}</strong>.
-      @endif
-    @else
+    @if($isTherapist)
+      <hr>
+      <h3>Therapeut</h3>
       <form data-parsley-validate role="form" action="/patient/{{$Name}}/therapist" method="post" }}>
         {{ csrf_field() }}
         <div class="form-group">
@@ -76,7 +73,7 @@
         Änderungen.
       @endif
     </p>
-    @if($Patient['assignmentDayChangesLeft'] > 0 || $isTherapist)
+    @if($isPatient && $Patient['assignmentDayChangesLeft'] > 0)
       <form data-parsley-validate role="form" action="/patient/{{$Name}}/day_of_week" method="post">
         {{ csrf_field() }}
         <div class="form-group">
@@ -102,33 +99,39 @@
 
     @if($isTherapist)
       <hr>
-      <h3>Entlassungsdatum setzen</h3>
-      <form data-parsley-validate role="form" action="/patient/{{$Name}}/dateFromClinics" method="post">
-        {{ csrf_field() }}
-          <div class="form-group">
-            <div class='input-group date' id='datetimepicker1'>
-              {{-- <label for="dateFromClinics" class="control-label">Entlassungsdatum</label> --}}
-              <input name="dateFromClinics" type='text' value="{{ $Patient['dateFromClinics'] }}" class="form-control" required>
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </input>
-            </div>
-          </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker({
-                  locale: 'de',
-                  format: 'DD.MM.YYYY'
-                });
-            });
-        </script>
+      <h3>Entlassungsdatum</h3>
+      @if($Patient['status'] >= "P030")
         <p>
-          <div class="form-group">
-            <button type="submit" class="btn">Entlassungsdatum setzen</button>
-          </div>
+          Das Entlassungsdatum war {{ $Patient['dateFromClinics'] }}.
         </p>
-      </form>
+      @else
+        <form data-parsley-validate role="form" action="/patient/{{$Name}}/dateFromClinics" method="post">
+          {{ csrf_field() }}
+            <div class="form-group">
+              <div class='input-group date' id='datetimepicker1'>
+                {{-- <label for="dateFromClinics" class="control-label">Entlassungsdatum</label> --}}
+                <input name="dateFromClinics" type='text' value="{{ $Patient['dateFromClinics'] }}" class="form-control" required>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </input>
+              </div>
+            </div>
+          <script type="text/javascript">
+              $(function () {
+                  $('#datetimepicker1').datetimepicker({
+                    locale: 'de',
+                    format: 'DD.MM.YYYY'
+                  });
+              });
+          </script>
+          <p>
+            <div class="form-group">
+              <button type="submit" class="btn">Entlassungsdatum setzen</button>
+            </div>
+          </p>
+        </form>
+      @endif
     @endif
 
     @if($isPatient)
@@ -156,13 +159,13 @@
       </form>
     @endif
 
+    <hr>
+    <h3>Persönliche Informationen</h3>
     @if($isPatient)
-      <hr>
-      <h3>Persönliche Informationen</h3>
       <form data-parsley-validate role="form" action="/patient/{{$Name}}/personalInformation" method="post">
         {{ csrf_field() }}
         <div class="form-group">
-          <label for="personalInformation" class="control-label">Informationen</label>
+          <label for="personalInformation" class="control-label">(nur für Therapeuten sichtbar)</label>
           <textarea name="personalInformation" rows="5" class="form-control" placeholder="Ich habe eine Meinung zu Earl Grey.">{{ $Patient['personalInformation'] }}</textarea>
         </div>
         <p>
@@ -171,18 +174,24 @@
           </div>
         </p>
       </form>
+    @else
+      <p>
+        {{ $Patient['personalInformation'] }}
+      </p>
     @endif
 
 
-    <hr>
-    <h3>Intervention beenden</h3>
-    <p>
-      <a href="/patient/{{$Name}}/cancelIntervention" class="btn btn-danger">Intervention beenden</a>
-    </p>
+    @if($isTherapist)
+      <hr>
+      <h3>Intervention beenden</h3>
+      <p>
+        <a href="/patient/{{$Name}}/cancelIntervention" class="btn btn-danger">Intervention beenden</a>
+      </p>
+    @endif
 
     <hr>
     <p>
-      <a href="/" class="btn btn-default">Abbrechen</a>
+      <a href="/" class="btn btn-default">Fertig</a>
     </p>
 
 
