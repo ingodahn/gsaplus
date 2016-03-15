@@ -12,10 +12,36 @@ class Patient extends User
 
     protected static $singleTableType = 'patient';
 
-    protected static $persisted = ['code', 'assignment_day', 'assignment_day_changes_left', 'date_from_clinics',
-        // patient status should be determined - not cached
-        // 'patient_status',
-        'last_activity', 'personal_information', 'notes_of_therapist', 'registration_date', 'therapist_id' ];
+    protected static $persisted = ['code',
+        'assignment_day',
+        'assignment_day_changes_left',
+        'date_from_clinics',
+        'last_activity',
+        'personal_information',
+        'notes_of_therapist',
+        'registration_date',
+        'therapist_id' ];
+
+    /*
+     * The following accessors will convert every date to an instance
+     * of Jenssegers\Date\Date which supports localization.
+     *
+     * All dates are originally returned as Carbon instances. The
+     * Date class extends the Carbon class. So conversion is a
+     * piece of cake.
+     */
+
+    public function getDateFromClinicsAttribute($date) {
+        return new Date($date);
+    }
+
+    public function getLastActivityAttribute($date) {
+        return new Date($date);
+    }
+
+    public function getRegistrationDateAttribute($date) {
+        return new Date($date);
+    }
 
     /**
      * Get our assignments (all - independent of state).
