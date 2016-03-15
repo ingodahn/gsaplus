@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-use Carbon\Carbon;
 use App\WeekDay;
 use App\Http\Controllers\Days;
+
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
+use Jenssegers\Date\Date;
+
 
 class DaysTest extends TestCase
 {

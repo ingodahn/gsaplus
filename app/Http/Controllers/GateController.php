@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 use App\Code;
 use App\Patient;
@@ -231,7 +231,7 @@ class GateController extends Controller
 			$patient->name = $name;
 			$patient->email = $email;
 			$patient->password = bcrypt($password);
-			$patient->registration_date = Carbon::create();
+			$patient->registration_date = Date::create();
 			$patient->code = $code;
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;

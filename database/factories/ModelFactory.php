@@ -71,7 +71,7 @@ $factory->define(App\AssignmentTemplate::class, function (Faker\Generator $faker
 });
 
 $factory->define(App\WeekDay::class, function (Faker\Generator $faker) {
-    $date = Carbon::createFromTimeStamp($faker->dateTime()->getTimestamp());
+    $date = Date::createFromTimeStamp($faker->dateTime()->getTimestamp());
 
     return [
         'number' => $date->dayOfWeek,

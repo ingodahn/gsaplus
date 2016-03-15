@@ -3,9 +3,9 @@
 namespace App;
 
 use App\Models\AssignmentStatus;
-
-use Carbon\Carbon;
 use App\Models\PatientStatus;
+
+use Jenssegers\Date\Date;
 
 class Patient extends User
 {
@@ -70,9 +70,9 @@ class Patient extends User
     }
 
     /**
-     * Returns the day of the first assignment (a Carbon date object).
+     * Returns the day of the first assignment (a Date object).
      *
-     * @return the day of the first assignment (a Carbon date object)
+     * @return the day of the first assignment (a Date object)
      */
     public function first_assignment_day () {
         return $this->date_from_clinics->copy()->startOfDay()
@@ -80,12 +80,12 @@ class Patient extends User
     }
 
     /**
-     * Returns the day of the last assignment (a Carbon date object).
+     * Returns the day of the last assignment (a Date object).
      *
-     * @return the day of the last assignment (a Carbon date object)
+     * @return the day of the last assignment (a Date object)
      */
     public function last_assignment_day() {
-        return Carbon::now()->startOfDay()->previous($this->assignment_day);
+        return Date::now()->startOfDay()->previous($this->assignment_day);
     }
 
     /**
@@ -161,7 +161,7 @@ class Patient extends User
      * noch in der Klinik ist)
      */
     public function patient_week() {
-        return $this->week_for_date(Carbon::now());
+        return $this->week_for_date(Date::now());
     }
 
     /**
@@ -170,15 +170,15 @@ class Patient extends User
      * - 0, if the patient left the clinic, but no assignment ist defined yet (at the given time)
      * - the number of weeks lying between the first assignment day and the given date, otherwise
      *
-     * @param Carbon|null $date
+     * @param Date|null $date
      *          the reference date
      *
      * @return int
      *          the week of intervention (at the given time)
      */
-    public function week_for_date(Carbon $date = null) {
+    public function week_for_date(Date $date = null) {
         if (is_null($date)) {
-            $date = Carbon::now();
+            $date = Date::now();
         }
 
         // -> Ausgangsdatum: Entlassungsdatum

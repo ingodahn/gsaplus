@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\AssignmentStatus;
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 class Assignment extends Model
 {
@@ -71,7 +71,7 @@ class Assignment extends Model
                 // patient has finished assignment
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
             } else if ($this->assigned_on !== null) {
-                if (Carbon::now()->gt($this->assigned_on->
+                if (Date::now()->gt($this->assigned_on->
                         copy()->addDays(config('gsa.reminder_period_in_days')))) {
                     // patient was reminded by system and didn't submit any text
                     // TODO: check if this is really the case! -> check reminders
