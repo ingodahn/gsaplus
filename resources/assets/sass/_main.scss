@@ -31,14 +31,14 @@ $parallax-window-height: 400px;
   $nav-total-height: $nav-height + $navbar-padding-bottom + $navbar-border;
   top: -$nav-total-height;
   margin-bottom: -$nav-total-height;
-  min-height: $parallax-window-height + $nav-height + $navbar-border;
+  min-height: $parallax-window-height + $nav-total-height;
   @media (max-height: 640px) {
-    min-height: ($parallax-window-height / 2) + $nav-height + $navbar-border;
+    min-height: ($parallax-window-height / 2) + $nav-total-height;
   }
   a {
     color: $red-youtube;
     // Offset button by half of navbar's size since it moves the percieved center
-    margin-top: ($nav-height + $navbar-padding-bottom + $navbar-border) / 2;
+    margin-top: ($nav-total-height) / 2;
   }
   a:hover {
     color: $red-youtube-hover;
