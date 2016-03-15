@@ -8,7 +8,7 @@ use App\Patient;
 use App\Therapist;
 use App\Helper;
 
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 use Hash;
 
@@ -32,7 +32,7 @@ class PatientController extends Controller
 	 */
 	public function cancel_intervention(Request $request, Patient $patient)
 	{
-		$patient->intervention_ended_on = Carbon::now();
+		$patient->intervention_ended_on = Date::now();
 		$patient->save();
 
 		Alert::info('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->flash();
@@ -146,7 +146,7 @@ class PatientController extends Controller
 		$date_from_clinics_string = $request->input('dateFromClinics');
 
 		try {
-			$date_from_clinics = Carbon::createFromFormat('d.m.Y', $date_from_clinics_string);
+			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
 		} catch (\InvalidArgumentException $e) {
 			Alert::danger('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->flash();
 		}

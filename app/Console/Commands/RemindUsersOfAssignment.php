@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 use App\Patient;
 
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -85,7 +85,7 @@ class RemindUsersOfAssignment extends Command
         // - assignment day matches the current day
         $patients = Patient::whereNull('intervention_ended_on')
             ->whereNotNull('date_from_clinics')
-            ->where('assignment_day', '=', Carbon::now()->dayOfWeek)->get();
+            ->where('assignment_day', '=', Date::now()->dayOfWeek)->get();
 
         // remind of first or current assignment
         foreach ($patients as $patient) {
