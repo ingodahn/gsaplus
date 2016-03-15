@@ -6,7 +6,7 @@
 
 
     <h2>
-      {{ $Name }}
+      Profil von {{ $Name }}
       <small>
         (
         @if($isTherapist)
@@ -165,7 +165,7 @@
       <form data-parsley-validate role="form" action="/patient/{{$Name}}/personalInformation" method="post">
         {{ csrf_field() }}
         <div class="form-group">
-          <label for="personalInformation" class="control-label">Informationen</label>
+          <label for="personalInformation" class="control-label">(nur für Therapeuten sichtbar)</label>
           <textarea name="personalInformation" rows="5" class="form-control" placeholder="Ich habe eine Meinung zu Earl Grey.">{{ $Patient['personalInformation'] }}</textarea>
         </div>
         <p>
@@ -191,7 +191,7 @@
 
     <hr>
     <p>
-      <a href="/" class="btn btn-default">Abbrechen</a>
+      <a href="/" class="btn btn-default">Fertig</a>
     </p>
 
 
