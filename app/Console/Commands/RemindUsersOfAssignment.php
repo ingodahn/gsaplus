@@ -94,7 +94,7 @@ class RemindUsersOfAssignment extends Command
             if ($week === 1 && $type_of_reminder == self::OPTION_FIRST) {
                 // remind of first assignment
                 $this->sendEMail($patient, self::OPTION_FIRST);
-            } else if ($week <= 12 && $type_of_reminder == self::OPTION_NEW) {
+            } else if ($week > 1 && $week <= 12 && $type_of_reminder == self::OPTION_NEW) {
                 // remind of current assignment
                 $this->sendEMail($patient, self::OPTION_NEW);
             }
