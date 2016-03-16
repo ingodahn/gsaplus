@@ -66,11 +66,16 @@
     <hr>
     <h3>Tagebuchtag</h3>
     <p>
-      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChangesLeft'] }}</strong>
-      @if($Patient['assignmentDayChangesLeft'] == 1)
-        Änderung.
+      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben
+      @if($Patient['assignmentDayChangesLeft'] > 0)
+        noch <strong>{{$Patient['assignmentDayChangesLeft']}}</strong>
+        @if($Patient['assignmentDayChangesLeft'] == 1)
+          Änderung.
+        @else
+          Änderungen.
+        @endif
       @else
-        Änderungen.
+        <strong>keine</strong> Änderungen mehr.
       @endif
     </p>
     @if($isPatient && $Patient['assignmentDayChangesLeft'] > 0)
