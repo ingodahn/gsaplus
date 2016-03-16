@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 
 use App\Models;
 
+use App\Models\UserRole;
+
 /**
  * @author dahn
  * @version 1.0
@@ -38,11 +40,11 @@ class AuxController extends Controller
 	public function home(Request $request)
 	{
 		switch ($request->user()->type) {
-			case 'patient':
+			case UserRole::PATIENT:
 				return view('patient.diary')-> with('name',$request->user()->name);
-			case 'admin':
+			case UserRole::ADMIN:
 				return view('admin.home');
-			case 'therapist':
+			case UserRole::THERAPIST:
 				$days = new Days;
 				$patientListModel = array();
 				$patientListModel['Slots'] = $days->get_days();

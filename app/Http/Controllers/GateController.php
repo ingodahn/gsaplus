@@ -108,9 +108,9 @@ class GateController extends Controller
 	 */
 	private function code_status($code)
 	{
-		if (Patient::where('code', $code)->first() !== null) {
+		if (Patient::whereCode($code)->exists()) {
 			return self::CODE_REGISTERED;
-		} else if (Code::where('value', $code)->first() !== null) {
+		} else if (Code::whereValue($code)->exists()) {
 			return self::CODE_UNREGISTERED;
 		} else {
 			return self::CODE_INCORRECT;
@@ -208,8 +208,8 @@ class GateController extends Controller
 		$email = $request->input('email');
 		$day = $request->input('day_of_week');
 
-		$emailExists = (Patient::where('email', $email)->first() !== null);
-		$nameExists = (Patient::where('name', $name)->first() !== null);
+		$emailExists = Patient::whereEmail($email)->exists();
+		$nameExists = Patient::whereName($name)->exists();
 
 		//if (Name or eMail already in use) {
 		if ($nameExists || $emailExists) {
@@ -285,9 +285,9 @@ class GateController extends Controller
 				return Redirect::to('/Login');
 			} else if ($this->code_status($code) === self::CODE_UNREGISTERED) {
 				// code isn't yet registered
+				$this->save_furthest_step(self::PAGE_WELCOME);
 				/* TODO: better URLs
 				return Redirect::to('/registration/welcome'); */
-				$this->save_furthest_step(self::PAGE_WELCOME);
 				return view('gate.welcome');
 			} else {
 				// code is incorrect

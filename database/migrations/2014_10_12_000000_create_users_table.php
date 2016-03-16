@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\UserRole;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -36,7 +38,7 @@ class CreateUsersTable extends Migration
 
             $table->integer('therapist_id')->unsigned();
 
-            $table->enum('type', ['patient', 'therapist', 'admin']);
+            $table->enum('type', [UserRole::PATIENT, UserRole::THERAPIST, UserRole::ADMIN]);
 
             $table->rememberToken();
             $table->nullableTimestamps();

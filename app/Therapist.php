@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Models\UserRole;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Therapist extends User
 {
 
-    protected static $singleTableType = 'therapist';
+    protected static $singleTableType = UserRole::THERAPIST;
 
     /**
      * Get the responses to our assignments.

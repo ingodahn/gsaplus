@@ -66,9 +66,10 @@ class PatientListController extends Controller
 			'Donnerstag' => $request->input('Do_slots')
 		];
 
-		$days=new Days;
+		$days = new Days;
 		$days->set_days($Days);
-		$Days1=$days->get_days();
+		$Days1 = $days->get_days();
+
 		return dd($Days1);
 
 	}
@@ -86,15 +87,14 @@ class PatientListController extends Controller
 	 */
 	public function show(Request $request) {
 		//Zeige Seite patient_list mit
-		$days=new Days;
-		$Slots = $days->get_days();
 		// Slots von Days,
 		// Patientenliste von datatable
+		$days = new Days;
+		$Slots = $days->get_days();
 
-		$params['Slots']=$Slots;
+		$params['Slots'] = $Slots;
+
 		return view('therapist.patient_list')->with($params);
-
-
 	}
 
 	/**

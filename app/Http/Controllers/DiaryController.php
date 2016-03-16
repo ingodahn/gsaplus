@@ -10,6 +10,8 @@ use App\Code;
 use App\Patient;
 use App\Users;
 
+use App\Models\UserRole;
+
 /**
  * @author dahn
  * @version 1.0
@@ -207,7 +209,8 @@ class DiaryController extends Controller
 		 * TODO: remove null check
 		 */
 		if ($name && $request->user() !== null
-			&& $request->user()->type === 'patient' && Auth::user()->name !== $name) {
+			&& $request->user()->type === UserRole::PATIENT
+			&& Auth::user()->name !== $name) {
 			return Redirect::to('/');
 		}
 		// return $name;

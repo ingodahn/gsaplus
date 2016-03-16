@@ -65,6 +65,11 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('reset', 'Auth\PasswordController@postReset');
 	});
 
+});
+
+Route::group(['middleware' => ['web', 'auth']], function () {
+	Route::get('/Home', 'AuxController@home');
+
 	// Experimental for M2
 	Route::get('/Diary/{name?}','DiaryController@show');
 	Route::get('/Profile/{name?}','PatientController@profile');
@@ -83,10 +88,5 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('notes', 'PatientController@save_notes_of_therapist');
 	});
 
+	Route::any('patient_list/data', 'PatientListController@anyData')->name('datatables.data');
 });
-
-Route::group(['middleware' => ['web', 'auth']], function () {
-	Route::get('/Home', 'AuxController@home');
-});
-
-Route::any('patient_list/data', 'PatientListController@anyData')->name('datatables.data');
