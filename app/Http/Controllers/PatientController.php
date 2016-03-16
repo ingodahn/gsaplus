@@ -63,12 +63,6 @@ class PatientController extends Controller
 		//$patient=Patient(name);
 		$patient = Patient::where('name', $name)->first();
 
-		$profile_user_model=[];
-		$profile_user_model['Name'] = $name;
-		$profile_user_model['Role'] = $user_role;
-		$profile_user_model['isTherapist'] = $user_role == "therapist";
-		$profile_user_model['isPatient'] = $user_role == "patient";
-
 		$patient_info=[];
 		$patient_info['assignment_day'] = Helper::generate_day_number_map()[$patient->assignment_day];
 		$patient_info['available_days'] = $days->get_available_days();
@@ -83,6 +77,7 @@ class PatientController extends Controller
 		$patient_info['therapist'] = $patient->therapist !== null ? $patient->therapist->name : "-";
 		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(),'name');
 
+		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);

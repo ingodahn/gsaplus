@@ -83,14 +83,13 @@
 
     <hr>
     <p>
-      <a href="/" class="btn btn-default">Home</a>
       <a href="/Logout" class="btn btn-warning">Logout</a>
     </p>
   </div>
 
   <div class="container-fluid">
     <hr/>
-    <h2>Patientenliste</h2>
+    <h2>Patientenliste  <a href="/" class="btn btn-default">Zurücksetzen</a></h2>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
         <table class="table table-bordered" id="PatientList">
