@@ -86,7 +86,7 @@ end
 
 desc "apply major db changes - all data will be removed - run if tables were added or removed"
 task :db_reset do
-  sh "mysql scotchbox < ./database/sql/drop_all_tables.sql"
+  sh "mysql -u root -p scotchbox < ./database/sql/drop_all_tables.sql"
   sh "composer dump-autoload"
   sh "php artisan migrate"
 end
