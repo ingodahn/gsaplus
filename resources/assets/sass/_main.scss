@@ -9,7 +9,7 @@ $navbar-border: 1px;
   background-color: rgba(white, 0.6);
   padding-bottom: $navbar-padding-bottom;
   margin-bottom: 0px;
-  z-index: 2;
+  z-index: 1;
 }
 
 $nav-height: 100px;
@@ -93,7 +93,7 @@ hr {
   top: 20px;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .parsley-errors-list {
