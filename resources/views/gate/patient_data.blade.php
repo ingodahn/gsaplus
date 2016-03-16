@@ -56,11 +56,11 @@
         <p>Ihr Online-Therapeut wird Sie in Zukunft unter diesem Benutzernamen ansprechen und keinen Bezug zu Ihrem echten Namen herstellen können. Die angegebene E-Mail-Adresse ist für den Online-Therapeuten nicht sichtbar.</p>
       </div>
 
-      <p>Bitte wählen Sie einen Benutzernamen und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>
+      <p>Bitte wählen Sie einen Benutzernamen (nur Buchstaben, Zahlen, <code>-</code>, <code>_</code> und <code>.</code>)und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>
 
       <div class="form-group">
         <label for="name" class="control-label">Benutzername</label>
-        <input name="name" type="text" class="form-control" placeholder="mrhyde63" required>
+        <input name="name" type="text" class="form-control" placeholder="mrhyde63" required pattern="^[a-zA-Z0-9\.\-_]+$">
       </div>
 
       <div class="row">
