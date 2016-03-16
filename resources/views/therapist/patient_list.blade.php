@@ -24,13 +24,13 @@
           { data: 'selection', name: 'selection', orderable: false, searchable: false},
           { data: 'name', name: 'name' },
           { data: 'code', name: 'code' },
-		  { data: 'patient_week', name: 'patient_week' },
+		      { data: 'patient_week', name: 'patient_week' },
           { data: 'assignment_day', name: 'assignment_day' },
-		  { data: 'patient_status', name: 'patient_status' },
+		      { data: 'patient_status', name: 'patient_status' },
           { data: 'status_of_next_assignment', name: 'status_of_next_assignment' },
           { data: 'overdue', name: 'overdue' },
-		  { data: 'last_activity', name: 'last_activity' },
-		  { data: 'therapist', name: 'therapist' }
+		      { data: 'last_activity', name: 'last_activity' },
+		      { data: 'therapist', name: 'therapist' }
         ]
       });
     });
