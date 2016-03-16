@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-danger" data-dismiss="modal">Close</a>
+        <a href="javascript:void(0)" class="btn btn-danger" data-dismiss="modal">Schließen</a>
       </div>
     </div>
   </div>
