@@ -190,7 +190,7 @@
       <hr>
       <h3>Intervention beenden</h3>
       <p>
-        <a href="/patient/{{$Name}}/cancelIntervention" class="btn btn-danger">Intervention beenden</a>
+        <a href="/patient/{{$Name}}/cancelIntervention" class="btn btn-danger" onclick="return confirm('Wollen sie den Patientenaccount wirklich löschen?');">Intervention beenden</a>
       </p>
     @endif
 
