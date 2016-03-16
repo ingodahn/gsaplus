@@ -31,7 +31,10 @@
           { data: 'overdue', name: 'overdue' },
 		      { data: 'last_activity', name: 'last_activity' },
 		      { data: 'therapist', name: 'therapist' }
-        ]
+        ],
+        createdRow: function (row, data, index) {
+          $('td', row).eq(2).wrapInner('<code></code>');
+        }
       });
     });
   </script>
