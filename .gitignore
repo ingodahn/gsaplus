@@ -151,6 +151,8 @@ public/css
 public/js
 public/fonts
 public/img
+_ide_helper.php
+composer.lock
 
 ### Vagrant ###
 .vagrant/
