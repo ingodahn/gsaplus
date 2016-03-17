@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert;
 
 use App\Patient;
 
@@ -85,7 +85,7 @@ class ContactController extends Controller
 		});
 
 		// Alert not shown
-		Alert::info('Die Mails wurden verschickt.')->flash();
+		Alert::success('Die Mails wurden verschickt.')->flash();
 		return Redirect::to('/Home');
 	}
 
@@ -134,7 +134,7 @@ class ContactController extends Controller
 			}); */
 
 		// alert doesn't work with more than one redirect
-		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
+		Alert::success('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
 
 		return redirect("/");
 	}

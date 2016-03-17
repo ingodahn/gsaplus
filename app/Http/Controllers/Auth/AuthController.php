@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 use Session;
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert;
 
 use App\Http\Controllers\Days;
 

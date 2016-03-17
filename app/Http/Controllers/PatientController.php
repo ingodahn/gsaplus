@@ -12,7 +12,7 @@ use Jenssegers\Date\Date;
 
 use Hash;
 
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert;
 
 use Illuminate\Support\Facades\Redirect;
 
@@ -35,7 +35,7 @@ class PatientController extends Controller
 		$patient->intervention_ended_on = Date::now();
 		$patient->save();
 
-		Alert::info('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->flash();
+		Alert::success('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->flash();
 
 		return Redirect::back();
 	}
@@ -103,7 +103,7 @@ class PatientController extends Controller
 		} else {
 			$patient->therapist()->associate($therapist);
 
-			Alert::info('Der Therapeut wurde erfolgreich geändert.')->flash();
+			Alert::success('Der Therapeut wurde erfolgreich geändert.')->flash();
 		}
 
 		$patient->save();
@@ -125,12 +125,12 @@ class PatientController extends Controller
 				$is_therapist ?: $patient->assignment_day_changes_left -= 1 ;
 				$patient->save();
 
-				Alert::info('Der Schreibtag wurde erfolgreich geändert.')->flash();
+				Alert::success('Der Schreibtag wurde erfolgreich geändert.')->flash();
 			} else {
-				Alert::danger('Der angegebene Schreibtag ist ungültig.')->flash();
+				Alert::error('Der angegebene Schreibtag ist ungültig.')->flash();
 			}
 		} else {
-			Alert::danger("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->flash();
+			Alert::error("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->flash();
 		}
 
 		return Redirect::back();
@@ -150,7 +150,7 @@ class PatientController extends Controller
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
 
-			Alert::info('Das Entlassungsdatum wurde erfolgreich geändert.')->flash();
+			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->flash();
 		}
 
 		return Redirect::back();
@@ -164,9 +164,9 @@ class PatientController extends Controller
 			$patient->password = bcrypt($password);
 			$patient->save();
 
-			Alert::info('Das Passwort wurde erfolgreich geändert.')->flash();
+			Alert::success('Das Passwort wurde erfolgreich geändert.')->flash();
 		} else {
-			Alert::danger('Das eingegebene Passwort ist nicht korrekt.')->flash();
+			Alert::error('Das eingegebene Passwort ist nicht korrekt.')->flash();
 		}
 
 		return Redirect::back();
@@ -179,7 +179,7 @@ class PatientController extends Controller
 			$patient->personal_information = $personal_information;
 			$patient->save();
 
-			Alert::info('Die persönlichen Notizen wurden erfolgreich geändert.')->flash();
+			Alert::success('Die persönlichen Notizen wurden erfolgreich geändert.')->flash();
 		} else {
 			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
 		}
@@ -194,7 +194,7 @@ class PatientController extends Controller
 			$patient->notes_of_therapist = $notes_of_therapist;
 			$patient->save();
 
-			Alert::info('Die Notizen wurden erfolgreich geändert.')->flash();
+			Alert::success('Die Notizen wurden erfolgreich geändert.')->flash();
 		} else {
 			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
 		}

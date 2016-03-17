@@ -17,7 +17,7 @@ use App\Therapist;
 use App\Helper;
 use App\Models;
 
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert;
 
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem
@@ -131,9 +131,9 @@ class GateController extends Controller
 	public function enter_system()
 	{
 		if (Auth::check()) {
-			return Redirect::to('/Home')->with('alert_messages', Alert::all());
+			return Redirect::to('/Home')->with('alert_messages', SweetAlert::all());
 		} else {
-			return Redirect::to('/Login')->with('alert_messages', Alert::all());
+			return Redirect::to('/Login')->with('alert_messages', SweetAlert::all());
 		}
 	}
 
@@ -219,7 +219,7 @@ class GateController extends Controller
 
 			$days = new Days;
 			$day_of_week=$days->get_available_days();
-			Alert::danger($message);
+			Alert::error($message, 'Fehler bei Registrierung');
 
 			//Zeige Seite PatientenDaten
 			return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
@@ -245,7 +245,7 @@ class GateController extends Controller
 
 			Auth::login($patient);
 
-			Alert::info('Sie haben sich erfolgreich registriert.');
+			Alert::success('Sie haben sich erfolgreich registriert.');
 
 			return view('patient.diary')->with('name',$name);
 		}
