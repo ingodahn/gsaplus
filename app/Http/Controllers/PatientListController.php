@@ -118,7 +118,6 @@ class PatientListController extends Controller
 		$days_map = Helper::generate_day_number_map();
 
 		return Datatables::of(Patient::select('*'))
-			->removeColumn('email')
 			->addColumn('patient_status', function ($patient) {
 				$status = $patient->status();
 
@@ -152,6 +151,11 @@ class PatientListController extends Controller
 				$name = $patient->name;
 				return '<a href="/Diary/'.$name.'">'.$name.'</a>';
 			})
+			->removeColumn('id')
+			->removeColumn('created_at')
+			->removeColumn('updated_at')
+			->removeColumn('is_random')
+			->removeColumn('personal_information')
 			->make(true);
 	}
 
