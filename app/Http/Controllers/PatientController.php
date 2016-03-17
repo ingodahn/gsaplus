@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\PatientStatus;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,8 +66,19 @@ class PatientController extends Controller
 
 		$days = new Days;
 
-		//$patient=Patient(name);
 		$patient = Patient::whereName($name)->firstOrFail();
+
+		$status = $patient->status();
+
+		switch ($user_role) {
+			case UserRole::PATIENT:
+				$status = PatientStatus::$STATUS_INFO[$status];
+				break;
+			case UserRole::THERAPIST:
+			case UserRole::ADMIN:
+				$status = $status.': '.PatientStatus::$STATUS_INFO[$status];
+				break;
+		}
 
 		$patient_info=[];
 		$patient_info['assignment_day'] = Helper::generate_day_number_map()[$patient->assignment_day];
@@ -77,7 +90,7 @@ class PatientController extends Controller
 		$patient_info['notes'] = $patient->notes_of_therapist;
 		$patient_info['patientWeek'] = $patient->patient_week();
 		$patient_info['personalInformation'] = $patient->personal_information;
-		$patient_info['status'] = $patient->status();
+		$patient_info['status'] = $status;
 		$patient_info['therapist'] = $patient->therapist !== null ? $patient->therapist->name : "-";
 		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(),'name');
 
