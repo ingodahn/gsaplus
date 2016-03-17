@@ -73,6 +73,6 @@ class AuthController extends Controller
         }
 
         return view('gate.start_page', ['RegistrationPossible' => $days->day_available()])
-                ->with('alert_messages', Alert::all());
+                ;//->with('alert_messages', Alert::all());
     }
 }

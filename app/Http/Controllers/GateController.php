@@ -131,9 +131,9 @@ class GateController extends Controller
 	public function enter_system()
 	{
 		if (Auth::check()) {
-			return Redirect::to('/Home')->with('alert_messages', Alert::all());
+			return Redirect::to('/Home');//->with('alert_messages', Alert::all());
 		} else {
-			return Redirect::to('/Login')->with('alert_messages', Alert::all());
+			return Redirect::to('/Login');//->with('alert_messages', Alert::all());
 		}
 	}
 
