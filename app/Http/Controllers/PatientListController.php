@@ -20,7 +20,7 @@ use App\Models\PatientStatus;
 use App\Models\AssignmentStatus;
 
 use App\Http\Controllers;
-use UxWeb\SweetAlert\SweetAlert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 
 

@@ -17,7 +17,7 @@ use App\Therapist;
 use App\Helper;
 use App\Models;
 
-use UxWeb\SweetAlert\SweetAlert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem
@@ -131,9 +131,9 @@ class GateController extends Controller
 	public function enter_system()
 	{
 		if (Auth::check()) {
-			return Redirect::to('/Home')->with('alert_messages', SweetAlert::all());
+			return Redirect::to('/Home')->with('alert_messages', Alert::all());
 		} else {
-			return Redirect::to('/Login')->with('alert_messages', SweetAlert::all());
+			return Redirect::to('/Login')->with('alert_messages', Alert::all());
 		}
 	}
 
@@ -270,7 +270,7 @@ class GateController extends Controller
 
 			if ($validation->fails()) {
 				// return Redirect::back()->withErrors($validation)->withInput();
-				Alert::warning('Bitte geben Sie den Code ein, den Sie für die Teilnahme an der Studie erhalten haben.')->flash();
+				Alert::warning('Bitte geben Sie den Code ein, den Sie für die Teilnahme an der Studie erhalten haben.')->persistent();
 				return Redirect::to('/Login');
 			}
 
@@ -281,7 +281,7 @@ class GateController extends Controller
 
 			if ($this->code_status($code) === self::CODE_REGISTERED) {
 				// code is already registered
-				Alert::warning('Dieser Code wurde bereits registriert. Bitte loggen Sie sich mit Ihrem Benutzernamen und Passwort ein.')->flash();
+				Alert::warning('Dieser Code wurde bereits registriert. Bitte loggen Sie sich mit Ihrem Benutzernamen und Passwort ein.')->persistent();
 				return Redirect::to('/Login');
 			} else if ($this->code_status($code) === self::CODE_UNREGISTERED) {
 				// code isn't yet registered
@@ -291,7 +291,7 @@ class GateController extends Controller
 				return view('gate.welcome');
 			} else {
 				// code is incorrect
-				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
+				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->persistent();
 				return Redirect::to('/Login');
 			}
 		} else {
