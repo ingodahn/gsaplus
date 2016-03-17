@@ -56,7 +56,7 @@ class GateController extends Controller
 
 	/**
 	 * Bestimmt den bisher weitesten Schritt und prüft, ob der gewünschte
-	 * Schritt (zu $to) erlaubt ist ist.
+	 * Schritt (zu $to) erlaubt ist.
 	 *
 	 * @param $to
 	 * 			der gewünschte Schritt
@@ -64,17 +64,16 @@ class GateController extends Controller
 	 * 			true, falls der gewünschte Schritt erlaubt ist, andernfalls false
 	 */
 	private function is_valid_step_to($to) {
-		$current_page_string = Session::get(self::PAGE_SESSION_KEY);
-
-		$current_page = array_flip(self::PAGE_STRING_MAP)[$current_page_string];
+		$furthest_page_string = Session::get(self::PAGE_SESSION_KEY);
+		$furthest_page = array_flip(self::PAGE_STRING_MAP)[$furthest_page_string];
 
 		$code_is_unknown = Session::get(self::CODE_SESSION_KEY) === null
 			|| Session::get(self::CODE_SESSION_KEY === '');
 
 		// code has to be known
-		if (!$code_is_unknown || $current_page === self::PAGE_START) {
+		if (!$code_is_unknown || $furthest_page === self::PAGE_START) {
 			// the transition to the next or a previous state is valid
-			if ($to <= $current_page + 1) {
+			if ($to <= $furthest_page + 1) {
 				return true;
 			}
 		}
@@ -90,10 +89,10 @@ class GateController extends Controller
 	 * 			der zu vergleichende Schritt
 	 */
 	private function save_furthest_step($to_save) {
-		$current_page_string = Session::get(self::PAGE_SESSION_KEY);
-		$current_page = array_flip(self::PAGE_STRING_MAP)[$current_page_string];
+		$furthest_page_string = Session::get(self::PAGE_SESSION_KEY);
+		$furthest_page = array_flip(self::PAGE_STRING_MAP)[$furthest_page_string];
 
-		if ($to_save > $current_page) {
+		if ($to_save > $furthest_page) {
 			Session::put(self::PAGE_SESSION_KEY, self::PAGE_STRING_MAP[$to_save]);
 		}
 	}
@@ -231,7 +230,7 @@ class GateController extends Controller
 			$patient->name = $name;
 			$patient->email = $email;
 			$patient->password = bcrypt($password);
-			$patient->registration_date = Date::create();
+			$patient->registration_date = Date::now();
 			$patient->code = $code;
 			$patient->assignment_day = $dateMap[$day];
 			$patient->assignment_day_changes_left = 1;
