@@ -68,7 +68,7 @@ class GateController extends Controller
 		$furthest_page = array_flip(self::PAGE_STRING_MAP)[$furthest_page_string];
 
 		$code_is_unknown = Session::get(self::CODE_SESSION_KEY) === null
-			|| Session::get(self::CODE_SESSION_KEY === '');
+			|| Session::get(self::CODE_SESSION_KEY) === '';
 
 		// code has to be known
 		if (!$code_is_unknown || $furthest_page === self::PAGE_START) {
