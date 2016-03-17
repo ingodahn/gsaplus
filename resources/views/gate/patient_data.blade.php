@@ -1,6 +1,43 @@
 @extends('layouts.master')
 @section('title', 'Registrierung')
 
+@section('additional-head')
+  <script src="/js/zxcvbn.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      evaluate();
+      $("#password").keyup(function (event) {
+        evaluate();
+      });
+
+      function evaluate() {
+        var password = $("#password").val();
+        if (password) {
+          var result = zxcvbn(password);
+          switch (result.score) {
+            case 0:
+              updateText("Sehr schwach"); break;
+            case 1:
+              updateText("Schwach"); break;
+            case 2:
+              updateText("Ok"); break;
+            case 3:
+              updateText("Stark"); break;
+            case 4:
+              updateText("Sehr stark"); break;
+          }
+        } else {
+          updateText("-");
+        }
+
+        function updateText(text) {
+          $("#strength-addon").text(text);
+        }
+      }
+    });
+  </script>
+@endsection
+
 @section('content')
   <div class="container">
 
@@ -66,12 +103,21 @@
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="password" class="control-label">Passwort</label>
-          <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6">
+          <div class="input-group">
+            <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6" aria-describedby="strength-addon">
+            <span class="input-group-addon" id="strength-addon"></span>
+          </div>
         </div>
 
         <div class="form-group col-sm-6">
           <label class="control-label">Passwort wiederholen</label>
           <input type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="progress">
+          <div id="StrengthProgressBar" class="progress-bar"></div>
         </div>
       </div>
 
