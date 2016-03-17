@@ -23,6 +23,7 @@
     "datatables.net-bs": "~1.10.11",
     "datatables.net-responsive": "~2.0.2",
     "datatables.net-responsive-bs": "~2.0.2",
-    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
+    "sweetalert": "~1.1.3"
   }
 }

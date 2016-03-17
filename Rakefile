@@ -39,6 +39,8 @@ task :js do
   `cp bower_components/moment/min/moment.min.js public/js/`
   `cp bower_components/moment/locale/de.js public/js/i18n/moment-de.js`
   `cp bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js public/js/`
+
+  `cp bower_components/sweetalert/dist/sweetalert.min.js public/js/`
 end
 
 desc "Publish all font assets"
