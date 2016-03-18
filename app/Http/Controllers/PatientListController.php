@@ -156,6 +156,7 @@ class PatientListController extends Controller
 			->removeColumn('updated_at')
 			->removeColumn('is_random')
 			->removeColumn('personal_information')
+			->removeColumn('email')
 			->make(true);
 	}
 
