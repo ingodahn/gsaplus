@@ -79,6 +79,7 @@ class PatientController extends Controller
 
 		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;
+		$profile_user_model['PatientName'] = $patient->name;
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);
 		return view('patient.patient_profile')->with($profile_user_model);
