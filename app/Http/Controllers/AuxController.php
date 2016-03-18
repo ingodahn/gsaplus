@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models;
 
 use App\Models\UserRole;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 /**
  * @author dahn
@@ -41,14 +42,11 @@ class AuxController extends Controller
 	{
 		switch ($request->user()->type) {
 			case UserRole::PATIENT:
-				return view('patient.diary')-> with('name',$request->user()->name);
+				return Redirect::to('/Diary');
 			case UserRole::ADMIN:
-				return view('admin.home');
+				return Redirect::to('/admin_home');
 			case UserRole::THERAPIST:
-				$days = new Days;
-				$patientListModel = array();
-				$patientListModel['Slots'] = $days->get_days();
-				return view('therapist.patient_list')->with($patientListModel);
+				return Redirect::to('/patient_list');
 		}
 	}
 

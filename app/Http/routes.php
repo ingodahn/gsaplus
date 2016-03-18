@@ -88,5 +88,6 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 		Route::post('notes', 'PatientController@save_notes_of_therapist');
 	});
 
-	Route::any('patient_list/data', 'PatientListController@anyData')->name('datatables.data');
+	Route::get('/patient_list', 'PatientListController@show');
+	Route::any('/patient_list/data', 'PatientListController@anyData')->name('datatables.data');
 });
