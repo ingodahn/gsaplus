@@ -197,6 +197,7 @@ class DiaryController extends Controller
 	 */
 	public function show(Request $request,$name=NULL)
 	{
+		return "Show aufgerufen";
 		// Setting default parameter
 		if (! $name) {
 			$name = Auth::user()->name;
@@ -211,7 +212,9 @@ class DiaryController extends Controller
 			return Redirect::to('/');
 		}
 		// return $name;
-		return view('patient.diary')->with('name',$name);
+		$patient=Patient::whereName($name)->first();
+		return dd($patient);
+		// return view('patient.diary')->with('name',$name);
 	}
 
 }
