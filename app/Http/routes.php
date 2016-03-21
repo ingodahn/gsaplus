@@ -32,6 +32,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/ContactTeam', 'ContactController@contact_team');
 	Route::post('/SendMessage', 'ContactController@send_message');
 
+	Route::get('/impressum', function() {
+		return view('system.impressum');
+	});
+	Route::get('/privacy', function() {
+		return view('system.privacy');
+	});
+
 	Route::get('/ResetPassword', 'GateController@reset_password');
 	Route::post('/MailForPassword', 'GateController@mail_for_password');
 
