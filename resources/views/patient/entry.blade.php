@@ -84,7 +84,7 @@
         <p>
             <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}"
                class="btn btn-warning">Älter</a>
-            <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}"
+            <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}"
                class="btn btn-warning">Neuer</a>
             <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn btn-warning">Zur
                 aktuellen Aufgabe</a>
