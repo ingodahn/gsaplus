@@ -208,13 +208,13 @@ class DiaryController extends Controller
 		}
 		if ($request->input('entryButton') == "saveDirty"){
 			/* Zwischenspeichern von $entry */
-			Alert::warning("Der Eintrag wurde zwischengespeichert")->flash();
+			Alert::success("Der Eintrag wurde zwischengespeichert")->flash();
 			return Redirect::back();
 		} else {
 			/* Speichern von $entry */
-			// Alert::warning("Der Eintrag wurde abgeschickt")->flash();
-			return "Abgeschickt";
-			// return Redirect::to('/Home');
+			Alert::success("Der Eintrag wurde abgeschickt")->flash();
+			//return "Abgeschickt";
+			return Redirect::to('/Home');
 		}
 
 	}

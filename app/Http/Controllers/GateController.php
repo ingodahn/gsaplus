@@ -245,8 +245,9 @@ class GateController extends Controller
 			Auth::login($patient);
 
 			Alert::info('Sie haben sich erfolgreich registriert.');
+			return Redirect::to('/Diary');
 
-			return view('patient.diary')->with('name',$name);
+			//return view('patient.diary')->with('name',$name);
 		}
 	}
 
