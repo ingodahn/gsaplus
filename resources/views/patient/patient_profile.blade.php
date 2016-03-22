@@ -162,7 +162,7 @@
     <hr>
     <h3>Persönliche Informationen</h3>
     @if($isPatient)
-      <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/personalInformation" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/personal_information" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="personal_information" class="control-label">(nur für Therapeuten sichtbar)</label>
