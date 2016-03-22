@@ -54,27 +54,7 @@ class DiaryController extends Controller
 	{
 	}
 
-	/**
-	 * Zeige den vorhergehenden Eintrag
-	 *
-	 * @param week
-	 * @param patient
-	 */
-	public function diary_back($week, $patient)
-	{
-	}
-
-	/**
-	 * Zeige den folgenden Eintrag
-	 *
-	 * @param week
-	 * @param patient
-	 */
-	public function diary_forward($week, $patient)
-	{
-	}
-
-	/**
+		/**
 	 * Es wird der zur als Argument übergebenen Wochennummer gehörende Tagebucheintrag
 	 * für den angemeldeten Patienten ausgegeben. Soweit ein Kommentar vorhanden ist
 	 * wird er mit ausgegeben.
@@ -92,11 +72,21 @@ class DiaryController extends Controller
 		$patient_info['name']=$patient->name;
 		$patient_info['patientWeek']=$patient->patient_week();
 
+		// Answer for week 1
+$situation=[];
+		$situation['description']=	"Chrakteristisch für die Situation war...";
+		$situation['expectation']= "Meine Erwartungen ...";
+		$situation['their_reaction']= "Die Reaktionen der anderen waren ...";
+		$situation['my_reaction']= "Meine Reaktion ... ";
+
+		$situations=[$situation,$situation,$situation];
+
+
 		$entry_info=[];
 		$entry_info['week']=$week;
 		$entry_info['status']="Abgeschickt";
-		$entry_info['problem']= "Beschreiben Sie eine oder mehrere Situationen, die Sie an Ihrem ersten Arbeitstag belastet haben.";
-		$entry_info['answer']= "Antwort des Patienten";
+		$entry_info['problem']= "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
+		$entry_info['answer']= $situations;
 		$entry_info['survey']="Indication of feeling of patient (Antwort auf Befindensfragen)";
 		$entry_info['comment']="Hier steht der Kommentar des Therapeuten";
 		$entry_info['comment_reply']="Hier steht die Bewertung des Kommentars des Therapeuten durch den Patienten.";
