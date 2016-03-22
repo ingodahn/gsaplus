@@ -11,4 +11,6 @@ class Admin extends User
 
     protected static $singleTableType = UserRole::ADMIN;
 
+    protected static $persisted = [];
+
 }

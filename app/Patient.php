@@ -22,7 +22,23 @@ class Patient extends User
         'notes_of_therapist',
         'registration_date',
         'therapist_id',
-        'intervention_ended_on'];
+        'intervention_ended_on',
+        'last_login',
+    ];
+
+    protected $dates = [
+        'registration_date',
+        'date_from_clinics',
+        'last_activity',
+        'last_login'
+    ];
+
+    public $info_methods = [
+        'status',
+        'status_of_next_assignment',
+        'patient_week',
+        'overdue'
+    ];
 
     /*
      * The following accessors will convert every date to an instance
@@ -43,6 +59,16 @@ class Patient extends User
 
     public function getRegistrationDateAttribute($date) {
         return new Date($date);
+    }
+
+    public function to_info($current_info = []) {
+        $info = parent::to_info($current_info);
+
+        $therapist = $this->therapist ? $this->therapist->name : $this->info_null_string;
+
+        $info = array_add($info, $this->class_name(). '.therapist', $therapist);
+
+        return $info;
     }
 
     /**
