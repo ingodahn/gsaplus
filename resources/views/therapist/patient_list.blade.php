@@ -31,7 +31,8 @@
           { data: 'overdue', name: 'overdue' },
 		  { data: 'last_activity', name: 'last_activity' },
 		  { data: 'therapist', name: 'therapist' }
-        ]
+        ],
+        order: [1, 'asc']
       });
     });
   </script>

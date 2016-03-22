@@ -27,15 +27,15 @@ class AssignmentStatus
     const UNKNOWN = "E000";
 
     public static $STATUS_INFO = array(
-        "E010"=>"E010: Aufgabe nicht definiert",
-        "E015"=>"E015: Aufgabe definiert",
-        "E020"=>"E020: Aufgabe gestellt",
-        "E030"=>"E030: Aufgabe bearbeitet",
-        "E040"=>"E040: Aufgabe abgeschickt",
-        "E050"=>"E050: Antwort kommentiert",
-        "E060"=>"E060: Kommentar bewertet",
-        "E070"=>"E070: Aufgabe überfällig",
-        "E100"=>"E100: Aufgabe nicht erforderlich"
+        self::ASSIGNMENT_IS_NOT_DEFINED => "Aufgabe nicht definiert",
+        self::THERAPIST_SAVED_ASSIGNMENT => "Aufgabe definiert",
+        self::PATIENT_GOT_ASSIGNMENT => "Aufgabe gestellt",
+        self::PATIENT_EDITED_ASSIGNMENT => "Aufgabe bearbeitet",
+        self::PATIENT_FINISHED_ASSIGNMENT => "Aufgabe abgeschickt",
+        self::THERAPIST_COMMENTED_ASSIGNMENT => "Antwort kommentiert",
+        self::PATIENT_RATED_COMMENT => "Kommentar bewertet",
+        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Aufgabe überfällig",
+        self::ASSIGNMENT_IS_NOT_REQUIRED => "Aufgabe nicht erforderlich"
     );
 
     public static function to_patient_status($assignment_status) {

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\UserRole;
 use App\Models\AssignmentStatus;
 use App\Models\PatientStatus;
 
@@ -10,7 +11,7 @@ use Jenssegers\Date\Date;
 class Patient extends User
 {
 
-    protected static $singleTableType = 'patient';
+    protected static $singleTableType = UserRole::PATIENT;
 
     protected static $persisted = ['code',
         'assignment_day',

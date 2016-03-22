@@ -66,9 +66,10 @@ class PatientListController extends Controller
 			'Donnerstag' => $request->input('Do_slots')
 		];
 
-		$days=new Days;
+		$days = new Days;
 		$days->set_days($Days);
-		$Days1=$days->get_days();
+		$Days1 = $days->get_days();
+
 		return dd($Days1);
 
 	}
@@ -86,15 +87,14 @@ class PatientListController extends Controller
 	 */
 	public function show(Request $request) {
 		//Zeige Seite patient_list mit
-		$days=new Days;
-		$Slots = $days->get_days();
 		// Slots von Days,
 		// Patientenliste von datatable
+		$days = new Days;
+		$Slots = $days->get_days();
 
-		$params['Slots']=$Slots;
+		$params['Slots'] = $Slots;
+
 		return view('therapist.patient_list')->with($params);
-
-
 	}
 
 	/**
@@ -118,12 +118,15 @@ class PatientListController extends Controller
 		$days_map = Helper::generate_day_number_map();
 
 		return Datatables::of(Patient::select('*'))
-			->removeColumn('email')
 			->addColumn('patient_status', function ($patient) {
-				return PatientStatus::$STATUS_INFO[$patient->status()];
+				$status = $patient->status();
+
+				return $status.': '.PatientStatus::$STATUS_INFO[$status];
 			})
 			->addColumn('status_of_next_assignment', function($patient){
-				return AssignmentStatus::$STATUS_INFO[$patient->status_of_next_assignment()];
+				$status = $patient->status_of_next_assignment();
+
+				return $status.': '.AssignmentStatus::$STATUS_INFO[$status];
 			})
 			->edit_column('assignment_day', function($row) use ($days_map) {
 				return $days_map[$row->assignment_day];
@@ -148,6 +151,12 @@ class PatientListController extends Controller
 				$name = $patient->name;
 				return '<a href="/Diary/'.$name.'">'.$name.'</a>';
 			})
+			->removeColumn('id')
+			->removeColumn('created_at')
+			->removeColumn('updated_at')
+			->removeColumn('is_random')
+			->removeColumn('personal_information')
+			->removeColumn('email')
 			->make(true);
 	}
 
