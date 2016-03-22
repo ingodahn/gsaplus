@@ -23,12 +23,12 @@
           { data: 'selection', name: 'selection', orderable: false, searchable: false},
           { data: 'name', name: 'name' },
           { data: 'code', name: 'code' },
-		  { data: 'patient_week', name: 'patient_week' },
-          { data: 'assignment_day', name: 'assignment_day' },
-		  { data: 'patient_status', name: 'patient_status' },
-          { data: 'status_of_next_assignment', name: 'status_of_next_assignment' },
+		  { data: 'patientWeek', name: 'patientWeek' },
+          { data: 'assignmentDay', name: 'assignmentDay' },
+		  { data: 'status', name: 'patientStatus' },
+          { data: 'statusOfNextAssignment', name: 'statusOfNextAssignment' },
           { data: 'overdue', name: 'overdue' },
-		  { data: 'last_activity', name: 'last_activity' },
+		  { data: 'lastActivity', name: 'lastActivity' },
 		  { data: 'therapist', name: 'therapist' }
         ],
         order: [1, 'asc']

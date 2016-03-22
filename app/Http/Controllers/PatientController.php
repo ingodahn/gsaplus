@@ -68,35 +68,26 @@ class PatientController extends Controller
 
 		$patient = Patient::whereName($name)->firstOrFail();
 
-		$status = $patient->status();
+		$patient_info = $patient->to_info()['Patient'];
 
 		switch ($user_role) {
 			case UserRole::PATIENT:
-				$status = PatientStatus::$STATUS_INFO[$status];
+				$status = PatientStatus::$STATUS_INFO[$patient_info['status']];
 				break;
 			case UserRole::THERAPIST:
 			case UserRole::ADMIN:
-				$status = $status.': '.PatientStatus::$STATUS_INFO[$status];
+				$status = $patient_info['status'].': '.PatientStatus::$STATUS_INFO[$patient_info['status']];
 				break;
 		}
 
-		$patient_info=[];
-		$patient_info['assignment_day'] = Helper::generate_day_number_map()[$patient->assignment_day];
-		$patient_info['available_days'] = $days->get_available_days();
-		$patient_info['assignmentDayChangesLeft'] = $patient->assignment_day_changes_left;
-		$patient_info['code'] = $patient->code;
-		$patient_info['dateFromClinics'] = $patient->date_from_clinics !== null ? $patient->date_from_clinics->format('d.m.Y') : '';
-		$patient_info['lastActivity'] = $patient->last_activity;
-		$patient_info['notes'] = $patient->notes_of_therapist;
-		$patient_info['patientWeek'] = $patient->patient_week();
-		$patient_info['personalInformation'] = $patient->personal_information;
+		$patient_info['assignmentDay'] = Helper::generate_day_number_map()[$patient_info['assignmentDay']];
+		$patient_info['availableDays'] = $days->get_available_days();
 		$patient_info['status'] = $status;
-		$patient_info['therapist'] = $patient->therapist !== null ? $patient->therapist->name : "-";
-		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(),'name');
+		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(), 'name');
 
 		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;
-		$profile_user_model['PatientName'] = $patient->name;
+
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);
 		return view('patient.patient_profile')->with($profile_user_model);
@@ -156,7 +147,7 @@ class PatientController extends Controller
 
 	public function save_date_from_clinics(Request $request, Patient $patient) {
 		// format: dd.mm.yyyy
-		$date_from_clinics_string = $request->input('dateFromClinics');
+		$date_from_clinics_string = $request->input('date_from_clinics');
 
 		try {
 			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
@@ -175,8 +166,8 @@ class PatientController extends Controller
 	}
 
 	public function save_password(Request $request, Patient $patient) {
-		$old_password = $request->input('oldPassword');
-		$password = $request->input('newPassword');
+		$old_password = $request->input('old_password');
+		$password = $request->input('new_password');
 
 		if (Hash::check($old_password, $patient->password)) {
 			$patient->password = bcrypt($password);
@@ -191,7 +182,7 @@ class PatientController extends Controller
 	}
 
 	public function save_personal_information(Request $request, Patient $patient) {
-		$personal_information = $request->input('personalInformation');
+		$personal_information = $request->input('personal_information');
 
 		if ($personal_information !== '') {
 			$patient->personal_information = $personal_information;

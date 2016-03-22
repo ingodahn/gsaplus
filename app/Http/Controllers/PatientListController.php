@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
@@ -117,47 +118,43 @@ class PatientListController extends Controller
 	{
 		$days_map = Helper::generate_day_number_map();
 
-		return Datatables::of(Patient::select('*'))
-			->addColumn('patient_status', function ($patient) {
-				$status = $patient->status();
+		$infos = new Collection;
+		$patients = Patient::all();
 
-				return $status.': '.PatientStatus::$STATUS_INFO[$status];
-			})
-			->addColumn('status_of_next_assignment', function($patient){
-				$status = $patient->status_of_next_assignment();
+		foreach ($patients as $patient) {
+			$infos->push($patient->to_info()[$patient->class_name()]);
+		}
 
-				return $status.': '.AssignmentStatus::$STATUS_INFO[$status];
-			})
-			->edit_column('assignment_day', function($row) use ($days_map) {
-				return $days_map[$row->assignment_day];
-			})
-			->addColumn('patient_week', function($patient) {
-				return $patient->patient_week() === -1 ? "-" : $patient->patient_week();
-			})
-			->addColumn('last_activity', function($patient) {
-				return $patient->last_activity != null ? $patient->last_activity->format('d.m.Y') : "";
-			})
-			->addColumn('therapist', function($patient) {
-				return $patient->therapist !== null ? $patient->therapist->name : "-";
-			})
-			-> addColumn('selection', function($row){
-				$name=$row->name;
-				return '<input type="checkbox" name="list_of_names[]" value="'.$name.'"></input>';
-			})
-			->addColumn('overdue', function($patient) {
-				return round($patient->overdue() * 100, 0)."%";
-			})
-			->edit_column('name', function($patient) {
-				$name = $patient->name;
-				return '<a href="/Diary/'.$name.'">'.$name.'</a>';
-			})
-			->removeColumn('id')
-			->removeColumn('created_at')
-			->removeColumn('updated_at')
-			->removeColumn('is_random')
-			->removeColumn('personal_information')
-			->removeColumn('email')
-			->make(true);
+		return Datatables::of($infos)
+				-> addColumn('selection', function($patient_info){
+					return '<input type="checkbox" name="list_of_names[]" value="'.$patient_info['name'].'"></input>';
+				})
+				->editColumn('overdue', function($patient_info) {
+					return round($patient_info['overdue'] * 100, 0)."%";
+				})
+				->edit_column('name', function($patient_info) {
+					return '<a href="/Diary/'.$patient_info['name'].'">'.$patient_info['name'].'</a>';
+				})
+				->editColumn('status', function ($patient_info) {
+					return $patient_info['status'].': '.PatientStatus::$STATUS_INFO[$patient_info['status']];
+				})
+				->editColumn('statusOfNextAssignment', function($patient_info){
+					return $patient_info['statusOfNextAssignment'].': '
+							.AssignmentStatus::$STATUS_INFO[$patient_info['statusOfNextAssignment']];
+				})
+				->editColumn('patientWeek', function($patient_info) {
+					return $patient_info['patientWeek'] === -1 ? "-" : $patient_info['patientWeek'];
+				})
+				->edit_column('assignmentDay', function($patient_info) use ($days_map) {
+					return $days_map[$patient_info['assignmentDay']];
+				})
+				->removeColumn('id')
+				->removeColumn('createdAt')
+				->removeColumn('updatedAt')
+				->removeColumn('isRandom')
+				->removeColumn('personalInformation')
+				->removeColumn('email')
+				->make(true);
 	}
 
 }

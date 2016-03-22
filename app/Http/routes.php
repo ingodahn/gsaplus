@@ -88,10 +88,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::group(['prefix' => '/patient/{patient}'], function () {
 		Route::post('therapist', 'PatientController@save_therapist');
 		Route::post('day_of_week', 'PatientController@save_day_of_week');
-		Route::post('dateFromClinics', 'PatientController@save_date_from_clinics');
+		Route::post('date_from_clinics', 'PatientController@save_date_from_clinics');
 		Route::post('password', 'PatientController@save_password');
-		Route::post('personalInformation', 'PatientController@save_personal_information');
-		Route::get('cancelIntervention', 'PatientController@cancel_intervention');
+		Route::post('personal_information', 'PatientController@save_personal_information');
+		Route::get('cancel_intervention', 'PatientController@cancel_intervention');
 		Route::post('notes', 'PatientController@save_notes_of_therapist');
 	});
 
