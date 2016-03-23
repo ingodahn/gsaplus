@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
-class AssignmentTemplate extends Model
+class AssignmentTemplate extends InfoModel
 {
 
     /**

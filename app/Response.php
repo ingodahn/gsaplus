@@ -2,12 +2,20 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
-class Response extends Model
+use Jenssegers\Date\Date;
+
+class Response extends InfoModel
 {
 
     protected $dates = ['created_at', 'updated_at', 'date'];
+
+    /*
+     * hide ids from list of attributes
+     * (ids are used to resolve relationships)
+     */
+    protected $hidden = ['assignment_id', 'therapist_id'];
 
     /**
      * Get the assignment.
@@ -23,6 +31,18 @@ class Response extends Model
     public function therapist()
     {
         return $this->belongsTo('App\Therapist');
+    }
+
+    public function to_info($current_info = []) {
+        $info = parent::to_info($current_info);
+
+        $assignment_text = $this->assignment ? $this->assignment->assignment_text : $this->info_null_string;
+        $therapist_name = $this->therapist ? $this->therapist->name : $this->info_null_string;
+
+        $info = array_add($info, $this->class_name() .'.assignment', $assignment_text);
+        $info = array_add($info, $this->class_name() .'.therapist', $therapist_name);
+
+        return $info;
     }
 
     /*

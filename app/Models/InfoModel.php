@@ -27,6 +27,8 @@ class InfoModel extends Model
     }
 
     public function dates_info($camel_case = true) {
+        $info = [];
+
         foreach ($this->getDates() as $date_attribute_name) {
             $value = $this->getAttribute($date_attribute_name);
             $name = $camel_case ? camel_case($date_attribute_name) : $date_attribute_name;
@@ -41,7 +43,7 @@ class InfoModel extends Model
         $info = [];
         $dates = $this->getDates();
 
-        foreach (array_keys($this->getAttributes()) as $attribute_name) {
+        foreach (array_keys($this->attributesToArray()) as $attribute_name) {
             if (!in_array($attribute_name, $dates)) {
                 $value = $this->getAttribute($attribute_name);
                 $name = $camel_case ? camel_case($attribute_name) : $attribute_name;

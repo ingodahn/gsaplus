@@ -26,6 +26,12 @@ class Patient extends User
         'last_login',
     ];
 
+    /*
+     * hide ids from list of attributes
+     * (ids are used to resolve relationships)
+     */
+    protected $hidden = ['therapist_id'];
+
     protected $dates = [
         'registration_date',
         'date_from_clinics',
@@ -61,16 +67,6 @@ class Patient extends User
         return new Date($date);
     }
 
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
-
-        $therapist = $this->therapist ? $this->therapist->name : $this->info_null_string;
-
-        $info = array_add($info, $this->class_name(). '.therapist', $therapist);
-
-        return $info;
-    }
-
     /**
      * Get our assignments (all - independent of state).
      */
@@ -85,6 +81,16 @@ class Patient extends User
     public function therapist()
     {
         return $this->belongsTo('App\Therapist', 'therapist_id');
+    }
+
+    public function to_info($current_info = []) {
+        $info = parent::to_info($current_info);
+
+        $therapist = $this->therapist ? $this->therapist->name : $this->info_null_string;
+
+        $info = array_add($info, $this->class_name(). '.therapist', $therapist);
+
+        return $info;
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
-class WeekDay extends Model
+class WeekDay extends InfoModel
 {
     public $timestamps = false;
 

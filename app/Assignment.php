@@ -2,15 +2,21 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
 use App\Models\AssignmentStatus;
 use Jenssegers\Date\Date;
 
-class Assignment extends Model
+class Assignment extends InfoModel
 {
 
     protected $dates = ['created_at', 'updated_at', 'assigned_on'];
+
+    /*
+     * hide ids from list of attributes
+     * (ids are used to resolve relationships)
+     */
+    protected $hidden = ['patient_id', 'assignment_template_id'];
 
     /**
      * Get the underlying template.
@@ -34,6 +40,18 @@ class Assignment extends Model
     public function response()
     {
         return $this->hasOne('App\Response');
+    }
+
+    public function to_info($current_info = []) {
+        $info = parent::to_info($current_info);
+
+        $template_name = $this->assignment_template ? $this->assignment_template->title : $this->info_null_string;
+        $patient_name = $this->patient ? $this->patient->name : $this->info_null_string;
+
+        $info = array_add($info, $this->class_name() .'.assignmentTemplate', $template_name);
+        $info = array_add($info, $this->class_name() .'.patient', $patient_name);
+
+        return $info;
     }
 
     /*
