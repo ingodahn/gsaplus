@@ -77,6 +77,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/Profile/{name?}','PatientController@profile');
 	Route::post('/SendMail','ContactController@message_to_patients');
 	Route::post('/MassAction/mail','ContactController@mail_editor');
+	Route::post('/SetSlots', 'PatientListController@set_slots');
 	// Route::post('/SaveProfile','PatientController@save_profile');
 
 	// patient profile: routes for post requests
