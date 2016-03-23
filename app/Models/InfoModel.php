@@ -48,9 +48,6 @@ class InfoModel extends Model
      *
      * Format [ <date attribute name> => <string representation of date> ]
      *
-     * @param bool $camel_case
-     *              true: output attribute names in camelCase
-     *              false: don't
      * @return array an array containing a string representation of each date
      */
     public function date_info() {
@@ -71,10 +68,6 @@ class InfoModel extends Model
      * listed - please use method date_info to obtain a list of date strings.
      *
      * Format [ <attribute name> => <string representation of value> ]
-     *
-     * @param bool $camel_case
-     *              true: output attribute names in camelCase
-     *              false: don't
      *
      * @return an array containing a string representation of each attribute value (excluding dates)
      */
@@ -100,10 +93,6 @@ class InfoModel extends Model
      * store the return value.
      *
      * Format [ <method name> => <return value> ]
-     *
-     * @param bool $camel_case
-     *              true: output attribute names in camelCase
-     *              false: don't
      *
      * @return an array containing a string representation of each attribute value (excluding dates)
      */
