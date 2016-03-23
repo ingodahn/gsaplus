@@ -111,22 +111,34 @@ class DatabaseSeeder extends Seeder
                 $template->assignments()->save($assignment);
                 $patient->assignments()->save($assignment);
 
-                // generate response if patient has finished assignment
+                // generate comment if patient has finished assignment
                 if ($saved) {
-                    $response = factory(App\Response::class)->make();
-                    $response->timestamps = false;
-                    $response->is_random = true;
+                    $comment = factory(App\Comment::class)->make();
+                    $comment->timestamps = false;
+                    $comment->is_random = true;
 
-                    // response is created within 48 hours
-                    // (this may result in responses late at night ^^)
-                    $response->date = $assignment_date->copy()->addHours(rand(0,48) - $assignment_date->hour);
+                    // answer is commented is created within 48 hours
+                    // (this may result in comments late at night ^^)
+                    $comment->date = $assignment_date->copy()->addHours(rand(0,48) - $assignment_date->hour);
 
-                    $response->save();
+                    $comment->save();
 
-                    // associate the response with the therapist
+                    // associate the comment with the therapist
                     // and the assignment
-                    $assignment->response()->save($response);
-                    $therapist->responses()->save($response);
+                    $assignment->comment()->save($comment);
+                    $therapist->comments()->save($comment);
+
+                    $rating = rand(0,10) <= 6;
+
+                    if ($rating) {
+                        $reply = factory(App\CommentReply::class)->make();
+                        $reply->is_random = true;
+                        $reply->timestamps = false;
+
+                        $reply->save();
+
+                        $comment->comment_reply()->save($reply);
+                    }
                 }
             }
 

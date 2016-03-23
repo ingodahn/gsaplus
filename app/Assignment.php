@@ -39,12 +39,12 @@ class Assignment extends InfoModel
     }
 
     /**
-     * Relationship to the therapists response. Please use $assignment->response
-     * to access the response.
+     * Relationship to the therapists comment. Please use $assignment->comment
+     * to access the comment.
      */
-    public function response()
+    public function comment()
     {
-        return $this->hasOne('App\Response');
+        return $this->hasOne('App\Comment');
     }
 
     public function to_info($current_info = []) {
@@ -91,7 +91,7 @@ class Assignment extends InfoModel
             return AssignmentStatus::ASSIGNMENT_IS_NOT_REQUIRED;
         }
 
-        if ($this->response === null) {
+        if ($this->comment === null) {
             if ($this->state === true) {
                 // patient has finished assignment
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
@@ -117,11 +117,11 @@ class Assignment extends InfoModel
                 return AssignmentStatus::ASSIGNMENT_IS_NOT_DEFINED;
             }
         } else {
-            if ($this->response->rating !== null) {
+            if ($this->comment->comment_reply !== null) {
                 // patient rated therapists comment
                 return AssignmentStatus::PATIENT_RATED_COMMENT;
             } else {
-                // therapist provided comment to patients response
+                // therapist provided comment to patients answer
                 return AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             }
         }

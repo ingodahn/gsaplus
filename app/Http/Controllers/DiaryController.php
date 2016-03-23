@@ -73,7 +73,7 @@ class DiaryController extends Controller
 		$patient_info['patientWeek']=$patient->patient_week();
 
 		// Answer for week 1
-$situation=[];
+		$situation=[];
 		$situation['description']=	"Chrakteristisch für die Situation war...";
 		$situation['expectation']= "Meine Erwartungen ...";
 		$situation['their_reaction']= "Die Reaktionen der anderen waren ...";
@@ -132,7 +132,7 @@ $situation=[];
 	 *
 	 * @param entry_id
 	 */
-	public function get_response($entry_id)
+	public function get_comment($entry_id)
 	{
 
 		//if (not actual assignment) {

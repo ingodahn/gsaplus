@@ -12,12 +12,12 @@ class Therapist extends User
     protected static $singleTableType = UserRole::THERAPIST;
 
     /**
-     * Relationship to the therapists responses . Please use
-     * $therapist->responses to access the collection.
+     * Relationship to the therapists comments . Please use
+     * $therapist->comments to access the collection.
      */
-    public function responses()
+    public function comments()
     {
-        return $this->hasMany('App\Response');
+        return $this->hasMany('App\Comment');
     }
 
     /**

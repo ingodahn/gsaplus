@@ -56,10 +56,17 @@ $factory->define(App\Assignment::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Response::class, function (Faker\Generator $faker) {
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
     return [
         'date' => $faker->dateTime($max = 'now'),
         'text' => $faker->text()
+    ];
+});
+
+$factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
+    return [
+        'helpful' => rand(0,4),
+        'satisfied' => rand(0,4)
     ];
 });
 

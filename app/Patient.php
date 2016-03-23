@@ -192,8 +192,8 @@ class Patient extends User
      *
      * TODO: check for patient text (? - only for current assignment?)
      */
-    public function past_assignments_without_response() {
-        return $this->past_assignments()->whereDoesntHave('response');
+    public function uncommented_assignments() {
+        return $this->past_assignments()->whereDoesntHave('comment');
     }
 
     /**
@@ -210,7 +210,7 @@ class Patient extends User
         $number_of_past_assignments = $this->past_assignments()->count();
 
         return $number_of_past_assignments > 0 ?
-                    $this->past_assignments_without_response()->count() / $number_of_past_assignments : 0;
+                    $this->uncommented_assignments()->count() / $number_of_past_assignments : 0;
 
     }
 

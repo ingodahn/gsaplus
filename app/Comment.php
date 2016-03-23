@@ -6,7 +6,7 @@ use App\Models\InfoModel;
 
 use Jenssegers\Date\Date;
 
-class Response extends InfoModel
+class Comment extends InfoModel
 {
 
     protected $dates = ['created_at', 'updated_at', 'date'];
@@ -19,7 +19,7 @@ class Response extends InfoModel
 
     /**
      * Relationship to the commented assignment. Please use
-     * $response->assignment to access the assignment.
+     * $comment->assignment to access the assignment.
      */
     public function assignment()
     {
@@ -27,12 +27,20 @@ class Response extends InfoModel
     }
 
     /**
-     * Relationship to the author of the response. Please use
-     * $response->therapist to access the therapist.
+     * Relationship to the author of the comment. Please use
+     * $comment->therapist to access the therapist.
      */
     public function therapist()
     {
         return $this->belongsTo('App\Therapist');
+    }
+
+    /**
+     * Relationship to the patients reply. Please use $comment->reply
+     * to access the reply.
+     */
+    public function comment_reply() {
+        return $this->hasOne('App\CommentReply');
     }
 
     public function to_info($current_info = []) {
