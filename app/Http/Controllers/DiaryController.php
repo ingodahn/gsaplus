@@ -67,11 +67,9 @@ class DiaryController extends Controller
 	 */
 	public function entry(Request $request, Patient $patient,$week)
 	{
-		$patient_info=[];
-		$patient_info['notes']=$patient->notes_of_therapist;
-		$patient_info['name']=$patient->name;
-		$patient_info['patientWeek']=$patient->patient_week();
+		$patient_info=$patient->to_info()['Patient'];
 
+		/* Begin Löschen wenn assignment_for_week funktioniert */
 		// Answer for week 1
 $situation=[];
 		$situation['description']=	"Chrakteristisch für die Situation war...";
@@ -90,6 +88,13 @@ $situation=[];
 		$entry_info['survey']="Indication of feeling of patient (Antwort auf Befindensfragen)";
 		$entry_info['comment']="Hier steht der Kommentar des Therapeuten";
 		$entry_info['comment_reply']="Hier steht die Bewertung des Kommentars des Therapeuten durch den Patienten.";
+
+		/* End Löschen wenn assignment_for_week funktioniert */
+
+		/* Einkommentieren wenn assignment_for_week funktioniert 
+		$assignment=Patient::whereName($patient_info['name'])->assignment_for_week($week);
+		$entry_info=$assignment->to_info()['Assignment'];
+		*/
 
 		$param['PatientInfo']=$patient_info;
 		$param['EntryInfo']=$entry_info;
