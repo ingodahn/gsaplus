@@ -21,77 +21,83 @@ use App\Models\UserRole;
 class DiaryController extends Controller
 {
 
-	function __construct()
-	{
-	}
+    function __construct()
+    {
+    }
 
-	function __destruct()
-	{
-	}
-
-
-
-	/**
-	 * Füge eine neue Situation zur ersten Schreibaufgabe hinzu
-	 */
-	public function add_situation()
-	{
-	}
-
-	
-	/**
-	 * Zeige alle bisherigen Beiträge sowie die dazu erfolgten Kommentare auf einer
-	 * Seite an, die vom Browser gespeichert oder ausgedruckt werden kann.
-	 */
-	public function commented_diary()
-	{
-	}
-
-	/**
-	 * Zeige den aktuellen Eintrag
-	 */
-	public function current()
-	{
-	}
-
-		/**
-	 * Es wird der zur als Argument übergebenen Wochennummer gehörende Tagebucheintrag
-	 * für den angemeldeten Patienten ausgegeben. Soweit ein Kommentar vorhanden ist
-	 * wird er mit ausgegeben.
-	 * Je nach Art der Aufgabe und Rolle des Benutzers können Elemente angezeigt werden oder nicht
-	 * bzw. editiert werden oder nicht:
-	 * P030, P040, P080, P090: Editierbar
-	 * Sonst nicht editierbar
-	 * @param name
-	 * @param week
-	 */
-	public function entry(Request $request, Patient $patient,$week)
-	{
-		$patient_info=$patient->to_info()['Patient'];
-
-		/* Begin Löschen wenn assignment_for_week funktioniert */
-		// Answer for week 1
-$situation=[];
-		$situation['description']=	"Chrakteristisch für die Situation war...";
-		$situation['expectation']= "Meine Erwartungen ...";
-		$situation['their_reaction']= "Die Reaktionen der anderen waren ...";
-		$situation['my_reaction']= "Meine Reaktion ... ";
-
-		$situations=[$situation,$situation,$situation];
+    function __destruct()
+    {
+    }
 
 
-		$entry_info=[];
-		$entry_info['week']=$week;
-		$entry_info['status']="Abgeschickt";
-		$entry_info['problem']= "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
-		$entry_info['answer']= $situations;
-		$entry_info['survey']="Indication of feeling of patient (Antwort auf Befindensfragen)";
-		$entry_info['comment']="Hier steht der Kommentar des Therapeuten";
-		$entry_info['comment_reply']="Hier steht die Bewertung des Kommentars des Therapeuten durch den Patienten.";
+    /**
+     * Füge eine neue Situation zur ersten Schreibaufgabe hinzu
+     */
+    public function add_situation()
+    {
+    }
+
+
+    /**
+     * Zeige alle bisherigen Beiträge sowie die dazu erfolgten Kommentare auf einer
+     * Seite an, die vom Browser gespeichert oder ausgedruckt werden kann.
+     */
+    public function commented_diary()
+    {
+    }
+
+    /**
+     * Zeige den aktuellen Eintrag
+     */
+    public function current()
+    {
+    }
+
+    /**
+     * Es wird der zur als Argument übergebenen Wochennummer gehörende Tagebucheintrag
+     * für den angemeldeten Patienten ausgegeben. Soweit ein Kommentar vorhanden ist
+     * wird er mit ausgegeben.
+     * Je nach Art der Aufgabe und Rolle des Benutzers können Elemente angezeigt werden oder nicht
+     * bzw. editiert werden oder nicht:
+     * P030, P040, P080, P090: Editierbar
+     * Sonst nicht editierbar
+     * @param name
+     * @param week
+     */
+    public function entry(Request $request, Patient $patient, $week)
+    {
+        $patient_info = $patient->to_info()['Patient'];
+
+        /* Begin Löschen wenn assignment_for_week funktioniert */
+        // Answer for week 1
+        $situation = [];
+        $situation['description'] = "Chrakteristisch für die Situation war...";
+        $situation['expectation'] = "Meine Erwartungen ...";
+        $situation['their_reaction'] = "Die Reaktionen der anderen waren ...";
+        $situation['my_reaction'] = "Meine Reaktion ... ";
+
+        $situations = [$situation, $situation, $situation];
+
+
+        $entry_info = [];
+        $entry_info['week'] = $week;
+        $entry_info['status'] = "Abgeschickt";
+        $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
+        $entry_info['answer'] = $situations;
+        $entry_info['survey']['phq4']['interested'] = 1;
+        $entry_info['survey']['phq4']['depressed']=2;
+        $entry_info['survey']['phq4']['nervous']=3;
+        $entry_info['survey']['phq4']['troubled']=0;
+        $entry_info['survey']['wai']=5;
+        $entry_info['comment'] = "Hier steht der Kommentar des Therapeuten";
+
+        $entry_info['comment_reply']['helpful'] = 1;
+        $entry_info['comment_reply']['satisfied'] = 2;
+
 
 		/* End Löschen wenn assignment_for_week funktioniert */
 
-		/* Einkommentieren wenn assignment_for_week funktioniert 
+		/* Einkommentieren wenn assignment_for_week funktioniert
 		$assignment=Patient::whereName($patient_info['name'])->assignment_for_week($week);
 		$entry_info=$assignment->to_info()['Assignment'];
 		*/
@@ -209,7 +215,7 @@ $situation=[];
 			/* Speichern von $entry */
 			Alert::success("Der Eintrag wurde abgeschickt")->flash();
 			//return "Abgeschickt";
-			return Redirect::to('/Home');
+			return Redirect::to(' / Home');
 		}
 
 	}
@@ -246,7 +252,7 @@ $situation=[];
 		if ($name && $request->user() !== null
 			&& $request->user()->type === UserRole::PATIENT
 			&& Auth::user()->name !== $name) {
-			return Redirect::to('/');
+			return Redirect::to(' / ');
 		}
 
 		$Diary = [];
@@ -258,7 +264,7 @@ $situation=[];
 			$entries[$i]['problem']= 'Schreibaufgabe';
 		}
 		$Diary['entries']=$entries;
-		return view('patient.diary')->with('Diary',$Diary);
+		return view('patient . diary')->with('Diary',$Diary);
 	}
 
 }
