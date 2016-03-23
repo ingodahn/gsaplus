@@ -8,10 +8,10 @@
             {{ csrf_field() }}
             <h2>Schreibaufgabe für {{ $PatientInfo['name'] }} für Woche {{ $EntryInfo['week'] }}
                 ({{ $EntryInfo['status'] }})</h2>
-            Ansicht: {{ $Role }}
+            
             @if ($Role=='therapist')
                 <h3>Notizen der Therapeuten</h3>
-                {{ $PatientInfo['notes'] }}
+                {{ $PatientInfo['notesOfTherapist'] }}
                 <!--
                 Das Notiz-Feld ($PatientInfo['notes']) ermöglicht dem Therapeuten die Eingabe zusätzlicher
                 Informationen.
