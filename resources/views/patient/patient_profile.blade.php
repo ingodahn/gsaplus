@@ -66,11 +66,16 @@
     <hr>
     <h3>Tagebuchtag</h3>
     <p>
-      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignmentDay'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChangesLeft'] }}</strong>
-      @if($Patient['assignmentDayChangesLeft'] == 1)
-        Änderung.
+      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignmentDay'] }}</strong> und es verbleiben
+      @if($Patient['assignmentDayChangesLeft'] > 0)
+        noch <strong>{{$Patient['assignmentDayChangesLeft']}}</strong>
+        @if($Patient['assignmentDayChangesLeft'] == 1)
+          Änderung.
+        @else
+          Änderungen.
+        @endif
       @else
-        Änderungen.
+        <strong>keine</strong> Änderungen mehr.
       @endif
     </p>
     @if($isPatient && $Patient['assignmentDayChangesLeft'] > 0)
@@ -185,7 +190,7 @@
       <hr>
       <h3>Intervention beenden</h3>
       <p>
-        <a href="/patient/{{$Patient['name']}}/cancel_intervention" class="btn btn-danger">Intervention beenden</a>
+        <a href="/patient/{{$Patient['name']}}/cancel_intervention" class="btn btn-danger" onclick="return confirm('Wollen sie den Patientenaccount wirklich löschen?');">Intervention beenden</a>
       </p>
     @endif
 

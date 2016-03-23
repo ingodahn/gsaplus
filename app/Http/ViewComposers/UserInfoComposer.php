@@ -42,7 +42,10 @@ class UserInfoComposer
                 ->with('Name', $this->user->name)
                 ->with('isTherapist', $this->isTherapist())
                 ->with('isPatient', $this->isPatient())
-                ->with('isAdmin', $this->isAdmin());
+                ->with('isAdmin', $this->isAdmin())
+                ->with('isLoggedIn', true);
+        } else {
+          $view->with('isLoggedIn', false);
         }
     }
 
