@@ -68,6 +68,8 @@ class DiaryController extends Controller
     {
         $patient_info = $patient->to_info()['Patient'];
 
+        return dd($patient_info);
+
         /* Begin Löschen wenn assignment_for_week funktioniert */
         // Answer for week 1
         $situation = [];
@@ -264,7 +266,7 @@ class DiaryController extends Controller
 			$entries[$i]['problem']= 'Schreibaufgabe';
 		}
 		$Diary['entries']=$entries;
-		return view('patient . diary')->with('Diary',$Diary);
+		return view('patient.diary')->with('Diary',$Diary);
 	}
 
 }

@@ -12,10 +12,11 @@
             @if ($Role=='therapist')
                 <h3>Notizen der Therapeuten</h3>
                 {{ $PatientInfo['notes'] }}
-                </br>
+                <!--
                 Das Notiz-Feld ($PatientInfo['notes']) ermöglicht dem Therapeuten die Eingabe zusätzlicher
                 Informationen.
                 Es wird für Patienten niemals angezeigt. Für Therapeuten ist es immer editierbar.
+                -->
                 @endif
 
                         <!-- Problem
@@ -123,7 +124,7 @@
                         <h3>Kommentar des Therapeuten</h3>
                     </summary>
                     {{ $EntryInfo['comment'] }}
-                    </br>
+                    <!--
                     Für Patienten ist der Kommentar (comment, EntryInfo->comment()) nur sichtbar wenn er
                     vom Therapeuten abgeschickt wurde ($EntyInfo['status']>= 'E050'). Er ist für Patienten niemals
                     editierbar.
@@ -132,6 +133,7 @@
                     </br>
                     Für Therapeuten ist der Kommentar nur editierbar wenn der Eintrag vom Patienten abgeschickt
                     aber der Kommentar vom Therapeuten noch nicht abgeschickt ist. ($EntryInfo['status'] == 'E040')
+                    -->
                 </details>
                 @if ($Role == 'patient')
                     <details>
