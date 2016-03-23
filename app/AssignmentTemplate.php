@@ -4,6 +4,8 @@ namespace App;
 
 use App\Models\InfoModel;
 
+use Jenssegers\Date\Date;
+
 class AssignmentTemplate extends InfoModel
 {
 

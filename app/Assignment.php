@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Models\AssignmentStatus;
+
 use App\Models\InfoModel;
 
-use App\Models\AssignmentStatus;
 use Jenssegers\Date\Date;
 
 class Assignment extends InfoModel
