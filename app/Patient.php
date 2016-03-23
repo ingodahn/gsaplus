@@ -36,7 +36,8 @@ class Patient extends User
         'registration_date',
         'date_from_clinics',
         'last_activity',
-        'last_login'
+        'last_login',
+        'intervention_ended_on'
     ];
 
     public $info_methods = [
