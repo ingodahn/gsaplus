@@ -10,7 +10,8 @@ class AssignmentTemplate extends InfoModel
 {
 
     /**
-     * Get all assignments which are based on this template.
+     * Relationship to all derived assignments (which are based on this template).
+     * Please use $assignment_template->assignments to access the collection.
      */
     public function assignments()
     {

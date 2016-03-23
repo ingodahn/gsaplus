@@ -20,7 +20,9 @@ class Assignment extends InfoModel
     protected $hidden = ['patient_id', 'assignment_template_id'];
 
     /**
-     * Get the underlying template.
+     * Relationship to the underlying template (the assignment is
+     * based on). Please use $assignment->assignment_template to
+     * access the template.
      */
     public function assignment_template()
     {
@@ -28,7 +30,8 @@ class Assignment extends InfoModel
     }
 
     /**
-     * Get the patient who should write an answer.
+     * Relationship to the patient (who should answer the assignment).
+     * Please use $assignment->patient to access the patient.
      */
     public function patient()
     {
@@ -36,7 +39,8 @@ class Assignment extends InfoModel
     }
 
     /**
-     * Get the response of the therapist.
+     * Relationship to the therapists response. Please use $assignment->response
+     * to access the response.
      */
     public function response()
     {
@@ -78,6 +82,8 @@ class Assignment extends InfoModel
 
     /**
      * Status der Aufgabe
+     *
+     * @return string Status der Aufgabe
      */
     public function status() {
         if ($this->patient->intervention_ended_on !== null &&

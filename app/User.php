@@ -44,7 +44,7 @@ class User extends InfoModel implements
     /**
      * Get the route key for the model.
      *
-     * @return string
+     * @return string the route key for the model
      */
     public function getRouteKeyName()
     {

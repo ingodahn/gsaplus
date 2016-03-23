@@ -12,7 +12,8 @@ class Therapist extends User
     protected static $singleTableType = UserRole::THERAPIST;
 
     /**
-     * Get the responses to our assignments.
+     * Relationship to the therapists responses . Please use
+     * $therapist->responses to access the collection.
      */
     public function responses()
     {
@@ -20,7 +21,8 @@ class Therapist extends User
     }
 
     /**
-     * Get the patients for whom we provide guidance.
+     * Relationship to the patients for whom the therapist is responsible.
+     * Please use $therapist->patients to access the collection.
      */
     public function patients()
     {

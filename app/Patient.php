@@ -6,6 +6,7 @@ use App\Models\UserRole;
 use App\Models\AssignmentStatus;
 use App\Models\PatientStatus;
 
+use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Date\Date;
 
 class Patient extends User
@@ -69,7 +70,12 @@ class Patient extends User
     }
 
     /**
-     * Get our assignments (all - independent of state).
+     * Relationship to the patients assignments (all - independent of state) including
+     * the results of the situation survey. Please use $patient->assignments
+     * to access the collection.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany all assignments including the
+     *          results of the situation survey
      */
     public function assignments()
     {
@@ -77,7 +83,11 @@ class Patient extends User
     }
 
     /**
-     * Get the responsible therapist.
+     * Relationship to the responsible therapist (if set). Please use $patient->therapist
+     * to access the therapist.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo the responsible
+     *          therapist (if set)
      */
     public function therapist()
     {
@@ -95,28 +105,30 @@ class Patient extends User
     }
 
     /**
-     * Returns an ordered list of all assignments (including undefined assignments).
+     * Returns an ordered collection of all assignments that also
+     * includes the situation survey.
      *
-     * @return an ordered list of all assignments (including undefined assignments)
+     * @return Collection an ordered list of all assignments that also
+     * includes the situation survey
      */
     public function ordered_assignments() {
         return $this->assignments->sortBy('week');
     }
 
     /**
-     * Returns the day of the first assignment (a Date object).
+     * Returns the day of the first assignment.
      *
-     * @return the day of the first assignment (a Date object)
+     * @return Date the day of the first assignment
      */
-    public function first_assignment_day () {
+    public function first_assignment_day() {
         return $this->date_from_clinics->copy()->startOfDay()
             ->endOfWeek()->next($this->assignment_day);
     }
 
     /**
-     * Returns the day of the last assignment (a Date object).
+     * Returns the day of the last assignment.
      *
-     * @return the day of the last assignment (a Date object)
+     * @return Date the day of the last assignment
      */
     public function last_assignment_day() {
         return Date::now()->startOfDay()->previous($this->assignment_day);
@@ -125,7 +137,7 @@ class Patient extends User
     /**
      * Returns the current assignment (assigned on the recent assignment day).
      *
-     * @return the current assignment
+     * @return Assignment the current assignment
      */
     public function current_assignment() {
         return $this->assignment_for_week($this->patient_week());
@@ -133,6 +145,8 @@ class Patient extends User
 
     /**
      * Returns the next assignment (for the next assignment day).
+     *
+     * @return Assignment the next assignment (for the next assignment day).
      */
     public function next_assignment() {
         return $this->assignment_for_week($this->patient_week() + 1);
@@ -140,33 +154,41 @@ class Patient extends User
 
     /**
      * Returns the assignment for the given week.
+     *
+     * @return Assignment the assignment for the given week
      */
     public function assignment_for_week($week) {
         return $this->ordered_assignments()->get($week - 1);
     }
 
     /**
-     * Returns the week the intervention ended or null, if the intervention didn't end yet.
+     * Returns the week in which the intervention ended
+     * (or null, if the intervention didn't end yet).
      *
-     * @return the week the intervention ended or null (if intervention is still running)
+     * @return int the week the intervention ended or null
+     *          (if intervention is still running)
      */
     public function intervention_ended_in_week() {
         return $this->intervention_ended_on !== null ? $this->week_for_date($this->intervention_ended_on) : null;
     }
 
     /**
-     * Returns the number of past assignments (including the current assignment).
+     * Returns past assignments (including the current assignment and the
+     * situation survey).
      *
-     * @return the number of past assignments (including the current assignment)
+     * @return Collection past assignments (including the current assignment and
+     * the situation survey)
      */
     public function past_assignments() {
         return $this->assignments()->where('week', '<=', $this->patient_week());
     }
 
     /**
-     * Returns the number of past assignments that have a response (including the current assignment)
+     * Returns all uncommented assignments (including the current assignment
+     * and the situation survey).
      *
-     * @return the number of past assignments that have a response
+     * @return Collection all uncommented assignments (including the current assignment
+     * and the situation survey)
      *
      * TODO: check for patient text (? - only for current assignment?)
      */
@@ -176,6 +198,8 @@ class Patient extends User
 
     /**
      * Prozentsatz der versäumten Tagebucheinträge
+     *
+     * @return float Prozentsatz der versäumten Tagebucheinträge
      */
     public function overdue()
     {
@@ -192,6 +216,9 @@ class Patient extends User
 
     /**
      * Nummer der Woche der Intervention (0...13) oder -1 (falls der Patient
+     * noch in der Klinik ist).
+     *
+     * @return int Nummer der Woche der Intervention (0...13) oder -1 (falls der Patient
      * noch in der Klinik ist)
      */
     public function patient_week() {
@@ -248,6 +275,8 @@ class Patient extends User
 
     /**
      * Status des Patienten
+     *
+     * @return string Status des Patienten
      */
     public function status()
     {
@@ -292,6 +321,8 @@ class Patient extends User
 
     /**
      * Returns the status of the next assignment.
+     *
+     * @return string status of the next assignment
      */
     public function status_of_next_assignment() {
         if ($this->intervention_ended_on !== null || $this->patient_week() === 12) {

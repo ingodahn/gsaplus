@@ -18,7 +18,8 @@ class Response extends InfoModel
     protected $hidden = ['assignment_id', 'therapist_id'];
 
     /**
-     * Get the assignment.
+     * Relationship to the commented assignment. Please use
+     * $response->assignment to access the assignment.
      */
     public function assignment()
     {
@@ -26,7 +27,8 @@ class Response extends InfoModel
     }
 
     /**
-     * Get the author of the response.
+     * Relationship to the author of the response. Please use
+     * $response->therapist to access the therapist.
      */
     public function therapist()
     {
