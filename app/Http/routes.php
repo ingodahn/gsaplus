@@ -77,7 +77,6 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
 	Route::get('/Home', 'AuxController@home');
 
-	// Experimental for M2
 	Route::get('/Diary/{name?}','DiaryController@show');
 	Route::get('/Profile/{name?}','PatientController@profile');
 	Route::post('/SendMail','ContactController@message_to_patients');
@@ -97,4 +96,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
 	Route::get('/patient_list', 'PatientListController@show');
 	Route::any('/patient_list/data', 'PatientListController@anyData')->name('datatables.data');
+
+	// Experimental for M3
+	Route::get('/Assignment/{patient}/{week}','DiaryController@entry');
+	Route::post('/SaveAssignment/{patient}/{week}','DiaryController@save_entry');
 });
