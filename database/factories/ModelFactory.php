@@ -72,8 +72,8 @@ $factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
 
 $factory->define(App\AssignmentTemplate::class, function (Faker\Generator $faker) {
     return [
-        'title' => str_random(20),
-        'text' => $faker->text()
+        'name' => str_random(20),
+        'problem_template' => $faker->text()
     ];
 });
 

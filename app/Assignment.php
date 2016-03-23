@@ -50,10 +50,13 @@ class Assignment extends InfoModel
     public function to_info($current_info = []) {
         $info = parent::to_info($current_info);
 
-        $template_name = $this->assignment_template ? $this->assignment_template->title : $this->info_null_string;
+        $template_name = $this->assignment_template ? $this->assignment_template->name : $this->info_null_string;
         $patient_name = $this->patient ? $this->patient->name : $this->info_null_string;
 
-        $info = array_add($info, $this->class_name() .'.assignmentTemplate', $template_name);
+        $template_key_name = 'assignment_template';
+        $template_key_name = $this->info_camel_case ? camel_case($template_key_name) : $template_key_name;
+
+        $info = array_add($info, $this->class_name() .'.'. $template_key_name, $template_name);
         $info = array_add($info, $this->class_name() .'.patient', $patient_name);
 
         return $info;

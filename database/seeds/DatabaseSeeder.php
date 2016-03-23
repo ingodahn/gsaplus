@@ -103,7 +103,7 @@ class DatabaseSeeder extends Seeder
                 $template = App\AssignmentTemplate::all()->random();
 
                 // 75% chance: the templates text wasn't modified
-                $assignment->assignment_text = (rand(0,3) === 0) ? $faker->realText() : $template->text;
+                $assignment->assignment_text = (rand(0,3) === 0) ? $faker->realText() : $template->problem_template;
 
                 // save assignment to DB
                 $assignment->save();

@@ -15,8 +15,8 @@ class CreateAssignmentTemplatesTable extends Migration
         Schema::create('assignment_templates', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('text');
-            $table->string('title');
+            $table->string('name');
+            $table->string('problem_template');
 
             $table->nullableTimestamps();
         });
