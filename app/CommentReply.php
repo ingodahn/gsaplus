@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
-class CommentReply extends Model
+class CommentReply extends InfoModel
 {
 
     protected $dates = ['created_at', 'updated_at'];
@@ -23,4 +23,15 @@ class CommentReply extends Model
     {
         return $this->belongsTo('App\Comment');
     }
+
+    public function to_info($current_info = []) {
+        $info = parent::to_info($current_info);
+
+        $comment_text = $this->comment ? $this->comment->text : $this->info_null_string;
+
+        $info = array_add($info, $this->class_name() .'.comment', $comment_text);
+
+        return $info;
+    }
+
 }
