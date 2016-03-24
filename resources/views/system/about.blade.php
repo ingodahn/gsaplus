@@ -20,7 +20,7 @@
         Das Projekt ist von der Deutschen Rentenversicherung Bund gefördert.
       </p>
 
-      <h3>Fragestellung und Ziel des Projekts:</h3>
+      <h3>Fragestellung und Ziel des Projekts</h3>
       <p>
         Die Rückkehr an den Arbeitsplatz ist auch nach erfolgreicher Rehabilitation oft mit neuen Anforderungen oder Belastungen verbunden. Es besteht daher häufig Bedarf nach entsprechenden Nachsorgeprogrammen, welche dabei helfen, diesen Belastungen entgegenzuwirken und die Behandlungserfolge der stationären medizinischen Rehabilitation langfristig zu stabilisieren. Aus diesem Grunde haben wir ein internetbasiertes Nachsorgeprogramm entwickelt, welches beruflich belastete Rehabilitanden bei Ihrer Rückkehr an den Arbeitsplatz begleitet.
       </p>
@@ -34,7 +34,7 @@
         Im Rahmen des laufenden Projekts soll überprüft werden, ob Teilnehmer von <em>GSA-Online plus</em> ihren positiven Umgang mit beruflichen Belastungen stabilisieren können und die Wiedereingliederung in den Beruf durch die Teilnahme an dem Projekt gefördert wird.
       </p>
 
-      <h3>Die wöchentlichen Tagebucheinträge: Fokus der Schreibintervention </h3>
+      <h3>Die wöchentlichen Tagebucheinträge: Fokus der Schreibintervention</h3>
       <p>
         Die zentrale Aufgabe des Nachsorgeprogramm <em>GSA-Online plus</em> ist eine Schreibintervention: Die Teilnehmer verfassen jede Woche einen Tagebucheintrag zu einem vorgegebenen Schreibimpuls, welcher die Teilnehmer anleitet, über bestimmte Ereignisse, Gedanken und Gefühle zu schreiben. Zu Beginn des Nachsorgeprogramms können die Teilnehmer wählen, an welchem Wochentag sie ihren Eintrag regelmäßig schreiben möchten. <em>GSA-Online plus</em> kann somit problemlos in den jeweiligen Arbeitsalltag und Tagesablauf integriert werden. Die Kommunikation mit dem Onlinetherapeuten erfolgt anonym.
       </p>
@@ -63,7 +63,8 @@
       <p>
         Anders ausgedrückt verdeutlicht dieses Schema, dass der Wunsch bzw. die Erwartungen an eine Situation oder eine Person, sowohl die Reaktion des Gegenübers, als auch die eigene Reaktion beeinflussen.
       </p>
-      <h4>Beispiel:</h4>
+
+      <h4>Beispiel</h4>
       <p>
         <em>Frau A. kehrt nach einer vierwöchigen Reha an ihren Arbeitsplatz zurück. Im Rahmen der Online-Nachsorge berichtet sie, dass sie sich sehr darüber gefreut habe, dass so viele Kollegen sich nach ihrem Wohlbefinden erkundigt hätten. Das habe ihr den Einstieg sehr erleichtert und sie habe direkt mit der Vorgesetzten ihr Anliegen nach einer 4-Tage-Woche besprechen können.</em>
       </p>
