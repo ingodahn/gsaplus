@@ -95,7 +95,7 @@ class Assignment extends InfoModel
         }
 
         if ($this->comment === null) {
-            if ($this->state === true) {
+            if ($this->dirty === false) {
                 // patient has finished assignment
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
             } else if ($this->assigned_on !== null) {

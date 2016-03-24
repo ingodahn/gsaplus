@@ -106,7 +106,7 @@ class DatabaseSeeder extends Seeder
                 // 60% chance: the patient completed the assignment
                 //(the patient sent in a final text)
                 $saved = rand(0,10) <= 6;
-                $saved ? $assignment->state = true : $assignment->state = false;
+                $saved ? $assignment->dirty = false : $assignment->dirty = true;
 
                 // choose random template
                 $template = AssignmentTemplate::all()->random();

@@ -16,10 +16,11 @@ class CreateAssignmentsTable extends Migration
             $table->increments('id');
 
             $table->tinyInteger('week');
+            $table->boolean('dirty');
+
             $table->dateTime('assigned_on');
             $table->text('assignment_text');
             $table->text('patient_text');
-            $table->boolean('state');
 
             $table->integer('assignment_template_id')->unsigned();
             $table->integer('patient_id')->unsigned();
