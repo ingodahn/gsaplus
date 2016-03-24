@@ -89,7 +89,7 @@
 
   <div class="container-fluid">
     <hr/>
-    <h2>Patientenliste  <a href="/" class="btn btn-default">Ansicht zurücksetzen</a></h2>
+    <h2>Patientenliste  <a href="/" class="btn btn-default pull-right">Ansicht zurücksetzen</a></h2>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
         <table class="table table-bordered" id="PatientList">
