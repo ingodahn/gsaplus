@@ -12,6 +12,7 @@
 
   <script src="//cdn.datatables.net/plug-ins/1.10.11/sorting/datetime-moment.js"></script>
 
+
   <script>
     $(function() {
       $('#PatientList').DataTable({
@@ -43,39 +44,42 @@
 
 @section('content')
   <div class="container">
-
-    <h2>Slots</h2>
+    <h2>Slots
+      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden. Achtung: Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
+        <i class="fa fa-question-circle"></i>
+      </a>
+    </h2>
     <p>
       <form class="" action="/SetSlots" method="post">
         {{ csrf_field() }}
         <div class="row space-wrapped-cols">
           <div class="col-md-2">
             <div class="input-group">
-              <span class="input-group-addon"><code>Mo</code></span>
+              <span class="input-group-addon day-slot"><code>Mo</code></span>
               <input name="Mo_slots"  type="number" class="form-control" value="{{$Slots['Montag']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group">
-              <span class="input-group-addon"><code>Di</code></span>
+              <span class="input-group-addon day-slot"><code>Di</code></span>
               <input name="Di_slots"  type="number" class="form-control" value="{{$Slots['Dienstag']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group">
-              <span class="input-group-addon"><code>Mi</code></span>
+              <span class="input-group-addon day-slot"><code>Mi</code></span>
               <input name="Mi_slots"  type="number" class="form-control" value="{{$Slots['Mittwoch']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group">
-              <span class="input-group-addon"><code>Do</code></span>
+              <span class="input-group-addon day-slot"><code>Do</code></span>
               <input name="Do_slots"  type="number" class="form-control" value="{{$Slots['Donnerstag']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group">
-              <span class="input-group-addon"><code>So</code></span>
+              <span class="input-group-addon day-slot"><code>So</code></span>
               <input name="So_slots" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
             </div>
           </div>
@@ -85,22 +89,17 @@
         </div>
       </form>
     </p>
-
-    <hr>
-    <p>
-      <a href="/Logout" class="btn btn-warning">Logout</a>
-    </p>
   </div>
 
   <div class="container-fluid">
     <hr/>
-    <h2>Patientenliste  <a href="/" class="btn btn-default">Zurücksetzen</a></h2>
+    <h2>Patientenliste  <a href="/" class="btn btn-default pull-right">Ansicht zurücksetzen</a></h2>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
         <table class="table table-bordered" id="PatientList">
           <thead>
           <tr>
-            <th>Auswahl</th>
+            <th></th>
             <th>Name</th>
             <th>Code</th>
             <th>Woche</th>
@@ -113,7 +112,7 @@
           </tr>
           </thead>
         </table>
-      <button type="submit" class="btn btn-primary pull-right">Mail an ausgew&auml;hlte Patienten</button>
+      <button type="submit" class="btn btn-primary">Mail an ausgewählte Patienten</button>
     </form>
 
   </div>

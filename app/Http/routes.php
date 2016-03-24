@@ -38,6 +38,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/privacy', function() {
 		return view('system.privacy');
 	});
+	Route::get('/about', function() {
+		return view('system.about');
+	});
 
 	Route::get('/ResetPassword', 'GateController@reset_password');
 	Route::post('/MailForPassword', 'GateController@mail_for_password');

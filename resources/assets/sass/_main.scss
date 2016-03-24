@@ -9,6 +9,7 @@ $navbar-border: 1px;
   background-color: rgba(white, 0.6);
   padding-bottom: $navbar-padding-bottom;
   margin-bottom: 0px;
+  z-index: 1;
 }
 
 $nav-height: 100px;
@@ -19,6 +20,10 @@ $nav-height: 100px;
   margin-left: -5px; // Correct for the internal margin of the logo
 }
 
+.navbar-nav {
+  margin-top: $nav-height / 4; // Stupid hack because vertical centering is too hard
+}
+
 $parallax-window-height: 400px;
 
 .parallax-window {
@@ -27,15 +32,18 @@ $parallax-window-height: 400px;
 }
 
 .parallax-window-nav {
-  margin-top: -$nav-height - $navbar-padding-bottom - $navbar-border;
-  min-height: $parallax-window-height + $nav-height + $navbar-border;
+  position: relative;
+  $nav-total-height: $nav-height + $navbar-padding-bottom + $navbar-border;
+  top: -$nav-total-height;
+  margin-bottom: -$nav-total-height;
+  min-height: $parallax-window-height + $nav-total-height;
   @media (max-height: 640px) {
-    min-height: ($parallax-window-height / 2) + $nav-height + $navbar-border;
+    min-height: ($parallax-window-height / 2) + $nav-total-height;
   }
   a {
     color: $red-youtube;
     // Offset button by half of navbar's size since it moves the percieved center
-    margin-top: ($nav-height + $navbar-padding-bottom + $navbar-border) / 2;
+    margin-top: ($nav-total-height) / 2;
   }
   a:hover {
     color: $red-youtube-hover;
@@ -85,7 +93,7 @@ hr {
   top: 20px;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .parsley-errors-list {
@@ -123,4 +131,20 @@ hr {
 
 .space-wrapped-cols div[class*='col-'] {
   margin-bottom: 4px;
+}
+
+.panel-heading h4 {
+  font-size: ceil($font-size-base * 1.1);
+  font-weight: normal;
+}
+
+// Day slot labels in patient_list view
+.day-slot code {
+  color: initial;
+  background-color: initial;
+}
+
+// Table in patient_list view
+tr.even {
+    background-color: $gray-lightest;
 }

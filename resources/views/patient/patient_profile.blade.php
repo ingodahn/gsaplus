@@ -17,11 +17,6 @@
       </small>
     </h2>
 
-
-    <p>
-      <a href="/Logout" class="btn btn-warning">Ausloggen</a>
-    </p>
-
     @if ($isTherapist)
       <hr>
       <h3>Notizen</h3>
