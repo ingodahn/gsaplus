@@ -22,11 +22,6 @@
             <li><a href="/Home">Mein Tagebuch</a></li>
           @endif
 
-
-          {{-- Common --}}
-          <li><a href="/experteninformationen">Experteninformationen</a></li>
-
-
           {{-- Therapist --}}
           @if($isTherapist)
             <li><a href="/Home">Patientenliste</a></li>
@@ -34,6 +29,8 @@
             <li><a href="/AdminCodes">AdminCodes</a></li>
           @endif
 
+          {{-- Common --}}
+          <li><a href="/experteninformationen">Experteninformationen</a></li>
 
           {{-- User-Related --}}
           <li class="dropdown">
