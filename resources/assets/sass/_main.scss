@@ -143,3 +143,8 @@ hr {
   color: initial;
   background-color: initial;
 }
+
+// Table in patient_list view
+tr.even {
+    background-color: $gray-lightest;
+}
