@@ -44,7 +44,11 @@
 
 @section('content')
   <div class="container">
-    <h2>Slots</h2>
+    <h2>Slots
+      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden. Achtung: Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
+        <i class="fa fa-question-circle"></i>
+      </a>
+    </h2>
     <p>
       <form class="" action="/SetSlots" method="post">
         {{ csrf_field() }}
