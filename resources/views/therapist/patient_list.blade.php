@@ -95,7 +95,7 @@
         <table class="table table-bordered" id="PatientList">
           <thead>
           <tr>
-            <th>Auswahl</th>
+            <th></th>
             <th>Name</th>
             <th>Code</th>
             <th>Woche</th>
@@ -108,7 +108,7 @@
           </tr>
           </thead>
         </table>
-      <button type="submit" class="btn btn-primary pull-right">Mail an ausgew&auml;hlte Patienten</button>
+      <button type="submit" class="btn btn-primary">Mail an ausgewählte Patienten</button>
     </form>
 
   </div>
