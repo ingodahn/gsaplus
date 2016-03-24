@@ -64,7 +64,9 @@
         Anders ausgedrückt verdeutlicht dieses Schema, dass der Wunsch bzw. die Erwartungen an eine Situation oder eine Person, sowohl die Reaktion des Gegenübers, als auch die eigene Reaktion beeinflussen.
       </p>
       <h4>Beispiel:</h4>
-      <em>Frau A. kehrt nach einer vierwöchigen Reha an ihren Arbeitsplatz zurück. Im Rahmen der Online-Nachsorge berichtet sie, dass sie sich sehr darüber gefreut habe, dass so viele Kollegen sich nach ihrem Wohlbefinden erkundigt hätten. Das habe ihr den Einstieg sehr erleichtert und sie habe direkt mit der Vorgesetzten ihr Anliegen nach einer 4-Tage-Woche besprechen können.</em>
+      <p>
+        <em>Frau A. kehrt nach einer vierwöchigen Reha an ihren Arbeitsplatz zurück. Im Rahmen der Online-Nachsorge berichtet sie, dass sie sich sehr darüber gefreut habe, dass so viele Kollegen sich nach ihrem Wohlbefinden erkundigt hätten. Das habe ihr den Einstieg sehr erleichtert und sie habe direkt mit der Vorgesetzten ihr Anliegen nach einer 4-Tage-Woche besprechen können.</em>
+      </p>
       <p>
         Was war der Wunsch (W) von Frau A. in dieser Situation?
       </p>
