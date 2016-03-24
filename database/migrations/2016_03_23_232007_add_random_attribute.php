@@ -15,7 +15,7 @@ class AddRandomAttribute extends Migration
      */
     public function up()
     {
-        foreach (['users', 'assignments', 'assignment_templates', 'comments', 'comment_replies'] as $table_name) {
+        foreach (['users', 'assignments', 'assignment_templates', 'comments', 'comment_replies', 'phq4', 'wai', 'surveys'] as $table_name) {
             Schema::table($table_name, function($table) {
                 $table->boolean('is_random');
             });
@@ -29,7 +29,7 @@ class AddRandomAttribute extends Migration
      */
     public function down()
     {
-        foreach (['users', 'assignments', 'assignment_templates', 'comments', 'comment_replies'] as $table_name) {
+        foreach (['users', 'assignments', 'assignment_templates', 'comments', 'comment_replies', 'phq4', 'wai', 'surveys'] as $table_name) {
             Schema::table($table_name, function($table) {
                 $table->dropColumn('is_random');
             });

@@ -12,18 +12,10 @@
 */
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
-    $registrationDate = $faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now');
-    $loginDate = $faker->dateTimeBetween($registrationDate, $endDate = 'now');
-
     return [
         'name' => $faker->userName,
         'email' => $faker->email,
         'password' => bcrypt('password'), // str_random(10)
-        // 'remember_token' => str_random(10),
-        'last_login' => $loginDate,
-        'registration_date' => $registrationDate,
-        'created_at' => $registrationDate,
-        'updated_at' => $loginDate
     ];
 });
 
@@ -35,9 +27,6 @@ $factory->define(App\Patient::class, function (Faker\Generator $faker) use ($fac
         'code' => strtoupper(str_random(6)),
         'assignment_day' => $faker->numberBetween($min = 0, $max = 4),
         'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3)
-
-        // patient status should be determined - not cached
-        // 'patient_status' => 'P130'
     ]);
 });
 
@@ -74,6 +63,27 @@ $factory->define(App\AssignmentTemplate::class, function (Faker\Generator $faker
     return [
         'name' => str_random(20),
         'problem_template' => $faker->text()
+    ];
+});
+
+$factory->define(App\PHQ4::class, function (Faker\Generator $faker) {
+    return [
+        'depressed' => rand(0,3),
+        'interested' => rand(0,3),
+        'nervous' => rand(0,3),
+        'troubled' => rand(0,3)
+    ];
+});
+
+$factory->define(App\WAI::class, function (Faker\Generator $faker) {
+    return [
+        'index' => rand(0,10)
+    ];
+});
+
+$factory->define(App\Survey::class, function (Faker\Generator $faker) {
+    return [
+
     ];
 });
 
