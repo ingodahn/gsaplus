@@ -187,12 +187,12 @@ class Patient extends User
      * Returns all uncommented assignments (including the current assignment
      * and the situation survey).
      *
-     * @return Collection all uncommented assignments (including the current assignment
-     * and the situation survey)
+     * @return Collection of all uncommented assignments (including the current
+     * assignment and the situation survey)
      *
      * TODO: check for patient text (? - only for current assignment?)
      */
-    public function uncommented_assignments() {
+    public function past_assignments_without_comment() {
         return $this->past_assignments()->whereDoesntHave('comment');
     }
 
@@ -210,7 +210,7 @@ class Patient extends User
         $number_of_past_assignments = $this->past_assignments()->count();
 
         return $number_of_past_assignments > 0 ?
-                    $this->uncommented_assignments()->count() / $number_of_past_assignments : 0;
+                    $this->past_assignments_without_comment()->count() / $number_of_past_assignments : 0;
 
     }
 
