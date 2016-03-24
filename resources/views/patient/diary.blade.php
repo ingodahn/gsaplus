@@ -23,9 +23,5 @@
       </ul>
     </p>
 
-    <p>
-      <a href="/Logout" class="btn btn-warning">Logout</a>
-    </p>
-
   </div>
 @endsection
