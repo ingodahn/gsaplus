@@ -20,8 +20,11 @@
           {{-- Patient --}}
           @if($isPatient)
             <li><a href="/Home">Mein Tagebuch</a></li>
-            <li><a href="/Profile/{{$Name}}">Mein Profil</a></li>
           @endif
+
+
+          {{-- Common --}}
+          <li><a href="/experteninformationen">Experteninformationen</a></li>
 
 
           {{-- Therapist --}}
@@ -32,14 +35,13 @@
           @endif
 
 
-          {{-- Common --}}
+          {{-- User-Related --}}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$Name}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              {{-- <li><a href="#">Action</a></li> --}}
-              {{-- <li><a href="#">Another action</a></li> --}}
-              {{-- <li><a href="#">Something else here</a></li> --}}
-              {{-- <li role="separator" class="divider"></li> --}}
+              @if($isPatient)
+                <li><a href="/Profile/{{$Name}}">Mein Profil</a></li>
+              @endif
               <li><a href="/Logout">Ausloggen</a></li>
             </ul>
           </li>
