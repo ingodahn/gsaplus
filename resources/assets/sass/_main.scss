@@ -124,3 +124,8 @@ hr {
 .space-wrapped-cols div[class*='col-'] {
   margin-bottom: 4px;
 }
+
+.panel-heading h4{
+  font-size: ceil($font-size-base * 1.1);
+  font-weight: normal;
+}
