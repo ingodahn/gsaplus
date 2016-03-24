@@ -145,8 +145,7 @@
         </p>
 
         <p>
-            <a href="/Home" class="btn btn-warning">Zur Übersicht</a> <a href="/Logout"
-                                                                         class="btn btn-warning">Logout</a>
+            <a href="/Home" class="btn btn-warning">Zur Übersicht</a> 
         </p>
 
     </div>
