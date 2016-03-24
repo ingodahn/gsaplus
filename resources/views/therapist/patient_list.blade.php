@@ -44,7 +44,6 @@
 
 @section('content')
   <div class="container">
-
     <h2>Slots</h2>
     <p>
       <form class="" action="/SetSlots" method="post">
@@ -85,11 +84,6 @@
           </div>
         </div>
       </form>
-    </p>
-
-    <hr>
-    <p>
-      <a href="/Logout" class="btn btn-warning">Logout</a>
     </p>
   </div>
 
