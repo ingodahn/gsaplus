@@ -128,3 +128,7 @@ hr {
 .checkbox, .accept {
     margin-top: 15px !important;
 }
+
+.space-wrapped-cols div[class*='col-'] {
+  margin-bottom: 4px;
+}

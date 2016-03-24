@@ -61,7 +61,7 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label for="name">Benutzername</label>
-            <input name="name" class="form-control" placeholder="Benutzername" autocomplete="off" required>
+            <input name="name" class="form-control" placeholder="Benutzername" autocomplete="off" required pattern="^[a-zA-Z0-9\.\-_]+$">
           </div>
           <div class="form-group">
             <label for="password">Passwort</label>

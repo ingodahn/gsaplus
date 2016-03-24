@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\PatientStatus;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -8,7 +10,9 @@ use App\Patient;
 use App\Therapist;
 use App\Helper;
 
-use Carbon\Carbon;
+use App\Models\UserRole;
+
+use Jenssegers\Date\Date;
 
 use Hash;
 
@@ -32,7 +36,7 @@ class PatientController extends Controller
 	 */
 	public function cancel_intervention(Request $request, Patient $patient)
 	{
-		$patient->intervention_ended_on = Carbon::now();
+		$patient->intervention_ended_on = Date::now();
 		$patient->save();
 
 		Alert::info('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->flash();
@@ -47,21 +51,34 @@ class PatientController extends Controller
 	 *
 	 * @param name
 	 */
-	public function profile(Request $request,$name=NULL)
+	public function profile(Request $request, $name = null)
 	{
-	//	return dd($request->user());
-		if (! $name) {
-			$name=Auth::user()->name;
+		//	return dd($request->user());
+		if (!$name) {
+			$name = Auth::user()->name;
 		}
-		$user_role=$request->user()->type;
-		if ($user_role == 'patient' &&  $name!=Auth::user()-> name) {
-			return	Redirect::to('/');
+
+		$user_role = $request->user()->type;
+
+		if ($user_role == UserRole::PATIENT && $name != Auth::user()->name) {
+			return Redirect::to('/');
 		}
 
 		$days = new Days;
 
-		//$patient=Patient(name);
-		$patient = Patient::where('name', $name)->first();
+		$patient = Patient::whereName($name)->firstOrFail();
+
+		$status = $patient->status();
+
+		switch ($user_role) {
+			case UserRole::PATIENT:
+				$status = PatientStatus::$STATUS_INFO[$status];
+				break;
+			case UserRole::THERAPIST:
+			case UserRole::ADMIN:
+				$status = $status.': '.PatientStatus::$STATUS_INFO[$status];
+				break;
+		}
 
 		$patient_info=[];
 		$patient_info['assignment_day'] = Helper::generate_day_number_map()[$patient->assignment_day];
@@ -73,12 +90,13 @@ class PatientController extends Controller
 		$patient_info['notes'] = $patient->notes_of_therapist;
 		$patient_info['patientWeek'] = $patient->patient_week();
 		$patient_info['personalInformation'] = $patient->personal_information;
-		$patient_info['status'] = $patient->status();
+		$patient_info['status'] = $status;
 		$patient_info['therapist'] = $patient->therapist !== null ? $patient->therapist->name : "-";
 		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(),'name');
 
 		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;
+		$profile_user_model['PatientName'] = $patient->name;
 		// $profile_user_model['Patient']=Patient($name);
 		// return dd($profile_user_model);
 		return view('patient.patient_profile')->with($profile_user_model);
@@ -87,7 +105,7 @@ class PatientController extends Controller
 	public function save_therapist(Request $request, Patient $patient) {
 		$name_of_therapist = $request->input('therapist');
 
-		$therapist = Therapist::where('name', $name_of_therapist)->first();
+		$therapist = Therapist::whereName($name_of_therapist)->first();
 
 		if ($therapist === null) {
 			$message_to_user = 'Ein Therapeut mit dem Namen '. $name_of_therapist .
@@ -112,7 +130,7 @@ class PatientController extends Controller
 	}
 
 	public function save_day_of_week(Request $request, Patient $patient) {
-		$is_therapist = ($request->user()->type === 'therapist');
+		$is_therapist = ($request->user()->type === UserRole::THERAPIST);
 
 		if ($patient->assignment_day_changes_left > 0 || $is_therapist) {
 			// Sonntag, ..., Donnerstag
@@ -141,7 +159,7 @@ class PatientController extends Controller
 		$date_from_clinics_string = $request->input('dateFromClinics');
 
 		try {
-			$date_from_clinics = Carbon::createFromFormat('d.m.Y', $date_from_clinics_string);
+			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
 		} catch (\InvalidArgumentException $e) {
 			Alert::danger('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->flash();
 		}

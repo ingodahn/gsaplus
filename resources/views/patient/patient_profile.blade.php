@@ -6,7 +6,7 @@
 
 
     <h2>
-      Profil von {{ $Name }}
+      Profil von {{ $PatientName }}
       <small>
         (
         @if($isTherapist)
@@ -25,7 +25,7 @@
     @if ($isTherapist)
       <hr>
       <h3>Notizen</h3>
-      <form data-parsley-validate role="form" action="/patient/{{$Name}}/notes" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$PatientName}}/notes" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="notes" class="control-label">Notizen</label>
@@ -43,7 +43,7 @@
     @if($isTherapist)
       <hr>
       <h3>Therapeut</h3>
-      <form data-parsley-validate role="form" action="/patient/{{$Name}}/therapist" method="post" }}>
+      <form data-parsley-validate role="form" action="/patient/{{$PatientName}}/therapist" method="post" }}>
         {{ csrf_field() }}
         <div class="form-group">
           <label for="therapist" class="control-label">Therapeut</label>
@@ -66,15 +66,20 @@
     <hr>
     <h3>Tagebuchtag</h3>
     <p>
-      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben noch <strong>{{ $Patient['assignmentDayChangesLeft'] }}</strong>
-      @if($Patient['assignmentDayChangesLeft'] == 1)
-        Änderung.
+      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignment_day'] }}</strong> und es verbleiben
+      @if($Patient['assignmentDayChangesLeft'] > 0)
+        noch <strong>{{$Patient['assignmentDayChangesLeft']}}</strong>
+        @if($Patient['assignmentDayChangesLeft'] == 1)
+          Änderung.
+        @else
+          Änderungen.
+        @endif
       @else
-        Änderungen.
+        <strong>keine</strong> Änderungen mehr.
       @endif
     </p>
     @if($isPatient && $Patient['assignmentDayChangesLeft'] > 0)
-      <form data-parsley-validate role="form" action="/patient/{{$Name}}/day_of_week" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$PatientName}}/day_of_week" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="day_of_week" class="control-label">Wochentag</label>
@@ -105,7 +110,7 @@
           Das Entlassungsdatum war {{ $Patient['dateFromClinics'] }}.
         </p>
       @else
-        <form data-parsley-validate role="form" action="/patient/{{$Name}}/dateFromClinics" method="post">
+        <form data-parsley-validate role="form" action="/patient/{{$PatientName}}/dateFromClinics" method="post">
           {{ csrf_field() }}
             <div class="form-group">
               <div class='input-group date' id='datetimepicker1'>
@@ -137,7 +142,7 @@
     @if($isPatient)
       <hr>
       <h3>Passwort ändern</h3>
-      <form data-parsley-validate role="form" action="/patient/{{$Name}}/password" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$PatientName}}/password" method="post">
         {{ csrf_field() }}
         <p>
           <label for="password" class="control-label">Altes Passwort</label>
@@ -162,7 +167,7 @@
     <hr>
     <h3>Persönliche Informationen</h3>
     @if($isPatient)
-      <form data-parsley-validate role="form" action="/patient/{{$Name}}/personalInformation" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$PatientName}}/personalInformation" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="personalInformation" class="control-label">(nur für Therapeuten sichtbar)</label>
@@ -185,7 +190,7 @@
       <hr>
       <h3>Intervention beenden</h3>
       <p>
-        <a href="/patient/{{$Name}}/cancelIntervention" class="btn btn-danger">Intervention beenden</a>
+        <a href="/patient/{{$PatientName}}/cancelIntervention" class="btn btn-danger" onclick="return confirm('Wollen sie den Patientenaccount wirklich löschen?');">Intervention beenden</a>
       </p>
     @endif
 

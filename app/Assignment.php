@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\AssignmentStatus;
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 class Assignment extends Model
 {
@@ -36,6 +36,27 @@ class Assignment extends Model
         return $this->hasOne('App\Response');
     }
 
+    /*
+     * The following accessors will convert every date to an instance
+     * of Jenssegers\Date\Date which supports localization.
+     *
+     * All dates are originally returned as Carbon instances. The
+     * Date class extends the Carbon class. So conversion is a
+     * piece of cake.
+     */
+
+    public function getCreatedAtAttribute($date) {
+        return new Date($date);
+    }
+
+    public function getUpdatedAtAttribute($date) {
+        return new Date($date);
+    }
+
+    public function getAssignedOnAttribute($date) {
+        return new Date($date);
+    }
+
     /**
      * Status der Aufgabe
      */
@@ -50,7 +71,7 @@ class Assignment extends Model
                 // patient has finished assignment
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
             } else if ($this->assigned_on !== null) {
-                if (Carbon::now()->gt($this->assigned_on->
+                if (Date::now()->gt($this->assigned_on->
                         copy()->addDays(config('gsa.reminder_period_in_days')))) {
                     // patient was reminded by system and didn't submit any text
                     // TODO: check if this is really the case! -> check reminders

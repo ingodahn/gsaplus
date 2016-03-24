@@ -49,9 +49,9 @@ class ContactController extends Controller
 	{
 		// return dd($request);
 		$list_of_patients = $request->input('list_of_names');
-		$listS=implode(', ',$list_of_patients);
+		$listS = implode(', ', $list_of_patients);
 		// return dd($list_of_patients);
-		return view('system.mail_editor')->with('ListOfPatients',$listS);
+		return view('system.mail_editor')->with('ListOfPatients', $listS);
 	}
 
 	/**
@@ -112,9 +112,9 @@ class ContactController extends Controller
 				->withInput();
 		}
 
-		$eMail=$request->input('eMail');
-		$subject=$request->input('subject');
-		$bodyMessage=$request->input('message');
+		$eMail = $request->input('eMail');
+		$subject = $request->input('subject');
+		$bodyMessage = $request->input('message');
 
 		$eMailTeam = config('mail.team.address');
 		// $nameTeam = config('mail.team.name');
@@ -134,7 +134,7 @@ class ContactController extends Controller
 			}); */
 
 		// alert doesn't work with more than one redirect
-		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
+		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt.')->flash();
 
 		return redirect("/");
 	}

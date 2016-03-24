@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
-use Jenssegers\Date\Date;
-
 use App\Patient;
 use App\Admin;
 use App\Therapist;
+
+use Jenssegers\Date\Date;
 
 class User extends Authenticatable
 {
@@ -21,10 +21,18 @@ class User extends Authenticatable
 
     protected static $singleTableSubclasses = [Patient::class, Admin::class, Therapist::class];
 
-    protected static $persisted = ['name', 'email', 'password', 'last_login', 'is_random'];
+    protected static $persisted = ['name',
+        'email',
+        'password',
+        'last_login',
+        'is_random'];
 
-    protected $dates = ['created_at', 'updated_at', 'last_login' ,
-                            'registration_date', 'date_from_clinics', 'last_activity', 'intervention_ended_on'];
+    protected $dates = ['created_at',
+        'updated_at',
+        'last_login',
+        'registration_date',
+        'date_from_clinics',
+        'last_activity'];
 
     /**
      * Get the route key for the model.
@@ -42,7 +50,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name',
+        'email',
+        'password'
     ];
 
     /**
@@ -51,7 +61,29 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
+
+    /*
+     * The following accessors will convert every date to an instance
+     * of Jenssegers\Date\Date which supports localization.
+     *
+     * All dates are originally returned as Carbon instances. The
+     * Date class extends the Carbon class. So conversion is a
+     * piece of cake.
+     */
+
+    public function getCreatedAtAttribute($date) {
+        return new Date($date);
+    }
+
+    public function getUpdatedAtAttribute($date) {
+        return new Date($date);
+    }
+
+    public function getLastLoginAttribute($date) {
+        return new Date($date);
+    }
 
 }

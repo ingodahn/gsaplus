@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 class DatabaseSeeder extends Seeder
 {
@@ -62,17 +62,17 @@ class DatabaseSeeder extends Seeder
 
             // the registration happened before the first assignment
             // add 1-3 weeks between the registration and the first assignment
-            $patient->registration_date = Carbon::now()->startOfWeek()
+            $patient->registration_date = Date::now()->startOfWeek()
                     ->subWeeks($assignment_count + rand(1,3));
 
-            $end = Carbon::now()->startOfWeek()->next($patient->assignment_day)->isPast()
+            $end = Date::now()->startOfWeek()->next($patient->assignment_day)->isPast()
                         ? $assignment_count : $assignment_count-1;
 
             // create a bunch of successive assignments
             for ($count = 1; $count <= $end; $count++) {
                 // the assignment should happen in the past /
                 // the assignment should happen during work hours
-                $assignment_date = Carbon::now()->startOfWeek()->addHours(rand(8,18));
+                $assignment_date = Date::now()->startOfWeek()->addHours(rand(8,18));
 
                 // use the chosen weekday
                 $assignment_date->next($patient->assignment_day);

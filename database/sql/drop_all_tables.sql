@@ -1,8 +1,8 @@
-DROP TABLE migrations;
-DROP TABLE users;
-DROP TABLE password_resets;
-DROP TABLE assignment_templates;
-DROP TABLE assignments;
-DROP TABLE responses;
-DROP TABLE week_days;
-DROP TABLE codes;
+DROP TABLE IF EXISTS migrations;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS password_resets;
+DROP TABLE IF EXISTS assignment_templates;
+DROP TABLE IF EXISTS assignments;
+DROP TABLE IF EXISTS responses;
+DROP TABLE IF EXISTS week_days;
+DROP TABLE IF EXISTS codes;
