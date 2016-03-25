@@ -130,8 +130,19 @@ class Patient extends User
      *
      * @return Date the day of the last assignment
      */
-    public function last_assignment_day() {
-        return Date::now()->startOfDay()->previous($this->assignment_day);
+    public function previous_assignment_day() {
+        return $this->assignment_day_for_week($this->patient_week());
+    }
+
+    /**
+     * Returns the weeks assignment day (in the past or future).
+     *
+     * @param $week
+     *          the week
+     * @return Date the given weeks assignment day
+     */
+    public function assignment_day_for_week($week) {
+        return $this->first_assignment_day()->copy()->addWeeks($week - 1);
     }
 
     /**
@@ -222,7 +233,7 @@ class Patient extends User
      * noch in der Klinik ist)
      */
     public function patient_week() {
-        return $this->week_for_date(Date::now());
+        return min($this->week_for_date(Date::now()), 12);
     }
 
     /**
