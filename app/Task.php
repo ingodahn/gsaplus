@@ -47,9 +47,9 @@ class Task extends Assignment
             return AssignmentStatus::THERAPIST_SAVED_ASSIGNMENT;
         }
 
-        if ($this->dirty === false && $this->answer != '') {
-            // dirty flag is false and no answer is provided
-            // -> patient hasn't worked on the assignment
+        if ($this->dirty === false && $this->answer !== '') {
+            // dirty flag is false and an answer is provided
+            // -> patient finished the assignment
             return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
         } else if (Date::now()->gt(
             $this->patient->previous_assignment_day()
