@@ -40,8 +40,30 @@ $factory->define(App\Admin::class, function (Faker\Generator $faker) use ($facto
 
 $factory->define(App\Assignment::class, function (Faker\Generator $faker) {
     return [
-        'assigned_on' => $faker->dateTime($max = 'now'),
-        'patient_text' => $faker->text()
+        'dirty' => rand(0,1),
+        'week' => rand(1,12)
+    ];
+});
+
+$factory->define(App\SituationSurvey::class, function (Faker\Generator $faker) {
+    return [
+
+    ];
+});
+
+$factory->define(App\Situation::class, function (Faker\Generator $faker) {
+    return [
+        'description' => $faker->realText(),
+        'expectation' => $faker->realText(),
+        'my_reaction' => $faker->realText(),
+        'their_reaction' => $faker->realText()
+    ];
+});
+
+$factory->define(App\Task::class, function (Faker\Generator $faker) {
+    return [
+        'problem' => $faker->realText(),
+        'answer'  => $faker->realText()
     ];
 });
 
@@ -59,10 +81,10 @@ $factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\AssignmentTemplate::class, function (Faker\Generator $faker) {
+$factory->define(App\TaskTemplate::class, function (Faker\Generator $faker) {
     return [
         'name' => str_random(20),
-        'problem_template' => $faker->text()
+        'problem' => $faker->text()
     ];
 });
 
