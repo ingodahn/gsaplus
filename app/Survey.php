@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
-class Survey extends Model
+class Survey extends InfoModel
 {
 
     protected $dates = ['created_at', 'updated_at'];

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\AssignmentType;
 use App\Models\InfoModel;
 
 use Jenssegers\Date\Date;
@@ -46,10 +47,14 @@ class Comment extends InfoModel
     public function to_info($current_info = []) {
         $info = parent::to_info($current_info);
 
-        $assignment_text = $this->assignment ? $this->assignment->assignment_text : $this->info_null_string;
+        if ($this->assignment->type === AssignmentType::TASK) {
+            $problem = $this->assignment->problem ? $this->assignment->problem : $this->info_null_string;
+
+            $info = array_add($info, $this->class_name() .'.task', $problem);
+        }
+
         $therapist_name = $this->therapist ? $this->therapist->name : $this->info_null_string;
 
-        $info = array_add($info, $this->class_name() .'.assignment', $assignment_text);
         $info = array_add($info, $this->class_name() .'.therapist', $therapist_name);
 
         return $info;

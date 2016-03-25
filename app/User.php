@@ -5,10 +5,6 @@ namespace App;
 use App\Models\InfoModel;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
-use App\Patient;
-use App\Admin;
-use App\Therapist;
-
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;

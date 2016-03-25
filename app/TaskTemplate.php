@@ -6,16 +6,16 @@ use App\Models\InfoModel;
 
 use Jenssegers\Date\Date;
 
-class AssignmentTemplate extends InfoModel
+class TaskTemplate extends InfoModel
 {
 
     /**
-     * Relationship to all derived assignments (which are based on this template).
-     * Please use $assignment_template->assignments to access the collection.
+     * Relationship to all derived tasks (which are based on this template).
+     * Please use $task_template->tasks to access the collection.
      */
-    public function assignments()
+    public function tasks()
     {
-        return $this->hasMany('App\Assignment');
+        return $this->hasMany('App\Task');
     }
 
     /*
