@@ -11,12 +11,13 @@ class AddRandomAttribute extends Migration
 
     const TABLE_NAMES = ['users',
         'assignments',
-        'assignment_templates',
+        'task_templates',
         'comments',
         'comment_replies',
         'phq4',
         'wai',
-        'surveys'];
+        'surveys',
+        'situations'];
 
     /**
      * Run the migrations.

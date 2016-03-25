@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\AssignmentType;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -18,11 +20,16 @@ class CreateAssignmentsTable extends Migration
             $table->tinyInteger('week');
             $table->boolean('dirty');
 
-            $table->dateTime('assigned_on');
-            $table->text('assignment_text');
-            $table->text('patient_text');
+            // attributes for tasks
+            $table->string('problem');
+            $table->string('answer');
 
-            $table->integer('assignment_template_id')->unsigned();
+            // attributes for situations
+            // none (link is hasOne in model -> id is stored in situations table)
+
+            $table->enum('type', [AssignmentType::SITUATION_SURVEY, AssignmentType::TASK]);
+
+            $table->integer('task_template_id')->unsigned();
             $table->integer('patient_id')->unsigned();
 
             $table->nullableTimestamps();
