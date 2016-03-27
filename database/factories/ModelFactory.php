@@ -30,25 +30,23 @@ $factory->define(App\Patient::class, function (Faker\Generator $faker) use ($fac
     ]);
 });
 
-$factory->define(App\Therapist::class, function (Faker\Generator $faker) use ($factory) {
+$factory->define(App\Therapist::class, function () use ($factory) {
     return $factory->raw(App\User::class);
 });
 
-$factory->define(App\Admin::class, function (Faker\Generator $faker) use ($factory) {
+$factory->define(App\Admin::class, function () use ($factory) {
     return $factory->raw(App\User::class);
 });
 
-$factory->define(App\Assignment::class, function (Faker\Generator $faker) {
+$factory->define(App\Assignment::class, function () {
     return [
         'dirty' => rand(0,1),
         'week' => rand(1,12)
     ];
 });
 
-$factory->define(App\SituationSurvey::class, function (Faker\Generator $faker) {
-    return [
-
-    ];
+$factory->define(App\SituationSurvey::class, function () use ($factory) {
+    return $factory->raw(App\Assignment::class);
 });
 
 $factory->define(App\Situation::class, function (Faker\Generator $faker) {
@@ -60,10 +58,19 @@ $factory->define(App\Situation::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Task::class, function (Faker\Generator $faker) {
-    return [
+$factory->define(App\Task::class, function (Faker\Generator $faker) use ($factory) {
+    $assignment = $factory->raw(App\Assignment::class);
+
+    return array_merge($assignment, [
         'problem' => $faker->realText(),
         'answer'  => $faker->realText()
+    ]);
+});
+
+$factory->define(App\TaskTemplate::class, function (Faker\Generator $faker) {
+    return [
+        'name' => str_random(20),
+        'problem' => $faker->text()
     ];
 });
 
@@ -81,14 +88,13 @@ $factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\TaskTemplate::class, function (Faker\Generator $faker) {
+$factory->define(App\Survey::class, function () {
     return [
-        'name' => str_random(20),
-        'problem' => $faker->text()
+
     ];
 });
 
-$factory->define(App\PHQ4::class, function (Faker\Generator $faker) {
+$factory->define(App\PHQ4::class, function () {
     return [
         'depressed' => rand(0,3),
         'interested' => rand(0,3),
@@ -97,15 +103,9 @@ $factory->define(App\PHQ4::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\WAI::class, function (Faker\Generator $faker) {
+$factory->define(App\WAI::class, function () {
     return [
         'index' => rand(0,10)
-    ];
-});
-
-$factory->define(App\Survey::class, function (Faker\Generator $faker) {
-    return [
-
     ];
 });
 
