@@ -226,10 +226,10 @@ class Patient extends User
     }
 
     /**
-     * Nummer der Woche der Intervention (0...13) oder -1 (falls der Patient
+     * Nummer der Woche der Intervention (0...12) oder -1 (falls der Patient
      * noch in der Klinik ist).
      *
-     * @return int Nummer der Woche der Intervention (0...13) oder -1 (falls der Patient
+     * @return int Nummer der Woche der Intervention (0...12) oder -1 (falls der Patient
      * noch in der Klinik ist)
      */
     public function patient_week() {

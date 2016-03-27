@@ -7,7 +7,7 @@ use Jenssegers\Date\Date;
 class Helper {
 
     /**
-     * Generate an array containing the days name and their numbers.
+     * Generate an array mapping each days name to its number.
      */
     public static function generate_day_name_map()
     {
@@ -25,7 +25,7 @@ class Helper {
     }
 
     /**
-     * Generate an array containing the days name and their numbers.
+     * Generate an array mapping each days number to its name.
      */
     public static function generate_day_number_map()
     {
