@@ -31,6 +31,21 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+Setup email addresses
+```
+administrator
+MAIL_ADMIN_NAME=
+MAIL_ADMIN_ADDRESS=
+
+team
+MAIL_TEAM_NAME=
+MAIL_TEAM_ADDRESS=
+
+system
+MAIL_APP_NAME=
+MAIL_APP_ADDRESS=
+```
+
 Initialize the project:
 
 ``` bash
