@@ -25,4 +25,9 @@ class WAI extends InfoModel
         return $this->belongsTo('App\Survey');
     }
 
+    public function info_array_key()
+    {
+        return strtolower(parent::info_array_key());
+    }
+
 }

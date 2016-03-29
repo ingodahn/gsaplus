@@ -26,4 +26,18 @@ class Survey extends InfoModel
         return $this->hasOne('App\WAI');
     }
 
+    public function to_info($current_info = []) {
+        $info = parent::to_info($current_info);
+
+        if ($this->phq4) {
+            $info[$this->info_array_key()] = $this->phq4->to_info($info[$this->info_array_key()]);
+        }
+
+        if ($this->wai) {
+            $info[$this->info_array_key()] = $this->wai->to_info($info[$this->info_array_key()]);
+        }
+
+        return $info;
+    }
+
 }

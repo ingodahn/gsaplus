@@ -50,12 +50,12 @@ class Comment extends InfoModel
         if ($this->assignment->type === AssignmentType::TASK) {
             $problem = $this->assignment->problem ? $this->assignment->problem : $this->info_null_string;
 
-            $info = array_add($info, $this->class_name() .'.task', $problem);
+            $info = array_add($info, $this->info_array_key() .'.task', $problem);
         }
 
         $therapist_name = $this->therapist ? $this->therapist->name : $this->info_null_string;
 
-        $info = array_add($info, $this->class_name() .'.therapist', $therapist_name);
+        $info = array_add($info, $this->info_array_key() .'.therapist', $therapist_name);
 
         return $info;
     }

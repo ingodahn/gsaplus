@@ -16,6 +16,23 @@ class SituationSurvey extends Assignment
         return $this->hasMany('App\Situation');
     }
 
+    public function to_info($current_info = []) {
+        $info = parent::to_info($current_info);
+
+        if ($this->situations) {
+            $count = 1;
+
+            foreach ($this->situations as $situation) {
+                $sub_key = $situation->info_array_key();
+
+                $info[$this->info_array_key()][$sub_key.'s'][$count++]
+                    = $situation->to_info()[$sub_key];
+            }
+        }
+
+        return $info;
+    }
+
     public function status() {
         $status = parent::status();
 

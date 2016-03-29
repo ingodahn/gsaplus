@@ -30,7 +30,7 @@ class Task extends Assignment
         $template_name = $this->task_template ? $this->task_template->name : $this->info_null_string;
         $template_key_name = $this->info_camel_case ? camel_case('task_template') : 'task_template';
 
-        $info = array_add($info, $this->class_name() .'.'. $template_key_name, $template_name);
+        $info = array_add($info, $this->info_array_key() .'.'. $template_key_name, $template_name);
 
         return $info;
     }

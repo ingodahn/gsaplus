@@ -99,7 +99,7 @@ class Patient extends User
 
         $therapist = $this->therapist ? $this->therapist->name : $this->info_null_string;
 
-        $info = array_add($info, $this->class_name(). '.therapist', $therapist);
+        $info = array_add($info, $this->info_array_key(). '.therapist', $therapist);
 
         return $info;
     }

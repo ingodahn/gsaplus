@@ -31,16 +31,19 @@ class InfoModel extends Model
     public $reflection_class;
 
     /**
-     * Returns the class name (without the namespace part).
+     * Returns an unique key which is used to store information
+     * about this instance - see method to_info(...).
      *
-     * @return string the class name (without the namespace part)
+     * @return an unique key which is used to store information
+ *              about this instance - see method to_info(...)
      */
-    public function class_name() {
+    public function info_array_key() {
         if (!$this->reflection_class) {
             $this->reflection_class = new \ReflectionClass($this);
         }
 
-        return $this->reflection_class->getShortName();
+        return strtolower($this->reflection_class->getShortName()[0])
+                    . substr($this->reflection_class->getShortName(), 1);
     }
 
     /**
@@ -112,7 +115,7 @@ class InfoModel extends Model
      * (or parts of it) may be passed on to a view. A new array is instantiated
      * if no array is given.
      *
-     * The returned array contains one key - the class name (e.g. 'Patient') -
+     * The returned array contains one key - the info array key (e.g. 'patient') -
      * that in return contains all the name / value pairs.
      *
      * The array is build up by calling the methods
@@ -137,7 +140,7 @@ class InfoModel extends Model
         $members = array_merge($attributes, $this->date_info());
         $info = array_merge($members, $this->method_info());
 
-        $current_info[$this->class_name()] = $info;
+        $current_info[$this->info_array_key()] = $info;
 
         return $current_info;
     }

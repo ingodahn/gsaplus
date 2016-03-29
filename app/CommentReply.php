@@ -29,7 +29,7 @@ class CommentReply extends InfoModel
 
         $comment_text = $this->comment ? $this->comment->text : $this->info_null_string;
 
-        $info = array_add($info, $this->class_name() .'.comment', $comment_text);
+        $info = array_add($info, $this->info_array_key() .'.comment', $comment_text);
 
         return $info;
     }

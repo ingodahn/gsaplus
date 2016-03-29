@@ -54,8 +54,8 @@ class Assignment extends InfoModel
         $patient_name = $this->patient ? $this->patient->name : $this->info_null_string;
         $comment = $this->comment ? $this->comment->text : $this->info_null_string;
 
-        $info = array_add($info, $this->class_name() .'.patient', $patient_name);
-        $info = array_add($info, $this->class_name() .'.comment', $comment);
+        $info = array_add($info, $this->info_array_key() .'.patient', $patient_name);
+        $info = array_add($info, $this->info_array_key() .'.comment', $comment);
 
         return $info;
     }
