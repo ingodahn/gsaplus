@@ -8,8 +8,10 @@
     <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
       {{ csrf_field() }}
 
-      <h2>Schreibaufgabe für {{ $PatientInfo['name'] }} für Woche {{ $EntryInfo['week'] }} ({{ $EntryInfo['status'] }})</h2>
-      Ansicht: {{ $Role }}
+      <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }})</small></h2>
+      <p>
+        Ansicht: <code>{{$Role}}</code>
+      </p>
 
       @if ($Role=='therapist')
         <h3>Notizen der Therapeuten</h3>
@@ -20,12 +22,10 @@
 
       <!-- Problem: Die Fragestellung (Problem, $EntryInfo['problem']) wird immer angezeigt. Für Patienten ist sie nicht editierbar. Für Therapeuten ist die Fragestellung nur editierbar wenn die Aufgabe die aktuelle Aufgabe ist ($EntryInfo['week'] == $PatientInfo['patientWeek']) und sie vom System noch nicht abgeschickt wurde ($EntryInfo['status'] < 'E020'). -->
 
-      <h3>Aufgabe</h3>
-      {{ $EntryInfo['problem'] }}
+      <p>{{ $EntryInfo['problem'] }}</p>
 
       <!-- Antwort Answer of patient on problem. This can be for week == 1: array of situations for week > 1: string Für Patienten ist der zuletzt gespeicherte, automatisch gespeicherte oder abgeschickte Inhalt (content, $EntryInfo['answer']) immer sichtbar aber nur editierbar wenn er nicht abgeschickt oder überfällig ist ($EntryInfo['status'] < 'E040'). Für Therapeuten ist der Inhalt nur sichtbar wenn er abgeschickt wurde ($EntryInfo['status'] >= 'E040'). Er ist für Therapeuten niemals editierbar. -->
 
-      <h3>Antwort:</h3>
       <details open>
         <summary>
           <h4>Erste Situation</h4>
