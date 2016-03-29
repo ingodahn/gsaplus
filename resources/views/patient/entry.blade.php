@@ -37,14 +37,24 @@
           </div>
           <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
-              <h5>Beschreiben Sie die Situation</h5>
-              {{ $EntryInfo['answer'][0]['description'] }}
-              <h5>Wunsch ans Gegenüber:</h5>
-              {{ $EntryInfo['answer'][0]['expectation'] }}
-              <h5>Reaktion der anderen:</h5>
-              {{ $EntryInfo['answer'][0]['their_reaction'] }}
-              <h5>Ihre Reaktion:</h5>
-              {{ $EntryInfo['answer'][0]['my_reaction'] }}
+
+              <div class="form-group">
+                <label for="situation0-description">Beschreiben Sie die Situation</label>
+                <input type="text" class="form-control" id="situation0-description" value="{{$EntryInfo['answer'][0]['description']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation0-expectations">Wunsch ans Gegenüber</label>
+                <input type="text" class="form-control" id="situation0-expectations" value="{{$EntryInfo['answer'][0]['expectation']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation0-their-reaction">Reaktion der anderen</label>
+                <input type="text" class="form-control" id="situation0-their-reaction" value="{{$EntryInfo['answer'][0]['their_reaction']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation0-my-reaction">Ihre Reaktion</label>
+                <input type="text" class="form-control" id="situation0-my-reaction" value="{{$EntryInfo['answer'][0]['my_reaction']}}">
+              </div>
+
             </div>
           </div>
         </div>
@@ -58,14 +68,24 @@
           </div>
           <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
             <div class="panel-body">
-              <h5>Beschreiben Sie die Situation</h5>
-              {{ $EntryInfo['answer'][1]['description'] }}
-              <h5>Wunsch ans Gegenüber:</h5>
-              {{ $EntryInfo['answer'][1]['expectation'] }}
-              <h5>Reaktion der anderen:</h5>
-              {{ $EntryInfo['answer'][1]['their_reaction'] }}
-              <h5>Ihre Reaktion:</h5>
-              {{ $EntryInfo['answer'][1]['my_reaction'] }}
+
+              <div class="form-group">
+                <label for="situation1-description">Beschreiben Sie die Situation</label>
+                <input type="text" class="form-control" id="situation1-description" value="{{$EntryInfo['answer'][1]['description']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation1-expectations">Wunsch ans Gegenüber</label>
+                <input type="text" class="form-control" id="situation1-expectations" value="{{$EntryInfo['answer'][1]['expectation']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation1-their-reaction">Reaktion der anderen</label>
+                <input type="text" class="form-control" id="situation1-their-reaction" value="{{$EntryInfo['answer'][1]['their_reaction']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation1-my-reaction">Ihre Reaktion</label>
+                <input type="text" class="form-control" id="situation1-my-reaction" value="{{$EntryInfo['answer'][1]['my_reaction']}}">
+              </div>
+
             </div>
           </div>
         </div>
@@ -79,14 +99,24 @@
           </div>
           <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
             <div class="panel-body">
-              <h5>Beschreiben Sie die Situation</h5>
-              {{ $EntryInfo['answer'][2]['description'] }}
-              <h5>Wunsch ans Gegenüber:</h5>
-              {{ $EntryInfo['answer'][2]['expectation'] }}
-              <h5>Reaktion der anderen:</h5>
-              {{ $EntryInfo['answer'][2]['their_reaction'] }}
-              <h5>Ihre Reaktion:</h5>
-              {{ $EntryInfo['answer'][2]['my_reaction'] }}
+
+              <div class="form-group">
+                <label for="situation2-description">Beschreiben Sie die Situation</label>
+                <input type="text" class="form-control" id="situation2-description" value="{{$EntryInfo['answer'][2]['description']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation2-expectations">Wunsch ans Gegenüber</label>
+                <input type="text" class="form-control" id="situation2-expectations" value="{{$EntryInfo['answer'][2]['expectation']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation2-their-reaction">Reaktion der anderen</label>
+                <input type="text" class="form-control" id="situation2-their-reaction" value="{{$EntryInfo['answer'][2]['their_reaction']}}">
+              </div>
+              <div class="form-group">
+                <label for="situation2-my-reaction">Ihre Reaktion</label>
+                <input type="text" class="form-control" id="situation2-my-reaction" value="{{$EntryInfo['answer'][2]['my_reaction']}}">
+              </div>
+
             </div>
           </div>
         </div>
