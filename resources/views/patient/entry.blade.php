@@ -26,45 +26,71 @@
 
       <!-- Antwort Answer of patient on problem. This can be for week == 1: array of situations for week > 1: string Für Patienten ist der zuletzt gespeicherte, automatisch gespeicherte oder abgeschickte Inhalt (content, $EntryInfo['answer']) immer sichtbar aber nur editierbar wenn er nicht abgeschickt oder überfällig ist ($EntryInfo['status'] < 'E040'). Für Therapeuten ist der Inhalt nur sichtbar wenn er abgeschickt wurde ($EntryInfo['status'] >= 'E040'). Er ist für Therapeuten niemals editierbar. -->
 
-      <details open>
-        <summary>
-          <h4>Erste Situation</h4>
-        </summary>
-        <h5>Beschreiben Sie die Situation</h5>
-        {{ $EntryInfo['answer'][0]['description'] }}
-        <h5>Wunsch ans Gegenüber:</h5>
-        {{ $EntryInfo['answer'][0]['expectation'] }}
-        <h5>Reaktion der anderen:</h5>
-        {{ $EntryInfo['answer'][0]['their_reaction'] }}
-        <h5>Ihre Reaktion:</h5>
-        {{ $EntryInfo['answer'][0]['my_reaction'] }}
-      </details>
-      <details>
-        <summary>
-          <h4>Zweite Situation</h4>
-        </summary>
-        <h5>Beschreiben Sie die Situation</h5>
-        {{ $EntryInfo['answer'][1]['description'] }}
-        <h5>Wunsch ans Gegenüber:</h5>
-        {{ $EntryInfo['answer'][1]['expectation'] }}
-        <h5>Reaktion der anderen:</h5>
-        {{ $EntryInfo['answer'][1]['their_reaction'] }}
-        <h5>Ihre Reaktion:</h5>
-        {{ $EntryInfo['answer'][1]['my_reaction'] }}
-      </details>
-      <details >
-        <summary>
-          <h4>Dritte Situation</h4>
-        </summary>
-        <h5>Beschreiben Sie die Situation</h5>
-        {{ $EntryInfo['answer'][2]['description'] }}
-        <h5>Wunsch ans Gegenüber:</h5>
-        {{ $EntryInfo['answer'][2]['expectation'] }}
-        <h5>Reaktion der anderen:</h5>
-        {{ $EntryInfo['answer'][2]['their_reaction'] }}
-        <h5>Ihre Reaktion:</h5>
-        {{ $EntryInfo['answer'][2]['my_reaction'] }}
-      </details>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Situation 1
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <h5>Beschreiben Sie die Situation</h5>
+              {{ $EntryInfo['answer'][0]['description'] }}
+              <h5>Wunsch ans Gegenüber:</h5>
+              {{ $EntryInfo['answer'][0]['expectation'] }}
+              <h5>Reaktion der anderen:</h5>
+              {{ $EntryInfo['answer'][0]['their_reaction'] }}
+              <h5>Ihre Reaktion:</h5>
+              {{ $EntryInfo['answer'][0]['my_reaction'] }}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Situation 2
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <h5>Beschreiben Sie die Situation</h5>
+              {{ $EntryInfo['answer'][1]['description'] }}
+              <h5>Wunsch ans Gegenüber:</h5>
+              {{ $EntryInfo['answer'][1]['expectation'] }}
+              <h5>Reaktion der anderen:</h5>
+              {{ $EntryInfo['answer'][1]['their_reaction'] }}
+              <h5>Ihre Reaktion:</h5>
+              {{ $EntryInfo['answer'][1]['my_reaction'] }}
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Situation 3
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              <h5>Beschreiben Sie die Situation</h5>
+              {{ $EntryInfo['answer'][2]['description'] }}
+              <h5>Wunsch ans Gegenüber:</h5>
+              {{ $EntryInfo['answer'][2]['expectation'] }}
+              <h5>Reaktion der anderen:</h5>
+              {{ $EntryInfo['answer'][2]['their_reaction'] }}
+              <h5>Ihre Reaktion:</h5>
+              {{ $EntryInfo['answer'][2]['my_reaction'] }}
+            </div>
+          </div>
+        </div>
+      </div>
 
 
       <details>
