@@ -93,40 +93,30 @@
       </div>
 
 
-      <details>
-        <summary>
-          <h3>Fragen zum Befinden:</h3>
-        </summary>
-        {{ $EntryInfo['survey'] }}
-        </br>
+      <h3>Fragen zum Befinden</h3>
+      <p>{{$EntryInfo['survey']}}</p>
+      {{--
         Für den Patienten werden die Befindensfragen (survey, $EntryInfo['survey']) nur angezeigt, wenn der Eintrag weder überfällig noch abgeschickt ist ($EntryInfo['status'] < 'E040'). Sie sind dann editierbar, d.h. sie können beantwortet werden.
-        </br>
         Für Therapeuten werden die Befindensfragen (survey) mit Antworten immer angezeigt. Sie sind nicht editierbar.
-      </details>
-      <details>
-        <summary>
-          <h3>Kommentar des Therapeuten</h3>
-        </summary>
-        {{ $EntryInfo['comment'] }}
-        </br>
+      --}}
+
+      <h3>Kommentar des Therapeuten</h3>
+      <p>{{$EntryInfo['comment']}}</p>
+      {{--
         Für Patienten ist der Kommentar (comment, EntryInfo->comment()) nur sichtbar wenn er vom Therapeuten abgeschickt wurde ($EntyInfo['status']>= 'E050'). Er ist für Patienten niemals editierbar.
-        </br>
         Für Therapeuten ist der Kommentar immer sichtbar, ggf. in einer zwischengespeicherten Version.
-        </br>
         Für Therapeuten ist der Kommentar nur editierbar wenn der Eintrag vom Patienten abgeschickt aber der Kommentar vom Therapeuten noch nicht abgeschickt ist. ($EntryInfo['status'] == 'E040')
-      </details>
+      --}}
+
       @if ($Role == 'patient')
-        <details>
-          <summary>
-            <h3>Bewertung des Therapeutenkommentars</h3>
-          </summary>
-          {{ $EntryInfo['comment_reply'] }}
-          </br>
+        <h3>Bewertung des Therapeutenkommentars</h3>
+        <p>{{$EntryInfo['comment_reply']}}</p>
+        {{--
           Der Patient kann über die Kommentar-Rückmeldung (comment_reply, $EntryInfo['comment_reply']) einmalig das Niveau seiner Zufriedenheit mit dem Kommentar eingeben. Das Feld wird für den Patienten immer dann angezeigt, wenn die Aufgabe kommentiert wurde. In diesem Fall kann der Patient die Rückmeldung eingeben und abschicken. ($EntryInfo['status'] == 'E050') Ansonsten wird das Feld nicht angezeigt. Wird das Feld angezeigt, so soll der Patient nachdrücklich aufgefordert werden es auszufüllen.
-          </br>
           Der Therapeut sieht die Kommentar-Rückmeldung niemals.
-        </details>
+        --}}
       @endif
+
       <p>
         <button type="submit" class="btn" name="entryButton" value="saveDirty">Zwischenspeichern</button>
         <button type="submit" class="btn btn-warning" name="entryButton" value="save">Abschicken</button>
