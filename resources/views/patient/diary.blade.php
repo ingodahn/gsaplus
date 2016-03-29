@@ -23,18 +23,18 @@
         <th>Aktionen</th>
       </thead>
       <tbody>
-      @for ($i=1; $i <= 12; $i++)
+      @foreach($Diary['entries'] as $i => $entry)
         <tr>
           <td>{{$i}}</td>
-          <td>{{$Diary['entries'][$i]['problem']}}</td>
+          <td>{{$entry['problem']}}</td>
           <td>
-            <code>{{$Diary['entries'][$i]['entry_status']}}</code>
+            <code>{{$entry['entry_status']}}</code>
           </td>
           <td>
             <a href="/Assignment/{{$Diary['name']}}/{{$i}}">Ansehen</a>
           </td>
         </tr>
-      @endfor
+      @endforeach
       </tbody>
     </table>
 
