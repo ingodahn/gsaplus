@@ -66,7 +66,7 @@ class DiaryController extends Controller
      */
     public function entry(Request $request, Patient $patient, $week)
     {
-        $patient_info = $patient->to_info()['Patient'];
+        $patient_info = $patient->to_info()[$patient->info_array_key()];
 
         /* Begin Löschen wenn assignment_for_week funktioniert */
         // Answer for week 1
