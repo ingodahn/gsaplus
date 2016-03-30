@@ -49,7 +49,7 @@ MAIL_APP_ADDRESS=
 Initialize the project:
 
 ``` bash
-cd /var/www # Change to the project dir inside the VM
+cd /var/www/gsa-online-plus # Change to the project dir
 composer install # Fetch php-dependencies
 php artisan migrate # Migrate the database
 bower install # Fetch frontend-dependencies
@@ -57,7 +57,7 @@ rake # Compile/copy frontend-dependencies into public
 ```
 
 ## Cron
-If you are not using Vagrant, add the following cron job:
+Add the following cron job:
 
 ``` bash
 * * * * * php /var/www/artisan schedule:run >> /dev/null 2>&1
