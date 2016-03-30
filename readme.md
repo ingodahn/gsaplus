@@ -1,5 +1,7 @@
 # Set up for Server Administrator
 
+*Tested with Ubuntu Server 14.04 LTS*
+
 ## Required Applications
 
 - apache 2
@@ -16,6 +18,8 @@ Clone Repository:
 ``` bash
 # cd /var/www
 # git clone https://gitlab.uni-koblenz.de/iwm/gsa-online-plus.git
+# cd gsa-online-plus
+# git checkout master
 ```
 
 Configure Apache:
@@ -31,7 +35,7 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
-Setup email addresses
+Setup email addresses in the .env file:
 ```
 administrator
 MAIL_ADMIN_NAME=
