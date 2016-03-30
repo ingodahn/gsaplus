@@ -16,10 +16,10 @@
 Clone Repository:
 
 ``` bash
-# cd /var/www
-# git clone https://gitlab.uni-koblenz.de/iwm/gsa-online-plus.git
-# cd gsa-online-plus
-# git checkout master
+cd /var/www
+git clone https://gitlab.uni-koblenz.de/iwm/gsa-online-plus.git
+cd gsa-online-plus
+git checkout master
 ```
 
 Configure Apache:
