@@ -34,6 +34,9 @@ class InfoModel extends Model
     public $reflection_class;
     // an array containing each relations name
     public $relation_methods = [];
+    // whether to include the main attributes values /
+    // properties of x to many relations (like a collection count)
+    public $info_relation_attributes = true;
 
     /**
      * Maps relation names to attribute names. The generated info
@@ -197,8 +200,14 @@ class InfoModel extends Model
         // calculate the path for further insertions (which require a key)
         $add_path = $path === null ? '' : $path .'.';
 
+        $relations_to_proceed = $relations;
+
+        if ($this->info_relation_attributes === true) {
+            $relations_to_proceed = array_merge($relations, array_keys($this->info_relation_map()));
+        }
+
         // process specified relationships
-        foreach(array_merge($relations, array_keys($this->info_relation_map())) as $relation_name) {
+        foreach($relations_to_proceed as $relation_name) {
             // get referenced model instance
             $target = $this->getRelationValue($relation_name);
             // where to place the generated sub info / the key - value pair?
