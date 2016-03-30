@@ -6,13 +6,13 @@
 
 
     <h2>
-      Profil von {{ $patient['name'] }}
+      Profil von {{ $Patient['name'] }}
       <small>
         (
         @if($isTherapist)
-          code: <code>{{ $patient['code'] }}</code>,
+          code: <code>{{ $Patient['code'] }}</code>,
         @endif
-        status: <code>{{ $patient['status'] }}</code>
+        status: <code>{{ $Patient['status'] }}</code>
         )
       </small>
     </h2>
@@ -20,11 +20,11 @@
     @if ($isTherapist)
       <hr>
       <h3>Notizen</h3>
-      <form data-parsley-validate role="form" action="/patient/{{$patient['name']}}/notes" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/notes" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="notes" class="control-label">Notizen</label>
-          <textarea name="notes" rows="5" class="form-control" placeholder="Hat eine zu krasse Meinung zu Earl Grey.">{{ $patient['notesOfTherapist'] }}</textarea>
+          <textarea name="notes" rows="5" class="form-control" placeholder="Hat eine zu krasse Meinung zu Earl Grey.">{{ $Patient['notesOfTherapist'] }}</textarea>
         </div>
         <p>
           <div class="form-group">
@@ -38,13 +38,13 @@
     @if($isTherapist)
       <hr>
       <h3>Therapeut</h3>
-      <form data-parsley-validate role="form" action="/patient/{{$patient['name']}}/therapist" method="post" }}>
+      <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/therapist" method="post" }}>
         {{ csrf_field() }}
         <div class="form-group">
           <label for="therapist" class="control-label">Therapeut</label>
           <select name="therapist" class="form-control" required>
-            <option>{{ $patient['therapist'] }}</option>
-            @foreach(array_diff($patient['listOfTherapists'], [$patient['therapist']]) as $therapist)
+            <option>{{ $Patient['therapist'] }}</option>
+            @foreach(array_diff($Patient['listOfTherapists'], [$Patient['therapist']]) as $therapist)
               <option>{{$therapist}}</option>
             @endforeach
           </select>
@@ -61,10 +61,10 @@
     <hr>
     <h3>Tagebuchtag</h3>
     <p>
-      Der aktuelle Tagebuchtag ist <strong>{{ $patient['assignmentDay'] }}</strong> und es verbleiben
-      @if($patient['assignmentDayChangesLeft'] > 0)
-        noch <strong>{{$patient['assignmentDayChangesLeft']}}</strong>
-        @if($patient['assignmentDayChangesLeft'] == 1)
+      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignmentDay'] }}</strong> und es verbleiben
+      @if($Patient['assignmentDayChangesLeft'] > 0)
+        noch <strong>{{$Patient['assignmentDayChangesLeft']}}</strong>
+        @if($Patient['assignmentDayChangesLeft'] == 1)
           Änderung.
         @else
           Änderungen.
@@ -73,8 +73,8 @@
         <strong>keine</strong> Änderungen mehr.
       @endif
     </p>
-    @if($isPatient && $patient['assignmentDayChangesLeft'] > 0)
-      <form data-parsley-validate role="form" action="/patient/{{$patient['name']}}/day_of_week" method="post">
+    @if($isPatient && $Patient['assignmentDayChangesLeft'] > 0)
+      <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/day_of_week" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="day_of_week" class="control-label">Wochentag</label>
@@ -82,8 +82,8 @@
             <i class="fa fa-question-circle"></i>
           </a>
           <select name="day_of_week" class="form-control" required>
-            <option>{{ $patient['assignmentDay'] }}</option>
-            @foreach(array_diff($patient['availableDays'], [$patient['assignmentDay']]) as $day)
+            <option>{{ $Patient['assignmentDay'] }}</option>
+            @foreach(array_diff($Patient['availableDays'], [$Patient['assignmentDay']]) as $day)
               <option>{{ $day }}</option>
             @endforeach
           </select>
@@ -100,17 +100,17 @@
     @if($isTherapist)
       <hr>
       <h3>Entlassungsdatum</h3>
-      @if($patient['status'] >= "P030")
+      @if($Patient['status'] >= "P030")
         <p>
-          Das Entlassungsdatum war {{ $patient['dateFromClinics'] }}.
+          Das Entlassungsdatum war {{ $Patient['dateFromClinics'] }}.
         </p>
       @else
-        <form data-parsley-validate role="form" action="/patient/{{$patient['name']}}/date_from_clinics" method="post">
+        <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/date_from_clinics" method="post">
           {{ csrf_field() }}
             <div class="form-group">
               <div class='input-group date' id='datetimepicker1'>
                 {{-- <label for="dateFromClinics" class="control-label">Entlassungsdatum</label> --}}
-                <input name="date_from_clinics" type='text' value="{{ $patient['dateFromClinics'] }}" class="form-control" required>
+                <input name="date_from_clinics" type='text' value="{{ $Patient['dateFromClinics'] }}" class="form-control" required>
                 <span class="input-group-addon">
                   <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -137,7 +137,7 @@
     @if($isPatient)
       <hr>
       <h3>Passwort ändern</h3>
-      <form data-parsley-validate role="form" action="/patient/{{$patient['name']}}/password" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/password" method="post">
         {{ csrf_field() }}
         <p>
           <label for="password" class="control-label">Altes Passwort</label>
@@ -162,11 +162,11 @@
     <hr>
     <h3>Persönliche Informationen</h3>
     @if($isPatient)
-      <form data-parsley-validate role="form" action="/patient/{{$patient['name']}}/personal_information" method="post">
+      <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/personal_information" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="personal_information" class="control-label">(nur für Therapeuten sichtbar)</label>
-          <textarea name="personal_information" rows="5" class="form-control" placeholder="Ich habe eine Meinung zu Earl Grey.">{{ $patient['personalInformation'] }}</textarea>
+          <textarea name="personal_information" rows="5" class="form-control" placeholder="Ich habe eine Meinung zu Earl Grey.">{{ $Patient['personalInformation'] }}</textarea>
         </div>
         <p>
           <div class="form-group">
@@ -176,7 +176,7 @@
       </form>
     @else
       <p>
-        {{ $patient['personalInformation'] }}
+        {{ $Patient['personalInformation'] }}
       </p>
     @endif
 
@@ -185,7 +185,7 @@
       <hr>
       <h3>Intervention beenden</h3>
       <p>
-        <a href="/patient/{{$patient['name']}}/cancel_intervention" class="btn btn-danger" onclick="return confirm('Wollen sie den Patientenaccount wirklich löschen?');">Intervention beenden</a>
+        <a href="/patient/{{$Patient['name']}}/cancel_intervention" class="btn btn-danger" onclick="return confirm('Wollen sie den Patientenaccount wirklich löschen?');">Intervention beenden</a>
       </p>
     @endif
 
