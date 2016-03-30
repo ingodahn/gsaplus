@@ -122,7 +122,7 @@ class PatientListController extends Controller
 		$patients = Patient::all();
 
 		foreach ($patients as $patient) {
-			$infos->push($patient->to_info()[$patient->info_array_key()]);
+			$infos->push($patient->to_info());
 		}
 
 		return Datatables::of($infos)
