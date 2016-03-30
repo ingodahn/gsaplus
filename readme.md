@@ -1,7 +1,82 @@
-# Set up
-We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed. Our base box is [Scotch Box](https://box.scotch.io/). The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver.
+# Set up for Server Administrator
 
-It has yet to be decided if we'll replicate the box environment on the production server or if we'll run the Vagrant VM there too.
+*Tested with Ubuntu Server 14.04 LTS*
+
+## Required Applications
+
+- apache 2
+- mysql
+- php >= 5.5.9
+- composer
+- bower
+- rake
+- git
+- laravel (siehe https://laravel.com/docs/5.2)
+
+Clone Repository:
+
+``` bash
+cd /var/www
+git clone https://gitlab.uni-koblenz.de/iwm/gsa-online-plus.git
+cd gsa-online-plus
+git checkout master
+```
+
+Configure Apache:
+```
+DocumentRoot /var/www/gsa-online-plus/public
+Enforce SSL Connections
+```
+
+Create Database and edit the the .env file:
+```
+DB_HOST=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
+
+Setup email addresses in the .env file:
+```
+administrator
+MAIL_ADMIN_NAME=
+MAIL_ADMIN_ADDRESS=
+
+team
+MAIL_TEAM_NAME=
+MAIL_TEAM_ADDRESS=
+
+system
+MAIL_APP_NAME=
+MAIL_APP_ADDRESS=
+```
+
+Initialize the project:
+
+``` bash
+cd /var/www/gsa-online-plus # Change to the project dir
+composer install # Fetch php-dependencies
+php artisan migrate # Migrate the database
+bower install # Fetch frontend-dependencies
+rake # Compile/copy frontend-dependencies into public
+```
+
+During the test phase (not for production phase):
+``` bash
+rake db_reset_and_seed
+```
+
+## Cron
+Add the following cron job:
+
+``` bash
+* * * * * php /var/www/artisan schedule:run >> /dev/null 2>&1
+```
+
+You may need to change the path for the `artisan`-script (it's in this project's root). See <https://laravel.com/docs/master/scheduling>. The schedule at `app/Console/Kernel.php` has a test-command that should log a message to `storage/logs/laravel.log` every day. You can change the rate to `->everyMinute()` for testing.
+
+# Set up for Developer
+We use Vagrant for setting up a virtual machine in development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed. Our base box is [Scotch Box](https://box.scotch.io/). The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver.
 
 SSH into the VM (`vagrant ssh` or use vagrant@192.168.33.10 with password *vagrant* with your own client). Execute the following commands sequentially for the first-time setup. After that, run individual commands when needed (eg. if dependencies change).
 
@@ -12,15 +87,6 @@ php artisan migrate # Migrate the database
 bower install # Fetch frontend-dependencies
 rake # Compile/copy frontend-dependencies into public
 ```
-
-## Cron
-If you are not using Vagrant, add the following cron job:
-
-``` bash
-* * * * * php /var/www/artisan schedule:run >> /dev/null 2>&1
-```
-
-You may need to change the path for the `artisan`-script (it's in this project's root). See <https://laravel.com/docs/master/scheduling>. The schedule at `app/Console/Kernel.php` has a test-command that should log a message to `storage/logs/laravel.log` every day. You can change the rate to `->everyMinute()` for testing.
 
 ## Common Errors
 * *Permission denied*, *File does not exist* and other File-Errors: Sometimes the gitignore excludes directories that need to exist for the application. This is a configuration error and should be reported to <mbrack@uni-koblenz.de>.
