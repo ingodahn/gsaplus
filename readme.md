@@ -60,6 +60,11 @@ bower install # Fetch frontend-dependencies
 rake # Compile/copy frontend-dependencies into public
 ```
 
+During the test phase (not for production phase):
+``` bash
+rake db_reset_and_seed
+```
+
 ## Cron
 Add the following cron job:
 
