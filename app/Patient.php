@@ -48,6 +48,16 @@ class Patient extends User
         'overdue'
     ];
 
+    public $relation_methods = [
+        'assignments',
+        'therapist'
+    ];
+
+    protected function info_relation_map() {
+        return ['therapist' => 'name',
+                'assignments' => 'collection_info'];
+    }
+
     /*
      * The following accessors will convert every date to an instance
      * of Jenssegers\Date\Date which supports localization.
@@ -94,15 +104,7 @@ class Patient extends User
         return $this->belongsTo('App\Therapist', 'therapist_id');
     }
 
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
 
-        $therapist = $this->therapist ? $this->therapist->name : $this->info_null_string;
-
-        $info = array_add($info, $this->info_array_key(). '.therapist', $therapist);
-
-        return $info;
-    }
 
     /**
      * Returns an ordered collection of all assignments that also

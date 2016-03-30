@@ -15,6 +15,10 @@ class Situation extends InfoModel
      */
     protected $hidden = ['situation_survey_id'];
 
+    public $relation_methods = [
+        'situation_survey'
+    ];
+
     /**
      * Relationship to the situation survey. Please use
      * $situation->situation_survey to access the survey.

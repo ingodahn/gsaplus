@@ -12,25 +12,19 @@ class SituationSurvey extends Assignment
 
     protected static $singleTableType = AssignmentType::SITUATION_SURVEY;
 
-    public function situations() {
-        return $this->hasMany('App\Situation');
+    public $relation_methods = [
+        'patient',
+        'comment',
+        'survey',
+        'situations'
+    ];
+
+    protected function info_relation_map() {
+        return ['situations' => 'collection_info'];
     }
 
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
-
-        if ($this->situations) {
-            $count = 1;
-
-            foreach ($this->situations as $situation) {
-                $sub_key = $situation->info_array_key();
-
-                $info[$this->info_array_key()][$sub_key.'s'][$count++]
-                    = $situation->to_info()[$sub_key];
-            }
-        }
-
-        return $info;
+    public function situations() {
+        return $this->hasMany('App\Situation');
     }
 
     public function status() {

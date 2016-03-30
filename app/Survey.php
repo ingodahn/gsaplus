@@ -9,6 +9,18 @@ class Survey extends InfoModel
 
     protected $dates = ['created_at', 'updated_at'];
 
+    /*
+     * hide ids from list of attributes
+     * (ids are used to resolve relationships)
+     */
+    protected $hidden = ['assignment_id'];
+
+    public $relation_methods = [
+        'phq4',
+        'wai',
+        'assignment'
+    ];
+
     /**
      * Relationship to the first question of the survey (of type PHQ-4).
      * Please use $survey->phq4 to access the results.
@@ -26,18 +38,13 @@ class Survey extends InfoModel
         return $this->hasOne('App\WAI');
     }
 
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
-
-        if ($this->phq4) {
-            $info[$this->info_array_key()] = $this->phq4->to_info($info[$this->info_array_key()]);
-        }
-
-        if ($this->wai) {
-            $info[$this->info_array_key()] = $this->wai->to_info($info[$this->info_array_key()]);
-        }
-
-        return $info;
+    /**
+     * Relationship to the assignment (which was saved along with the
+     * surveys answers). Please use $survey->assignment to access the
+     * assignment.
+     */
+    public function assignment() {
+        return $this->belongsTo('App\Assignment', 'assignment_id');
     }
 
 }

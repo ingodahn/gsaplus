@@ -28,7 +28,17 @@ class Assignment extends InfoModel
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['patient_id', 'assignment_template_id'];
+    protected $hidden = ['patient_id', 'task_template_id'];
+
+    public $relation_methods = [
+        'patient',
+        'comment',
+        'survey'];
+
+    protected function info_relation_map()
+    {
+        return ['patient' => 'name', 'comment' => 'text'];
+    }
 
     /**
      * Relationship to the patient (who should answer the assignment).
@@ -48,16 +58,12 @@ class Assignment extends InfoModel
         return $this->hasOne('App\Comment', 'assignment_id');
     }
 
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
-
-        $patient_name = $this->patient ? $this->patient->name : $this->info_null_string;
-        $comment = $this->comment ? $this->comment->text : $this->info_null_string;
-
-        $info = array_add($info, $this->info_array_key() .'.patient', $patient_name);
-        $info = array_add($info, $this->info_array_key() .'.comment', $comment);
-
-        return $info;
+    /**
+     * Relationship to the surveys answers. Please use $assignment->survey
+     * to access the answers.
+     */
+    public function survey() {
+        return $this->hasOne('App\Survey', 'assignment_id');
     }
 
     /*

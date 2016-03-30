@@ -14,6 +14,17 @@ class Task extends Assignment
 
     protected static $persisted = ['problem', 'answer', 'task_template_id'];
 
+    public $relation_methods = [
+        'patient',
+        'comment',
+        'survey',
+        'task_template'
+    ];
+
+    protected function info_relation_map() {
+        return array_merge(parent::info_relation_map(), ['task_template' => 'name']);
+    }
+
     /**
      * Relationship to the underlying template (the assignment is
      * based on). Please use $task->task_template to
@@ -22,17 +33,6 @@ class Task extends Assignment
     public function task_template()
     {
         return $this->belongsTo('App\TaskTemplate');
-    }
-
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
-
-        $template_name = $this->task_template ? $this->task_template->name : $this->info_null_string;
-        $template_key_name = $this->info_camel_case ? camel_case('task_template') : 'task_template';
-
-        $info = array_add($info, $this->info_array_key() .'.'. $template_key_name, $template_name);
-
-        return $info;
     }
 
     public function status() {

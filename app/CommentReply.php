@@ -15,6 +15,15 @@ class CommentReply extends InfoModel
      */
     protected $hidden = ['comment_id'];
 
+    public $relation_methods = [
+        'comment'
+    ];
+
+    protected function info_relation_map()
+    {
+        return ['comment' => 'text'];
+    }
+
     /**
      * Relationship to the comment. Please use $->comment_reply
      * to access the comment.
@@ -22,16 +31,6 @@ class CommentReply extends InfoModel
     public function comment()
     {
         return $this->belongsTo('App\Comment');
-    }
-
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
-
-        $comment_text = $this->comment ? $this->comment->text : $this->info_null_string;
-
-        $info = array_add($info, $this->info_array_key() .'.comment', $comment_text);
-
-        return $info;
     }
 
 }

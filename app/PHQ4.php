@@ -17,17 +17,16 @@ class PHQ4 extends InfoModel
      */
     protected $hidden = ['survey_id'];
 
+    public $relation_methods = [
+        'survey'
+    ];
+
     /**
      * Relationship to the survey. Please use $phq4->survey to
      * access the survey.
      */
     public function survey() {
         return $this->belongsTo('App\Survey');
-    }
-
-    public function info_array_key()
-    {
-        return strtolower(parent::info_array_key());
     }
 
 }

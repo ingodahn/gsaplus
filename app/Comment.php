@@ -18,6 +18,35 @@ class Comment extends InfoModel
      */
     protected $hidden = ['assignment_id', 'therapist_id'];
 
+    public $relation_methods = [
+        'assignment',
+        'therapist',
+        'comment_reply'
+    ];
+
+    protected function info_relation_map()
+    {
+        return ['therapist' => 'name'];
+    }
+
+    /**
+     * Adds task name to info (if the referenced assignment is a task and no
+     * sub info is included for it).
+     */
+    public function to_info($info = [], $path = null, $relations = []) {
+        $info = parent::to_info($info, $path, $relations);
+
+        $add_path = ($path === null) ? 'task' : $path .'.task';
+
+        if (!in_array('assignment', $relations) && $this->assignment->type === AssignmentType::TASK) {
+            $problem = $this->assignment->problem ? $this->assignment->problem : $this->info_null_string;
+
+            $info = array_add($info, $add_path, $problem);
+        }
+
+        return $info;
+    }
+
     /**
      * Relationship to the commented assignment. Please use
      * $comment->assignment to access the assignment.
@@ -42,22 +71,6 @@ class Comment extends InfoModel
      */
     public function comment_reply() {
         return $this->hasOne('App\CommentReply');
-    }
-
-    public function to_info($current_info = []) {
-        $info = parent::to_info($current_info);
-
-        if ($this->assignment->type === AssignmentType::TASK) {
-            $problem = $this->assignment->problem ? $this->assignment->problem : $this->info_null_string;
-
-            $info = array_add($info, $this->info_array_key() .'.task', $problem);
-        }
-
-        $therapist_name = $this->therapist ? $this->therapist->name : $this->info_null_string;
-
-        $info = array_add($info, $this->info_array_key() .'.therapist', $therapist_name);
-
-        return $info;
     }
 
     /*
