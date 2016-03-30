@@ -171,6 +171,9 @@ class DatabaseSeeder extends Seeder
 
                     $survey->phq4()->save($phq4);
                     $survey->wai()->save($wai);
+
+                    $assignment->survey()->save($survey);
+                    $survey->assignment()->associate($assignment);
                 }
             }
 
