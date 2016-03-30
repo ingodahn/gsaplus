@@ -25,6 +25,7 @@ git checkout master
 Configure Apache:
 ```
 DocumentRoot /var/www/gsa-online-plus/public
+Enforce SSL Connections
 ```
 
 Create Database and edit the the .env file:
