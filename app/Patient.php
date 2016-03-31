@@ -148,6 +148,15 @@ class Patient extends User
     }
 
     /**
+     * Returns the first assignment (the situation survey).
+     *
+     * @return SituationSurvey the first assignment
+     */
+    public function first_assignment() {
+        return $this->ordered_assignments()->get(0);
+    }
+
+    /**
      * Returns the current assignment (assigned on the recent assignment day).
      *
      * @return Assignment the current assignment
