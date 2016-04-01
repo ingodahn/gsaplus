@@ -117,12 +117,12 @@ class ContactController extends Controller
 		$bodyMessage=$request->input('message');
 
 		$eMailTeam = config('mail.team.address');
-		// $nameTeam = config('mail.team.name');
+		$nameTeam = config('mail.team.name');
 
-		Mail::raw($bodyMessage, function ($message) use ($eMail, $eMailTeam, $subject) {
+		Mail::raw($bodyMessage, function ($message) use ($eMail, $eMailTeam, $nameTeam, $subject) {
 				// no from part needed - the sites name and email address can be found
 				// under 'mail.from' in file config/mail.php
-				$message->from($eMail)->to($eMailTeam, 'Team GSA Online Plus')->subject($subject);
+				$message->from($eMail)->to($eMailTeam, $nameTeam)->subject($subject);
 			});
 
 		// uncomment to send confirmation
