@@ -30,7 +30,9 @@ class User extends InfoModel implements
     protected static $persisted = ['name',
         'email',
         'password',
-        'is_random'];
+        'is_random',
+        'remember_token'
+    ];
 
     protected $dates = [
         'created_at',
