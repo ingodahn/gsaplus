@@ -49,14 +49,6 @@ class PatientListController extends Controller
 	{
 	}
 
-
-
-	/**
-	 * Days wird im System modifiziert und die Seite mit der Patientenliste (der der
-	 * Slots-Teil davon) wird neu aufgebaut
-	 *
-	 * @param days
-	 */
 	public function set_slots(Request $request)
 	{
 		$Days = ['Sonntag' => $request->input('So_slots'),
@@ -66,13 +58,15 @@ class PatientListController extends Controller
 			'Donnerstag' => $request->input('Do_slots')
 		];
 
-		$days=new Days;
+		$days = new Days;
 		$days->set_days($Days);
-		$Days1=$days->get_days();
-		return dd($Days1);
+		$Slots = $days->get_days();
 
+		$params['Slots'] = $Slots;
+		Alert::info('Die Zahl der freien Slots wurde aktualisiert')->flash();
+
+		return view('therapist.patient_list')->with($params);
 	}
-
 
 	/**
 	 * 'Liefere Seite patient_list'(
