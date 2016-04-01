@@ -1,24 +1,11 @@
 @extends('layouts.master')
 @section('title', 'Schreibaufgabe')
 
-@section('additional-head')
-  <script type="text/javascript">
-    function submit() {
-      console.log("Submit");
-      $("#entryForm").submit();
-    }
-
-    function save() {
-      console.log("Save");
-    }
-  </script>
-@endsection
-
 @section('content')
   <div class="container">
 
 
-    <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post" name="entryForm" id="entryForm">
+    <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
       {{ csrf_field() }}
 
       <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }})</small></h2>
@@ -171,8 +158,8 @@
       @endif
 
       <p>
-        <a href="javascript:save()" class="btn">Zwischenspeichern</a>
-        <a href="javascript:submit()" class="btn btn-primary">Abschicken</a>
+        <button type="submit" class="btn" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+        <button type="submit" class="btn btn-warning" name="entryButton" value="save">Abschicken</button>
       </p>
     </form>
 
