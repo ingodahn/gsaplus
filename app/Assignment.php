@@ -35,6 +35,10 @@ class Assignment extends InfoModel
         'comment',
         'survey'];
 
+    public $info_methods = [
+        'status'
+    ];
+
     protected function info_relation_map()
     {
         return ['patient' => 'name', 'comment' => 'text'];
