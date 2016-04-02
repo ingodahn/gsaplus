@@ -215,7 +215,7 @@ class DiaryController extends Controller
             /* Speichern von $entry */
             Alert::success("Der Eintrag wurde abgeschickt")->flash();
             //return "Abgeschickt";
-            return Redirect::to(' / Home');
+            return Redirect::to('/Home');
         }
 
     }
@@ -253,7 +253,7 @@ class DiaryController extends Controller
             && $request->user()->type === UserRole::PATIENT
             && Auth::user()->name !== $name
         ) {
-            return Redirect::to(' / ');
+            return Redirect::to('/');
         }
 
         $Diary = [];
