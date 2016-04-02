@@ -41,16 +41,16 @@ class Patient extends User
         'intervention_ended_on'
     ];
 
+    public $relation_methods = [
+        'assignments',
+        'therapist'
+    ];
+
     public $info_methods = [
         'status',
         'status_of_next_assignment',
         'patient_week',
         'overdue'
-    ];
-
-    public $relation_methods = [
-        'assignments',
-        'therapist'
     ];
 
     protected function info_relation_map() {
