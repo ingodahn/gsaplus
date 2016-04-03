@@ -31,7 +31,10 @@ class Patient extends User
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['therapist_id'];
+    protected $hidden = ['therapist_id',
+        'password',
+        'remember_token',
+    ];
 
     protected $dates = [
         'registration_date',
