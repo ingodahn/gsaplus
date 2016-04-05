@@ -5,10 +5,6 @@ namespace App;
 use App\Models\InfoModel;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
-use App\Patient;
-use App\Admin;
-use App\Therapist;
-
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -44,7 +40,7 @@ class User extends InfoModel implements
     /**
      * Get the route key for the model.
      *
-     * @return string
+     * @return string the route key for the model
      */
     public function getRouteKeyName()
     {

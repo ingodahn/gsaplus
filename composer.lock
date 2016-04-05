@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "efe1843e62fc46fa1b0c50838e896705",
-    "content-hash": "250f63bc71b0d64bb04ca7f45d386287",
+    "hash": "3c9b4ee27a7fa5eac4c50c26597635c8",
+    "content-hash": "9c782cce5d7ec183af1fcc7ca7ebc5ea",
     "packages": [
         {
             "name": "caouecs/laravel4-lang",
-            "version": "2.0.41",
+            "version": "2.0.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caouecs/Laravel-lang.git",
-                "reference": "667d35d0f299e705a7597c64d1f4c68d35efae3e"
+                "reference": "f92481561cddff8771cf7622ef969d9bc6ed3d79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/667d35d0f299e705a7597c64d1f4c68d35efae3e",
-                "reference": "667d35d0f299e705a7597c64d1f4c68d35efae3e",
+                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/f92481561cddff8771cf7622ef969d9bc6ed3d79",
+                "reference": "f92481561cddff8771cf7622ef969d9bc6ed3d79",
                 "shasum": ""
             },
             "require-dev": {
@@ -45,7 +45,7 @@
                 "laravel",
                 "lpm"
             ],
-            "time": "2016-03-13 20:34:12"
+            "time": "2016-03-22 21:53:38"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -964,18 +964,59 @@
         },
         {
             "name": "nanigans/single-table-inheritance",
-            "version": "0.5.0",
+            "version": "0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Nanigans/single-table-inheritance.git",
-                "reference": "master"
+                "reference": "d620a03b09c6e929b89c3687fcbc10ede5ad272a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nanigans/single-table-inheritance/zipball/d620a03b09c6e929b89c3687fcbc10ede5ad272a",
+                "reference": "d620a03b09c6e929b89c3687fcbc10ede5ad272a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.2.*",
+                "illuminate/support": "5.2.*",
+                "php": ">= 5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "orchestra/testbench": "3.2.*",
+                "phpunit/phpunit": "~4.8|~5.2"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.7.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Nanigans\\SingleTableInheritance\\": "src/"
                 }
-            }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Palmer",
+                    "email": "jpalmer@nanigans.com"
+                }
+            ],
+            "description": "Single Table Inheritance Trait",
+            "keywords": [
+                "eloquent",
+                "inheritance",
+                "laravel",
+                "model",
+                "single",
+                "table"
+            ],
+            "time": "2016-03-04 15:14:45"
         },
         {
             "name": "nesbot/carbon",

@@ -15,16 +15,19 @@
 
       @if ($Role=='therapist')
         <h3>Notizen der Therapeuten</h3>
-        {{ $PatientInfo['notes'] }}
+        {{ $PatientInfo['notesOfTherapist'] }}
         </br>
-        Das Notiz-Feld ($PatientInfo['notes']) ermöglicht dem Therapeuten die Eingabe zusätzlicher Informationen. Es wird für Patienten niemals angezeigt. Für Therapeuten ist es immer editierbar.
+        {{-- Das Notiz-Feld ($PatientInfo['notes']) ermöglicht dem Therapeuten die Eingabe zusätzlicher Informationen. Es wird für Patienten niemals angezeigt. Für Therapeuten ist es immer editierbar. --}}
       @endif
 
-      <!-- Problem: Die Fragestellung (Problem, $EntryInfo['problem']) wird immer angezeigt. Für Patienten ist sie nicht editierbar. Für Therapeuten ist die Fragestellung nur editierbar wenn die Aufgabe die aktuelle Aufgabe ist ($EntryInfo['week'] == $PatientInfo['patientWeek']) und sie vom System noch nicht abgeschickt wurde ($EntryInfo['status'] < 'E020'). -->
+      <!-- Problem: Die Fragestellung (Problem, $EntryInfo['problem']) wird immer angezeigt. Für Patienten ist sie nicht editierbar.
+      Für Therapeuten ist die Fragestellung nur editierbar wenn die Aufgabe die aktuelle Aufgabe ist ($EntryInfo['week'] == $PatientInfo['patientWeek']) und sie vom System noch nicht abgeschickt wurde ($EntryInfo['status'] < 'E020'). -->
 
       <p>{{ $EntryInfo['problem'] }}</p>
 
-      <!-- Antwort Answer of patient on problem. This can be for week == 1: array of situations for week > 1: string Für Patienten ist der zuletzt gespeicherte, automatisch gespeicherte oder abgeschickte Inhalt (content, $EntryInfo['answer']) immer sichtbar aber nur editierbar wenn er nicht abgeschickt oder überfällig ist ($EntryInfo['status'] < 'E040'). Für Therapeuten ist der Inhalt nur sichtbar wenn er abgeschickt wurde ($EntryInfo['status'] >= 'E040'). Er ist für Therapeuten niemals editierbar. -->
+      <!-- Antwort Answer of patient on problem. This can be for week == 1: array of situations for week > 1: string
+      Für Patienten ist der zuletzt gespeicherte, automatisch gespeicherte oder abgeschickte Inhalt (content, $EntryInfo['answer']) immer sichtbar aber nur editierbar wenn er nicht abgeschickt oder überfällig ist ($EntryInfo['status'] < 'E040').
+      Für Therapeuten ist der Inhalt nur sichtbar wenn er abgeschickt wurde ($EntryInfo['status'] >= 'E040'). Er ist für Therapeuten niemals editierbar. -->
 
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
@@ -124,16 +127,39 @@
 
       <hr>
 
+      <h3>Fragen zum Befinden</h3>
+      <p>
+        Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt? (0...3)
+      </p>
       <div class="form-group">
-        <label for="feeling">Fragen zum Befinden</label>
-        <textarea class="form-control" id="feeling" placeholder="">{{$EntryInfo['survey']}}</textarea>
-        {{-- <p class="help-block">Help text here.</p> --}}
+        <label for="phq4_interested">Wenig Interesse oder Freude an Ihren Tätigkeiten:</label>
+        <input type="number" name="phq4_interested" value="{{$EntryInfo['survey']['phq4']['interested']}}"></input>
+      </div>
+      <div class="form-group">
+        <label for="phq4_depressed">Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit:</label>
+        <input type="number" name="phq4_depressed" value="{{$EntryInfo['survey']['phq4']['depressed']}}"></input>
+      </div>
+      <div class="form-group">
+        <label for="phq4_interested">Nervosität, Ängstlichkeit oder Anspannung:</label>
+        <input type="number" name="phq4_nervous" value="{{$EntryInfo['survey']['phq4']['nervous']}}"></input>
+      </div>
+      <div class="form-group">
+        <label for="phq4_interested">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
+        <input type="number" name="phq4_troubled" value="{{$EntryInfo['survey']['phq4']['troubled']}}"></input>
+      </div>
+      <p>
+        Wenn Sie Ihre beste, je erreichte Arbeitsfähigkeit mit 10 Punkten bewerten: Wie viele Punkte würden Sie dann für Ihre derzeitige Arbeitsfähigkeit geben (0 bedeutet, dass Sie derzeit arbeitsunfähig sind)?
+      </p>
+      <div class="form-group">
+        <label for="wai">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
+        <input type="number" name="wai" value="{{$EntryInfo['survey']['wai']}}"></input>
       </div>
       {{--
         Für den Patienten werden die Befindensfragen (survey, $EntryInfo['survey']) nur angezeigt, wenn der Eintrag weder überfällig noch abgeschickt ist ($EntryInfo['status'] < 'E040'). Sie sind dann editierbar, d.h. sie können beantwortet werden.
         Für Therapeuten werden die Befindensfragen (survey) mit Antworten immer angezeigt. Sie sind nicht editierbar.
       --}}
 
+      <h3>Kommentar des Therapeuten</h3>
       <div class="form-group">
         <label for="comment">Kommentar des Therapeuten</label>
         <textarea class="form-control" id="comment" placeholder="">{{$EntryInfo['comment']}}</textarea>
@@ -145,12 +171,17 @@
         Für Therapeuten ist der Kommentar nur editierbar wenn der Eintrag vom Patienten abgeschickt aber der Kommentar vom Therapeuten noch nicht abgeschickt ist. ($EntryInfo['status'] == 'E040')
       --}}
 
+      <h3>Bewertung des Therapeutenkommentars</h3>
       @if ($Role == 'patient')
         <div class="form-group">
-          <label for="rating">Bewertung des Therapeutenkommentars</label>
-          <textarea class="form-control" id="rating" placeholder="">{{$EntryInfo['comment_reply']}}</textarea>
-          {{-- <p class="help-block">Help text here.</p> --}}
+          <label for="satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
+          <input type="number" name="satisfied" value="{{$EntryInfo['comment_reply']['satisfied']}}"></input>
         </div>
+        <div class="form-group">
+          <label for="satisfied">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
+          <input type="number" name="satisfied" value="{{$EntryInfo['comment_reply']['helpful']}}"></input>
+        </div>
+
         {{--
           Der Patient kann über die Kommentar-Rückmeldung (comment_reply, $EntryInfo['comment_reply']) einmalig das Niveau seiner Zufriedenheit mit dem Kommentar eingeben. Das Feld wird für den Patienten immer dann angezeigt, wenn die Aufgabe kommentiert wurde. In diesem Fall kann der Patient die Rückmeldung eingeben und abschicken. ($EntryInfo['status'] == 'E050') Ansonsten wird das Feld nicht angezeigt. Wird das Feld angezeigt, so soll der Patient nachdrücklich aufgefordert werden es auszufüllen.
           Der Therapeut sieht die Kommentar-Rückmeldung niemals.
@@ -161,18 +192,19 @@
         <button type="submit" class="btn" name="entryButton" value="saveDirty">Zwischenspeichern</button>
         <button type="submit" class="btn btn-warning" name="entryButton" value="save">Abschicken</button>
       </p>
-    </form>
+      </form>
 
 
-    <p>
+      <p>
       <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn btn-warning">Älter</a>
       <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn btn-warning">Neuer</a>
       <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn btn-warning">Zur aktuellen Aufgabe</a>
-    </p>
-    <p>
+      </p>
+      <p>
       <a href="/Home" class="btn btn-warning">Zur Übersicht</a>
-    </p>
+      </p>
 
 
   </div>
+
 @endsection

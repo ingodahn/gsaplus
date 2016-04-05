@@ -69,9 +69,12 @@ class PatientListController extends Controller
 
 		$days = new Days;
 		$days->set_days($Days);
-		$Days1 = $days->get_days();
+		$Slots = $days->get_days();
 
-		return dd($Days1);
+		$params['Slots'] = $Slots;
+		Alert::info('Die Zahl der freien Slots wurde aktualisiert')->flash();
+
+		return view('therapist.patient_list')->with($params);
 
 	}
 
@@ -122,7 +125,7 @@ class PatientListController extends Controller
 		$patients = Patient::all();
 
 		foreach ($patients as $patient) {
-			$infos->push($patient->to_info()[$patient->class_name()]);
+			$infos->push($patient->to_info());
 		}
 
 		return Datatables::of($infos)

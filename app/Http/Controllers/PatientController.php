@@ -68,7 +68,7 @@ class PatientController extends Controller
 
 		$patient = Patient::whereName($name)->firstOrFail();
 
-		$patient_info = $patient->to_info()['Patient'];
+		$patient_info = $patient->to_info();
 
 		switch ($user_role) {
 			case UserRole::PATIENT:

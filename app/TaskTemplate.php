@@ -6,15 +6,24 @@ use App\Models\InfoModel;
 
 use Jenssegers\Date\Date;
 
-class AssignmentTemplate extends InfoModel
+class TaskTemplate extends InfoModel
 {
 
+    public $relation_methods = [
+        'tasks'
+    ];
+
+    protected function info_relation_map() {
+        return ['tasks' => 'collection_info'];
+    }
+
     /**
-     * Get all assignments which are based on this template.
+     * Relationship to all derived tasks (which are based on this template).
+     * Please use $task_template->tasks to access the collection.
      */
-    public function assignments()
+    public function tasks()
     {
-        return $this->hasMany('App\Assignment');
+        return $this->hasMany('App\Task');
     }
 
     /*
