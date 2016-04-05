@@ -2,6 +2,8 @@
 
 namespace App\Http\ViewComposers;
 
+use App\Models\UserRole;
+
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Auth\Guard;
 
@@ -48,15 +50,15 @@ class UserInfoComposer
     }
 
     private function isTherapist() {
-        return ($this->user->type === 'therapist');
+        return ($this->user->type === UserRole::THERAPIST);
     }
 
     private function isPatient() {
-        return ($this->user->type === 'patient');
+        return ($this->user->type === UserRole::PATIENT);
     }
 
     private function isAdmin() {
-        return ($this->user->type === 'admin');
+        return ($this->user->type === UserRole::ADMIN);
     }
 
 }

@@ -46,7 +46,7 @@ class PasswordController extends Controller
      */
     public function postEmail(Request $request)
     {
-        $p = Patient::where('email', $request->input('email'))->first();
+        $p = Patient::whereEmail($request->input('email'))->first();
 
         if ($p !== null && !$p->is_random) {
             return $this->sendResetLinkEmail($request);

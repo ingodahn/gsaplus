@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
@@ -66,10 +67,14 @@ class PatientListController extends Controller
 			'Donnerstag' => $request->input('Do_slots')
 		];
 
-		$days=new Days;
+		$days = new Days;
 		$days->set_days($Days);
-		$Days1=$days->get_days();
-		return dd($Days1);
+		$Slots = $days->get_days();
+
+		$params['Slots'] = $Slots;
+		Alert::info('Die Zahl der freien Slots wurde aktualisiert')->flash();
+
+		return view('therapist.patient_list')->with($params);
 
 	}
 
@@ -86,15 +91,14 @@ class PatientListController extends Controller
 	 */
 	public function show(Request $request) {
 		//Zeige Seite patient_list mit
-		$days=new Days;
-		$Slots = $days->get_days();
 		// Slots von Days,
 		// Patientenliste von datatable
+		$days = new Days;
+		$Slots = $days->get_days();
 
-		$params['Slots']=$Slots;
+		$params['Slots'] = $Slots;
+
 		return view('therapist.patient_list')->with($params);
-
-
 	}
 
 	/**
@@ -117,38 +121,43 @@ class PatientListController extends Controller
 	{
 		$days_map = Helper::generate_day_number_map();
 
-		return Datatables::of(Patient::select('*'))
-			->removeColumn('email')
-			->addColumn('patient_status', function ($patient) {
-				return PatientStatus::$STATUS_INFO[$patient->status()];
-			})
-			->addColumn('status_of_next_assignment', function($patient){
-				return AssignmentStatus::$STATUS_INFO[$patient->status_of_next_assignment()];
-			})
-			->edit_column('assignment_day', function($row) use ($days_map) {
-				return $days_map[$row->assignment_day];
-			})
-			->addColumn('patient_week', function($patient) {
-				return $patient->patient_week() === -1 ? "-" : $patient->patient_week();
-			})
-			->addColumn('last_activity', function($patient) {
-				return $patient->last_activity != null ? $patient->last_activity->format('d.m.Y') : "";
-			})
-			->addColumn('therapist', function($patient) {
-				return $patient->therapist !== null ? $patient->therapist->name : "-";
-			})
-			-> addColumn('selection', function($row){
-				$name=$row->name;
-				return '<input type="checkbox" name="list_of_names[]" value="'.$name.'"></input>';
-			})
-			->addColumn('overdue', function($patient) {
-				return round($patient->overdue() * 100, 0)."%";
-			})
-			->edit_column('name', function($patient) {
-				$name = $patient->name;
-				return '<a href="/Diary/'.$name.'">'.$name.'</a>';
-			})
-			->make(true);
+		$infos = new Collection;
+		$patients = Patient::all();
+
+		foreach ($patients as $patient) {
+			$infos->push($patient->to_info());
+		}
+
+		return Datatables::of($infos)
+				-> addColumn('selection', function($patient_info){
+					return '<input type="checkbox" name="list_of_names[]" value="'.$patient_info['name'].'"></input>';
+				})
+				->editColumn('overdue', function($patient_info) {
+					return round($patient_info['overdue'] * 100, 0)."%";
+				})
+				->edit_column('name', function($patient_info) {
+					return '<a href="/Diary/'.$patient_info['name'].'">'.$patient_info['name'].'</a>';
+				})
+				->editColumn('status', function ($patient_info) {
+					return $patient_info['status'].': '.PatientStatus::$STATUS_INFO[$patient_info['status']];
+				})
+				->editColumn('statusOfNextAssignment', function($patient_info){
+					return $patient_info['statusOfNextAssignment'].': '
+							.AssignmentStatus::$STATUS_INFO[$patient_info['statusOfNextAssignment']];
+				})
+				->editColumn('patientWeek', function($patient_info) {
+					return $patient_info['patientWeek'] === -1 ? "-" : $patient_info['patientWeek'];
+				})
+				->edit_column('assignmentDay', function($patient_info) use ($days_map) {
+					return $days_map[$patient_info['assignmentDay']];
+				})
+				->removeColumn('id')
+				->removeColumn('createdAt')
+				->removeColumn('updatedAt')
+				->removeColumn('isRandom')
+				->removeColumn('personalInformation')
+				->removeColumn('email')
+				->make(true);
 	}
 
 }

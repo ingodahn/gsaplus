@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssignmentTemplatesTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,14 @@ class CreateAssignmentTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignment_templates', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->dateTime('date');
             $table->string('text');
-            $table->string('title');
+
+            $table->integer('assignment_id')->unsigned();
+            $table->integer('therapist_id')->unsigned();
 
             $table->nullableTimestamps();
         });
@@ -29,6 +32,6 @@ class CreateAssignmentTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('assignment_templates');
+        Schema::drop('comments');
     }
 }

@@ -41,6 +41,8 @@ task :js do
   `cp bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js public/js/`
 
   `cp bower_components/sweetalert/dist/sweetalert.min.js public/js/`
+
+  `cp bower_components/zxcvbn/dist/zxcvbn.js public/js/`
 end
 
 desc "Publish all font assets"
@@ -88,7 +90,7 @@ end
 
 desc "apply major db changes - all data will be removed - run if tables were added or removed"
 task :db_reset do
-  sh "mysql scotchbox < ./database/sql/drop_all_tables.sql"
+  sh "mysql -u root -p < ./database/sql/reset_database.sql"
   sh "composer dump-autoload"
   sh "php artisan migrate"
 end

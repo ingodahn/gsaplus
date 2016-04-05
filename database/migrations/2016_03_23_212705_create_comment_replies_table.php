@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResponsesTable extends Migration
+class CreateCommentRepliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,13 @@ class CreateResponsesTable extends Migration
      */
     public function up()
     {
-        Schema::create('responses', function (Blueprint $table) {
+        Schema::create('comment_replies', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->dateTime('date');
-            $table->string('text');
-            $table->tinyInteger('rating');
+            $table->tinyInteger('helpful')->unsigned();
+            $table->tinyInteger('satisfied')->unsigned();
 
-            $table->integer('assignment_id')->unsigned();
-            $table->integer('therapist_id')->unsigned();
+            $table->integer('comment_id')->unsigned();
 
             $table->nullableTimestamps();
         });
@@ -33,6 +31,6 @@ class CreateResponsesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('responses');
+        Schema::drop('comment_replies');
     }
 }

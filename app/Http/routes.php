@@ -38,6 +38,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/privacy', function() {
 		return view('system.privacy');
 	});
+	Route::get('/about', function() {
+		return view('system.about');
+	});
 
 	Route::get('/ResetPassword', 'GateController@reset_password');
 	Route::post('/MailForPassword', 'GateController@mail_for_password');
@@ -72,28 +75,33 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('reset', 'Auth\PasswordController@postReset');
 	});
 
-	// Experimental for M2
+});
+
+Route::group(['middleware' => ['web', 'auth']], function () {
+	Route::get('/Home', 'AuxController@home');
+
 	Route::get('/Diary/{name?}','DiaryController@show');
 	Route::get('/Profile/{name?}','PatientController@profile');
 	Route::post('/SendMail','ContactController@message_to_patients');
 	Route::post('/MassAction/mail','ContactController@mail_editor');
+	Route::post('/SetSlots', 'PatientListController@set_slots');
 	// Route::post('/SaveProfile','PatientController@save_profile');
 
 	// patient profile: routes for post requests
 	Route::group(['prefix' => '/patient/{patient}'], function () {
 		Route::post('therapist', 'PatientController@save_therapist');
 		Route::post('day_of_week', 'PatientController@save_day_of_week');
-		Route::post('dateFromClinics', 'PatientController@save_date_from_clinics');
+		Route::post('date_from_clinics', 'PatientController@save_date_from_clinics');
 		Route::post('password', 'PatientController@save_password');
-		Route::post('personalInformation', 'PatientController@save_personal_information');
-		Route::get('cancelIntervention', 'PatientController@cancel_intervention');
+		Route::post('personal_information', 'PatientController@save_personal_information');
+		Route::get('cancel_intervention', 'PatientController@cancel_intervention');
 		Route::post('notes', 'PatientController@save_notes_of_therapist');
 	});
 
-});
+	Route::get('/patient_list', 'PatientListController@show');
+	Route::any('/patient_list/data', 'PatientListController@anyData')->name('datatables.data');
 
-Route::group(['middleware' => ['web', 'auth']], function () {
-	Route::get('/Home', 'AuxController@home');
+	// Experimental for M3
+	Route::get('/Assignment/{patient}/{week}','DiaryController@entry');
+	Route::post('/SaveAssignment/{patient}/{week}','DiaryController@save_entry');
 });
-
-Route::any('patient_list/data', 'PatientListController@anyData')->name('datatables.data');

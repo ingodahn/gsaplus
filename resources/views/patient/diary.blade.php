@@ -6,16 +6,37 @@
 
     <h2>Tagebuch</h2>
     <p>
-      Dies ist das Tagebuch von <em>{{ $name }}</em>. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
-    </p>
-	
-	<p>
-      <a href="/Profile/{{ $name }}" class="btn btn-warning">Profil</a>
+      Dies ist das Tagebuch von <em>{{ $Diary['name'] }}</em>. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
     </p>
 
+    <p>Es ist Woche <strong>{{$Diary['patient_week']}}</strong> von 12.</p>
+
     <p>
-      <a href="/Logout" class="btn btn-warning">Logout</a>
+      <a href="/Profile/{{$Diary['name']}}">Profil von {{$Diary['name']}}.</a>
     </p>
+
+    <table class="table table-striped table-bordered table-condensed">
+      <thead>
+        <th>Woche</th>
+        <th>Aufgabe</th>
+        <th>Status</th>
+        <th>Aktionen</th>
+      </thead>
+      <tbody>
+      @foreach($Diary['entries'] as $i => $entry)
+        <tr>
+          <td>{{$i}}</td>
+          <td>{{$entry['problem']}}</td>
+          <td>
+            <code>{{$entry['entry_status']}}</code>
+          </td>
+          <td>
+            <a href="/Assignment/{{$Diary['name']}}/{{$i}}">Ansehen</a>
+          </td>
+        </tr>
+      @endforeach
+      </tbody>
+    </table>
 
   </div>
 @endsection

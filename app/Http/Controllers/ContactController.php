@@ -49,9 +49,9 @@ class ContactController extends Controller
 	{
 		// return dd($request);
 		$list_of_patients = $request->input('list_of_names');
-		$listS=implode(', ',$list_of_patients);
+		$listS = implode(', ', $list_of_patients);
 		// return dd($list_of_patients);
-		return view('system.mail_editor')->with('ListOfPatients',$listS);
+		return view('system.mail_editor')->with('ListOfPatients', $listS);
 	}
 
 	/**
@@ -112,17 +112,17 @@ class ContactController extends Controller
 				->withInput();
 		}
 
-		$eMail=$request->input('eMail');
-		$subject=$request->input('subject');
-		$bodyMessage=$request->input('message');
+		$eMail = $request->input('eMail');
+		$subject = $request->input('subject');
+		$bodyMessage = $request->input('message');
 
 		$eMailTeam = config('mail.team.address');
-		// $nameTeam = config('mail.team.name');
+		$nameTeam = config('mail.team.name');
 
-		Mail::raw($bodyMessage, function ($message) use ($eMail, $eMailTeam, $subject) {
+		Mail::raw($bodyMessage, function ($message) use ($eMail, $eMailTeam, $nameTeam, $subject) {
 				// no from part needed - the sites name and email address can be found
 				// under 'mail.from' in file config/mail.php
-				$message->from($eMail)->to($eMailTeam, 'Team GSA Online Plus')->subject($subject);
+				$message->from($eMail)->to($eMailTeam, $nameTeam)->subject($subject);
 			});
 
 		// uncomment to send confirmation
