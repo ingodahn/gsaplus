@@ -42,20 +42,20 @@
             <div class="panel-body">
 
               <div class="form-group">
-                <label for="situation0-description">Beschreiben Sie die Situation</label>
-                <input type="text" class="form-control" id="situation0-description" value="{{$EntryInfo['answer'][0]['description']}}">
+                <label for="situation0_description">Beschreiben Sie die Situation</label>
+                <input type="text" class="form-control" name="situation0_description" value="{{$EntryInfo['answer'][0]['description']}}">
               </div>
               <div class="form-group">
-                <label for="situation0-expectations">Wunsch ans Gegenüber</label>
-                <input type="text" class="form-control" id="situation0-expectations" value="{{$EntryInfo['answer'][0]['expectation']}}">
+                <label for="situation0_expectations">Wunsch ans Gegenüber</label>
+                <input type="text" class="form-control" id="situation0_expectations" name="situation0_expectations" value="{{$EntryInfo['answer'][0]['expectation']}}">
               </div>
               <div class="form-group">
-                <label for="situation0-their-reaction">Reaktion der anderen</label>
-                <input type="text" class="form-control" id="situation0-their-reaction" value="{{$EntryInfo['answer'][0]['their_reaction']}}">
+                <label for="situation0_their_reaction">Reaktion der anderen</label>
+                <input type="text" class="form-control" id="situation0_their_reaction" name="situation0_their_reaction" value="{{$EntryInfo['answer'][0]['their_reaction']}}">
               </div>
               <div class="form-group">
-                <label for="situation0-my-reaction">Ihre Reaktion</label>
-                <input type="text" class="form-control" id="situation0-my-reaction" value="{{$EntryInfo['answer'][0]['my_reaction']}}">
+                <label for="situation0_my_reaction">Ihre Reaktion</label>
+                <input type="text" class="form-control" id="situation0_my_reaction" name="situation0_my_reaction" value="{{$EntryInfo['answer'][0]['my_reaction']}}">
               </div>
 
             </div>
@@ -73,20 +73,20 @@
             <div class="panel-body">
 
               <div class="form-group">
-                <label for="situation1-description">Beschreiben Sie die Situation</label>
-                <input type="text" class="form-control" id="situation1-description" value="{{$EntryInfo['answer'][1]['description']}}">
+                <label for="situation1_description">Beschreiben Sie die Situation</label>
+                <input type="text" class="form-control" id="situation1_description" name="situation1_description" value="{{$EntryInfo['answer'][1]['description']}}">
               </div>
               <div class="form-group">
-                <label for="situation1-expectations">Wunsch ans Gegenüber</label>
-                <input type="text" class="form-control" id="situation1-expectations" value="{{$EntryInfo['answer'][1]['expectation']}}">
+                <label for="situation1_expectations">Wunsch ans Gegenüber</label>
+                <input type="text" class="form-control" id="situation1_expectations" name="situation1_expectations" value="{{$EntryInfo['answer'][1]['expectation']}}">
               </div>
               <div class="form-group">
-                <label for="situation1-their-reaction">Reaktion der anderen</label>
-                <input type="text" class="form-control" id="situation1-their-reaction" value="{{$EntryInfo['answer'][1]['their_reaction']}}">
+                <label for="situation1_their_reaction">Reaktion der anderen</label>
+                <input type="text" class="form-control" id="situation1_their_reaction" name="situation1_their_reaction" value="{{$EntryInfo['answer'][1]['their_reaction']}}">
               </div>
               <div class="form-group">
-                <label for="situation1-my-reaction">Ihre Reaktion</label>
-                <input type="text" class="form-control" id="situation1-my-reaction" value="{{$EntryInfo['answer'][1]['my_reaction']}}">
+                <label for="situation1_my_reaction">Ihre Reaktion</label>
+                <input type="text" class="form-control" id="situation1_my_reaction" name="situation1_my_reaction" value="{{$EntryInfo['answer'][1]['my_reaction']}}">
               </div>
 
             </div>
@@ -104,20 +104,20 @@
             <div class="panel-body">
 
               <div class="form-group">
-                <label for="situation2-description">Beschreiben Sie die Situation</label>
-                <input type="text" class="form-control" id="situation2-description" value="{{$EntryInfo['answer'][2]['description']}}">
+                <label for="situation2_description">Beschreiben Sie die Situation</label>
+                <input type="text" class="form-control" id="situation2_description" name="situation2_description" value="{{$EntryInfo['answer'][2]['description']}}">
               </div>
               <div class="form-group">
-                <label for="situation2-expectations">Wunsch ans Gegenüber</label>
-                <input type="text" class="form-control" id="situation2-expectations" value="{{$EntryInfo['answer'][2]['expectation']}}">
+                <label for="situation2_expectations">Wunsch ans Gegenüber</label>
+                <input type="text" class="form-control" id="situation2_expectations" name="situation2_expectations" value="{{$EntryInfo['answer'][2]['expectation']}}">
               </div>
               <div class="form-group">
-                <label for="situation2-their-reaction">Reaktion der anderen</label>
-                <input type="text" class="form-control" id="situation2-their-reaction" value="{{$EntryInfo['answer'][2]['their_reaction']}}">
+                <label for="situation2_their_reaction">Reaktion der anderen</label>
+                <input type="text" class="form-control" id="situation2_their_reaction" name="situation2_their_reaction" value="{{$EntryInfo['answer'][2]['their_reaction']}}">
               </div>
               <div class="form-group">
-                <label for="situation2-my-reaction">Ihre Reaktion</label>
-                <input type="text" class="form-control" id="situation2-my-reaction" value="{{$EntryInfo['answer'][2]['my_reaction']}}">
+                <label for="situation2_my_reaction">Ihre Reaktion</label>
+                <input type="text" class="form-control" id="situation2_my_reaction" name="situation2_my_reaction" value="{{$EntryInfo['answer'][2]['my_reaction']}}">
               </div>
 
             </div>
@@ -133,26 +133,26 @@
       </p>
       <div class="form-group">
         <label for="phq4_interested">Wenig Interesse oder Freude an Ihren Tätigkeiten:</label>
-        <input type="number" name="phq4_interested" value="{{$EntryInfo['survey']['phq4']['interested']}}"></input>
+        <input type="number" id="survey_phq4_interested" name="phq4_interested" value="{{$EntryInfo['survey']['phq4']['interested']}}"></input>
       </div>
       <div class="form-group">
         <label for="phq4_depressed">Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit:</label>
-        <input type="number" name="phq4_depressed" value="{{$EntryInfo['survey']['phq4']['depressed']}}"></input>
+        <input type="number" id="survey_phq4_depressed" name="phq4_depressed" value="{{$EntryInfo['survey']['phq4']['depressed']}}"></input>
       </div>
       <div class="form-group">
         <label for="phq4_interested">Nervosität, Ängstlichkeit oder Anspannung:</label>
-        <input type="number" name="phq4_nervous" value="{{$EntryInfo['survey']['phq4']['nervous']}}"></input>
+        <input type="number" id="survey_phq4_nervous" name="phq4_nervous" value="{{$EntryInfo['survey']['phq4']['nervous']}}"></input>
       </div>
       <div class="form-group">
         <label for="phq4_interested">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
-        <input type="number" name="phq4_troubled" value="{{$EntryInfo['survey']['phq4']['troubled']}}"></input>
+        <input type="number" id="survey_phq4_troubled" name="phq4_troubled" value="{{$EntryInfo['survey']['phq4']['troubled']}}"></input>
       </div>
       <p>
         Wenn Sie Ihre beste, je erreichte Arbeitsfähigkeit mit 10 Punkten bewerten: Wie viele Punkte würden Sie dann für Ihre derzeitige Arbeitsfähigkeit geben (0 bedeutet, dass Sie derzeit arbeitsunfähig sind)?
       </p>
       <div class="form-group">
-        <label for="wai">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
-        <input type="number" name="wai" value="{{$EntryInfo['survey']['wai']}}"></input>
+        <label for="survey_wai">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
+        <input type="number" id="survey_wai" name="survey_wai" value="{{$EntryInfo['survey']['wai']}}"></input>
       </div>
       {{--
         Für den Patienten werden die Befindensfragen (survey, $EntryInfo['survey']) nur angezeigt, wenn der Eintrag weder überfällig noch abgeschickt ist ($EntryInfo['status'] < 'E040'). Sie sind dann editierbar, d.h. sie können beantwortet werden.
@@ -174,12 +174,12 @@
       <h3>Bewertung des Therapeutenkommentars</h3>
       @if ($Role == 'patient')
         <div class="form-group">
-          <label for="satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
-          <input type="number" name="satisfied" value="{{$EntryInfo['comment_reply']['satisfied']}}"></input>
+          <label for="comment_reply_satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
+          <input type="number" name="comment_reply_satisfied" id="" value="{{$EntryInfo['comment_reply']['satisfied']}}"></input>
         </div>
         <div class="form-group">
-          <label for="satisfied">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
-          <input type="number" name="satisfied" value="{{$EntryInfo['comment_reply']['helpful']}}"></input>
+          <label for="comment_reply_helpful">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
+          <input type="number" name="comment_reply_helpful" id="comment_reply_helpful" value="{{$EntryInfo['comment_reply']['helpful']}}"></input>
         </div>
 
         {{--
