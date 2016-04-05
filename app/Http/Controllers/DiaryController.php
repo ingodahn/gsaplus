@@ -68,39 +68,31 @@ class DiaryController extends Controller
     {
         $patient_info = $patient->to_info();
 
-        /* Begin Löschen wenn assignment_for_week funktioniert */
-        // Answer for week 1
-        $situation = [];
-        $situation['description'] = "Chrakteristisch für die Situation war...";
-        $situation['expectation'] = "Meine Erwartungen ...";
-        $situation['their_reaction'] = "Die Reaktionen der anderen waren ...";
-        $situation['my_reaction'] = "Meine Reaktion ... ";
+        $assignment=$patient->assignment_for_week($week);
 
-        $situations = [$situation, $situation, $situation];
+        $assignment_info=$assignment->to_info([], null, ['situations','survey','comment','commentReply']);
+        $survey=$assignment->survey;
 
+        $survey_info = $survey->to_info([], null, ['phq4','wai']);
 
         $entry_info = [];
-        $entry_info['week'] = $week;
-        $entry_info['status'] = "Abgeschickt";
+        $entry_info['week'] = $assignment_info['week'];
+        $entry_info['status'] = $assignment_info['status']; // Jetzt als Code, besser wäre Klartext
         $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
-        $entry_info['answer'] = $situations;
-        $entry_info['survey']['phq4']['interested'] = 1;
-        $entry_info['survey']['phq4']['depressed'] = 2;
-        $entry_info['survey']['phq4']['nervous'] = 3;
-        $entry_info['survey']['phq4']['troubled'] = 0;
-        $entry_info['survey']['wai'] = 5;
-        $entry_info['comment'] = "Hier steht der Kommentar des Therapeuten";
+        $entry_info['answer'] = $assignment_info['situations'];
+        for ($i=0;$i<=2;$i++){ // This is easier than fetching each situation, setting the to_camel_case attribute and re-generating the info
+            $entry_info['answer'][$i]['my_reaction']=$entry_info['answer'][$i]['myReaction'];
+            $entry_info['answer'][$i]['their_reaction']=$entry_info['answer'][$i]['theirReaction'];
+        }
+        $entry_info['survey'] = $survey_info;
+        $entry_info['survey']['wai']=$survey_info['wai']['index'];
 
+        $entry_info['comment'] = $assignment_info['comment']['text'];
+
+        /* ToDo:  comment_reply mit Werten aus Datenbank aktualisieren */
         $entry_info['comment_reply']['helpful'] = 1;
         $entry_info['comment_reply']['satisfied'] = 2;
 
-
-        /* End Löschen wenn assignment_for_week funktioniert */
-
-        /* Einkommentieren wenn assignment_for_week funktioniert
-        $assignment=Patient::whereName($patient_info['name'])->assignment_for_week($week);
-        $entry_info=$assignment->to_info()['Assignment'];
-        */
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
@@ -257,12 +249,37 @@ class DiaryController extends Controller
         }
 
         $Diary = [];
-        $Diary['name'] = $name;
-        $Diary['patient_week'] = 1;
+
+        $patient=Patient::whereName($name)->first();
+        // $patient_info=$patient->to_info();
+        $info=$patient->to_info([], null, ['assignments']);
+        // return dd($info);
+        $Diary['name'] = $info['name'];
+        $Diary['patient_week'] = $info['patientWeek'];
+        $assignment_info=$info['assignments'];
         $entries = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $entries[$i]['entry_status'] = 'E010';
-            $entries[$i]['problem'] = 'Schreibaufgabe';
+        $entries[1]['problem']="Beschreiben Sie typische Situationen...";
+        $entries[1]['entry_status'] = $assignment_info[0]['status'];
+        $assignment_count=count($assignment_info);
+
+        for ($i = 2; $i <= $assignment_count; $i++) {
+            $i1=$i-1;
+            $entries[$i]['entry_status'] = $assignment_info[$i1]['status'];
+            $string = $assignment_info[$i1]['problem'];
+            if (strlen($string) > 30)
+            {
+                $string = wordwrap($string, 30);
+                $string = substr($string, 0, strpos($string, "\n"));
+            }
+            $entries[$i]['problem'] = $string." ...";
+        }
+        if ($assignment_count < 12) { //This should not happen
+            $Diary['xxx']='Hier';
+            for ($j=$assignment_count; $j<=12; $j++) {
+
+                $entries[$j]['problem']='';
+                $entries[$j]['entry_status']='E010';
+            }
         }
         $Diary['entries'] = $entries;
         return view('patient.diary')->with('Diary', $Diary);
