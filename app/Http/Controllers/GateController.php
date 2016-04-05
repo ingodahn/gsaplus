@@ -218,7 +218,7 @@ class GateController extends Controller
 
 			$days = new Days;
 			$day_of_week=$days->get_available_days();
-			Alert::error($message, 'Fehler bei Registrierung');
+			Alert::error($message, 'Fehler bei Registrierung')->persistent();
 
 			//Zeige Seite PatientenDaten
 			return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
@@ -244,7 +244,7 @@ class GateController extends Controller
 
 			Auth::login($patient);
 
-			Alert::success('Sie haben sich erfolgreich registriert.');
+			Alert::success('Sie haben sich erfolgreich registriert.')->persistent();
 			return Redirect::to('/Diary');
 
 			//return view('patient.diary')->with('name',$name);
