@@ -209,13 +209,40 @@
 
       <h3>Bewertung des Therapeutenkommentars</h3>
       @if ($Role == 'patient')
-        <div class="form-group">
-          <label for="comment_reply_satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
-          <input type="number" name="comment_reply_satisfied" id="" value="{{$EntryInfo['comment_reply']['satisfied']}}"></input>
-        </div>
-        <div class="form-group">
-          <label for="comment_reply_helpful">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
-          <input type="number" name="comment_reply_helpful" id="comment_reply_helpful" value="{{$EntryInfo['comment_reply']['helpful']}}"></input>
+        <div class="container-fluid">
+
+          <div class="form-group">
+            <?php $checked = $EntryInfo['comment_reply']['satisfied']; ?>
+            <div class="row">
+              <div class="col-md-7">
+                <label for="comment_reply_satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
+              </div>
+              @for($j = 0; $j < 4; $j++)
+                <div class="col-md-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comment_reply_satisfied" id="comment_reply_satisfied" value="{{$j}}" {{$checked == $j ? "checked" : ""}}> {{$j}}
+                  </label>
+                </div>
+              @endfor
+            </div>
+          </div>
+
+          <div class="form-group">
+            <?php $checked = $EntryInfo['comment_reply']['helpful']; ?>
+            <div class="row">
+              <div class="col-md-7">
+                <label for="comment_reply_helpful">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
+              </div>
+              @for($j = 0; $j < 4; $j++)
+                <div class="col-md-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comment_reply_helpful" id="comment_reply_helpful" value="{{$j}}" {{$checked == $j ? "checked" : ""}}> {{$j}}
+                  </label>
+                </div>
+              @endfor
+            </div>
+          </div>
+
         </div>
 
         {{--
