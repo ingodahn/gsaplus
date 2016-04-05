@@ -128,32 +128,147 @@
       <hr>
 
       <h3>Fragen zum Befinden</h3>
+
       <p>
-        Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt? (0...3)
+        Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt?
       </p>
-      <div class="form-group">
-        <label for="phq4_interested">Wenig Interesse oder Freude an Ihren Tätigkeiten:</label>
-        <input type="number" id="survey_phq4_interested" name="phq4_interested" value="{{$EntryInfo['survey']['phq4']['interested']}}"></input>
+
+      <div class="container-fluid">
+        <div class="form-group">
+          <?php $checked = $EntryInfo['survey']['phq4']['interested']; ?>
+          <div class="row">
+            <div class="col-md-7">
+              <label for="phq4_interested">Wenig Interesse oder Freude an Ihren Tätigkeiten</label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_interested" value="0" {{$checked == 0 ? "checked" : ""}}>0
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_interested" value="1" {{$checked == 1 ? "checked" : ""}}> 1
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_interested" value="2" {{$checked == 2 ? "checked" : ""}}> 2
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_interested" value="3" {{$checked == 3 ? "checked" : ""}}> 3
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <?php $checked = $EntryInfo['survey']['phq4']['depressed']; ?>
+          <div class="row">
+            <div class="col-md-7">
+              <label for="phq4_depressed">Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit</label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_depressed" value="0" {{$checked == 0 ? "checked" : ""}}>0
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_depressed" value="1" {{$checked == 1 ? "checked" : ""}}> 1
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_depressed" value="2" {{$checked == 2 ? "checked" : ""}}> 2
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_depressed" value="3" {{$checked == 3 ? "checked" : ""}}> 3
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <?php $checked = $EntryInfo['survey']['phq4']['nervous']; ?>
+          <div class="row">
+            <div class="col-md-7">
+              <label for="phq4_depressed">Nervosität, Ängstlichkeit oder Anspannung</label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_nervous" value="0" {{$checked == 0 ? "checked" : ""}}>0
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_nervous" value="1" {{$checked == 1 ? "checked" : ""}}> 1
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_nervous" value="2" {{$checked == 2 ? "checked" : ""}}> 2
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_nervous" value="3" {{$checked == 3 ? "checked" : ""}}> 3
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <?php $checked = $EntryInfo['survey']['phq4']['troubled']; ?>
+          <div class="row">
+            <div class="col-md-7">
+              <label for="phq4_troubled">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren</label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_troubled" value="0" {{$checked == 0 ? "checked" : ""}}>0
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_troubled" value="1" {{$checked == 1 ? "checked" : ""}}> 1
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_troubled" value="2" {{$checked == 2 ? "checked" : ""}}> 2
+              </label>
+            </div>
+            <div class="col-md-1">
+              <label class="radio-inline">
+                <input type="radio" name="phq4_troubled" value="3" {{$checked == 3 ? "checked" : ""}}> 3
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="phq4_depressed">Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit:</label>
-        <input type="number" id="survey_phq4_depressed" name="phq4_depressed" value="{{$EntryInfo['survey']['phq4']['depressed']}}"></input>
-      </div>
-      <div class="form-group">
-        <label for="phq4_interested">Nervosität, Ängstlichkeit oder Anspannung:</label>
-        <input type="number" id="survey_phq4_nervous" name="phq4_nervous" value="{{$EntryInfo['survey']['phq4']['nervous']}}"></input>
-      </div>
-      <div class="form-group">
-        <label for="phq4_interested">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
-        <input type="number" id="survey_phq4_troubled" name="phq4_troubled" value="{{$EntryInfo['survey']['phq4']['troubled']}}"></input>
-      </div>
+
       <p>
         Wenn Sie Ihre beste, je erreichte Arbeitsfähigkeit mit 10 Punkten bewerten: Wie viele Punkte würden Sie dann für Ihre derzeitige Arbeitsfähigkeit geben (0 bedeutet, dass Sie derzeit arbeitsunfähig sind)?
       </p>
-      <div class="form-group">
-        <label for="survey_wai">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
-        <input type="number" id="survey_wai" name="survey_wai" value="{{$EntryInfo['survey']['wai']}}"></input>
+
+      <div class="container-fluid">
+        <div class="form-group">
+          <div class="row">
+            @for($i=0; $i <= 10; $i++)
+              <div class="col-md-1">
+                <label class="radio-inline">
+                  <input type="radio" name="survey_wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}}> {{$i}}
+                </label>
+              </div>
+            @endfor
+          </div>
+        </div>
       </div>
+
       {{--
         Für den Patienten werden die Befindensfragen (survey, $EntryInfo['survey']) nur angezeigt, wenn der Eintrag weder überfällig noch abgeschickt ist ($EntryInfo['status'] < 'E040'). Sie sind dann editierbar, d.h. sie können beantwortet werden.
         Für Therapeuten werden die Befindensfragen (survey) mit Antworten immer angezeigt. Sie sind nicht editierbar.
