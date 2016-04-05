@@ -134,121 +134,42 @@
       </p>
 
       <div class="container-fluid">
-        <div class="form-group">
-          <?php $checked = $EntryInfo['survey']['phq4']['interested']; ?>
-          <div class="row">
-            <div class="col-md-7">
-              <label for="phq4_interested">Wenig Interesse oder Freude an Ihren Tätigkeiten</label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_interested" value="0" {{$checked == 0 ? "checked" : ""}}>0
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_interested" value="1" {{$checked == 1 ? "checked" : ""}}> 1
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_interested" value="2" {{$checked == 2 ? "checked" : ""}}> 2
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_interested" value="3" {{$checked == 3 ? "checked" : ""}}> 3
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <?php $checked = $EntryInfo['survey']['phq4']['depressed']; ?>
-          <div class="row">
-            <div class="col-md-7">
-              <label for="phq4_depressed">Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit</label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_depressed" value="0" {{$checked == 0 ? "checked" : ""}}>0
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_depressed" value="1" {{$checked == 1 ? "checked" : ""}}> 1
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_depressed" value="2" {{$checked == 2 ? "checked" : ""}}> 2
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_depressed" value="3" {{$checked == 3 ? "checked" : ""}}> 3
-              </label>
+        <?php
+          $labels = [
+            "Wenig Interesse oder Freude an Ihren Tätigkeiten",
+            "Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit",
+            "Nervosität, Ängstlichkeit oder Anspannung",
+            "Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren"
+          ];
+          $names = [
+            "phq4_interested",
+            "phq4_depressed",
+            "phq4_nervous",
+            "phq4_troubled"
+          ];
+          $values = [
+            $EntryInfo['survey']['phq4']['interested'],
+            $EntryInfo['survey']['phq4']['depressed'],
+            $EntryInfo['survey']['phq4']['nervous'],
+            $EntryInfo['survey']['phq4']['troubled']
+          ];
+        ?>
+        @for($i = 0; $i < 4; $i++)
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-7">
+                <label for="{{$names[$i]}}">{{$labels[$i]}}</label>
+              </div>
+              @for($j = 0; $j < 4; $j++)
+                <div class="col-md-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="{{$names[$i]}}" value="{{$j}}" {{$values[$i] == $j ? "checked" : ""}}> {{$j}}
+                  </label>
+                </div>
+              @endfor
             </div>
           </div>
-        </div>
-
-        <div class="form-group">
-          <?php $checked = $EntryInfo['survey']['phq4']['nervous']; ?>
-          <div class="row">
-            <div class="col-md-7">
-              <label for="phq4_depressed">Nervosität, Ängstlichkeit oder Anspannung</label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_nervous" value="0" {{$checked == 0 ? "checked" : ""}}>0
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_nervous" value="1" {{$checked == 1 ? "checked" : ""}}> 1
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_nervous" value="2" {{$checked == 2 ? "checked" : ""}}> 2
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_nervous" value="3" {{$checked == 3 ? "checked" : ""}}> 3
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <?php $checked = $EntryInfo['survey']['phq4']['troubled']; ?>
-          <div class="row">
-            <div class="col-md-7">
-              <label for="phq4_troubled">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren</label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_troubled" value="0" {{$checked == 0 ? "checked" : ""}}>0
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_troubled" value="1" {{$checked == 1 ? "checked" : ""}}> 1
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_troubled" value="2" {{$checked == 2 ? "checked" : ""}}> 2
-              </label>
-            </div>
-            <div class="col-md-1">
-              <label class="radio-inline">
-                <input type="radio" name="phq4_troubled" value="3" {{$checked == 3 ? "checked" : ""}}> 3
-              </label>
-            </div>
-          </div>
-        </div>
+        @endfor
       </div>
 
       <p>
