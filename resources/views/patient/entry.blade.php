@@ -1,11 +1,26 @@
 @extends('layouts.master')
 @section('title', 'Schreibaufgabe')
 
+@section('additional-head')
+  <script type="text/javascript">
+    $(function() {
+      $("#entry_form").on("submit", function() {
+        $('<input>').attr({
+          type: 'hidden',
+          id: 'timestamp',
+          name: 'timestamp',
+          value: Date.now()
+        }).appendTo('#entry_form');
+      });
+    });
+  </script>
+@endsection
+
 @section('content')
   <div class="container">
 
 
-    <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
+    <form id="entry_form" data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
       {{ csrf_field() }}
 
       <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }})</small></h2>
@@ -128,32 +143,68 @@
       <hr>
 
       <h3>Fragen zum Befinden</h3>
+
       <p>
-        Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt? (0...3)
+        Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt?
       </p>
-      <div class="form-group">
-        <label for="phq4_interested">Wenig Interesse oder Freude an Ihren Tätigkeiten:</label>
-        <input type="number" id="survey_phq4_interested" name="phq4_interested" value="{{$EntryInfo['survey']['phq4']['interested']}}"></input>
+
+      <div class="container-fluid">
+        <?php
+          $labels = [
+            "Wenig Interesse oder Freude an Ihren Tätigkeiten",
+            "Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit",
+            "Nervosität, Ängstlichkeit oder Anspannung",
+            "Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren"
+          ];
+          $names = [
+            "phq4_interested",
+            "phq4_depressed",
+            "phq4_nervous",
+            "phq4_troubled"
+          ];
+          $values = [
+            $EntryInfo['survey']['phq4']['interested'],
+            $EntryInfo['survey']['phq4']['depressed'],
+            $EntryInfo['survey']['phq4']['nervous'],
+            $EntryInfo['survey']['phq4']['troubled']
+          ];
+        ?>
+        @for($i = 0; $i < 4; $i++)
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-7">
+                <label for="{{$names[$i]}}">{{$labels[$i]}}</label>
+              </div>
+              @for($j = 0; $j < 4; $j++)
+                <div class="col-md-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="{{$names[$i]}}" value="{{$j}}" {{$values[$i] == $j ? "checked" : ""}}> {{$j}}
+                  </label>
+                </div>
+              @endfor
+            </div>
+          </div>
+        @endfor
       </div>
-      <div class="form-group">
-        <label for="phq4_depressed">Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit:</label>
-        <input type="number" id="survey_phq4_depressed" name="phq4_depressed" value="{{$EntryInfo['survey']['phq4']['depressed']}}"></input>
-      </div>
-      <div class="form-group">
-        <label for="phq4_interested">Nervosität, Ängstlichkeit oder Anspannung:</label>
-        <input type="number" id="survey_phq4_nervous" name="phq4_nervous" value="{{$EntryInfo['survey']['phq4']['nervous']}}"></input>
-      </div>
-      <div class="form-group">
-        <label for="phq4_interested">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
-        <input type="number" id="survey_phq4_troubled" name="phq4_troubled" value="{{$EntryInfo['survey']['phq4']['troubled']}}"></input>
-      </div>
+
       <p>
         Wenn Sie Ihre beste, je erreichte Arbeitsfähigkeit mit 10 Punkten bewerten: Wie viele Punkte würden Sie dann für Ihre derzeitige Arbeitsfähigkeit geben (0 bedeutet, dass Sie derzeit arbeitsunfähig sind)?
       </p>
-      <div class="form-group">
-        <label for="survey_wai">Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren:</label>
-        <input type="number" id="survey_wai" name="survey_wai" value="{{$EntryInfo['survey']['wai']}}"></input>
+
+      <div class="container-fluid">
+        <div class="form-group">
+          <div class="row">
+            @for($i=0; $i <= 10; $i++)
+              <div class="col-md-1">
+                <label class="radio-inline">
+                  <input type="radio" name="survey_wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}}> {{$i}}
+                </label>
+              </div>
+            @endfor
+          </div>
+        </div>
       </div>
+
       {{--
         Für den Patienten werden die Befindensfragen (survey, $EntryInfo['survey']) nur angezeigt, wenn der Eintrag weder überfällig noch abgeschickt ist ($EntryInfo['status'] < 'E040'). Sie sind dann editierbar, d.h. sie können beantwortet werden.
         Für Therapeuten werden die Befindensfragen (survey) mit Antworten immer angezeigt. Sie sind nicht editierbar.
@@ -173,13 +224,40 @@
 
       <h3>Bewertung des Therapeutenkommentars</h3>
       @if ($Role == 'patient')
-        <div class="form-group">
-          <label for="comment_reply_satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
-          <input type="number" name="comment_reply_satisfied" id="" value="{{$EntryInfo['comment_reply']['satisfied']}}"></input>
-        </div>
-        <div class="form-group">
-          <label for="comment_reply_helpful">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
-          <input type="number" name="comment_reply_helpful" id="comment_reply_helpful" value="{{$EntryInfo['comment_reply']['helpful']}}"></input>
+        <div class="container-fluid">
+
+          <div class="form-group">
+            <?php $checked = $EntryInfo['comment_reply']['satisfied']; ?>
+            <div class="row">
+              <div class="col-md-7">
+                <label for="comment_reply_satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
+              </div>
+              @for($j = 0; $j < 4; $j++)
+                <div class="col-md-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comment_reply_satisfied" id="comment_reply_satisfied" value="{{$j}}" {{$checked == $j ? "checked" : ""}}> {{$j}}
+                  </label>
+                </div>
+              @endfor
+            </div>
+          </div>
+
+          <div class="form-group">
+            <?php $checked = $EntryInfo['comment_reply']['helpful']; ?>
+            <div class="row">
+              <div class="col-md-7">
+                <label for="comment_reply_helpful">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
+              </div>
+              @for($j = 0; $j < 4; $j++)
+                <div class="col-md-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="comment_reply_helpful" id="comment_reply_helpful" value="{{$j}}" {{$checked == $j ? "checked" : ""}}> {{$j}}
+                  </label>
+                </div>
+              @endfor
+            </div>
+          </div>
+
         </div>
 
         {{--
