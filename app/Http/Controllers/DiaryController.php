@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignmentStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +81,7 @@ class DiaryController extends Controller
         $entry_info['status'] = $assignment_info['status']; // Jetzt als Code, besser wäre Klartext
         $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
         $entry_info['answer'] = $assignment_info['situations'];
+        return dd($entry_info);
         for ($i=0;$i<=2;$i++){ // This is easier than fetching each situation, setting the to_camel_case attribute and re-generating the info
             $entry_info['answer'][$i]['my_reaction']=$entry_info['answer'][$i]['myReaction'];
             $entry_info['answer'][$i]['their_reaction']=$entry_info['answer'][$i]['theirReaction'];
@@ -259,12 +261,15 @@ class DiaryController extends Controller
         $assignment_info=$info['assignments'];
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
-        $entries[1]['entry_status'] = $assignment_info[0]['status'];
+        $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['status']];
         $assignment_count=count($assignment_info);
-
         for ($i = 2; $i <= $assignment_count; $i++) {
             $i1=$i-1;
-            $entries[$i]['entry_status'] = $assignment_info[$i1]['status'];
+            if ($i < $info['patientWeek']) {
+                $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['status']];
+            } else {
+                $entries[$i]['entry_status']='';
+            }
             $string = $assignment_info[$i1]['problem'];
             if (strlen($string) > 30)
             {
