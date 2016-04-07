@@ -9,13 +9,7 @@ use Jenssegers\Date\Date;
 class TaskTemplate extends InfoModel
 {
 
-    public $relation_methods = [
-        'tasks'
-    ];
-
-    protected function info_relation_map() {
-        return ['tasks' => 'collection_info'];
-    }
+    protected $hidden = ['created_at', 'updated_at', 'is_random'];
 
     /**
      * Relationship to all derived tasks (which are based on this template).

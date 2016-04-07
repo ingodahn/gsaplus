@@ -35,7 +35,8 @@ class AssignmentStatus
         self::THERAPIST_COMMENTED_ASSIGNMENT => "Antwort kommentiert",
         self::PATIENT_RATED_COMMENT => "Kommentar bewertet",
         self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Aufgabe überfällig",
-        self::ASSIGNMENT_IS_NOT_REQUIRED => "Aufgabe nicht erforderlich"
+        self::ASSIGNMENT_IS_NOT_REQUIRED => "Aufgabe nicht erforderlich",
+        self::UNKNOWN => "Unbekannt"
     );
 
     public static function to_patient_status($assignment_status) {

@@ -1,17 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sascha
- * Date: 22.03.2016
- * Time: 18:37
- */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Adds an info method to each eloquent model (all models inherit from this one).
@@ -22,61 +14,19 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class InfoModel extends Model
 {
 
-    // standard date format (used to convert a date to a string)
-    public $info_date_format = 'd.m.Y';
-    // representation of a null value
-    public $info_null_string = '-';
-    // methods to call - the return values key is the method name
-    public $info_methods = [];
-    // output key names in camelCase?
-    public $info_camel_case = true;
-    // used to get the short name of the class
-    public $reflection_class;
-    // an array containing each relations name
-    public $relation_methods = [];
-    // whether to include the main attributes values /
-    // properties of x to many relations (like a collection count)
-    public $info_relation_attributes = true;
+    // dynamic attributes - related accessors are called to obtain the values
+    protected $dynamic_attributes = [];
 
-    /**
-     * Maps relation names to attribute names. The generated info
-     * will contain a value for each relation - an attribute of the
-     * referenced model (if the type is a "One to One" relation).
-     *
-     * A function may be specified if the relation type is "One to Many".
-     * The function will be called on the collection.
-     *
-     * For example:
-     * $patient->to_info() will generate a description of the
-     * assignment.
-     * Returning ['therapist' => 'name'] will add the
-     * therapists name to each info.
-     * Returning ['assignments' => 'collection_info'] will add the number
-     * of assignments to each info (the return value of the method
-     * $this->collection_info).
-     *
-     * This method should be overwritten if such information should
-     * be included. Returning an empty won't add any relationship
-     * specific information.
-     */
-    protected function info_relation_map() {
-        return [];
+    // output key names in camelCase?
+    // class specific -> override the method to set a different date format
+    public static function info_camel_case() {
+        return true;
     }
 
-    /**
-     * Converts a collection (the value of a relation of type "One To Many")
-     * to a single value. Each info contains a key / value pair for such a
-     * relation: ['relation_name' => 'return_value']
-*                (e.g. ['assignments' => 12] - for a concrete patient)
-     *
-     * @param Collection $collection
-     *          referenced elements (values)
-     * @param $relation_name
-     *          the relations name
-     * @return a string
-     */
-    protected function collection_info(Collection $collection, $relation_name) {
-        return $collection->count();
+    // standard date format (used to convert a date to a string)
+    // class specific -> override the method to set a different date format
+    public static function info_date_format() {
+        return 'd.m.Y';
     }
 
     /**
@@ -90,10 +40,14 @@ class InfoModel extends Model
         $info = [];
 
         foreach ($this->getDates() as $date_attribute_name) {
-            $value = $this->getAttribute($date_attribute_name);
-            $name = $this->info_camel_case ? camel_case($date_attribute_name) : $date_attribute_name;
+            if (!in_array($date_attribute_name, $this->hidden)) {
+                $value = $this->getAttribute($date_attribute_name);
+                $name = static::info_camel_case() ? camel_case($date_attribute_name) : $date_attribute_name;
 
-            $info[$name] = $value !== null ? $value->format($this->info_date_format) : $this->info_null_string;
+                if ($value !== null) {
+                    $info[$name] = $value->format(static::info_date_format());
+                }
+            }
         }
 
         return $info;
@@ -112,11 +66,13 @@ class InfoModel extends Model
         $dates = $this->getDates();
 
         foreach (array_keys($this->attributesToArray()) as $attribute_name) {
-            if (!in_array($attribute_name, $dates)) {
+            if (!in_array($attribute_name, $dates) && $attribute_name !== 'id') {
                 $value = $this->getAttribute($attribute_name);
-                $name = $this->info_camel_case ? camel_case($attribute_name) : $attribute_name;
+                $name = static::info_camel_case() ? camel_case($attribute_name) : $attribute_name;
 
-                $info[$name] = $value !== null ? $value : $this->info_null_string;
+                if ($value !== null) {
+                    $info[$name] = $value;
+                }
             }
         }
 
@@ -124,20 +80,17 @@ class InfoModel extends Model
     }
 
     /**
-     * Returns an array containing the results of some method calls. $this->info_methods
-     * lists the methods to call (i.e. their names). The name of the method is used to
-     * store the return value.
+     * Returns an array containing the results of some accessors. $this->dynamic_attributes
+     * lists the accessors to call (i.e. their names).
      *
-     * Format [ <method name> => <return value> ]
-     *
-     * @return an array containing a string representation of each attribute value (excluding dates)
+     * @return an array containing a string representation of each attribute value
      */
-    protected function method_info() {
+    protected function accessor_info() {
         $info = [];
 
-        foreach ($this->info_methods as $method_name) {
-            $name = $this->info_camel_case ? camel_case($method_name) : $method_name;
-            $info[$name] = $this->$method_name();
+        foreach ($this->dynamic_attributes as $dynamic_attribute) {
+            $name = static::info_camel_case() ? camel_case($dynamic_attribute) : $dynamic_attribute;
+            $info[$name] = $this->getAttribute($dynamic_attribute);
         }
 
         return $info;
@@ -163,14 +116,15 @@ class InfoModel extends Model
      *      (adds a string representation for each attributes value)
      * - date_info(...)
      *      (adds a string representation for each date)
-     * - method_info(...)
-     *      (adds the return values of a set of predefined method calls)
+     * - accessor_info(...)
+     *      (adds the return values of a set of predefined accessors)
      *
      * Please refer to the documentation of those methods to determine the
      * included information.
      *
      * Related information can also be included. A list of relationships
-     * can be passed as an argument.
+     * can be passed as an argument. Nested relationships should use
+     * dot notation (e.g. 'assignments.comment').
      *
      * For example:
      * $patient([], null, ['assignments']) will create a new array containing
@@ -181,82 +135,71 @@ class InfoModel extends Model
      *        string $path
      *             a target location (where the generated information should be
      *             inserted) - this has to be different from null
-     *        array $relations
+     *        array $relations_paths
      *             the relationships which should be processed (sub infos
      *             will be created and inserted)
      *
      * @return array an array containing generated information (describing this
      *          instance) - all original entries are retained
      */
-    public function to_info($info = [], $path = null, $relations = []) {
+    protected function to_info($info = [], $path = null, $relations_paths = []) {
         // collect information about this instance
         $collected_info = array_merge($this->attribute_info(),
-                                $this->date_info(),
-                                $this->method_info());
+            $this->date_info(),
+            $this->accessor_info());
 
-        // add the collected information to the target array
+        // add collected information
         $info = array_add($info, $path, $collected_info);
 
         // calculate the path for further insertions (which require a key)
         $add_path = $path === null ? '' : $path .'.';
 
-        $relations_to_proceed = $relations;
+        // process specified relation paths
+        foreach($relations_paths as $relation_path) {
+            $relations_on_path = explode(".", $relation_path, 2);
 
-        if ($this->info_relation_attributes === true) {
-            $relations_to_proceed = array_merge($relations, array_keys($this->info_relation_map()));
-        }
+            $is_recursive = sizeof($relations_on_path) >= 2;
 
-        // process specified relationships
-        foreach($relations_to_proceed as $relation_name) {
-            // get referenced model instance
+            if ($is_recursive) {
+                $relation_name = $relations_on_path[0];
+                $remaining_relation_path = [$relations_on_path[1]];
+            } else {
+                $relation_name = $relation_path;
+                $remaining_relation_path = [];
+            }
+
+            // get the referenced model instance
             $target = $this->getRelationValue($relation_name);
-            // where to place the generated sub info / the key - value pair?
-            $attribute_path = $this->info_camel_case ?
-                                $add_path.camel_case($relation_name) :
-                                $add_path.$relation_name;
-            // maps the relations name to its main attribute (if key exists)
-            $map = $this->info_relation_map();
+            // where to place the generated sub info
+            $attribute_path = static::info_camel_case() ?
+                $add_path.camel_case($relation_name) :
+                $add_path.$relation_name;
 
             if ($target && (get_class($target) === Collection::class)) {
-                if (in_array($relation_name, $relations)) {
-                    // if the relation is of type "One to Many" or "Many to Many"
-                    // -> include a list of sub infos
-                    for ($i = 0; $i < $target->count(); $i++) {
-                        $info = $target->get($i)->to_info($info, $attribute_path. '.' .$i);
-                    }
-                } else {
-                    // the method that should be called on the collection
-                    $method_name = array_key_exists($relation_name, $map) ? $map[$relation_name] : null;
-
-                    if ($method_name) {
-                        // relation shouldn't be processed -> call method to obtain value
-                        $info = array_add($info, $attribute_path, $this->{$method_name}($target, $relation_name));
-                    }
+                // if the relation is of type "One to Many" or "Many to Many"
+                // -> include a list of sub infos
+                for ($i = 0; $i < $target->count(); $i++) {
+                    $info = $target->get($i)->to_info($info, $attribute_path. '.' .$i, $remaining_relation_path);
                 }
+            } else if ($is_recursive) {
+                // first process sub paths
+                $info = $target ?
+                        $target->to_info($info, $attribute_path, $remaining_relation_path) : $info;
             } else {
-                if (in_array($relation_name, $relations)) {
-                    // the relation should be processed and is of type "One to One"
-                    // -> add the single info
-                    $info = $target ? $target->to_info($info, $attribute_path)
-                        : array_add($info, $attribute_path, $this->info_null_string);
-                } else {
-                    // relation shouldn't be processed -> add the main attributes value
-
-                    // the attributes name whose value should be stored
-                    $main_attribute = array_key_exists($relation_name, $map) ? $map[$relation_name] : null;
-
-                    // store the attributes value - or the null string, if the attribute, the
-                    // link or the mapping is null
-                    if ($main_attribute && $target && $target->{$main_attribute}) {
-                        $info = array_add($info, $attribute_path, $target->{$main_attribute});
-                    } else {
-                        $info = array_add($info, $attribute_path, $this->info_null_string);
-                    }
-                }
+                // at last: add info
+                $info = $target ? array_add($info, $attribute_path, $target->to_info()) : $info;
             }
         }
 
-        return $info;
+       return $info;
+    }
+
+    public function info_with(...$relation_paths) {
+        return $this->to_info([], null, $relation_paths);
+    }
+
+    public function info() {
+        return $this->to_info();
     }
 
 }

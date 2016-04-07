@@ -17,6 +17,9 @@ use App\Therapist;
 use App\Helper;
 use App\Models;
 
+use App\SituationSurvey;
+use App\Task;
+
 use Prologue\Alerts\Facades\Alert;
 
 /**
@@ -238,6 +241,18 @@ class GateController extends Controller
 			$patient->date_from_clinics = null;
 
 			$patient->save();
+
+			// create all assignments (all future assignments will be defined)
+			for ($week = 1; $week <= 12; $week++) {
+				$assignment = ($week == 1) ?
+					new SituationSurvey :
+					new Task;
+
+				$assignment->week = $week;
+				$assignment->dirty = false;
+
+				$patient->assignments()->save($assignment);
+			}
 
 			$days = new Days;
 			$days->decrease_day($day);

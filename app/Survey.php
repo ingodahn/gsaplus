@@ -13,13 +13,7 @@ class Survey extends InfoModel
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['assignment_id'];
-
-    public $relation_methods = [
-        'phq4',
-        'wai',
-        'assignment'
-    ];
+    protected $hidden = ['assignment_id', 'created_at', 'updated_at', 'is_random'];
 
     /**
      * Relationship to the first question of the survey (of type PHQ-4).

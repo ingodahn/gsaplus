@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Models\AssignmentType;
 use App\Models\InfoModel;
 
 use Jenssegers\Date\Date;
@@ -16,36 +15,7 @@ class Comment extends InfoModel
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['assignment_id', 'therapist_id'];
-
-    public $relation_methods = [
-        'assignment',
-        'therapist',
-        'comment_reply'
-    ];
-
-    protected function info_relation_map()
-    {
-        return ['therapist' => 'name'];
-    }
-
-    /**
-     * Adds task name to info (if the referenced assignment is a task and no
-     * sub info is included for it).
-     */
-    public function to_info($info = [], $path = null, $relations = []) {
-        $info = parent::to_info($info, $path, $relations);
-
-        $add_path = ($path === null) ? 'task' : $path .'.task';
-
-        if (!in_array('assignment', $relations) && $this->assignment->type === AssignmentType::TASK) {
-            $problem = $this->assignment->problem ? $this->assignment->problem : $this->info_null_string;
-
-            $info = array_add($info, $add_path, $problem);
-        }
-
-        return $info;
-    }
+    protected $hidden = ['assignment_id', 'therapist_id', 'created_at', 'updated_at', 'is_random'];
 
     /**
      * Relationship to the commented assignment. Please use

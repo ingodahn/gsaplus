@@ -24,25 +24,22 @@ class Assignment extends InfoModel
 
     protected $dates = ['created_at', 'updated_at'];
 
+    protected $casts = ['dirty' => 'boolean'];
+
     /*
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['patient_id', 'task_template_id'];
+    protected $hidden = ['patient_id',
+        'task_template_id',
+        'created_at',
+        'updated_at',
+        'is_random',
+        'type'];
 
-    public $relation_methods = [
-        'patient',
-        'comment',
-        'survey'];
-
-    public $info_methods = [
-        'status'
+    protected $dynamic_attributes = [
+        'assignment_status'
     ];
-
-    protected function info_relation_map()
-    {
-        return ['patient' => 'name', 'comment' => 'text'];
-    }
 
     /**
      * Relationship to the patient (who should answer the assignment).
@@ -89,6 +86,10 @@ class Assignment extends InfoModel
 
     public function getAssignedOnAttribute($date) {
         return new Date($date);
+    }
+
+    public function getAssignmentStatusAttribute() {
+        return $this->status();
     }
 
     /**

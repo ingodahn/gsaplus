@@ -15,11 +15,7 @@ class PHQ4 extends InfoModel
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['survey_id'];
-
-    public $relation_methods = [
-        'survey'
-    ];
+    protected $hidden = ['survey_id', 'created_at', 'updated_at', 'is_random'];
 
     /**
      * Relationship to the survey. Please use $phq4->survey to
