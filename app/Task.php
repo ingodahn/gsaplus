@@ -14,17 +14,6 @@ class Task extends Assignment
 
     protected static $persisted = ['problem', 'answer', 'task_template_id'];
 
-    public $relation_methods = [
-        'patient',
-        'comment',
-        'survey',
-        'task_template'
-    ];
-
-    protected function info_relation_map() {
-        return array_merge(parent::info_relation_map(), ['task_template' => 'name']);
-    }
-
     /**
      * Relationship to the underlying template (the assignment is
      * based on). Please use $task->task_template to

@@ -13,16 +13,7 @@ class CommentReply extends InfoModel
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['comment_id'];
-
-    public $relation_methods = [
-        'comment'
-    ];
-
-    protected function info_relation_map()
-    {
-        return ['comment' => 'text'];
-    }
+    protected $hidden = ['comment_id', 'created_at', 'updated_at', 'is_random'];
 
     /**
      * Relationship to the comment. Please use $->comment_reply
@@ -30,7 +21,7 @@ class CommentReply extends InfoModel
      */
     public function comment()
     {
-        return $this->belongsTo('App\Comment');
+        return $this->belongsTo('App\Comment', 'comment_id');
     }
 
 }

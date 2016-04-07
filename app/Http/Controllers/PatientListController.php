@@ -122,7 +122,7 @@ class PatientListController extends Controller
 		$patients = Patient::all();
 
 		foreach ($patients as $patient) {
-			$infos->push($patient->to_info());
+			$infos->push($patient->info_with('therapist'));
 		}
 
 		return Datatables::of($infos)
@@ -136,7 +136,10 @@ class PatientListController extends Controller
 					return '<a href="/Diary/'.$patient_info['name'].'">'.$patient_info['name'].'</a>';
 				})
 				->editColumn('status', function ($patient_info) {
-					return $patient_info['status'].': '.PatientStatus::$STATUS_INFO[$patient_info['status']];
+					return $patient_info['patientStatus'].': '.PatientStatus::$STATUS_INFO[$patient_info['patientStatus']];
+				})
+				->addColumn('therapist', function ($patient_info) {
+					return $patient_info['therapist']['name'];
 				})
 				->editColumn('statusOfNextAssignment', function($patient_info){
 					return $patient_info['statusOfNextAssignment'].': '

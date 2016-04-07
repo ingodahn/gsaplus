@@ -34,6 +34,10 @@ class Patient extends User
     protected $hidden = ['therapist_id',
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'is_random',
+        'type'
     ];
 
     protected $dates = [
@@ -44,22 +48,12 @@ class Patient extends User
         'intervention_ended_on'
     ];
 
-    public $relation_methods = [
-        'assignments',
-        'therapist'
-    ];
-
-    public $info_methods = [
-        'status',
+    protected $dynamic_attributes = [
+        'patient_status',
         'status_of_next_assignment',
         'patient_week',
         'overdue'
     ];
-
-    protected function info_relation_map() {
-        return ['therapist' => 'name',
-                'assignments' => 'collection_info'];
-    }
 
     /*
      * The following accessors will convert every date to an instance
@@ -80,6 +74,22 @@ class Patient extends User
 
     public function getRegistrationDateAttribute($date) {
         return new Date($date);
+    }
+
+    public function getPatientStatusAttribute() {
+        return $this->status();
+    }
+
+    public function getStatusOfNextAssignmentAttribute() {
+        return $this->status_of_next_assignment();
+    }
+
+    public function getPatientWeekAttribute() {
+        return $this->patient_week();
+    }
+
+    public function getOverdueAttribute() {
+        return $this->overdue();
     }
 
     /**
@@ -359,6 +369,28 @@ class Patient extends User
                 return $this->next_assignment()->status();
             }
         }
+    }
+
+    /**
+     * An info that contains descriptions of all possible sub relations.
+     *
+     * Included:
+     * - therapist
+     * - assignments
+     *      -> with all situations (if assignment is a situation survey)
+     *      -> with survey
+     *      -> with phq4 and wai
+     *      -> with comment
+     *          -> and commentReply
+     *
+     * @return array an info that contains descriptions of all possible sub relations
+     */
+    public function all_info() {
+        return $this->info_with('therapist',
+                           'assignments.situations',
+                           'assignments.survey.phq4',
+                           'assignments.survey.wai',
+                           'assignments.comment.comment_reply');
     }
 
 }

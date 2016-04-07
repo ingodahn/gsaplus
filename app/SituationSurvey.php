@@ -12,17 +12,6 @@ class SituationSurvey extends Assignment
 
     protected static $singleTableType = AssignmentType::SITUATION_SURVEY;
 
-    public $relation_methods = [
-        'patient',
-        'comment',
-        'survey',
-        'situations'
-    ];
-
-    protected function info_relation_map() {
-        return ['situations' => 'collection_info'];
-    }
-
     public function situations() {
         return $this->hasMany('App\Situation');
     }
