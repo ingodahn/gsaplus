@@ -27,7 +27,7 @@ class Task extends Assignment
     public function status() {
         $status = parent::status();
 
-        if ($this->problem === null) {
+        if ($this->problem === "") {
             return AssignmentStatus::ASSIGNMENT_IS_NOT_DEFINED;
         } else if ($this->patient->patient_week() < $this->week) {
             // therapist entered text of assignment (or has
