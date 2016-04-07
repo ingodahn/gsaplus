@@ -253,19 +253,25 @@ class DiaryController extends Controller
         $Diary = [];
 
         $patient=Patient::whereName($name)->first();
-        // $patient_info=$patient->to_info();
         $info=$patient->to_info([], null, ['assignments']);
-        // return dd($info);
         $Diary['name'] = $info['name'];
         $Diary['patient_week'] = $info['patientWeek'];
-        $assignment_info=$info['assignments'];
+        if (array_key_exists('assignments',$info)) {
+           $assignment_info = $info['assignments'];
+        } else {
+            $info['assignments']=[];
+        }
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
         $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['status']];
-        $assignment_count=count($assignment_info);
-        for ($i = 2; $i <= $assignment_count; $i++) {
+        $weeks_to_show=$info['patientWeek'];
+        if (Auth::user()->type == UserRole::THERAPIST) {
+            $weeks_to_show = 12;
+        }
+
+        for ($i = 2; $i <= $weeks_to_show; $i++) {
             $i1=$i-1;
-            if ($i < $info['patientWeek']) {
+            if ($i <= $info['patientWeek']) {
                 $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['status']];
             } else {
                 $entries[$i]['entry_status']='';
@@ -278,14 +284,13 @@ class DiaryController extends Controller
             }
             $entries[$i]['problem'] = $string." ...";
         }
-        if ($assignment_count < 12) { //This should not happen
-            $Diary['xxx']='Hier';
-            for ($j=$assignment_count; $j<=12; $j++) {
+
+            for ($j=$weeks_to_show+1; $j<=12; $j++) {
 
                 $entries[$j]['problem']='';
-                $entries[$j]['entry_status']='E010';
+                $entries[$j]['entry_status']='';
             }
-        }
+
         $Diary['entries'] = $entries;
         return view('patient.diary')->with('Diary', $Diary);
     }
