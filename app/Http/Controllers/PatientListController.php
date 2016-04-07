@@ -139,7 +139,7 @@ class PatientListController extends Controller
 					return $patient_info['patientStatus'].': '.PatientStatus::$STATUS_INFO[$patient_info['patientStatus']];
 				})
 				->addColumn('therapist', function ($patient_info) {
-					return $patient_info['therapist']['name'];
+					return array_get($patient_info, 'therapist.name', '-');
 				})
 				->editColumn('statusOfNextAssignment', function($patient_info){
 					return $patient_info['statusOfNextAssignment'].': '

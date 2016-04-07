@@ -83,7 +83,7 @@ class PatientController extends Controller
 		$patient_info['assignmentDay'] = Helper::generate_day_number_map()[$patient_info['assignmentDay']];
 		$patient_info['availableDays'] = $days->get_available_days();
 		$patient_info['status'] = $status;
-		$patient_info['therapist'] = $patient_info['therapist']['name'];
+		$patient_info['therapist'] = array_get($patient_info, 'therapist.name', '-');
 		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(), 'name');
 
 		$profile_user_model=[];
