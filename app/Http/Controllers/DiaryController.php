@@ -67,38 +67,88 @@ class DiaryController extends Controller
      */
     public function entry(Request $request, Patient $patient, $week)
     {
-        $patient_info = $patient->info();
-
-        // bitte verwenden
-        // enthält Informationen zu allen Subrelationen und deren Attribute
+        /*  Eigentlich brauche ich nur die Information für den Patienten
+        * und die Information für einen Eintrag rekursiv aufgelöst.
+         * $assignment=$patient->assignment_for_week($week);
+         * $assignment_info = $assignment->all_info();
+         * funktioniert aber nicht
+         * Deshalb muss ich alle assignments holen
+         */
+        $patient->save();
         $info = $patient->all_info();
+        $patient_info = $patient->info_with();
 
-        $assignment=$patient->assignment_for_week($week);
-
-        $assignment_info=$assignment->to_info([], null, ['situations','survey','comment','commentReply']);
-        $survey=$assignment->survey;
-
-        $survey_info = $survey->to_info([], null, ['phq4','wai']);
+        $assignment_info=$info['assignments'][$week-1];
 
         $entry_info = [];
         $entry_info['week'] = $assignment_info['week'];
-        $entry_info['status'] = $assignment_info['status']; // Jetzt als Code, besser wäre Klartext
-        $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
-        $entry_info['answer'] = $assignment_info['situations'];
-        return dd($entry_info);
-        for ($i=0;$i<=2;$i++){ // This is easier than fetching each situation, setting the to_camel_case attribute and re-generating the info
-            $entry_info['answer'][$i]['my_reaction']=$entry_info['answer'][$i]['myReaction'];
-            $entry_info['answer'][$i]['their_reaction']=$entry_info['answer'][$i]['theirReaction'];
-        }
-        $entry_info['survey'] = $survey_info;
-        $entry_info['survey']['wai']=$survey_info['wai']['index'];
+        $entry_info['status'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
+       // if ($week == 1) { // !!! uncomment for M4 !!!
+            $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
+            if (!array_key_exists('situations', $assignment_info)) {
+                $assignment_info['situations'] = [];
+            }
+            $entry_info['answer'] = $assignment_info['situations']; // Now $entry_info['answer'] exists and has values from $assignment_info['situations' IF these exist
+            $empty_situation = [
+                "description" => "",
+                "expectation" => "",
+                "myReaction" => "",
+                'theirReaction' => ""
+            ];
 
+            for ($i = 0; $i <= 2; $i++) {
+                if (!array_key_exists($i, $entry_info['answer'])) { // filling missing situation with $empty_situation
+                    $entry_info['answer'][$i] = $empty_situation;
+                }
+                // This is easier than fetching each situation, setting the to_camel_case attribute and re-generating the info:
+                $entry_info['answer'][$i]['my_reaction'] = $entry_info['answer'][$i]['myReaction'];
+                $entry_info['answer'][$i]['their_reaction'] = $entry_info['answer'][$i]['theirReaction'];
+            }
+        // } else {    // week 2 and later !!!uncomment for M4
+
+        // }    // !!! uncomment for M4
+        if (! array_key_exists('survey',$assignment_info)) {
+            $assignment_info['survey']=[];
+        }
+        if (! array_key_exists('phq4',$assignment_info['survey'])){
+            $assignment_info['survey']['phq4']=[];
+        }
+        if (! array_key_exists('depressed',$assignment_info['survey']['phq4'])){
+            $assignment_info['survey']['phq4']['depressed']=-1;
+        }
+        if (! array_key_exists('nervous',$assignment_info['survey']['phq4'])){
+            $assignment_info['survey']['phq4']['nervous']=-1;
+        }
+        if (! array_key_exists('interested',$assignment_info['survey']['phq4'])){
+            $assignment_info['survey']['phq4']['interested']=-1;
+        }
+        if (! array_key_exists('troubled',$assignment_info['survey']['phq4'])){
+            $assignment_info['survey']['phq4']['troubled']=-1;
+        }
+        $entry_info['survey'] = $assignment_info['survey'];
+        if (! array_key_exists('wai',$assignment_info['survey'])){
+            $assignment_info['survey']['wai']=['index'=> -1];
+        }
+
+        $entry_info['survey']['wai']=$assignment_info['survey']['wai']['index'];
+        if (! array_key_exists('comment',$assignment_info)) {
+            $assignment_info['comment']=['text' => ""];
+        }
         $entry_info['comment'] = $assignment_info['comment']['text'];
 
+        if (! array_key_exists('commentReply',$assignment_info)) {
+            $assignment_info['commentReply']=[];
+        }
+        if (! array_key_exists('helpful',$assignment_info['commentReply'])) {
+            $assignment_info['commentReply']['helpful']=-1;
+        }
+        if (! array_key_exists('satisfied',$assignment_info['commentReply'])) {
+            $assignment_info['commentReply']['satisfied']=-1;
+        }
         /* ToDo:  comment_reply mit Werten aus Datenbank aktualisieren */
-        $entry_info['comment_reply']['helpful'] = 1;
-        $entry_info['comment_reply']['satisfied'] = 2;
-
+        $entry_info['comment_reply']['helpful'] = $assignment_info['commentReply']['helpful'];
+        $entry_info['comment_reply']['satisfied'] = $assignment_info['commentReply']['satisfied'];
+        // return dd($entry_info);
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
@@ -257,17 +307,19 @@ class DiaryController extends Controller
         $Diary = [];
 
         $patient=Patient::whereName($name)->first();
-        $info=$patient->to_info([], null, ['assignments']);
+        $info=$patient->all_info();
+        // $info=$patient->to_info([], null, ['assignments']);
         $Diary['name'] = $info['name'];
         $Diary['patient_week'] = $info['patientWeek'];
-        if (array_key_exists('assignments',$info)) {
+        /*if (array_key_exists('assignments',$info)) {
            $assignment_info = $info['assignments'];
         } else {
             $info['assignments']=[];
-        }
+        }*/
+        $assignment_info = $info['assignments'];
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
-        $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['status']];
+        $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['assignmentStatus']];
         $weeks_to_show=$info['patientWeek'];
         if (Auth::user()->type == UserRole::THERAPIST) {
             $weeks_to_show = 12;
@@ -276,7 +328,7 @@ class DiaryController extends Controller
         for ($i = 2; $i <= $weeks_to_show; $i++) {
             $i1=$i-1;
             if ($i <= $info['patientWeek']) {
-                $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['status']];
+                $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['assignmentStatus']];
             } else {
                 $entries[$i]['entry_status']='';
             }
