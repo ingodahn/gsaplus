@@ -120,4 +120,24 @@ class Assignment extends InfoModel
         return AssignmentStatus::UNKNOWN;
     }
 
+    /**
+     * An info that contains descriptions of all possible sub relations.
+     *
+     * Included:
+     * - therapist
+     * - assignments
+     *      -> with all situations (if assignment is a situation survey)
+     *      -> with survey
+     *      -> with phq4 and wai
+     *      -> with comment
+     *          -> and commentReply
+     *
+     * @return array an info that contains descriptions of all possible sub relations
+     */
+    public function all_info() {
+        return $this->info_with('situations',
+            'comment.comment_reply',
+            'survey.phq4',
+            'survey.wai');
+    }
 }
