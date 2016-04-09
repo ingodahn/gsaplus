@@ -271,17 +271,18 @@
         </div>
       @endif
 
-      <h3>Kommentar des Therapeuten</h3>
-      <div class="form-group">
-        <label for="comment">Kommentar des Therapeuten</label>
-        <textarea class="form-control" id="comment" placeholder="">{{$EntryInfo['comment']}}</textarea>
-        {{-- <p class="help-block">Help text here.</p> --}}
-      </div>
-      {{--
-        Für Patienten ist der Kommentar (comment, EntryInfo->comment()) nur sichtbar wenn er vom Therapeuten abgeschickt wurde ($EntyInfo['status']>= 'E050'). Er ist für Patienten niemals editierbar.
-        Für Therapeuten ist der Kommentar immer sichtbar, ggf. in einer zwischengespeicherten Version.
-        Für Therapeuten ist der Kommentar nur editierbar wenn der Eintrag vom Patienten abgeschickt aber der Kommentar vom Therapeuten noch nicht abgeschickt ist. ($EntryInfo['status'] == 'E040')
-      --}}
+
+      <?php
+        $visible = $isPatient && $EntyInfo['status']>= 'E050' || $isTherapist;
+        $editable = $isPatient && $EntryInfo['status'] == 'E040';
+      ?>
+      @if($visible)
+        <h3>Kommentar des Therapeuten</h3>
+        <div class="form-group">
+          <label for="comment">Kommentar des Therapeuten</label>
+          <textarea class="form-control" id="comment" placeholder="" {{$editable ? "" : "disabled"}}>{{$EntryInfo['comment']}}</textarea>
+        </div>
+      @endif
 
       <h3>Bewertung des Therapeutenkommentars</h3>
       @if ($Role == 'patient')
