@@ -334,12 +334,13 @@
       @endif
 
       <p>
-        <button type="submit" class="btn" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+        <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
         <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
       </p>
       </form>
 
 
+      <hr>
       <p>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn">Älter</a>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn">Neuer</a>
