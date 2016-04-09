@@ -205,73 +205,77 @@
 
       <hr>
 
-      <h3>Fragen zum Befinden</h3>
-
-      <p>
-        Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt?
-      </p>
-
-      <div class="container-fluid">
-        <?php
-          $labels = [
-            "Wenig Interesse oder Freude an Ihren Tätigkeiten",
-            "Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit",
-            "Nervosität, Ängstlichkeit oder Anspannung",
-            "Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren"
-          ];
-          $names = [
-            "phq4_interested",
-            "phq4_depressed",
-            "phq4_nervous",
-            "phq4_troubled"
-          ];
-          $values = [
-            $EntryInfo['survey']['phq4']['interested'],
-            $EntryInfo['survey']['phq4']['depressed'],
-            $EntryInfo['survey']['phq4']['nervous'],
-            $EntryInfo['survey']['phq4']['troubled']
-          ];
-        ?>
-        @for($i = 0; $i < 4; $i++)
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-7">
-                <label for="{{$names[$i]}}">{{$labels[$i]}}</label>
-              </div>
-              @for($j = 0; $j < 4; $j++)
-                <div class="col-md-1">
-                  <label class="radio-inline">
-                    <input type="radio" name="{{$names[$i]}}" value="{{$j}}" {{$values[$i] == $j ? "checked" : ""}}> {{$j}}
-                  </label>
-                </div>
-              @endfor
-            </div>
-          </div>
-        @endfor
-      </div>
-
-      <p>
-        Wenn Sie Ihre beste, je erreichte Arbeitsfähigkeit mit 10 Punkten bewerten: Wie viele Punkte würden Sie dann für Ihre derzeitige Arbeitsfähigkeit geben (0 bedeutet, dass Sie derzeit arbeitsunfähig sind)?
-      </p>
-
-      <div class="container-fluid">
-        <div class="form-group">
-          <div class="row">
-            @for($i=0; $i <= 10; $i++)
-              <div class="col-md-1">
-                <label class="radio-inline">
-                  <input type="radio" name="survey_wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}}> {{$i}}
-                </label>
-              </div>
-            @endfor
-          </div>
-        </div>
-      </div>
 
       {{--
         Für den Patienten werden die Befindensfragen (survey, $EntryInfo['survey']) nur angezeigt, wenn der Eintrag weder überfällig noch abgeschickt ist ($EntryInfo['status'] < 'E040'). Sie sind dann editierbar, d.h. sie können beantwortet werden.
         Für Therapeuten werden die Befindensfragen (survey) mit Antworten immer angezeigt. Sie sind nicht editierbar.
       --}}
+
+      <?php
+        $visible = $isPatient && $EntryInfo['status'] < 'E040' || $isTherapist;
+        $editable = $isPatient && $EntryInfo['status'] < 'E040';
+      ?>
+      @if($visible)
+        <h3>Fragen zum Befinden</h3>
+        <p>
+          Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt?
+        </p>
+        <div class="container-fluid">
+          <?php
+            $labels = [
+              "Wenig Interesse oder Freude an Ihren Tätigkeiten",
+              "Niedergeschlagenheit, Schwermut oder Hoffnungslosigkeit",
+              "Nervosität, Ängstlichkeit oder Anspannung",
+              "Nicht in der Lage sein, Sorgen zu stoppen oder zu kontrollieren"
+            ];
+            $names = [
+              "phq4_interested",
+              "phq4_depressed",
+              "phq4_nervous",
+              "phq4_troubled"
+            ];
+            $values = [
+              $EntryInfo['survey']['phq4']['interested'],
+              $EntryInfo['survey']['phq4']['depressed'],
+              $EntryInfo['survey']['phq4']['nervous'],
+              $EntryInfo['survey']['phq4']['troubled']
+            ];
+          ?>
+          @for($i = 0; $i < 4; $i++)
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-7">
+                  <label for="{{$names[$i]}}">{{$labels[$i]}}</label>
+                </div>
+                @for($j = 0; $j < 4; $j++)
+                  <div class="col-md-1">
+                    <label class="radio-inline">
+                      <input type="radio" name="{{$names[$i]}}" value="{{$j}}" {{$values[$i] == $j ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$j}}
+                    </label>
+                  </div>
+                @endfor
+              </div>
+            </div>
+          @endfor
+        </div>
+
+        <p>
+          Wenn Sie Ihre beste, je erreichte Arbeitsfähigkeit mit 10 Punkten bewerten: Wie viele Punkte würden Sie dann für Ihre derzeitige Arbeitsfähigkeit geben (0 bedeutet, dass Sie derzeit arbeitsunfähig sind)?
+        </p>
+        <div class="container-fluid">
+          <div class="form-group">
+            <div class="row">
+              @for($i=0; $i <= 10; $i++)
+                <div class="col-md-1">
+                  <label class="radio-inline">
+                    <input type="radio" name="survey_wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$i}}
+                  </label>
+                </div>
+              @endfor
+            </div>
+          </div>
+        </div>
+      @endif
 
       <h3>Kommentar des Therapeuten</h3>
       <div class="form-group">
