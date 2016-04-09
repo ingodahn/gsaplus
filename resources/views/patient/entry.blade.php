@@ -17,7 +17,6 @@
         <h3>Notizen der Therapeuten</h3>
         {{ $PatientInfo['notesOfTherapist'] }}
         </br>
-        {{-- Das Notiz-Feld ($PatientInfo['notes']) ermöglicht dem Therapeuten die Eingabe zusätzlicher Informationen. Es wird für Patienten niemals angezeigt. Für Therapeuten ist es immer editierbar. --}}
       @endif
 
       <!-- Problem: Die Fragestellung (Problem, $EntryInfo['problem']) wird immer angezeigt. Für Patienten ist sie nicht editierbar.
