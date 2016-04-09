@@ -8,10 +8,7 @@
     <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
       {{ csrf_field() }}
 
-      <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }})</small></h2>
-      <p>
-        Ansicht: <code>{{$Role}}</code>
-      </p>
+      <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }}, <code>{{$Role}}</code>)</small></h2>
 
       @if ($Role=='therapist')
         <h3>Notizen der Therapeuten</h3>
