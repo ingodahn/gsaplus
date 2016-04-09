@@ -23,7 +23,7 @@
         <p>
         <div class="form-group">
           <label for="problem">Problem bearbeiten</label>
-          <textarea class="form-control" name="problem">{{$EntryInfo['problem']}}</textarea>
+          <textarea class="form-control js-auto-size" name="problem">{{$EntryInfo['problem']}}</textarea>
         </div>
       </p>
       @endif
@@ -280,10 +280,9 @@
         <h3>Kommentar des Therapeuten</h3>
         <div class="form-group">
           <label for="comment">Kommentar des Therapeuten</label>
-          <textarea class="form-control" id="comment" placeholder="" {{$editable ? "" : "disabled"}}>{{$EntryInfo['comment']}}</textarea>
+          <textarea class="form-control js-auto-size" id="comment" placeholder="" {{$editable ? "" : "disabled"}}>{{$EntryInfo['comment']}}</textarea>
         </div>
       @endif
-
 
       <?php
         $visible = $isPatient && $EntryInfo['status'] == 'E050';
