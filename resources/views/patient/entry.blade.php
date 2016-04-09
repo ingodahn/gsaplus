@@ -28,105 +28,180 @@
       </p>
       @endif
 
-      <!-- Antwort Answer of patient on problem. This can be for week == 1: array of situations for week > 1: string
-      Für Patienten ist der zuletzt gespeicherte, automatisch gespeicherte oder abgeschickte Inhalt (content, $EntryInfo['answer']) immer sichtbar aber nur editierbar wenn er nicht abgeschickt oder überfällig ist ($EntryInfo['status'] < 'E040').
-      Für Therapeuten ist der Inhalt nur sichtbar wenn er abgeschickt wurde ($EntryInfo['status'] >= 'E040'). Er ist für Therapeuten niemals editierbar. -->
+      <?php
+        $visible = $isPatient || $isTherapist &&  $isTherapist && $EntryInfo['status'] >= 'E040';
+        $editable = $isPatient && $EntryInfo['status'] < 'E040';
+      ?>
+      @if($visible)
+        <h3>Antwort</h3>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Situation 1
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
 
-      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Situation 1
-              </a>
-            </h4>
+                <div class="form-group">
+                  <label for="situation0_description">Beschreiben Sie die Situation</label>
+                  @if($editable)
+                    <input type="text" class="form-control" name="situation0_description" value="{{$EntryInfo['answer'][0]['description']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][0]['description']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation0_expectations">Wunsch ans Gegenüber</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation0_expectations" name="situation0_expectations" value="{{$EntryInfo['answer'][0]['expectation']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][0]['expectation']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation0_their_reaction">Reaktion der anderen</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation0_their_reaction" name="situation0_their_reaction" value="{{$EntryInfo['answer'][0]['their_reaction']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][0]['their_reaction']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation0_my_reaction">Ihre Reaktion</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation0_my_reaction" name="situation0_my_reaction" value="{{$EntryInfo['answer'][0]['my_reaction']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][0]['my_reaction']}}
+                    </p>
+                  @endif
+                </div>
+
+              </div>
+            </div>
           </div>
-          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Situation 2
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
 
-              <div class="form-group">
-                <label for="situation0_description">Beschreiben Sie die Situation</label>
-                <input type="text" class="form-control" name="situation0_description" value="{{$EntryInfo['answer'][0]['description']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation0_expectations">Wunsch ans Gegenüber</label>
-                <input type="text" class="form-control" id="situation0_expectations" name="situation0_expectations" value="{{$EntryInfo['answer'][0]['expectation']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation0_their_reaction">Reaktion der anderen</label>
-                <input type="text" class="form-control" id="situation0_their_reaction" name="situation0_their_reaction" value="{{$EntryInfo['answer'][0]['their_reaction']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation0_my_reaction">Ihre Reaktion</label>
-                <input type="text" class="form-control" id="situation0_my_reaction" name="situation0_my_reaction" value="{{$EntryInfo['answer'][0]['my_reaction']}}">
-              </div>
+                <div class="form-group">
+                  <label for="situation1_description">Beschreiben Sie die Situation</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation1_description" name="situation1_description" value="{{$EntryInfo['answer'][1]['description']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][1]['description']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation1_expectations">Wunsch ans Gegenüber</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation1_expectations" name="situation1_expectations" value="{{$EntryInfo['answer'][1]['expectation']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][1]['expectation']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation1_their_reaction">Reaktion der anderen</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation1_their_reaction" name="situation1_their_reaction" value="{{$EntryInfo['answer'][1]['their_reaction']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][1]['their_reaction']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation1_my_reaction">Ihre Reaktion</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation1_my_reaction" name="situation1_my_reaction" value="{{$EntryInfo['answer'][1]['my_reaction']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][1]['my_reaction']}}
+                    </p>
+                  @endif
+                </div>
 
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Situation 3
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+
+                <div class="form-group">
+                  <label for="situation2_description">Beschreiben Sie die Situation</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation2_description" name="situation2_description" value="{{$EntryInfo['answer'][2]['description']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][2]['description']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation2_expectations">Wunsch ans Gegenüber</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation2_expectations" name="situation2_expectations" value="{{$EntryInfo['answer'][2]['expectation']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][2]['expectation']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation2_their_reaction">Reaktion der anderen</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation2_their_reaction" name="situation2_their_reaction" value="{{$EntryInfo['answer'][2]['their_reaction']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][2]['their_reaction']}}
+                    </p>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="situation2_my_reaction">Ihre Reaktion</label>
+                  @if($editable)
+                    <input type="text" class="form-control" id="situation2_my_reaction" name="situation2_my_reaction" value="{{$EntryInfo['answer'][2]['my_reaction']}}">
+                  @else
+                    <p>
+                      {{$EntryInfo['answer'][2]['my_reaction']}}
+                    </p>
+                  @endif
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingTwo">
-            <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Situation 2
-              </a>
-            </h4>
-          </div>
-          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="panel-body">
-
-              <div class="form-group">
-                <label for="situation1_description">Beschreiben Sie die Situation</label>
-                <input type="text" class="form-control" id="situation1_description" name="situation1_description" value="{{$EntryInfo['answer'][1]['description']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation1_expectations">Wunsch ans Gegenüber</label>
-                <input type="text" class="form-control" id="situation1_expectations" name="situation1_expectations" value="{{$EntryInfo['answer'][1]['expectation']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation1_their_reaction">Reaktion der anderen</label>
-                <input type="text" class="form-control" id="situation1_their_reaction" name="situation1_their_reaction" value="{{$EntryInfo['answer'][1]['their_reaction']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation1_my_reaction">Ihre Reaktion</label>
-                <input type="text" class="form-control" id="situation1_my_reaction" name="situation1_my_reaction" value="{{$EntryInfo['answer'][1]['my_reaction']}}">
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingThree">
-            <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Situation 3
-              </a>
-            </h4>
-          </div>
-          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-            <div class="panel-body">
-
-              <div class="form-group">
-                <label for="situation2_description">Beschreiben Sie die Situation</label>
-                <input type="text" class="form-control" id="situation2_description" name="situation2_description" value="{{$EntryInfo['answer'][2]['description']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation2_expectations">Wunsch ans Gegenüber</label>
-                <input type="text" class="form-control" id="situation2_expectations" name="situation2_expectations" value="{{$EntryInfo['answer'][2]['expectation']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation2_their_reaction">Reaktion der anderen</label>
-                <input type="text" class="form-control" id="situation2_their_reaction" name="situation2_their_reaction" value="{{$EntryInfo['answer'][2]['their_reaction']}}">
-              </div>
-              <div class="form-group">
-                <label for="situation2_my_reaction">Ihre Reaktion</label>
-                <input type="text" class="form-control" id="situation2_my_reaction" name="situation2_my_reaction" value="{{$EntryInfo['answer'][2]['my_reaction']}}">
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
+      @endif
 
       <hr>
 
