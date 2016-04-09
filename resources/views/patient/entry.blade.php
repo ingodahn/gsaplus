@@ -1,26 +1,11 @@
 @extends('layouts.master')
 @section('title', 'Schreibaufgabe')
 
-@section('additional-head')
-  <script type="text/javascript">
-    $(function() {
-      $("#entry_form").on("submit", function() {
-        $('<input>').attr({
-          type: 'hidden',
-          id: 'timestamp',
-          name: 'timestamp',
-          value: Date.now()
-        }).appendTo('#entry_form');
-      });
-    });
-  </script>
-@endsection
-
 @section('content')
   <div class="container">
 
 
-    <form id="entry_form" data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
+    <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
       {{ csrf_field() }}
 
       <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }})</small></h2>
