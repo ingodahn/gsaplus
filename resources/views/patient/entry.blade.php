@@ -16,10 +16,17 @@
         </br>
       @endif
 
-      <!-- Problem: Die Fragestellung (Problem, $EntryInfo['problem']) wird immer angezeigt. Für Patienten ist sie nicht editierbar.
-      Für Therapeuten ist die Fragestellung nur editierbar wenn die Aufgabe die aktuelle Aufgabe ist ($EntryInfo['week'] == $PatientInfo['patientWeek']) und sie vom System noch nicht abgeschickt wurde ($EntryInfo['status'] < 'E020'). -->
-
-      <p>{{ $EntryInfo['problem'] }}</p>
+      <h3>Fragestellung</h3>
+      @if($isPatient || $isTherapist && $EntryInfo['status'] >= 'E020')
+        <p>{{$EntryInfo['problem']}}</p>
+      @elseif($isTherapist && $EntryInfo['status'] < 'E020')
+        <p>
+        <div class="form-group">
+          <label for="problem">Problem bearbeiten</label>
+          <textarea class="form-control" name="problem">{{$EntryInfo['problem']}}</textarea>
+        </div>
+      </p>
+      @endif
 
       <!-- Antwort Answer of patient on problem. This can be for week == 1: array of situations for week > 1: string
       Für Patienten ist der zuletzt gespeicherte, automatisch gespeicherte oder abgeschickte Inhalt (content, $EntryInfo['answer']) immer sichtbar aber nur editierbar wenn er nicht abgeschickt oder überfällig ist ($EntryInfo['status'] < 'E040').
