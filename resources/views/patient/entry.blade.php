@@ -205,12 +205,6 @@
 
       <hr>
 
-
-      {{--
-        Für den Patienten werden die Befindensfragen (survey, $EntryInfo['survey']) nur angezeigt, wenn der Eintrag weder überfällig noch abgeschickt ist ($EntryInfo['status'] < 'E040'). Sie sind dann editierbar, d.h. sie können beantwortet werden.
-        Für Therapeuten werden die Befindensfragen (survey) mit Antworten immer angezeigt. Sie sind nicht editierbar.
-      --}}
-
       <?php
         $visible = $isPatient && $EntryInfo['status'] < 'E040' || $isTherapist;
         $editable = $isPatient && $EntryInfo['status'] < 'E040';
