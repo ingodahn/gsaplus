@@ -53,14 +53,14 @@ class Comment extends InfoModel
      */
 
     public function getCreatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getUpdatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getDateAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 }

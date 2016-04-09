@@ -129,7 +129,7 @@ class PatientListController extends Controller
 		}
 
 		return Datatables::of($infos)
-				-> addColumn('selection', function($patient_info){
+				->addColumn('selection', function($patient_info){
 					return '<input type="checkbox" name="list_of_names[]" value="'.$patient_info['name'].'"></input>';
 				})
 				->editColumn('overdue', function($patient_info) {
@@ -153,6 +153,9 @@ class PatientListController extends Controller
 				})
 				->edit_column('assignmentDay', function($patient_info) use ($days_map) {
 					return $days_map[$patient_info['assignmentDay']];
+				})
+				->edit_column('lastActivity', function($patient_info) {
+					return array_get($patient_info, 'lastActivity', '-');
 				})
 				->removeColumn('id')
 				->removeColumn('createdAt')

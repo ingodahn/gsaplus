@@ -65,15 +65,15 @@ class Patient extends User
      */
 
     public function getDateFromClinicsAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getLastActivityAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getRegistrationDateAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getPatientStatusAttribute() {
@@ -136,8 +136,9 @@ class Patient extends User
      * @return Date the day of the first assignment
      */
     public function first_assignment_day() {
-        return $this->date_from_clinics->copy()->startOfDay()
-            ->endOfWeek()->next($this->assignment_day);
+        return $this->date_from_clinics === null ? null :
+                    $this->date_from_clinics->copy()->startOfDay()
+                    ->endOfWeek()->next($this->assignment_day);
     }
 
     /**
@@ -157,7 +158,8 @@ class Patient extends User
      * @return Date the given weeks assignment day
      */
     public function assignment_day_for_week($week) {
-        return $this->first_assignment_day()->copy()->addWeeks($week - 1);
+        return $this->first_assignment_day() === null ? null :
+                    $this->first_assignment_day()->copy()->addWeeks($week - 1);
     }
 
     /**
@@ -204,7 +206,8 @@ class Patient extends User
      *          (if intervention is still running)
      */
     public function intervention_ended_in_week() {
-        return $this->intervention_ended_on !== null ? $this->week_for_date($this->intervention_ended_on) : null;
+        return $this->intervention_ended_on === null ? null :
+                    $this->week_for_date($this->intervention_ended_on);
     }
 
     /**

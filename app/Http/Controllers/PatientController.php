@@ -85,6 +85,7 @@ class PatientController extends Controller
 		$patient_info['status'] = $status;
 		$patient_info['therapist'] = array_get($patient_info, 'therapist.name', '-');
 		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(), 'name');
+		$patient_info['dateFromClinics'] = array_get($patient_info, 'dateFromClinics', '-');
 
 		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;

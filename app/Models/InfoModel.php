@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Adds an info method to each eloquent model (all models inherit from this one).
- *
- * The returned info is an array that contains preformatted values. It (or parts of it)
- * may be passed on to a view.
+ * Adds an info method which gathers information about the model.
  */
 class InfoModel extends Model
 {
@@ -18,23 +15,23 @@ class InfoModel extends Model
     protected $dynamic_attributes = [];
 
     // output key names in camelCase?
-    // class specific -> override the method to set a different date format
+    // class specific setting -> override method to use snake case
     public static function info_camel_case() {
         return true;
     }
 
-    // standard date format (used to convert a date to a string)
-    // class specific -> override the method to set a different date format
+    // standard date format (dates are converted to strings)
+    // class specific setting -> override method to set different date format
     public static function info_date_format() {
         return 'd.m.Y';
     }
 
     /**
-     * Returns an array containing a string representation of each date.
+     * Formats every date and returns the resulting array.
      *
-     * Format [ <date attribute name> => <string representation of date> ]
+     * format: [ <date attribute name> => <string representation of date>, ... ]
      *
-     * @return array an array containing a string representation of each date
+     * @return array an array that contains a string representation of each date
      */
     protected function date_info() {
         $info = [];
@@ -54,12 +51,13 @@ class InfoModel extends Model
     }
 
     /**
-     * Returns an array containing a string representation of each attribute value. Dates aren't
-     * listed - please use method date_info to obtain a list of date strings.
+     * Collects the attributes values and returns the resulting array.
      *
-     * Format [ <attribute name> => <string representation of value> ]
+     * format: [ <attribute name> => <string representation of value>, ... ]
      *
-     * @return an array containing a string representation of each attribute value (excluding dates)
+     * Dates aren't listed - please use method date_info to obtain a list of date strings.
+     *
+     * @return an array that contains the models attribute names and their values (excluding dates)
      */
     protected function attribute_info() {
         $info = [];
@@ -80,10 +78,13 @@ class InfoModel extends Model
     }
 
     /**
-     * Returns an array containing the results of some accessors. $this->dynamic_attributes
-     * lists the accessors to call (i.e. their names).
+     * Collects the dynamic attributes values and returns the resulting array.
      *
-     * @return an array containing a string representation of each attribute value
+     * format: [ <name of dynamic attribute> => <value>, ... ]
+     *
+     * $this->dynamic_attributes lists the accessors to call (i.e. their names).
+     *
+     * @return an array that contains the dynamic attributes values
      */
     protected function accessor_info() {
         $info = [];
@@ -97,11 +98,14 @@ class InfoModel extends Model
     }
 
     /**
-     * Adds an array containing preformatted values (to the given array). It
-     * (or parts of it) may be passed on to a view. A new array is instantiated
-     * if no target array is given.
+     * Collects information about this instance and a specific set of
+     * relations. The information is returned as a (nested) associative
+     * array. It (or parts of it) may be passed on to a view.
      *
-     * The path can be used to specify a target location.
+     * The method allows to merge the result with a different array - the
+     * original array won't be modified (the merge result will be returned).
+     *
+     * The path can be used to specify a merge location.
      *
      * For example:
      * to_info($some_array, 'document.entry')
@@ -109,38 +113,36 @@ class InfoModel extends Model
      * will add the information under the specified path:
      * [ 'document' => [ 'entry' => [... information ...] ] ]
      *
-     * All original entries are retained.
-     *
      * The array is build up by calling the methods
      * - attribute_info(...)
-     *      (adds a string representation for each attributes value)
+     *      (returns each attributes value)
      * - date_info(...)
-     *      (adds a string representation for each date)
+     *      (returns a string representation for each date)
      * - accessor_info(...)
-     *      (adds the return values of a set of predefined accessors)
+     *      (returns the dynamic attribute values)
      *
      * Please refer to the documentation of those methods to determine the
      * included information.
      *
-     * Related information can also be included. A list of relationships
-     * can be passed as an argument. Nested relationships should use
+     * Related information can also be included. A list of relation paths
+     * specifies the relations to process. Nested relations should use
      * dot notation (e.g. 'assignments.comment').
      *
      * For example:
-     * $patient([], null, ['assignments']) will create a new array containing
-     * the generated info and a list of the patients assignments.
+     * to_info([], null, ['assignments']) will also return information on
+     * each assignment (if $this is an instance of Patient).
      *
      * @param array $info
      *             a base array
      *        string $path
-     *             a target location (where the generated information should be
-     *             inserted) - this has to be different from null
+     *             a merge location (where the generated information should be
+     *             added)
      *        array $relations_paths
-     *             the relationships which should be processed (sub infos
+     *             the relation paths which should be processed (sub infos
      *             will be created and inserted)
      *
-     * @return array an array containing generated information (describing this
-     *          instance) - all original entries are retained
+     * @return array information about this instance and a specific set of
+     * relations
      */
     protected function to_info($info = [], $path = null, $relations_paths = []) {
         // collect information about this instance
