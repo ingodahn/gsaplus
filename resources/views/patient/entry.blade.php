@@ -335,18 +335,18 @@
 
       <p>
         <button type="submit" class="btn" name="entryButton" value="saveDirty">Zwischenspeichern</button>
-        <button type="submit" class="btn btn-warning" name="entryButton" value="save">Abschicken</button>
+        <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
       </p>
       </form>
 
 
       <p>
-      <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn btn-warning">Älter</a>
-      <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn btn-warning">Neuer</a>
-      <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn btn-warning">Zur aktuellen Aufgabe</a>
+        <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn">Älter</a>
+        <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn">Neuer</a>
+        <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn">Zur aktuellen Aufgabe</a>
       </p>
       <p>
-      <a href="/Home" class="btn btn-warning">Zur Übersicht</a>
+        <a href="/Home" class="btn">Zur Übersicht</a>
       </p>
 
 
