@@ -284,8 +284,18 @@
         </div>
       @endif
 
+
+      <?php
+        $visible = $isPatient && $EntryInfo['status'] == 'E050';
+        $editable = $visible;
+      ?>
+      @if ($visible)
       <h3>Bewertung des Therapeutenkommentars</h3>
-      @if ($Role == 'patient')
+
+        <div class="bs-callout bs-callout-warning">
+          <p>Sie werden nachdrücklich aufgefordert, diese Felder auszufüllen.</p>
+        </div>
+
         <div class="container-fluid">
 
           <div class="form-group">
@@ -321,11 +331,6 @@
           </div>
 
         </div>
-
-        {{--
-          Der Patient kann über die Kommentar-Rückmeldung (comment_reply, $EntryInfo['comment_reply']) einmalig das Niveau seiner Zufriedenheit mit dem Kommentar eingeben. Das Feld wird für den Patienten immer dann angezeigt, wenn die Aufgabe kommentiert wurde. In diesem Fall kann der Patient die Rückmeldung eingeben und abschicken. ($EntryInfo['status'] == 'E050') Ansonsten wird das Feld nicht angezeigt. Wird das Feld angezeigt, so soll der Patient nachdrücklich aufgefordert werden es auszufüllen.
-          Der Therapeut sieht die Kommentar-Rückmeldung niemals.
-        --}}
       @endif
 
       <p>
