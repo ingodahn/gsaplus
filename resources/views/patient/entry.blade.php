@@ -273,7 +273,7 @@
 
 
       <?php
-        $visible = $isPatient && $EntyInfo['status']>= 'E050' || $isTherapist;
+        $visible = $isPatient && $EntryInfo['status']>= 'E050' || $isTherapist;
         $editable = $isPatient && $EntryInfo['status'] == 'E040';
       ?>
       @if($visible)
