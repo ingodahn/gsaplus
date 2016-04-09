@@ -11,6 +11,10 @@ use UxWeb\SweetAlert\SweetAlert as Alert;
 use App\Code;
 use App\Patient;
 use App\Users;
+use App\Situation;
+use App\Survey;
+use App\PHQ4;
+use App\WAI;
 
 use App\Models\UserRole;
 
@@ -75,10 +79,11 @@ class DiaryController extends Controller
          * Deshalb muss ich alle assignments holen
          */
         $patient->save();
-        $info = $patient->all_info();
+        // $info = $patient->all_info();
         $patient_info = $patient->info_with();
 
-        $assignment_info=$info['assignments'][$week-1];
+        // $assignment_info=$info['assignments'][$week-1];
+        $assignment_info=$patient->assignment_for_week($week)->all_info();
 
         $entry_info = [];
         $entry_info['week'] = $assignment_info['week'];
@@ -238,30 +243,100 @@ class DiaryController extends Controller
         /* Wenn die Rolle des Angemeldeten Benutzers patient ist, so sollte geprüft werden, ob $patient identisch
         *  mit dem angemeldeten Benutzer ist.
         */
-        /* $entry sollte die Schreibaufgabe des $patient in $week sein */
-        /* Hier als Array da die Struktur noch nicht fesgelegt ist */
-        $entry = [];
-        If ($request->input('problem')) {
-            $entry['problem'] = $request->input('problem');
+        $assignment=$patient->assignment_for_week($week);
+        if ($week == 1) {
+            if ($request->has('situation0_description')) { // situations were editable
+                $situations=$assignment->situations->all();
+                if ($situations == []){
+                    for ($i=0; $i<=2; $i++){
+                        $situation=new Situation;
+                        $assignment->situations()->save($situation);
+                    }
+                } // Now we are sure that the situations exist and we get it again.
+                $situations=$assignment->situations;
+                for ($i=0; $i<=2; $i++){
+                    $situation=$situations->get($i);
+                    $situation->description = $request->input('situation'.$i.'_description');
+                    $situation->expectation = $request->input('situation'.$i.'_expectations'); //note: Plural in request
+                    $situation->my_reaction = $request->input('situation'.$i.'my_reaction');
+                    $situation->their_reaction = $request->input('situation'.$i.'their_reaction');
+                    // and save it
+                    $situation->save();
+                }
+            }
+        } else {
+            // To do for M4: handling of problem and reflection
+            /*If ($request->has('problem')) {
+                $assignment->problem = $request->input('problem');
+            }
+            If ($request->has('reflection')) {
+                $assignment->'answer' = $request->input('reflection');
+            }*/
         }
-        If ($request->input('content')) {
-            $entry['content'] = $request->input('content');
+
+        $assignment_info=$assignment->info();
+
+        if ($request->has('survey_wai') ||
+        $request->has('phq4_interested') ||
+        $request->has('phq4_depressed') ||
+        $request->has('phq4_nervous') ||
+        $request->has('phq4_troubled')) { // Survey is edited
+            if (! array_key_exists('survey',$assignment_info)) { // no survey yet
+
+                $survey = new Survey();
+                $assignment->survey()->save($survey);
+                                $wai = new WAI;
+                $wai->index=-1;
+                $survey->wai()->save($wai);
+            } else {
+                $survey = $assignment->survey;
+                $wai = $survey->wai;
+                $phq4 = $survey->phq4;
+            }
+            if ($request->has('phq4_interested') ||
+                $request->has('phq4_depressed') ||
+                $request->has('phq4_nervous') ||
+                $request->has('phq4_troubled')){
+                $phq4 = new PHQ4;
+                $survey->phq4()->save($phq4);
+            } 
+            if ($request->has('phq4_interested')) {
+                $phq4->interested = $request->input('phq4_interested');
+            }
+            if ($request->has('phq4_depressed')) {
+                $phq4->depressed = $request->input('phq4_depressed');
+            }
+            if ($request->has('phq4_nervous')) {
+                $phq4->nervous = $request->input('phq4_nervous');
+            }
+            if ($request->has('phq4_troubled')) {
+                $phq4->troubled = $request->input('phq4_nervous');
+            }
+
+            $phq4->save();
+            if ($request->has('survey_wai')){
+                $wai->index = $request->input('survey_wai');
+            }
+
+            $wai->save();
         }
-        If ($request->input('survey')) {
-            $entry['survey'] = $request->input('survey');
-        }
-        If ($request->input('comment')) {
+        If ($request->has('comment')) {
             $entry['comment'] = $request->input('comment');
         }
-        If ($request->input('comment_reply')) {
+        If ($request->has('comment_reply')) {
             $entry['comment_reply'] = $request->input('comment_reply');
         }
         if ($request->input('entryButton') == "saveDirty") {
             /* Zwischenspeichern von $entry */
+            $assignment->dirty = true;
+            $assignment->save();
+            return dd($assignment->all_info());
             Alert::success("Der Eintrag wurde zwischengespeichert")->persistent();
             return Redirect::back();
         } else {
             /* Speichern von $entry */
+            $assignment->dirty = false;
+            $assignment->save();
             Alert::success("Der Eintrag wurde abgeschickt")->persistent();
             //return "Abgeschickt";
             return Redirect::to('/Home');
