@@ -17,10 +17,7 @@ use App\Therapist;
 use App\Helper;
 use App\Models;
 
-use App\SituationSurvey;
-use App\Task;
-
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem
@@ -133,9 +130,9 @@ class GateController extends Controller
 	public function enter_system()
 	{
 		if (Auth::check()) {
-			return Redirect::to('/Home')->with('alert_messages', Alert::all());
+			return Redirect::to('/Home');//->with('alert_messages', Alert::all());
 		} else {
-			return Redirect::to('/Login')->with('alert_messages', Alert::all());
+			return Redirect::to('/Login');//->with('alert_messages', Alert::all());
 		}
 	}
 
@@ -221,7 +218,7 @@ class GateController extends Controller
 
 			$days = new Days;
 			$day_of_week=$days->get_available_days();
-			Alert::danger($message);
+			Alert::error($message, 'Fehler bei Registrierung')->persistent();
 
 			//Zeige Seite PatientenDaten
 			return view('gate.patient_data')->with('DayOfWeek',$day_of_week);
@@ -259,7 +256,7 @@ class GateController extends Controller
 
 			Auth::login($patient);
 
-			Alert::info('Sie haben sich erfolgreich registriert.');
+			Alert::success('Sie haben sich erfolgreich registriert.')->persistent();
 			return Redirect::to('/Diary');
 
 			//return view('patient.diary')->with('name',$name);
@@ -285,7 +282,7 @@ class GateController extends Controller
 
 			if ($validation->fails()) {
 				// return Redirect::back()->withErrors($validation)->withInput();
-				Alert::warning('Bitte geben Sie den Code ein, den Sie für die Teilnahme an der Studie erhalten haben.')->flash();
+				Alert::warning('Bitte geben Sie den Code ein, den Sie für die Teilnahme an der Studie erhalten haben.')->persistent();
 				return Redirect::to('/Login');
 			}
 
@@ -296,7 +293,7 @@ class GateController extends Controller
 
 			if ($this->code_status($code) === self::CODE_REGISTERED) {
 				// code is already registered
-				Alert::warning('Dieser Code wurde bereits registriert. Bitte loggen Sie sich mit Ihrem Benutzernamen und Passwort ein.')->flash();
+				Alert::warning('Dieser Code wurde bereits registriert. Bitte loggen Sie sich mit Ihrem Benutzernamen und Passwort ein.')->persistent();
 				return Redirect::to('/Login');
 			} else if ($this->code_status($code) === self::CODE_UNREGISTERED) {
 				// code isn't yet registered
@@ -306,7 +303,7 @@ class GateController extends Controller
 				return view('gate.welcome');
 			} else {
 				// code is incorrect
-				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->flash();
+				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->persistent();
 				return Redirect::to('/Login');
 			}
 		} else {
