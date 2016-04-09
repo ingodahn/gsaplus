@@ -107,6 +107,7 @@ class DiaryController extends Controller
         // } else {    // week 2 and later !!!uncomment for M4
 
         // }    // !!! uncomment for M4
+        
         if (! array_key_exists('survey',$assignment_info)) {
             $assignment_info['survey']=[];
         }
