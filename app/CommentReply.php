@@ -24,4 +24,12 @@ class CommentReply extends InfoModel
         return $this->belongsTo('App\Comment', 'comment_id');
     }
 
+    public function getCreatedAtAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
+
+    public function getUpdatedAtAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
+
 }

@@ -46,9 +46,9 @@ class SituationSurvey extends Assignment
                 // dirty is false and an answer is provided
                 // -> patient sent in the answer
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
-            } else if (Date::now()->gt(
-                $this->patient->previous_assignment_day()
-                    ->addDays(config('gsa.reminder_period_in_days')))) {
+            } else if ($this->patient->previous_assignment_day() !== null &&
+                            Date::now()->gt($this->patient->previous_assignment_day()
+                            ->addDays(config('gsa.reminder_period_in_days')))) {
                 // patient was reminded by system and didn't submit any text
                 // TODO: check if this is really the case! -> check reminders
                 return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
