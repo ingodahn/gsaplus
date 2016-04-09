@@ -16,6 +16,8 @@ use App\Patient;
 use App\Therapist;
 use App\Helper;
 use App\Models;
+use App\SituationSurvey;
+use App\Task;
 
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
