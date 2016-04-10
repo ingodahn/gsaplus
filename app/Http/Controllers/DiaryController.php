@@ -15,6 +15,8 @@ use App\Situation;
 use App\Survey;
 use App\PHQ4;
 use App\WAI;
+use App\Comment;
+use App\CommentReply;
 
 use App\Models\UserRole;
 
@@ -281,25 +283,19 @@ class DiaryController extends Controller
         $request->has('phq4_depressed') ||
         $request->has('phq4_nervous') ||
         $request->has('phq4_troubled')) { // Survey is edited
-            if (! array_key_exists('survey',$assignment_info)) { // no survey yet
-
+          //  if (! array_key_exists('survey',$assignment_info)) { // no survey yet
+            if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
                 $survey = new Survey();
                 $assignment->survey()->save($survey);
-                                $wai = new WAI;
-                $wai->index=-1;
+                $wai = new WAI;
                 $survey->wai()->save($wai);
-            } else {
-                $survey = $assignment->survey;
-                $wai = $survey->wai;
-                $phq4 = $survey->phq4;
-            }
-            if ($request->has('phq4_interested') ||
-                $request->has('phq4_depressed') ||
-                $request->has('phq4_nervous') ||
-                $request->has('phq4_troubled')){
                 $phq4 = new PHQ4;
                 $survey->phq4()->save($phq4);
-            } 
+            } else {
+                $survey = $assignment->survey->first();
+                $wai = $survey->wai->first();
+                $phq4 = $survey->phq4->first();
+            }
             if ($request->has('phq4_interested')) {
                 $phq4->interested = $request->input('phq4_interested');
             }
@@ -312,19 +308,35 @@ class DiaryController extends Controller
             if ($request->has('phq4_troubled')) {
                 $phq4->troubled = $request->input('phq4_nervous');
             }
-
             $phq4->save();
             if ($request->has('survey_wai')){
                 $wai->index = $request->input('survey_wai');
             }
-
             $wai->save();
         }
-        If ($request->has('comment')) {
-            $entry['comment'] = $request->input('comment');
+        if ($request->has('comment')) {
+            if ($assignment->comment->all() == []){
+                $comment = new Comment;
+                $assignment->comment()->save($comment);
+            }
+            $comment = $assignment->comment->first();
+            $comment->text = $request->input('comment');
+            $comment->save();
         }
-        If ($request->has('comment_reply')) {
-            $entry['comment_reply'] = $request->input('comment_reply');
+        if ($request->has('comment_reply_satisfied') ||
+        $request->has('comment_reply_helpful')) {
+            $comment = $assignment->comment->first();
+            if ($comment->comment_reply->all()==[]){
+                $comment_reply=new CommentReply;
+                $comment->comment_reply()->save($comment_reply);
+            }
+            $comment_reply = $comment->comment_reply->first();
+            if ($request->has('comment_reply_helpful')) {
+                $comment_reply->helpful = $request->input('comment_reply_helpful');
+            }
+            if ($request->has('comment_reply_satisfied')) {
+                $comment_reply->helpful = $request->input('comment_reply_satisfied');
+            }
         }
         if ($request->input('entryButton') == "saveDirty") {
             /* Zwischenspeichern von $entry */
@@ -424,6 +436,7 @@ class DiaryController extends Controller
             }
 
         $Diary['entries'] = $entries;
+        return dd($Diary);
         return view('patient.diary')->with('Diary', $Diary);
     }
 
