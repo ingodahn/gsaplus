@@ -436,7 +436,6 @@ class DiaryController extends Controller
             }
 
         $Diary['entries'] = $entries;
-        return dd($Diary);
         return view('patient.diary')->with('Diary', $Diary);
     }
 
