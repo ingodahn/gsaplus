@@ -18,8 +18,6 @@ class RemindUsersOfAssignment extends Command
     const OPTION_MISSED = 'missed';
     const OPTION_ALL = 'all';
 
-    const OPTION_DATE = 'date';
-
     const VIEW_DIR = 'emails.assignment';
 
     /**
@@ -42,8 +40,7 @@ class RemindUsersOfAssignment extends Command
                                 {--'.self::OPTION_NEW.' : Remind of new assignment}
                                 {--'.self::OPTION_DUE.' : Remind of due assignment}
                                 {--'.self::OPTION_MISSED.' : Remind of missed assignment}
-                                {--'.self::OPTION_ALL.' : Remind of first, new, due or missed assignment}
-                                {--'.self::OPTION_DATE.'= : Set another date (format is dd-mm-yyyy)}';
+                                {--'.self::OPTION_ALL.' : Remind of first, new, due or missed assignment}';
 
     /**
      * The console command description.
@@ -69,11 +66,7 @@ class RemindUsersOfAssignment extends Command
      */
     public function handle()
     {
-        if ($this->option(self::OPTION_DATE)) {
-            $this->date = Date::createFromFormat('d.m.Y', $this->option(self::OPTION_DATE));
-        } else {
-            $this->date = Date::now()->startOfDay();
-        }
+        $this->date = new Date(config('gsa.current_date'));
 
         if ($this->option(self::OPTION_FIRST) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_FIRST);
