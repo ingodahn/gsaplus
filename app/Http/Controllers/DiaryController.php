@@ -89,7 +89,8 @@ class DiaryController extends Controller
 
         $entry_info = [];
         $entry_info['week'] = $assignment_info['week'];
-        $entry_info['status'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
+        $entry_info['status'] = $assignment_info['assignmentStatus'];
+        $entry_info['status_text'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
        // if ($week == 1) { // !!! uncomment for M4 !!!
             $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
             if (!array_key_exists('situations', $assignment_info)) {
@@ -399,6 +400,9 @@ class DiaryController extends Controller
         // $info=$patient->to_info([], null, ['assignments']);
         $Diary['name'] = $info['name'];
         $Diary['patient_week'] = $info['patientWeek'];
+        if ($Diary['patient_week'] < 0) {
+            $Diary['patient_week'] = 0;
+        }
         /*if (array_key_exists('assignments',$info)) {
            $assignment_info = $info['assignments'];
         } else {
@@ -408,7 +412,7 @@ class DiaryController extends Controller
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
         $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['assignmentStatus']];
-        $weeks_to_show=$info['patientWeek'];
+        $weeks_to_show=$Diary['patient_week'];
         if (Auth::user()->type == UserRole::THERAPIST) {
             $weeks_to_show = 12;
         }
