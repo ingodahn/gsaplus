@@ -6,11 +6,17 @@ use App\Models\AssignmentStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use App\Code;
 use App\Patient;
 use App\Users;
+use App\Situation;
+use App\Survey;
+use App\PHQ4;
+use App\WAI;
+use App\Comment;
+use App\CommentReply;
 
 use App\Models\UserRole;
 
@@ -75,14 +81,16 @@ class DiaryController extends Controller
          * Deshalb muss ich alle assignments holen
          */
         $patient->save();
-        $info = $patient->all_info();
+        // $info = $patient->all_info();
         $patient_info = $patient->info_with();
 
-        $assignment_info=$info['assignments'][$week-1];
+        // $assignment_info=$info['assignments'][$week-1];
+        $assignment_info=$patient->assignment_for_week($week)->all_info();
 
         $entry_info = [];
         $entry_info['week'] = $assignment_info['week'];
-        $entry_info['status'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
+        $entry_info['status'] = $assignment_info['assignmentStatus'];
+        $entry_info['status_text'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
        // if ($week == 1) { // !!! uncomment for M4 !!!
             $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
             if (!array_key_exists('situations', $assignment_info)) {
@@ -107,6 +115,7 @@ class DiaryController extends Controller
         // } else {    // week 2 and later !!!uncomment for M4
 
         // }    // !!! uncomment for M4
+        
         if (! array_key_exists('survey',$assignment_info)) {
             $assignment_info['survey']=[];
         }
@@ -237,31 +246,111 @@ class DiaryController extends Controller
         /* Wenn die Rolle des Angemeldeten Benutzers patient ist, so sollte geprüft werden, ob $patient identisch
         *  mit dem angemeldeten Benutzer ist.
         */
-        /* $entry sollte die Schreibaufgabe des $patient in $week sein */
-        /* Hier als Array da die Struktur noch nicht fesgelegt ist */
-        $entry = [];
-        If ($request->input('problem')) {
-            $entry['problem'] = $request->input('problem');
+        $assignment=$patient->assignment_for_week($week);
+        if ($week == 1) {
+            if ($request->has('situation0_description')) { // situations were editable
+                $situations=$assignment->situations->all();
+                if ($situations == []){
+                    for ($i=0; $i<=2; $i++){
+                        $situation=new Situation;
+                        $assignment->situations()->save($situation);
+                    }
+                } // Now we are sure that the situations exist and we get it again.
+                $situations=$assignment->situations;
+                for ($i=0; $i<=2; $i++){
+                    $situation=$situations->get($i);
+                    $situation->description = $request->input('situation'.$i.'_description');
+                    $situation->expectation = $request->input('situation'.$i.'_expectations'); //note: Plural in request
+                    $situation->my_reaction = $request->input('situation'.$i.'my_reaction');
+                    $situation->their_reaction = $request->input('situation'.$i.'their_reaction');
+                    // and save it
+                    $situation->save();
+                }
+            }
+        } else {
+            // To do for M4: handling of problem and reflection
+            /*If ($request->has('problem')) {
+                $assignment->problem = $request->input('problem');
+            }
+            If ($request->has('reflection')) {
+                $assignment->'answer' = $request->input('reflection');
+            }*/
         }
-        If ($request->input('content')) {
-            $entry['content'] = $request->input('content');
+
+        $assignment_info=$assignment->info();
+
+        if ($request->has('survey_wai') ||
+        $request->has('phq4_interested') ||
+        $request->has('phq4_depressed') ||
+        $request->has('phq4_nervous') ||
+        $request->has('phq4_troubled')) { // Survey is edited
+          //  if (! array_key_exists('survey',$assignment_info)) { // no survey yet
+            if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
+                $survey = new Survey();
+                $assignment->survey()->save($survey);
+                $wai = new WAI;
+                $survey->wai()->save($wai);
+                $phq4 = new PHQ4;
+                $survey->phq4()->save($phq4);
+            } else {
+                $survey = $assignment->survey->first();
+                $wai = $survey->wai->first();
+                $phq4 = $survey->phq4->first();
+            }
+            if ($request->has('phq4_interested')) {
+                $phq4->interested = $request->input('phq4_interested');
+            }
+            if ($request->has('phq4_depressed')) {
+                $phq4->depressed = $request->input('phq4_depressed');
+            }
+            if ($request->has('phq4_nervous')) {
+                $phq4->nervous = $request->input('phq4_nervous');
+            }
+            if ($request->has('phq4_troubled')) {
+                $phq4->troubled = $request->input('phq4_nervous');
+            }
+            $phq4->save();
+            if ($request->has('survey_wai')){
+                $wai->index = $request->input('survey_wai');
+            }
+            $wai->save();
         }
-        If ($request->input('survey')) {
-            $entry['survey'] = $request->input('survey');
+        if ($request->has('comment')) {
+            if ($assignment->comment->all() == []){
+                $comment = new Comment;
+                $assignment->comment()->save($comment);
+            }
+            $comment = $assignment->comment->first();
+            $comment->text = $request->input('comment');
+            $comment->save();
         }
-        If ($request->input('comment')) {
-            $entry['comment'] = $request->input('comment');
-        }
-        If ($request->input('comment_reply')) {
-            $entry['comment_reply'] = $request->input('comment_reply');
+        if ($request->has('comment_reply_satisfied') ||
+        $request->has('comment_reply_helpful')) {
+            $comment = $assignment->comment->first();
+            if ($comment->comment_reply->all()==[]){
+                $comment_reply=new CommentReply;
+                $comment->comment_reply()->save($comment_reply);
+            }
+            $comment_reply = $comment->comment_reply->first();
+            if ($request->has('comment_reply_helpful')) {
+                $comment_reply->helpful = $request->input('comment_reply_helpful');
+            }
+            if ($request->has('comment_reply_satisfied')) {
+                $comment_reply->helpful = $request->input('comment_reply_satisfied');
+            }
         }
         if ($request->input('entryButton') == "saveDirty") {
             /* Zwischenspeichern von $entry */
-            Alert::success("Der Eintrag wurde zwischengespeichert")->flash();
+            $assignment->dirty = true;
+            $assignment->save();
+            return dd($assignment->all_info());
+            Alert::success("Der Eintrag wurde zwischengespeichert")->persistent();
             return Redirect::back();
         } else {
             /* Speichern von $entry */
-            Alert::success("Der Eintrag wurde abgeschickt")->flash();
+            $assignment->dirty = false;
+            $assignment->save();
+            Alert::success("Der Eintrag wurde abgeschickt")->persistent();
             //return "Abgeschickt";
             return Redirect::to('/Home');
         }
@@ -311,6 +400,9 @@ class DiaryController extends Controller
         // $info=$patient->to_info([], null, ['assignments']);
         $Diary['name'] = $info['name'];
         $Diary['patient_week'] = $info['patientWeek'];
+        if ($Diary['patient_week'] < 0) {
+            $Diary['patient_week'] = 0;
+        }
         /*if (array_key_exists('assignments',$info)) {
            $assignment_info = $info['assignments'];
         } else {
@@ -320,7 +412,7 @@ class DiaryController extends Controller
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
         $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['assignmentStatus']];
-        $weeks_to_show=$info['patientWeek'];
+        $weeks_to_show=$Diary['patient_week'];
         if (Auth::user()->type == UserRole::THERAPIST) {
             $weeks_to_show = 12;
         }

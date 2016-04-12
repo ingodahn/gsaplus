@@ -31,7 +31,9 @@
             <code>{{$entry['entry_status']}}</code>
           </td>
           <td>
-            <a href="/Assignment/{{$Diary['name']}}/{{$i}}">Ansehen</a>
+            @if($isTherapist || $isPatient && $i <= $Diary['patient_week'])
+              <a href="/Assignment/{{$Diary['name']}}/{{$i}}">Ansehen</a>
+            @endif
           </td>
         </tr>
       @endforeach

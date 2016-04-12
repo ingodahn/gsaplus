@@ -22,7 +22,7 @@
           </div>
           <div class="form-group">
             <label for="message" class="control-label">Nachricht</label>
-            <textarea name="message" rows="5" class="form-control" placeholder="Ich will gerne mit dir gehen, aber ich weiß nicht, wie ich herabkommen kann. Wenn du kommst, so bring jedesmal einen Strang Seide mit, daraus will ich eine Leiter flechten, und wenn die fertig ist, so steige ich herunter, und du nimmst mich auf dein Pferd." required></textarea>
+            <textarea name="message" rows="5" class="form-control js-auto-size" placeholder="Ich will gerne mit dir gehen, aber ich weiß nicht, wie ich herabkommen kann. Wenn du kommst, so bring jedesmal einen Strang Seide mit, daraus will ich eine Leiter flechten, und wenn die fertig ist, so steige ich herunter, und du nimmst mich auf dein Pferd." required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Absenden</button>
           <a href="/Home" class="btn btn-default">Abbrechen</a>

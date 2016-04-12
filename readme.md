@@ -6,7 +6,7 @@
 
 - apache 2
 - mysql
-- php >= 5.5.9
+- php >= 5.6
 - composer
 - bower
 - rake

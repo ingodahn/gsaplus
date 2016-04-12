@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use App\Patient;
 
@@ -73,19 +73,21 @@ class ContactController extends Controller
 		$patient_names = collect(explode(',', $list_of_names))->sort()->flatten();
 		$patient_mails = array_pluck(Patient::whereIn('name', $patient_names)->get()->sortBy('name'), 'email');
 
-		Mail::raw($mail_body, function ($message) use ($patient_names, $patient_mails, $mail_subject) {
-			// no from part needed - the sites name and email address can be found
-			// under 'mail.from' in file config/mail.php
-			for ($i = 0; $i < count($patient_mails); $i++) {
-				// works because collections are sorted (see above)
-				$message->to($patient_mails[$i], $patient_names->toArray()[$i]);
-			}
+		$patient_names_array = $patient_names->toArray();
 
-			$message->subject($mail_subject);
-		});
+		for ($i = 0; $i < count($patient_mails); $i++) {
+			Mail::raw($mail_body, function ($message) use ($patient_names_array, $patient_mails, $i, $mail_subject) {
+				// no from part needed - the sites name and email address can be found
+				// under 'mail.from' in file config/mail.php
+
+				// works because collections are sorted (see above)
+				$message->subject($mail_subject)
+					->to($patient_mails[$i], $patient_names_array[$i]);
+			});
+		}
 
 		// Alert not shown
-		Alert::info('Die Mails wurden verschickt.')->flash();
+		Alert::success('Die Mails wurden verschickt.')->persistent();
 		return Redirect::to('/Home');
 	}
 
@@ -134,7 +136,7 @@ class ContactController extends Controller
 			}); */
 
 		// alert doesn't work with more than one redirect
-		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt.')->flash();
+		Alert::success('Ihre Nachricht wurde an das Projektteam übermittelt')->persistent();
 
 		return redirect("/");
 	}
