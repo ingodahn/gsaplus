@@ -11,9 +11,10 @@
       <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }}, <code>{{$Role}}</code>)</small></h2>
 
       @if ($Role=='therapist')
-        <h3>Notizen der Therapeuten</h3>
-        {{ $PatientInfo['notesOfTherapist'] }}
-        </br>
+        <div class="form-group">
+          <label for="notesOfTherapist">Notizen der Therapeuten</label>
+          <textarea class="form-control js-auto-size" name="notesOfTherapist">{{$PatientInfo['notesOfTherapist']}}</textarea>
+        </div>
       @endif
 
       <h3>Fragestellung</h3>
