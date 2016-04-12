@@ -44,7 +44,6 @@
   <script type="text/javascript">
     $(function(){
       $("#reset").on("click", function() {
-        console.log("reset");
         localStorage.removeItem("DataTables_PatientList_/patient_list");
       });
     });
