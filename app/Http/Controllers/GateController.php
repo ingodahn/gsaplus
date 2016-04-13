@@ -18,7 +18,7 @@ use App\Helper;
 use App\Models;
 
 use UxWeb\SweetAlert\SweetAlert as Alert;
-use Prologue\Alerts\Facades\Alert;
+// use Prologue\Alerts\Facades\Alert;
 
 use App\SituationSurvey;
 use App\Task;
