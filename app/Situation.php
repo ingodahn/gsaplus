@@ -13,11 +13,7 @@ class Situation extends InfoModel
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['situation_survey_id'];
-
-    public $relation_methods = [
-        'situation_survey'
-    ];
+    protected $hidden = ['situation_survey_id','created_at', 'updated_at', 'is_random'];
 
     /**
      * Relationship to the situation survey. Please use
@@ -25,6 +21,14 @@ class Situation extends InfoModel
      */
     public function situation_survey() {
         return $this->belongsTo('App\SituationSurvey', 'situation_survey_id');
+    }
+
+    public function getCreatedAtAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
+
+    public function getUpdatedAtAttribute($date) {
+        return $date === null ? null : new Date($date);
     }
 
 }
