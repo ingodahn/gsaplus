@@ -23,8 +23,6 @@ use Prologue\Alerts\Facades\Alert;
 use App\SituationSurvey;
 use App\Task;
 
-
-
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem
  * Registrierungs- und Anmeldeprozess.
