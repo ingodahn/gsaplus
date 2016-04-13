@@ -16,7 +16,7 @@ use Jenssegers\Date\Date;
 
 use Hash;
 
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use Illuminate\Support\Facades\Redirect;
 
@@ -39,7 +39,7 @@ class PatientController extends Controller
 		$patient->intervention_ended_on = Date::now();
 		$patient->save();
 
-		Alert::info('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->flash();
+		Alert::success('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->persistent();
 
 		return Redirect::back();
 	}
@@ -108,11 +108,11 @@ class PatientController extends Controller
 				$message_to_user.' Der Therapeut wurde somit zurückgesetzt.';
 			}
 
-			Alert::warning($message_to_user)->flash();
+			Alert::warning($message_to_user)->persistent();
 		} else {
 			$patient->therapist()->associate($therapist);
 
-			Alert::info('Der Therapeut wurde erfolgreich geändert.')->flash();
+			Alert::success('Der Therapeut wurde erfolgreich geändert.')->persistent();
 		}
 
 		$patient->save();
@@ -134,12 +134,12 @@ class PatientController extends Controller
 				$is_therapist ?: $patient->assignment_day_changes_left -= 1 ;
 				$patient->save();
 
-				Alert::info('Der Schreibtag wurde erfolgreich geändert.')->flash();
+				Alert::success('Der Schreibtag wurde erfolgreich geändert.')->persistent();
 			} else {
-				Alert::danger('Der angegebene Schreibtag ist ungültig.')->flash();
+				Alert::error('Der angegebene Schreibtag ist ungültig.')->persistent();
 			}
 		} else {
-			Alert::danger("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->flash();
+			Alert::error("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->persistent();
 		}
 
 		return Redirect::back();
@@ -152,14 +152,14 @@ class PatientController extends Controller
 		try {
 			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
 		} catch (\InvalidArgumentException $e) {
-			Alert::danger('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->flash();
+			Alert::danger('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->persistent();
 		}
 
 		if (isset($date_from_clinics)) {
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
 
-			Alert::info('Das Entlassungsdatum wurde erfolgreich geändert.')->flash();
+			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->persistent();
 		}
 
 		return Redirect::back();
@@ -173,9 +173,9 @@ class PatientController extends Controller
 			$patient->password = bcrypt($password);
 			$patient->save();
 
-			Alert::info('Das Passwort wurde erfolgreich geändert.')->flash();
+			Alert::success('Das Passwort wurde erfolgreich geändert.')->persistent();
 		} else {
-			Alert::danger('Das eingegebene Passwort ist nicht korrekt.')->flash();
+			Alert::error('Das eingegebene Passwort ist nicht korrekt.')->persistent();
 		}
 
 		return Redirect::back();
@@ -188,9 +188,9 @@ class PatientController extends Controller
 			$patient->personal_information = $personal_information;
 			$patient->save();
 
-			Alert::info('Die persönlichen Notizen wurden erfolgreich geändert.')->flash();
+			Alert::success('Die persönlichen Notizen wurden erfolgreich geändert.')->persistent();
 		} else {
-			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
+			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
 		}
 
 		return Redirect::back();
@@ -203,9 +203,9 @@ class PatientController extends Controller
 			$patient->notes_of_therapist = $notes_of_therapist;
 			$patient->save();
 
-			Alert::info('Die Notizen wurden erfolgreich geändert.')->flash();
+			Alert::success('Die Notizen wurden erfolgreich geändert.')->persistent();
 		} else {
-			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
+			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
 		}
 
 		return Redirect::back();

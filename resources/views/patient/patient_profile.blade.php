@@ -24,7 +24,7 @@
         {{ csrf_field() }}
         <div class="form-group">
           <label for="notes" class="control-label">Notizen</label>
-          <textarea name="notes" rows="5" class="form-control" placeholder="Hat eine zu krasse Meinung zu Earl Grey.">{{ $Patient['notesOfTherapist'] }}</textarea>
+          <textarea name="notes" rows="5" class="form-control js-auto-size" placeholder="Hat eine zu krasse Meinung zu Earl Grey.">{{ $Patient['notesOfTherapist'] }}</textarea>
         </div>
         <p>
           <div class="form-group">
@@ -166,7 +166,7 @@
         {{ csrf_field() }}
         <div class="form-group">
           <label for="personal_information" class="control-label">(nur für Therapeuten sichtbar)</label>
-          <textarea name="personal_information" rows="5" class="form-control" placeholder="Ich habe eine Meinung zu Earl Grey.">{{ $Patient['personalInformation'] }}</textarea>
+          <textarea name="personal_information" rows="5" class="form-control js-auto-size" placeholder="Ich habe eine Meinung zu Earl Grey.">{{ $Patient['personalInformation'] }}</textarea>
         </div>
         <p>
           <div class="form-group">

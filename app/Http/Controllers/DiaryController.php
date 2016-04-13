@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use App\Code;
 use App\Patient;
@@ -209,11 +209,11 @@ class DiaryController extends Controller
         }
         if ($request->input('entryButton') == "saveDirty") {
             /* Zwischenspeichern von $entry */
-            Alert::success("Der Eintrag wurde zwischengespeichert")->flash();
+            Alert::success("Der Eintrag wurde zwischengespeichert")->persistent();
             return Redirect::back();
         } else {
             /* Speichern von $entry */
-            Alert::success("Der Eintrag wurde abgeschickt")->flash();
+            Alert::success("Der Eintrag wurde abgeschickt")->persistent();
             //return "Abgeschickt";
             return Redirect::to('/Home');
         }
