@@ -68,28 +68,28 @@ class PatientController extends Controller
 
 		$patient = Patient::whereName($name)->firstOrFail();
 
-		$patient_info = $patient->to_info();
+		$patient_info = $patient->info_with('therapist');
 
 		switch ($user_role) {
 			case UserRole::PATIENT:
-				$status = PatientStatus::$STATUS_INFO[$patient_info['status']];
+				$status = PatientStatus::$STATUS_INFO[$patient_info['patientStatus']];
 				break;
 			case UserRole::THERAPIST:
 			case UserRole::ADMIN:
-				$status = $patient_info['status'].': '.PatientStatus::$STATUS_INFO[$patient_info['status']];
+				$status = $patient_info['patientStatus'].': '.PatientStatus::$STATUS_INFO[$patient_info['patientStatus']];
 				break;
 		}
 
 		$patient_info['assignmentDay'] = Helper::generate_day_number_map()[$patient_info['assignmentDay']];
 		$patient_info['availableDays'] = $days->get_available_days();
 		$patient_info['status'] = $status;
+		$patient_info['therapist'] = array_get($patient_info, 'therapist.name', '-');
 		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(), 'name');
+		$patient_info['dateFromClinics'] = array_get($patient_info, 'dateFromClinics', '-');
 
 		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;
-
-		// $profile_user_model['Patient']=Patient($name);
-		// return dd($profile_user_model);
+		
 		return view('patient.patient_profile')->with($profile_user_model);
 	}
 

@@ -30,7 +30,9 @@ class User extends InfoModel implements
     protected static $persisted = ['name',
         'email',
         'password',
-        'is_random'];
+        'is_random',
+        'remember_token'
+    ];
 
     protected $dates = [
         'created_at',
@@ -66,6 +68,10 @@ class User extends InfoModel implements
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'is_random',
+        'type'
     ];
 
     /*
@@ -78,15 +84,15 @@ class User extends InfoModel implements
      */
 
     public function getCreatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getUpdatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getLastLoginAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
 }

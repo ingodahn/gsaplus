@@ -31,7 +31,14 @@ class Patient extends User
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['therapist_id'];
+    protected $hidden = ['therapist_id',
+        'password',
+        'remember_token',
+        'created_at',
+        'updated_at',
+        'is_random',
+        'type'
+    ];
 
     protected $dates = [
         'registration_date',
@@ -41,22 +48,12 @@ class Patient extends User
         'intervention_ended_on'
     ];
 
-    public $info_methods = [
-        'status',
+    protected $dynamic_attributes = [
+        'patient_status',
         'status_of_next_assignment',
         'patient_week',
         'overdue'
     ];
-
-    public $relation_methods = [
-        'assignments',
-        'therapist'
-    ];
-
-    protected function info_relation_map() {
-        return ['therapist' => 'name',
-                'assignments' => 'collection_info'];
-    }
 
     /*
      * The following accessors will convert every date to an instance
@@ -68,15 +65,31 @@ class Patient extends User
      */
 
     public function getDateFromClinicsAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getLastActivityAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getRegistrationDateAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
+    }
+
+    public function getPatientStatusAttribute() {
+        return $this->status();
+    }
+
+    public function getStatusOfNextAssignmentAttribute() {
+        return $this->status_of_next_assignment();
+    }
+
+    public function getPatientWeekAttribute() {
+        return $this->patient_week();
+    }
+
+    public function getOverdueAttribute() {
+        return $this->overdue();
     }
 
     /**
@@ -123,8 +136,9 @@ class Patient extends User
      * @return Date the day of the first assignment
      */
     public function first_assignment_day() {
-        return $this->date_from_clinics->copy()->startOfDay()
-            ->endOfWeek()->next($this->assignment_day);
+        return $this->date_from_clinics === null ? null :
+                    $this->date_from_clinics->copy()->startOfDay()
+                    ->endOfWeek()->next($this->assignment_day);
     }
 
     /**
@@ -144,7 +158,8 @@ class Patient extends User
      * @return Date the given weeks assignment day
      */
     public function assignment_day_for_week($week) {
-        return $this->first_assignment_day()->copy()->addWeeks($week - 1);
+        return $this->first_assignment_day() === null ? null :
+                    $this->first_assignment_day()->copy()->addWeeks($week - 1);
     }
 
     /**
@@ -191,7 +206,8 @@ class Patient extends User
      *          (if intervention is still running)
      */
     public function intervention_ended_in_week() {
-        return $this->intervention_ended_on !== null ? $this->week_for_date($this->intervention_ended_on) : null;
+        return $this->intervention_ended_on === null ? null :
+                    $this->week_for_date($this->intervention_ended_on);
     }
 
     /**
@@ -356,6 +372,28 @@ class Patient extends User
                 return $this->next_assignment()->status();
             }
         }
+    }
+
+    /**
+     * An info that contains descriptions of all possible sub relations.
+     *
+     * Included:
+     * - therapist
+     * - assignments
+     *      -> with all situations (if assignment is a situation survey)
+     *      -> with survey
+     *      -> with phq4 and wai
+     *      -> with comment
+     *          -> and commentReply
+     *
+     * @return array an info that contains descriptions of all possible sub relations
+     */
+    public function all_info() {
+        return $this->info_with('therapist',
+                           'assignments.situations',
+                           'assignments.survey.phq4',
+                           'assignments.survey.wai',
+                           'assignments.comment.comment_reply');
     }
 
 }

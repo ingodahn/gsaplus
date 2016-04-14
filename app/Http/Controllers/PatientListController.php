@@ -125,11 +125,11 @@ class PatientListController extends Controller
 		$patients = Patient::all();
 
 		foreach ($patients as $patient) {
-			$infos->push($patient->to_info());
+			$infos->push($patient->info_with('therapist'));
 		}
 
 		return Datatables::of($infos)
-				-> addColumn('selection', function($patient_info){
+				->addColumn('selection', function($patient_info){
 					return '<input type="checkbox" name="list_of_names[]" value="'.$patient_info['name'].'"></input>';
 				})
 				->editColumn('overdue', function($patient_info) {
@@ -139,7 +139,10 @@ class PatientListController extends Controller
 					return '<a href="/Diary/'.$patient_info['name'].'">'.$patient_info['name'].'</a>';
 				})
 				->editColumn('status', function ($patient_info) {
-					return $patient_info['status'].': '.PatientStatus::$STATUS_INFO[$patient_info['status']];
+					return $patient_info['patientStatus'].': '.PatientStatus::$STATUS_INFO[$patient_info['patientStatus']];
+				})
+				->addColumn('therapist', function ($patient_info) {
+					return array_get($patient_info, 'therapist.name', '-');
 				})
 				->editColumn('statusOfNextAssignment', function($patient_info){
 					return $patient_info['statusOfNextAssignment'].': '
@@ -150,6 +153,9 @@ class PatientListController extends Controller
 				})
 				->edit_column('assignmentDay', function($patient_info) use ($days_map) {
 					return $days_map[$patient_info['assignmentDay']];
+				})
+				->edit_column('lastActivity', function($patient_info) {
+					return array_get($patient_info, 'lastActivity', '-');
 				})
 				->removeColumn('id')
 				->removeColumn('createdAt')

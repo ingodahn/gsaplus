@@ -147,3 +147,10 @@ hr {
 tr.even {
     background-color: $gray-lightest;
 }
+
+// For javierjulio/textarea-autosize
+textarea {
+  box-sizing: border-box;
+  min-height: 39px;
+  overflow-x: hidden; /* for Firefox (issue #5) */
+}

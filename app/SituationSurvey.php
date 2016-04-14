@@ -12,17 +12,6 @@ class SituationSurvey extends Assignment
 
     protected static $singleTableType = AssignmentType::SITUATION_SURVEY;
 
-    public $relation_methods = [
-        'patient',
-        'comment',
-        'survey',
-        'situations'
-    ];
-
-    protected function info_relation_map() {
-        return ['situations' => 'collection_info'];
-    }
-
     public function situations() {
         return $this->hasMany('App\Situation');
     }
@@ -42,10 +31,10 @@ class SituationSurvey extends Assignment
 
             if ($this->$situations !== null) {
                 foreach ($situations as $situation) {
-                    if ($situation->description
-                        || $situation->expectation
-                        || $situation->my_reaction
-                        || $situation->their_reaction) {
+                    if ($situation->description != NULL
+                        || $situation->expectation != NULL
+                        || $situation->my_reaction != NULL
+                        || $situation->their_reaction != NULL) {
                         // user provided some answers
                         $partially_answered = true;
                         break;
@@ -57,12 +46,16 @@ class SituationSurvey extends Assignment
                 // dirty is false and an answer is provided
                 // -> patient sent in the answer
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
-            } else if (Date::now()->gt(
-                $this->patient->previous_assignment_day()
-                    ->addDays(config('gsa.reminder_period_in_days')))) {
+            } else if ($this->patient->previous_assignment_day() !== null &&
+                            Date::now()->gt($this->patient->previous_assignment_day()
+                            ->addDays(config('gsa.reminder_period_in_days')))) {
                 // patient was reminded by system and didn't submit any text
                 // TODO: check if this is really the case! -> check reminders
                 return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
+            } else {
+                // patient hasn't edited assignment and reminder should happen
+                // in the future
+                return AssignmentStatus::THERAPIST_SAVED_ASSIGNMENT;
             }
         }
 

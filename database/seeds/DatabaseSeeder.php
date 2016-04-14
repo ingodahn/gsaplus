@@ -71,8 +71,7 @@ class DatabaseSeeder extends Seeder
             });;
 
         foreach ($patients as $patient) {
-            // every patient has a random number of assignments
-            // (in the past)
+            // every patient has a random number of past assignments
             $assignment_count = rand(1,12);
             // choose random therapist
             $therapist = Therapist::all()->random();
@@ -89,8 +88,8 @@ class DatabaseSeeder extends Seeder
                         $patient->date_from_clinics->copy()->subWeeks(3),
                         $patient->date_from_clinics->copy()->subDay());
 
-            // create a bunch of successive assignments
-            for ($week = 1; $week <= $assignment_count; $week++) {
+            // create all assignments (all future assignments will be defined)
+            for ($week = 1; $week <= 12; $week++) {
                 // create the actual assignment
                 $assignment = ($week == 1) ?
                                 factory(SituationSurvey::class)->make() :
@@ -103,7 +102,7 @@ class DatabaseSeeder extends Seeder
 
                 // 60% chance: the patient completed the assignment
                 // (the patient sent in a final text)
-                $saved = rand(0,10) <= 6;
+                $saved = (rand(0,10) <= 6) && ($week <= $assignment_count);
                 $saved ? $assignment->dirty = false : $assignment->dirty = true;
 
                 // save assignment to DB
@@ -113,7 +112,7 @@ class DatabaseSeeder extends Seeder
 
                 switch ($assignment->type) {
                     case AssignmentType::SITUATION_SURVEY:
-                        $situation_count = rand(1,3);
+                        $situation_count = 3; // rand(1,3);
 
                         for ($count = 1; $count <= $situation_count; $count++) {
                             // answers generated in model factory
@@ -143,7 +142,14 @@ class DatabaseSeeder extends Seeder
                     // answer is commented within 48 hours
                     // (this may result in comments late at night ^^)
                     $comment->date = $patient->assignment_day_for_week($week)
-                                        ->copy()->addHours(rand(0,48));
+                        ->copy()->addHours(rand(0,48));
+
+                    // comment should ly in the past
+                    if ($week === $patient->patient_week() && $comment->date->isFuture()) {
+                        $comment->date = $faker->dateTimeBetween(
+                                                    $patient->previous_assignment_day(), 'now');
+                    }
+
                     $comment->save();
 
                     // associate the comment with the therapist
@@ -177,13 +183,15 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
+
             // the login date needs to be coherent
             // -> assume that the patient has viewed the previous assignment
-            $patient->last_login = $faker->dateTimeBetween($patient->previous_assignment_day(), 'now');
-            // assume user didn't logout
+            $patient->last_login = $faker->dateTimeBetween
+                                        ($patient->previous_assignment_day(), 'now');
+
             $patient->last_activity = $faker->dateTimeBetween($patient->last_login, 'now');
-            // save dates
-            $patient->save();
+            // save
+            $this->set_developer_attributes($patient, true);
         }
     }
 
