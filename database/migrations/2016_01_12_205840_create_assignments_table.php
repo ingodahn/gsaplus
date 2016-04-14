@@ -18,6 +18,7 @@ class CreateAssignmentsTable extends Migration
             $table->increments('id');
 
             $table->tinyInteger('week');
+            $table->date('writing_date')->nullable();
             $table->boolean('dirty');
 
             // attributes for tasks
