@@ -84,26 +84,52 @@ class DatabaseSeeder extends Seeder
 
             // the registration happened before the patient left the clinic
             // registration date -> between 1 day and 3 weeks before date of departure
+            // TODO: not always the case
             $patient->registration_date = $faker->dateTimeBetween(
                         $patient->date_from_clinics->copy()->subWeeks(3),
                         $patient->date_from_clinics->copy()->subDay());
 
+            // set first assignment day
+            $first_assignment_day = $patient->date_from_clinics->copy()->startOfDay()
+                ->endOfWeek()->next($patient->assignment_day);
+
             // create all assignments (all future assignments will be defined)
             for ($week = 1; $week <= 12; $week++) {
-                // create the actual assignment
-                $assignment = ($week == 1) ?
-                                factory(SituationSurvey::class)->make() :
-                                factory(Task::class)->make();
+                // next writing day is always a week in the future
+                // -> not always the case
+                // TODO: implement other cases (for testing)
+                $writing_date = $first_assignment_day->copy()->addWeeks($week-1);
 
-                // assignments mustn't be assigned yet
-                // -> an assignment is saved for a specific week
-                // -> details are filled in later
+                $is_past_assignment = $writing_date->isPast();
+
+                // create the actual assignment
+                // random values are generated only if the writing date is in the past
+                $assignment = ($week == 1) ?
+                    ($is_past_assignment ? factory(SituationSurvey::class)->make() : new SituationSurvey) :
+                    ($is_past_assignment ? factory(Task::class)->make() : new Task);
+
+                // -> date is only specified for past assignments and
+                // the next assignment
+                if ($writing_date->lte(Date::now()->addWeek())) {
+                    $assignment->writing_date = $writing_date;
+                }
+
+                // the week is rather an assignment number
+                // -> patient may be in week 5 but 7 weeks passed since the first
+                //    assignment
+                // TODO: adapt seeder - generate appropriate test data
                 $assignment->week = $week;
 
                 // 60% chance: the patient completed the assignment
                 // (the patient sent in a final text)
-                $saved = (rand(0,10) <= 6) && ($week <= $assignment_count);
-                $saved ? $assignment->dirty = false : $assignment->dirty = true;
+                $saved = (rand(0,10) <= 6) && $is_past_assignment;
+
+                // answer may be empty
+                if (!$saved && (rand(0,10) <= 2)) {
+                    $assignment->answer = "";
+                }
+
+                $assignment->dirty = $assignment->answer === "" ? false : true;
 
                 // save assignment to DB
                 // don't save timestamps (for testing) and
@@ -116,7 +142,8 @@ class DatabaseSeeder extends Seeder
 
                         for ($count = 1; $count <= $situation_count; $count++) {
                             // answers generated in model factory
-                            $situation = factory(Situation::class)->make();
+                            $situation = $is_past_assignment && $saved ?
+                                            factory(Situation::class)->make() : new Situation;
                             $this->set_developer_attributes($situation, true);
                             // add situation
                             $assignment->situations()->save($situation);
@@ -127,6 +154,7 @@ class DatabaseSeeder extends Seeder
                         $template = TaskTemplate::all()->random();
                         // 75% chance: the templates text wasn't modified
                         $assignment->problem = (rand(0,3) === 0) ? $faker->realText() : $template->problem;
+
                         // add link to the template
                         $assignment->task_template()->associate($template);
                         break;
@@ -141,13 +169,11 @@ class DatabaseSeeder extends Seeder
 
                     // answer is commented within 48 hours
                     // (this may result in comments late at night ^^)
-                    $comment->date = $patient->assignment_day_for_week($week)
-                        ->copy()->addHours(rand(0,48));
+                    $comment->date = $assignment->writing_date->copy()->addHours(rand(0,48));
 
                     // comment should ly in the past
-                    if ($week === $patient->patient_week() && $comment->date->isFuture()) {
-                        $comment->date = $faker->dateTimeBetween(
-                                                    $patient->previous_assignment_day(), 'now');
+                    if ($week === $assignment_count && $comment->date->isFuture()) {
+                        $comment->date = $faker->dateTimeBetween($assignment->writing_date, 'now');
                     }
 
                     $comment->save();
@@ -183,13 +209,26 @@ class DatabaseSeeder extends Seeder
                 }
             }
 
-
             // the login date needs to be coherent
-            // -> assume that the patient has viewed the previous assignment
-            $patient->last_login = $faker->dateTimeBetween
-                                        ($patient->previous_assignment_day(), 'now');
+            // -> assume that the patient has viewed the current assignment
+            // (if one exists)
+           $latest_assignment = $patient->latest_assignment_for_date(Date::now());
 
+            if ($latest_assignment) {
+                if ($latest_assignment->comment) {
+                    $reference_date = $latest_assignment->comment->date;
+                } else {
+                    $reference_date = $latest_assignment->writing_date;
+                }
+            }  else if ($patient->date_from_clinics) {
+                $reference_date = $patient->date_from_clinics;
+            } else {
+                $reference_date = $patient->registration_date;
+            }
+
+            $patient->last_login = $faker->dateTimeBetween($reference_date, 'now');
             $patient->last_activity = $faker->dateTimeBetween($patient->last_login, 'now');
+
             // save
             $this->set_developer_attributes($patient, true);
         }

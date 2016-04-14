@@ -22,7 +22,7 @@ class Assignment extends InfoModel
 
     protected static $persisted = ['dirty', 'week', 'patient_id', 'is_random'];
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at', 'writing_date'];
 
     protected $casts = ['dirty' => 'boolean'];
 
@@ -38,7 +38,8 @@ class Assignment extends InfoModel
         'type'];
 
     protected $dynamic_attributes = [
-        'assignment_status'
+        'assignment_status',
+        'partially_answered'
     ];
 
     /**
@@ -88,6 +89,10 @@ class Assignment extends InfoModel
         return $date === null ? null : new Date($date);
     }
 
+    public function getWritingDateAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
+
     public function getAssignmentStatusAttribute() {
         return $this->status();
     }
@@ -98,9 +103,15 @@ class Assignment extends InfoModel
      * @return string Status der Aufgabe
      */
     public function status() {
-        if ($this->patient->intervention_ended_on !== null &&
-                $this->patient->intervention_ended_in_week() <= $this->week) {
-            return AssignmentStatus::ASSIGNMENT_IS_NOT_REQUIRED;
+        if ($this->patient->intervention_ended_on !== null) {
+            // if intervention end date is set and writing date is null
+            // -> assignment hasn't been assigned yet and is not required
+            // if writing date is set: check if writing date is greater than
+            // intervention end date
+            if  ($this->writing_date === null
+                    || $this->patient->intervention_ended_on->lt($this->writing_date)) {
+                return AssignmentStatus::ASSIGNMENT_IS_NOT_REQUIRED;
+            }
         }
 
         if ($this->comment !== null) {
@@ -111,10 +122,30 @@ class Assignment extends InfoModel
                 // therapist provided comment to patients answer
                 return AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             }
-        } else if ($this->dirty) {
-            return AssignmentStatus::PATIENT_EDITED_ASSIGNMENT;
-        } else if ($this->patient->current_assignment() === $this) {
+        } else if ($this->writing_date !== null &&
+                (!$this->partially_answered || $this->dirty) &&
+                Date::now()->gte($this->writing_date->copy()
+                ->addDays(config('gsa.reminder_period_in_days')))) {
+            // patient was reminded by system and didn't submit a text
+            // or didn't sent in the answer
+            // TODO: check if this is really the case! -> check reminders
+            return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
+        } else if ($this->partially_answered) {
+            if ($this->dirty) {
+                // patient has provided an answer but didn't save it
+                return AssignmentStatus::PATIENT_EDITED_ASSIGNMENT;
+            } else {
+                // patient sent in the answer
+                return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
+            }
+        } else if ($this->patient->patient_week === $this->week) {
+            // patient didn't edit the assignment
             return AssignmentStatus::PATIENT_GOT_ASSIGNMENT;
+        } else if ($this->patient->patient_week < $this->week) {
+            // therapist entered text of assignment (or has
+            // used text from template) and the assignment lies
+            // in the future (patient didn't get it yet)
+            return AssignmentStatus::THERAPIST_SAVED_ASSIGNMENT;
         }
 
         return AssignmentStatus::UNKNOWN;
