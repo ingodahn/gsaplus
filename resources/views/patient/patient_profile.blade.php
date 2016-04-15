@@ -8,12 +8,10 @@
     <h2>
       Profil von {{ $Patient['name'] }}
       <small>
-        (
         @if($isTherapist)
           code: <code>{{ $Patient['code'] }}</code>,
         @endif
         status: <code>{{ $Patient['status'] }}</code>
-        )
       </small>
     </h2>
 
