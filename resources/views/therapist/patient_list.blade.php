@@ -103,7 +103,7 @@
     <hr/>
     <h2>Patientenliste
       <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Alle im System registrierten Patienten mit Sortier- und Filterfunktionen" data-content="
-      Es gibt folgende <b>Patientenstati (P)</b>
+      Es gibt folgende <strong>Patientenstati (P)</strong>
       <ul>
         <li>Registriert (P020)</li>
         <li>Entlassungsdatum erfasst (P025)</li>
@@ -118,7 +118,7 @@
       </ul>
       Die Zahlen dienen zur Sortierung.<br>
       <br>
-      Es gibt auch folgende <b>Aufgabenstati (E)</b>
+      Es gibt auch folgende <strong>Aufgabenstati (E)</strong>
       <ul>
         <li>Aufgabe nicht definiert (E010)</li>
         <li>Aufgabe definiert (E015)</li>
@@ -130,7 +130,7 @@
         <li>Aufgabe überfällig (E070)</li>
         <li>Aufgabe nicht erforderlich (E100)</li>
       </ul>
-      Der Wert für <b>Überfällig</b> wird wie folgt berechnet:<br>
+      Der Wert für <strong>Überfällig</strong> wird wie folgt berechnet:<br>
       Überfällig (overdue) = Wert der Form 'Anzahl der überfälligen Einträge' / 'Aktuelle Wochennr' = Anzahl der bereits gestellten Aufgaben
       ">
         <i class="fa fa-question-circle"></i>
