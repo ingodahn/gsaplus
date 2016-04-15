@@ -153,4 +153,5 @@ textarea {
   box-sizing: border-box;
   min-height: 39px;
   overflow-x: hidden; /* for Firefox (issue #5) */
+  overflow: hidden;
 }
