@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label for="message" class="control-label">Nachricht</label>
-                <textarea name="mail_body" rows="5" class="form-control" placeholder="Sehr geehrter Dr Ogen..."></textarea>
+                <textarea name="mail_body" rows="5" class="form-control js-auto-size" placeholder="Sehr geehrter Dr Ogen..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary pull-right">Absenden</button>
             <a class="btn btn-primary pull-right" style="margin-right: 10px;" href="/Home">Zurück</a>

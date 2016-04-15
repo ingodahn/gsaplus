@@ -11,16 +11,6 @@ class Therapist extends User
 
     protected static $singleTableType = UserRole::THERAPIST;
 
-    public $relation_methods = [
-        'patients',
-        'comments'
-    ];
-
-    protected function info_relation_map() {
-        return ['comments' => 'collection_info',
-                'patients' => 'collection_info'];
-    }
-
     /**
      * Relationship to the therapists comments . Please use
      * $therapist->comments to access the collection.

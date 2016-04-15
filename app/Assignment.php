@@ -24,21 +24,22 @@ class Assignment extends InfoModel
 
     protected $dates = ['created_at', 'updated_at'];
 
+    protected $casts = ['dirty' => 'boolean'];
+
     /*
      * hide ids from list of attributes
      * (ids are used to resolve relationships)
      */
-    protected $hidden = ['patient_id', 'task_template_id'];
+    protected $hidden = ['patient_id',
+        'task_template_id',
+        'created_at',
+        'updated_at',
+        'is_random',
+        'type'];
 
-    public $relation_methods = [
-        'patient',
-        'comment',
-        'survey'];
-
-    protected function info_relation_map()
-    {
-        return ['patient' => 'name', 'comment' => 'text'];
-    }
+    protected $dynamic_attributes = [
+        'assignment_status'
+    ];
 
     /**
      * Relationship to the patient (who should answer the assignment).
@@ -76,15 +77,19 @@ class Assignment extends InfoModel
      */
 
     public function getCreatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getUpdatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getAssignedOnAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
+    }
+
+    public function getAssignmentStatusAttribute() {
+        return $this->status();
     }
 
     /**
@@ -115,4 +120,24 @@ class Assignment extends InfoModel
         return AssignmentStatus::UNKNOWN;
     }
 
+    /**
+     * An info that contains descriptions of all possible sub relations.
+     *
+     * Included:
+     * - therapist
+     * - assignments
+     *      -> with all situations (if assignment is a situation survey)
+     *      -> with survey
+     *      -> with phq4 and wai
+     *      -> with comment
+     *          -> and commentReply
+     *
+     * @return array an info that contains descriptions of all possible sub relations
+     */
+    public function all_info() {
+        return $this->info_with('situations',
+            'comment.comment_reply',
+            'survey.phq4',
+            'survey.wai');
+    }
 }

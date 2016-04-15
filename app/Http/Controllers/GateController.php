@@ -18,6 +18,10 @@ use App\Helper;
 use App\Models;
 
 use UxWeb\SweetAlert\SweetAlert as Alert;
+// use Prologue\Alerts\Facades\Alert;
+
+use App\SituationSurvey;
+use App\Task;
 
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem
@@ -238,6 +242,18 @@ class GateController extends Controller
 			$patient->date_from_clinics = null;
 
 			$patient->save();
+
+			// create all assignments (all future assignments will be defined)
+			for ($week = 1; $week <= 12; $week++) {
+				$assignment = ($week == 1) ?
+					new SituationSurvey :
+					new Task;
+
+				$assignment->week = $week;
+				$assignment->dirty = false;
+
+				$patient->assignments()->save($assignment);
+			}
 
 			$days = new Days;
 			$days->decrease_day($day);
