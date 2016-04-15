@@ -99,22 +99,27 @@ class RemindUsersOfAssignment extends Command
 
         // remind of first or current assignment
         foreach ($assignments as $assignment) {
-            $next_assignment = $assignment->patient->assignment_for_week($assignment->week + 1);
+            $patient = $assignment->patient;
 
-            if ($next_assignment && $next_assignment->writing_date === null) {
-                $next_assignment->writing_date = Date::now()->startOfDay()->addWeek();
-                $next_assignment->save();
-            }
+            if ($patient->intervention_ended_on === null) {
+                $next_assignment = $patient->assignment_for_week($assignment->week + 1);
 
-            if ($assignment->status() === AssignmentStatus::PATIENT_GOT_ASSIGNMENT) {
-                if ($assignment->week === 1 && $type_of_reminder == self::OPTION_FIRST) {
-                    // remind of first assignment
-                    $this->sendEMail($assignment->patient, self::OPTION_FIRST);
-                } else if ($assignment->week > 1 && $assignment->week <= 12
-                    && $type_of_reminder == self::OPTION_NEW
-                    && $assignment->problem != NULL) {
-                    // remind of current assignment
-                    $this->sendEMail($assignment->patient, self::OPTION_NEW);
+                if ($next_assignment && $next_assignment->writing_date === null) {
+                    $next_assignment->writing_date = Date::now()->startOfDay()->addWeek();
+                    $next_assignment->save();
+                }
+
+                // don't send reminder if patient already edited the assignment
+                if ($assignment->status() === AssignmentStatus::PATIENT_GOT_ASSIGNMENT) {
+                    if ($assignment->week === 1 && $type_of_reminder == self::OPTION_FIRST) {
+                        // remind of first assignment
+                        $this->sendEMail($assignment->patient, self::OPTION_FIRST);
+                    } else if ($assignment->week > 1 && $assignment->week <= 12
+                        && $type_of_reminder == self::OPTION_NEW
+                        && $assignment->problem != NULL) {
+                        // remind of current assignment
+                        $this->sendEMail($assignment->patient, self::OPTION_NEW);
+                    }
                 }
             }
 
