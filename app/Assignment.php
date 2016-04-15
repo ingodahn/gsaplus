@@ -39,7 +39,8 @@ class Assignment extends InfoModel
 
     protected $dynamic_attributes = [
         'assignment_status',
-        'partially_answered'
+        'partially_answered',
+        'system_reminded_of_assignment'
     ];
 
     /**
@@ -97,6 +98,29 @@ class Assignment extends InfoModel
         return $this->status();
     }
 
+    public function getSystemRemindedOfAssignmentAttribute() {
+        $not_saved_or_empty = (!$this->partially_answered || $this->dirty);
+
+        $system_reminded_of_assignment = ($not_saved_or_empty && $this->is_past_assignment) ||
+                                            ($this->is_current_assignment &&
+                                            $this->patient->date_of_last_reminder &&
+                                            $this->patient->date_of_last_reminder->gte($this->writing_date));
+
+        return $system_reminded_of_assignment;
+    }
+
+    public function getIsCurrentAssignmentAttribute() {
+        $current_assignment = $this->patient->current_assignment();
+
+        return ($current_assignment && $current_assignment->week == $this->week);
+    }
+
+    public function getIsPastAssignmentAttribute() {
+        $current_assignment = $this->patient->current_assignment();
+
+        return ($current_assignment && ($current_assignment->week > $this->week));
+    }
+
     /**
      * Status der Aufgabe
      *
@@ -112,9 +136,7 @@ class Assignment extends InfoModel
                     || $this->patient->intervention_ended_on->lt($this->writing_date)) {
                 return AssignmentStatus::ASSIGNMENT_IS_NOT_REQUIRED;
             }
-        }
-
-        if ($this->comment !== null) {
+        } else if ($this->comment !== null) {
             if ($this->comment->comment_reply !== null) {
                 // patient rated therapists comment
                 return AssignmentStatus::PATIENT_RATED_COMMENT;
@@ -122,13 +144,8 @@ class Assignment extends InfoModel
                 // therapist provided comment to patients answer
                 return AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             }
-        } else if ($this->writing_date !== null &&
-                (!$this->partially_answered || $this->dirty) &&
-                Date::now()->gte($this->writing_date->copy()
-                ->addDays(config('gsa.reminder_period_in_days')))) {
+        } else if ($this->system_reminded_of_assignment){
             // patient was reminded by system and didn't submit a text
-            // or didn't sent in the answer
-            // TODO: check if this is really the case! -> check reminders
             return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
         } else if ($this->partially_answered) {
             if ($this->dirty) {
