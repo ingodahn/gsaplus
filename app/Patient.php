@@ -24,6 +24,7 @@ class Patient extends User
         'registration_date',
         'therapist_id',
         'intervention_ended_on',
+        'date_of_last_reminder',
         'last_login',
     ];
 
@@ -45,7 +46,8 @@ class Patient extends User
         'date_from_clinics',
         'last_activity',
         'last_login',
-        'intervention_ended_on'
+        'intervention_ended_on',
+        'date_of_last_reminder'
     ];
 
     protected $dynamic_attributes = [

@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('date_from_clinics')->nullable();
             $table->dateTime('last_activity')->nullable();
             $table->dateTime('intervention_ended_on')->nullable();
+            $table->dateTime('date_of_last_reminder')->nullable();
             $table->text('personal_information');
             $table->text('notes_of_therapist');
 
