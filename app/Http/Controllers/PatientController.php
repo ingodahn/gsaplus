@@ -89,7 +89,7 @@ class PatientController extends Controller
 
 		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;
-		
+
 		return view('patient.patient_profile')->with($profile_user_model);
 	}
 
@@ -188,7 +188,7 @@ class PatientController extends Controller
 			$patient->personal_information = $personal_information;
 			$patient->save();
 
-			Alert::success('Die persönlichen Notizen wurden erfolgreich geändert.')->persistent();
+			Alert::success('Ihre persönlichen Informationen wurden erfolgreich gespeichert.')->persistent();
 		} else {
 			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
 		}
