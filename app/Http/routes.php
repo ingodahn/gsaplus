@@ -41,6 +41,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/about', function() {
 		return view('system.about');
 	});
+	Route::get('/info', function() {
+		return view('system.info');
+	});
 
 	Route::get('/ResetPassword', 'GateController@reset_password');
 	Route::post('/MailForPassword', 'GateController@mail_for_password');
