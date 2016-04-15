@@ -121,7 +121,38 @@ class RemindUsersOfAssignment extends Command
     }
 
     protected function sendRemindersForDueAssignments() {
+        // get patients whose
+        // - intervention didn't end
+        // - hospital stay is over
+        $patients = Patient::whereNull('intervention_ended_on')
+            ->whereNotNull('date_from_clinics')
+            ->get();
 
+        $bar = $this->output->createProgressBar($patients->count());
+
+        $bar->setFormat("Notifying of due assignment: ".'[%bar%] %current%/%max%');
+        $bar->start();
+
+        foreach ($patients as $patient) {
+            // assignments exists because date from clinics was set before
+            // (see mutator in class Patient)
+            $current_assignment = $patient->current_assignment();
+
+             if (Date::now()->gte($current_assignment->writing_date->copy()
+                    ->addDays(config('gsa.reminder_period_in_days')))) {
+                // remind of due assignment if 5 days passed since the writing date
+                $this->sendEMail($patient, self::OPTION_DUE);
+
+                 // save date of reminder
+                $patient->date_of_last_reminder = Date::now();
+                $patient->save();
+            }
+
+            $bar->advance();
+        }
+
+        $bar->finish();
+        $bar->clear();
     }
 
     protected function sendRemindersForMissedAssignments() {
