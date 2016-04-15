@@ -127,7 +127,7 @@
         </div>
       </div>
 
-      <p><b>Hinweis:</b>
+      <p><strong>Hinweis:</strong>
         Speichern Sie Ihr Passwort nicht im Browser wenn andere Benutzer diesen Rechner unter dem selben Namen nutzen können.
       </p>
 
