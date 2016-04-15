@@ -9,6 +9,10 @@
       Dies ist das Tagebuch von <em>{{ $Diary['name'] }}</em>. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
     </p>
 
+    <p>
+      Wenn Sie noch keine Aufgabe erhalten haben, warten Sie bitte ab, bis Ihr Online Therapeut Ihnen eine Aufgabe zuweist.
+    </p>
+
     <p>Es ist Woche <strong>{{$Diary['patient_week']}}</strong> von 12.</p>
 
     <p>
