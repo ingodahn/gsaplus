@@ -34,6 +34,9 @@
 
     <div class="info-video" id="video-1">
       <h3>Some video</h3>
+      <div class="pull-right">
+        <a href="#toc">Nach oben</a>
+      </div>
       <p>
         Sehen sie hier, wie ein Mann lacht.
       </p>
@@ -44,6 +47,9 @@
 
     <div class="info-video" id="video-2">
       <h3>Another video</h3>
+      <div class="pull-right">
+        <a href="#toc">Nach oben</a>
+      </div>
       <p>
         Sehen sie hier, wie ein Mann weint.
       </p>
@@ -54,6 +60,9 @@
 
     <div class="info-video" id="video-3">
       <h3>Awesome video</h3>
+      <div class="pull-right">
+        <a href="#toc">Nach oben</a>
+      </div>
       <p>
         Ein Mann hat viele Gesichter.
       </p>
@@ -64,6 +73,9 @@
 
     <div class="info-video" id="video-4">
       <h3>Boring video</h3>
+      <div class="pull-right">
+        <a href="#toc">Nach oben</a>
+      </div>
       <p>
         Ein Mann bittet ein Mädchen um Verzeihung.
       </p>
@@ -74,6 +86,9 @@
 
     <div class="info-video" id="video-5">
       <h3>Video about videos</h3>
+      <div class="pull-right">
+        <a href="#toc">Nach oben</a>
+      </div>
       <p>
         Ein Mädchen spielt mit dem Feuer. Ein Mädchen weiß nicht, was gut für es ist. Ein Mädchen sollte weg rennen.
       </p>
@@ -84,6 +99,9 @@
 
     <div class="info-video" id="video-6">
       <h3>Videooooooo</h3>
+      <div class="pull-right">
+        <a href="#toc">Nach oben</a>
+      </div>
       <p>
         Ein Mann tippt Wörter auf einer Tastatur.
       </p>
