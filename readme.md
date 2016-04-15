@@ -59,6 +59,8 @@ Rake is a task-runner that we use to automate repetetive tasks, like for example
 
 There are also some tasks which are not called by the update-task, mainly the `watch`-task (which watches the scss-scources for changes and compiles them live) or the `db_reset_`-tasks (which delete the database before migrating them). The latter need to be used manually if database-tables need to be added or removed. The developers should notify about this, but if you see related errors, they propably forgot to. Note that all `db_`-tasks *delete all data* and should be used with extreme caution on the production environment.
 
+When using vagrant, run `vagrant reload --provision` to reload the VM and re-run the provisioning script after it was updated. Omit the `--provision` to just reload the VM. This may be necessary if the VM is unresponsive after suspending the host machine. If you modified the VM and want to revert it to the intended setup, `vagrant destroy` and `vagrant up`.
+
 
 
 # Glossary
