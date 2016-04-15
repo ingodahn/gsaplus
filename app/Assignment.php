@@ -20,9 +20,9 @@ class Assignment extends InfoModel
 
     protected static $singleTableSubclasses = [SituationSurvey::class, Task::class];
 
-    protected static $persisted = ['dirty', 'week', 'patient_id', 'is_random'];
+    protected static $persisted = ['dirty', 'week', 'date_of_reminder', 'patient_id', 'is_random'];
 
-    protected $dates = ['created_at', 'updated_at', 'writing_date'];
+    protected $dates = ['created_at', 'updated_at', 'writing_date', 'date_of_reminder'];
 
     protected $casts = ['dirty' => 'boolean'];
 
@@ -42,6 +42,10 @@ class Assignment extends InfoModel
         'partially_answered',
         'system_reminded_of_assignment'
     ];
+
+    public function getDateOfReminderAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
 
     /**
      * Relationship to the patient (who should answer the assignment).
@@ -98,29 +102,6 @@ class Assignment extends InfoModel
         return $this->status();
     }
 
-    public function getSystemRemindedOfAssignmentAttribute() {
-        $not_saved_or_empty = (!$this->partially_answered || $this->dirty);
-
-        $system_reminded_of_assignment = ($not_saved_or_empty && $this->is_past_assignment) ||
-                                            ($this->is_current_assignment &&
-                                            $this->patient->date_of_last_reminder &&
-                                            $this->patient->date_of_last_reminder->gte($this->writing_date));
-
-        return $system_reminded_of_assignment;
-    }
-
-    public function getIsCurrentAssignmentAttribute() {
-        $current_assignment = $this->patient->current_assignment();
-
-        return ($current_assignment && $current_assignment->week == $this->week);
-    }
-
-    public function getIsPastAssignmentAttribute() {
-        $current_assignment = $this->patient->current_assignment();
-
-        return ($current_assignment && ($current_assignment->week > $this->week));
-    }
-
     /**
      * Status der Aufgabe
      *
@@ -144,7 +125,7 @@ class Assignment extends InfoModel
                 // therapist provided comment to patients answer
                 return AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             }
-        } else if ($this->system_reminded_of_assignment){
+        } else if ($this->date_of_reminder){
             // patient was reminded by system and didn't submit a text
             return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
         } else if ($this->partially_answered) {
@@ -155,7 +136,7 @@ class Assignment extends InfoModel
                 // patient sent in the answer
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
             }
-        } else if ($this->patient->patient_week === $this->week) {
+        } else if ($this->patient->patient_week >= $this->week) {
             // patient didn't edit the assignment
             return AssignmentStatus::PATIENT_GOT_ASSIGNMENT;
         } else if ($this->patient->patient_week < $this->week) {

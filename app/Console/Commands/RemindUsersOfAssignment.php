@@ -144,8 +144,8 @@ class RemindUsersOfAssignment extends Command
                 $this->sendEMail($patient, self::OPTION_DUE);
 
                  // save date of reminder
-                $patient->date_of_last_reminder = Date::now();
-                $patient->save();
+                $current_assignment->date_of_reminder = Date::now();
+                $current_assignment->save();
             }
 
             $bar->advance();

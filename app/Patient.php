@@ -24,7 +24,6 @@ class Patient extends User
         'registration_date',
         'therapist_id',
         'intervention_ended_on',
-        'date_of_last_reminder',
         'last_login',
     ];
 
@@ -46,8 +45,7 @@ class Patient extends User
         'date_from_clinics',
         'last_activity',
         'last_login',
-        'intervention_ended_on',
-        'date_of_last_reminder'
+        'intervention_ended_on'
     ];
 
     protected $dynamic_attributes = [
@@ -269,7 +267,10 @@ class Patient extends User
         $past_assignments = $this->past_assignments();
 
         foreach ($past_assignments as $assignment) {
-            if ($assignment->assignment_status === AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT) {
+            $status = $assignment->assignment_status;
+
+            if ($status === AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT ||
+                $status < AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT) {
                 $overdue++;
             }
         }

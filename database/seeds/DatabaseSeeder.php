@@ -125,11 +125,29 @@ class DatabaseSeeder extends Seeder
                 $saved = (rand(0,10) <= 6) && $is_past_assignment;
 
                 // answer may be empty
-                if (!$saved && (rand(0,10) <= 2)) {
+                if (!$saved && (rand(0,10) <= 3)) {
                     $assignment->answer = "";
                 }
 
-                $assignment->dirty = $assignment->answer === "" ? false : true;
+                if (!$saved && $is_past_assignment) {
+                    $date_of_reminder = $assignment->writing_date
+                                            ->addDays(config('gsa.reminder_period_in_days'));
+
+                    if ($assignment->answer === "") {
+                        $assignment->dirty = false;
+                    } else {
+                        $assignment->dirty = true;
+                    }
+
+                    if ($date_of_reminder->isPast()) {
+                        $assignment->date_of_reminder = $date_of_reminder;
+                    } else {
+                        $assignment->date_of_reminder =
+                                    $faker->dateTimeBetween($assignment->writing_date, 'now');
+                    }
+                } else {
+                    $assignment->dirty = false;
+                }
 
                 // save assignment to DB
                 // don't save timestamps (for testing) and
