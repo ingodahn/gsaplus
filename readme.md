@@ -7,7 +7,7 @@ This document describes how to set up the required server-stack and how to updat
 # Setup
 The following is a description of the *recommended* server setup. It may be technically possible to exchange some of the used components (e.g. **nginx** instead of **apache**), but is discouraged. We need to differentiate two different environments: *Development* and *production*. The *production*-environment is going to be the server in Mainz, which will eventually be made publicly accessible and thus needs to be strictly secured. It must therefore be set up by hand. The *development*-environment is a Virtual Machine, closely resembling the production-environment. It can be set up almost entirely automatically. This guide will focus on *describing* the required environment, rather then how to *set up* such an environment.
 
-It is assumend that you retreive the project's source code via git. Unless specified otherwise, only the `master`-branch is save for production.
+It is assumend that you retreive the project's source code via git. Unless specified otherwise, only the `master`-branch is safe for production.
 
 
 ## Production
