@@ -253,20 +253,7 @@ class Patient extends User
      * the situation survey)
      */
     public function past_assignments() {
-        return $this->assignments()->where('week', '<=', $this->patient_week());
-    }
-
-    /**
-     * Returns all uncommented assignments (including the current assignment
-     * and the situation survey).
-     *
-     * @return Collection of all uncommented assignments (including the current
-     * assignment and the situation survey)
-     *
-     * TODO: check for patient text (? - only for current assignment?)
-     */
-    public function past_assignments_without_comment() {
-        return $this->past_assignments()->whereDoesntHave('comment');
+        return $this->assignments()->where('week', '<=', $this->patient_week())->get();
     }
 
     /**
@@ -276,14 +263,16 @@ class Patient extends User
      */
     public function overdue()
     {
-        // TODO: alle Aufgaben bis zur aktuellen Aufgabe zählen,
-        // da meistens ebenso zukünftige Aufgaben eixistieren
-        // (Ingo: am Anfang werden 12 leere Aufgaben angelegt)
+        $overdue = 0;
+        $past_assignments = $this->past_assignments();
 
-        $number_of_past_assignments = $this->past_assignments()->count();
+        foreach ($past_assignments as $assignment) {
+            if ($assignment->assignment_status === AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT) {
+                $overdue++;
+            }
+        }
 
-        return $number_of_past_assignments > 0 ?
-                    $this->past_assignments_without_comment()->count() / $number_of_past_assignments : 0;
+        return $past_assignments->count() > 0 ? $overdue / $past_assignments->count() : 0;
     }
 
     /**
