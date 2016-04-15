@@ -124,6 +124,7 @@ class Patient extends User
             // give patient at least a week before the first assignment starts
             $first_assignment->writing_date = $reference_date->copy()->startOfDay()
                 ->addWeek()->next($this->assignment_day);
+            $first_assignment->save();
         }
 
         $this->attributes['date_from_clinics'] = $date_from_clinics;
@@ -302,7 +303,8 @@ class Patient extends User
             // patient hasn't left the clinic
             return -1;
         } else if (Date::now()->gte($this->date_from_clinics) &&
-                    Date::now()->lt($this->first_assignment()->writing_date)) {
+                    ($this->first_assignment()->writing_date === null ||
+                    Date::now()->lt($this->first_assignment()->writing_date))) {
             // 0-te Woche falls der erste Schreibtag in der Zukunft liegt
             // und der Patient bereits entlassen wurde
             return 0;
@@ -334,26 +336,17 @@ class Patient extends User
 
         switch ($patient_week) {
             case -1:
-            case 0:
                 // patient resides in clinic
+            case 0:
                 if ($this->date_from_clinics !== null) {
-                    // date of departure is set and lies in the future
+                    // date of departure is set
                     return PatientStatus::DATE_OF_DEPARTURE_SET;
                 } else {
                     // date of departure isn't set but patient is registered
                     return PatientStatus::REGISTERED;
                 }
             default:
-                // get the current assignment (assignment count starts with 0!)
-                $current_assignment = $this->current_assignment();
-
-                if ($current_assignment === null) {
-                    // shouldn't happen... but...
-                    return ($patient_week === 1) ? PatientStatus::DATE_OF_DEPARTURE_SET :
-                        PatientStatus::UNKNOWN;
-                } else {
-                    return AssignmentStatus::to_patient_status($current_assignment->status());
-                }
+                return AssignmentStatus::to_patient_status($this->current_assignment()->status());
         }
     }
 
