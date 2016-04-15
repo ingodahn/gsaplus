@@ -39,8 +39,7 @@ class Assignment extends InfoModel
 
     protected $dynamic_attributes = [
         'assignment_status',
-        'partially_answered',
-        'system_reminded_of_assignment'
+        'partially_answered'
     ];
 
     public function getDateOfReminderAttribute($date) {
