@@ -6,7 +6,7 @@ use App\Models\PatientStatus;
 
 use App\Helper;
 
-class RandomPatientsTableSeeder extends BaseSeeder
+class RandomPatientsTableSeeder extends PatientsTableBaseSeeder
 {
     /**
      * Run the database seeds.

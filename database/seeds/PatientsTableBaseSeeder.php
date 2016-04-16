@@ -28,7 +28,7 @@ use Jenssegers\Date\Date;
 
 use Illuminate\Database\Seeder;
 
-abstract class BaseSeeder extends Seeder
+abstract class PatientsTableBaseSeeder extends Seeder
 {
 
     /**
