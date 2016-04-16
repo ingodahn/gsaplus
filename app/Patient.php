@@ -176,9 +176,9 @@ class Patient extends User
     }
 
     /**
-     * Returns the day of the last assignment.
+     * Returns the day of the previous assignment.
      *
-     * @return Date the day of the last assignment
+     * @return Date the day of the previous assignment
      */
     public function previous_assignment_day() {
         return $this->current_assignment()->writing_date;
@@ -294,11 +294,6 @@ class Patient extends User
      * noch in der Klinik ist)
      */
     public function patient_week() {
-        // -> Ausgangsdatum: Entlassungsdatum / Tag an dem das Entlassungsdatum eingetragen wird
-        // (wenn das Datum in der Vergangenheit liegt)
-        //
-        // -> nächster Schreibtag: mindestens eine Woche später
-        // -> 0-te Woche ist die bis zum ersten Schreibtag
         if ($this->date_from_clinics === null || $this->date_from_clinics->isFuture()) {
             // patient hasn't left the clinic
             return -1;
