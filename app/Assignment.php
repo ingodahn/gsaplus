@@ -107,15 +107,14 @@ class Assignment extends InfoModel
      * @return string Status der Aufgabe
      */
     public function status() {
-        if ($this->patient->intervention_ended_on !== null) {
-            // if intervention end date is set and writing date is null
-            // -> assignment hasn't been assigned yet and is not required
-            // if writing date is set: check if writing date is greater than
-            // intervention end date
-            if  ($this->writing_date === null
-                    || $this->patient->intervention_ended_on->lt($this->writing_date)) {
+        if ($this->patient->intervention_ended_on &&
+            ($this->writing_date === null ||
+             $this->patient->intervention_ended_on->lt($this->writing_date))) {
+                // if intervention end date is set and writing date is null
+                // -> assignment hasn't been assigned yet and is not required
+                // if writing date is set: check if writing date is greater than
+                // intervention end date
                 return AssignmentStatus::ASSIGNMENT_IS_NOT_REQUIRED;
-            }
         } else if ($this->comment !== null) {
             if ($this->comment->comment_reply !== null) {
                 // patient rated therapists comment

@@ -303,7 +303,8 @@ class Patient extends User
             // patient hasn't left the clinic
             return -1;
         } else if (Date::now()->gte($this->date_from_clinics) &&
-                    ($this->first_assignment()->writing_date === null ||
+                    ($this->first_assignment() === null ||
+                    $this->first_assignment()->writing_date === null ||
                     Date::now()->lt($this->first_assignment()->writing_date))) {
             // 0-te Woche falls der erste Schreibtag in der Zukunft liegt
             // und der Patient bereits entlassen wurde
