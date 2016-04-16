@@ -246,6 +246,8 @@ class DiaryController extends Controller
         /* Wenn die Rolle des Angemeldeten Benutzers patient ist, so sollte geprüft werden, ob $patient identisch
         *  mit dem angemeldeten Benutzer ist.
         */
+        $is_therapist = ($request->user()->type === UserRole::THERAPIST);
+        $is_patient = ($request->user()->type === UserRole::PATIENT);
         $assignment=$patient->assignment_for_week($week);
         if ($week == 1) {
             if ($request->has('situation0_description')) { // situations were editable
@@ -348,7 +350,9 @@ class DiaryController extends Controller
             return Redirect::back();
         } else {
             /* Speichern von $entry */
-            $assignment->dirty = false;
+            if ($is_patient) {
+                $assignment->dirty = false;
+            }
             $assignment->save();
             Alert::success("Der Eintrag wurde abgeschickt")->persistent();
             //return "Abgeschickt";
@@ -386,8 +390,9 @@ class DiaryController extends Controller
          *
          * TODO: remove null check
          */
+        $is_patient = ($request->user()->type === UserRole::PATIENT);
         if ($name && $request->user() !== null
-            && $request->user()->type === UserRole::PATIENT
+            && $is_patient
             && Auth::user()->name !== $name
         ) {
             return Redirect::to('/');
@@ -396,6 +401,12 @@ class DiaryController extends Controller
         $Diary = [];
 
         $patient=Patient::whereName($name)->first();
+
+        if ($is_patient) {
+            $patient->last_activity=time();
+            $patient->save();
+        }
+
         $info=$patient->all_info();
         // $info=$patient->to_info([], null, ['assignments']);
         $Diary['name'] = $info['name'];

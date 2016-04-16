@@ -16,10 +16,12 @@ use App\Patient;
 use App\Therapist;
 use App\Helper;
 use App\Models;
-use App\SituationSurvey;
-use App\Task;
 
 use UxWeb\SweetAlert\SweetAlert as Alert;
+// use Prologue\Alerts\Facades\Alert;
+
+use App\SituationSurvey;
+use App\Task;
 
 /**
  * Diese Klasse behandelt alle Aufrufe des servers in Zusammenhang mit dem

@@ -30,7 +30,7 @@
           @endif
 
           {{-- Common --}}
-          <li><a href="/experteninformationen">Experteninformationen</a></li>
+          <li><a href="/info">Experteninformationen</a></li>
 
           {{-- User-Related --}}
           <li class="dropdown">

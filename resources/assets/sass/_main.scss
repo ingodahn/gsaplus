@@ -19,9 +19,19 @@ $nav-height: 100px;
   padding-top: 5px;
 }
 
+// Height of the top navbar
 .navbar-nav {
   margin-top: $nav-height / 4; // Stupid hack because vertical centering is too hard
 }
+
+// Shrink Footer
+.navbar-footer {
+  margin-bottom: 10px;
+}
+.navbar-footer > .navbar-nav {
+  margin-top: 10px;
+}
+
 
 $parallax-window-height: 400px;
 
@@ -153,4 +163,9 @@ textarea {
   box-sizing: border-box;
   min-height: 39px;
   overflow-x: hidden; /* for Firefox (issue #5) */
+  overflow: hidden;
+}
+
+.info-video {
+  margin-top: 64px;
 }

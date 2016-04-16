@@ -8,7 +8,7 @@
     <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
       {{ csrf_field() }}
 
-      <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status'] }}, <code>{{$Role}}</code>)</small></h2>
+      <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status_text'] }}, <code>{{$Role}}</code>)</small></h2>
 
       @if ($Role=='therapist')
         <div class="form-group">
@@ -215,7 +215,7 @@
         <p>
           Wie oft fühlten Sie sich im Verlauf der <strong>letzten 2 Wochen</strong> durch die folgenden Beschwerden beeinträchtigt?
         </p>
-        <div class="container-fluid">
+        <div class="container-fluid big-radios">
           <?php
             $labels = [
               "Wenig Interesse oder Freude an Ihren Tätigkeiten",
@@ -244,7 +244,7 @@
                 </div>
                 @for($j = 0; $j < 4; $j++)
                   <div class="col-md-1">
-                    <label class="radio-inline">
+                    <label class="radio-inline big-radio">
                       <input type="radio" name="{{$names[$i]}}" value="{{$j}}" {{$values[$i] == $j ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$j}}
                     </label>
                   </div>
@@ -254,15 +254,16 @@
           @endfor
         </div>
 
+        <br>
         <p>
           Wenn Sie Ihre beste, je erreichte Arbeitsfähigkeit mit 10 Punkten bewerten: Wie viele Punkte würden Sie dann für Ihre derzeitige Arbeitsfähigkeit geben (0 bedeutet, dass Sie derzeit arbeitsunfähig sind)?
         </p>
-        <div class="container-fluid">
+        <div class="container-fluid big-radios">
           <div class="form-group">
             <div class="row">
               @for($i=0; $i <= 10; $i++)
                 <div class="col-md-1">
-                  <label class="radio-inline">
+                  <label class="radio-inline big-radio">
                     <input type="radio" name="survey_wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$i}}
                   </label>
                 </div>
@@ -333,8 +334,11 @@
         </div>
       @endif
 
+      <hr>
       <p>
-        <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+        @if($isPatient)
+          <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+        @endif
         <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
       </p>
       </form>
@@ -345,8 +349,6 @@
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn">Älter</a>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn">Neuer</a>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn">Zur aktuellen Aufgabe</a>
-      </p>
-      <p>
         <a href="/Home" class="btn">Zur Übersicht</a>
       </p>
 
