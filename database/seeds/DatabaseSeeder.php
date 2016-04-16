@@ -22,5 +22,4 @@ class DatabaseSeeder extends Seeder
         $this->call(RandomPatientsTableSeeder::class);
     }
 
-
 }
