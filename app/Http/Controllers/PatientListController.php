@@ -72,7 +72,7 @@ class PatientListController extends Controller
 		$Slots = $days->get_days();
 
 		$params['Slots'] = $Slots;
-		Alert::info('Die Zahl der freien Slots wurde aktualisiert')->flash();
+		Alert::info('Die Zahl der freien Slots wurde aktualisiert')->persistent();
 
 		return view('therapist.patient_list')->with($params);
 
