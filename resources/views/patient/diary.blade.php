@@ -30,6 +30,7 @@
     @endif
 
     <p>Es ist Woche <strong>{{$Diary['patient_week']}}</strong> von 12.</p>
+      <p>{{$Diary['next_assignment']}}</p>
 
 
 

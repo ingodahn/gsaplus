@@ -154,10 +154,9 @@ class DiaryController extends Controller
         if (! array_key_exists('satisfied',$assignment_info['commentReply'])) {
             $assignment_info['commentReply']['satisfied']=-1;
         }
-        /* ToDo:  comment_reply mit Werten aus Datenbank aktualisieren */
+
         $entry_info['comment_reply']['helpful'] = $assignment_info['commentReply']['helpful'];
         $entry_info['comment_reply']['satisfied'] = $assignment_info['commentReply']['satisfied'];
-        // return dd($entry_info);
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
@@ -263,8 +262,8 @@ class DiaryController extends Controller
                     $situation=$situations->get($i);
                     $situation->description = $request->input('situation'.$i.'_description');
                     $situation->expectation = $request->input('situation'.$i.'_expectations'); //note: Plural in request
-                    $situation->my_reaction = $request->input('situation'.$i.'my_reaction');
-                    $situation->their_reaction = $request->input('situation'.$i.'their_reaction');
+                    $situation->my_reaction = $request->input('situation'.$i.'_my_reaction');
+                    $situation->their_reaction = $request->input('situation'.$i.'_their_reaction');
                     // and save it
                     $situation->save();
                 }
@@ -286,8 +285,8 @@ class DiaryController extends Controller
         $request->has('phq4_depressed') ||
         $request->has('phq4_nervous') ||
         $request->has('phq4_troubled')) { // Survey is edited
-          //  if (! array_key_exists('survey',$assignment_info)) { // no survey yet
-            if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
+          if (! array_key_exists('survey',$assignment_info)) { // no survey yet
+           // if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
                 $survey = new Survey();
                 $assignment->survey()->save($survey);
                 $wai = new WAI;
@@ -345,7 +344,7 @@ class DiaryController extends Controller
             /* Zwischenspeichern von $entry */
             $assignment->dirty = true;
             $assignment->save();
-            return dd($assignment->all_info());
+            // return dd($assignment->all_info());
             Alert::success("Der Eintrag wurde zwischengespeichert")->persistent();
             return Redirect::back();
         } else {
@@ -414,11 +413,18 @@ class DiaryController extends Controller
         if ($Diary['patient_week'] < 0) {
             $Diary['patient_week'] = 0;
         }
-        /*if (array_key_exists('assignments',$info)) {
-           $assignment_info = $info['assignments'];
-        } else {
-            $info['assignments']=[];
-        }*/
+
+        $patient_week=$Diary['patient_week'];
+        $next_assignment_date=$patient->next_assignment()->writing_date;
+        if ($next_assignment_date) {
+            $Diary['next_assignment'] = "Die nächste Aufgabe wird am ".$next_assignment_date->format('d.m.Y')." gestellt.";
+        } elseif ($info['patientStatus'] == 'P020') {
+            $Diary['next_assignment'] = "Die erste Schreibaufgabe wird nach Übermittlung des Entlassungsdatums durch die Klinik gestellt. Sie werden darüber per eMail informiert.";
+        }
+        else {
+            $Diary['next_assignment'] = "Es ist keine weitere Aufgabe vorgesehen";
+        }
+
         $assignment_info = $info['assignments'];
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
@@ -454,6 +460,15 @@ class DiaryController extends Controller
         return view('patient.diary')->with('Diary', $Diary);
     }
 
+    /* Returning a default for null value */
+    private function value_with_default($value,$default) {
+        if ($value) {
+            return $value;
+        } else {
+            return $default;
+        }
+    }
 }
+
 
 ?>
