@@ -15,7 +15,7 @@
         <?php $i++; ?>
         <div class="col-xs-2 col-sm-1 {{$name ? "used" : "unused"}}">
           @if($name)
-            <a href="/profile/{{$name}}">
+            <a href="/Profile/{{$name}}">
               <code>{{$code}}</code>
             </a>
           @else
