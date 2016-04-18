@@ -13,7 +13,7 @@ use App\Patient;
 use App\Users;
 use App\Situation;
 use App\Survey;
-use App\PHQ4;
+use App\PHQ;
 use App\WAI;
 use App\Comment;
 use App\CommentReply;
@@ -116,30 +116,15 @@ class DiaryController extends Controller
 
         // }    // !!! uncomment for M4
         
-        if (! array_key_exists('survey',$assignment_info)) {
-            $assignment_info['survey']=[];
-        }
-        if (! array_key_exists('phq4',$assignment_info['survey'])){
-            $assignment_info['survey']['phq4']=[];
-        }
-        if (! array_key_exists('depressed',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['depressed']=-1;
-        }
-        if (! array_key_exists('nervous',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['nervous']=-1;
-        }
-        if (! array_key_exists('interested',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['interested']=-1;
-        }
-        if (! array_key_exists('troubled',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['troubled']=-1;
-        }
-        $entry_info['survey'] = $assignment_info['survey'];
-        if (! array_key_exists('wai',$assignment_info['survey'])){
-            $assignment_info['survey']['wai']=['index'=> -1];
-        }
+        // if (! array_key_exists('survey',$assignment_info)) {
+            $assignment_info['survey']=[
+                "health"=>-1,
+                "wai"=>-1
+            ];
+        // }
 
-        $entry_info['survey']['wai']=$assignment_info['survey']['wai']['index'];
+        $entry_info['survey'] = $assignment_info['survey'];
+
         if (! array_key_exists('comment',$assignment_info)) {
             $assignment_info['comment']=['text' => ""];
         }
@@ -280,42 +265,28 @@ class DiaryController extends Controller
 
         $assignment_info=$assignment->info();
 
-        if ($request->has('survey_wai') ||
-        $request->has('phq4_interested') ||
-        $request->has('phq4_depressed') ||
-        $request->has('phq4_nervous') ||
-        $request->has('phq4_troubled')) { // Survey is edited
+        /* Uncomment if Survey class is re-implemented
+         if ($request->has('wai') ||
+        $request->has('health') ) { // Survey is edited
           if (! array_key_exists('survey',$assignment_info)) { // no survey yet
            // if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
                 $survey = new Survey();
+              $survey->health=-1;
+              $survey->wai=-1;
                 $assignment->survey()->save($survey);
-                $wai = new WAI;
-                $survey->wai()->save($wai);
-                $phq4 = new PHQ4;
-                $survey->phq4()->save($phq4);
-            } else {
+                } else {
                 $survey = $assignment->survey->first();
-                $wai = $survey->wai->first();
-                $phq4 = $survey->phq4->first();
             }
-            if ($request->has('phq4_interested')) {
-                $phq4->interested = $request->input('phq4_interested');
+
+            if ($request->has('health')){
+                $survey->health = $request->input('health');
             }
-            if ($request->has('phq4_depressed')) {
-                $phq4->depressed = $request->input('phq4_depressed');
+            if ($request->has('wai')){
+                $survey->wai = $request->input('wai');
             }
-            if ($request->has('phq4_nervous')) {
-                $phq4->nervous = $request->input('phq4_nervous');
-            }
-            if ($request->has('phq4_troubled')) {
-                $phq4->troubled = $request->input('phq4_nervous');
-            }
-            $phq4->save();
-            if ($request->has('survey_wai')){
-                $wai->index = $request->input('survey_wai');
-            }
-            $wai->save();
-        }
+            $survey->save();
+        }*/
+        
         if ($request->has('comment')) {
             if ($assignment->comment->all() == []){
                 $comment = new Comment;
