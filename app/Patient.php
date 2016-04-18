@@ -92,6 +92,44 @@ class Patient extends User
         return $this->overdue();
     }
 
+    public function setAssignmentDayAttribute($assignment_day) {
+        $current_assignment = $this->current_assignment();
+
+        if ($current_assignment && $current_assignment->week < 12) {
+            // day is changed during intervention period
+
+            // leave patient at least one week time complete the current assignment
+            $next_writing_date = Date::now()->next($this->assignment_day)->addWeek();
+
+            $next_assignment = $this->next_assignment();
+            $next_assignment->writing_date = $next_writing_date;
+        }
+
+        $this->attributes['assignment_day'] = $assignment_day;
+    }
+
+    public function setDateFromClinicsAttribute($date_from_clinics) {
+        $first_assignment = $this->first_assignment();
+
+        if ($this->patient_week() < 1 && $first_assignment) {
+            // first writing date should lie in the future
+            if ($date_from_clinics->isPast()) {
+                // use current date for the calculation if the date is in the past
+                $reference_date = Date::now();
+            } else {
+                // use date from clinics if it is in the future
+                $reference_date = $date_from_clinics->copy();
+            }
+
+            // give patient at least a week before the first assignment starts
+            $first_assignment->writing_date = $reference_date->copy()->startOfDay()
+                ->addWeek()->next($this->assignment_day);
+            $first_assignment->save();
+        }
+
+        $this->attributes['date_from_clinics'] = $date_from_clinics;
+    }
+
     /**
      * Relationship to the patients assignments (all - independent of state) including
      * the results of the situation survey. Please use $patient->assignments
@@ -117,8 +155,6 @@ class Patient extends User
         return $this->belongsTo('App\Therapist', 'therapist_id');
     }
 
-
-
     /**
      * Returns an ordered collection of all assignments that also
      * includes the situation survey.
@@ -136,18 +172,16 @@ class Patient extends User
      * @return Date the day of the first assignment
      */
     public function first_assignment_day() {
-        return $this->date_from_clinics === null ? null :
-                    $this->date_from_clinics->copy()->startOfDay()
-                    ->endOfWeek()->next($this->assignment_day);
+        return $this->first_assignment()->writing_date ?: null;
     }
 
     /**
-     * Returns the day of the last assignment.
+     * Returns the day of the previous assignment.
      *
-     * @return Date the day of the last assignment
+     * @return Date the day of the previous assignment
      */
     public function previous_assignment_day() {
-        return $this->assignment_day_for_week($this->patient_week());
+        return $this->current_assignment()->writing_date;
     }
 
     /**
@@ -158,8 +192,7 @@ class Patient extends User
      * @return Date the given weeks assignment day
      */
     public function assignment_day_for_week($week) {
-        return $this->first_assignment_day() === null ? null :
-                    $this->first_assignment_day()->copy()->addWeeks($week - 1);
+        return $this->assignment_for_week($week)->writing_date ?: null;
     }
 
     /**
@@ -172,12 +205,13 @@ class Patient extends User
     }
 
     /**
-     * Returns the current assignment (assigned on the recent assignment day).
+     * Returns the latest assignment with writing_date < Date::now()
+     * (the current assignment).
      *
-     * @return Assignment the current assignment
+     * @return Assignment the latest assignment with writing_date < Date::now()
      */
     public function current_assignment() {
-        return $this->assignment_for_week($this->patient_week());
+        return $this->latest_assignment_for_date(Date::now());
     }
 
     /**
@@ -190,24 +224,26 @@ class Patient extends User
     }
 
     /**
+     * Returns the latest assignment with writing_date < $date.
+     *
+     * @param $date
+     *          the upper bound (for writing_date)
+     *
+     * @return Assignment the latest assignment with writing_date < $date
+     */
+    public function latest_assignment_for_date($date) {
+        // all() loads all entries -> use orderBy and grab the first result
+        return $this->assignments()->whereDate('writing_date', '<=', $date)
+                ->orderBy('writing_date', 'desc')->first();
+    }
+
+    /**
      * Returns the assignment for the given week.
      *
      * @return Assignment the assignment for the given week
      */
     public function assignment_for_week($week) {
         return $this->ordered_assignments()->get($week - 1);
-    }
-
-    /**
-     * Returns the week in which the intervention ended
-     * (or null, if the intervention didn't end yet).
-     *
-     * @return int the week the intervention ended or null
-     *          (if intervention is still running)
-     */
-    public function intervention_ended_in_week() {
-        return $this->intervention_ended_on === null ? null :
-                    $this->week_for_date($this->intervention_ended_on);
     }
 
     /**
@@ -218,20 +254,7 @@ class Patient extends User
      * the situation survey)
      */
     public function past_assignments() {
-        return $this->assignments()->where('week', '<=', $this->patient_week());
-    }
-
-    /**
-     * Returns all uncommented assignments (including the current assignment
-     * and the situation survey).
-     *
-     * @return Collection of all uncommented assignments (including the current
-     * assignment and the situation survey)
-     *
-     * TODO: check for patient text (? - only for current assignment?)
-     */
-    public function past_assignments_without_comment() {
-        return $this->past_assignments()->whereDoesntHave('comment');
+        return $this->assignments()->where('week', '<=', $this->patient_week())->get();
     }
 
     /**
@@ -241,73 +264,50 @@ class Patient extends User
      */
     public function overdue()
     {
-        // TODO: alle Aufgaben bis zur aktuellen Aufgabe zählen,
-        // da meistens ebenso zukünftige Aufgaben eixistieren
-        // (Ingo: am Anfang werden 12 leere Aufgaben angelegt)
+        $overdue = 0;
+        $past_assignments = $this->past_assignments();
 
-        $number_of_past_assignments = $this->past_assignments()->count();
+        foreach ($past_assignments as $assignment) {
+            $status = $assignment->assignment_status;
 
-        return $number_of_past_assignments > 0 ?
-                    $this->past_assignments_without_comment()->count() / $number_of_past_assignments : 0;
+            if ($status === AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT ||
+                $status < AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT) {
+                $overdue++;
+            }
+        }
 
+        return $past_assignments->count() > 0 ? $overdue / $past_assignments->count() : 0;
     }
 
     /**
      * Nummer der Woche der Intervention (0...12) oder -1 (falls der Patient
      * noch in der Klinik ist).
      *
+     * Returns
+     * - -1, if the patient resided in the clinic (at the given time)
+     * - 0, if the patient left the clinic, but no assignment ist defined yet (at the given time)
+     * - the number of assignments with writing_date <= now <= (next_writing_date || writing_date->addWeek()),
+     * if such an assignment exists
+     * - null otherwise
+     *
      * @return int Nummer der Woche der Intervention (0...12) oder -1 (falls der Patient
      * noch in der Klinik ist)
      */
     public function patient_week() {
-        return min($this->week_for_date(Date::now()), 12);
-    }
-
-    /**
-     * Returns
-     * - -1, if the patient resided in the clinic (at the given time)
-     * - 0, if the patient left the clinic, but no assignment ist defined yet (at the given time)
-     * - the number of weeks lying between the first assignment day and the given date, otherwise
-     *
-     * @param Date|null $date
-     *          the reference date
-     *
-     * @return int
-     *          the week of intervention (at the given time)
-     */
-    public function week_for_date(Date $date = null) {
-        if (is_null($date)) {
-            $date = Date::now();
-        }
-
-        // -> Ausgangsdatum: Entlassungsdatum
-        // -> nächster Schreibtag: in der ersten Woche danach
-        // -> 0-te Woche ist die bis zum ersten Schreibtag
-        // -> dann die Differenz vom ersten Schreibtag bis zum gegebenen Datum berechnen
-        //    (in Wochen - nat. hächstens 12 Wochen zählen, ansonsten
-        //    war die Intervention bereits vorbei)
-        //
-
-        // Anmerkung: es muss noch kein assignment existieren, also auch nicht mit arbeiten
-        // die Wochen zählen, nicht die Aufgaben
-
-        // shouldn't happen... (day is set during registration)
-        if ($this->assignment_day === null) {
-            return -1;
-        }
-
-        if ($this->date_from_clinics === null
-            || $this->date_from_clinics->isFuture()) {
+        if ($this->date_from_clinics === null || $this->date_from_clinics->isFuture()) {
             // patient hasn't left the clinic
             return -1;
-        } else if ($date->between($this->date_from_clinics, $this->first_assignment_day())) {
+        } else if (Date::now()->gte($this->date_from_clinics) &&
+                    ($this->first_assignment() === null ||
+                    $this->first_assignment()->writing_date === null ||
+                    Date::now()->lt($this->first_assignment()->writing_date))) {
             // 0-te Woche falls der erste Schreibtag in der Zukunft liegt
             // und der Patient bereits entlassen wurde
             return 0;
         } else {
-            // n+1-te Woche bei n Wochen Differenz
-            // Bsp. 1 Tag nach dem ersten Schreibtag -> 0 Wochen Differenz -> 1-te Woche
-            return $date->copy()->startOfDay()->diffInWeeks($this->first_assignment_day()) + 1;
+            $current_assignment = $this->current_assignment();
+
+            return $current_assignment ? $current_assignment->week : null;
         }
     }
 
@@ -333,27 +333,16 @@ class Patient extends User
         switch ($patient_week) {
             case -1:
                 // patient resides in clinic
+            case 0:
                 if ($this->date_from_clinics !== null) {
-                    // date of departure is set and lies in the future
+                    // date of departure is set
                     return PatientStatus::DATE_OF_DEPARTURE_SET;
                 } else {
                     // date of departure isn't set but patient is registered
                     return PatientStatus::REGISTERED;
                 }
-            case 0:
-                // patient has left the clinic but hasn't received an assignment yet
-                return PatientStatus::REGISTERED;
             default:
-                // get the current assignment (assignment count starts with 0!)
-                $current_assignment = $this->current_assignment();
-
-                if ($current_assignment === null) {
-                    // shouldn't happen... but...
-                    return ($patient_week === 1) ? PatientStatus::DATE_OF_DEPARTURE_SET :
-                        PatientStatus::UNKNOWN;
-                } else {
-                    return AssignmentStatus::to_patient_status($current_assignment->status());
-                }
+                return AssignmentStatus::to_patient_status($this->current_assignment()->status());
         }
     }
 
