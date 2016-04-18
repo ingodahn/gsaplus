@@ -5,6 +5,13 @@
   <div class="container">
     <h2>Codes</h2>
 
+    <p>
+      <span class="used"><code>Registriert</code></span>
+      <br>
+      <span class="unused"><code>Nicht registriert</code></span>
+    </p>
+    <br>
+
     <div class="row">
       <?php $i = 0; ?>
       @foreach($codes as $code => $name)
