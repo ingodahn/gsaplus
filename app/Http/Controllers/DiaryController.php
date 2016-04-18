@@ -13,7 +13,7 @@ use App\Patient;
 use App\Users;
 use App\Situation;
 use App\Survey;
-use App\PHQ4;
+use App\PHQ;
 use App\WAI;
 use App\Comment;
 use App\CommentReply;
@@ -116,30 +116,15 @@ class DiaryController extends Controller
 
         // }    // !!! uncomment for M4
         
-        if (! array_key_exists('survey',$assignment_info)) {
-            $assignment_info['survey']=[];
-        }
-        if (! array_key_exists('phq4',$assignment_info['survey'])){
-            $assignment_info['survey']['phq4']=[];
-        }
-        if (! array_key_exists('depressed',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['depressed']=-1;
-        }
-        if (! array_key_exists('nervous',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['nervous']=-1;
-        }
-        if (! array_key_exists('interested',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['interested']=-1;
-        }
-        if (! array_key_exists('troubled',$assignment_info['survey']['phq4'])){
-            $assignment_info['survey']['phq4']['troubled']=-1;
-        }
-        $entry_info['survey'] = $assignment_info['survey'];
-        if (! array_key_exists('wai',$assignment_info['survey'])){
-            $assignment_info['survey']['wai']=['index'=> -1];
-        }
+        // if (! array_key_exists('survey',$assignment_info)) {
+            $assignment_info['survey']=[
+                "health"=>-1,
+                "wai"=>-1
+            ];
+        // }
 
-        $entry_info['survey']['wai']=$assignment_info['survey']['wai']['index'];
+        $entry_info['survey'] = $assignment_info['survey'];
+
         if (! array_key_exists('comment',$assignment_info)) {
             $assignment_info['comment']=['text' => ""];
         }
@@ -154,10 +139,9 @@ class DiaryController extends Controller
         if (! array_key_exists('satisfied',$assignment_info['commentReply'])) {
             $assignment_info['commentReply']['satisfied']=-1;
         }
-        /* ToDo:  comment_reply mit Werten aus Datenbank aktualisieren */
+
         $entry_info['comment_reply']['helpful'] = $assignment_info['commentReply']['helpful'];
         $entry_info['comment_reply']['satisfied'] = $assignment_info['commentReply']['satisfied'];
-        // return dd($entry_info);
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
@@ -263,8 +247,8 @@ class DiaryController extends Controller
                     $situation=$situations->get($i);
                     $situation->description = $request->input('situation'.$i.'_description');
                     $situation->expectation = $request->input('situation'.$i.'_expectations'); //note: Plural in request
-                    $situation->my_reaction = $request->input('situation'.$i.'my_reaction');
-                    $situation->their_reaction = $request->input('situation'.$i.'their_reaction');
+                    $situation->my_reaction = $request->input('situation'.$i.'_my_reaction');
+                    $situation->their_reaction = $request->input('situation'.$i.'_their_reaction');
                     // and save it
                     $situation->save();
                 }
@@ -281,42 +265,28 @@ class DiaryController extends Controller
 
         $assignment_info=$assignment->info();
 
-        if ($request->has('survey_wai') ||
-        $request->has('phq4_interested') ||
-        $request->has('phq4_depressed') ||
-        $request->has('phq4_nervous') ||
-        $request->has('phq4_troubled')) { // Survey is edited
-          //  if (! array_key_exists('survey',$assignment_info)) { // no survey yet
-            if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
+        /* Uncomment if Survey class is re-implemented
+         if ($request->has('wai') ||
+        $request->has('health') ) { // Survey is edited
+          if (! array_key_exists('survey',$assignment_info)) { // no survey yet
+           // if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
                 $survey = new Survey();
+              $survey->health=-1;
+              $survey->wai=-1;
                 $assignment->survey()->save($survey);
-                $wai = new WAI;
-                $survey->wai()->save($wai);
-                $phq4 = new PHQ4;
-                $survey->phq4()->save($phq4);
-            } else {
+                } else {
                 $survey = $assignment->survey->first();
-                $wai = $survey->wai->first();
-                $phq4 = $survey->phq4->first();
             }
-            if ($request->has('phq4_interested')) {
-                $phq4->interested = $request->input('phq4_interested');
+
+            if ($request->has('health')){
+                $survey->health = $request->input('health');
             }
-            if ($request->has('phq4_depressed')) {
-                $phq4->depressed = $request->input('phq4_depressed');
+            if ($request->has('wai')){
+                $survey->wai = $request->input('wai');
             }
-            if ($request->has('phq4_nervous')) {
-                $phq4->nervous = $request->input('phq4_nervous');
-            }
-            if ($request->has('phq4_troubled')) {
-                $phq4->troubled = $request->input('phq4_nervous');
-            }
-            $phq4->save();
-            if ($request->has('survey_wai')){
-                $wai->index = $request->input('survey_wai');
-            }
-            $wai->save();
-        }
+            $survey->save();
+        }*/
+
         if ($request->has('comment')) {
             if ($assignment->comment->all() == []){
                 $comment = new Comment;
@@ -345,7 +315,7 @@ class DiaryController extends Controller
             /* Zwischenspeichern von $entry */
             $assignment->dirty = true;
             $assignment->save();
-            return dd($assignment->all_info());
+            // return dd($assignment->all_info());
             Alert::success("Der Eintrag wurde zwischengespeichert")->persistent();
             return Redirect::back();
         } else {
@@ -414,11 +384,18 @@ class DiaryController extends Controller
         if ($Diary['patient_week'] < 0) {
             $Diary['patient_week'] = 0;
         }
-        /*if (array_key_exists('assignments',$info)) {
-           $assignment_info = $info['assignments'];
-        } else {
-            $info['assignments']=[];
-        }*/
+
+        $patient_week=$Diary['patient_week'];
+        $next_assignment_date=$patient->next_assignment()->writing_date;
+        if ($next_assignment_date) {
+            $Diary['next_assignment'] = "Die nächste Aufgabe wird am ".$next_assignment_date->format('d.m.Y')." gestellt.";
+        } elseif ($info['patientStatus'] == 'P020') {
+            $Diary['next_assignment'] = "Die erste Schreibaufgabe wird nach Übermittlung des Entlassungsdatums durch die Klinik gestellt. Sie werden darüber per eMail informiert.";
+        }
+        else {
+            $Diary['next_assignment'] = "Es ist keine weitere Aufgabe vorgesehen";
+        }
+
         $assignment_info = $info['assignments'];
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
@@ -454,6 +431,15 @@ class DiaryController extends Controller
         return view('patient.diary')->with('Diary', $Diary);
     }
 
+    /* Returning a default for null value */
+    private function value_with_default($value,$default) {
+        if ($value) {
+            return $value;
+        } else {
+            return $default;
+        }
+    }
 }
+
 
 ?>
