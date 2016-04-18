@@ -286,7 +286,7 @@ class DiaryController extends Controller
             }
             $survey->save();
         }*/
-        
+
         if ($request->has('comment')) {
             if ($assignment->comment->all() == []){
                 $comment = new Comment;
