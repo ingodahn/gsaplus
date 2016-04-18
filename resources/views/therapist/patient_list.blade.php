@@ -53,7 +53,7 @@
 @section('content')
   <div class="container">
     <h2>Slots
-      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden. Achtung: Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
+      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden.<br><strong>Achtung:</strong> Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
         <i class="fa fa-question-circle"></i>
       </a>
     </h2>
@@ -101,7 +101,42 @@
 
   <div class="container-fluid">
     <hr/>
-    <h2>Patientenliste  <a href="/" class="btn btn-default pull-right" id="reset">Ansicht zurücksetzen</a></h2>
+    <h2>Patientenliste
+      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Alle im System registrierten Patienten mit Sortier- und Filterfunktionen" data-content="
+      Es gibt folgende <strong>Patientenstati (P)</strong>
+      <ul>
+        <li>Registriert (P020)</li>
+        <li>Entlassungsdatum erfasst (P025)</li>
+        <li>Aufgabe erhalten (P030)</li>
+        <li>Aufgabe bearbeitet (P040)</li>
+        <li>Aufgabe gemahnt (P045)</li>
+        <li>Aufgabe abgeschickt (P050)</li>
+        <li>Aufgabe kommentiert (P060)</li>
+        <li>Aufgabenkommentar bewertet (P065)</li>
+        <li>Mitarbeit beendet (P130)</li>
+        <li>Interventionszeit beendet (P140)</li>
+      </ul>
+      Die Zahlen dienen zur Sortierung.<br>
+      <br>
+      Es gibt auch folgende <strong>Aufgabenstati (E)</strong>
+      <ul>
+        <li>Aufgabe nicht definiert (E010)</li>
+        <li>Aufgabe definiert (E015)</li>
+        <li>Aufgabe gestellt (E020)</li>
+        <li>Aufgabe bearbeitet (E030)</li>
+        <li>Antwort abgeschickt (E040)</li>
+        <li>Antwort kommentiert (E050)</li>
+        <li>Kommentar bewertet (E060)</li>
+        <li>Aufgabe überfällig (E070)</li>
+        <li>Aufgabe nicht erforderlich (E100)</li>
+      </ul>
+      Der Wert für <strong>Überfällig</strong> wird wie folgt berechnet:<br>
+      Überfällig (overdue) = Wert der Form 'Anzahl der überfälligen Einträge' / 'Aktuelle Wochennr' = Anzahl der bereits gestellten Aufgaben
+      ">
+        <i class="fa fa-question-circle"></i>
+      </a>
+      <a href="/" class="btn btn-default pull-right" id="reset">Ansicht zurücksetzen</a>
+    </h2>
     <form action="/MassAction/mail" method="post">
       {{ csrf_field() }}
         <table class="table table-bordered" id="PatientList">

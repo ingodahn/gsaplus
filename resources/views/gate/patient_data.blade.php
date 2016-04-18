@@ -116,12 +116,6 @@
       </div>
 
       <div class="row">
-        <div class="progress">
-          <div id="StrengthProgressBar" class="progress-bar"></div>
-        </div>
-      </div>
-
-      <div class="row">
         <div class="form-group col-sm-6">
           <label for="email" class="control-label">E-Mail Adresse</label>
           <input name="email" id="email" type="email" class="form-control width-100" placeholder="w.meyer@web.de" required>
@@ -133,7 +127,7 @@
         </div>
       </div>
 
-      <p><b>Hinweis:</b>
+      <p><strong>Hinweis:</strong>
         Speichern Sie Ihr Passwort nicht im Browser wenn andere Benutzer diesen Rechner unter dem selben Namen nutzen können.
       </p>
 
