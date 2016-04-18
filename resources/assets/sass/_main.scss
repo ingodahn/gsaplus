@@ -157,7 +157,7 @@ textarea {
 }
 
 .used code {
-  background-color: #F44336;
+  background-color: $brand-primary;
   color: white;
 }
 
@@ -166,6 +166,6 @@ textarea {
 }
 
 .unused code {
-  background-color: #4CAF50;
+  background-color: $gray-lighter;
   color: black;
 }
