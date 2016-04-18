@@ -5,25 +5,25 @@ This document describes how to set up the required server-stack and how to updat
 
 
 # Setup
-The following is a description of the *recommended* server setup. It may be technically possible to exchange some of the used components (e.g. **nginx** instead of **apache**), but is discouraged. We need to differentiate two different environments: *Development* and *production*. The *production*-environment is going to be the server in Mainz, which will eventually be made publicly accessible and thus needs to be strictly secured. It must therefore be set up by hand. The *development*-environment is a Virtual Machine, closely resembling the production-environment. It can be set up almost entirely automatically. This guide will focus on *describing* the required environment, rather then how to *set up* such an environment.
+The following is a description of the *recommended* server setup. It may be technically possible to exchange some of the used components (e.g. **nginx** instead of **apache**), but is discouraged. We need to differentiate two different environments: *Development* and *production*. The *production*-environment is going to be the server in Mainz, which will eventually be made publicly accessible and thus needs to be strictly secured. It must therefore be set up by hand. The *development*-environment is a Virtual Machine, closely resembling the production-environment. It can be set up almost entirely automatically. This guide will focus on *describing* the required environment, rather then *explaining how to set up* such an environment.
 
 It is assumend that you retreive the project's source code via git. Unless specified otherwise, only the `master`-branch is safe for production.
 
 
 ## Production
-Basically, you'll need a standard LAMP-stack with some additional dependencies and configurations. Currently, we are targeting ubuntu 14.04 LTS, but this may change to the new LTS in april 2016. You'll have to install the following:
+Basically, you'll need a standard LAMP-stack with some additional dependencies and configurations. Currently, we are targeting ubuntu 14.04 LTS, but this may change to the new LTS in april 2016. You'll have to install the following. The given install instructions are *only examples* for Ubuntu 14.04 LTS.
 
-* apache2
-* A mysql server
-* php (>= 5.6, unlike as stated in laravel installation)
-* composer
-* The laravel-dependencies (<https://laravel.com/docs/5.2>)
+* apache2 (`apt-get install apache2`)
+* A mysql server (`apt-get install mysql-server`)
+* php (>= 5.6, unlike as stated in laravel installation) (*TODO*)
+* composer (*TODO*)
+* The laravel-dependencies (<https://laravel.com/docs/5.2>) (*TODO*)
 * phpunit (*optional*, see [provision.sh](provision.sh) for installation reference)
-* ruby
-  * rake
-  * sass
-* nodejs
-  * bower
+* ruby (`apt-get install ruby`)
+  * rake (`apt-get install rake`)
+  * sass (`apt-get install ruby-sass`)
+* nodejs (`apt-get install nodejs nodejs-legacy`)
+  * bower (`npm install -g bower`)
 
 Make the `public`-directory of this repo the root of your webserver and enforce HTTPS-connections. The project is set up to read certain environment-specific configuration-options from a file called `.env`. Copy the `.env.example` to `.env` to receive an empty configuration-file. Create a database and enter host, databasename, username and password into `.env`. Enter the mailing-configuration as well. You can now run `rake` to automatically install some local project-dependencies, have the database set up and migrated, and compile and copy assets.
 
