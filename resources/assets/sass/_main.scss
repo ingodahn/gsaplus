@@ -155,3 +155,16 @@ textarea {
   overflow-x: hidden; /* for Firefox (issue #5) */
   overflow: hidden;
 }
+
+.used code {
+  background-color: #F44336;
+  color: white;
+  a {
+    text-decoration: none;
+  }
+}
+
+.unused code {
+  background-color: #4CAF50;
+  color: black;
+}

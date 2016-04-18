@@ -1,25 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Codes')
 
-@section('additional-head')
-  <style media="screen">
-    .used code {
-      background-color: #F44336;
-      color: white;
-      text-decoration: none;
-    }
-
-    .used a {
-      text-decoration: none;
-    }
-
-    .unused code {
-      background-color: #4CAF50;
-      color: black;
-    }
-  </style>
-@endsection
-
 @section('content')
   <div class="container">
     <h2>Codes</h2>
