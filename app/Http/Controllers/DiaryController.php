@@ -226,11 +226,11 @@ class DiaryController extends Controller
         if ($week == 1) {
             $assignment->load('situations');
 
-            if ($request->has('situation0_description')) { // situations were editable
+            if ($request->exists('situation0_description')) { // situations were editable
                 $situation_count = 0;
                 $situations = [];
 
-                while($request->has('situation'.$situation_count.'_description')) {
+                while($request->exists('situation'.$situation_count.'_description')) {
                     $saved_situation = $assignment->situations->get($situation_count);
 
                     // check whether situation exists, create new situation if needed
