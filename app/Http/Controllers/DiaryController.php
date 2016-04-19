@@ -106,7 +106,7 @@ class DiaryController extends Controller
         // }    // !!! uncomment for M4
         
         if (! array_key_exists('survey', $assignment_info)) {
-            $assignment_info['survey'] = [
+            $assignment_info['survey']=[
                 "health" => -1,
                 "wai" => -1
             ];
@@ -221,26 +221,35 @@ class DiaryController extends Controller
         */
         $is_therapist = ($request->user()->type === UserRole::THERAPIST);
         $is_patient = ($request->user()->type === UserRole::PATIENT);
-        $assignment=$patient->assignment_for_week($week);
+        $assignment = $patient->assignment_for_week($week);
+
         if ($week == 1) {
+            $assignment->load('situations');
+
             if ($request->has('situation0_description')) { // situations were editable
-                $situations=$assignment->situations->all();
-                if ($situations == []){
-                    for ($i=0; $i<=2; $i++){
-                        $situation=new Situation;
-                        $assignment->situations()->save($situation);
-                    }
-                } // Now we are sure that the situations exist and we get it again.
-                $situations=$assignment->situations;
-                for ($i=0; $i<=2; $i++){
-                    $situation=$situations->get($i);
-                    $situation->description = $request->input('situation'.$i.'_description');
-                    $situation->expectation = $request->input('situation'.$i.'_expectations'); //note: Plural in request
-                    $situation->my_reaction = $request->input('situation'.$i.'_my_reaction');
-                    $situation->their_reaction = $request->input('situation'.$i.'_their_reaction');
-                    // and save it
-                    $situation->save();
+                $situation_count = 0;
+                $situations = [];
+
+                while($request->has('situation'.$situation_count.'_description')) {
+                    $saved_situation = $assignment->situations->get($situation_count);
+
+                    // check whether situation exists, create new situation if needed
+                    $situation = $saved_situation ? $saved_situation : Situation::create();
+
+                    // fill in the details (supplied by the user)
+                    $situation->description = $request->input('situation'.$situation_count.'_description');
+                    $situation->expectation = $request->input('situation'.$situation_count.'_expectations'); //note: Plural in request
+                    $situation->my_reaction = $request->input('situation'.$situation_count.'_my_reaction');
+                    $situation->their_reaction = $request->input('situation'.$situation_count.'_their_reaction');
+
+                    $situations[] = $situation;
+
+                    // process next set
+                    $situation_count++;
                 }
+
+                // save or update the situations
+                $assignment->situations()->saveMany($situations);
             }
         } else {
             // To do for M4: handling of problem and reflection
