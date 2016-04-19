@@ -154,8 +154,7 @@ class Assignment extends InfoModel
      * - therapist
      * - assignments
      *      -> with all situations (if assignment is a situation survey)
-     *      -> with survey
-     *      -> with phq4 and wai
+     *      -> with survey results
      *      -> with comment
      *          -> and commentReply
      *
@@ -164,7 +163,6 @@ class Assignment extends InfoModel
     public function all_info() {
         return $this->info_with('situations',
             'comment.comment_reply',
-            'survey.phq4',
-            'survey.wai');
+            'survey');
     }
 }

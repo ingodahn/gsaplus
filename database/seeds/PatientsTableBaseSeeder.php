@@ -10,8 +10,6 @@ use App\TaskTemplate;
 use App\Comment;
 use App\CommentReply;
 
-use App\PHQ4;
-use App\WAI;
 use App\Survey;
 
 use App\SituationSurvey;
@@ -309,15 +307,6 @@ abstract class PatientsTableBaseSeeder extends Seeder
     protected function add_survey_results(Assignment &$assignment) {
         $survey = factory(Survey::class)->make();
         Helper::set_developer_attributes($survey, true);
-
-        $phq4 = factory(PHQ4::class)->make();
-        Helper::set_developer_attributes($phq4, true);
-
-        $wai = factory(WAI::class)->make();
-        Helper::set_developer_attributes($wai, true);
-
-        $survey->phq4()->save($phq4);
-        $survey->wai()->save($wai);
 
         $assignment->survey()->save($survey);
         $survey->assignment()->associate($assignment);

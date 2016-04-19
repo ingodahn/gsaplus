@@ -17,6 +17,9 @@ class CreateSurveysTable extends Migration
 
             $table->integer('assignment_id')->unsigned();
 
+            $table->tinyInteger('wai')->unsigned();
+            $table->tinyInteger('health')->unsigned();
+
             $table->nullableTimestamps();
         });
     }

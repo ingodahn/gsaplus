@@ -14,8 +14,6 @@ class AddRandomAttribute extends Migration
         'task_templates',
         'comments',
         'comment_replies',
-        'phq4',
-        'wai',
         'surveys',
         'situations'];
 
