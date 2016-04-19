@@ -10,11 +10,10 @@ use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use App\Code;
 use App\Patient;
-use App\Users;
+
 use App\Situation;
 use App\Survey;
-use App\PHQ;
-use App\WAI;
+
 use App\Comment;
 use App\CommentReply;
 
@@ -73,18 +72,8 @@ class DiaryController extends Controller
      */
     public function entry(Request $request, Patient $patient, $week)
     {
-        /*  Eigentlich brauche ich nur die Information für den Patienten
-        * und die Information für einen Eintrag rekursiv aufgelöst.
-         * $assignment=$patient->assignment_for_week($week);
-         * $assignment_info = $assignment->all_info();
-         * funktioniert aber nicht
-         * Deshalb muss ich alle assignments holen
-         */
-        $patient->save();
-        // $info = $patient->all_info();
-        $patient_info = $patient->info_with();
+        $patient_info = $patient->info();
 
-        // $assignment_info=$info['assignments'][$week-1];
         $assignment_info=$patient->assignment_for_week($week)->all_info();
 
         $entry_info = [];
@@ -116,12 +105,12 @@ class DiaryController extends Controller
 
         // }    // !!! uncomment for M4
         
-        // if (! array_key_exists('survey',$assignment_info)) {
-            $assignment_info['survey']=[
-                "health"=>-1,
-                "wai"=>-1
+        if (! array_key_exists('survey', $assignment_info)) {
+            $assignment_info['survey'] = [
+                "health" => -1,
+                "wai" => -1
             ];
-        // }
+        }
 
         $entry_info['survey'] = $assignment_info['survey'];
 
@@ -263,29 +252,25 @@ class DiaryController extends Controller
             }*/
         }
 
-        $assignment_info=$assignment->info();
+         if ($request->has('wai') || $request->has('health')) { // Survey is edited
+             if ($assignment->survey === null) { // no survey yet
+                 // no survey yet - we create a complete survey with default values
+                 $survey = Survey::create();
 
-        /* Uncomment if Survey class is re-implemented
-         if ($request->has('wai') ||
-        $request->has('health') ) { // Survey is edited
-          if (! array_key_exists('survey',$assignment_info)) { // no survey yet
-           // if ($assignment->survey->all() == []) { // no survey yet - we create a complete survey with default values
-                $survey = new Survey();
-              $survey->health=-1;
-              $survey->wai=-1;
-                $assignment->survey()->save($survey);
-                } else {
-                $survey = $assignment->survey->first();
-            }
+                 $assignment->survey()->save($survey);
+             } else {
+                 $survey = $assignment->survey;
+             }
 
-            if ($request->has('health')){
-                $survey->health = $request->input('health');
-            }
-            if ($request->has('wai')){
-                $survey->wai = $request->input('wai');
-            }
-            $survey->save();
-        }*/
+             if ($request->has('health')) {
+                 $survey->health = $request->input('health');
+             }
+             if ($request->has('wai')) {
+                 $survey->wai = $request->input('wai');
+             }
+
+             $survey->save();
+         }
 
         if ($request->has('comment')) {
             if ($assignment->comment->all() == []){
