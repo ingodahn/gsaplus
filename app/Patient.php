@@ -370,8 +370,7 @@ class Patient extends User
      * - therapist
      * - assignments
      *      -> with all situations (if assignment is a situation survey)
-     *      -> with survey
-     *      -> with phq4 and wai
+     *      -> with survey results
      *      -> with comment
      *          -> and commentReply
      *
@@ -380,8 +379,7 @@ class Patient extends User
     public function all_info() {
         return $this->info_with('therapist',
                            'assignments.situations',
-                           'assignments.survey.phq4',
-                           'assignments.survey.wai',
+                           'assignments.survey.',
                            'assignments.comment.comment_reply');
     }
 
