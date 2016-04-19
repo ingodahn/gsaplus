@@ -185,12 +185,11 @@ abstract class PatientsTableBaseSeeder extends Seeder
 
             switch ($assignment->type) {
                 case AssignmentType::SITUATION_SURVEY:
-                    $situation_count = rand(1,3);
+                    $situation_count = $saved && $is_past_assignment ? rand(1,3) : 0;
 
                     for ($count = 1; $count <= $situation_count; $count++) {
                         // answers generated in model factory
-                        $situation = $is_past_assignment && $saved ?
-                            factory(Situation::class)->make() : new Situation;
+                        $situation = factory(Situation::class)->make();
                         Helper::set_developer_attributes($situation, true);
                         // add situation
                         $assignment->situations()->save($situation);
