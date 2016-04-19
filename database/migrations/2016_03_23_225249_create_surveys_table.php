@@ -15,10 +15,10 @@ class CreateSurveysTable extends Migration
         Schema::create('surveys', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('assignment_id')->unsigned();
-
-            $table->tinyInteger('wai')->unsigned();
-            $table->tinyInteger('health')->unsigned();
+            $table->integer('assignment_id')->unsigned()
+            ;
+            $table->tinyInteger('wai')->default(-1);
+            $table->tinyInteger('health')->default(-1);
 
             $table->nullableTimestamps();
         });
