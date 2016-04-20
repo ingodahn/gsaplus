@@ -220,7 +220,7 @@ class Patient extends User
      * @return Assignment the next assignment (for the next assignment day).
      */
     public function next_assignment() {
-        return $this->assignment_for_week($this->patient_week() + 1);
+        return $this->assignment_for_week(max($this->patient_week() + 1, 1));
     }
 
     /**
