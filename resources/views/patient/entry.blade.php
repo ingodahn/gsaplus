@@ -35,7 +35,8 @@
       ?>
       @if($visible)
         <h3>Antwort</h3>
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        @if ($EntryInfo['week'] == 1)
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne">
               <h4 class="panel-title">
@@ -202,6 +203,13 @@
             </div>
           </div>
         </div>
+        @else
+          @if ($editable)
+            <textarea class="form-control js-auto-size" id="reflection"  name="reflection">{{$EntryInfo['reflection']}}</textarea>
+          @else
+            <p>{{ $EntryInfo['reflection'] }}</p>
+          @endif
+        @endif
       @endif
 
       <hr>

@@ -80,7 +80,7 @@ class DiaryController extends Controller
         $entry_info['week'] = $assignment_info['week'];
         $entry_info['status'] = $assignment_info['assignmentStatus'];
         $entry_info['status_text'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
-       // if ($week == 1) { // !!! uncomment for M4 !!!
+       if ($week == 1) {
             $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
             if (!array_key_exists('situations', $assignment_info)) {
                 $assignment_info['situations'] = [];
@@ -101,9 +101,11 @@ class DiaryController extends Controller
                 $entry_info['answer'][$i]['my_reaction'] = $entry_info['answer'][$i]['myReaction'];
                 $entry_info['answer'][$i]['their_reaction'] = $entry_info['answer'][$i]['theirReaction'];
             }
-        // } else {    // week 2 and later !!!uncomment for M4
-
-        // }    // !!! uncomment for M4
+        } else {    // week 2 and later
+           $entry_info['problem']=$assignment_info['problem'];
+           // ToDo: If answer exists already, load t from database, else $entry_info['reflection']='';
+           $entry_info['reflection'] = "Reflexionen ab Woche 2 nicht implementiert";
+        }
         
         if (! array_key_exists('survey', $assignment_info)) {
             $assignment_info['survey']=[
@@ -252,7 +254,8 @@ class DiaryController extends Controller
                 $assignment->situations()->saveMany($situations);
             }
         } else {
-            // To do for M4: handling of problem and reflection
+            // ToDo: for M4: handling of problem and reflection
+            // Get problem and answer from database
             /*If ($request->has('problem')) {
                 $assignment->problem = $request->input('problem');
             }
