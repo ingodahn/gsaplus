@@ -12,7 +12,5 @@
 			<li><a href="/Logout">Ausloggen.</a></li>
 		</ul>
 
-		<p>Aktuelles Datum: {{ \Jenssegers\Date\Date::now() }}</p>
-
     </div>
 @endsection
