@@ -34,13 +34,14 @@ class AdminController extends Controller
 
 		foreach (Code::all() as $code) {
 			if (Patient::whereCode($code->value)->exists()) {
-				$codes[$code->value] = 'registriert';
+				$patient = Patient::whereCode($code->value)->firstOrFail();
+				$codes[$code->value] = $patient->name;
 			} else {
-				$codes[$code->value] = 'nicht registriert';
+				$codes[$code->value] = null;
 			}
 		}
 
-		return dd($codes);
+		return view("admin.codes")->with(["codes" => $codes]);
 	}
 
 	/**

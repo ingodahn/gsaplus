@@ -168,4 +168,17 @@ textarea {
 
 .info-video {
   margin-top: 64px;
+
+.used code {
+  background-color: $brand-primary;
+  color: white;
+}
+
+.used a {
+  text-decoration: none;
+}
+
+.unused code {
+  background-color: $gray-lighter;
+  color: black;
 }
