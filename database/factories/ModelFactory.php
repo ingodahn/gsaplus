@@ -112,3 +112,14 @@ $factory->define(App\Code::class, function () {
         'value' => strtoupper(str_random(3))
     ];
 });
+
+$factory->define(App\TestSetting::class, function() {
+   return [
+       'test_date' => null,
+       'created_at' => Date::now(),
+       'updated_at' => Date::now(),
+       'first_reminder' => false,
+       'new_reminder' => false,
+       'due_reminder' => false
+   ];
+});
