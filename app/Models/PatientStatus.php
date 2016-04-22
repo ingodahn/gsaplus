@@ -45,7 +45,7 @@ class PatientStatus
         self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",
         self::COLLABORATION_ENDED => "Mitarbeit beendet",
         self::INTERVENTION_ENDED => "Interventionszeit beendet"
-        self::UNKNOWN => "Unbekannt",
+        self::UNKNOWN => "Unbekannt"
     );
 
 }
