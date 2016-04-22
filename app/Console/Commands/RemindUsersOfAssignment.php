@@ -8,6 +8,7 @@ use App\Models\InfoModel;
 use Illuminate\Console\Command;
 
 use App\Patient;
+use App\TestSetting;
 
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Mail;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 class RemindUsersOfAssignment extends Command
 {
-    const OPTION_FIRST = "first";
+    const OPTION_FIRST = 'first';
     const OPTION_NEW = 'new';
     const OPTION_DUE = 'due';
     const OPTION_MISSED = 'missed';
@@ -64,9 +65,11 @@ class RemindUsersOfAssignment extends Command
      */
     public function handle()
     {
-        // set test date
-        // -> other methods should also use the test date
-        Date::setTestNow(new Date(config('gsa.current_date')));
+        $settings = TestSetting::first();
+
+        if ($settings && $settings->test_date) {
+            Date::setTestNow($settings->test_date);
+        }
 
         if ($this->option(self::OPTION_FIRST) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_FIRST);
@@ -148,7 +151,8 @@ class RemindUsersOfAssignment extends Command
             // (see mutator in class Patient)
             $current_assignment = $patient->current_assignment();
 
-             if (Date::now()->gte($current_assignment->writing_date->copy()
+             if ($current_assignment && $current_assignment->writing_date &&
+                    Date::now()->gte($current_assignment->writing_date->copy()
                     ->addDays(config('gsa.reminder_period_in_days')))) {
                 // remind of due assignment if 5 days passed since the writing date
                 $this->sendEMail($patient, self::OPTION_DUE);
