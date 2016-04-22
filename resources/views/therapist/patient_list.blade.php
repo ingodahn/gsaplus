@@ -103,7 +103,7 @@
     <hr/>
     <h2>Patientenliste
       <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Alle im System registrierten Patienten mit Sortier- und Filterfunktionen" data-content="
-      Es gibt folgende <strong>Patientenstati (P)</strong>
+      Es gibt folgende <strong>Patienten-Status (P)</strong>
       <ul>
         <li>Registriert (P020)</li>
         <li>Entlassungsdatum erfasst (P025)</li>
@@ -116,9 +116,9 @@
         <li>Mitarbeit beendet (P130)</li>
         <li>Interventionszeit beendet (P140)</li>
       </ul>
-      Die Zahlen dienen zur Sortierung.<br>
+      Die Zahlen dienen zur Sortierung und sind so gewählt, dass sie das Verfahren chronologisch abbilden.<br>
       <br>
-      Es gibt auch folgende <strong>Aufgabenstati (E)</strong>
+      Es gibt auch folgende <strong>Schreibimpuls-Status (E)</strong>
       <ul>
         <li>Schreibimpuls nicht definiert (E010)</li>
         <li>Schreibimpuls definiert (E015)</li>
@@ -146,9 +146,9 @@
             <th>Name</th>
             <th>Code</th>
             <th>Woche</th>
-            <th>Tagebuchtag</th>
+            <th>Schreibtag</th>
             <th>Status</th>
-            <th>N&auml;chste Aufgabe</th>
+            <th>Schreibimpuls</th>
             <th>Überfällig</th>
             <th>Zuletzt aktiv</th>
             <th>Therapeut</th>
