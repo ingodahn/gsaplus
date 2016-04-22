@@ -138,7 +138,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align:middle">Erhalt einer Folge-Aufgabe</td>
+                    <td>Erhalt einer Folge-Aufgabe</td>
                     <td>
                         Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren neuen Schreibtag haben.
                     </td>
@@ -150,7 +150,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="vertical-align:middle">Aktuelle Aufgabe unbearbeitet</td>
+                    <td>Aktuelle Aufgabe unbearbeitet</td>
                     <td>
                         Gilt für alle Patienten die Ihre aktuelle Aufgabe 5 Tage lang nicht bearbeitet haben.
                     </td>
@@ -182,7 +182,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="vertical-align:middle" class="col-xs-7">Aktuelles Datum</td>
+                        <td class="col-xs-7">Aktuelles Datum</td>
                         <td>
                             <div class='input-group date' id='datetimepicker'>
                                 <input name="test_date" type='text' value="{{ $settings['testDate'] }}" class="form-control" required>
