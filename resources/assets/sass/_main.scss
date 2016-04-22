@@ -24,6 +24,44 @@ $nav-height: 100px;
   margin-top: $nav-height / 4; // Stupid hack because vertical centering is too hard
 }
 
+// Change the hamburger button breakpoint to 1000px to avoid menu breaking
+@media (max-width: 1000px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+		top: 0;
+		border-width: 0 0 1px;
+	}
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+		margin-top: 7.5px;
+	}
+	.navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+  		display:block !important;
+	}
+}
+
 // Shrink Footer
 .navbar-footer {
   margin-bottom: 10px;
@@ -31,7 +69,6 @@ $nav-height: 100px;
 .navbar-footer > .navbar-nav {
   margin-top: 10px;
 }
-
 
 $parallax-window-height: 400px;
 
