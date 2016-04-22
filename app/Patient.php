@@ -52,7 +52,8 @@ class Patient extends User
         'patient_status',
         'status_of_next_assignment',
         'patient_week',
-        'overdue'
+        'overdue',
+        'next_writing_date'
     ];
 
     /*
@@ -90,6 +91,10 @@ class Patient extends User
 
     public function getOverdueAttribute() {
         return $this->overdue();
+    }
+
+    public function getNextWritingDateAttribute() {
+        return $this->next_assignment() ? $this->next_assignment()->writing_date : null;
     }
 
     public function setAssignmentDayAttribute($assignment_day) {
