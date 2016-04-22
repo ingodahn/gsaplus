@@ -34,7 +34,7 @@
         $editable = $isPatient && $EntryInfo['status'] < 'E040';
       ?>
       @if($visible)
-        <h3>Antwort</h3>
+        <h3>Tagebucheintrag</h3>
         @if ($EntryInfo['week'] == 1)
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="panel panel-default">
