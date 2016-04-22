@@ -35,17 +35,17 @@ class PatientStatus
      * - was passiert wenn eine Aufgabe gemahnt und daraufhin abgeschickt wurde?
      */
     public static $STATUS_INFO = array(
-        self::UNKNOWN => "Unbekannt",
         self::REGISTERED => "Registriert",
         self::DATE_OF_DEPARTURE_SET => "Entlassungsdatum erfasst",
-        self::PATIENT_GOT_ASSIGNMENT => "Aufgabe erhalten",
-        self::PATIENT_EDITED_ASSIGNMENT => "Aufgabe bearbeitet",
-        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Aufgabe gemahnt",
-        self::PATIENT_FINISHED_ASSIGNMENT => "Aufgabe abgeschickt",
-        self::THERAPIST_COMMENTED_ASSIGNMENT => "Aufgabe kommentiert",
-        self::PATIENT_RATED_COMMENT => "Aufgabenkommentar bewertet",
+        self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls erhalten",
+        self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag bearbeitet",
+        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Tagebucheintrag gemahnt",
+        self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
+        self::THERAPIST_COMMENTED_ASSIGNMENT => "Tagebucheintrag mit Rückmeldung versehen",
+        self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",
         self::COLLABORATION_ENDED => "Mitarbeit beendet",
         self::INTERVENTION_ENDED => "Interventionszeit beendet"
+        self::UNKNOWN => "Unbekannt",
     );
 
 }

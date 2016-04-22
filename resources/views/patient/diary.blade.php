@@ -42,7 +42,7 @@
     <table class="table table-striped table-bordered table-condensed">
       <thead>
         <th>Woche</th>
-        <th>Aufgabe</th>
+        <th>Schreibimpuls</th>
         <th>Status</th>
         <th>Aktionen</th>
       </thead>

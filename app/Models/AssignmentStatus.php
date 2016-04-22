@@ -27,15 +27,15 @@ class AssignmentStatus
     const UNKNOWN = "E000";
 
     public static $STATUS_INFO = array(
-        self::ASSIGNMENT_IS_NOT_DEFINED => "Aufgabe nicht definiert",
-        self::THERAPIST_SAVED_ASSIGNMENT => "Aufgabe definiert",
-        self::PATIENT_GOT_ASSIGNMENT => "Aufgabe gestellt",
-        self::PATIENT_EDITED_ASSIGNMENT => "Aufgabe bearbeitet",
-        self::PATIENT_FINISHED_ASSIGNMENT => "Aufgabe abgeschickt",
-        self::THERAPIST_COMMENTED_ASSIGNMENT => "Antwort kommentiert",
-        self::PATIENT_RATED_COMMENT => "Kommentar bewertet",
-        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Aufgabe überfällig",
-        self::ASSIGNMENT_IS_NOT_REQUIRED => "Aufgabe nicht erforderlich",
+        self::ASSIGNMENT_IS_NOT_DEFINED => "Schreibimpuls nicht definiert",
+        self::THERAPIST_SAVED_ASSIGNMENT => "Schreibimpuls definiert",
+        self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls gegeben",
+        self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag bearbeitet",
+        self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
+        self::THERAPIST_COMMENTED_ASSIGNMENT => "Tagebucheintrag mit Rückmeldung versehen",
+        self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",
+        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Tagebucheintrag überfällig",
+        self::ASSIGNMENT_IS_NOT_REQUIRED => "Schreibimpuls nicht erforderlich",
         self::UNKNOWN => "Unbekannt"
     );
 
