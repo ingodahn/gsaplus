@@ -132,7 +132,7 @@
       </p>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary pull-right">Absenden</button>
+        <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registrierung abschließen</button>
       </div>
     </form>
 
