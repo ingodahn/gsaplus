@@ -11,7 +11,11 @@
     </p>
     @endif
 
-    <h2>Tagebuch</h2>
+    <h2>Tagebuch
+      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Ihr Tagebuch" data-content="Hier kommt eine Schnellhilfe zur Bedienung des Tagebuchs.">
+        <i class="fa fa-question-circle"></i>
+      </a>
+    </h2>
 
     @if($isTherapist)
     <p>
