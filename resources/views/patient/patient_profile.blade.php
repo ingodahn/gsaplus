@@ -179,7 +179,7 @@
       </form>
     @else
       <p>
-        {{ $Patient['personalInformation'] }}
+        {!! nl2br(e($Patient['personalInformation'])) !!}
       </p>
     @endif
 
