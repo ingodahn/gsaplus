@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\TestSetting;
+
 use Closure;
+
 use Jenssegers\Date\Date;
 
 class ChangeCurrentDate
@@ -16,7 +19,11 @@ class ChangeCurrentDate
      */
     public function handle($request, Closure $next)
     {
-        Date::setTestNow(new Date(config('gsa.current_date')));
+        $settings = TestSetting::first();
+
+        if ($settings && $settings->test_date) {
+            Date::setTestNow($settings->test_date);
+        }
 
         return $next($request);
     }
