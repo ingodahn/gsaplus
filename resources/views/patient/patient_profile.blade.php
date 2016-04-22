@@ -57,9 +57,9 @@
 
 
     <hr>
-    <h3>Tagebuchtag</h3>
+    <h3>Schreibtag</h3>
     <p>
-      Der aktuelle Tagebuchtag ist <strong>{{ $Patient['assignmentDay'] }}</strong> und es
+      Der aktuelle Schreibtag ist <strong>{{ $Patient['assignmentDay'] }}</strong> und es
       @if($Patient['assignmentDayChangesLeft'] == 1)
         verbleibt
       @else
@@ -93,7 +93,7 @@
         </div>
         <p>
           <div class="form-group">
-            <button type="submit" class="btn">Tagebuchtag setzen</button>
+            <button type="submit" class="btn">Schreibtag setzen</button>
           </div>
         </p>
       </form>
