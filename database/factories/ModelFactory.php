@@ -92,22 +92,8 @@ $factory->define(App\CommentReply::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Survey::class, function () {
     return [
-
-    ];
-});
-
-$factory->define(App\PHQ4::class, function () {
-    return [
-        'depressed' => rand(0,3),
-        'interested' => rand(0,3),
-        'nervous' => rand(0,3),
-        'troubled' => rand(0,3)
-    ];
-});
-
-$factory->define(App\WAI::class, function () {
-    return [
-        'index' => rand(0,10)
+        'wai' => rand(0,10),
+        'health' => rand(0,10)
     ];
 });
 

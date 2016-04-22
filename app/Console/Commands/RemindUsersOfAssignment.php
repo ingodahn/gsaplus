@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Assignment;
+use App\Models\AssignmentStatus;
+use App\Models\InfoModel;
 use Illuminate\Console\Command;
 
 use App\Patient;
@@ -19,11 +22,6 @@ class RemindUsersOfAssignment extends Command
     const OPTION_ALL = 'all';
 
     const VIEW_DIR = 'emails.assignment';
-
-    /**
-     * @var Date
-     */
-    private $date;
 
     protected $views = [self::OPTION_FIRST => self::VIEW_DIR.'.first',
                         self::OPTION_NEW => self::VIEW_DIR.'.new',
@@ -66,7 +64,9 @@ class RemindUsersOfAssignment extends Command
      */
     public function handle()
     {
-        $this->date = new Date(config('gsa.current_date'));
+        // set test date
+        // -> other methods should also use the test date
+        Date::setTestNow(new Date(config('gsa.current_date')));
 
         if ($this->option(self::OPTION_FIRST) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_FIRST);
@@ -88,32 +88,38 @@ class RemindUsersOfAssignment extends Command
     }
 
     protected function sendRemindersForNewOrCurrentAssignments($type_of_reminder) {
-        // get patients whose
-        // - intervention didn't end
-        // - hospital stay is over
-        // - assignment day matches the current day
-        $patients = Patient::whereNull('intervention_ended_on')
-            ->whereNotNull('date_from_clinics')
-            ->whereAssignmentDay($this->date->dayOfWeek)
-            ->get();
+        // get all assignments with writing_date = now
+        $assignments = Assignment::where('writing_date', '=',
+                        Date::now()->format('Y-m-d'))->get();
 
-        $bar = $this->output->createProgressBar($patients->count());
+        $bar = $this->output->createProgressBar($assignments->count());
 
         $bar->setFormat("Notifying of {$type_of_reminder} assignment: ".'[%bar%] %current%/%max%');
         $bar->start();
 
         // remind of first or current assignment
-        foreach ($patients as $patient) {
-            $week = $patient->week_for_date($this->date);
-            $assignment = $patient->assignment_for_week($week);
+        foreach ($assignments as $assignment) {
+            $patient = $assignment->patient;
 
-            if ($week === 1 && $type_of_reminder == self::OPTION_FIRST) {
-                // remind of first assignment
-                $this->sendEMail($patient, self::OPTION_FIRST);
-            } else if ($week > 1 && $week <= 12 && $type_of_reminder == self::OPTION_NEW) {
-                if ($assignment && $assignment->problem != NULL) {
-                    // remind of current assignment
-                    $this->sendEMail($patient, self::OPTION_NEW);
+            if ($patient->intervention_ended_on === null) {
+                $next_assignment = $patient->assignment_for_week($assignment->week + 1);
+
+                if ($next_assignment && $next_assignment->writing_date === null) {
+                    $next_assignment->writing_date = Date::now()->startOfDay()->addWeek();
+                    $next_assignment->save();
+                }
+
+                // don't send reminder if patient already edited the assignment
+                if ($assignment->status() === AssignmentStatus::PATIENT_GOT_ASSIGNMENT) {
+                    if ($assignment->week === 1 && $type_of_reminder == self::OPTION_FIRST) {
+                        // remind of first assignment
+                        $this->sendEMail($assignment->patient, self::OPTION_FIRST);
+                    } else if ($assignment->week > 1 && $assignment->week <= 12
+                        && $type_of_reminder == self::OPTION_NEW
+                        && $assignment->problem != NULL) {
+                        // remind of current assignment
+                        $this->sendEMail($assignment->patient, self::OPTION_NEW);
+                    }
                 }
             }
 
@@ -125,7 +131,38 @@ class RemindUsersOfAssignment extends Command
     }
 
     protected function sendRemindersForDueAssignments() {
+        // get patients whose
+        // - intervention didn't end
+        // - hospital stay is over
+        $patients = Patient::whereNull('intervention_ended_on')
+            ->whereNotNull('date_from_clinics')
+            ->get();
 
+        $bar = $this->output->createProgressBar($patients->count());
+
+        $bar->setFormat("Notifying of due assignment: ".'[%bar%] %current%/%max%');
+        $bar->start();
+
+        foreach ($patients as $patient) {
+            // assignments exists because date from clinics was set before
+            // (see mutator in class Patient)
+            $current_assignment = $patient->current_assignment();
+
+             if (Date::now()->gte($current_assignment->writing_date->copy()
+                    ->addDays(config('gsa.reminder_period_in_days')))) {
+                // remind of due assignment if 5 days passed since the writing date
+                $this->sendEMail($patient, self::OPTION_DUE);
+
+                 // save date of reminder
+                $current_assignment->date_of_reminder = Date::now();
+                $current_assignment->save();
+            }
+
+            $bar->advance();
+        }
+
+        $bar->finish();
+        $bar->clear();
     }
 
     protected function sendRemindersForMissedAssignments() {
