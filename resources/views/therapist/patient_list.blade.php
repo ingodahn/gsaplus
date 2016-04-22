@@ -131,7 +131,7 @@
         <li>Schreibimpuls nicht erforderlich (E100)</li>
       </ul>
       Der Wert für <strong>Überfällig</strong> wird wie folgt berechnet:<br>
-      Überfällig (overdue) = Wert der Form 'Anzahl der überfälligen Einträge' / 'Aktuelle Wochennr' = Anzahl der bereits gestellten Aufgaben
+      Überfällig (overdue) = Wert der Form 'Anzahl der überfälligen Einträge' / 'Aktuelle Wochennr' = Anzahl der bereits gegebenen Schreibimpulse
       ">
         <i class="fa fa-question-circle"></i>
       </a>
