@@ -102,9 +102,9 @@ class Assignment extends InfoModel
     }
 
     /**
-     * Status der Aufgabe
+     * Status des Schreibimpulses
      *
-     * @return string Status der Aufgabe
+     * @return string Status des Schreibimpulses
      */
     public function status() {
         if ($this->patient->intervention_ended_on &&

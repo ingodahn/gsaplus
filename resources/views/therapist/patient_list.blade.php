@@ -107,12 +107,12 @@
       <ul>
         <li>Registriert (P020)</li>
         <li>Entlassungsdatum erfasst (P025)</li>
-        <li>Aufgabe erhalten (P030)</li>
-        <li>Aufgabe bearbeitet (P040)</li>
-        <li>Aufgabe gemahnt (P045)</li>
-        <li>Aufgabe abgeschickt (P050)</li>
-        <li>Aufgabe kommentiert (P060)</li>
-        <li>Aufgabenkommentar bewertet (P065)</li>
+        <li>Schreibimpuls erhalten (P030)</li>
+        <li>Tagebucheintrag bearbeitet (P040)</li>
+        <li>Tagebucheintrag gemahnt (P045)</li>
+        <li>Tagebucheintrag abgeschickt (P050)</li>
+        <li>Tagebucheintrag mit Rückmeldung versehen (P060)</li>
+        <li>Rückmeldung bewertet (P065)</li>
         <li>Mitarbeit beendet (P130)</li>
         <li>Interventionszeit beendet (P140)</li>
       </ul>
@@ -120,15 +120,15 @@
       <br>
       Es gibt auch folgende <strong>Aufgabenstati (E)</strong>
       <ul>
-        <li>Aufgabe nicht definiert (E010)</li>
-        <li>Aufgabe definiert (E015)</li>
-        <li>Aufgabe gestellt (E020)</li>
-        <li>Aufgabe bearbeitet (E030)</li>
-        <li>Antwort abgeschickt (E040)</li>
-        <li>Antwort kommentiert (E050)</li>
-        <li>Kommentar bewertet (E060)</li>
-        <li>Aufgabe überfällig (E070)</li>
-        <li>Aufgabe nicht erforderlich (E100)</li>
+        <li>Schreibimpuls nicht definiert (E010)</li>
+        <li>Schreibimpuls definiert (E015)</li>
+        <li>Schreibimpuls gegeben (E020)</li>
+        <li>Tagebucheintrag bearbeitet (E030)</li>
+        <li>Tagebucheintrag abgeschickt (E040)</li>
+        <li>Tagebucheintrag mit Rückmeldung versehen (E050)</li>
+        <li>Rückmeldung bewertet (E060)</li>
+        <li>Tagebucheintrag überfällig (E070)</li>
+        <li>Schreibimpuls nicht erforderlich (E100)</li>
       </ul>
       Der Wert für <strong>Überfällig</strong> wird wie folgt berechnet:<br>
       Überfällig (overdue) = Wert der Form 'Anzahl der überfälligen Einträge' / 'Aktuelle Wochennr' = Anzahl der bereits gestellten Aufgaben
