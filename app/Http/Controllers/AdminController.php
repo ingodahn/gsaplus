@@ -53,7 +53,7 @@ class AdminController extends Controller
 
 		foreach (Patient::all() as $patient) {
 			$info[$patient->name]['Code'] = $patient->code;
-			$info[$patient->name]['Tagebuchtag'] = $patient->assignment_day;
+			$info[$patient->name]['Schreibtag'] = $patient->assignment_day;
 			$info[$patient->name]['Änderungen möglich'] = $patient->assignment_day_changes_left;
 
 			if ($patient->therapist !== null) {
