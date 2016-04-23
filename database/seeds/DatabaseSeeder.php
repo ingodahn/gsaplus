@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CodesTableSeeder::class);
         $this->call(RandomWeekDaysTableSeeder::class);
+        $this->call(TestSettingsTableSeeder::class);
 
         $this->call(AdminsTableSeeder::class);
         $this->call(TherapistsTableSeeder::class);

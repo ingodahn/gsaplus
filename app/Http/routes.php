@@ -15,7 +15,6 @@ Route::get('/admin_home',function() {
 Route::get('/AdminCodes','AdminController@admin_codes');
 Route::get('/AdminUsers','AdminController@admin_users');
 
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,6 +25,8 @@ Route::get('/AdminUsers','AdminController@admin_users');
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+// the following routes are working on the current date
+// -> middleware test.date
 Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'GateController@enter_system');
 
@@ -78,9 +79,25 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('reset', 'Auth\PasswordController@postReset');
 	});
 
+	// especially the test page needs to operate on the current date (!)
+	// -> middleware test.date isn't active
+	// (session is needed for alerts)
+	Route::group(['prefix' => '/test'], function() {
+		Route::get('', 'TestController@showOverview');
+
+		// Password reset link request routes...
+		Route::post('login/{user}', 'TestController@loginAs');
+		Route::post('next-date/{patient}', 'TestController@setAssignmentRelatedTestDate');
+		Route::post('next-date/{patient}/{daysToAdd}', 'TestController@setAssignmentRelatedTestDate');
+		Route::post('settings', 'TestController@changeSettings');
+
+		Route::post('send-reminders/{option}', 'TestController@sendReminders');
+	});
+
 });
 
-Route::group(['middleware' => ['web', 'auth']], function () {
+// the following routes are working with the test date
+Route::group(['middleware' => ['web', 'auth', 'test.date']], function () {
 	Route::get('/Home', 'AuxController@home');
 
 	Route::get('/Diary/{name?}','DiaryController@show');

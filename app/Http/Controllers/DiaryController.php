@@ -383,7 +383,7 @@ class DiaryController extends Controller
         }
 
         $patient_week=$Diary['patient_week'];
-        $next_assignment_date=$patient->next_assignment()->writing_date;
+        $next_assignment_date=$patient->next_assignment() ? $patient->next_assignment()->writing_date : null;
         if ($next_assignment_date) {
             $Diary['next_assignment'] = "Die nächste Aufgabe wird am ".$next_assignment_date->format('d.m.Y')." gestellt.";
         } elseif ($info['patientStatus'] == 'P020') {
