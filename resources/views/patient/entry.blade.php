@@ -17,7 +17,7 @@
         </div>
       @endif
 
-      <h3>Fragestellung</h3>
+      <h3>Schreibimpuls</h3>
       @if($isPatient || $isTherapist && $EntryInfo['status'] >= 'E020')
         <p>{{$EntryInfo['problem']}}</p>
       @elseif($isTherapist && $EntryInfo['status'] < 'E020')
@@ -274,9 +274,9 @@
         $editable = $isPatient && $EntryInfo['status'] == 'E040';
       ?>
       @if($visible)
-        <h3>Kommentar des Therapeuten</h3>
+        <h3>Rückmeldung des Therapeuten</h3>
         <div class="form-group">
-          <label for="comment">Kommentar des Therapeuten</label>
+          <label for="comment">Rückmeldung des Therapeuten auf Ihren Tagebucheintrag</label>
           <textarea class="form-control js-auto-size" id="comment" placeholder="" {{$editable ? "" : "disabled"}}>{{$EntryInfo['comment']}}</textarea>
         </div>
       @endif
