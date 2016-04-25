@@ -210,6 +210,9 @@
             <p>{{ $EntryInfo['reflection'] }}</p>
           @endif
         @endif
+          @if($isPatient)
+            <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+          @endif
       @endif
 
       <hr>
