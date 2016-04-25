@@ -39,7 +39,7 @@ class PatientStatus
         self::DATE_OF_DEPARTURE_SET => "Entlassungsdatum erfasst",
         self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls erhalten",
         self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag bearbeitet",
-        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Tagebucheintrag gemahnt",
+        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Tagebucheintrag in Kürze fällig",
         self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
         self::THERAPIST_COMMENTED_ASSIGNMENT => "Tagebucheintrag mit Rückmeldung versehen",
         self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",

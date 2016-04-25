@@ -69,6 +69,11 @@ abstract class PatientsTableBaseSeeder extends Seeder
      *          use "" if true, random texts otherwise
      */
     protected function fill_in_situations(Assignment &$assignment, $empty) {
+        // TODO: clean up and fix method (creating past assignments)
+        if (!$empty && empty($assignment->situations)) {
+            $this->add_situation($assignment);
+        }
+
         foreach ($assignment->situations as $situation) {
             $empty ? $situation->description = "" : $this->faker->realText();
             $empty ? $situation->expectation = "" : $this->faker->realText();
@@ -107,6 +112,11 @@ abstract class PatientsTableBaseSeeder extends Seeder
         $this->add_statistics($patient);
     }
 
+    protected function create_random_number_of_past_assignments(Patient &$patient, $max) {
+        // patient has a random number of past assignments
+        $this->create_fixed_number_of_past_assignments($patient, rand(1, $max));
+    }
+
     /**
      * Create and add a random number of past assignments (including comments, comment
      * replies, ...). Some properties are randomly set (e.g. probability that a saved
@@ -115,18 +125,17 @@ abstract class PatientsTableBaseSeeder extends Seeder
      * @param Patient $patient
      *          the patient
      */
-    protected function create_random_number_of_assignments(Patient &$patient)
+    protected function create_fixed_number_of_past_assignments(Patient &$patient, $assignment_count,
+                                                                        $weeks_till_previous_assignment = 0)
     {
-        // patient has a random number of past assignments
-        // TODO: fix error when using (1, 12)
-        $assignment_count = rand(1, 12);
         // choose random therapist
         $therapist = Therapist::all()->random();
         $therapist->patients()->save($patient);
 
         $patient->date_from_clinics = Date::now()
             ->startOfWeek()
-            ->subWeeks($assignment_count)
+            ->subWeeks($assignment_count + 1)
+            ->subWeeks($weeks_till_previous_assignment)
             ->addDays(rand(0, 6));
 
         // set first assignment day
@@ -188,11 +197,7 @@ abstract class PatientsTableBaseSeeder extends Seeder
                     $situation_count = $saved && $is_past_assignment ? rand(1,3) : 0;
 
                     for ($count = 1; $count <= $situation_count; $count++) {
-                        // answers generated in model factory
-                        $situation = factory(Situation::class)->make();
-                        Helper::set_developer_attributes($situation, true);
-                        // add situation
-                        $assignment->situations()->save($situation);
+                        $this->add_situation($assignment);
                     }
                     break;
                 case AssignmentType::TASK:
@@ -253,6 +258,21 @@ abstract class PatientsTableBaseSeeder extends Seeder
                 $this->add_statistics($patient);
             }
         }
+    }
+
+    /**
+     * Add a situation and associate it with the situation survey (the first
+     * assignment). Some properties are randomly set.
+     *
+     * @param SituationSurvey $survey
+     *          the situation survey
+     */
+    protected function add_situation(&$survey) {
+        // answers generated in model factory
+        $situation = factory(Situation::class)->make();
+        Helper::set_developer_attributes($situation, true);
+        // add situation
+        $survey->situations()->save($situation);
     }
 
     /**
@@ -356,8 +376,11 @@ abstract class PatientsTableBaseSeeder extends Seeder
             case PatientStatus::DATE_OF_DEPARTURE_SET:
                 $this->create_empty_assignments($patient);
                 break;
+            case PatientStatus::INTERVENTION_ENDED:
+                $this->create_fixed_number_of_past_assignments($patient, 12, 1);
+                break;
             default:
-                $this->create_random_number_of_assignments($patient);
+                $this->create_random_number_of_past_assignments($patient, 11);
         }
 
         $current_assignment = $patient->current_assignment();
@@ -402,7 +425,7 @@ abstract class PatientsTableBaseSeeder extends Seeder
                 $this->add_comment($current_assignment);
                 $this->add_comment_reply($current_assignment->comment);
                 break;
-            case PatientStatus::INTERVENTION_ENDED:
+            case PatientStatus::COLLABORATION_ENDED:
                 $patient->intervention_ended_on = Date::now();
                 break;
         }
