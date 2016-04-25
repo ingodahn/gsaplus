@@ -18,8 +18,7 @@ class RandomPatientsTableSeeder extends PatientsTableBaseSeeder
         $faker = $this->faker;
 
         foreach (array_keys(PatientStatus::$STATUS_INFO) as $patient_status) {
-            if ($patient_status === PatientStatus::UNKNOWN ||
-                $patient_status === PatientStatus::COLLABORATION_ENDED) {
+            if ($patient_status === PatientStatus::UNKNOWN) {
                 continue;
             }
 
