@@ -14,10 +14,29 @@
 @endsection
 
 @section('content')
+
+    {{-- Add smooth scrolling --}}
+    <script type="text/javascript">
+      $(function() {
+      $('a[href*="#"]:not([href="#"])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html, body').animate({
+              scrollTop: target.offset().top
+            }, 1000);
+            return false;
+          }
+        }
+      });
+      });
+    </script>
+
     <?php use App\Models\UserRole; ?>
 
     <div class="container" id="top">
-        <h3>Test Seite</h3>
+        <h3>Softwaretest-Kontrollzentrum</h3>
         <p>Auf dieser Seite können sie die im System vorhandenen</p>
         <ul>
             <li>
