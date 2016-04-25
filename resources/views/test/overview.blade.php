@@ -6,6 +6,10 @@
         td {
             vertical-align:middle !important;
         }
+        
+        ul.nav {
+            display: none;
+        }
     </style>
 @endsection
 
