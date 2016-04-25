@@ -50,7 +50,7 @@
             Benutzers einzusehen und das Datum auf ein in der Zukunft liegendes Schreibdatum zu ändern
             (falls der Benutzer ein Patient ist).</p>
         <p>Patienten können <a href="#reminders">daran erinnert</a> werden,
-            dass Sie die erste bzw. eine Folge-Aufgabe erhalten oder die aktuelle Aufgabe 5 Tage lang
+            dass Sie den erste bzw. einen Folge-Schreibimpuls erhalten oder den aktuellen Schreibimpuls 5 Tage lang
             nicht bearbeitet haben.</p>
         <p>In den <a href="#config">Einstellungen</a> kann das aktuelle Test-Datum gewählt werden. Zudem
             können bestimmte Erinnerungen automatisch verschickt werden, wenn sich das Test-Datum ändert.</p>
@@ -141,7 +141,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Erhalt der ersten Aufgabe</td>
+                    <td>Erhalt des ersten Schreibimpulses</td>
                     <td>
                         Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren ersten Schreibtag haben.
                     </td>
@@ -153,7 +153,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Erhalt einer Folge-Aufgabe</td>
+                    <td>Erhalt eines Folge-Schreibimpulses</td>
                     <td>
                         Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren neuen Schreibtag haben.
                     </td>
@@ -165,9 +165,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Aktuelle Aufgabe unbearbeitet</td>
+                    <td>Aktueller Schreibimpuls unbearbeitet</td>
                     <td>
-                        Gilt für alle Patienten die Ihre aktuelle Aufgabe 5 Tage lang nicht bearbeitet haben.
+                        Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.
                     </td>
                     <td>
                         <form method="POST" action="/test/send-reminders/due">
@@ -179,7 +179,7 @@
             </tbody>
         </table>
 
-        <p>Wenn ein Patient an eine aktuelle Aufgabe erinnert wird, so wird ebenso das <em>nächste
+        <p>Wenn ein Patient an einen aktuellen Schreibimpuls erinnert wird, so wird ebenso das <em>nächste
             Schreibdatum (+1 Woche)</em> berechnet.</p>
 
         <br/>
@@ -218,7 +218,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Automatisch an erste Aufgabe erinnern
+                            Automatisch an ersten Schreibimpuls erinnern
                         </td>
                         <td>
                             <input type="checkbox" class="pull-right" name="first_reminder" value="1" {{ $settings['firstReminder'] ? 'checked' : ''}}>
@@ -226,7 +226,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Automatisch an neue Aufgabe erinnern
+                            Automatisch an neuen Schreibimpuls erinnern
                         </td>
                         <td>
                             <input type="checkbox" class="pull-right" name="new_reminder" value="1" {{ $settings['newReminder'] ? 'checked' : '' }}>
@@ -234,7 +234,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Automatisch an Aufgabe erinnern, die in Kürze fällig ist
+                            Automatisch an Schreibimpuls erinnern, der in Kürze fällig ist
                         </td>
                         <td>
                             <input type="checkbox" class="pull-right" name="due_reminder"  value="1" {{ $settings['dueReminder'] ? 'checked' : ''}}>
