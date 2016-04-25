@@ -289,7 +289,7 @@
         $editable = $visible;
       ?>
       @if ($visible)
-      <h3>Bewertung des Therapeutenkommentars</h3>
+      <h3>Bewertung der Rückmeldung des Therapeuten</h3>
 
         <div class="bs-callout bs-callout-warning">
           <p>Sie werden nachdrücklich aufgefordert, diese Felder auszufüllen.</p>
@@ -346,7 +346,7 @@
       <p>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn">Älter</a>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn">Neuer</a>
-        <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn">Zur aktuellen Aufgabe</a>
+        <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn">Zum aktuellen Schreibimpuls</a>
         <a href="/Home" class="btn">Zur Übersicht</a>
       </p>
 
