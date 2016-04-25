@@ -221,12 +221,12 @@
       @if($visible)
         <h3>Fragen zum Befinden</h3>
         <p>
-          <strong>Wir wollen herausfinden, wie gut oder schlecht Ihre Gesundheit HEUTE ist:</strong>
+          <strong>Wir wollen herausfinden, wie gut oder schlecht Ihre Gesundheit <em>heute</em> ist:</strong>
         </p>
       <ul>
         <li>10 ist die beste Gesundheit, die Sie sich vorstellen können.</li>
         <li>0 ist die schlechteste Gesundheit, die Sie sich vorstellen können.</li>
-        <li>Bitte wählen Sie den Wert, der Ihre Gesundheit HEUTE am besten beschreibt.</li>
+        <li>Bitte wählen Sie den Wert, der Ihre Gesundheit <strong><em>heute</em></strong> am besten beschreibt.</li>
       </ul>
 
         <div class="container-fluid big-radios">
