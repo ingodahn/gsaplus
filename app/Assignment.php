@@ -128,9 +128,16 @@ class Assignment extends InfoModel
                 // patient was reminded by system and didn't submit a text
                 return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
             } else if ($this->week == $this->patient->patient_week) {
-                // patient was reminded by system and there is still
-                // time to finish the assignment
-                return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
+                // check if intervention ended
+                if ($this->week == 12 && $this->writing_date->copy()->addWeek()->isPast()) {
+                    // intervention ended, patient was reminded of
+                    // the last assignment but didn't submit a text
+                    return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
+                } else {
+                    // patient was reminded by system and there is still
+                    // time to finish the assignment
+                    return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
+                }
             }
         } else if ($this->partially_answered) {
             if ($this->dirty) {
