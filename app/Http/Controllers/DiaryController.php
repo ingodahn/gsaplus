@@ -37,7 +37,7 @@ class DiaryController extends Controller
 
 
     /**
-     * Füge eine neue Situation zur ersten Schreibaufgabe hinzu
+     * Füge eine neue Situation zum ersten Schreibimpuls hinzu
      */
     public function add_situation()
     {
@@ -106,7 +106,7 @@ class DiaryController extends Controller
            // ToDo: If answer exists already, load t from database, else $entry_info['reflection']='';
            $entry_info['reflection'] = "Reflexionen ab Woche 2 nicht implementiert";
         }
-        
+
         if (! array_key_exists('survey', $assignment_info)) {
             $assignment_info['survey']=[
                 "health" => -1,
@@ -146,12 +146,12 @@ class DiaryController extends Controller
      * das nicht der Fall so wird aud die Startseite
      * weitergeleitet.
      * Je nach Status des Patienten wird die anzuzeigende Seite ansonsten gestaltet:
-     * Ist nicht die aktuelle Aufgabe ausgewählt, so weirden die gewählte Aufgabe und
-     * der Kommentar nicht editierbar angezeigt.
+     * Ist nicht der aktuelle Schreibimpuls ausgewählt, so weirden der gewählte
+     * Schreibimpuls und der Kommentar nicht editierbar angezeigt.
      * Ist die aktuelle Aufgabe ausgewählt, so wird die aktuelle Aufgabe je nach
      * Status des Patienten angezeigt. dabei werden unterschiedliche Seiten
-     * ausgeliefert, je nachdem ob es sich um die erste Aufgabe oder eine Folgeaufgabe
-     * handelt.
+     * ausgeliefert, je nachdem ob es sich um den ersten Schreibimpuls oder einen
+     * Folgeschreibimpuls handelt.
      * Die folgenden Fälle sind relevant (s. Patient_status):
      * <ul>
      *    <li>Erste Aufgabe erhalten: Aufgabe editierbar</li>
@@ -385,12 +385,12 @@ class DiaryController extends Controller
         $patient_week=$Diary['patient_week'];
         $next_assignment_date=$patient->next_assignment() ? $patient->next_assignment()->writing_date : null;
         if ($next_assignment_date) {
-            $Diary['next_assignment'] = "Die nächste Aufgabe wird am ".$next_assignment_date->format('d.m.Y')." gestellt.";
+            $Diary['next_assignment'] = "Der nächste Schreibimpuls wird am ".$next_assignment_date->format('d.m.Y')." gegeben.";
         } elseif ($info['patientStatus'] == 'P020') {
-            $Diary['next_assignment'] = "Die erste Schreibaufgabe wird nach Übermittlung des Entlassungsdatums durch die Klinik gestellt. Sie werden darüber per eMail informiert.";
+            $Diary['next_assignment'] = "Der erste Schreibimpuls wird nach Übermittlung des Entlassungsdatums aus der Klinik gegeben. Sie werden darüber per E-Mail informiert.";
         }
         else {
-            $Diary['next_assignment'] = "Es ist keine weitere Aufgabe vorgesehen";
+            $Diary['next_assignment'] = "Es ist kein weiterer Schreibimpuls vorgesehen.";
         }
 
         $assignment_info = $info['assignments'];

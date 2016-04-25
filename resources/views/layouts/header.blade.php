@@ -27,8 +27,14 @@
           {{-- Therapist --}}
           @if($isTherapist)
             <li><a href="/Home">Patientenliste</a></li>
-            <li><a href="/AdminUsers">AdminUsers</a></li>
-            <li><a href="/AdminCodes">AdminCodes</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin-Tools <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/test" target="_blank">Konrollzentrum</a></li>
+                <li><a href="/AdminUsers" target="_blank">Alle Nutzer</a></li>
+                <li><a href="/AdminCodes" target="_blank">Alle Codes</a></li>
+              </ul>
+            </li>
           @endif
 
           {{-- Common --}}

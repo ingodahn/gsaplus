@@ -187,16 +187,16 @@ class RemindUsersOfAssignment extends Command
 
         switch ($type_of_reminder) {
             case self::OPTION_FIRST:
-                $subject = 'Erste Aufgabe gestellt';
+                $subject = 'Erster Schreibimpuls gegeben';
                 break;
             case self::OPTION_NEW:
-                $subject = 'Neue Aufgabe vorhanden';
+                $subject = 'Neuer Schreibimpuls vorhanden';
                 break;
             case self::OPTION_DUE:
-                $subject = 'Letzte Aufgabe unbearbeitet';
+                $subject = 'Letzter Schreibimpuls unbeantwortet';
                 break;
             case self::OPTION_MISSED:
-                $subject = 'Letzte Aufgabe versäumt';
+                $subject = 'Letzten Tagebucheintrag versäumt';
                 break;
         }
 

@@ -29,7 +29,7 @@
     </p>
 
     <p>
-      Wenn Sie noch keine Aufgabe erhalten haben, warten Sie bitte ab, bis Ihr Online Therapeut Ihnen eine Aufgabe zuweist.
+      Wenn Sie noch keinen Schreibimpuls erhalten haben, warten Sie bitte ab, bis Ihr Online Therapeut Ihnen einen Schreibimpuls gibt.
     </p>
     @endif
 
@@ -42,7 +42,7 @@
     <table class="table table-striped table-bordered table-condensed">
       <thead>
         <th>Woche</th>
-        <th>Aufgabe</th>
+        <th>Schreibimpuls</th>
         <th>Status</th>
         <th>Aktionen</th>
       </thead>

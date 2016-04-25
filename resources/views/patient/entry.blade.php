@@ -17,7 +17,7 @@
         </div>
       @endif
 
-      <h3>Fragestellung</h3>
+      <h3>Schreibimpuls</h3>
       @if($isPatient || $isTherapist && $EntryInfo['status'] >= 'E020')
         <p>{{$EntryInfo['problem']}}</p>
       @elseif($isTherapist && $EntryInfo['status'] < 'E020')
@@ -34,7 +34,7 @@
         $editable = $isPatient && $EntryInfo['status'] < 'E040';
       ?>
       @if($visible)
-        <h3>Antwort</h3>
+        <h3>Tagebucheintrag</h3>
         @if ($EntryInfo['week'] == 1)
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
           <div class="panel panel-default">
@@ -210,6 +210,9 @@
             <p>{{ $EntryInfo['reflection'] }}</p>
           @endif
         @endif
+          @if($isPatient)
+            <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+          @endif
       @endif
 
       <hr>
@@ -221,12 +224,12 @@
       @if($visible)
         <h3>Fragen zum Befinden</h3>
         <p>
-          <strong>Wir wollen herausfinden, wie gut oder schlecht Ihre Gesundheit HEUTE ist:</strong>
+          <strong>Wir wollen herausfinden, wie gut oder schlecht Ihre Gesundheit <em>heute</em> ist:</strong>
         </p>
       <ul>
         <li>10 ist die beste Gesundheit, die Sie sich vorstellen können.</li>
         <li>0 ist die schlechteste Gesundheit, die Sie sich vorstellen können.</li>
-        <li>Bitte wählen Sie den Wert, der Ihre Gesundheit HEUTE am besten beschreibt.</li>
+        <li>Bitte wählen Sie den Wert, der Ihre Gesundheit <strong><em>heute</em></strong> am besten beschreibt.</li>
       </ul>
 
         <div class="container-fluid big-radios">
@@ -274,9 +277,9 @@
         $editable = $isPatient && $EntryInfo['status'] == 'E040';
       ?>
       @if($visible)
-        <h3>Kommentar des Therapeuten</h3>
+        <h3>Rückmeldung des Therapeuten</h3>
         <div class="form-group">
-          <label for="comment">Kommentar des Therapeuten</label>
+          <label for="comment">Rückmeldung des Therapeuten auf Ihren Tagebucheintrag</label>
           <textarea class="form-control js-auto-size" id="comment" placeholder="" {{$editable ? "" : "disabled"}}>{{$EntryInfo['comment']}}</textarea>
         </div>
       @endif
@@ -286,7 +289,7 @@
         $editable = $visible;
       ?>
       @if ($visible)
-      <h3>Bewertung des Therapeutenkommentars</h3>
+      <h3>Bewertung der Rückmeldung des Therapeuten</h3>
 
         <div class="bs-callout bs-callout-warning">
           <p>Sie werden nachdrücklich aufgefordert, diese Felder auszufüllen.</p>
@@ -343,7 +346,7 @@
       <p>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn">Älter</a>
         <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn">Neuer</a>
-        <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn">Zur aktuellen Aufgabe</a>
+        <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn">Zum aktuellen Schreibimpuls</a>
         <a href="/Home" class="btn">Zur Übersicht</a>
       </p>
 

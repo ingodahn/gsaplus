@@ -61,7 +61,7 @@ class TestController extends Controller
 
                 $this->sendAutomaticReminders();
             } else {
-                Alert::error('Der Patient hat entweder keine Folgeaufgabe oder das nächste Schreibdatum '.
+                Alert::error('Der Patient hat entweder keinen Folge-Schreibimpuls oder das nächste Schreibdatum '.
                     'wurde noch nicht gesetzt.', 'Das Datum konnte nicht geändert werden.')->persistent();
             }
         }

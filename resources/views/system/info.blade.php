@@ -60,7 +60,7 @@
     <div class="info-video" id="video-1">
       <h3>Wer sind wir?</h3>
       <div class="pull-right">
-        <a href="#body">Nach oben</a>
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
         Begrüßung und Angebot der online Nachsorge
@@ -73,7 +73,7 @@
     <div class="info-video" id="video-2">
       <h3>Rückkehr an den Arbeitsplatz</h3>
       <div class="pull-right">
-        <a href="#body">Nach oben</a>
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
         Warum onlinebasierte Unterstützung bei der Wiedereingliederung?
@@ -86,7 +86,7 @@
     <div class="info-video" id="video-3">
       <h3>Ablauf und Durchführung</h3>
       <div class="pull-right">
-        <a href="#body">Nach oben</a>
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
         Wie läuft die online Nachsorge ab?
@@ -99,7 +99,7 @@
     <div class="info-video" id="video-4">
       <h3>Die ZBKT Methode</h3>
       <div class="pull-right">
-        <a href="#body">Nach oben</a>
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
         Welche Grundlage hat die online Nachsorge?
@@ -112,7 +112,7 @@
     <div class="info-video" id="video-5">
       <h3>Ein Beispiel</h3>
       <div class="pull-right">
-        <a href="#body">Nach oben</a>
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
         Eine ganz normale Wiedereingliederung
@@ -125,7 +125,7 @@
     <div class="info-video" id="video-6">
       <h3>Am Ball Bleiben</h3>
       <div class="pull-right">
-        <a href="#body">Nach oben</a>
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
         Warum ist es wichtig dabei zu bleiben?
