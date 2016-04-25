@@ -330,7 +330,7 @@ class Patient extends User
         // am nächsten Schreibtag gilt die Aufgabe als versäumt
 
         if ($this->intervention_ended_on !== null) {
-            return PatientStatus::INTERVENTION_ENDED;
+            return PatientStatus::COLLABORATION_ENDED;
         }
 
         $patient_week = $this->patient_week();
@@ -345,6 +345,10 @@ class Patient extends User
                 } else {
                     // date of departure isn't set but patient is registered
                     return PatientStatus::REGISTERED;
+                }
+            case 12:
+                if ($this->current_assignment()->writing_date->copy()->addWeek()->isPast()) {
+                    return PatientStatus::INTERVENTION_ENDED;
                 }
             default:
                 return AssignmentStatus::to_patient_status($this->current_assignment()->status());
