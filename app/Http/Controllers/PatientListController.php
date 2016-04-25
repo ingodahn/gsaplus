@@ -149,7 +149,7 @@ class PatientListController extends Controller
 							.AssignmentStatus::$STATUS_INFO[$patient_info['statusOfNextAssignment']];
 				})
 				->editColumn('patientWeek', function($patient_info) {
-					return $patient_info['patientWeek'] === -1 ? "-" : $patient_info['patientWeek'];
+					return max($patient_info['patientWeek'], 0);
 				})
 				->edit_column('assignmentDay', function($patient_info) use ($days_map) {
 					return $days_map[$patient_info['assignmentDay']];
