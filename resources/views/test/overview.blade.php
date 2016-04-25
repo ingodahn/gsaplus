@@ -54,7 +54,7 @@
             Benutzers einzusehen und das Datum auf ein in der Zukunft liegendes Schreibdatum zu ändern
             (falls der Benutzer ein Patient ist).</p>
         <p>Patienten können <a href="#reminders">daran erinnert</a> werden,
-            dass Sie den erste bzw. einen Folge-Schreibimpuls erhalten oder den aktuellen Schreibimpuls 5 Tage lang
+            dass Sie den ersten bzw. einen Folge-Schreibimpuls erhalten oder den aktuellen Schreibimpuls 5 Tage lang
             nicht bearbeitet haben.</p>
         <p>In den <a href="#config">Einstellungen</a> kann das aktuelle Test-Datum gewählt werden. Zudem
             können bestimmte Erinnerungen automatisch verschickt werden, wenn sich das Test-Datum ändert.</p>

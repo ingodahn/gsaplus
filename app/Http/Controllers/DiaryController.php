@@ -146,7 +146,7 @@ class DiaryController extends Controller
      * das nicht der Fall so wird aud die Startseite
      * weitergeleitet.
      * Je nach Status des Patienten wird die anzuzeigende Seite ansonsten gestaltet:
-     * Ist nicht der aktuelle Schreibimpuls ausgewählt, so weirden der gewählte
+     * Ist nicht der aktuelle Schreibimpuls ausgewählt, so werden der gewählte
      * Schreibimpuls und der Kommentar nicht editierbar angezeigt.
      * Ist die aktuelle Aufgabe ausgewählt, so wird die aktuelle Aufgabe je nach
      * Status des Patienten angezeigt. dabei werden unterschiedliche Seiten
