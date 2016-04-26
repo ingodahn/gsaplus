@@ -9,6 +9,19 @@
 
         pre.sf-dump {
             font: 18px Monaco,Consolas,monospace !important;
+            background-color: AliceBlue !important;
+        }
+
+        .sf-dump-note {
+            color: Indigo !important;
+        }
+
+        .sf-dump-key {
+            color: DodgerBlue !important;
+        }
+
+        .sf-dump-str {
+            color: #ef7676 !important;
         }
 
         #button-container {
@@ -34,7 +47,7 @@
         {{ dump($info) }}
 
         <p class="pull-right" id="button-container">
-            <a href="/test" class="btn btn-primary">Zurück</a>
+            <a onclick="window.close()" class="btn btn-primary">Schließen</a>
         </p>
 
     </div>
