@@ -14,7 +14,7 @@ wget --progress=bar:force -P /tmp/ http://builds.piwik.org/piwik.zip
 unzip /tmp/piwik.zip -d /tmp
 rm -rf /var/www/public/piwik
 mv /tmp/piwik /var/www/public/
-echo "always_populate_raw_post_data = -1" >> /etc/php5/apache2/php.ini
+sed -i -e 's/;always_populate_raw_post_data/always_populate_raw_post_data/g' /etc/php5/apache2/php.ini
 sudo service apache2 restart
 mysql -uroot -proot -e "create database piwik"
 echo "Visit /piwik to complete the installation"
