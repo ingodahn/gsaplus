@@ -153,14 +153,32 @@ class TestController extends Controller
     }
 
     protected function dumpInfo(User $user) {
-        $info = ($user->type == UserRole::PATIENT) ? $user->all_info() : $user->info();
+        $info = [];
+        $day_map = Helper::generate_day_number_map();
 
-        if (array_key_exists('assignmentDay', $info)) {
-            $day_map = Helper::generate_day_number_map();
-            $info['assignmentDay'] = $day_map[$info['assignmentDay']];
+        switch ($user->type) {
+            case UserRole::PATIENT:
+                $info = $user->all_info();
+                $this->insertNameOfAssignmentDay($info, $day_map);
+                break;
+            case UserRole::THERAPIST:
+                $info = $user->info_with('patients');
+                for ($count = 0; $count < count($info['patients']); $count++) {
+                    $this->insertNameOfAssignmentDay($info['patients'][$count], $day_map);
+                }
+                break;
+            case UserRole::ADMIN:
+                $info = $user->info();
         }
 
         return view('test.info-dump')->with('info', $info);
+    }
+
+    protected function insertNameOfAssignmentDay(&$info, $day_map) {
+        if (array_key_exists('assignmentDay', $info)) {
+            $info['assignmentDay'] = $day_map[$info['assignmentDay']];
+        }
+
     }
 
 }
