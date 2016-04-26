@@ -35,6 +35,8 @@ Next, add the following cron job:
 
 You may need to change the path for the `artisan`-script (it's in this project's root). See <https://laravel.com/docs/master/scheduling>. The schedule at `app/Console/Kernel.php` has a test-command that should log a message to `storage/logs/laravel.log` every day. You can change the rate to `->everyMinute()` for testing.
 
+To connect to a Piwik-instance, change the three `PIWIK_`-fields in `.env`.
+
 
 ## Development
 We use [Vagrant](https://www.vagrantup.com/) with a [VirtualBox](https://www.virtualbox.org/)-Provider (please install both) for setting up a virtual machine for development. Clone this repo and run `vagrant up` to get a production-like environment with all dependencies installed. Our base box is [Scotch Box](https://box.scotch.io/). The project directory is symlinked into `/var/www`; changes made on the host will also be made on the client and vice versa. `/var/www/public` is the root of the webserver.
@@ -47,6 +49,8 @@ rake # Automated task to update dependencies, compile assets, etc.
 ```
 
 The application should now be accessible at <http://192.168.33.10/>.
+
+The VM has an instance of Piwik running at <http://192.168.33.10/piwik>. Unfortunately, not every step of it's installation can be automated, so you'll have to go through their setup first. This is completely optional.
 
 
 
