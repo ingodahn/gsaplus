@@ -163,3 +163,4 @@ _ide_helper.php
 # Sass
 .sass-cache
 bower_components
+public/piwik
