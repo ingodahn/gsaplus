@@ -10,6 +10,7 @@
         pre.sf-dump {
             font: 18px Monaco,Consolas,monospace !important;
             background-color: AliceBlue !important;
+            z-index: 99998 !important;
         }
 
         .sf-dump-note {
@@ -42,12 +43,19 @@
 
 @section('content')
     <br/>
-    <br/>
     <div class="container">
+        <p>Für den Benutzer <strong>{{ $info['name'] }}</strong> sind die folgenden Daten gespeichert<small>*</small>:</p>
+
         {{ dump($info) }}
 
-        <p class="pull-right" id="button-container">
-            <a onclick="window.close()" class="btn btn-primary">Schließen</a>
+        <small>* alle errechneten Werte (wie z.B. die Patientwoche) beziehen sich auf das aktuelle Testdatum</small>
+
+        <p id="button-container">
+            <form action="/test/dump-info/{{ $info['name'] }}/save" method="POST" class="pull-right">
+                {{ csrf_field() }}
+                <button class="btn btn-primary" type="submit">Datenabbild auf dem Server speichern</button>
+                <a onclick="window.close()" class="btn btn-default">Schließen</a>
+            </form>
         </p>
 
     </div>
