@@ -93,7 +93,10 @@ Route::group(['middleware' => ['web']], function () {
 
 		Route::post('send-reminders/{option}', 'TestController@sendReminders');
 
-		Route::get('dump-info/{user}', 'TestController@dumpInfo');
+		Route::group(['prefix' => 'dump-info/{user}', 'middleware' => ['test.date']], function() {
+			Route::get('', 'TestController@dumpInfo');
+			Route::post('save', 'TestController@saveDumpToLogFile');
+		});
 	});
 
 });
