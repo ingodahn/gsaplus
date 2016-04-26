@@ -13,6 +13,7 @@ use App\TestSetting;
 
 use App\Console\Commands\RemindUsersOfAssignment;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 use Jenssegers\Date\Date;
@@ -23,6 +24,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 use Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class TestController extends Controller
 {
@@ -153,6 +155,16 @@ class TestController extends Controller
     }
 
     protected function dumpInfo(User $user) {
+        return view('test.info-dump')->with('info', $this->getInfo($user));
+    }
+
+    protected function insertNameOfAssignmentDay(&$info, $day_map) {
+        if (array_key_exists('assignmentDay', $info)) {
+            $info['assignmentDay'] = $day_map[$info['assignmentDay']];
+        }
+    }
+
+    protected function getInfo(User $user) {
         $info = [];
         $day_map = Helper::generate_day_number_map();
 
@@ -171,14 +183,25 @@ class TestController extends Controller
                 $info = $user->info();
         }
 
-        return view('test.info-dump')->with('info', $info);
+        return $info;
     }
 
-    protected function insertNameOfAssignmentDay(&$info, $day_map) {
-        if (array_key_exists('assignmentDay', $info)) {
-            $info['assignmentDay'] = $day_map[$info['assignmentDay']];
+    public function saveDumpToLogFile(Request $request, User $user) {
+        $fileName = $user->name.'_'.date('Y-m-d_G_i_s').'.log';
+        $filePath = 'dumps/'.$fileName;
+
+        $settings = TestSetting::first();
+
+        $test_date = $settings->test_date ? $settings->test_date : Date::createFromFormat('Y-m-d', date('Y-m-d'));
+        $date_string = $test_date->format('d.m.Y');
+
+        if (Storage::put($filePath, "Test date is ".$date_string."\n\n".var_export($this->getInfo($user), true))) {
+            Alert::success('Die aktuellen Daten unter "'.$fileName.'" gespeichert.')->persistent();
+        } else {
+            Alert::error('Leider konnte kein Abbild gespeichert werden.')->persistent();
         }
 
+        return Redirect::back();
     }
 
 }
