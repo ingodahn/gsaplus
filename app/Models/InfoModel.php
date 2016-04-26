@@ -91,7 +91,10 @@ class InfoModel extends Model
 
         foreach ($this->dynamic_attributes as $dynamic_attribute) {
             $name = static::info_camel_case() ? camel_case($dynamic_attribute) : $dynamic_attribute;
-            $info[$name] = $this->getAttribute($dynamic_attribute);
+            $value = $this->getAttribute($dynamic_attribute);
+
+            $info[$name] = $value !== null &&
+                            is_a($value, 'Jenssegers\Date\Date') ? $value->format('d.m.Y') : $value;
         }
 
         return $info;

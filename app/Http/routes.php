@@ -92,6 +92,8 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('settings', 'TestController@changeSettings');
 
 		Route::post('send-reminders/{option}', 'TestController@sendReminders');
+
+		Route::get('dump-info/{user}', 'TestController@dumpInfo');
 	});
 
 });
