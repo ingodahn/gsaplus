@@ -10,7 +10,7 @@ echo "Installed $(phpunit --version)"
 
 sudo apt-get install language-pack-DE -y
 
-wget -P /tmp/ http://builds.piwik.org/piwik.zip
+wget --progress=bar:force -P /tmp/ http://builds.piwik.org/piwik.zip
 unzip /tmp/piwik.zip -d /tmp
 rm -rf /var/www/public/piwik
 mv /tmp/piwik /var/www/public/
