@@ -87,7 +87,11 @@
                 <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <td>{{ $user['name'] }}</td>
+                        <td>
+                            <a href="/test/dump-info/{{$user['name'] }}" target="_blank">
+                                {{ $user['name'] }}
+                            </a>
+                        </td>
                         <td>
                             <a href="https://www.mailinator.com/inbox2.jsp?public_to={{$user['name'] }}#/#public_maildirdiv" target="_blank">
                                 {{ $user['email'] }}
