@@ -152,15 +152,20 @@ class RemindUsersOfAssignment extends Command
             $current_assignment = $patient->current_assignment();
 
              if ($current_assignment && $current_assignment->writing_date &&
-                    Date::now()->gte($current_assignment->writing_date->copy()
-                    ->addDays(config('gsa.reminder_period_in_days')))) {
-                // remind of due assignment if 5 days passed since the writing date
-                $this->sendEMail($patient, self::OPTION_DUE);
+                    $current_assignment->status() <= AssignmentStatus::PATIENT_EDITED_ASSIGNMENT) {
+                 $end_of_period = $current_assignment->writing_date->copy()
+                     ->addDays(config('gsa.reminder_period_in_days'));
 
-                 // save date of reminder
-                $current_assignment->date_of_reminder = Date::now();
-                $current_assignment->save();
-            }
+                 if (Date::now()->gte($end_of_period) &&
+                     ($current_assignment->week != 12 || $current_assignment->writing_date->copy()->addWeek()->isFuture())) {
+                     // remind of due assignment if 5 days passed since the writing date
+                     $this->sendEMail($patient, self::OPTION_DUE);
+
+                     // save date of reminder
+                     $current_assignment->date_of_reminder = Date::now();
+                     $current_assignment->save();
+                 }
+             }
 
             $bar->advance();
         }
