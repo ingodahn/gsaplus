@@ -46,6 +46,7 @@ SSH into the VM (`vagrant ssh` or use `vagrant@192.168.33.10` with password `vag
 ``` bash
 cd /var/www # Change to the project dir inside the VM
 rake # Automated task to update dependencies, compile assets, etc.
+rake db_seed # Optional. Seed DB with test-data.
 ```
 
 The application should now be accessible at <http://192.168.33.10/>.
