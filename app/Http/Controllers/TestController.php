@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserRole;
 use App\User;
 use App\Patient;
 use App\Assignment;
+
+use App\Helper;
 
 use App\TestSetting;
 
@@ -147,6 +150,17 @@ class TestController extends Controller
         }
 
         return Redirect::back();
+    }
+
+    protected function dumpInfo(User $user) {
+        $info = ($user->type == UserRole::PATIENT) ? $user->all_info() : $user->info();
+
+        if (array_key_exists('assignmentDay', $info)) {
+            $day_map = Helper::generate_day_number_map();
+            $info['assignmentDay'] = $day_map[$info['assignmentDay']];
+        }
+
+        return view('test.info-dump')->with('info', $info);
     }
 
 }
