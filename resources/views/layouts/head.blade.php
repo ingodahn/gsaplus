@@ -27,6 +27,9 @@
   var _paq = _paq || [];
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
+  @if($isLoggedIn)
+    _paq.push(['setUserId', '{{$Name}}']);
+  @endif
   (function() {
     var u="//192.168.33.10/piwik/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
