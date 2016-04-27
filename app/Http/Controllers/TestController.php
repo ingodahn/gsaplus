@@ -29,6 +29,9 @@ use Illuminate\Support\Facades\Storage;
 class TestController extends Controller
 {
 
+    // store settings accross method calls
+    private $settings = null;
+
     public function showOverview() {
         $infos = ['patient' => new Collection, 'therapist' => new Collection, 'admin' => new Collection];
 
@@ -57,7 +60,7 @@ class TestController extends Controller
         $next_assignment = $patient->next_assignment();
 
         if ($next_assignment && $next_assignment->writing_date) {
-            $settings = TestSetting::first();
+            $settings = $this->settings();
             $settings->test_date = $next_assignment->writing_date->copy()->addDays($daysToAdd);
 
             if ($settings->save()) {
@@ -85,7 +88,7 @@ class TestController extends Controller
     }
 
     protected function saveSettings(Request $request) {
-        $settings = TestSetting::first();
+        $settings = $this->settings();
 
         if ($request->has('test_date')) {
             $settings->test_date = Date::createFromFormat('d.m.Y', $request->input('test_date'));
@@ -103,7 +106,7 @@ class TestController extends Controller
     }
 
     protected function restoreSettings() {
-        $settings = TestSetting::first();
+        $settings = $this->settings();
 
         $settings->fill(factory(TestSetting::class)->make()->toArray());
 
@@ -115,7 +118,7 @@ class TestController extends Controller
     }
 
     protected function sendAutomaticReminders() {
-        $settings = TestSetting::first();
+        $settings = $this->settings();
 
         $reminders = [];
 
@@ -139,6 +142,8 @@ class TestController extends Controller
     }
 
     public function sendRemindersFor(...$options) {
+        $settings = $this->settings();
+
         $successful = true;
 
         foreach ($options as $option) {
@@ -190,7 +195,7 @@ class TestController extends Controller
         $fileName = $user->name.'_'.date('Y-m-d_G_i_s').'.log';
         $filePath = 'dumps/'.$fileName;
 
-        $settings = TestSetting::first();
+        $settings = $this->settings();
 
         $test_date = $settings->test_date ? $settings->test_date : Date::createFromFormat('Y-m-d', date('Y-m-d'));
         $date_string = $test_date->format('d.m.Y');
@@ -202,6 +207,14 @@ class TestController extends Controller
         }
 
         return Redirect::back();
+    }
+
+    protected function settings() {
+        if ($this->settings === null) {
+            $this->settings = TestSetting::first();
+        }
+
+        return $this->settings;
     }
 
 }
