@@ -40,6 +40,8 @@ class AuxController extends Controller
 	 */
 	public function home(Request $request)
 	{
+		$request->session()->reflash(); // Keep alerts
+
 		switch ($request->user()->type) {
 			case UserRole::PATIENT:
 				return Redirect::to('/Diary');
