@@ -21,6 +21,7 @@ class RemindUsersOfAssignment extends Command
     const OPTION_DUE = 'due';
     const OPTION_MISSED = 'missed';
     const OPTION_ALL = 'all';
+    const OPTION_SET_NEXT_WRITING_DATE = 'set-next-writing-date';
 
     const VIEW_DIR = 'emails.assignment';
 
@@ -38,7 +39,8 @@ class RemindUsersOfAssignment extends Command
                                 {--'.self::OPTION_FIRST.' : Remind of first assignment}
                                 {--'.self::OPTION_NEW.' : Remind of new assignment}
                                 {--'.self::OPTION_DUE.' : Remind of due assignment}
-                                {--'.self::OPTION_ALL.' : Remind of first, new, due or missed assignment}';
+                                {--'.self::OPTION_ALL.' : Remind of first, new, due or missed assignment}
+                                {--'.self::OPTION_SET_NEXT_WRITING_DATE.' : set next writing date}';
 
     /**
      * The console command description.
@@ -102,7 +104,8 @@ class RemindUsersOfAssignment extends Command
             if ($patient->intervention_ended_on === null) {
                 $next_assignment = $patient->assignment_for_week($assignment->week + 1);
 
-                if ($next_assignment && $next_assignment->writing_date === null) {
+                if ($this->option(self::OPTION_SET_NEXT_WRITING_DATE) &&
+                    $next_assignment && $next_assignment->writing_date === null) {
                     $next_assignment->writing_date = Date::now()->startOfDay()->addWeek();
                     $next_assignment->save();
                 }
