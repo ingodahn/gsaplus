@@ -13,7 +13,6 @@ use App\TestSetting;
 
 use App\Console\Commands\RemindUsersOfAssignment;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 use Jenssegers\Date\Date;
@@ -148,7 +147,15 @@ class TestController extends Controller
         $successful = true;
 
         foreach ($options as $option) {
-            $successful = (Artisan::call('gsa:send-reminders', ['--'.$option => 'default', '--quiet' => 'default']) === 0) && $successful;
+            $arguments = ['--'.$option => 'default',
+                            '--quiet' => 'default'];
+
+            if ($settings->calc_next_writing_date) {
+                $arguments['--'.RemindUsersOfAssignment::OPTION_SET_NEXT_WRITING_DATE] = 'default';
+            }
+
+            $successful = (Artisan::call('gsa:send-reminders',
+                                $arguments) === 0) && $successful;
         }
 
         if ($successful) {
