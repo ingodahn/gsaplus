@@ -38,7 +38,6 @@ class RemindUsersOfAssignment extends Command
                                 {--'.self::OPTION_FIRST.' : Remind of first assignment}
                                 {--'.self::OPTION_NEW.' : Remind of new assignment}
                                 {--'.self::OPTION_DUE.' : Remind of due assignment}
-                                {--'.self::OPTION_MISSED.' : Remind of missed assignment}
                                 {--'.self::OPTION_ALL.' : Remind of first, new, due or missed assignment}';
 
     /**
@@ -83,10 +82,6 @@ class RemindUsersOfAssignment extends Command
             $this->sendRemindersForDueAssignments();
         }
 
-        if ($this->option(self::OPTION_MISSED) || $this->option(self::OPTION_ALL)) {
-            $this->sendRemindersForMissedAssignments();
-        }
-
         print "\r";
     }
 
@@ -120,8 +115,16 @@ class RemindUsersOfAssignment extends Command
                     } else if ($assignment->week > 1 && $assignment->week <= 12
                         && $type_of_reminder == self::OPTION_NEW
                         && $assignment->problem != NULL) {
-                        // remind of current assignment
-                        $this->sendEMail($assignment->patient, self::OPTION_NEW);
+
+                        $previous_assignment = $patient->assignment_for_week($assignment->week - 1);
+
+                        if ($previous_assignment->status() == AssignmentStatus::PATIENT_MISSED_ASSIGNMENT) {
+                            // notify about current and missed assignment (patient missed the previous one)
+                            $this->sendEMail($assignment->patient, self::OPTION_MISSED);
+                        } else {
+                            // remind of current assignment
+                            $this->sendEMail($assignment->patient, self::OPTION_NEW);
+                        }
                     }
                 }
             }
@@ -181,10 +184,6 @@ class RemindUsersOfAssignment extends Command
         $bar->clear();
     }
 
-    protected function sendRemindersForMissedAssignments() {
-
-    }
-
     /*
      * Sends a reminder to the given patient. The reminders type may be
      * 'first', 'new', 'due' or 'missed'.
@@ -208,7 +207,7 @@ class RemindUsersOfAssignment extends Command
                 $subject = 'Letzter Schreibimpuls unbeantwortet';
                 break;
             case self::OPTION_MISSED:
-                $subject = 'Letzten Tagebucheintrag versäumt';
+                $subject = 'Letzter Tagebucheintrag versäumt';
                 break;
         }
 
