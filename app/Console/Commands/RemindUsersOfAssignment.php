@@ -147,25 +147,32 @@ class RemindUsersOfAssignment extends Command
         $bar->start();
 
         foreach ($patients as $patient) {
-            // assignments exists because date from clinics was set before
-            // (see mutator in class Patient)
+            // current assignment may be null if patient is in week 0
+            // (patient left the clinic but the first assignments writing
+            // date is in the future)
+
+            // the current assignment always has a writing date (in fact the latest
+            // assignment with writing date < current date is returned - see docs in
+            // class Patient)
             $current_assignment = $patient->current_assignment();
 
-             if ($current_assignment && $current_assignment->writing_date &&
-                    $current_assignment->status() <= AssignmentStatus::PATIENT_EDITED_ASSIGNMENT) {
-                 $end_of_period = $current_assignment->writing_date->copy()
-                     ->addDays(config('gsa.reminder_period_in_days'));
+            // don't send reminder if no assignment is given / the patient already edited
+            // the assignment
+            if ($current_assignment &&
+                $current_assignment->status() <= AssignmentStatus::PATIENT_EDITED_ASSIGNMENT) {
+                $end_of_period = $current_assignment->writing_date->copy()
+                    ->addDays(config('gsa.reminder_period_in_days'));
 
-                 if (Date::now()->gte($end_of_period) &&
-                     ($current_assignment->week != 12 || $current_assignment->writing_date->copy()->addWeek()->isFuture())) {
-                     // remind of due assignment if 5 days passed since the writing date
-                     $this->sendEMail($patient, self::OPTION_DUE);
+                if (Date::now()->gte($end_of_period) &&
+                    ($current_assignment->week != 12 || $current_assignment->writing_date->copy()->addWeek()->isFuture())) {
+                    // remind of due assignment if 5 days passed since the writing date
+                    $this->sendEMail($patient, self::OPTION_DUE);
 
-                     // save date of reminder
-                     $current_assignment->date_of_reminder = Date::now();
-                     $current_assignment->save();
-                 }
-             }
+                    // save date of reminder
+                    $current_assignment->date_of_reminder = Date::now();
+                    $current_assignment->save();
+                }
+            }
 
             $bar->advance();
         }
