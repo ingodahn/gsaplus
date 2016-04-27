@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Test Page')
+@section('title', 'Nutzerinformation')
 
 @section('additional-head')
     <style>
