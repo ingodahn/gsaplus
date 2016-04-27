@@ -15,8 +15,8 @@ class CreateCommentRepliesTable extends Migration
         Schema::create('comment_replies', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->tinyInteger('helpful')->unsigned();
-            $table->tinyInteger('satisfied')->unsigned();
+            $table->tinyInteger('helpful')->default(-1);
+            $table->tinyInteger('satisfied')->default(-1);
 
             $table->integer('comment_id')->unsigned();
 
