@@ -13,19 +13,7 @@ use Illuminate\Support\Facades\Redirect;
  * @version 1.0
  * @created 13-Jan-2016 15:50:30
  */
-class AuxController extends Controller
-
-{
-
-	function __construct()
-	{
-	}
-
-	function __destruct()
-	{
-	}
-
-
+class AuxController extends Controller {
 
 	/**
 	 * Rücksprung zur Homepage des Benutzers. Dies ist
