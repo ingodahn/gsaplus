@@ -112,22 +112,35 @@ abstract class PatientsTableBaseSeeder extends Seeder
         $this->add_statistics($patient);
     }
 
+    /**
+     * Create and add a random number of past assignments. Uses
+     * @link create_fixed_number_of_past_assignments to create the actual
+     * assignments.
+     *
+     * @param Patient $patient
+     *          target (assignments will be created for the given patient)
+     * @param $max
+     *          the maximum number of assignments
+     */
     protected function create_random_number_of_past_assignments(Patient &$patient, $max) {
         // patient has a random number of past assignments
         $this->create_fixed_number_of_past_assignments($patient, rand(1, $max));
     }
 
     /**
-     * Create and add a random number of past assignments (including comments, comment
+     * Create and add a fixed number of past assignments (including comments, comment
      * replies, ...). Some properties are randomly set (e.g. probability that a saved
      * assignment has a comment = XY).
      *
      * @param Patient $patient
      *          the patient
+     * @param $assignment_count
+     *          the number of past assignments
+     * @param $weeks_till_previous_assignment
+     *          time between the previous assignment (in the past) and the current date
      */
     protected function create_fixed_number_of_past_assignments(Patient &$patient, $assignment_count,
-                                                                        $weeks_till_previous_assignment = 0)
-    {
+                                                                        $weeks_till_previous_assignment = 0) {
         // choose random therapist
         $therapist = Therapist::all()->random();
         $therapist->patients()->save($patient);
