@@ -19,25 +19,12 @@ use Validator;
 class ContactController extends Controller
 {
 
-	function __construct()
-	{
-	}
-
-	function __destruct()
-	{
-	}
-
-
-
 	/**
 	 * Zeige das Kontaktformular
 	 */
 	public function contact_team()
 	{
-
 		return view('system.contact_form');
-
-
 	}
 
 	/**
@@ -73,16 +60,17 @@ class ContactController extends Controller
 		$patient_names = collect(explode(',', $list_of_names))->sort()->flatten();
 		$patient_mails = array_pluck(Patient::whereIn('name', $patient_names)->get()->sortBy('name'), 'email');
 
+		$eMailTeam = config('mail.team.address');
+		$nameTeam = config('mail.team.name');
+
 		$patient_names_array = $patient_names->toArray();
 
 		for ($i = 0; $i < count($patient_mails); $i++) {
-			Mail::raw($mail_body, function ($message) use ($patient_names_array, $patient_mails, $i, $mail_subject) {
-				// no from part needed - the sites name and email address can be found
-				// under 'mail.from' in file config/mail.php
-
+			Mail::raw($mail_body, function ($message) use ($patient_names_array, $patient_mails, $i, $eMailTeam, $nameTeam, $mail_subject) {
 				// works because collections are sorted (see above)
-				$message->subject($mail_subject)
-					->to($patient_mails[$i], $patient_names_array[$i]);
+				$message->from($eMailTeam, $nameTeam)
+							->subject($mail_subject)
+							->to($patient_mails[$i], $patient_names_array[$i]);
 			});
 		}
 
