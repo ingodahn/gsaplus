@@ -120,6 +120,7 @@ $factory->define(App\TestSetting::class, function() {
        'updated_at' => Date::now(),
        'first_reminder' => false,
        'new_reminder' => false,
-       'due_reminder' => false
+       'due_reminder' => false,
+       'calc_next_writing_date' => false
    ];
 });
