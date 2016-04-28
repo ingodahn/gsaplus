@@ -215,7 +215,7 @@
                             <td class="col-xs-7">Aktuelles Datum</td>
                             <td>
                                 <div class='input-group date' id='datetimepicker'>
-                                    <input name="test_date" type='text' value="{{ $settings['testDate'] }}" class="form-control" required>
+                                    <input name="test_date" type='text' value="{{ $settings['testDate'] }}" class="form-control">
                                             <span class="input-group-addon">
                                               <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
