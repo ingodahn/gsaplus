@@ -217,6 +217,16 @@ class TestController extends Controller
         return Redirect::back();
     }
 
+    public function clearDistantWritingDates() {
+        if (Artisan::call('gsa:reassess-writing-dates', ['--quiet' => 'default']) === 0) {
+            Alert::success('Die Schreibdaten wurden erfolgreich bereinigt.')->persistent();
+        } else {
+            Alert::error('Die Schreibdaten konnten leider nicht bereinigt werden.')->persistent();
+        }
+
+        return Redirect::back();
+    }
+
     protected function settings() {
         if ($this->settings === null) {
             $this->settings = TestSetting::first();
