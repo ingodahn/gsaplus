@@ -44,7 +44,7 @@ class TestController extends Controller
 
         $settings = TestSetting::first()->info();
         // set current date if none was saved before
-        $settings['testDate'] = array_get($settings, 'testDate', Date::now()->format('d.m.Y.'));
+        $settings['testDate'] = array_get($settings, 'testDate', '');
 
         return view('test.overview')->with('infos', $infos)->with('settings', $settings);
     }
