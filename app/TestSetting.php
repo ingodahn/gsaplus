@@ -20,7 +20,8 @@ class TestSetting extends InfoModel
         'test_date',
         'first_reminder',
         'new_reminder',
-        'due_reminder'
+        'due_reminder',
+        'calc_next_writing_date'
     ];
 
     /*
