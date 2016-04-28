@@ -74,8 +74,8 @@ class ContactController extends Controller
 			});
 		}
 
-		// Alert not shown
 		Alert::success('Die Mails wurden verschickt.')->persistent();
+
 		return Redirect::to('/Home');
 	}
 
@@ -110,10 +110,8 @@ class ContactController extends Controller
 		$nameTeam = config('mail.team.name');
 
 		Mail::raw($bodyMessage, function ($message) use ($eMail, $eMailTeam, $nameTeam, $subject) {
-				// no from part needed - the sites name and email address can be found
-				// under 'mail.from' in file config/mail.php
 				$message->from($eMail)->to($eMailTeam, $nameTeam)->subject($subject);
-			});
+		});
 
 		// uncomment to send confirmation
 		/* Mail::send('emails.contact_mail_sent', ['bodyMessage' => $bodyMessage, 'subject' => $subject],
@@ -121,9 +119,8 @@ class ContactController extends Controller
 				// no from part needed - the sites name and email address can be found
 				// under 'mail.from' in file config/mail.php
 				$message->to($eMail)->subject("Ihre Anfrage");
-			}); */
+>			}); */
 
-		// alert doesn't work with more than one redirect
 		Alert::success('Ihre Nachricht wurde an das Projektteam übermittelt')->persistent();
 
 		return redirect("/");
