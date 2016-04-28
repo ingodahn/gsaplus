@@ -83,6 +83,7 @@
                         <th>E-Mail</th>
                         <th>Login</th>
                         @if($role == UserRole::PATIENT)
+                        <th>Status</th>
                         <th>Zeitsprung</th>
                         <th>Weiter Springen</th>
                         @endif
@@ -108,7 +109,26 @@
                             </form>
                         </td>
                         @if($role == UserRole::PATIENT)
-                            @if($user['nextWritingDate'])
+                            <td>
+                                <em>{{ $user['patientStatus']  }}</em>
+                                <a href="javascript:void(0)" data-toggle="popover" data-placement="right"
+                                   data-html="true" data-trigger="focus" title="Es gibt folgende Patienten-Status (P)"
+                                   data-content="<ul>
+                                    <li>Registriert (<strong>P020</strong>)</li>
+                                    <li>Entlassungsdatum erfasst (<strong>P025</strong>)</li>
+                                    <li>Schreibimpuls erhalten (<strong>P030</strong>)</li>
+                                    <li>Tagebucheintrag bearbeitet (<strong>P040</strong>)</li>
+                                    <li>Tagebucheintrag gemahnt (<strong>P045</strong>)</li>
+                                    <li>Tagebucheintrag abgeschickt (<strong>P050</strong>)</li>
+                                    <li>Tagebucheintrag mit Rückmeldung versehen (<strong>P060</strong>)</li>
+                                    <li>Rückmeldung bewertet (<strong>P065</strong>)</li>
+                                    <li>Mitarbeit beendet (<strong>P130</strong>)</li>
+                                    <li>Interventionszeit beendet (<strong>P140</strong>)</li>
+                                    </ul>">
+                                    <i class="fa fa-question-circle"></i>
+                                </a>
+                            </td>
+                            @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
                             <td>
                                 <form method="POST" action="/test/next-date/{{ $user['name'] }}">
                                     {{ csrf_field() }}
