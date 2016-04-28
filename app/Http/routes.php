@@ -92,6 +92,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('settings', 'TestController@changeSettings');
 
 		Route::post('send-reminders/{option}', 'TestController@sendReminders');
+		Route::post('remove-distant-dates', 'TestController@clearDistantWritingDates');
 
 		Route::group(['prefix' => 'dump-info/{user}', 'middleware' => ['test.date']], function() {
 			Route::get('', 'TestController@dumpInfo');
