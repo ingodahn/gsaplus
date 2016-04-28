@@ -270,7 +270,20 @@
                     <button type="submit" class="btn btn-primary" name="save_settings">Speichern</button>
                 </p>
             </form>
+        </div>
 
+        <div class="row">
+            <h4 id="clear_dates">Schreibdaten bereinigen</h4>
+
+            <form role="form" action="/test/remove-distant-dates" method="post">
+                {{ csrf_field() }}
+                <p>Sie können jedes berechnete (und nicht mehr benötigte) Schreibdatum entfernen falls sich
+                    das System ungewöhnlich verhalten sollte.</p>
+                <p>Diese Option macht nur Sinn, wenn die automatische Berechnung der Schreibtage aktiviert war und
+                    die Testdaten seitdem nicht mehr aktualisiert wurden.</p>
+
+                <button type="submit" class="btn btn-primary pull-right" name="remove_unnecessary_dates">Schreibdaten bereinigen</button>
+            </form>
         </div>
 
     </div>
