@@ -1,6 +1,43 @@
 @extends('layouts.master')
 @section('title', 'Registrierung')
 
+@section('additional-head')
+  <script src="/js/zxcvbn.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      evaluate();
+      $("#password").keyup(function (event) {
+        evaluate();
+      });
+
+      function evaluate() {
+        var password = $("#password").val();
+        if (password) {
+          var result = zxcvbn(password);
+          switch (result.score) {
+            case 0:
+              updateText("Sehr schwach"); break;
+            case 1:
+              updateText("Schwach"); break;
+            case 2:
+              updateText("Ok"); break;
+            case 3:
+              updateText("Stark"); break;
+            case 4:
+              updateText("Sehr stark"); break;
+          }
+        } else {
+          updateText("-");
+        }
+
+        function updateText(text) {
+          $("#strength-addon").text(text);
+        }
+      }
+    });
+  </script>
+@endsection
+
 @section('content')
   <div class="container">
 
@@ -37,7 +74,7 @@
 
       <div class="form-group">
         <label for="day_of_week" class="control-label">Wochentag</label>
-        <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-trigger="focus" title="Warum sind nicht alle Wochentage wählbar?" data-content="Wir möchten, dass Sie nach dem Schreiben Ihres Blog möglichst innerhalb von 24 h eine Rückmeldung Ihres Online-Therapeuten erhalten. Da wir dies jedoch nur von Montag bis Freitag mit begrenzten Kapazitäten zusagen können, sind nicht alle Tage als Schreibtage wählbar.">
+        <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-trigger="focus" title="Warum sind nicht alle Wochentage wählbar?" data-content="Wir möchten, dass Sie nach dem Schreiben Ihres Tagebuchs möglichst innerhalb von 24 h eine Rückmeldung Ihres Online-Therapeuten erhalten. Da wir dies jedoch nur von Montag bis Freitag mit begrenzten Kapazitäten zusagen können, sind nicht alle Tage als Schreibtage wählbar.">
           <i class="fa fa-question-circle"></i>
         </a>
         <select name="day_of_week" class="form-control" required>
@@ -56,17 +93,20 @@
         <p>Ihr Online-Therapeut wird Sie in Zukunft unter diesem Benutzernamen ansprechen und keinen Bezug zu Ihrem echten Namen herstellen können. Die angegebene E-Mail-Adresse ist für den Online-Therapeuten nicht sichtbar.</p>
       </div>
 
-      <p>Bitte wählen Sie einen Benutzernamen und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>
+      <p>Bitte wählen Sie einen Benutzernamen (nur Buchstaben, Zahlen, <code>-</code>, <code>_</code> und <code>.</code>)und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>
 
       <div class="form-group">
         <label for="name" class="control-label">Benutzername</label>
-        <input name="name" type="text" class="form-control" placeholder="mrhyde63" required>
+        <input name="name" type="text" class="form-control" placeholder="mrhyde63" required pattern="^[a-zA-Z0-9\.\-_]+$">
       </div>
 
       <div class="row">
         <div class="form-group col-sm-6">
           <label for="password" class="control-label">Passwort</label>
-          <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6">
+          <div class="input-group">
+            <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6" aria-describedby="strength-addon">
+            <span class="input-group-addon" id="strength-addon"></span>
+          </div>
         </div>
 
         <div class="form-group col-sm-6">
@@ -87,12 +127,12 @@
         </div>
       </div>
 
-      <p><b>Hinweis:</b>
+      <p><strong>Hinweis:</strong>
         Speichern Sie Ihr Passwort nicht im Browser wenn andere Benutzer diesen Rechner unter dem selben Namen nutzen können.
       </p>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary pull-right">Absenden</button>
+        <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Registrierung abschließen</button>
       </div>
     </form>
 

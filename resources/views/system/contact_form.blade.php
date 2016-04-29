@@ -10,22 +10,21 @@
           Nutzen sie dieses Formular um eine E-Mail an <a href="mailto:kontakt@gsa-online-plus.net">kontakt@gsa-online-plus.net</a> zu senden.
         </p>
 
-        <form action="/SendMessage" method="post">
+        <form action="/SendMessage" method="post" data-parsley-validate>
           {{ csrf_field() }}
           <div class="form-group">
             <label for="eMail" class="control-label">E-Mail</label>
-            <input name="eMail" type="text" class="form-control" placeholder="rapunzel@turm.de"></input>
+            <input name="eMail" type="email" class="form-control" placeholder="mail@domain.de" required></input>
           </div>
           <div class="form-group">
             <label for="subject" class="control-label">Betreff</label>
-            <input name="subject" type="text" class="form-control" placeholder="Problem und mögliche Lösung"></input>
+            <input name="subject" type="text" class="form-control" placeholder="Betreff der E-Mail"></input>
           </div>
           <div class="form-group">
             <label for="message" class="control-label">Nachricht</label>
-            <textarea name="message" rows="5" class="form-control" placeholder="Ich will gerne mit dir gehen, aber ich weiß nicht, wie ich herabkommen kann. Wenn du kommst, so bring jedesmal einen Strang Seide mit, daraus will ich eine Leiter flechten, und wenn die fertig ist, so steige ich herunter, und du nimmst mich auf dein Pferd."></textarea>
+            <textarea name="message" rows="5" class="form-control js-auto-size" placeholder="Beschreiben Sie Ihr Anliegen" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Absenden</button>
-          <a href="/Home" class="btn btn-default">Abbrechen</a>
         </form>
 
     </div>

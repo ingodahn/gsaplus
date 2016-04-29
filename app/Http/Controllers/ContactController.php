@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use App\Patient;
 
@@ -19,25 +19,12 @@ use Validator;
 class ContactController extends Controller
 {
 
-	function __construct()
-	{
-	}
-
-	function __destruct()
-	{
-	}
-
-
-
 	/**
 	 * Zeige das Kontaktformular
 	 */
 	public function contact_team()
 	{
-
 		return view('system.contact_form');
-
-
 	}
 
 	/**
@@ -49,9 +36,9 @@ class ContactController extends Controller
 	{
 		// return dd($request);
 		$list_of_patients = $request->input('list_of_names');
-		$listS=implode(', ',$list_of_patients);
+		$listS = implode(', ', $list_of_patients);
 		// return dd($list_of_patients);
-		return view('system.mail_editor')->with('ListOfPatients',$listS);
+		return view('system.mail_editor')->with('ListOfPatients', $listS);
 	}
 
 	/**
@@ -73,19 +60,22 @@ class ContactController extends Controller
 		$patient_names = collect(explode(',', $list_of_names))->sort()->flatten();
 		$patient_mails = array_pluck(Patient::whereIn('name', $patient_names)->get()->sortBy('name'), 'email');
 
-		Mail::raw($mail_body, function ($message) use ($patient_names, $patient_mails, $mail_subject) {
-			// no from part needed - the sites name and email address can be found
-			// under 'mail.from' in file config/mail.php
-			for ($i = 0; $i < count($patient_mails); $i++) {
+		$eMailTeam = config('mail.team.address');
+		$nameTeam = config('mail.team.name');
+
+		$patient_names_array = $patient_names->toArray();
+
+		for ($i = 0; $i < count($patient_mails); $i++) {
+			Mail::raw($mail_body, function ($message) use ($patient_names_array, $patient_mails, $i, $eMailTeam, $nameTeam, $mail_subject) {
 				// works because collections are sorted (see above)
-				$message->to($patient_mails[$i], $patient_names->toArray()[$i]);
-			}
+				$message->from($eMailTeam, $nameTeam)
+							->subject($mail_subject)
+							->to($patient_mails[$i], $patient_names_array[$i]);
+			});
+		}
 
-			$message->subject($mail_subject);
-		});
+		Alert::success('Die Mails wurden verschickt.')->persistent();
 
-		// Alert not shown
-		Alert::info('Die Mails wurden verschickt.')->flash();
 		return Redirect::to('/Home');
 	}
 
@@ -112,18 +102,16 @@ class ContactController extends Controller
 				->withInput();
 		}
 
-		$eMail=$request->input('eMail');
-		$subject=$request->input('subject');
-		$bodyMessage=$request->input('message');
+		$eMail = $request->input('eMail');
+		$subject = $request->input('subject');
+		$bodyMessage = $request->input('message');
 
 		$eMailTeam = config('mail.team.address');
 		$nameTeam = config('mail.team.name');
 
 		Mail::raw($bodyMessage, function ($message) use ($eMail, $eMailTeam, $nameTeam, $subject) {
-				// no from part needed - the sites name and email address can be found
-				// under 'mail.from' in file config/mail.php
 				$message->from($eMail)->to($eMailTeam, $nameTeam)->subject($subject);
-			});
+		});
 
 		// uncomment to send confirmation
 		/* Mail::send('emails.contact_mail_sent', ['bodyMessage' => $bodyMessage, 'subject' => $subject],
@@ -131,10 +119,9 @@ class ContactController extends Controller
 				// no from part needed - the sites name and email address can be found
 				// under 'mail.from' in file config/mail.php
 				$message->to($eMail)->subject("Ihre Anfrage");
-			}); */
+>			}); */
 
-		// alert doesn't work with more than one redirect
-		Alert::info('Ihre Nachricht wurde an das Projektteam übermittelt')->flash();
+		Alert::success('Ihre Nachricht wurde an das Projektteam übermittelt')->persistent();
 
 		return redirect("/");
 	}

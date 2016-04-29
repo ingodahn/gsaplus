@@ -159,7 +159,7 @@ return [
         /*
          * Custom Providers
          */
-         Prologue\Alerts\AlertsServiceProvider::class,
+         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Provider for PhpStorm
@@ -229,7 +229,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Alert'     => Prologue\Alerts\Facades\Alert::class,
+        'Alert'     => UxWeb\SweetAlert\SweetAlert::class,
         'Date'      => Jenssegers\Date\Date::class,
         'Datatables' => Yajra\Datatables\Datatables::class,
 

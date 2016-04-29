@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+use App\Admin;
+
+use App\Helper;
+
+class AdminsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $admin = factory(Admin::class, 4)
+            ->make()
+            ->each(function(Admin $a) {
+                Helper::set_developer_attributes($a, true);
+            });
+    }
+}

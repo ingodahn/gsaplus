@@ -1,0 +1,14 @@
+.big-radios {
+  label {
+    padding: 1em;
+  }
+
+  .big-radio {
+    padding-left: 2em;
+    margin: 0em;
+    cursor:pointer;
+  }
+  .big-radio:hover {
+    background: $gray-lighter;
+  }
+}

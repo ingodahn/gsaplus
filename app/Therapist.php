@@ -2,23 +2,27 @@
 
 namespace App;
 
+use App\Models\UserRole;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Therapist extends User
 {
 
-    protected static $singleTableType = 'therapist';
+    protected static $singleTableType = UserRole::THERAPIST;
 
     /**
-     * Get the responses to our assignments.
+     * Relationship to the therapists comments . Please use
+     * $therapist->comments to access the collection.
      */
-    public function responses()
+    public function comments()
     {
-        return $this->hasMany('App\Response');
+        return $this->hasMany('App\Comment');
     }
 
     /**
-     * Get the patients for whom we provide guidance.
+     * Relationship to the patients for whom the therapist is responsible.
+     * Please use $therapist->patients to access the collection.
      */
     public function patients()
     {

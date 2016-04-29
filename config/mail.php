@@ -5,15 +5,24 @@ return [
     /*
      * The administrator of the site (gsa online plus). Arrays aren't supported
      * in the .env file -> use multiple variables.
+     *
+     * The administrator is informed if a days time slots are occupied.
      */
     'admin' => [
         'address' => env('MAIL_ADMIN_ADDRESS', 'admin@localhost.com'),
         'name'  => env('MAIL_ADMIN_NAME', 'Administrator')
     ],
 
+    /*
+     * The teams mail settings.
+     *
+     * The address is used to send reminders and mass mails (to patients).
+     *
+     * Patients may send mails to the team by using the contact form.
+     */
     'team' => [
         'address' => env('MAIL_TEAM_ADDRESS', 'team@localhost.com'),
-        'name' => env('MAIL_TEAM_NAME', 'Team')
+        'name' => env('MAIL_TEAM_NAME', 'Team GSA Online Plus')
     ],
 
     /*

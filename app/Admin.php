@@ -2,11 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\UserRole;
 
 class Admin extends User
 {
 
-    protected static $singleTableType = 'admin';
+    protected static $singleTableType = UserRole::ADMIN;
 
 }
