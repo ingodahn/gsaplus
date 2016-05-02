@@ -11,7 +11,7 @@ It is assumend that you retreive the project's source code via git. Unless speci
 
 
 ## Production
-Basically, you'll need a standard LAMP-stack with some additional dependencies and configurations. Currently, we are targeting ubuntu 14.04 LTS, but this may change to the new LTS in april 2016. You'll have to install the following. The given install instructions are *only examples* for Ubuntu 14.04 LTS.
+Basically, you'll need a standard LAMP-stack with some additional dependencies and configurations. Currently, we are targeting ubuntu 16.04 LTS. You'll have to install the following. The given install instructions are *only examples* for Ubuntu 16.04 LTS.
 
 * apache2 (`apt-get install apache2`)
 * A mysql server (`apt-get install mysql-server`)
