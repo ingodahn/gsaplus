@@ -397,6 +397,7 @@ class DiaryController extends Controller
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
         $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['assignmentStatus']];
+        $entries[1]['entry_status_code'] = $assignment_info[0]['assignmentStatus'];
         $weeks_to_show=$Diary['patient_week'];
         if (Auth::user()->type == UserRole::THERAPIST) {
             $weeks_to_show = 12;
@@ -406,22 +407,19 @@ class DiaryController extends Controller
             $i1=$i-1;
             if ($i <= $info['patientWeek']) {
                 $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['assignmentStatus']];
+                $entries[$i]['entry_status_code'] = $assignment_info[$i1]['assignmentStatus'];
             } else {
                 $entries[$i]['entry_status']='';
+                $entries[$i]['entry_status_code']='';
             }
-            $string = $assignment_info[$i1]['problem'];
-            if (strlen($string) > 30)
-            {
-                $string = wordwrap($string, 30);
-                $string = substr($string, 0, strpos($string, "\n"));
-            }
-            $entries[$i]['problem'] = $string." ...";
+            $entries[$i]['problem'] = $assignment_info[$i1]['problem'];
         }
 
             for ($j=$weeks_to_show+1; $j<=12; $j++) {
 
                 $entries[$j]['problem']='';
                 $entries[$j]['entry_status']='';
+                $entries[$j]['entry_status_code']='';
             }
 
         $Diary['entries'] = $entries;

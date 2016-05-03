@@ -39,30 +39,42 @@
       <p>{{$Diary['next_assignment']}}</p>
     </div>
 
-    <table class="table table-striped table-bordered table-condensed">
-      <thead>
-        <th>Woche</th>
-        <th>Schreibimpuls</th>
-        <th>Status</th>
-        <th>Aktionen</th>
-      </thead>
-      <tbody>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       @foreach($Diary['entries'] as $i => $entry)
-        <tr>
-          <td>{{$i}}</td>
-          <td>{{$entry['problem']}}</td>
-          <td>
-            <code>{{$entry['entry_status']}}</code>
-          </td>
-          <td>
-            @if($isTherapist || $isPatient && $i <= $Diary['patient_week'])
-              <a href="/Assignment/{{$Diary['name']}}/{{$i}}">Ansehen</a>
-            @endif
-          </td>
-        </tr>
-      @endforeach
-      </tbody>
-    </table>
+        <?php
+          $revealed = $isPatient && $i == $Diary['patient_week'] ? "in" : "";
+          switch($entry['entry_status_code']) {
+            case "E020": $displayState = "primary"; break;
+            case "E030": $displayState = "primary"; break;
+            case "E040": $displayState = "primary"; break;
+            case "E050": $displayState = "primary"; break;
+            case "E060": $displayState = "success"; break;
+            case "E070": $displayState = "warning"; break;
+            default: $displayState = "default"; break;
+          }
+        ?>
 
+        <div class="panel panel-{{$displayState}}">
+          <div class="panel-heading" role="tab" id="heading{{$i}}">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
+
+                Woche {{$i}} -- {{$entry['entry_status']}} (<code>{{$entry['entry_status_code']}}</code>)
+
+              </a>
+            </h4>
+          </div>
+          <div id="collapse{{$i}}" class="panel-collapse collapse {{$revealed}}" role="tabpanel" aria-labelledby="heading{{$i}}">
+            <div class="panel-body">
+
+              <p>
+                {{$entry['problem']}}
+              </p>
+
+            </div>
+          </div>
+        </div>
+      @endforeach
+    </div>
   </div>
 @endsection
