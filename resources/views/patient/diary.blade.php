@@ -5,10 +5,10 @@
   <div class="container">
 
     @if($isTherapist)
-    <h2>Profil</h2>
-    <p>
-      <a class="btn btn-primary" href="/Profile/{{$Diary['name']}}">Profil von {{$Diary['name']}} aufrufen</a>
-    </p>
+      <h2>Profil</h2>
+      <p>
+        <a class="btn btn-primary" href="/Profile/{{$Diary['name']}}">Profil von {{$Diary['name']}} aufrufen</a>
+      </p>
     @endif
 
     <h2>Tagebuch
@@ -18,19 +18,19 @@
     </h2>
 
     @if($isTherapist)
-    <p>
-      Dies ist das Tagebuch von <em>{{ $Diary['name'] }}</em>. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
-    </p>
+      <p>
+        Dies ist das Tagebuch von <em>{{ $Diary['name'] }}</em>. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
+      </p>
     @endif
 
     @if($isPatient)
-    <p>
-      Dies ist Ihr Tagebuch. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
-    </p>
+      <p>
+        Dies ist Ihr Tagebuch. Es enthält eine Übersicht aller geplanten und geschriebenen Einträge mit ihrem jeweiligen Status.
+      </p>
 
-    <p>
-      Wenn Sie noch keinen Schreibimpuls erhalten haben, warten Sie bitte ab, bis Ihr Online Therapeut Ihnen einen Schreibimpuls gibt.
-    </p>
+      <p>
+        Wenn Sie noch keinen Schreibimpuls erhalten haben, warten Sie bitte ab, bis Ihr Online Therapeut Ihnen einen Schreibimpuls gibt.
+      </p>
     @endif
 
     <p>Es ist Woche <strong>{{$Diary['patient_week']}}</strong> von 12.</p>
