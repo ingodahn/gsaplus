@@ -6,6 +6,7 @@
 
 
     <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
+
       {{ csrf_field() }}
 
       <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status_text'] }}, <code>{{$Role}}</code>)</small></h2>
@@ -13,9 +14,7 @@
       @include('patient.entry.notizen')
       @include('patient.entry.impuls')
       @include('patient.entry.eintrag')
-
       <hr>
-
       @include('patient.entry.befinden')
       @include('patient.entry.rückmeldung')
       @include('patient.entry.bewertung')
@@ -27,6 +26,7 @@
         @endif
         <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
       </p>
+
     </form>
 
 
