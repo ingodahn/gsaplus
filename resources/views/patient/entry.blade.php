@@ -16,6 +16,7 @@
 
       <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status_text'] }}, <code>{{$EntryInfo['status']}}</code>)</small></h2>
 
+      @include('patient.entry.help')
       @include('patient.entry.notizen')
       @include('patient.entry.impuls')
       @include('patient.entry.eintrag')
