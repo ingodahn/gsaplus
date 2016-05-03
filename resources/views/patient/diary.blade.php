@@ -39,10 +39,12 @@
       <p>{{$Diary['next_assignment']}}</p>
     </div>
 
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel-group diary-accordion" id="accordion" role="tablist" aria-multiselectable="true">
       @foreach($Diary['entries'] as $i => $entry)
         <?php
-          $revealed = $isPatient && $i == $Diary['patient_week'] ? "in" : "";
+          $current = $i == $Diary['patient_week'];
+          $revealed = $isPatient && $current ? "in" : "";
+          $class = $current ? "diary-panel-current" : "diary-panel";
           switch($entry['entry_status_code']) {
             case "E020": $displayState = "primary"; break;
             case "E030": $displayState = "primary"; break;
@@ -54,22 +56,26 @@
           }
         ?>
 
-        <div class="panel panel-{{$displayState}}">
+        <div class="panel panel-{{$displayState}} {{$class}}">
           <div class="panel-heading" role="tab" id="heading{{$i}}">
             <h4 class="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
 
-                Woche {{$i}} -- {{$entry['entry_status']}} (<code>{{$entry['entry_status_code']}}</code>)
+                <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
 
               </a>
+              <a href="#" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i>
+</a>
             </h4>
           </div>
           <div id="collapse{{$i}}" class="panel-collapse collapse {{$revealed}}" role="tabpanel" aria-labelledby="heading{{$i}}">
             <div class="panel-body">
 
-              <p>
-                {{$entry['problem']}}
-              </p>
+              @if($current)
+                <p><em>Dies ist die aktuelle Aufgabe.</em></p>
+              @endif
+              <p>Status-Code: <code>{{$entry['entry_status_code']}}</code></p>
+              <p>{{$entry['problem']}}</p>
 
             </div>
           </div>
