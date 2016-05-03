@@ -39,10 +39,16 @@
 
     <hr>
     <p>
-      <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn btn-default">Älter</a>
-      <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn btn-default">Neuer</a>
+      <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']-1 }}" class="btn btn-default">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Älter
+      </a>
       <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $PatientInfo['patientWeek'] }}" class="btn btn-default">Zum aktuellen Schreibimpuls</a>
-      <a href="/Home" class="btn btn-default">Zur Übersicht</a>
+      <a href="/Assignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week']+1 }}" class="btn btn-default">
+        Neuer
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="/Home" class="btn btn-default pull-right">Zur Übersicht</a>
     </p>
 
 
