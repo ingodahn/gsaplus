@@ -17,7 +17,7 @@
 
     @include('patient.profile.notizen')
     @include('patient.profile.therapist')
-    @include('patient.profile.therapist')
+    @include('patient.profile.schreibtag')
     @include('patient.profile.entlassungsdatum')
     @include('patient.profile.password')
     @include('patient.profile.persönliche_informationen')
