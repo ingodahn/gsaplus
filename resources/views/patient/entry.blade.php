@@ -7,9 +7,14 @@
 
     <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
 
+      <?php
+        $submittable = $isPatient && in_array($EntryInfo['status'], ["E020", "E030", "E050"])
+                    || $isTherapist && in_array($EntryInfo['status'], ["E010", "E040"]);
+      ?>
+
       {{ csrf_field() }}
 
-      <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status_text'] }}, <code>{{$Role}}</code>)</small></h2>
+      <h2>Woche {{$EntryInfo['week']}} <small>({{ $EntryInfo['status_text'] }}, <code>{{$EntryInfo['status']}}</code>)</small></h2>
 
       @include('patient.entry.notizen')
       @include('patient.entry.impuls')
@@ -19,13 +24,15 @@
       @include('patient.entry.rückmeldung')
       @include('patient.entry.bewertung')
 
-      <hr>
-      <p>
-        @if($isPatient)
-          <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
-        @endif
-        <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
-      </p>
+      @if($submittable)
+        <hr>
+        <p>
+          @if($isPatient)
+            <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+          @endif
+          <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
+        </p>
+      @endif
 
     </form>
 
