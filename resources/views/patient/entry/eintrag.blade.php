@@ -20,10 +20,10 @@
             <div class="form-group">
               <label for="situation0_description">Beschreiben Sie die Situation</label>
               @if($editable)
-                <textarea class="form-control js-auto-size" id="situation0_description"  name="situation0_description">{{$EntryInfo['answer'][0]['description']}}</textarea>
+                <textarea class="form-control js-auto-size" id="situation0_description" name="situation0_description">{{$EntryInfo['answer'][0]['description']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][0]['description']}}
+                  {!! nl2br(e($EntryInfo['answer'][0]['description'])) !!}
                 </p>
               @endif
             </div>
@@ -33,7 +33,7 @@
                 <textarea class="form-control js-auto-size" id="situation0_expectations" name="situation0_expectations">{{$EntryInfo['answer'][0]['expectation']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][0]['expectation']}}
+                  {!! nl2br(e($EntryInfo['answer'][0]['expectation'])) !!}
                 </p>
               @endif
             </div>
@@ -43,7 +43,7 @@
                 <textarea class="form-control js-auto-size" id="situation0_their_reaction" name="situation0_their_reaction">{{$EntryInfo['answer'][0]['their_reaction']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][0]['their_reaction']}}
+                  {!! nl2br(e($EntryInfo['answer'][0]['their_reaction'])) !!}
                 </p>
               @endif
             </div>
@@ -53,7 +53,7 @@
                 <textarea class="form-control js-auto-size" id="situation0_my_reaction" name="situation0_my_reaction">{{$EntryInfo['answer'][0]['my_reaction']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][0]['my_reaction']}}
+                  {!! nl2br(e($EntryInfo['answer'][0]['my_reaction'])) !!}
                 </p>
               @endif
             </div>
@@ -78,7 +78,7 @@
                 <textarea class="form-control js-auto-size" id="situation1_description" name="situation1_description">{{$EntryInfo['answer'][1]['description']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][1]['description']}}
+                  {!! nl2br(e($EntryInfo['answer'][1]['description'])) !!}
                 </p>
               @endif
             </div>
@@ -88,7 +88,7 @@
                 <textarea class="form-control js-auto-size" id="situation1_expectations" name="situation1_expectations">{{$EntryInfo['answer'][1]['expectation']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][1]['expectation']}}
+                  {!! nl2br(e($EntryInfo['answer'][1]['expectation'])) !!}
                 </p>
               @endif
             </div>
@@ -98,7 +98,7 @@
                 <textarea class="form-control js-auto-size" id="situation1_their_reaction" name="situation1_their_reaction">{{$EntryInfo['answer'][1]['their_reaction']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][1]['their_reaction']}}
+                  {!! nl2br(e($EntryInfo['answer'][1]['their_reaction'])) !!}
                 </p>
               @endif
             </div>
@@ -108,7 +108,7 @@
                 <textarea class="form-control js-auto-size" id="situation1_my_reaction" name="situation1_my_reaction">{{$EntryInfo['answer'][1]['my_reaction']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][1]['my_reaction']}}
+                  {!! nl2br(e($EntryInfo['answer'][1]['my_reaction'])) !!}
                 </p>
               @endif
             </div>
@@ -133,7 +133,7 @@
                 <textarea class="form-control js-auto-size" id="situation2_description" name="situation2_description">{{$EntryInfo['answer'][2]['description']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][2]['description']}}
+                  {!! nl2br(e($EntryInfo['answer'][2]['description'])) !!}
                 </p>
               @endif
             </div>
@@ -143,7 +143,7 @@
                 <textarea class="form-control js-auto-size" id="situation2_expectations" name="situation2_expectations">{{$EntryInfo['answer'][2]['expectation']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][2]['expectation']}}
+                  {!! nl2br(e($EntryInfo['answer'][2]['expectation'])) !!}
                 </p>
               @endif
             </div>
@@ -153,7 +153,7 @@
                 <textarea class="form-control js-auto-size" id="situation2_their_reaction" name="situation2_their_reaction">{{$EntryInfo['answer'][2]['their_reaction']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][2]['their_reaction']}}
+                  {!! nl2br(e($EntryInfo['answer'][2]['their_reaction'])) !!}
                 </p>
               @endif
             </div>
@@ -163,7 +163,7 @@
                 <textarea class="form-control js-auto-size" id="situation2_my_reaction" name="situation2_my_reaction">{{$EntryInfo['answer'][2]['my_reaction']}}</textarea>
               @else
                 <p>
-                  {{$EntryInfo['answer'][2]['my_reaction']}}
+                  {!! nl2br(e($EntryInfo['answer'][2]['my_reaction'])) !!}
                 </p>
               @endif
             </div>
@@ -176,10 +176,10 @@
     @if ($editable)
       <textarea class="form-control js-auto-size" id="reflection"  name="reflection">{{$EntryInfo['reflection']}}</textarea>
     @else
-      <p>{{ $EntryInfo['reflection'] }}</p>
+      <p>{!! nl2br(e($EntryInfo['reflection'])) !!}</p>
     @endif
   @endif
-  @if($submittable)
+  @if($submittable && $isPatient)
     <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
   @endif
 @endif

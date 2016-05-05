@@ -73,9 +73,8 @@ class DiaryController extends Controller
     public function entry(Request $request, Patient $patient, $week)
     {
         $patient_info = $patient->info();
-
+// All assignments exist after registration, so we can grab it
         $assignment_info=$patient->assignment_for_week($week)->all_info();
-
         $entry_info = [];
         $entry_info['week'] = $assignment_info['week'];
         $entry_info['status'] = $assignment_info['assignmentStatus'];
@@ -103,8 +102,7 @@ class DiaryController extends Controller
             }
         } else {    // week 2 and later
            $entry_info['problem']=$assignment_info['problem'];
-           // ToDo: If answer exists already, load t from database, else $entry_info['reflection']='';
-           $entry_info['reflection'] = "Reflexionen ab Woche 2 nicht implementiert";
+           $entry_info['reflection'] = $assignment_info['answer'];
         }
 
         if (! array_key_exists('survey', $assignment_info)) {
@@ -254,14 +252,13 @@ class DiaryController extends Controller
                 $assignment->situations()->saveMany($situations);
             }
         } else {
-            // ToDo: for M4: handling of problem and reflection
             // Get problem and answer from database
-            /*If ($request->has('problem')) {
+            If ($request->has('problem')) {
                 $assignment->problem = $request->input('problem');
             }
             If ($request->has('reflection')) {
-                $assignment->'answer' = $request->input('reflection');
-            }*/
+                $assignment->answer = $request->input('reflection');
+            }
         }
 
          if ($request->has('wai') || $request->has('health')) { // Survey is edited
@@ -283,30 +280,38 @@ class DiaryController extends Controller
 
              $survey->save();
          }
+        // Use this as template for generating and instantiating objects
+         if ($request->has('comment')) {
+            $comment = $assignment->comment ?: new Comment;
+            $comment->text = $request->input('comment');
 
-        if ($request->has('comment')) {
-            if ($assignment->comment->all() == []){
-                $comment = new Comment;
+            if ($assignment->comment) {
+                $comment->save();
+            } else {
                 $assignment->comment()->save($comment);
             }
-            $comment = $assignment->comment->first();
-            $comment->text = $request->input('comment');
-            $comment->save();
         }
         if ($request->has('comment_reply_satisfied') ||
         $request->has('comment_reply_helpful')) {
-            $comment = $assignment->comment->first();
-            if ($comment->comment_reply->all()==[]){
-                $comment_reply=new CommentReply;
-                $comment->comment_reply()->save($comment_reply);
-            }
-            $comment_reply = $comment->comment_reply->first();
+            $comment = $assignment->comment;
+            $comment_reply = $comment->comment_reply ?: new CommentReply;
             if ($request->has('comment_reply_helpful')) {
                 $comment_reply->helpful = $request->input('comment_reply_helpful');
             }
             if ($request->has('comment_reply_satisfied')) {
                 $comment_reply->helpful = $request->input('comment_reply_satisfied');
             }
+            if ($comment->comment_reply) {
+                $comment_reply->save();
+            } else {
+                $comment->comment_reply()->save($comment_reply);
+            }
+        }
+
+        if ($request->has('notesOfTherapist')) {
+            $patient->notes_of_therapist = $request->input('notesOfTherapist');
+            $patient->save();
+            // ToDo: Send mail to patient informing that entry has been commented
         }
         if ($request->input('entryButton') == "saveDirty") {
             /* Zwischenspeichern von $entry */
@@ -322,7 +327,6 @@ class DiaryController extends Controller
             }
             $assignment->save();
             Alert::success("Der Eintrag wurde abgeschickt")->persistent();
-            //return "Abgeschickt";
             return Redirect::to('/Home');
         }
 
