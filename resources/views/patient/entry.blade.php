@@ -8,7 +8,7 @@
     <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
 
       <?php
-        $submittable = $isPatient && in_array($EntryInfo['status'], ["E020", "E030", "E050"])
+        $submittable = $isPatient && in_array($EntryInfo['status'], ["E020", "E030", "E035", "E050"])
                 || $isTherapist;
       ?>
 
