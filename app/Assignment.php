@@ -133,6 +133,10 @@ class Assignment extends InfoModel
                     // intervention ended, patient was reminded of
                     // the last assignment but didn't submit a text
                     return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
+                } else if ($this->partially_answered && !$this->dirty) {
+                    // patient was reminded but finished assignment
+                    // in time
+                   return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
                 } else {
                     // patient was reminded by system and there is still
                     // time to finish the assignment
