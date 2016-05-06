@@ -134,6 +134,7 @@ class DiaryController extends Controller
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
+        $param['Problems']=  AssignmentTemplates::get_template_titles();
 
         return view('patient/entry')->with($param);
     }
