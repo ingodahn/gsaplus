@@ -41,7 +41,7 @@
     <input type="text" name="template_title" id="template_title" size="50">
     </span>
   <span class="form-group">
-    <label for="vhoose_template" class="sr-only">Musterauswahl:</label>
+    <label for="choose_template" class="sr-only">Musterauswahl:</label>
       <select name="choose_template" id="choose_template" onchange=getProblemTemplate(this.value) size="1">
         <option selected>Kein Muster gewählt</option>
         @foreach($Problems as $title)
