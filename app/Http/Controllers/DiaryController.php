@@ -19,6 +19,8 @@ use App\CommentReply;
 
 use App\Models\UserRole;
 
+use App\Tasktemplate;
+
 /**
  * @author dahn
  * @version 1.0
@@ -127,7 +129,7 @@ class DiaryController extends Controller
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
-        $param['Problems']=  AssignmentTemplates::get_template_titles();
+        $param['Problems']=  TaskTemplate::lists('name');
 
         return view('patient/entry')->with($param);
     }
@@ -257,15 +259,24 @@ class DiaryController extends Controller
         }
         if ($request->input('entryButton')=="newAssignment") {
             $title=$request->input('template_title');
-            //ToDo: trim $title, if empty return error
-            $text=$request->input('problem');
-            $alert=AssignmentTemplates::save_template($title,$text);
-            if ($alert["type"] == "success") {
-                Alert::success($alert["message"])->persistent();
+            //trim $title, if empty return error
+            $title=trim($title);
+            if ($title == '') {
+                Alert::error("Der Titel darf nicht leer sein.");
+                return Redirect::back();
             }
-            if ($alert["type"] == "error") {
-                Alert::error($alert["message"])->persistent();
+            $problem=$request->input('problem');
+            $task=TaskTemplate::whereName($title)->first();
+            if (! $task){
+                $task= new TaskTemplate;
+                $task->name=$title;
+                $alert="Muster \"".$title."\" erstellt.";
+            } else {
+                $alert="Muster \"".$title."\" aktualisiert.";
             }
+            $task->problem = $problem;
+            $task->save();
+            Alert::success($alert)->persistent();
             return Redirect::back();
         }
         if ($request->input('entryButton') == "saveDirty") {
@@ -288,13 +299,16 @@ class DiaryController extends Controller
     }
 
     /**
-     * Wähle die Afgabe mit dem angegebenen Titel aus und trage den Aufgaben-text in
+     * Wähle die Aufgabe mit dem angegebenen Titel aus und trage den Aufgaben-text in
      * entry.problem ein
      *
      * @param assignment_id
      */
-    public function select_assignment($assignment_id)
+    public function select_assignment(Request $request)
     {
+        $title=$request->input('templateTitle');
+        $task=TaskTemplate::whereName($title)->first();
+        return $task->problem;
     }
 
     /**

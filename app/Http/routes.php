@@ -79,7 +79,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('reset', 'Auth\PasswordController@postReset');
 	});
 
-	Route::get('/AssignmentTemplate','AssignmentTemplates@get_template');
+	Route::get('/AssignmentTemplate','DiaryController@select_assignment');
 
 	/*
 	 * The test page itself needs to operate on the current date (!). The

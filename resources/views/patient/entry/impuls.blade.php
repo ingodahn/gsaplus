@@ -49,7 +49,7 @@
         @endforeach
       </select>
   </span>
-    <button type="submit" class="btn btn-primary" name="entryButton" value="newAssignment">Neuer Musterimpuls</button>
+    <button type="submit" class="btn btn-primary" name="entryButton" value="newAssignment">Musterimpuls erstellen/bearbeiten</button>
   </p>
   <p>
     <div class="form-group">
