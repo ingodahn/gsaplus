@@ -6,8 +6,6 @@
   <h3>Rückmeldung des Therapeuten</h3>
   <div class="form-group">
     <label for="comment">Rückmeldung des Therapeuten auf Ihren Tagebucheintrag</label>
-    <textarea class="form-control js-auto-size" id="comment" name="comment" placeholder="" {{$editable ? "" : "disabled"}}>
-      {{$EntryInfo['comment']}}
-    </textarea>
+    <textarea class="form-control js-auto-size" id="comment" name="comment" placeholder="" {{$editable ? "" : "disabled"}}>{{$EntryInfo['comment']}}</textarea>
   </div>
 @endif
