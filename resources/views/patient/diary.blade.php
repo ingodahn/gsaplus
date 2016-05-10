@@ -63,6 +63,8 @@
       @endforeach
       </tbody>
     </table>
-
+      <p>
+        <a class="btn btn-primary" href="/CommentedDiary/{{$Diary['name']}}" target=""_blank">Kommentiertes Tagebuch</a>
+      </p>
   </div>
 @endsection

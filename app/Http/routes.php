@@ -118,6 +118,7 @@ Route::group(['middleware' => ['web', 'auth', 'test.date']], function () {
 	Route::get('/Home', 'AuxController@home');
 
 	Route::get('/Diary/{name?}','DiaryController@show');
+	Route::get('/CommentedDiary/{name}','DiaryController@commented_diary');
 	Route::get('/Profile/{name?}','PatientController@profile');
 	Route::post('/SendMail','ContactController@message_to_patients');
 	Route::post('/MassAction/mail','ContactController@mail_editor');
