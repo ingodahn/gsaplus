@@ -22,6 +22,7 @@ Basically, you'll need a standard LAMP-stack with some additional dependencies a
 * ruby (`apt-get install ruby`)
   * rake (`apt-get install rake`)
   * sass (`apt-get install ruby-sass`)
+  * dotenv (`apt-get install ruby-dotenv`)
 * nodejs (`apt-get install nodejs nodejs-legacy`)
   * bower (`npm install -g bower`)
 
