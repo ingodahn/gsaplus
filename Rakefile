@@ -1,4 +1,4 @@
-require 'dotenv/tasks'
+# require 'dotenv/tasks'
 
 
 
@@ -95,8 +95,10 @@ task :db_refresh do
 end
 
 desc "apply major db changes - all data will be removed - run if tables were added or removed"
-task db_reset: [:dotenv] do
-  sh "mysql -u#{ENV['DB_USERNAME']} -p#{ENV['DB_PASSWORD']} < ./database/sql/reset_database.sql"
+# task db_reset: [:dotenv] do
+task :db_reset do
+  # sh "mysql -u#{ENV['DB_USERNAME']} -p#{ENV['DB_PASSWORD']} < ./database/sql/reset_database.sql"
+  sh "mysql -uroot -p < ./database/sql/reset_database.sql"
   sh "composer dump-autoload"
   sh "php artisan migrate"
 end
