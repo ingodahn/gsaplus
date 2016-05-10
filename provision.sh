@@ -3,8 +3,8 @@
 apt-get update
 
 apt-get install -y fish tree
-/home/vagrant/.rbenv/shims/gem install sass
-/home/vagrant/.rbenv/shims/gem install dotenv
+
+apt-get install -y ruby-dotenv ruby-sass
 wget -qNO /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
 chmod +x /usr/local/bin/phpunit
 echo "Installed $(phpunit --version)"
