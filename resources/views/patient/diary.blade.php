@@ -60,12 +60,9 @@
           <div class="panel-heading" role="tab" id="heading{{$i}}">
             <h4 class="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
-
                 <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
-
               </a>
-              <a href="#" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i>
-</a>
+              <a href="#" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
             </h4>
           </div>
           <div id="collapse{{$i}}" class="panel-collapse collapse {{$revealed}}" role="tabpanel" aria-labelledby="heading{{$i}}">
