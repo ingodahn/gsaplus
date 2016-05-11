@@ -6,7 +6,7 @@
 <h2>Ihr Tagebuch</h2>
         @if($isTherapist)
             <p>
-                Dies ist das Tagebuch von <em>{{ $Name }}</em>.
+                Dies ist das Tagebuch von <em>{{ $PatientName }}</em>.
             </p>
         @endif
     @for ($i=1;$i<$Week; $i++)

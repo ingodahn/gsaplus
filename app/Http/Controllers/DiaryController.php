@@ -50,7 +50,8 @@ class DiaryController extends Controller
      */
     public function commented_diary(Request $request, $name)
     {
-        // ToDo: Logout if not user is therapist or $name == Auth::user()-> name
+        // ToDo: Return access violation error if not user is therapist or $name == Auth::user()-> name
+        $isTherapist = (Auth::user()->type === UserRole::THERAPIST);
         $patient=Patient::whereName($name)->first();
         $info=$patient->all_info();
         $p_assignments=$info['assignments'];
@@ -66,13 +67,22 @@ class DiaryController extends Controller
                 $wai[$i]=-1;
                 $health[$i]=-1;
             }
+            /*$assignments[1]['problem']='Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.';
+            if ($isTherapist && $p_assignments[0]['dirty']) {
+                $assignments[0]['answer']='Nicht eingereicht';
+            } // XXXX*/
+
             if (isset($p_assignments[$i-1]['problem'])){
                 $assignments[$i]['problem']=$p_assignments[$i-1]['problem'];
             } else {
                 $assignments[$i]['problem']="Nicht definiert";
             }
             if (isset($p_assignments[$i-1]['answer'])) {
-                $assignments[$i]['answer']=$p_assignments[$i-1]['answer'];
+                if ($isTherapist && $p_assignments[$i-1]['dirty']) {
+                    $assignments[$i]['answer']="Nicht eingereicht";
+                } else {
+                    $assignments[$i]['answer']=$p_assignments[$i-1]['answer'];
+                }
             } else {
                 $assignments[$i]['answer']="Nicht beantwortet";
             }
@@ -82,12 +92,11 @@ class DiaryController extends Controller
                 $assignments[$i]['comment'] = "Nicht kommentiert";
             }
         }
-        $params['Name']=$name;
+        $params['PatientName']=$name;
         $params['Week']=$info['patientWeek'];
         $params['Wai']=$wai;
         $params['Health']=$health;
         $params['Assignments']=$assignments;
-        // return dd($params);
         return view('patient/commented_diary')->with($params);
     }
 
