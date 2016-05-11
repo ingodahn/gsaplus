@@ -70,7 +70,7 @@ class PatientListController extends Controller
 		$days = new Days;
 		$days->set_days($Days);
 		$Slots = $days->get_days();
-
+		
 		$params['Slots'] = $Slots;
 		Alert::info('Die Zahl der freien Slots wurde aktualisiert')->persistent();
 
