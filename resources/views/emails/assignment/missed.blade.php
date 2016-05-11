@@ -1,10 +1,10 @@
 <html>
 <body>
 <p>Sehr geehrter Patient,</p>
-<p>wir wollen Sie darüber informieren, dass Sie Ihre letzte Aufgabe nicht bearbeitet haben und die Frist
+<p>wir wollen Sie darüber informieren, dass Sie Ihren letzten Schreibimpuls nicht beantwortet haben und die Frist
     leider abgelaufen ist.</p>
-<p>Ihnen wurde daher eine neue Aufgabe zugewiesen. Bitte besuchen Sie unsere Webeiste um sich die
-    neue Aufgabe anzusehen und eine Antwort zu verfassen.</p>
+<p>Ihnen wurde daher ein neuer Schreibimpuls zugewiesen. Bitte besuchen Sie unsere Webeiste um sich
+    den neuen Schreibimpuls anzusehen und einen Tagebucheintrag zu verfassen.</p>
 <p>Viele Grüße,<br/>
     Ihr Team GSA Online Plus</p>
 </body>

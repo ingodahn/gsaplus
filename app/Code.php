@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
-class Code extends Model
+class Code extends InfoModel
 {
     public $timestamps = false;
 }

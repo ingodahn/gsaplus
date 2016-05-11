@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
-        Commands\RemindUsersOfAssignment::class
+        Commands\RemindUsersOfAssignment::class,
+        Commands\ClearDistantWritingDates::class
     ];
 
     /**

@@ -2,17 +2,22 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\InfoModel;
 
-class AssignmentTemplate extends Model
+use Jenssegers\Date\Date;
+
+class TaskTemplate extends InfoModel
 {
 
+    protected $hidden = ['created_at', 'updated_at', 'is_random'];
+
     /**
-     * Get all assignments which are based on this template.
+     * Relationship to all derived tasks (which are based on this template).
+     * Please use $task_template->tasks to access the collection.
      */
-    public function assignments()
+    public function tasks()
     {
-        return $this->hasMany('App\Assignment');
+        return $this->hasMany('App\Task');
     }
 
     /*
@@ -26,12 +31,12 @@ class AssignmentTemplate extends Model
 
     public function getCreatedAtAttribute($date)
     {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getUpdatedAtAttribute($date)
     {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
 }

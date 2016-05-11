@@ -47,12 +47,10 @@ class Days
 		$entry = $this->get_week_day($day);
 
 		$entry->free_time_slots--;
-		$entry->save();
 
-		// TODO: einkommentieren
-		/* if ($entry->free_time_slots <= 0) {
+		if ($entry->save() && $entry->free_time_slots <= 0) {
 			$this->send_mail($entry);
-		} */
+		}
 	}
 
 	/**
