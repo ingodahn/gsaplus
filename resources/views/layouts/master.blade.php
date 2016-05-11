@@ -4,7 +4,7 @@
     @include('layouts.head')
     @yield('additional-head')
   </head>
-  <body id="body">
+  <body id="body" class="role-{{$Role or "visitor"}}">
     @include('sweet::alert')
     {{-- show laravel specific errors (like validation errors or the cause of a failed login attempt) --}}
     @include('layouts.errors')
