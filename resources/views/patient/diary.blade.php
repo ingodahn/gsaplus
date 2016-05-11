@@ -1,6 +1,36 @@
 @extends('layouts.master')
 @section('title', 'Tagebuch')
 
+@section('additional-head')
+  <script type="text/javascript">
+    $(document).ready(function(){
+      function extractIndex(id) {
+        return /collapse(\d+)/.exec(id)[1];
+      }
+
+      function showClosedIcon(element) {
+        $("#heading" + extractIndex(element.id) + " .accordion-indicator")
+            .removeClass("fa-chevron-down")
+            .addClass("fa-chevron-right");
+      }
+
+      function showOpenIcon(element) {
+        $("#heading" + extractIndex(element.id) + " .accordion-indicator")
+            .removeClass("fa-chevron-right")
+            .addClass("fa-chevron-down");
+      }
+
+      $('.panel-collapse').on('show.bs.collapse', function () {
+        showOpenIcon(this);
+      });
+
+      $('.panel-collapse').on('hide.bs.collapse', function () {
+        showClosedIcon(this);
+      });
+    });
+  </script>
+@endsection
+
 @section('content')
   <div class="container">
 
@@ -43,7 +73,7 @@
       @foreach($Diary['entries'] as $i => $entry)
         <?php
           $current = $i == $Diary['patient_week'];
-          $revealed = $isPatient && $current ? "in" : "";
+          $revealed = $isPatient && $current;
           $class = $current ? "diary-panel-current" : "diary-panel";
           switch($entry['entry_status_code']) {
             case "E020": $displayState = "primary"; break;
@@ -56,16 +86,17 @@
           }
         ?>
 
-        <div class="panel panel-{{$displayState}} {{$class}}">
+        <div class="panel panel-{{$displayState}} {{$class}}" id="accordion-diary">
           <div class="panel-heading" role="tab" id="heading{{$i}}">
             <h4 class="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
-                <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
+
+                <small><i class="fa fa-chevron-{{$revealed ? "down" : "right"}} accordion-indicator" aria-hidden="true"></i></small> <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
               </a>
               <a href="#" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
             </h4>
           </div>
-          <div id="collapse{{$i}}" class="panel-collapse collapse {{$revealed}}" role="tabpanel" aria-labelledby="heading{{$i}}">
+          <div id="collapse{{$i}}" class="panel-collapse collapse {{$revealed ? "in" : ""}}" role="tabpanel" aria-labelledby="heading{{$i}}">
             <div class="panel-body">
 
               @if($current)
