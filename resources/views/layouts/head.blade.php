@@ -27,7 +27,7 @@
   var _paq = _paq || [];
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
-  @if($isLoggedIn)
+  @if($isLoggedIn && !$piwikOptOut)
     _paq.push(['setUserId', '{{$Name}}']);
   @endif
   (function() {

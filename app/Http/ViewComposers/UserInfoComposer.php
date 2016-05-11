@@ -43,7 +43,8 @@ class UserInfoComposer
                 ->with('isTherapist', $this->isTherapist())
                 ->with('isPatient', $this->isPatient())
                 ->with('isAdmin', $this->isAdmin())
-                ->with('isLoggedIn', true);
+                ->with('isLoggedIn', true)
+                ->with('piwikOptOut', false);
         } else {
           $view->with('isLoggedIn', false);
         }
