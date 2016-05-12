@@ -89,7 +89,7 @@
         <div class="panel panel-{{$displayState}} {{$class}}" id="accordion-diary">
           <div class="panel-heading" role="tab" id="heading{{$i}}">
             <h4 class="panel-title">
-              @if($i <= $Diary['patient_week'])
+              @if($isPatient && $i <= $Diary['patient_week'] || $isTherapist)
               <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
                 <small><i class="fa fa-chevron-{{$revealed ? "down" : "right"}} accordion-indicator" aria-hidden="true"></i></small> <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
               </a>
