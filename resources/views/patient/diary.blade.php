@@ -105,7 +105,6 @@
               @if($current)
                 <p><em>Dies ist die aktuelle Aufgabe.</em></p>
               @endif
-              <p>Status-Code: <code>{{$entry['entry_status_code']}}</code></p>
               <p>{{$entry['problem']}}</p>
 
             </div>
