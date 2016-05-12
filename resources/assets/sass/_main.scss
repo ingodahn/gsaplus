@@ -244,3 +244,7 @@ textarea {
 .panel-group .panel-heading a:focus,a:hover {
   text-decoration: none;
 }
+
+.role-therapist .navbar-default {
+  background-color: $md-blue-50;
+}
