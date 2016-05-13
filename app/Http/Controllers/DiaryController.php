@@ -50,8 +50,63 @@ class DiaryController extends Controller
      * Zeige alle bisherigen Beiträge sowie die dazu erfolgten Kommentare auf einer
      * Seite an, die vom Browser gespeichert oder ausgedruckt werden kann.
      */
-    public function commented_diary()
+    public function commented_diary(Request $request, $name)
     {
+        $isTherapist = (Auth::user()->type === UserRole::THERAPIST);
+        $patient=Patient::whereName($name)->first();
+        $info=$patient->all_info();
+        $p_assignments=$info['assignments'];
+        // return dd($p_assignments);
+        $wai=[];
+        $health=[];
+        $assignments=[];
+        $params=[];
+
+        for ($i=1; $i <= $info['patientWeek']; $i++) {
+            if (isset($p_assignments[$i - 1]['survey'])) {
+                $wai[$i] = $p_assignments[$i - 1]['survey']['wai'];
+                $health[$i] = $p_assignments[$i - 1]['survey']['health'];
+            } else {
+                $wai[$i] = -1;
+                $health[$i] = -1;
+            }
+        }
+// return dd($p_assignments);
+        $assignments[1]['problem']='Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.';
+        if (isset($p_assignments[0]['situations'])) {
+            $assignments[1]['answer']=$p_assignments[0]['situations'];
+        } else {
+            $assignments[1]['answer']="";
+        }
+        
+        $assignments[1]['dirty']=$p_assignments[0]['dirty'];
+
+        for ($i=2; $i <= $info['patientWeek']; $i++) {
+            if (isset($p_assignments[$i-1]['problem'])){
+                $assignments[$i]['problem']=$p_assignments[$i-1]['problem'];
+            } else {
+                $assignments[$i]['problem']="Nicht definiert";
+            }
+            if (isset($p_assignments[$i-1]['answer'])) {
+                    $assignments[$i]['answer']=$p_assignments[$i-1]['answer'];
+                    $assignments[$i]['dirty']=$p_assignments[$i-1]['dirty'];
+            } else {
+                $assignments[$i]['answer']="Nicht beantwortet";
+                $assignments[$i]['dirty']=false;
+            }
+            if (isset($p_assignments[$i-1]['comment']['text'])) {
+                $assignments[$i]['comment'] = $p_assignments[$i-1]['comment']['text'];
+            } else {
+                $assignments[$i]['comment'] = "Nicht kommentiert";
+            }
+        }
+        $params['PatientName']=$name;
+        $params['Week']=$info['patientWeek'];
+        $params['Wai']=$wai;
+        $params['Health']=$health;
+        $params['Assignments']=$assignments;
+        // return dd($params);
+        return view('patient/commented_diary')->with($params);
     }
 
     /**
