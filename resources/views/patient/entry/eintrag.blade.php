@@ -180,6 +180,6 @@
     @endif
   @endif
   @if($submittable && $isPatient)
-    <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+    <button type="submit" class="btn pull m-t-1" name="entryButton" value="saveDirty">Zwischenspeichern</button>
   @endif
 @endif

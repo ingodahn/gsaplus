@@ -31,10 +31,6 @@
     </p>
 
     <div id="toc" class="list-group">
-      <a href="#video-1" class="list-group-item">
-        <h4 class="list-group-item-heading">Wer sind wir?</h4>
-        <p class="list-group-item-text">Begrüßung und Angebot der online Nachsorge</p>
-      </a>
       <a href="#video-2" class="list-group-item">
         <h4 class="list-group-item-heading">Rückkehr an den Arbeitsplatz</h4>
         <p class="list-group-item-text">Warum onlinebasierte Unterstützung bei der Wiedereingliederung?</p>
@@ -57,18 +53,14 @@
       </a>
     </div>
 
-    <div class="info-video" id="video-1">
-      <h3>Wer sind wir?</h3>
-      <div class="pull-right">
-        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
-      </div>
-      <p>
-        Begrüßung und Angebot der online Nachsorge
-      </p>
-      <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/RvOnXh3NN9w" frameborder="0" allowfullscreen></iframe>
-      </div>
+
+    <div id="toc" class="list-group">
+      <a href="#video-1" class="list-group-item">
+        <h4 class="list-group-item-heading">Vorstellung von GSA online plus</h4>
+        <p class="list-group-item-text">Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)</p>
+      </a>
     </div>
+
 
     <div class="info-video" id="video-2">
       <h3>Rückkehr an den Arbeitsplatz</h3>
@@ -79,7 +71,7 @@
         Warum onlinebasierte Unterstützung bei der Wiedereingliederung?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ao8L-0nSYzg" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Pa_rhIynxeg" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -92,7 +84,7 @@
         Wie läuft die online Nachsorge ab?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/sNhhvQGsMEc" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/OIb2lFeh8d4" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -105,7 +97,7 @@
         Welche Grundlage hat die online Nachsorge?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/QOCaacO8wus" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ciaBwB2nKmA" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -118,7 +110,7 @@
         Eine ganz normale Wiedereingliederung
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/4_aOIA-vyBo" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dETH09wblvc" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -131,7 +123,21 @@
         Warum ist es wichtig dabei zu bleiben?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/V9_PjdU3Mpo" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/wZX7cabk0uo" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+
+    <div class="info-video" id="video-1">
+      <h3>Vorstellung von GSA online plus</h3>
+      <div class="pull-right">
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
+      </div>
+      <p>
+        Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)
+      </p>
+      <div class="videoWrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/15PsRxp3J_w" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
