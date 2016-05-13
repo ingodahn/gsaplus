@@ -89,7 +89,7 @@ Route::group(['middleware' => ['web']], function () {
 	 * by the library sweet alerts).
 	 */
 	if (App::environment("local")) {
-		Route::group(['prefix' => '/test'], function() {
+		Route::group(['prefix' => '/test', 'middleware' => ['test.date']], function() {
 			Route::get('', 'TestController@showOverview');
 
 			// Password reset link request routes...
@@ -109,7 +109,7 @@ Route::group(['middleware' => ['web']], function () {
 			 * applied to reflect the state visible to the user (testing the
 			 * web site).
 			 */
-			Route::group(['prefix' => 'dump-info/{user}', 'middleware' => ['test.date']], function() {
+			Route::group(['prefix' => 'dump-info/{user}'], function() {
 				Route::get('', 'TestController@dumpInfo');
 				Route::post('save', 'TestController@saveDumpToLogFile');
 			});

@@ -9,10 +9,10 @@ use Jenssegers\Date\Date;
 class TestSetting extends InfoModel
 {
 
+    public $timestamps = false;
+
     protected $dates = [
-        'test_date',
-        'created_at',
-        'updated_at'
+        'test_date'
     ];
 
 
@@ -32,14 +32,6 @@ class TestSetting extends InfoModel
      * Date class extends the Carbon class. So conversion is a
      * piece of cake.
      */
-
-    public function getCreatedAtAttribute($date) {
-        return $date === null ? null : new Date($date);
-    }
-
-    public function getUpdatedAtAttribute($date) {
-        return $date === null ? null : new Date($date);
-    }
 
     public function getTestDateAttribute($date) {
         return $date === null ? null : new Date($date);
