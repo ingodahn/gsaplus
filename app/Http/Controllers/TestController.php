@@ -98,7 +98,13 @@ class TestController extends Controller
         $settings->due_reminder = $request->input('due_reminder', '0');
         $settings->calc_next_writing_date = $request->input('calc_next_writing_date', '0');
 
-        if ($settings->save()) {
+        $successful = $settings->save();
+
+        if ($request->has('test_date')) {
+            $this->sendAutomaticReminders();
+        }
+
+        if ($successful) {
             Alert::success('Die neuen Einstellungen wurden gespeichert.')->persistent();
         } else {
             Alert::error('Die neuen Einstellungen konnten leider nicht gespeichert werden.')->persistent();
