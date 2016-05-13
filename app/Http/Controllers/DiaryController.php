@@ -19,6 +19,8 @@ use App\CommentReply;
 
 use App\Models\UserRole;
 
+use App\Tasktemplate;
+
 /**
  * @author dahn
  * @version 1.0
@@ -49,13 +51,6 @@ class DiaryController extends Controller
      * Seite an, die vom Browser gespeichert oder ausgedruckt werden kann.
      */
     public function commented_diary()
-    {
-    }
-
-    /**
-     * Zeige den aktuellen Eintrag
-     */
-    public function current()
     {
     }
 
@@ -134,60 +129,9 @@ class DiaryController extends Controller
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
+        $param['Problems']=  TaskTemplate::lists('name');
 
         return view('patient/entry')->with($param);
-    }
-
-    /**
-     * Die Seite mit dem Eintrag zur übergebenen Id wird angezeigt.
-     * Es wird überprüft, ob die Id zum Patienten der aktuellen Session gehört. Ist
-     * das nicht der Fall so wird aud die Startseite
-     * weitergeleitet.
-     * Je nach Status des Patienten wird die anzuzeigende Seite ansonsten gestaltet:
-     * Ist nicht der aktuelle Schreibimpuls ausgewählt, so werden der gewählte
-     * Schreibimpuls und der Kommentar nicht editierbar angezeigt.
-     * Ist die aktuelle Aufgabe ausgewählt, so wird die aktuelle Aufgabe je nach
-     * Status des Patienten angezeigt. dabei werden unterschiedliche Seiten
-     * ausgeliefert, je nachdem ob es sich um den ersten Schreibimpuls oder einen
-     * Folgeschreibimpuls handelt.
-     * Die folgenden Fälle sind relevant (s. Patient_status):
-     * <ul>
-     *    <li>Erste Aufgabe erhalten: Aufgabe editierbar</li>
-     *    <li>Erste Aufgabe bearbeitet: Aufgabe editierbar mit zwischengespeichertem
-     * Inhalt</li>
-     *    <li>Erste Aufgabe abgeschickt: Aufgabe nicht editierbar und Antwort</li>
-     *    <li>Erste Aufgabe kommentiert: Aufgabe und Antwort nicht editierbar mit
-     * Kommentar</li>
-     *    <li>Erste Aufgabe versäumt: Aufgabe nicht editierbar und Hinweis auf
-     * Versäumnis</li>
-     *    <li>Aktuelle Folgeaufgabe erhalten: Aufgabe editierbar</li>
-     *    <li>Aktuelle Folgeaufgabe bearbeitet: Aufgabe editierbar mit
-     * zwischengespeichertem Inhalt</li>
-     *    <li>Aktuelle Folgeaufgabe abgeschickt: Aufgabe und Antwort nicht
-     * editierbar</li>
-     *    <li>Aktuelle Folgeaufgabe kommentiert: Aufgabe und Antwort nicht editierbar
-     * mit Kommentar</li>
-     *    <li>Aktuelle Folgeaufgabe versäumt: Aufgabe nicht editierbar und Hinweis auf
-     * Versäumnis</li>
-     * </ul>
-     *
-     * @param entry_id
-     */
-    public function get_response($entry_id)
-    {
-
-        //if (not actual assignment) {
-        // return view(diary.entry_noneditable)->
-        //where('Content'="Complete content",
-        //Comment="Comment");
-        //Result: Not Actual
-        //} else if (first assignment) {
-        //Result: First
-        //} else {
-        // Result: Successive
-        //}
-
-
     }
 
     /**
@@ -313,6 +257,28 @@ class DiaryController extends Controller
             $patient->save();
             // ToDo: Send mail to patient informing that entry has been commented
         }
+        if ($request->input('entryButton')=="newAssignment") {
+            $title=$request->input('template_title');
+            //trim $title, if empty return error
+            $title=trim($title);
+            if ($title == '') {
+                Alert::error("Der Titel darf nicht leer sein.");
+                return Redirect::back();
+            }
+            $problem=$request->input('problem');
+            $task=TaskTemplate::whereName($title)->first();
+            if (! $task){
+                $task= new TaskTemplate;
+                $task->name=$title;
+                $alert="Muster \"".$title."\" erstellt.";
+            } else {
+                $alert="Muster \"".$title."\" aktualisiert.";
+            }
+            $task->problem = $problem;
+            $task->save();
+            Alert::success($alert)->persistent();
+            return Redirect::back();
+        }
         if ($request->input('entryButton') == "saveDirty") {
             /* Zwischenspeichern von $entry */
             $assignment->dirty = true;
@@ -333,13 +299,16 @@ class DiaryController extends Controller
     }
 
     /**
-     * Wähle die Afgabe mit dem angegebenen Titel aus und trage den Aufgaben-text in
+     * Wähle die Aufgabe mit dem angegebenen Titel aus und trage den Aufgaben-text in
      * entry.problem ein
      *
      * @param assignment_id
      */
-    public function select_assignment($assignment_id)
+    public function select_assignment(Request $request)
     {
+        $title=$request->input('templateTitle');
+        $task=TaskTemplate::whereName($title)->first();
+        return $task->problem;
     }
 
     /**
