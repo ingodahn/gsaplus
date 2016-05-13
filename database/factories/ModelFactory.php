@@ -118,9 +118,9 @@ $factory->define(App\TestSetting::class, function() {
        'test_date' => null,
        'created_at' => Date::now(),
        'updated_at' => Date::now(),
-       'first_reminder' => false,
-       'new_reminder' => false,
-       'due_reminder' => false,
-       'calc_next_writing_date' => false
+       'first_reminder' => true,
+       'new_reminder' => true,
+       'due_reminder' => true,
+       'calc_next_writing_date' => true
    ];
 });
