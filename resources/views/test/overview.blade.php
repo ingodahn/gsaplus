@@ -54,13 +54,16 @@
             <p>einsehen.</p>
             <p>Es ist möglich sich im Namen eines bestimmten Benutzers einzuloggen, die Mails eines
                 Benutzers einzusehen und das Datum auf ein in der Zukunft liegendes Schreibdatum zu ändern
-                (falls der Benutzer ein Patient ist).</p>
+                (falls der Benutzer ein Patient ist).<br/>
             <p>Patienten können <a href="#reminders">daran erinnert</a> werden,
                 dass Sie den ersten bzw. einen Folge-Schreibimpuls erhalten oder den aktuellen Schreibimpuls 5 Tage lang
                 nicht bearbeitet haben.</p>
             <p>In den <a href="#config">Einstellungen</a> kann das aktuelle Test-Datum gewählt werden. Zudem
-                können bestimmte Erinnerungen automatisch verschickt werden, wenn sich das Test-Datum ändert.</p>
-
+                können bestimmte Erinnerungen automatisch verschickt werden, wenn sich das Test-Datum ändert.
+                Standardmäßig sind alle Benachrichtigungen aktiviert.</p>
+            <p>Das Testdatum kann ebenso <a href="#set_date">schrittweise durchlaufen werden</a>.</p>
+            <p>Am Ende der Seite können <a href="#clear_dates">nicht mehr benötigte Schreibdaten gelöscht werden</a>
+                (diese werden berechnet wenn an neue Schreibimpulse erinnert wird).</p>
             <hr/>
         </div>
 
@@ -70,11 +73,18 @@
             @if($role == UserRole::PATIENT)
                 Patienten
             @elseif($role == UserRole::THERAPIST)
-                Therapeuten
+            Therapeuten
             @elseif($role == UserRole::ADMIN)
                 Administratoren
             @endif
             </h4>
+
+            @if($role == UserRole::PATIENT)
+                <em>Wichtig: </em>die Links in der Tabelle beziehen sich alle auf das aktuelle Datum. D.h. mit diesen
+                können Sie nur zum nächsten Schreibimpuls springen. Bitte <a href="#set_date">durchlaufen Sie die
+                Zeit schrittweise</a> oder <a href="#config">setzen Sie das Test-Datum</a> manuell um die Wochen
+                >= 2 zu testen.</p>
+            @endif
 
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -212,6 +222,11 @@
                     </tr>
                 </tbody>
             </table>
+            <p class="text-right" style="clear: both">
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
         </div>
 
         <div class="row">
@@ -219,10 +234,6 @@
 
             <form role="form" action="/test/settings" method="post">
                 {{ csrf_field() }}
-                <p>Normalerweise wird der Folgeschreibtag berechnet wenn ein Nutzer über den Erhalt
-                    einer aktuellen Aufgabe informiert wird. Dies kann zusammen mit Datumsverschiebungen zu
-                    Widersprüchen führen. Deshalb ist die Berechnung für Testzwecke ausgeschaltet.
-                    Bitte ändern Sie diese Einstellung nur wenn Sie wissen was Sie tun.</p>
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
@@ -290,6 +301,28 @@
                     <button type="submit" class="btn btn-primary" name="save_settings">Speichern</button>
                 </p>
             </form>
+            <p class="text-right" style="clear: both; padding-top: 0.8em;">
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
+        </div>
+
+        <div class="row">
+            <h4 id="set_date">Zum nächsten Datum</h4>
+            <p>Hier können Sie zu einem Folgedatum springen.</p>
+            <form method="POST" action="/test/next-date"
+                  class="pull-right floating-btn-form">
+                {{ csrf_field() }}
+                <input name="relative_date_string" value="tomorrow" hidden/>
+                <input class="btn btn-primary" value="Zum nächsten Tag" type="submit" />
+            </form>
+            <p class="text-right" style="clear: both">
+                <br/>
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
         </div>
 
         <div class="row">
@@ -299,11 +332,15 @@
                 {{ csrf_field() }}
                 <p>Sie können jedes berechnete (und nicht mehr benötigte) Schreibdatum entfernen falls sich
                     das System ungewöhnlich verhalten sollte.</p>
-                <p>Diese Option macht nur Sinn, wenn die automatische Berechnung der Schreibtage aktiviert war und
-                    die Testdaten seitdem nicht mehr aktualisiert wurden.</p>
 
                 <button type="submit" class="btn btn-primary pull-right" name="remove_unnecessary_dates">Schreibdaten bereinigen</button>
             </form>
+            <p class="text-right" style="clear: both">
+                <br/>
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
         </div>
 
     </div>
