@@ -69,9 +69,14 @@ class DiaryController extends Controller
                 $health[$i] = -1;
             }
         }
-
+// return dd($p_assignments);
         $assignments[1]['problem']='Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.';
-        $assignments[1]['answer']=$p_assignments[0]['situations'];
+        if (isset($p_assignments[0]['situations'])) {
+            $assignments[1]['answer']=$p_assignments[0]['situations'];
+        } else {
+            $assignments[1]['answer']="";
+        }
+        
         $assignments[1]['dirty']=$p_assignments[0]['dirty'];
 
         for ($i=2; $i <= $info['patientWeek']; $i++) {
