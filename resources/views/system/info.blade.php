@@ -31,10 +31,6 @@
     </p>
 
     <div id="toc" class="list-group">
-      <a href="#video-1" class="list-group-item">
-        <h4 class="list-group-item-heading">Wer sind wir?</h4>
-        <p class="list-group-item-text">Begrüßung und Angebot der online Nachsorge</p>
-      </a>
       <a href="#video-2" class="list-group-item">
         <h4 class="list-group-item-heading">Rückkehr an den Arbeitsplatz</h4>
         <p class="list-group-item-text">Warum onlinebasierte Unterstützung bei der Wiedereingliederung?</p>
@@ -57,18 +53,14 @@
       </a>
     </div>
 
-    <div class="info-video" id="video-1">
-      <h3>Wer sind wir?</h3>
-      <div class="pull-right">
-        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
-      </div>
-      <p>
-        Begrüßung und Angebot der online Nachsorge
-      </p>
-      <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/15PsRxp3J_w" frameborder="0" allowfullscreen></iframe>
-      </div>
+
+    <div id="toc" class="list-group">
+      <a href="#video-1" class="list-group-item">
+        <h4 class="list-group-item-heading">Vorstellung von GSA online plus</h4>
+        <p class="list-group-item-text">Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)</p>
+      </a>
     </div>
+
 
     <div class="info-video" id="video-2">
       <h3>Rückkehr an den Arbeitsplatz</h3>
@@ -132,6 +124,20 @@
       </p>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/wZX7cabk0uo" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+
+    <div class="info-video" id="video-1">
+      <h3>Vorstellung von GSA online plus</h3>
+      <div class="pull-right">
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
+      </div>
+      <p>
+        Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)
+      </p>
+      <div class="videoWrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/15PsRxp3J_w" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
