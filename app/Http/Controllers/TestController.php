@@ -59,21 +59,44 @@ class TestController extends Controller
         $next_assignment = $patient->next_assignment();
 
         if ($next_assignment && $next_assignment->writing_date) {
-            $settings = $this->settings();
-            $settings->test_date = $next_assignment->writing_date->copy()->addDays($daysToAdd);
-
-            if ($settings->save()) {
-                Alert::success('Das Datum wurde erfolgreich auf den '.
-                    $settings->test_date->format('d.m.Y').' geändert. ')->persistent();
-
-                $this->sendAutomaticReminders();
-            } else {
-                Alert::error('Der Patient hat entweder keinen Folge-Schreibimpuls oder das nächste Schreibdatum '.
-                    'wurde noch nicht gesetzt.', 'Das Datum konnte nicht geändert werden.')->persistent();
-            }
+            $this->setDateAndSendReminders($next_assignment->writing_date->copy()->addDays($daysToAdd));
         }
 
         return Redirect::back();
+    }
+
+    public function setRelativeTestDate(Request $request) {
+        $relative_date_string = $request->input('relative_date_string');
+
+        $settings = $this->settings();
+
+        if ($settings->test_date) {
+            Date::setTestNow($settings->test_date);
+        }
+
+        $this->setDateAndSendReminders(Date::parse($relative_date_string));
+
+        Date::setTestNow();
+
+        return Redirect::back();
+    }
+
+    protected function setDateAndSendReminders($date) {
+        $settings = $this->settings();
+
+        $settings->test_date = $date;
+        $save_successful = $settings->save();
+
+        if ($save_successful && $this->sendAutomaticReminders()) {
+            Alert::success('Das Datum wurde erfolgreich auf den '.
+                $settings->test_date->format('d.m.Y').' geändert. ')->persistent();
+        } else {
+            if ($save_successful) {
+                Alert::error('Nicht alle Benachrichtigungen konnten versendet werden.')->persistent();
+            } else {
+                Alert::warning('Das Datum konnte leider nicht geändert werden.')->persistent();
+            }
+        }
     }
 
     public function changeSettings(Request $request) {
