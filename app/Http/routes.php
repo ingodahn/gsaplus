@@ -94,9 +94,9 @@ Route::group(['middleware' => ['web']], function () {
 
 			// Password reset link request routes...
 			Route::post('login/{user}', 'TestController@loginAs');
+			Route::post('next-reminder/{patient}', 'TestController@setDateOfCurrentReminder');
 			Route::post('next-date', 'TestController@setRelativeTestDate');
 			Route::post('next-date/{patient}', 'TestController@setAssignmentRelatedTestDate');
-			Route::post('next-date/{patient}/{daysToAdd}', 'TestController@setAssignmentRelatedTestDate');
 			Route::post('settings', 'TestController@changeSettings');
 
 			Route::post('send-reminders/{option}', 'TestController@sendReminders');

@@ -6,6 +6,10 @@
         td {
             vertical-align:middle !important;
         }
+
+        th {
+            white-space : nowrap;
+        }
         
         ul.nav {
             display: none;
@@ -87,8 +91,8 @@
                         <th>Login</th>
                         @if($role == UserRole::PATIENT)
                         <th>Status</th>
-                        <th>Zum nächsten Schreibdatum</th>
-                        <th>Weiter Springen</th>
+                        <th class="text-center">Zum nächsten Schreibdatum</th>
+                        <th class="text-center">Zum Fristende</th>
                         @endif
                     </tr>
                 </thead>
@@ -132,24 +136,26 @@
                                 </a>
                             </td>
                             @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
-                            <td class="text-center">
-                                <form method="POST" action="/test/next-date/{{ $user['name'] }}">
-                                    {{ csrf_field() }}
-                                    <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
-                                </form>
-                            </td>
-                            <td class="text-center">
-                                <form method="POST" action="/test/next-date/{{ $user['name'] }}/{{ config('gsa.reminder_period_in_days') }}">
-                                    {{ csrf_field() }}
-                                    <input class="btn-link" value="nochmal (+) 5 Tage" type="submit" />
-                                </form>
-                            </td>
+                                <td class="text-center">
+                                    <form method="POST" action="/test/next-date/{{ $user['name'] }}">
+                                        {{ csrf_field() }}
+                                        <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
+                                    </form>
+                                </td>
+                                @if(isset($user['dateOfReminder']))
+                                    <td class="text-center">
+                                        <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
+                                            {{ csrf_field() }}
+                                            <input class="btn-link" value="Zum {{$user['dateOfReminder']}} springen" type="submit" />
+                                        </form>
+                                    </td>
+                                @endif
                             @else
                                 <td class="text-center">
                                     <small><em>... kein Folgedatum ...</em></small>
                                 </td>
                                 <td class="text-center">
-                                    <small><em>... kein Folgedatum ...</em></small>
+                                    <small><em>... kein Schreibimpuls ...</em></small>
                                 </td>
                             @endif
                         @endif
