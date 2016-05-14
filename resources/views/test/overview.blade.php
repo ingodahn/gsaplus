@@ -62,9 +62,9 @@
                 können bestimmte Erinnerungen automatisch verschickt werden, wenn sich das Test-Datum ändert.
                 Standardmäßig sind alle Benachrichtigungen aktiviert.</p>
             <p>Das Testdatum kann ebenso <a href="#set_date">schrittweise durchlaufen werden</a>.</p>
-            <p>Am Ende der Seite können <a href="#clear_dates">nicht mehr benötigte Schreibdaten gelöscht werden</a>
-                (diese werden berechnet wenn an neue Schreibimpulse erinnert wird).</p>
-            <hr/>
+            <p>Am Ende der Seite  <a href="#clear_dates">können Sie die zukünftige Historie der Nutzer löschen</a>.
+                D.h. diese es werden zukünftige Kommentare, Rückmeldungen, etc. entfernt. Die aktuelle Aufgabe bleibt
+                von der Aktion unberührt.<br/></p>
         </div>
 
         @foreach($infos as $role => $users)
@@ -78,13 +78,6 @@
                 Administratoren
             @endif
             </h4>
-
-            @if($role == UserRole::PATIENT)
-                <em>Wichtig: </em>die Links in der Tabelle beziehen sich alle auf das aktuelle Datum. D.h. mit diesen
-                können Sie nur zum nächsten Schreibimpuls springen. Bitte <a href="#set_date">durchlaufen Sie die
-                Zeit schrittweise</a> oder <a href="#config">setzen Sie das Test-Datum</a> manuell um die Wochen
-                >= 2 zu testen.</p>
-            @endif
 
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -328,12 +321,15 @@
         <div class="row">
             <h4 id="clear_dates">Schreibdaten bereinigen</h4>
 
-            <form role="form" action="/test/remove-distant-dates" method="post">
+            <form role="form" action="/test/remove-distant-data" method="post">
                 {{ csrf_field() }}
-                <p>Sie können jedes berechnete (und nicht mehr benötigte) Schreibdatum entfernen falls sich
-                    das System ungewöhnlich verhalten sollte.</p>
+                <p>Während des Testens entstehen zukünftige Tagebucheinträge, Kommentare und Rückmeldungen. Durch das
+                Versenden von Benachrichtigungen werden zukünftige Schreibtage berechnet und
+                zukünftige Schreibimpulse gemahnt. Diese Einträge machen keinen Sinn mehr, wenn das aktuelle Datum
+                wiederhergestellt wird.</p>
+                <p>Wählen Sie <em>Daten bereinigen</em> um die inkonsisten Daten zu entfernen.</p>
 
-                <button type="submit" class="btn btn-primary pull-right" name="remove_unnecessary_dates">Schreibdaten bereinigen</button>
+                <button type="submit" class="btn btn-primary pull-right" name="remove_unnecessary_dates">Daten bereinigen</button>
             </form>
             <p class="text-right" style="clear: both">
                 <br/>

@@ -12,6 +12,7 @@ use App\Helper;
 use App\TestSetting;
 
 use App\Console\Commands\RemindUsersOfAssignment;
+use App\Console\Commands\ClearDistantData;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -92,7 +93,7 @@ class TestController extends Controller
                 $settings->test_date->format('d.m.Y').' geändert. ')->persistent();
         } else {
             if ($save_successful) {
-                Alert::error('Nicht alle Benachrichtigungen konnten versendet werden.')->persistent();
+                Alert::warning('Nicht alle Benachrichtigungen konnten versendet werden.')->persistent();
             } else {
                 Alert::warning('Das Datum konnte leider nicht geändert werden.')->persistent();
             }
@@ -130,7 +131,7 @@ class TestController extends Controller
         if ($successful) {
             Alert::success('Die neuen Einstellungen wurden gespeichert.')->persistent();
         } else {
-            Alert::error('Die neuen Einstellungen konnten leider nicht gespeichert werden.')->persistent();
+            Alert::warning('Die neuen Einstellungen konnten leider nicht gespeichert werden.')->persistent();
         }
     }
 
@@ -142,7 +143,7 @@ class TestController extends Controller
         if ($settings->save()) {
             Alert::success('Die Einstellungen wurden erfolgreich zurück gesetzt.')->persistent();
         } else {
-            Alert::error('Die Einstellungen konnten leider nicht zurück gesetzt werden.')->persistent();
+            Alert::warning('Die Einstellungen konnten leider nicht zurück gesetzt werden.')->persistent();
         }
     }
 
@@ -190,7 +191,7 @@ class TestController extends Controller
         if ($successful) {
             Alert::success('Alle Benachrichtigungen wurden verschickt.')->persistent();
         } else {
-            Alert::error('Nicht alle Benachrichtigungen konnten verschickt werden.')->persistent();
+            Alert::warning('Nicht alle Benachrichtigungen konnten verschickt werden.')->persistent();
         }
 
         return Redirect::back();
@@ -240,20 +241,38 @@ class TestController extends Controller
         if (Storage::put($filePath, "Test date is ".$date_string."\n\n".var_export($this->getInfo($user), true))) {
             Alert::success('Die aktuellen Daten unter "'.$fileName.'" gespeichert.')->persistent();
         } else {
-            Alert::error('Leider konnte kein Abbild gespeichert werden.')->persistent();
+            Alert::warning('Leider konnte kein Abbild gespeichert werden.')->persistent();
         }
 
         return Redirect::back();
     }
 
-    public function clearDistantWritingDates() {
-        if (Artisan::call('gsa:reassess-writing-dates', ['--quiet' => 'default']) === 0) {
-            Alert::success('Die Schreibdaten wurden erfolgreich bereinigt.')->persistent();
+    public function clearDistantData() {
+        $successful = $this->callClearCommand();
+
+        if ($successful) {
+            Alert::success('Alle inkonsisten Daten wurden entfernt.')->persistent();
         } else {
-            Alert::error('Die Schreibdaten konnten leider nicht bereinigt werden.')->persistent();
+            Alert::warning('Leider konnten nicht alle inkonsistenten Daten entfernt werden.')->persistent();
         }
 
         return Redirect::back();
+    }
+
+    protected function callClearCommand(Patient $patient = null) {
+        $arguments = [];
+
+        if ($patient) {
+            $arguments['--'.ClearDistantData::OPTION_PATIENT] = $patient->name;
+        }
+
+        $args = array_merge($arguments, ['--quiet' => 'default']);
+
+        $arguments['--quiet'] = 'default';
+
+        $successful = (Artisan::call('gsa:clear-distant-data', $args) === 0);
+
+        return $successful;
     }
 
     protected function settings() {
