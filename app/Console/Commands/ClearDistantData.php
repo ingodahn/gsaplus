@@ -39,7 +39,7 @@ class ClearDistantData extends Command
      *
      * @var string
      */
-    protected $description = 'Removes inconsistent data and resets all attributes';
+    protected $description = 'Removes inconsistent data';
 
     /**
      * Create a new command instance.
