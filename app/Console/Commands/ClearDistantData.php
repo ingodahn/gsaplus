@@ -167,15 +167,17 @@ class ClearDistantData extends Command
     }
 
     protected function resetAttributesOfPatient(Patient &$patient) {
+        /*
         if ($patient->patient_week == -1) {
             $patient->date_from_clinics = null;
         }
 
-        $patient->assignment_day_changes_left = 2;
-        $patient->intervention_ended_on = null;
-        $patient->last_activity = Date::now();
         $patient->notes_of_therapist = "";
         $patient->personal_information = "";
+        $patient->assignment_day_changes_left = 2;
+        $patient->intervention_ended_on = null;
+        */
+        $patient->last_activity = Date::now();
         $patient->last_login = Date::now();
 
         $this->info("Reset attributes".$this->getPatientContextString($patient));
