@@ -135,7 +135,7 @@
                                     <i class="fa fa-question-circle"></i>
                                 </a>
                             </td>
-                            @if(isset($user['dateOfReminder']))
+                            @if(isset($user['dateOfReminder']) && $user['patientStatus'] < 'P130')
                                 <td class="text-center">
                                     <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
                                         {{ csrf_field() }}
