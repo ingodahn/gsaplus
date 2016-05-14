@@ -87,7 +87,7 @@
                         <th>Login</th>
                         @if($role == UserRole::PATIENT)
                         <th>Status</th>
-                        <th>Zeitsprung</th>
+                        <th>Zum nächsten Schreibdatum</th>
                         <th>Weiter Springen</th>
                         @endif
                     </tr>
@@ -132,13 +132,13 @@
                                 </a>
                             </td>
                             @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
-                            <td>
+                            <td class="text-center">
                                 <form method="POST" action="/test/next-date/{{ $user['name'] }}">
                                     {{ csrf_field() }}
-                                    <input class="btn-link" value="Zum nächsten Schreibdatum" type="submit" />
+                                    <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
                                 </form>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <form method="POST" action="/test/next-date/{{ $user['name'] }}/{{ config('gsa.reminder_period_in_days') }}">
                                     {{ csrf_field() }}
                                     <input class="btn-link" value="nochmal (+) 5 Tage" type="submit" />
