@@ -90,9 +90,9 @@
                         <th>E-Mail</th>
                         <th>Login</th>
                         @if($role == UserRole::PATIENT)
-                        <th>Status</th>
-                        <th class="text-center">Zum nächsten Schreibdatum</th>
-                        <th class="text-center">Zum Fristende</th>
+                            <th>Status</th>
+                            <th class="text-center">Zum Fristende</th>
+                            <th class="text-center">Zum nächsten Schreibdatum</th>
                         @endif
                     </tr>
                 </thead>
@@ -136,12 +136,6 @@
                                 </a>
                             </td>
                             @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
-                                <td class="text-center">
-                                    <form method="POST" action="/test/next-date/{{ $user['name'] }}">
-                                        {{ csrf_field() }}
-                                        <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
-                                    </form>
-                                </td>
                                 @if(isset($user['dateOfReminder']))
                                     <td class="text-center">
                                         <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
@@ -150,12 +144,18 @@
                                         </form>
                                     </td>
                                 @endif
+                                <td class="text-center">
+                                    <form method="POST" action="/test/next-date/{{ $user['name'] }}">
+                                        {{ csrf_field() }}
+                                        <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
+                                    </form>
+                                </td>
                             @else
                                 <td class="text-center">
-                                    <small><em>... kein Folgedatum ...</em></small>
+                                    <small><em>... kein Schreibimpuls ...</em></small>
                                 </td>
                                 <td class="text-center">
-                                    <small><em>... kein Schreibimpuls ...</em></small>
+                                    <small><em>... kein Folgedatum ...</em></small>
                                 </td>
                             @endif
                         @endif
