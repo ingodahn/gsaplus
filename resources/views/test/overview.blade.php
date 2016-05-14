@@ -135,15 +135,19 @@
                                     <i class="fa fa-question-circle"></i>
                                 </a>
                             </td>
+                            @if(isset($user['dateOfReminder']))
+                                <td class="text-center">
+                                    <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
+                                        {{ csrf_field() }}
+                                        <input class="btn-link" value="Zum {{$user['dateOfReminder']}} springen" type="submit" />
+                                    </form>
+                                </td>
+                            @else
+                                <td class="text-center">
+                                    <small><em>... kein Schreibimpuls ...</em></small>
+                                </td>
+                            @endif
                             @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
-                                @if(isset($user['dateOfReminder']))
-                                    <td class="text-center">
-                                        <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
-                                            {{ csrf_field() }}
-                                            <input class="btn-link" value="Zum {{$user['dateOfReminder']}} springen" type="submit" />
-                                        </form>
-                                    </td>
-                                @endif
                                 <td class="text-center">
                                     <form method="POST" action="/test/next-date/{{ $user['name'] }}">
                                         {{ csrf_field() }}
@@ -151,9 +155,6 @@
                                     </form>
                                 </td>
                             @else
-                                <td class="text-center">
-                                    <small><em>... kein Schreibimpuls ...</em></small>
-                                </td>
                                 <td class="text-center">
                                     <small><em>... kein Folgedatum ...</em></small>
                                 </td>
