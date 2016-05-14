@@ -259,7 +259,7 @@ class GateController extends Controller
 			$days->decrease_day($day);
 
 			// Inform patient
-			App\Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $email, $name, 'Ihre Registrierung', 'emails.confirm_registration');
+			Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $email, $name, 'Ihre Registrierung', 'emails.confirm_registration');
 
 			Auth::login($patient);
 
