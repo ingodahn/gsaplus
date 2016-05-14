@@ -61,7 +61,7 @@ class ClearDistantData extends Command
         $settings = TestSetting::first();
 
         if ($settings && $settings->test_date) {
-            Date::setTestNow($settings->test_date);
+            Date::setTestNow($settings->test_date->max(Date::now()));
         }
 
         $patients = new Collection;
