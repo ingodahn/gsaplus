@@ -36,7 +36,18 @@ class TestController extends Controller
         $infos = ['patient' => new Collection, 'therapist' => new Collection, 'admin' => new Collection];
 
         foreach (User::all() as $user) {
-            $infos[$user->type]->push($user->info());
+            $info = $user->info();
+
+            if ($user->type === UserRole::PATIENT) {
+                $current_assignment = $user->current_assignment();
+
+                if ($current_assignment && $current_assignment->writing_date) {
+                    $info['dateOfReminder'] = $current_assignment->writing_date
+                            ->copy()->addDays(config('gsa.reminder_period_in_days'))->format('d.m.Y');
+                }
+            }
+
+            $infos[$user->type]->push($info);
         }
 
         foreach ($infos as $key => $info) {
@@ -56,11 +67,22 @@ class TestController extends Controller
         return Redirect::to('/Home');
     }
 
-    public function setAssignmentRelatedTestDate(Patient $patient, $daysToAdd = 0) {
+    public function setAssignmentRelatedTestDate(Patient $patient) {
         $next_assignment = $patient->next_assignment();
 
         if ($next_assignment && $next_assignment->writing_date) {
-            $this->setDateAndSendReminders($next_assignment->writing_date->copy()->addDays($daysToAdd));
+            $this->setDateAndSendReminders($next_assignment->writing_date->copy());
+        }
+
+        return Redirect::back();
+    }
+
+    public function setDateOfCurrentReminder(Patient $patient) {
+        $current_assignment = $patient->current_assignment();
+
+        if ($current_assignment && $current_assignment->writing_date) {
+            $this->setDateAndSendReminders($current_assignment->writing_date->copy()
+                    ->addDays(config('gsa.reminder_period_in_days')));
         }
 
         return Redirect::back();
@@ -267,8 +289,6 @@ class TestController extends Controller
         }
 
         $args = array_merge($arguments, ['--quiet' => 'default']);
-
-        $arguments['--quiet'] = 'default';
 
         $successful = (Artisan::call('gsa:clear-distant-data', $args) === 0);
 
