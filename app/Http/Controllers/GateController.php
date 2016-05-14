@@ -258,9 +258,12 @@ class GateController extends Controller
 			$days = new Days;
 			$days->decrease_day($day);
 
+			// Inform patient
+			App\Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $email, $name, 'Ihre Registrierung', 'emails.confirm_registration');
+
 			Auth::login($patient);
 
-			Alert::success('Sie haben sich erfolgreich registriert.')->persistent();
+			Alert::success('Sie haben sich erfolgreich registriert. Sie erhalten in Kürze eine Bestätigung per eMail')->persistent();
 			return Redirect::to('/Diary');
 
 			//return view('patient.diary')->with('name',$name);

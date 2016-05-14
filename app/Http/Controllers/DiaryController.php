@@ -289,6 +289,7 @@ class DiaryController extends Controller
             } else {
                 $assignment->comment()->save($comment);
             }
+             App\Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email, $patient->name, 'Neuer Kommentar in Ihrem Tagebuch', 'emails.assignment.bew_comment');
         }
         if ($request->has('comment_reply_satisfied') ||
         $request->has('comment_reply_helpful')) {
