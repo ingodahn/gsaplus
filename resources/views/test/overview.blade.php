@@ -43,7 +43,8 @@
 
         <div class="row">
             <h3>Softwaretest-Kontrollzentrum</h3>
-            <p>Auf dieser Seite können sie die im System vorhandenen</p>
+
+            <p>Auf dieser Seite können Sie das <a href="#config">Testdatum ändern</a> und die im System vorhandenen</p>
             <ul>
                 <li>
                     <a href="#patients">Patienten</a>
@@ -172,6 +173,7 @@
         </div>
         @endforeach
 
+        <!--
         <div class="row">
             <h4 id="reminders">Erinnerungen</h4>
 
@@ -228,7 +230,7 @@
                 </a>
             </p>
         </div>
-
+-->
         <div class="row">
             <h4 id="config">Einstellungen</h4>
 
@@ -243,7 +245,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="col-xs-7">Aktuelles Datum</td>
+                            <td class="col-xs-7">Testdatum (leer = aktuelles Datum)</td>
                             <td>
                                 <div class='input-group date' id='datetimepicker'>
                                     <input name="test_date" type='text' value="{{ $settings['testDate'] }}" class="form-control">
@@ -326,7 +328,7 @@
         </div>
 
         <div class="row">
-            <h4 id="clear_dates">Schreibdaten bereinigen</h4>
+            <h4 id="clear_dates">Schreibdaten bereinigen - immer aufrufen, nachdem das Testdatum auf ein früheres Datum umgestellt wurde</h4>
 
             <form role="form" action="/test/remove-distant-data" method="post">
                 {{ csrf_field() }}
