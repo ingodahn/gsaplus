@@ -396,13 +396,15 @@ abstract class PatientsTableBaseSeeder extends Seeder
                 $this->create_random_number_of_past_assignments($patient, 11);
         }
 
+        $patient->load('assignments');
+
         $current_assignment = $patient->current_assignment();
 
         switch ($patient_status) {
             case PatientStatus::REGISTERED:
                 break;
             case PatientStatus::DATE_OF_DEPARTURE_SET:
-                $patient->date_from_clinics = $this->faker->dateTimeBetween($patient->registration_date, 'now');
+                $patient->date_from_clinics = Date::instance($this->faker->dateTimeBetween($patient->registration_date, 'now'));
                 break;
             case PatientStatus::PATIENT_GOT_ASSIGNMENT:
                 $current_assignment->dirty = false;
