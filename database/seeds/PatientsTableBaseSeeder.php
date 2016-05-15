@@ -404,8 +404,6 @@ abstract class PatientsTableBaseSeeder extends Seeder
             case PatientStatus::REGISTERED:
                 break;
             case PatientStatus::DATE_OF_DEPARTURE_SET:
-                print_r($current_assignment);
-
                 $patient->date_from_clinics = Date::instance($this->faker->dateTimeBetween($patient->registration_date, 'now'));
                 break;
             case PatientStatus::PATIENT_GOT_ASSIGNMENT:
