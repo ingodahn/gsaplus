@@ -232,12 +232,12 @@
         </div>
 -->
         <div class="row">
-            <h4 id="config">Einstellungen</h4>
+            <h4 id="config">Testdatum</h4>
 
             <form role="form" action="/test/settings" method="post">
                 {{ csrf_field() }}
                 <table class="table table-striped table-bordered table-hover">
-                    <thead>
+                    <thead class="hide">
                     <tr>
                         <th>Einstellung</th>
                         <th>Wert</th>
@@ -264,7 +264,7 @@
                                 </script>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Automatisch an ersten Schreibimpuls erinnern
                             </td>
@@ -272,7 +272,7 @@
                                 <input type="checkbox" class="pull-right" name="first_reminder" value="1" {{ $settings['firstReminder'] ? 'checked' : ''}}>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Automatisch an neuen Schreibimpuls erinnern
                             </td>
@@ -280,7 +280,7 @@
                                 <input type="checkbox" class="pull-right" name="new_reminder" value="1" {{ $settings['newReminder'] ? 'checked' : '' }}>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Automatisch an Schreibimpuls erinnern, der in Kürze fällig ist
                             </td>
@@ -288,7 +288,7 @@
                                 <input type="checkbox" class="pull-right" name="due_reminder"  value="1" {{ $settings['dueReminder'] ? 'checked' : ''}}>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Bei einer Erinnerung automatisch den nächsten Schreibtag berechnen
                             </td>

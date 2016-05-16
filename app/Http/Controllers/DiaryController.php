@@ -434,7 +434,7 @@ class DiaryController extends Controller
             $weeks_to_show = 12;
         }
 
-        for ($i = 2; $i <= $weeks_to_show; $i++) {
+        /*for ($i = 2; $i <= $weeks_to_show; $i++) {
             $i1=$i-1;
             if ($i <= $info['patientWeek']) {
                 $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['assignmentStatus']];
@@ -443,6 +443,14 @@ class DiaryController extends Controller
                 $entries[$i]['entry_status']='';
                 $entries[$i]['entry_status_code']='';
             }
+            $entries[$i]['problem'] = $assignment_info[$i1]['problem'];
+        }*/
+        for ($i = 2; $i <= $weeks_to_show; $i++) {
+            $i1=$i-1;
+
+                $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['assignmentStatus']];
+                $entries[$i]['entry_status_code'] = $assignment_info[$i1]['assignmentStatus'];
+
             $entries[$i]['problem'] = $assignment_info[$i1]['problem'];
         }
 
@@ -454,6 +462,7 @@ class DiaryController extends Controller
             }
 
         $Diary['entries'] = $entries;
+        // return dd($Diary);
         return view('patient.diary')->with('Diary', $Diary);
     }
 
