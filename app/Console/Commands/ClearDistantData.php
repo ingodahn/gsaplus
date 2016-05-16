@@ -96,7 +96,7 @@ class ClearDistantData extends Command
     protected function removeData(Collection $assignments, Patient $patient) {
         foreach ($assignments as $assignment) {
             // only clear writing date of assignment surpassing the next assignment
-            if (min($patient->patient_week + 2, 12) <= $assignment->week) {
+            if (min(max($patient->patient_week, 0) + 2, 12) <= $assignment->week) {
                 $this->removeWritingDate($assignment);
             }
 
