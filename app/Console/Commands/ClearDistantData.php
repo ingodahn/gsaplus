@@ -175,11 +175,24 @@ class ClearDistantData extends Command
 
         $patient->notes_of_therapist = "";
         $patient->personal_information = "";
-        $patient->assignment_day_changes_left = 2;
         $patient->intervention_ended_on = null;
         */
-        $patient->last_activity = Date::now();
-        $patient->last_login = Date::now();
+
+        if ($patient->assignment_day_changes_left === 0) {
+            $patient->assignment_day_changes_left = 2;
+        }
+
+        if ($patient->last_activity && $patient->last_activity->isFuture()) {
+            $patient->last_activity = Date::now();
+        }
+
+        if ($patient->last_login && $patient->last_login->isFuture()) {
+            $patient->last_login = Date::now();
+        }
+
+        if ($patient->intervention_ended_on && $patient->intervention_ended_on->isFuture()) {
+            $patient->intervention_ended_on = null;
+        }
 
         $this->info("Reset attributes".$this->getPatientContextString($patient));
     }
