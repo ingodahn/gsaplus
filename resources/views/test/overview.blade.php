@@ -299,9 +299,10 @@
                     </tbody>
                 </table>
                 <p class="pull-right">
-                    <button type="submit" class="btn btn-default" name="reset_settings">Einstellungen wiederherstellen</button>
+                    <button type="submit" class="btn btn-default" name="reset_settings">Aktuelles Datum wiederherstellen</button>
                     <button type="submit" class="btn btn-primary" name="save_settings">Speichern</button>
                 </p>
+                <p>Nach dem Rückstellen des Datums unbedingt <b>Schreibdaten bereinigen</b> aufrufen!</p>
             </form>
             <p class="text-right" style="clear: both; padding-top: 0.8em;">
                 <a href="#top">Zum Seitenanfang

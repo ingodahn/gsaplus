@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert as Alert;
+use Jenssegers\Date\Date;
 
 use App\Code;
 use App\Patient;
@@ -400,7 +401,7 @@ class DiaryController extends Controller
         $patient=Patient::whereName($name)->first();
 
         if ($is_patient) {
-            $patient->last_activity=time();
+            $patient->last_activity=Date::now();
             $patient->save();
         }
 
