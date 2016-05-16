@@ -79,7 +79,7 @@ class ClearDistantData extends Command
             // the collection starts with index 0
             // => index ($patient_week - 1) selects current assignment
             // => index ($patient_week) selects next assignment
-            $index_for_next_week = min( max( $patient->patient_week, 0 ), 12 );
+            $index_for_next_week = max( $patient->patient_week, 0 );
             // select all assignments surpassing the current assignment
             $distant_assignments = $patient->ordered_assignments()->slice($index_for_next_week);
             // set writing dates to null
@@ -96,7 +96,7 @@ class ClearDistantData extends Command
     protected function removeData(Collection $assignments, Patient $patient) {
         foreach ($assignments as $assignment) {
             // only clear writing date of assignment surpassing the next assignment
-            if (min(max($patient->patient_week, 0) + 2, 12) <= $assignment->week) {
+            if ((max($patient->patient_week, 0) + 2) <= $assignment->week) {
                 $this->removeWritingDate($assignment);
             }
 
