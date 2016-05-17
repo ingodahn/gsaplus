@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\PatientStatus;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -8,11 +10,13 @@ use App\Patient;
 use App\Therapist;
 use App\Helper;
 
+use App\Models\UserRole;
+
 use Jenssegers\Date\Date;
 
 use Hash;
 
-use Prologue\Alerts\Facades\Alert;
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use Illuminate\Support\Facades\Redirect;
 
@@ -35,7 +39,7 @@ class PatientController extends Controller
 		$patient->intervention_ended_on = Date::now();
 		$patient->save();
 
-		Alert::info('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->flash();
+		Alert::success('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->persistent();
 
 		return Redirect::back();
 	}
@@ -47,48 +51,52 @@ class PatientController extends Controller
 	 *
 	 * @param name
 	 */
-	public function profile(Request $request,$name=NULL)
+	public function profile(Request $request, $name = null)
 	{
-	//	return dd($request->user());
-		if (! $name) {
-			$name=Auth::user()->name;
+		//	return dd($request->user());
+		if (!$name) {
+			$name = Auth::user()->name;
 		}
-		$user_role=$request->user()->type;
-		if ($user_role == 'patient' &&  $name!=Auth::user()-> name) {
-			return	Redirect::to('/');
+
+		$user_role = $request->user()->type;
+
+		if ($user_role == UserRole::PATIENT && $name != Auth::user()->name) {
+			return Redirect::to('/');
 		}
 
 		$days = new Days;
 
-		//$patient=Patient(name);
-		$patient = Patient::where('name', $name)->first();
+		$patient = Patient::whereName($name)->firstOrFail();
 
-		$patient_info=[];
-		$patient_info['assignment_day'] = Helper::generate_day_number_map()[$patient->assignment_day];
-		$patient_info['available_days'] = $days->get_available_days();
-		$patient_info['assignmentDayChangesLeft'] = $patient->assignment_day_changes_left;
-		$patient_info['code'] = $patient->code;
-		$patient_info['dateFromClinics'] = $patient->date_from_clinics !== null ? $patient->date_from_clinics->format('d.m.Y') : '';
-		$patient_info['lastActivity'] = $patient->last_activity;
-		$patient_info['notes'] = $patient->notes_of_therapist;
-		$patient_info['patientWeek'] = $patient->patient_week();
-		$patient_info['personalInformation'] = $patient->personal_information;
-		$patient_info['status'] = $patient->status();
-		$patient_info['therapist'] = $patient->therapist !== null ? $patient->therapist->name : "-";
-		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(),'name');
+		$patient_info = $patient->info_with('therapist');
+
+		switch ($user_role) {
+			case UserRole::PATIENT:
+				$status = PatientStatus::$STATUS_INFO[$patient_info['patientStatus']];
+				break;
+			case UserRole::THERAPIST:
+			case UserRole::ADMIN:
+				$status = $patient_info['patientStatus'].': '.PatientStatus::$STATUS_INFO[$patient_info['patientStatus']];
+				break;
+		}
+
+		$patient_info['assignmentDay'] = Helper::generate_day_number_map()[$patient_info['assignmentDay']];
+		$patient_info['availableDays'] = $days->get_available_days();
+		$patient_info['status'] = $status;
+		$patient_info['therapist'] = array_get($patient_info, 'therapist.name', '-');
+		$patient_info['listOfTherapists'] = array_pluck(Therapist::all()->sortBy('name')->toArray(), 'name');
+		$patient_info['dateFromClinics'] = array_get($patient_info, 'dateFromClinics', '-');
 
 		$profile_user_model=[];
 		$profile_user_model['Patient'] = $patient_info;
-		$profile_user_model['PatientName'] = $patient->name;
-		// $profile_user_model['Patient']=Patient($name);
-		// return dd($profile_user_model);
+
 		return view('patient.patient_profile')->with($profile_user_model);
 	}
 
 	public function save_therapist(Request $request, Patient $patient) {
 		$name_of_therapist = $request->input('therapist');
 
-		$therapist = Therapist::where('name', $name_of_therapist)->first();
+		$therapist = Therapist::whereName($name_of_therapist)->first();
 
 		if ($therapist === null) {
 			$message_to_user = 'Ein Therapeut mit dem Namen '. $name_of_therapist .
@@ -100,11 +108,11 @@ class PatientController extends Controller
 				$message_to_user.' Der Therapeut wurde somit zurückgesetzt.';
 			}
 
-			Alert::warning($message_to_user)->flash();
+			Alert::warning($message_to_user)->persistent();
 		} else {
 			$patient->therapist()->associate($therapist);
 
-			Alert::info('Der Therapeut wurde erfolgreich geändert.')->flash();
+			Alert::success('Der Therapeut wurde erfolgreich geändert.')->persistent();
 		}
 
 		$patient->save();
@@ -113,7 +121,7 @@ class PatientController extends Controller
 	}
 
 	public function save_day_of_week(Request $request, Patient $patient) {
-		$is_therapist = ($request->user()->type === 'therapist');
+		$is_therapist = ($request->user()->type === UserRole::THERAPIST);
 
 		if ($patient->assignment_day_changes_left > 0 || $is_therapist) {
 			// Sonntag, ..., Donnerstag
@@ -126,12 +134,12 @@ class PatientController extends Controller
 				$is_therapist ?: $patient->assignment_day_changes_left -= 1 ;
 				$patient->save();
 
-				Alert::info('Der Schreibtag wurde erfolgreich geändert.')->flash();
+				Alert::success('Der Schreibtag wurde erfolgreich geändert.')->persistent();
 			} else {
-				Alert::danger('Der angegebene Schreibtag ist ungültig.')->flash();
+				Alert::error('Der angegebene Schreibtag ist ungültig.')->persistent();
 			}
 		} else {
-			Alert::danger("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->flash();
+			Alert::error("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->persistent();
 		}
 
 		return Redirect::back();
@@ -139,50 +147,50 @@ class PatientController extends Controller
 
 	public function save_date_from_clinics(Request $request, Patient $patient) {
 		// format: dd.mm.yyyy
-		$date_from_clinics_string = $request->input('dateFromClinics');
+		$date_from_clinics_string = $request->input('date_from_clinics');
 
 		try {
 			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
 		} catch (\InvalidArgumentException $e) {
-			Alert::danger('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->flash();
+			Alert::danger('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->persistent();
 		}
 
 		if (isset($date_from_clinics)) {
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
 
-			Alert::info('Das Entlassungsdatum wurde erfolgreich geändert.')->flash();
+			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->persistent();
 		}
 
 		return Redirect::back();
 	}
 
 	public function save_password(Request $request, Patient $patient) {
-		$old_password = $request->input('oldPassword');
-		$password = $request->input('newPassword');
+		$old_password = $request->input('old_password');
+		$password = $request->input('new_password');
 
 		if (Hash::check($old_password, $patient->password)) {
 			$patient->password = bcrypt($password);
 			$patient->save();
 
-			Alert::info('Das Passwort wurde erfolgreich geändert.')->flash();
+			Alert::success('Das Passwort wurde erfolgreich geändert.')->persistent();
 		} else {
-			Alert::danger('Das eingegebene Passwort ist nicht korrekt.')->flash();
+			Alert::error('Das eingegebene Passwort ist nicht korrekt.')->persistent();
 		}
 
 		return Redirect::back();
 	}
 
 	public function save_personal_information(Request $request, Patient $patient) {
-		$personal_information = $request->input('personalInformation');
+		$personal_information = $request->input('personal_information');
 
 		if ($personal_information !== '') {
 			$patient->personal_information = $personal_information;
 			$patient->save();
 
-			Alert::info('Die persönlichen Notizen wurden erfolgreich geändert.')->flash();
+			Alert::success('Ihre persönlichen Informationen wurden erfolgreich gespeichert.')->persistent();
 		} else {
-			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
+			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
 		}
 
 		return Redirect::back();
@@ -195,9 +203,9 @@ class PatientController extends Controller
 			$patient->notes_of_therapist = $notes_of_therapist;
 			$patient->save();
 
-			Alert::info('Die Notizen wurden erfolgreich geändert.')->flash();
+			Alert::success('Die Notizen wurden erfolgreich geändert.')->persistent();
 		} else {
-			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->flash();
+			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
 		}
 
 		return Redirect::back();

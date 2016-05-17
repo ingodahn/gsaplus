@@ -2,18 +2,24 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\InfoModel;
 use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
 
-use App\Patient;
-use App\Admin;
-use App\Therapist;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use Jenssegers\Date\Date;
 
-class User extends Authenticatable
+class User extends InfoModel implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use SingleTableInheritanceTrait;
+    use Authenticatable, Authorizable, CanResetPassword, SingleTableInheritanceTrait;
 
     protected $table = "users";
 
@@ -24,20 +30,19 @@ class User extends Authenticatable
     protected static $persisted = ['name',
         'email',
         'password',
-        'last_login',
-        'is_random'];
+        'is_random',
+        'remember_token'
+    ];
 
-    protected $dates = ['created_at',
+    protected $dates = [
+        'created_at',
         'updated_at',
-        'last_login',
-        'registration_date',
-        'date_from_clinics',
-        'last_activity'];
+    ];
 
     /**
      * Get the route key for the model.
      *
-     * @return string
+     * @return string the route key for the model
      */
     public function getRouteKeyName()
     {
@@ -63,6 +68,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'is_random',
+        'type'
     ];
 
     /*
@@ -75,15 +84,15 @@ class User extends Authenticatable
      */
 
     public function getCreatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getUpdatedAtAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
     public function getLastLoginAttribute($date) {
-        return new Date($date);
+        return $date === null ? null : new Date($date);
     }
 
 }

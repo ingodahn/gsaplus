@@ -3,11 +3,14 @@
 namespace App;
 
 use Jenssegers\Date\Date;
+use Mail;
+
+use Illuminate\Database\Eloquent\Model;
 
 class Helper {
 
     /**
-     * Generate an array containing the days name and their numbers.
+     * Generate an array mapping each days name to its number.
      */
     public static function generate_day_name_map()
     {
@@ -25,11 +28,96 @@ class Helper {
     }
 
     /**
-     * Generate an array containing the days name and their numbers.
+     * Generate an array mapping each days number to its name.
      */
     public static function generate_day_number_map()
     {
         return array_flip(Helper::generate_day_name_map());
+    }
+
+    /**
+     * Tell laravel to ignore timestamps (set to null) and mark entry as random (is_random = true).
+     *
+     * @param Model $model the target (e.g. an assignment)
+     */
+    public static function set_developer_attributes(Model &$model, $save = false) {
+        $model->is_random = true;
+        $model->timestamps = false;
+
+        if ($save) {
+            $model->save();
+        }
+    }
+
+    /**
+     * Send mail - contents is taken from view.
+     *
+     * @param $sender
+     *           mail address of sender
+     * @param $name_of_sender
+     *          name of sender
+     * @param $recipient
+     *          mail address of recipient
+     * @param $name_of_recipient
+     *          name of recipient
+     * @param $subject
+     *          subject of message
+     * @param $view
+     *          view with contents (view path separated by dots)
+     *
+     * Please use config(...) to retrieve the settings.
+     *
+     * ... Available sender / recipients ...
+     *
+     * - Admin
+     *   - config('mail.admin.address') for address,
+     *   - config('mail.admin.name') for name
+     * - Team
+     *   - config('mail.team.address') for address,
+     *   - config('mail.team.name') for name
+     * - System
+     *   - config('mail.from.address') for address,
+     *   - config('mail.from.name') for name
+     *
+     * ... Predefined views ...
+     *
+     * -  Assignments
+     *  - first (erster impuls): 'emails.assignment.first'
+     *  - new (neuer impuls): 'emails.assignment.new'
+     *  - due (mahnung): 'emails.assignment.due'
+     *  - missed (versäumt): 'emails.assignment.missed'
+     */
+    public static function send_email_using_view($sender, $name_of_sender, $recipient,
+                                                    $name_of_recipient, $subject, $view) {
+        Mail::send($view, [],
+            function ($message) use ($sender, $name_of_sender, $recipient, $name_of_recipient, $subject) {
+                $message->from($sender, $name_of_sender)
+                    ->to($recipient, $name_of_recipient)
+                    ->subject($subject);
+        });
+    }
+
+    /**
+    * Send mail - contents is taken from string.
+    *
+    * @param $sender
+    *           mail address of sender
+    * @param $name_of_sender
+    *          name of sender
+    * @param $recipient
+    *          mail address of recipient
+    * @param $name_of_recipient
+    *          name of recipient
+    * @param $subject
+    *          subject of message
+    * @param $text
+    *          string with contents
+    */
+    public static function send_email_using_text($sender, $name_of_sender, $recipient,
+                                                    $name_of_recipient, $subject, $text) {
+        Mail::raw($text, function ($message) use ($sender, $name_of_sender, $recipient, $name_of_recipient, $subject) {
+            $message->from($sender, $name_of_sender)->to($recipient, $name_of_recipient)->subject($subject);
+        });
     }
 
 }

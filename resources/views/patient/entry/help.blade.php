@@ -1,0 +1,7 @@
+@if($isPatient)
+  @if($EntryInfo['week'] == 1)
+    <div class="bs-callout bs-callout-info">
+      <p>In der ersten Woche schreiben erhalten sie noch keine persönliche Schreibaufgabe von einem Therapeuten, sondern sollen bis zu 3 Situationen aus ihrem Alltag beschreiben.</p>
+    </div>
+  @endif
+@endif

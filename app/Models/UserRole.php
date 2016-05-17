@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Sascha
+ * Date: 16.03.2016
+ * Time: 04:17
+ */
+
+namespace App\Models;
+
+
+class UserRole
+{
+
+    const PATIENT = 'patient';
+    const THERAPIST = 'therapist';
+    const ADMIN = 'admin';
+
+}

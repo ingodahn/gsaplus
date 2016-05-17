@@ -2,9 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Assignment;
+use App\Models\AssignmentStatus;
+use App\Models\InfoModel;
 use Illuminate\Console\Command;
 
 use App\Patient;
+use App\TestSetting;
 
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Mail;
@@ -12,11 +16,12 @@ use Illuminate\Support\Facades\Mail;
 
 class RemindUsersOfAssignment extends Command
 {
-    const OPTION_FIRST = "first";
+    const OPTION_FIRST = 'first';
     const OPTION_NEW = 'new';
     const OPTION_DUE = 'due';
     const OPTION_MISSED = 'missed';
     const OPTION_ALL = 'all';
+    const OPTION_SET_NEXT_WRITING_DATE = 'set-next-writing-date';
 
     const VIEW_DIR = 'emails.assignment';
 
@@ -34,8 +39,8 @@ class RemindUsersOfAssignment extends Command
                                 {--'.self::OPTION_FIRST.' : Remind of first assignment}
                                 {--'.self::OPTION_NEW.' : Remind of new assignment}
                                 {--'.self::OPTION_DUE.' : Remind of due assignment}
-                                {--'.self::OPTION_MISSED.' : Remind of missed assignment}
-                                {--'.self::OPTION_ALL.' : Remind of first, new, due or missed assignment}';
+                                {--'.self::OPTION_ALL.' : Remind of first, new, due or missed assignment}
+                                {--'.self::OPTION_SET_NEXT_WRITING_DATE.' : set next writing date}';
 
     /**
      * The console command description.
@@ -61,6 +66,12 @@ class RemindUsersOfAssignment extends Command
      */
     public function handle()
     {
+        $settings = TestSetting::first();
+
+        if ($settings && $settings->test_date) {
+            Date::setTestNow($settings->test_date);
+        }
+
         if ($this->option(self::OPTION_FIRST) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForNewOrCurrentAssignments(self::OPTION_FIRST);
         }
@@ -73,40 +84,107 @@ class RemindUsersOfAssignment extends Command
             $this->sendRemindersForDueAssignments();
         }
 
-        if ($this->option(self::OPTION_MISSED) || $this->option(self::OPTION_ALL)) {
-            $this->sendRemindersForMissedAssignments();
-        }
+        print "\r";
     }
 
     protected function sendRemindersForNewOrCurrentAssignments($type_of_reminder) {
-        // get patients whose
-        // - intervention didn't end
-        // - hospital stay is over
-        // - assignment day matches the current day
-        $patients = Patient::whereNull('intervention_ended_on')
-            ->whereNotNull('date_from_clinics')
-            ->where('assignment_day', '=', Date::now()->dayOfWeek)->get();
+        // get all assignments with writing_date = now
+        $assignments = Assignment::where('writing_date', '=',
+                        Date::now()->format('Y-m-d'))->get();
+
+        $bar = $this->output->createProgressBar($assignments->count());
+
+        $bar->setFormat("Notifying of {$type_of_reminder} assignment: ".'[%bar%] %current%/%max%');
+        $bar->start();
 
         // remind of first or current assignment
-        foreach ($patients as $patient) {
-            $week = $patient->patient_week();
+        foreach ($assignments as $assignment) {
+            $patient = $assignment->patient;
 
-            if ($week === 1 && $type_of_reminder == self::OPTION_FIRST) {
-                // remind of first assignment
-                $this->sendEMail($patient, self::OPTION_FIRST);
-            } else if ($week > 1 && $week <= 12 && $type_of_reminder == self::OPTION_NEW) {
-                // remind of current assignment
-                $this->sendEMail($patient, self::OPTION_NEW);
+            if ($patient->intervention_ended_on === null) {
+                $next_assignment = $patient->assignment_for_week($assignment->week + 1);
+
+                if ($this->option(self::OPTION_SET_NEXT_WRITING_DATE) &&
+                    $next_assignment && $next_assignment->writing_date === null) {
+                    $next_assignment->writing_date = Date::now()->startOfDay()->addWeek();
+                    $next_assignment->save();
+                }
+
+                // don't send reminder if patient already edited the assignment
+                if ($assignment->status() === AssignmentStatus::PATIENT_GOT_ASSIGNMENT) {
+                    if ($assignment->week === 1 && $type_of_reminder == self::OPTION_FIRST) {
+                        // remind of first assignment
+                        $this->sendEMail($assignment->patient, self::OPTION_FIRST);
+                    } else if ($assignment->week > 1 && $assignment->week <= 12
+                        && $type_of_reminder == self::OPTION_NEW
+                        && $assignment->problem != NULL) {
+
+                        $previous_assignment = $patient->assignment_for_week($assignment->week - 1);
+
+                        if ($previous_assignment->status() == AssignmentStatus::PATIENT_MISSED_ASSIGNMENT) {
+                            // notify about current and missed assignment (patient missed the previous one)
+                            $this->sendEMail($assignment->patient, self::OPTION_MISSED);
+                        } else {
+                            // remind of current assignment
+                            $this->sendEMail($assignment->patient, self::OPTION_NEW);
+                        }
+                    }
+                }
             }
+
+            $bar->advance();
         }
+
+        $bar->finish();
+        $bar->clear();
     }
 
     protected function sendRemindersForDueAssignments() {
+        // get patients whose
+        // - intervention didn't end
+        // - hospital stay is over
+        $patients = Patient::whereNull('intervention_ended_on')
+            ->whereNotNull('date_from_clinics')
+            ->get();
 
-    }
+        $bar = $this->output->createProgressBar($patients->count());
 
-    protected function sendRemindersForMissedAssignments() {
+        $bar->setFormat("Notifying of due assignment: ".'[%bar%] %current%/%max%');
+        $bar->start();
 
+        foreach ($patients as $patient) {
+            // current assignment may be null if patient is in week 0
+            // (patient left the clinic but the first assignments writing
+            // date is in the future)
+
+            // the current assignment always has a writing date (in fact the latest
+            // assignment with writing date < current date is returned - see docs in
+            // class Patient)
+            $current_assignment = $patient->current_assignment();
+
+            // don't send reminder if no assignment is given / the patient already edited
+            // the assignment
+            if ($current_assignment &&
+                $current_assignment->status() <= AssignmentStatus::PATIENT_EDITED_ASSIGNMENT) {
+                $end_of_period = $current_assignment->writing_date->copy()
+                    ->addDays(config('gsa.reminder_period_in_days'));
+
+                if (Date::now()->gte($end_of_period) &&
+                    ($current_assignment->week != 12 || $current_assignment->writing_date->copy()->addWeek()->isFuture())) {
+                    // remind of due assignment if 5 days passed since the writing date
+                    $this->sendEMail($patient, self::OPTION_DUE);
+
+                    // save date of reminder
+                    $current_assignment->date_of_reminder = Date::now();
+                    $current_assignment->save();
+                }
+            }
+
+            $bar->advance();
+        }
+
+        $bar->finish();
+        $bar->clear();
     }
 
     /*
@@ -122,14 +200,17 @@ class RemindUsersOfAssignment extends Command
         $subject = null;
 
         switch ($type_of_reminder) {
+            case self::OPTION_FIRST:
+                $subject = 'Erster Schreibimpuls gegeben';
+                break;
             case self::OPTION_NEW:
-                $subject = 'Neue Aufgabe vorhanden';
+                $subject = 'Neuer Schreibimpuls vorhanden';
                 break;
             case self::OPTION_DUE:
-                $subject = 'Letzte Aufgabe unbearbeitet';
+                $subject = 'Letzter Schreibimpuls unbeantwortet';
                 break;
             case self::OPTION_MISSED:
-                $subject = 'Letzte Aufgabe versäumt';
+                $subject = 'Letzter Tagebucheintrag versäumt';
                 break;
         }
 

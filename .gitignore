@@ -152,7 +152,6 @@ public/js
 public/fonts
 public/img
 _ide_helper.php
-composer.lock
 
 ### Vagrant ###
 .vagrant/
@@ -164,3 +163,4 @@ composer.lock
 # Sass
 .sass-cache
 bower_components
+public/piwik

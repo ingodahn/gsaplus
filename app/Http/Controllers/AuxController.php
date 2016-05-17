@@ -1,28 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models;
+
+use App\Models\UserRole;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 /**
  * @author dahn
  * @version 1.0
  * @created 13-Jan-2016 15:50:30
  */
-class AuxController extends Controller
-
-{
-
-	function __construct()
-	{
-	}
-
-	function __destruct()
-	{
-	}
-
-
+class AuxController extends Controller {
 
 	/**
 	 * Rücksprung zur Homepage des Benutzers. Dies ist
@@ -37,16 +28,15 @@ class AuxController extends Controller
 	 */
 	public function home(Request $request)
 	{
+		$request->session()->reflash(); // Keep alerts
+
 		switch ($request->user()->type) {
-			case 'patient':
-				return view('patient.diary')-> with('name',$request->user()->name);
-			case 'admin':
-				return view('admin.home');
-			case 'therapist':
-				$days = new Days;
-				$patientListModel = array();
-				$patientListModel['Slots'] = $days->get_days();
-				return view('therapist.patient_list')->with($patientListModel);
+			case UserRole::PATIENT:
+				return Redirect::to('/Diary');
+			case UserRole::ADMIN:
+				return Redirect::to('/admin_home');
+			case UserRole::THERAPIST:
+				return Redirect::to('/patient_list');
 		}
 	}
 

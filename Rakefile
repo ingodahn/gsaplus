@@ -1,3 +1,7 @@
+require 'dotenv/tasks'
+
+
+
 desc "Shortcut for assets-task"
 task default: %w[update]
 
@@ -39,6 +43,12 @@ task :js do
   `cp bower_components/moment/min/moment.min.js public/js/`
   `cp bower_components/moment/locale/de.js public/js/i18n/moment-de.js`
   `cp bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js public/js/`
+
+  `cp bower_components/sweetalert/dist/sweetalert.min.js public/js/`
+
+  `cp bower_components/zxcvbn/dist/zxcvbn.js public/js/`
+
+  `cp bower_components/textarea-autosize/dist/jquery.textarea_autosize.min.js public/js/`
 end
 
 desc "Publish all font assets"
@@ -85,8 +95,11 @@ task :db_refresh do
 end
 
 desc "apply major db changes - all data will be removed - run if tables were added or removed"
-task :db_reset do
-  sh "mysql -u root -p scotchbox < ./database/sql/drop_all_tables.sql"
+task db_reset: [:dotenv] do
+  sh "mysql "\
+    "-u#{ENV['DB_USERNAME']} "\
+    "-p#{ENV['DB_PASSWORD']} "\
+    "-e 'SET @db_database=\"#{ENV['DB_DATABASE']}\"; source database/sql/reset_database.sql;'"
   sh "composer dump-autoload"
   sh "php artisan migrate"
 end
