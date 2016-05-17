@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Code;
+use App\Helper;
 use App\Patient;
 use App\Users;
 
@@ -14,17 +15,7 @@ use App\Users;
  */
 class AdminController extends Controller
 {
-
-	function __construct()
-	{
-	}
-
-	function __destruct()
-	{
-	}
-
-
-
+	
 	/**
 	 * Zeigt die Liste aller Codes mit ihrem Status (registriert/unregistriert)
 	 */
@@ -51,9 +42,11 @@ class AdminController extends Controller
 	{
 		$info = [];
 
+		$day_map = Helper::generate_day_number_map();
+
 		foreach (Patient::all() as $patient) {
 			$info[$patient->name]['Code'] = $patient->code;
-			$info[$patient->name]['Schreibtag'] = $patient->assignment_day;
+			$info[$patient->name]['Schreibtag'] = $day_map[$patient->assignment_day];
 			$info[$patient->name]['Änderungen möglich'] = $patient->assignment_day_changes_left;
 
 			if ($patient->therapist !== null) {
@@ -61,7 +54,7 @@ class AdminController extends Controller
 			}
 		}
 
-		dd($info);
+		return view("admin.patients")->with('info', $info);
 	}
 
 }

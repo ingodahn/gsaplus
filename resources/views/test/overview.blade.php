@@ -6,6 +6,10 @@
         td {
             vertical-align:middle !important;
         }
+
+        th {
+            white-space : nowrap;
+        }
         
         ul.nav {
             display: none;
@@ -39,7 +43,8 @@
 
         <div class="row">
             <h3>Softwaretest-Kontrollzentrum</h3>
-            <p>Auf dieser Seite können sie die im System vorhandenen</p>
+
+            <p>Auf dieser Seite können Sie das <a href="#config">Testdatum ändern</a> und die im System vorhandenen</p>
             <ul>
                 <li>
                     <a href="#patients">Patienten</a>
@@ -54,14 +59,17 @@
             <p>einsehen.</p>
             <p>Es ist möglich sich im Namen eines bestimmten Benutzers einzuloggen, die Mails eines
                 Benutzers einzusehen und das Datum auf ein in der Zukunft liegendes Schreibdatum zu ändern
-                (falls der Benutzer ein Patient ist).</p>
+                (falls der Benutzer ein Patient ist).<br/>
             <p>Patienten können <a href="#reminders">daran erinnert</a> werden,
                 dass Sie den ersten bzw. einen Folge-Schreibimpuls erhalten oder den aktuellen Schreibimpuls 5 Tage lang
                 nicht bearbeitet haben.</p>
             <p>In den <a href="#config">Einstellungen</a> kann das aktuelle Test-Datum gewählt werden. Zudem
-                können bestimmte Erinnerungen automatisch verschickt werden, wenn sich das Test-Datum ändert.</p>
-
-            <hr/>
+                können bestimmte Erinnerungen automatisch verschickt werden, wenn sich das Test-Datum ändert.
+                Standardmäßig sind alle Benachrichtigungen aktiviert.</p>
+            <p>Das Testdatum kann ebenso <a href="#set_date">schrittweise durchlaufen werden</a>.</p>
+            <p>Am Ende der Seite  <a href="#clear_dates">können Sie die zukünftige Historie der Nutzer löschen</a>.
+                D.h. diese es werden zukünftige Kommentare, Rückmeldungen, etc. entfernt. Die aktuelle Aufgabe bleibt
+                von der Aktion unberührt.<br/></p>
         </div>
 
         @foreach($infos as $role => $users)
@@ -70,7 +78,7 @@
             @if($role == UserRole::PATIENT)
                 Patienten
             @elseif($role == UserRole::THERAPIST)
-                Therapeuten
+            Therapeuten
             @elseif($role == UserRole::ADMIN)
                 Administratoren
             @endif
@@ -83,9 +91,9 @@
                         <th>E-Mail</th>
                         <th>Login</th>
                         @if($role == UserRole::PATIENT)
-                        <th>Status</th>
-                        <th>Zeitsprung</th>
-                        <th>Weiter Springen</th>
+                            <th>Status</th>
+                            <th class="text-center">Zum Fristende</th>
+                            <th class="text-center">Zum nächsten Schreibdatum</th>
                         @endif
                     </tr>
                 </thead>
@@ -128,23 +136,26 @@
                                     <i class="fa fa-question-circle"></i>
                                 </a>
                             </td>
-                            @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
-                            <td>
-                                <form method="POST" action="/test/next-date/{{ $user['name'] }}">
-                                    {{ csrf_field() }}
-                                    <input class="btn-link" value="Zum nächsten Schreibdatum" type="submit" />
-                                </form>
-                            </td>
-                            <td>
-                                <form method="POST" action="/test/next-date/{{ $user['name'] }}/{{ config('gsa.reminder_period_in_days') }}">
-                                    {{ csrf_field() }}
-                                    <input class="btn-link" value="nochmal (+) 5 Tage" type="submit" />
-                                </form>
-                            </td>
+                            @if(isset($user['dateOfReminder']) && $user['patientStatus'] < 'P130')
+                                <td class="text-center">
+                                    <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
+                                        {{ csrf_field() }}
+                                        <input class="btn-link" value="Zum {{$user['dateOfReminder']}} springen" type="submit" />
+                                    </form>
+                                </td>
                             @else
                                 <td class="text-center">
-                                    <small><em>... kein Folgedatum ...</em></small>
+                                    <small><em>... kein Schreibimpuls ...</em></small>
                                 </td>
+                            @endif
+                            @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
+                                <td class="text-center">
+                                    <form method="POST" action="/test/next-date/{{ $user['name'] }}">
+                                        {{ csrf_field() }}
+                                        <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
+                                    </form>
+                                </td>
+                            @else
                                 <td class="text-center">
                                     <small><em>... kein Folgedatum ...</em></small>
                                 </td>
@@ -162,6 +173,7 @@
         </div>
         @endforeach
 
+        <!--
         <div class="row">
             <h4 id="reminders">Erinnerungen</h4>
 
@@ -212,19 +224,20 @@
                     </tr>
                 </tbody>
             </table>
+            <p class="text-right" style="clear: both">
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
         </div>
-
+-->
         <div class="row">
-            <h4 id="config">Einstellungen</h4>
+            <h4 id="config">Testdatum</h4>
 
             <form role="form" action="/test/settings" method="post">
                 {{ csrf_field() }}
-                <p>Normalerweise wird der Folgeschreibtag berechnet wenn ein Nutzer über den Erhalt
-                    einer aktuellen Aufgabe informiert wird. Dies kann zusammen mit Datumsverschiebungen zu
-                    Widersprüchen führen. Deshalb ist die Berechnung für Testzwecke ausgeschaltet.
-                    Bitte ändern Sie diese Einstellung nur wenn Sie wissen was Sie tun.</p>
                 <table class="table table-striped table-bordered table-hover">
-                    <thead>
+                    <thead class="hide">
                     <tr>
                         <th>Einstellung</th>
                         <th>Wert</th>
@@ -232,7 +245,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="col-xs-7">Aktuelles Datum</td>
+                            <td class="col-xs-7">Testdatum (leer = aktuelles Datum)</td>
                             <td>
                                 <div class='input-group date' id='datetimepicker'>
                                     <input name="test_date" type='text' value="{{ $settings['testDate'] }}" class="form-control">
@@ -251,7 +264,7 @@
                                 </script>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Automatisch an ersten Schreibimpuls erinnern
                             </td>
@@ -259,7 +272,7 @@
                                 <input type="checkbox" class="pull-right" name="first_reminder" value="1" {{ $settings['firstReminder'] ? 'checked' : ''}}>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Automatisch an neuen Schreibimpuls erinnern
                             </td>
@@ -267,7 +280,7 @@
                                 <input type="checkbox" class="pull-right" name="new_reminder" value="1" {{ $settings['newReminder'] ? 'checked' : '' }}>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Automatisch an Schreibimpuls erinnern, der in Kürze fällig ist
                             </td>
@@ -275,7 +288,7 @@
                                 <input type="checkbox" class="pull-right" name="due_reminder"  value="1" {{ $settings['dueReminder'] ? 'checked' : ''}}>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="hide">
                             <td>
                                 Bei einer Erinnerung automatisch den nächsten Schreibtag berechnen
                             </td>
@@ -286,24 +299,54 @@
                     </tbody>
                 </table>
                 <p class="pull-right">
-                    <button type="submit" class="btn btn-default" name="reset_settings">Einstellungen wiederherstellen</button>
+                    <button type="submit" class="btn btn-default" name="reset_settings">Aktuelles Datum wiederherstellen</button>
                     <button type="submit" class="btn btn-primary" name="save_settings">Speichern</button>
                 </p>
+                <p>Nach dem Rückstellen des Datums unbedingt <b>Schreibdaten bereinigen</b> aufrufen!</p>
             </form>
+            <p class="text-right" style="clear: both; padding-top: 0.8em;">
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
         </div>
 
         <div class="row">
-            <h4 id="clear_dates">Schreibdaten bereinigen</h4>
-
-            <form role="form" action="/test/remove-distant-dates" method="post">
+            <h4 id="set_date">Zum nächsten Datum</h4>
+            <p>Hier können Sie zu einem Folgedatum springen.</p>
+            <form method="POST" action="/test/next-date"
+                  class="pull-right floating-btn-form">
                 {{ csrf_field() }}
-                <p>Sie können jedes berechnete (und nicht mehr benötigte) Schreibdatum entfernen falls sich
-                    das System ungewöhnlich verhalten sollte.</p>
-                <p>Diese Option macht nur Sinn, wenn die automatische Berechnung der Schreibtage aktiviert war und
-                    die Testdaten seitdem nicht mehr aktualisiert wurden.</p>
-
-                <button type="submit" class="btn btn-primary pull-right" name="remove_unnecessary_dates">Schreibdaten bereinigen</button>
+                <input name="relative_date_string" value="tomorrow" hidden/>
+                <input class="btn btn-primary" value="Zum nächsten Tag" type="submit" />
             </form>
+            <p class="text-right" style="clear: both">
+                <br/>
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
+        </div>
+
+        <div class="row">
+            <h4 id="clear_dates">Schreibdaten bereinigen - immer aufrufen, nachdem das Testdatum auf ein früheres Datum umgestellt wurde</h4>
+
+            <form role="form" action="/test/remove-distant-data" method="post">
+                {{ csrf_field() }}
+                <p>Während des Testens entstehen zukünftige Tagebucheinträge, Kommentare und Rückmeldungen. Durch das
+                Versenden von Benachrichtigungen werden zukünftige Schreibtage berechnet und
+                zukünftige Schreibimpulse gemahnt. Diese Einträge machen keinen Sinn mehr, wenn das aktuelle Datum
+                wiederhergestellt wird.</p>
+                <p>Wählen Sie <em>Daten bereinigen</em> um die inkonsisten Daten zu entfernen.</p>
+
+                <button type="submit" class="btn btn-primary pull-right" name="remove_unnecessary_dates">Daten bereinigen</button>
+            </form>
+            <p class="text-right" style="clear: both">
+                <br/>
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
         </div>
 
     </div>

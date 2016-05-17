@@ -3,6 +3,7 @@
 namespace App;
 
 use Jenssegers\Date\Date;
+use Mail;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,6 +47,77 @@ class Helper {
         if ($save) {
             $model->save();
         }
+    }
+
+    /**
+     * Send mail - contents is taken from view.
+     *
+     * @param $sender
+     *           mail address of sender
+     * @param $name_of_sender
+     *          name of sender
+     * @param $recipient
+     *          mail address of recipient
+     * @param $name_of_recipient
+     *          name of recipient
+     * @param $subject
+     *          subject of message
+     * @param $view
+     *          view with contents (view path separated by dots)
+     *
+     * Please use config(...) to retrieve the settings.
+     *
+     * ... Available sender / recipients ...
+     *
+     * - Admin
+     *   - config('mail.admin.address') for address,
+     *   - config('mail.admin.name') for name
+     * - Team
+     *   - config('mail.team.address') for address,
+     *   - config('mail.team.name') for name
+     * - System
+     *   - config('mail.from.address') for address,
+     *   - config('mail.from.name') for name
+     *
+     * ... Predefined views ...
+     *
+     * -  Assignments
+     *  - first (erster impuls): 'emails.assignment.first'
+     *  - new (neuer impuls): 'emails.assignment.new'
+     *  - due (mahnung): 'emails.assignment.due'
+     *  - missed (versäumt): 'emails.assignment.missed'
+     */
+    public static function send_email_using_view($sender, $name_of_sender, $recipient,
+                                                    $name_of_recipient, $subject, $view) {
+        Mail::send($view, [],
+            function ($message) use ($sender, $name_of_sender, $recipient, $name_of_recipient, $subject) {
+                $message->from($sender, $name_of_sender)
+                    ->to($recipient, $name_of_recipient)
+                    ->subject($subject);
+        });
+    }
+
+    /**
+    * Send mail - contents is taken from string.
+    *
+    * @param $sender
+    *           mail address of sender
+    * @param $name_of_sender
+    *          name of sender
+    * @param $recipient
+    *          mail address of recipient
+    * @param $name_of_recipient
+    *          name of recipient
+    * @param $subject
+    *          subject of message
+    * @param $text
+    *          string with contents
+    */
+    public static function send_email_using_text($sender, $name_of_sender, $recipient,
+                                                    $name_of_recipient, $subject, $text) {
+        Mail::raw($text, function ($message) use ($sender, $name_of_sender, $recipient, $name_of_recipient, $subject) {
+            $message->from($sender, $name_of_sender)->to($recipient, $name_of_recipient)->subject($subject);
+        });
     }
 
 }

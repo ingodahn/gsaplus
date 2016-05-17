@@ -116,7 +116,7 @@ class Patient extends User
     public function setDateFromClinicsAttribute($date_from_clinics) {
         $first_assignment = $this->first_assignment();
 
-        if ($this->patient_week() < 1 && $first_assignment) {
+        if ($this->patient_week() < 1 && $first_assignment && $date_from_clinics !== null) {
             // first writing date should lie in the future
             if ($date_from_clinics->isPast()) {
                 // use current date for the calculation if the date is in the past

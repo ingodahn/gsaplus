@@ -1,0 +1,24 @@
+@if($isPatient)
+  <hr>
+  <h3>Passwort ändern</h3>
+  <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/password" method="post">
+    {{ csrf_field() }}
+    <p>
+      <label for="password" class="control-label">Altes Passwort</label>
+      <input name="old_password" type="password" class="form-control" placeholder="hunter2" required minlength="6">
+    </p>
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label for="password" class="control-label">Neues Passwort</label>
+        <input name="new_password" id="password" type="password" class="form-control width-100" placeholder="hunter3 (mindestens 6 Zeichen)" required minlength="6">
+      </div>
+      <div class="form-group col-sm-6">
+        <label class="control-label">Wiederholen</label>
+        <input type="password" class="form-control width-100" placeholder="hunter3" required minlength="6" data-parsley-equalto="#password">
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn">Passwort ändern</button>
+    </div>
+  </form>
+@endif

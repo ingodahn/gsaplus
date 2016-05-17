@@ -1,3 +1,7 @@
+require 'dotenv/tasks'
+
+
+
 desc "Shortcut for assets-task"
 task default: %w[update]
 
@@ -91,8 +95,11 @@ task :db_refresh do
 end
 
 desc "apply major db changes - all data will be removed - run if tables were added or removed"
-task :db_reset do
-  sh "mysql -u root -p < ./database/sql/reset_database.sql"
+task db_reset: [:dotenv] do
+  sh "mysql "\
+    "-u#{ENV['DB_USERNAME']} "\
+    "-p#{ENV['DB_PASSWORD']} "\
+    "-e 'SET @db_database=\"#{ENV['DB_DATABASE']}\"; source database/sql/reset_database.sql;'"
   sh "composer dump-autoload"
   sh "php artisan migrate"
 end

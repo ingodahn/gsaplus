@@ -221,3 +221,30 @@ textarea {
   background-color: $gray-lighter;
   color: black;
 }
+
+.diary-accordion {
+  .panel {
+    border-radius: 0;
+    margin-top: 2px !important;
+    // border: 1px solid black;
+    // border-bottom: 1px solid black;
+  }
+
+  .panel-heading {
+    border-radius: 0;
+  }
+
+  .diary-panel-current {
+    .panel-title {
+      font-style: italic;
+    }
+  }
+}
+
+.panel-group .panel-heading a:focus,a:hover {
+  text-decoration: none;
+}
+
+.role-therapist .navbar-default {
+  background-color: $md-blue-50;
+}

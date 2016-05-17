@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use UxWeb\SweetAlert\SweetAlert as Alert;
+use Jenssegers\Date\Date;
 
 use App\Code;
 use App\Patient;
@@ -16,8 +17,11 @@ use App\Survey;
 
 use App\Comment;
 use App\CommentReply;
+use App\Helper;
 
 use App\Models\UserRole;
+
+use App\Tasktemplate;
 
 /**
  * @author dahn
@@ -48,15 +52,63 @@ class DiaryController extends Controller
      * Zeige alle bisherigen Beiträge sowie die dazu erfolgten Kommentare auf einer
      * Seite an, die vom Browser gespeichert oder ausgedruckt werden kann.
      */
-    public function commented_diary()
+    public function commented_diary(Request $request, $name)
     {
-    }
+        $isTherapist = (Auth::user()->type === UserRole::THERAPIST);
+        $patient=Patient::whereName($name)->first();
+        $info=$patient->all_info();
+        $p_assignments=$info['assignments'];
+        // return dd($p_assignments);
+        $wai=[];
+        $health=[];
+        $assignments=[];
+        $params=[];
 
-    /**
-     * Zeige den aktuellen Eintrag
-     */
-    public function current()
-    {
+        for ($i=1; $i <= $info['patientWeek']; $i++) {
+            if (isset($p_assignments[$i - 1]['survey'])) {
+                $wai[$i] = $p_assignments[$i - 1]['survey']['wai'];
+                $health[$i] = $p_assignments[$i - 1]['survey']['health'];
+            } else {
+                $wai[$i] = -1;
+                $health[$i] = -1;
+            }
+        }
+// return dd($p_assignments);
+        $assignments[1]['problem']='Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.';
+        if (isset($p_assignments[0]['situations'])) {
+            $assignments[1]['answer']=$p_assignments[0]['situations'];
+        } else {
+            $assignments[1]['answer']="";
+        }
+        
+        $assignments[1]['dirty']=$p_assignments[0]['dirty'];
+
+        for ($i=2; $i <= $info['patientWeek']; $i++) {
+            if (isset($p_assignments[$i-1]['problem'])){
+                $assignments[$i]['problem']=$p_assignments[$i-1]['problem'];
+            } else {
+                $assignments[$i]['problem']="Nicht definiert";
+            }
+            if (isset($p_assignments[$i-1]['answer'])) {
+                    $assignments[$i]['answer']=$p_assignments[$i-1]['answer'];
+                    $assignments[$i]['dirty']=$p_assignments[$i-1]['dirty'];
+            } else {
+                $assignments[$i]['answer']="Nicht beantwortet";
+                $assignments[$i]['dirty']=false;
+            }
+            if (isset($p_assignments[$i-1]['comment']['text'])) {
+                $assignments[$i]['comment'] = $p_assignments[$i-1]['comment']['text'];
+            } else {
+                $assignments[$i]['comment'] = "Nicht kommentiert";
+            }
+        }
+        $params['PatientName']=$name;
+        $params['Week']=$info['patientWeek'];
+        $params['Wai']=$wai;
+        $params['Health']=$health;
+        $params['Assignments']=$assignments;
+        // return dd($params);
+        return view('patient/commented_diary')->with($params);
     }
 
     /**
@@ -73,9 +125,8 @@ class DiaryController extends Controller
     public function entry(Request $request, Patient $patient, $week)
     {
         $patient_info = $patient->info();
-
+// All assignments exist after registration, so we can grab it
         $assignment_info=$patient->assignment_for_week($week)->all_info();
-
         $entry_info = [];
         $entry_info['week'] = $assignment_info['week'];
         $entry_info['status'] = $assignment_info['assignmentStatus'];
@@ -103,8 +154,7 @@ class DiaryController extends Controller
             }
         } else {    // week 2 and later
            $entry_info['problem']=$assignment_info['problem'];
-           // ToDo: If answer exists already, load t from database, else $entry_info['reflection']='';
-           $entry_info['reflection'] = "Reflexionen ab Woche 2 nicht implementiert";
+           $entry_info['reflection'] = $assignment_info['answer'];
         }
 
         if (! array_key_exists('survey', $assignment_info)) {
@@ -136,60 +186,9 @@ class DiaryController extends Controller
 
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
+        $param['Problems']=  TaskTemplate::lists('name');
 
         return view('patient/entry')->with($param);
-    }
-
-    /**
-     * Die Seite mit dem Eintrag zur übergebenen Id wird angezeigt.
-     * Es wird überprüft, ob die Id zum Patienten der aktuellen Session gehört. Ist
-     * das nicht der Fall so wird aud die Startseite
-     * weitergeleitet.
-     * Je nach Status des Patienten wird die anzuzeigende Seite ansonsten gestaltet:
-     * Ist nicht der aktuelle Schreibimpuls ausgewählt, so werden der gewählte
-     * Schreibimpuls und der Kommentar nicht editierbar angezeigt.
-     * Ist die aktuelle Aufgabe ausgewählt, so wird die aktuelle Aufgabe je nach
-     * Status des Patienten angezeigt. dabei werden unterschiedliche Seiten
-     * ausgeliefert, je nachdem ob es sich um den ersten Schreibimpuls oder einen
-     * Folgeschreibimpuls handelt.
-     * Die folgenden Fälle sind relevant (s. Patient_status):
-     * <ul>
-     *    <li>Erste Aufgabe erhalten: Aufgabe editierbar</li>
-     *    <li>Erste Aufgabe bearbeitet: Aufgabe editierbar mit zwischengespeichertem
-     * Inhalt</li>
-     *    <li>Erste Aufgabe abgeschickt: Aufgabe nicht editierbar und Antwort</li>
-     *    <li>Erste Aufgabe kommentiert: Aufgabe und Antwort nicht editierbar mit
-     * Kommentar</li>
-     *    <li>Erste Aufgabe versäumt: Aufgabe nicht editierbar und Hinweis auf
-     * Versäumnis</li>
-     *    <li>Aktuelle Folgeaufgabe erhalten: Aufgabe editierbar</li>
-     *    <li>Aktuelle Folgeaufgabe bearbeitet: Aufgabe editierbar mit
-     * zwischengespeichertem Inhalt</li>
-     *    <li>Aktuelle Folgeaufgabe abgeschickt: Aufgabe und Antwort nicht
-     * editierbar</li>
-     *    <li>Aktuelle Folgeaufgabe kommentiert: Aufgabe und Antwort nicht editierbar
-     * mit Kommentar</li>
-     *    <li>Aktuelle Folgeaufgabe versäumt: Aufgabe nicht editierbar und Hinweis auf
-     * Versäumnis</li>
-     * </ul>
-     *
-     * @param entry_id
-     */
-    public function get_response($entry_id)
-    {
-
-        //if (not actual assignment) {
-        // return view(diary.entry_noneditable)->
-        //where('Content'="Complete content",
-        //Comment="Comment");
-        //Result: Not Actual
-        //} else if (first assignment) {
-        //Result: First
-        //} else {
-        // Result: Successive
-        //}
-
-
     }
 
     /**
@@ -254,14 +253,13 @@ class DiaryController extends Controller
                 $assignment->situations()->saveMany($situations);
             }
         } else {
-            // ToDo: for M4: handling of problem and reflection
             // Get problem and answer from database
-            /*If ($request->has('problem')) {
+            If ($request->has('problem')) {
                 $assignment->problem = $request->input('problem');
             }
             If ($request->has('reflection')) {
-                $assignment->'answer' = $request->input('reflection');
-            }*/
+                $assignment->answer = $request->input('reflection');
+            }
         }
 
          if ($request->has('wai') || $request->has('health')) { // Survey is edited
@@ -283,30 +281,61 @@ class DiaryController extends Controller
 
              $survey->save();
          }
+        // Use this as template for generating and instantiating objects
+         if ($request->has('comment')) {
+            $comment = $assignment->comment ?: new Comment;
+            $comment->text = $request->input('comment');
 
-        if ($request->has('comment')) {
-            if ($assignment->comment->all() == []){
-                $comment = new Comment;
+            if ($assignment->comment) {
+                $comment->save();
+            } else {
                 $assignment->comment()->save($comment);
             }
-            $comment = $assignment->comment->first();
-            $comment->text = $request->input('comment');
-            $comment->save();
+             Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email, $patient->name, 'Neuer Kommentar in Ihrem Tagebuch', 'emails.assignment.new_comment');
         }
         if ($request->has('comment_reply_satisfied') ||
         $request->has('comment_reply_helpful')) {
-            $comment = $assignment->comment->first();
-            if ($comment->comment_reply->all()==[]){
-                $comment_reply=new CommentReply;
-                $comment->comment_reply()->save($comment_reply);
-            }
-            $comment_reply = $comment->comment_reply->first();
+            $comment = $assignment->comment;
+            $comment_reply = $comment->comment_reply ?: new CommentReply;
             if ($request->has('comment_reply_helpful')) {
                 $comment_reply->helpful = $request->input('comment_reply_helpful');
             }
             if ($request->has('comment_reply_satisfied')) {
                 $comment_reply->helpful = $request->input('comment_reply_satisfied');
             }
+            if ($comment->comment_reply) {
+                $comment_reply->save();
+            } else {
+                $comment->comment_reply()->save($comment_reply);
+            }
+        }
+
+        if ($request->has('notesOfTherapist')) {
+            $patient->notes_of_therapist = $request->input('notesOfTherapist');
+            $patient->save();
+            // ToDo: Send mail to patient informing that entry has been commented
+        }
+        if ($request->input('entryButton')=="newAssignment") {
+            $title=$request->input('template_title');
+            //trim $title, if empty return error
+            $title=trim($title);
+            if ($title == '') {
+                Alert::error("Der Titel darf nicht leer sein.");
+                return Redirect::back();
+            }
+            $problem=$request->input('problem');
+            $task=TaskTemplate::whereName($title)->first();
+            if (! $task){
+                $task= new TaskTemplate;
+                $task->name=$title;
+                $alert="Muster \"".$title."\" erstellt.";
+            } else {
+                $alert="Muster \"".$title."\" aktualisiert.";
+            }
+            $task->problem = $problem;
+            $task->save();
+            Alert::success($alert)->persistent();
+            return Redirect::back();
         }
         if ($request->input('entryButton') == "saveDirty") {
             /* Zwischenspeichern von $entry */
@@ -322,20 +351,22 @@ class DiaryController extends Controller
             }
             $assignment->save();
             Alert::success("Der Eintrag wurde abgeschickt")->persistent();
-            //return "Abgeschickt";
             return Redirect::to('/Home');
         }
 
     }
 
     /**
-     * Wähle die Afgabe mit dem angegebenen Titel aus und trage den Aufgaben-text in
+     * Wähle die Aufgabe mit dem angegebenen Titel aus und trage den Aufgaben-text in
      * entry.problem ein
      *
      * @param assignment_id
      */
-    public function select_assignment($assignment_id)
+    public function select_assignment(Request $request)
     {
+        $title=$request->input('templateTitle');
+        $task=TaskTemplate::whereName($title)->first();
+        return $task->problem;
     }
 
     /**
@@ -370,7 +401,7 @@ class DiaryController extends Controller
         $patient=Patient::whereName($name)->first();
 
         if ($is_patient) {
-            $patient->last_activity=time();
+            $patient->last_activity=Date::now();
             $patient->save();
         }
 
@@ -397,34 +428,41 @@ class DiaryController extends Controller
         $entries = [];
         $entries[1]['problem']="Beschreiben Sie typische Situationen...";
         $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['assignmentStatus']];
+        $entries[1]['entry_status_code'] = $assignment_info[0]['assignmentStatus'];
         $weeks_to_show=$Diary['patient_week'];
         if (Auth::user()->type == UserRole::THERAPIST) {
             $weeks_to_show = 12;
         }
 
-        for ($i = 2; $i <= $weeks_to_show; $i++) {
+        /*for ($i = 2; $i <= $weeks_to_show; $i++) {
             $i1=$i-1;
             if ($i <= $info['patientWeek']) {
                 $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['assignmentStatus']];
+                $entries[$i]['entry_status_code'] = $assignment_info[$i1]['assignmentStatus'];
             } else {
                 $entries[$i]['entry_status']='';
+                $entries[$i]['entry_status_code']='';
             }
-            $string = $assignment_info[$i1]['problem'];
-            if (strlen($string) > 30)
-            {
-                $string = wordwrap($string, 30);
-                $string = substr($string, 0, strpos($string, "\n"));
-            }
-            $entries[$i]['problem'] = $string." ...";
+            $entries[$i]['problem'] = $assignment_info[$i1]['problem'];
+        }*/
+        for ($i = 2; $i <= $weeks_to_show; $i++) {
+            $i1=$i-1;
+
+                $entries[$i]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[$i1]['assignmentStatus']];
+                $entries[$i]['entry_status_code'] = $assignment_info[$i1]['assignmentStatus'];
+
+            $entries[$i]['problem'] = $assignment_info[$i1]['problem'];
         }
 
             for ($j=$weeks_to_show+1; $j<=12; $j++) {
 
                 $entries[$j]['problem']='';
                 $entries[$j]['entry_status']='';
+                $entries[$j]['entry_status_code']='';
             }
 
         $Diary['entries'] = $entries;
+        // return dd($Diary);
         return view('patient.diary')->with('Diary', $Diary);
     }
 

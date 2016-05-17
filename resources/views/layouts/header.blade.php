@@ -42,7 +42,7 @@
 
           {{-- User-Related --}}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$Name}} <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user{{$isTherapist ? "-md" : ""}}" aria-hidden="true"></i> {{$Name}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
               @if($isPatient)
                 <li><a href="/Profile/{{$Name}}">Mein Profil</a></li>

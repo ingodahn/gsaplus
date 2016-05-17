@@ -9,8 +9,6 @@
         "laravel/framework": "5.2.*",
         "caouecs/laravel4-lang": "^2.0",
         "yajra/laravel-datatables-oracle": "^6.4",
-        "nanigans/single-table-inheritance": "^0.5.0",
-        "jenssegers/date": "^3.2",
         "uxweb/sweet-alert": "~1.1",
         "jenssegers/date": "^3.2",
         "nanigans/single-table-inheritance": "0.6.*"

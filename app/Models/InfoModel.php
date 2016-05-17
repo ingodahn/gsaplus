@@ -147,14 +147,20 @@ class InfoModel extends Model
      * @return array information about this instance and a specific set of
      * relations
      */
-    protected function to_info($info = [], $path = null, $relations_paths = []) {
+    public function to_info($info = [], $path = null, $relations_paths = []) {
         // collect information about this instance
         $collected_info = array_merge($this->attribute_info(),
             $this->date_info(),
             $this->accessor_info());
 
-        // add collected information
-        $info = array_add($info, $path, $collected_info);
+        if ($path === null) {
+            // add collected information
+            foreach ($collected_info as $key => $value) {
+                $info = array_add($info, $key, $value);
+            }
+        } else {
+            $info = array_add($info, $path, $collected_info);
+        }
 
         // calculate the path for further insertions (which require a key)
         $add_path = $path === null ? '' : $path .'.';

@@ -1,0 +1,36 @@
+@if($isTherapist)
+  <hr>
+  <h3>Entlassungsdatum</h3>
+  @if($Patient['status'] >= "P030")
+    <p>
+      Das Entlassungsdatum war {{ $Patient['dateFromClinics'] }}.
+    </p>
+  @else
+    <form data-parsley-validate role="form" action="/patient/{{$Patient['name']}}/date_from_clinics" method="post">
+      {{ csrf_field() }}
+        <div class="form-group">
+          <div class='input-group date' id='datetimepicker1'>
+            {{-- <label for="dateFromClinics" class="control-label">Entlassungsdatum</label> --}}
+            <input name="date_from_clinics" type='text' value="{{ $Patient['dateFromClinics'] }}" class="form-control" required>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </input>
+          </div>
+        </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#datetimepicker1').datetimepicker({
+                locale: 'de',
+                format: 'DD.MM.YYYY'
+              });
+          });
+      </script>
+      <p>
+        <div class="form-group">
+          <button type="submit" class="btn">Entlassungsdatum setzen</button>
+        </div>
+      </p>
+    </form>
+  @endif
+@endif

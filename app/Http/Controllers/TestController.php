@@ -12,6 +12,7 @@ use App\Helper;
 use App\TestSetting;
 
 use App\Console\Commands\RemindUsersOfAssignment;
+use App\Console\Commands\ClearDistantData;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,18 @@ class TestController extends Controller
         $infos = ['patient' => new Collection, 'therapist' => new Collection, 'admin' => new Collection];
 
         foreach (User::all() as $user) {
-            $infos[$user->type]->push($user->info());
+            $info = $user->info();
+
+            if ($user->type === UserRole::PATIENT) {
+                $current_assignment = $user->current_assignment();
+
+                if ($current_assignment && $current_assignment->writing_date) {
+                    $info['dateOfReminder'] = $current_assignment->writing_date
+                            ->copy()->addDays(config('gsa.reminder_period_in_days'))->format('d.m.Y');
+                }
+            }
+
+            $infos[$user->type]->push($info);
         }
 
         foreach ($infos as $key => $info) {
@@ -55,25 +67,59 @@ class TestController extends Controller
         return Redirect::to('/Home');
     }
 
-    public function setAssignmentRelatedTestDate(Patient $patient, $daysToAdd = 0) {
+    public function setAssignmentRelatedTestDate(Patient $patient) {
         $next_assignment = $patient->next_assignment();
 
         if ($next_assignment && $next_assignment->writing_date) {
-            $settings = $this->settings();
-            $settings->test_date = $next_assignment->writing_date->copy()->addDays($daysToAdd);
-
-            if ($settings->save()) {
-                Alert::success('Das Datum wurde erfolgreich auf den '.
-                    $settings->test_date->format('d.m.Y').' geändert. ')->persistent();
-
-                $this->sendAutomaticReminders();
-            } else {
-                Alert::error('Der Patient hat entweder keinen Folge-Schreibimpuls oder das nächste Schreibdatum '.
-                    'wurde noch nicht gesetzt.', 'Das Datum konnte nicht geändert werden.')->persistent();
-            }
+            $this->setDateAndSendReminders($next_assignment->writing_date->copy());
         }
 
         return Redirect::back();
+    }
+
+    public function setDateOfCurrentReminder(Patient $patient) {
+        $current_assignment = $patient->current_assignment();
+
+        if ($current_assignment && $current_assignment->writing_date) {
+            $this->setDateAndSendReminders($current_assignment->writing_date->copy()
+                    ->addDays(config('gsa.reminder_period_in_days')));
+        }
+
+        return Redirect::back();
+    }
+
+    public function setRelativeTestDate(Request $request) {
+        $relative_date_string = $request->input('relative_date_string');
+
+        $settings = $this->settings();
+
+        if ($settings->test_date) {
+            Date::setTestNow($settings->test_date);
+        }
+
+        $this->setDateAndSendReminders(Date::parse($relative_date_string));
+
+        Date::setTestNow();
+
+        return Redirect::back();
+    }
+
+    protected function setDateAndSendReminders($date) {
+        $settings = $this->settings();
+
+        $settings->test_date = $date;
+        $save_successful = $settings->save();
+
+        if ($save_successful && $this->sendAutomaticReminders()) {
+            Alert::success('Das Datum wurde erfolgreich auf den '.
+                $settings->test_date->format('d.m.Y').' geändert. ')->persistent();
+        } else {
+            if ($save_successful) {
+                Alert::warning('Nicht alle Benachrichtigungen konnten versendet werden.')->persistent();
+            } else {
+                Alert::warning('Das Datum konnte leider nicht geändert werden.')->persistent();
+            }
+        }
     }
 
     public function changeSettings(Request $request) {
@@ -98,10 +144,16 @@ class TestController extends Controller
         $settings->due_reminder = $request->input('due_reminder', '0');
         $settings->calc_next_writing_date = $request->input('calc_next_writing_date', '0');
 
-        if ($settings->save()) {
+        $successful = $settings->save();
+
+        if ($request->has('test_date')) {
+            $this->sendAutomaticReminders();
+        }
+
+        if ($successful) {
             Alert::success('Die neuen Einstellungen wurden gespeichert.')->persistent();
         } else {
-            Alert::error('Die neuen Einstellungen konnten leider nicht gespeichert werden.')->persistent();
+            Alert::warning('Die neuen Einstellungen konnten leider nicht gespeichert werden.')->persistent();
         }
     }
 
@@ -113,7 +165,7 @@ class TestController extends Controller
         if ($settings->save()) {
             Alert::success('Die Einstellungen wurden erfolgreich zurück gesetzt.')->persistent();
         } else {
-            Alert::error('Die Einstellungen konnten leider nicht zurück gesetzt werden.')->persistent();
+            Alert::warning('Die Einstellungen konnten leider nicht zurück gesetzt werden.')->persistent();
         }
     }
 
@@ -161,7 +213,7 @@ class TestController extends Controller
         if ($successful) {
             Alert::success('Alle Benachrichtigungen wurden verschickt.')->persistent();
         } else {
-            Alert::error('Nicht alle Benachrichtigungen konnten verschickt werden.')->persistent();
+            Alert::warning('Nicht alle Benachrichtigungen konnten verschickt werden.')->persistent();
         }
 
         return Redirect::back();
@@ -211,20 +263,36 @@ class TestController extends Controller
         if (Storage::put($filePath, "Test date is ".$date_string."\n\n".var_export($this->getInfo($user), true))) {
             Alert::success('Die aktuellen Daten unter "'.$fileName.'" gespeichert.')->persistent();
         } else {
-            Alert::error('Leider konnte kein Abbild gespeichert werden.')->persistent();
+            Alert::warning('Leider konnte kein Abbild gespeichert werden.')->persistent();
         }
 
         return Redirect::back();
     }
 
-    public function clearDistantWritingDates() {
-        if (Artisan::call('gsa:reassess-writing-dates', ['--quiet' => 'default']) === 0) {
-            Alert::success('Die Schreibdaten wurden erfolgreich bereinigt.')->persistent();
+    public function clearDistantData() {
+        $successful = $this->callClearCommand();
+
+        if ($successful) {
+            Alert::success('Alle inkonsisten Daten wurden entfernt.')->persistent();
         } else {
-            Alert::error('Die Schreibdaten konnten leider nicht bereinigt werden.')->persistent();
+            Alert::warning('Leider konnten nicht alle inkonsistenten Daten entfernt werden.')->persistent();
         }
 
         return Redirect::back();
+    }
+
+    protected function callClearCommand(Patient $patient = null) {
+        $arguments = [];
+
+        if ($patient) {
+            $arguments['--'.ClearDistantData::OPTION_PATIENT] = $patient->name;
+        }
+
+        $args = array_merge($arguments, ['--quiet' => 'default']);
+
+        $successful = (Artisan::call('gsa:clear-distant-data', $args) === 0);
+
+        return $successful;
     }
 
     protected function settings() {

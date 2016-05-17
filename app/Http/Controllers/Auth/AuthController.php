@@ -19,7 +19,7 @@ class AuthController extends Controller
     |  Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the the authentication of existing users.
+    | This controller handles the authentication of existing users.
     */
 
     use AuthenticatesUsers, ThrottlesLogins;
@@ -72,7 +72,6 @@ class AuthController extends Controller
                 GateController::PAGE_STRING_MAP[GateController::PAGE_START]);
         }
 
-        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()])
-                ;//->with('alert_messages', Alert::all());
+        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()]);
     }
 }
