@@ -21,7 +21,7 @@ use App\Helper;
 
 use App\Models\UserRole;
 
-use App\Tasktemplate;
+use App\TaskTemplate;
 
 /**
  * @author dahn
