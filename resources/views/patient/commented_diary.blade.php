@@ -20,6 +20,7 @@
                     labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
                     datasets: [{
                         label: 'Gesundheit (-1: Keine Angabe)',
+                        fill: false,
                         data: [
                                 @for ($w=1; $w <= $Week; $w++)
                             {{ $Health[$w] }},
@@ -29,9 +30,7 @@
                     }]
                 },
                 options: {
-
-                }
-            });
+                }});
         </script>
         <h3>Meine Arbeitsfähigkeit</h3>
         <canvas id="wai" ></canvas>
@@ -43,6 +42,7 @@
                     labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
                     datasets: [{
                         label: 'Arbeitsfähigkeit (-1: Keine Angabe)',
+                        fill: false,
                         data: [
                             @for ($w=1; $w <= $Week; $w++)
                             {{ $Wai[$w] }},
