@@ -30,12 +30,18 @@ class PatientController extends Controller
 {
 
 	/**
+	 * function cancel_intervention
 	 * Bricht die Intervention für den Patienten mit dem angegebenen Benutzernamen ab,
-	 *
-	 * @param name
+	 * @param Request $request
+	 * @param Patient $patient
+	 * @return mixed
 	 */
 	public function cancel_intervention(Request $request, Patient $patient)
 	{
+		if ($request->user()->type !== UserRole::THERAPIST) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$patient->intervention_ended_on = Date::now();
 		$patient->save();
 
@@ -44,12 +50,15 @@ class PatientController extends Controller
 		return Redirect::back();
 	}
 
-	/**
+	/** 
+	 * public function profile
+	 * @param Request $request
+	 * @param null $name
+	 * @return $this
+	 *
 	 * Zeigt die Profilseite des Patienten mit dem angegebenen Benutzernamen an. Ist
 	 * name nicht angegeben, so muss die Rolle des benutzers 'patient' sein und es
 	 * wird die Profilseite des aktuellen Patienten angezeigt.
-	 *
-	 * @param name
 	 */
 	public function profile(Request $request, $name = null)
 	{
@@ -60,8 +69,11 @@ class PatientController extends Controller
 
 		$user_role = $request->user()->type;
 
-		if ($user_role == UserRole::PATIENT && $name != Auth::user()->name) {
-			return Redirect::to('/');
+		//Access control
+		$ok=GateController::check_access($request, $name);
+		if (! $ok) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
 		}
 
 		$days = new Days;
@@ -93,7 +105,21 @@ class PatientController extends Controller
 		return view('patient.patient_profile')->with($profile_user_model);
 	}
 
+	/**
+	 * function save_therapist
+	 * Ordnet den angegebenen Therapeuten dem angegebenen Patienten zu
+	 * @param Request $request
+	 * @param Patient $patient
+	 * @return mixed
+	 */
 	public function save_therapist(Request $request, Patient $patient) {
+		$name=$patient->name;
+		//Access control
+		$ok=GateController::check_access($request, $name);
+		if (! $ok || $request->user()->type !== UserRole::THERAPIST) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$name_of_therapist = $request->input('therapist');
 
 		$therapist = Therapist::whereName($name_of_therapist)->first();
@@ -120,7 +146,22 @@ class PatientController extends Controller
 		return Redirect::back();
 	}
 
+	/**
+	 * function save_day_of_week
+	 * Setzt für den Patienten $patient den Schreibtag entsprechend Input-Parameter day_of_week
+	 * Patienten können dies nur tun, wenn die Zahl der erlaubten Änderungen (1) nicht erreicht ist.
+	 * @param Request $request
+	 * @param Patient $patient
+	 * @return mixed
+	 */
 	public function save_day_of_week(Request $request, Patient $patient) {
+		$name=$patient->name;
+		//Access control
+		$ok=GateController::check_access($request, $name);
+		if (! $ok) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$is_therapist = ($request->user()->type === UserRole::THERAPIST);
 
 		if ($patient->assignment_day_changes_left > 0 || $is_therapist) {
@@ -145,7 +186,19 @@ class PatientController extends Controller
 		return Redirect::back();
 	}
 
+	/**
+	 * function save_date_from_clinics
+	 * setzt das Entlassungsdatum für $patient entsprechend Input-Parameteer date_from_clinics
+	 * @param Request $request
+	 * @param Patient $patient
+	 * @return mixed
+	 */
+
 	public function save_date_from_clinics(Request $request, Patient $patient) {
+		if ($request->user()->type !== UserRole::THERAPIST){
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		// format: dd.mm.yyyy
 		$date_from_clinics_string = $request->input('date_from_clinics');
 
@@ -165,7 +218,21 @@ class PatientController extends Controller
 		return Redirect::back();
 	}
 
+	/**
+	 * function save_password
+	 * Setzt das neue Passowrt 'new_password' wenn das alte Password 'old_password' korrekt war
+	 * @param Request $request
+	 * @param Patient $patient
+	 * @return mixed
+	 */
 	public function save_password(Request $request, Patient $patient) {
+		$name=$patient->name;
+		//Access control
+		$ok=GateController::check_access($request, $name);
+		if (! $ok || $request->user()->type !== UserRole::PATIENT) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$old_password = $request->input('old_password');
 		$password = $request->input('new_password');
 
@@ -181,7 +248,21 @@ class PatientController extends Controller
 		return Redirect::back();
 	}
 
+	/**
+	 * function save_personal_information
+	 * Ändern der persönlichen Informationen durch den Patienten
+	 * @param Request $request
+	 * @param Patient $patient
+	 * @return mixed
+	 */
 	public function save_personal_information(Request $request, Patient $patient) {
+		$name=$patient->name;
+		//Access control
+		$ok=GateController::check_access($request, $name);
+		if (! $ok || $request->user()->type !== UserRole::PATIENT) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$personal_information = $request->input('personal_information');
 
 		if ($personal_information !== '') {
@@ -197,6 +278,13 @@ class PatientController extends Controller
 	}
 
 	public function save_notes_of_therapist(Request $request, Patient $patient) {
+		$name=$patient->name;
+		//Access control
+		$ok=GateController::check_access($request, $name);
+		if (! $ok) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$notes_of_therapist = $request->input('notes');
 
 		if ($notes_of_therapist !== '') {

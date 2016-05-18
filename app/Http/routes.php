@@ -130,8 +130,7 @@ Route::group(['middleware' => ['web', 'auth', 'test.date']], function () {
 	Route::post('/SendMail','ContactController@message_to_patients');
 	Route::post('/MassAction/mail','ContactController@mail_editor');
 	Route::post('/SetSlots', 'PatientListController@set_slots');
-	// Route::post('/SaveProfile','PatientController@save_profile');
-
+	
 	// patient profile: routes for post requests
 	Route::group(['prefix' => '/patient/{patient}'], function () {
 		Route::post('therapist', 'PatientController@save_therapist');
@@ -145,8 +144,7 @@ Route::group(['middleware' => ['web', 'auth', 'test.date']], function () {
 
 	Route::get('/patient_list', 'PatientListController@show');
 	Route::any('/patient_list/data', 'PatientListController@anyData')->name('datatables.data');
-
-	// Experimental for M3
+	
 	Route::get('/Assignment/{patient}/{week}','DiaryController@entry');
 	Route::post('/SaveAssignment/{patient}/{week}','DiaryController@save_entry');
 });
