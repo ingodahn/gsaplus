@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 use App\Http\Requests;
@@ -19,8 +20,10 @@ use App\Helper;
 use App\Patient;
 use App\Models\PatientStatus;
 use App\Models\AssignmentStatus;
+use App\Models\UserRole;
 
 use App\Http\Controllers;
+
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
 
@@ -51,15 +54,20 @@ class PatientListController extends Controller
 	}
 
 
-
 	/**
 	 * Days wird im System modifiziert und die Seite mit der Patientenliste (der der
 	 * Slots-Teil davon) wird neu aufgebaut
-	 *
-	 * @param days
+	 * Verwendet werden die Input-Parameter So_slots,...,Do_slots
+	 * @param Request $request
+	 * @return $this
 	 */
 	public function set_slots(Request $request)
 	{
+		$user_role = $request->user()->type;
+		if ($user_role !== UserRole::ADMIN && $user_role !== UserRole::THERAPIST) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$Days = ['Sonntag' => $request->input('So_slots'),
 			'Montag' => $request->input('Mo_slots'),
 			'Dienstag' => $request->input('Di_slots'),
@@ -78,21 +86,25 @@ class PatientListController extends Controller
 
 	}
 
-
 	/**
-	 * 'Liefere Seite patient_list'(
+	 * function show
+	 * Liefere Seite patient_list mit
 	 * <ul>
 	 * 	<li>'Slots'(Days)</li>
 	 * 	<li>patients(</li>
 	 * </ul>
-	 * )
-	 * Tabelle patient_list von datatable
-	 *
+	 * Tabelle patient_list von datatable wird dynamisch mit Ajax aufgebaut
+	 * @param Request $request
+	 * @return $this
 	 */
 	public function show(Request $request) {
 		//Zeige Seite patient_list mit
 		// Slots von Days,
 		// Patientenliste von datatable
+		if ($request->user()->type !== UserRole::THERAPIST) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$days = new Days;
 		$Slots = $days->get_days();
 
@@ -119,6 +131,11 @@ class PatientListController extends Controller
 	 */
 	public function anyData()
 	{
+		$user_role=Auth::user()->type;
+		if ($user_role !== UserRole::ADMIN && $user_role !== UserRole::THERAPIST) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$days_map = Helper::generate_day_number_map();
 
 		$infos = new Collection;

@@ -54,11 +54,18 @@ class DiaryController extends Controller
      */
     public function commented_diary(Request $request, $name)
     {
+        //Access control
+        $ok=GateController::check_access($request, $name);
+        if (! $ok) {
+            Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+            return Redirect::to('/Home');
+        }
+
         $isTherapist = (Auth::user()->type === UserRole::THERAPIST);
         $patient=Patient::whereName($name)->first();
         $info=$patient->all_info();
         $p_assignments=$info['assignments'];
-        // return dd($p_assignments);
+
         $wai=[];
         $health=[];
         $assignments=[];
@@ -73,7 +80,7 @@ class DiaryController extends Controller
                 $health[$i] = -1;
             }
         }
-// return dd($p_assignments);
+
         $assignments[1]['problem']='Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.';
         if (isset($p_assignments[0]['situations'])) {
             $assignments[1]['answer']=$p_assignments[0]['situations'];
@@ -112,18 +119,34 @@ class DiaryController extends Controller
     }
 
     /**
-     * Es wird der zur als Argument übergebenen Wochennummer gehörende Tagebucheintrag
-     * für den angemeldeten Patienten ausgegeben. Soweit ein Kommentar vorhanden ist
-     * wird er mit ausgegeben.
-     * Je nach Art der Aufgabe und Rolle des Benutzers können Elemente angezeigt werden oder nicht
-     * bzw. editiert werden oder nicht:
-     * P030, P040, P080, P090: Editierbar
-     * Sonst nicht editierbar
+     *
      * @param name
      * @param week
      */
+
+    /**
+     * function entry
+     * Es wird der zur als Argument $week übergebenen Wochennummer gehörende Tagebucheintrag
+     * für den Patienten $patient ausgegeben. Soweit ein Kommentar vorhanden ist
+     * wird er mit ausgegeben.
+     * Je nach Status der Aufgabe und Rolle des Benutzers entscheidet der view patient/entry ob Elemente angezeigt
+     * werden oder editierbar sind
+     *
+     * @param Request $request
+     * @param Patient $patient
+     * @param $week
+     * @return $this
+     */
     public function entry(Request $request, Patient $patient, $week)
     {
+        $name=$patient->name;
+        //Access control
+        $ok=GateController::check_access($request, $name, $week);
+        if (! $ok) {
+            Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+            return Redirect::to('/Home');
+        }
+        $week=intval($week); // avoid crashing the system with non-integer
         $patient_info = $patient->info();
 // All assignments exist after registration, so we can grab it
         $assignment_info=$patient->assignment_for_week($week)->all_info();
@@ -376,25 +399,19 @@ class DiaryController extends Controller
      */
     public function show(Request $request, $name = NULL)
     {
-        // Setting default parameter
+                // Setting default parameter
         if (!$name) {
             $name = Auth::user()->name;
         }
+        // check access permission
+        $ok=GateController::check_access($request,$name);
 
-        // $patient=Patient::whereName($name)->first();
-        // return dd($patient->assignment_for_week(1));
-        /**
-         * If the user is a patient, he can only see his own diary
-         *
-         * TODO: remove null check
-         */
-        $is_patient = ($request->user()->type === UserRole::PATIENT);
-        if ($name && $request->user() !== null
-            && $is_patient
-            && Auth::user()->name !== $name
-        ) {
-            return Redirect::to('/');
+        if (! $ok) {
+            Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+            return Redirect::to('/Home');
         }
+
+        $is_patient = ($request->user()->type === UserRole::PATIENT);
 
         $Diary = [];
 
