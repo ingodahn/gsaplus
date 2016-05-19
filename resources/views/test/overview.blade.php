@@ -339,7 +339,7 @@
                 wiederhergestellt wird.</p>
                 <p>Wählen Sie <em>Daten bereinigen</em> um die inkonsisten Daten zu entfernen.</p>
 
-                <button type="submit" class="btn btn-primary pull-right" name="remove_unnecessary_dates">Daten bereinigen</button>
+                <button type="submit" class="btn btn-primary pull-right" name="remove-distant-data">Daten bereinigen</button>
             </form>
             <p class="text-right" style="clear: both">
                 <br/>
