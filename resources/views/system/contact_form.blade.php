@@ -7,7 +7,7 @@
         <h2>Kontaktformular</h2>
 
         <p>
-          Nutzen sie dieses Formular um eine E-Mail an <a href="mailto:online-nachsorge@unimedizin-mainz.de">online-nachsorge@unimedizin-mainz.de</a> zu senden.
+          Nutzen sie dieses Formular um eine E-Mail an <a href="mailto:team@online-nachsorge.de">team@online-nachsorge.de</a> zu senden.
         </p>
 
         <form action="/SendMessage" method="post" data-parsley-validate>
