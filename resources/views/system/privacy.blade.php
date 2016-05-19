@@ -1,5 +1,12 @@
 @extends('layouts.master')
 @section('title', 'Datenschutz')
+@section('additional-head')
+  <script language="javascript" type="text/javascript">
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+@endsection
 
 @section('content')
     <div class="container">
@@ -41,7 +48,7 @@
       </p>
 
       <h3>Erfassung statistischer Daten</h3>
-      <iframe style="border: 0; width: 100%; height: 180px" src="/piwik/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
+      <iframe style="border: 0; width: 100%;" scrolling="no" onload="resizeIframe(this)" src="/piwik/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
 
       <h3>Cookies</h3>
       <p>
