@@ -40,6 +40,9 @@
         Wenn Sie mit uns per E-Mail in Kontakt treten möchten, weisen wir Sie darauf hin, dass die Vertraulichkeit der übermittelten Informationen auf dem Übertragungsweg durch das Internet nicht gewährleistet ist. Der Inhalt von E-Mails kann von Dritten eingesehen werden. Wir empfehlen Ihnen daher, uns telefonisch zu kontaktieren, wenn Sie uns vertrauliche Informationen zukommen lassen.
       </p>
 
+      <h3>Erfassung statistischer Daten</h3>
+      <iframe style="border: 0; width: 100%; height: 180px" src="/piwik/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
+
       <h3>Cookies</h3>
       <p>
         Die Internetseiten verwenden teilweise sogenannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert.
