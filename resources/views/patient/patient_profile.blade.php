@@ -20,7 +20,6 @@
     @include('patient.profile.schreibtag')
     @include('patient.profile.entlassungsdatum')
     @include('patient.profile.password')
-    @include('patient.profile.piwik')
     @include('patient.profile.persönliche_informationen')
     @include('patient.profile.intervention_beenden')
 
