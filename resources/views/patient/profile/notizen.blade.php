@@ -5,7 +5,7 @@
     {{ csrf_field() }}
     <div class="form-group">
       <label for="notes" class="control-label">für Patienten nicht sichtbar</label>
-      <textarea name="notes" rows="5" class="form-control js-auto-size" placeholder="Hat eine zu krasse Meinung zu Earl Grey.">{{ $Patient['notesOfTherapist'] }}</textarea>
+      <textarea name="notes" rows="5" class="form-control js-auto-size" placeholder="Hier können Sie Notizen eintragen, welche nur für Therapeuten sichtbar sind. Patienten werden diese Notizen nicht sehen können">{{ $Patient['notesOfTherapist'] }}</textarea>
     </div>
     <p>
       <div class="form-group">
