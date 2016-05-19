@@ -99,7 +99,7 @@ task db_reset: [:dotenv] do
   sh "mysql "\
     "-u#{ENV['DB_USERNAME']} "\
     "-p#{ENV['DB_PASSWORD']} "\
-    "-e 'SET @db_database=\"#{ENV['DB_DATABASE']}\"; source database/sql/reset_database.sql;'"
+    "-e 'SET @db_database=\"\`#{ENV['DB_DATABASE']}\`\"; source database/sql/reset_database.sql;'"
   sh "composer dump-autoload"
   sh "php artisan migrate"
 end
