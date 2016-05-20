@@ -21,6 +21,7 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
+                $request->session()->reflash(); // Keep alerts
                 return redirect()->guest('/Login');
             }
         }
