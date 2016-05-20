@@ -12,10 +12,12 @@
       <script>
         swal({
             text: "{{ $error }}",
-            title: "Error",
+            title: "Fehler",
             type: "warning",
             // showConfirmButton: false,
-            allowOutsideClick: true
+            allowOutsideClick: true,
+            // display umlaut
+            html: true
         });
     </script>
 

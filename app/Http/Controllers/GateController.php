@@ -210,6 +210,17 @@ class GateController extends Controller
 	 */
 	public function save_patient_data(Request $request)
 	{
+		$validator = Validator::make($request->all(), [
+			'name' => array('Regex:/^[a-zA-Z0-9\.\-_]+$/'),
+			'email' => 'required|email'
+		]);
+
+		if ($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator)
+				->withInput();
+		}
+
 		$code = $request->session()->get(self::CODE_SESSION_KEY);
 		$name = $request->input('name');
 		// ToDo: Check whether name is allowed
