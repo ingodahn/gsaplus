@@ -19,6 +19,12 @@ $nav-height: 100px;
   padding-top: 5px;
 }
 
+.unimed-logo {
+  float: right;
+  height: 40px;
+  margin-top: 15px;
+}
+
 // Height of the top navbar
 .navbar-nav {
   margin-top: $nav-height / 4; // Stupid hack because vertical centering is too hard
