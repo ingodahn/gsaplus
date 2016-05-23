@@ -6,13 +6,13 @@
         <h2>Ihr Tagebuch</h2>
         @if($isTherapist)
             <p>
-                Dies ist das Tagebuch von <em>{{ $PatientName }}</em>.
+              Dies ist das Tagebuch von <em>{{ $PatientName }}</em>.
             </p>
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>
         <h3>Meine Gesundheit</h3>
         <canvas id="health" ></canvas>
-               <script>
+        <script>
             var ctx = document.getElementById("health");
             var myChart = new Chart(ctx, {
                 type: 'line',
@@ -92,8 +92,8 @@
                                             <div class="sitPart">
                                                 {!! $Assignments[1]['answer'][$j-1]['theirReaction'] !!}
                                             </div>
-                                            </div>
-                                        @endif
+                                        </div>
+                                    @endif
                                 @endfor
                             @endif
                         </div>
@@ -128,5 +128,6 @@
                                 @endif
                     </div>
     @endfor
+</div>
 
 @endsection
