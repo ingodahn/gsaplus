@@ -6,7 +6,9 @@ namespace App\Http\Controllers;
 use App\Code;
 use App\Helper;
 use App\Patient;
-use App\Users;
+use App\User;
+
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * @author dahn
@@ -55,6 +57,20 @@ class AdminController extends Controller
 		}
 
 		return view("admin.patients")->with('info', $info);
+	}
+
+	public function admin_home() {
+		$infos = ['patient' => new Collection, 'therapist' => new Collection, 'admin' => new Collection];
+
+		foreach (User::all() as $user) {
+			$infos[$user->type]->push($user->info());
+		}
+
+		foreach ($infos as $key => $info) {
+			$infos[$key] = $info->sortBy('name');
+		}
+
+		return view('admin.home')->with('infos', $infos);
 	}
 
 }

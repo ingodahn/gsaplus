@@ -9,14 +9,6 @@ Route::get('/welcome', function() {
 	return Session::get('Code');
 });
 
-if (App::environment("local")) {
-	Route::get('/admin_home',function() {
-		return view('admin.home');
-	});
-	Route::get('/AdminCodes','AdminController@admin_codes');
-	Route::get('/AdminUsers','AdminController@admin_users');
-}
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -30,6 +22,12 @@ if (App::environment("local")) {
 | the current date will be used for every matching request.
 */
 Route::group(['middleware' => ['web']], function () {
+	if (App::environment("local")) {
+		Route::get('/admin_home', 'AdminController@admin_home');
+		Route::get('/AdminCodes','AdminController@admin_codes');
+		Route::get('/AdminUsers','AdminController@admin_users');
+	}
+
 	Route::get('/', 'GateController@enter_system');
 
 	Route::get('/ContactTeam', 'ContactController@contact_team');
