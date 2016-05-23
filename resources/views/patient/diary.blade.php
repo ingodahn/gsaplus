@@ -113,7 +113,7 @@
       @endforeach
     </div>
       <p>
-        <a class="btn btn-primary" href="/CommentedDiary/{{$Diary['name']}}" target=""_blank">Kommentiertes Tagebuch</a>
+        <a class="btn btn-primary" href="/CommentedDiary/{{$Diary['name']}}" target=""_blank"><i class="fa fa-book" aria-hidden="true"></i> Wochenrückblick</a>
       </p>
   </div>
 @endsection
