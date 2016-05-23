@@ -13,7 +13,6 @@ use App\TestSetting;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Mail;
 
-
 class RemindUsersOfAssignment extends Command
 {
     const OPTION_FIRST = 'first';
@@ -66,6 +65,8 @@ class RemindUsersOfAssignment extends Command
      */
     public function handle()
     {
+        $this->info(Date::now().': call to gsa:send-reminders.');
+
         $settings = TestSetting::first();
 
         if ($settings && $settings->test_date) {
@@ -83,19 +84,12 @@ class RemindUsersOfAssignment extends Command
         if ($this->option(self::OPTION_DUE) || $this->option(self::OPTION_ALL)) {
             $this->sendRemindersForDueAssignments();
         }
-
-        print "\r";
     }
 
     protected function sendRemindersForNewOrCurrentAssignments($type_of_reminder) {
         // get all assignments with writing_date = now
         $assignments = Assignment::where('writing_date', '=',
                         Date::now()->format('Y-m-d'))->get();
-
-        $bar = $this->output->createProgressBar($assignments->count());
-
-        $bar->setFormat("Notifying of {$type_of_reminder} assignment: ".'[%bar%] %current%/%max%');
-        $bar->start();
 
         // remind of first or current assignment
         foreach ($assignments as $assignment) {
@@ -131,12 +125,7 @@ class RemindUsersOfAssignment extends Command
                     }
                 }
             }
-
-            $bar->advance();
         }
-
-        $bar->finish();
-        $bar->clear();
     }
 
     protected function sendRemindersForDueAssignments() {
@@ -146,11 +135,6 @@ class RemindUsersOfAssignment extends Command
         $patients = Patient::whereNull('intervention_ended_on')
             ->whereNotNull('date_from_clinics')
             ->get();
-
-        $bar = $this->output->createProgressBar($patients->count());
-
-        $bar->setFormat("Notifying of due assignment: ".'[%bar%] %current%/%max%');
-        $bar->start();
 
         foreach ($patients as $patient) {
             // current assignment may be null if patient is in week 0
@@ -179,12 +163,7 @@ class RemindUsersOfAssignment extends Command
                     $current_assignment->save();
                 }
             }
-
-            $bar->advance();
         }
-
-        $bar->finish();
-        $bar->clear();
     }
 
     /*
@@ -221,6 +200,12 @@ class RemindUsersOfAssignment extends Command
                                 ->to($patient->email, $patient->name)
                                 ->subject($subject);
             });
+        }
+
+        if(count(Mail::failures()) > 0) {
+            $this->info(Date::now().': failed to send reminder for '.$type_of_reminder.' assignment - patient: '.$patient->name.'.');
+        } else {
+            $this->info(Date::now().': sent reminder for '.$type_of_reminder.' assignment - patient: '.$patient->name.'.');
         }
     }
 }
