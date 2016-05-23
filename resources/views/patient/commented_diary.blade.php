@@ -59,7 +59,7 @@
         <div class="commentedWeek">
             <h3>Woche 1</h3>
             <div class="impuls">
-                <h4>Schreibimpuls:</h4>
+                <h4><i class="fa fa-tasks" aria-hidden="true"></i> Schreibimpuls</h4>
                 {!! nl2br(e($Assignments[1]['problem'])) !!}
             </div>
             @if ($Assignments[1]['dirty'])
@@ -67,7 +67,7 @@
                     @else
                         <div class="answer">
                             @endif
-                            <h4>Wocheneintrag:</h4>
+                            <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
                             @if ($isTherapist && $Assignments[1]['dirty'])
                                 Nicht eingereicht.
                             @elseif($Assignments[1]['answer']=="")
@@ -76,7 +76,7 @@
                                 @for ($j=1;$j<=2;$j++)
                                     @if (isset($Assignments[1]['answer'][$j-1]['description']))
                                         <div class="situation">
-                                            <h5>Situation {!! $j !!}</h5>
+                                            <h4><i class="fa fa-sitemap" aria-hidden="true"></i> Situation {!! $j !!}</h4>
                                             <div class="sitPart">
                                                 {!! $Assignments[1]['answer'][$j-1]['description'] !!}
                                             </div>
@@ -104,26 +104,26 @@
                 <hr/>
                 <h3>Woche {{ $i }}</h3>
                 <div class="impuls">
-                    <h4>Schreibimpuls:</h4>
-                    {!! nl2br(e($Assignments[$i]['problem'])) !!}
+                    <h4><i class="fa fa-tasks" aria-hidden="true"></i> Schreibimpuls</h4>
+                    <p>{!! nl2br(e($Assignments[$i]['problem'])) !!}</p>
                 </div>
                 @if ($Assignments[$i]['dirty'])
                     <div class="answerNotSubmitted">
                         @if ($isTherapist)
                            <p>Nicht eingereicht.</p>
                         @else
-                            <h4>Wocheneintrag (nicht eingereicht):</h4>
-                            {!! nl2br(e($Assignments[$i]['answer'])) !!}
+                            <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag (nicht eingereicht)</h4>
+                            <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
                             </div>
                         @endif
                             @else
                             <div class="answer">
-                                <h4>Wocheneintrag:</h4>
-                                {!! nl2br(e($Assignments[$i]['answer'])) !!}
+                                <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
+                                <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
                                 </div>
                                 <div class="comment">
-                                    <h4>Kommentar Ihres Online-Therapeuten:</h4>
-                                    {!! nl2br(e($Assignments[$i]['comment'])) !!}
+                                    <h4><i class="fa fa-commenting" aria-hidden="true"></i> Kommentar Ihres Online-Therapeuten</h4>
+                                    <p>{!! nl2br(e($Assignments[$i]['comment'])) !!}</p>
                                 </div>
                                 @endif
                     </div>
