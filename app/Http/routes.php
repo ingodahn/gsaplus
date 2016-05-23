@@ -22,12 +22,6 @@ Route::get('/welcome', function() {
 | the current date will be used for every matching request.
 */
 Route::group(['middleware' => ['web']], function () {
-	if (App::environment("local")) {
-		Route::get('/admin_home', 'AdminController@admin_home');
-		Route::get('/AdminCodes','AdminController@admin_codes');
-		Route::get('/AdminUsers','AdminController@admin_users');
-	}
-
 	Route::get('/', 'GateController@enter_system');
 
 	Route::get('/ContactTeam', 'ContactController@contact_team');
@@ -118,6 +112,12 @@ Route::group(['middleware' => ['web']], function () {
 			});
 		});
 	}
+});
+
+Route::group(['middleware' => ['web', 'auth', 'role:admin']], function () {
+	Route::get('/admin_home', 'AdminController@admin_home');
+	Route::get('/AdminCodes','AdminController@admin_codes');
+	Route::get('/AdminUsers','AdminController@admin_users');
 });
 
 /*
