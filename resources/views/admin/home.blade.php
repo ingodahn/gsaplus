@@ -11,10 +11,6 @@
             white-space : nowrap;
         }
 
-        ul.nav {
-            display: none;
-        }
-
         hr {
             border-top: 1px dashed #8c8b8b;
         }
