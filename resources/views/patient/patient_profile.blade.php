@@ -7,12 +7,15 @@
 
     <h2>
       Profil von {{ $Patient['name'] }}
-      <small>
+
         @if($isTherapist)
-          code: <code>{{ $Patient['code'] }}</code>,
+        <small>
+          Code: <code>{{ $Patient['code'] }}</code>,
+          Status: <code>{{ $Patient['status'] }}</code>
+        </small>
         @endif
-        status: <code>{{ $Patient['status'] }}</code>
-      </small>
+
+
     </h2>
 
     @include('patient.profile.notizen')
