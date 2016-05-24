@@ -71,7 +71,7 @@
         Warum onlinebasierte Unterstützung bei der Wiedereingliederung?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Pa_rhIynxeg" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Pa_rhIynxeg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -84,7 +84,7 @@
         Wie läuft die online Nachsorge ab?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/OIb2lFeh8d4" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/OIb2lFeh8d4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -97,7 +97,7 @@
         Welche Grundlage hat die online Nachsorge?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ciaBwB2nKmA" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ciaBwB2nKmA?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -110,7 +110,7 @@
         Eine ganz normale Wiedereingliederung
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/dETH09wblvc" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dETH09wblvc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -123,7 +123,7 @@
         Warum ist es wichtig dabei zu bleiben?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/wZX7cabk0uo" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/wZX7cabk0uo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -137,7 +137,7 @@
         Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/15PsRxp3J_w" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/15PsRxp3J_w?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
