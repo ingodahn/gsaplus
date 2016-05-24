@@ -211,7 +211,7 @@ class GateController extends Controller
 	public function save_patient_data(Request $request)
 	{
 		$validator = Validator::make($request->all(), [
-			'name' => array('Regex:/^[a-zA-Z0-9\.\-_]+$/'),
+			'name' => array('Regex:/^[a-zA-Z0-9\.\-_]+$/', 'required'),
 			'email' => 'required|email'
 		]);
 
