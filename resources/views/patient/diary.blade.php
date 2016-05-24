@@ -69,6 +69,8 @@
       <p>{{$Diary['next_assignment']}}</p>
     </div>
 
+    <label>Klicken Sie auf die Wochen, um diese auszuklappen<br>
+      Zum Eintrag gelangen Sie über den Link auf der rechten Seite der Zeile</label>
     <div class="panel-group diary-accordion" id="accordion" role="tablist" aria-multiselectable="true">
       @foreach($Diary['entries'] as $i => $entry)
         <?php
