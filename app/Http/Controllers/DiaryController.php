@@ -81,11 +81,17 @@ class DiaryController extends Controller
             }
         }
 
+
         $assignments[1]['problem']='Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.';
         if (isset($p_assignments[0]['situations'])) {
             $assignments[1]['answer']=$p_assignments[0]['situations'];
         } else {
             $assignments[1]['answer']="";
+        }
+        if (isset($p_assignments[0]['comment']['text'])) {
+            $assignments[1]['comment'] = $p_assignments[0]['comment']['text'];
+        } else {
+            $assignments[1]['comment'] = "Keine Rückmeldung";
         }
 
         $assignments[1]['dirty']=$p_assignments[0]['dirty'];
@@ -114,7 +120,7 @@ class DiaryController extends Controller
         $params['Wai']=$wai;
         $params['Health']=$health;
         $params['Assignments']=$assignments;
-        // return dd($params);
+        
         return view('patient/commented_diary')->with($params);
     }
 
@@ -210,7 +216,6 @@ class DiaryController extends Controller
         $param['PatientInfo'] = $patient_info;
         $param['EntryInfo'] = $entry_info;
         $param['Problems']=  TaskTemplate::lists('name');
-
         return view('patient/entry')->with($param);
     }
 
