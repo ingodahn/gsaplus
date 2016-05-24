@@ -2,6 +2,40 @@
 @section('title', 'Administratoren Backend')
 
 @section('additional-head')
+    <script src="/js/zxcvbn.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            evaluate();
+            $("#password").keyup(function (event) {
+                evaluate();
+            });
+
+            function evaluate() {
+                var password = $("#password").val();
+                if (password) {
+                    var result = zxcvbn(password);
+                    switch (result.score) {
+                        case 0:
+                            updateText("Sehr schwach"); break;
+                        case 1:
+                            updateText("Schwach"); break;
+                        case 2:
+                            updateText("Ok"); break;
+                        case 3:
+                            updateText("Stark"); break;
+                        case 4:
+                            updateText("Sehr stark"); break;
+                    }
+                } else {
+                    updateText("-");
+                }
+
+                function updateText(text) {
+                    $("#strength-addon").text(text);
+                }
+            }
+        });
+    </script>
     <style>
         td {
             vertical-align:middle !important;
@@ -49,18 +83,69 @@
                     <a href="/AdminCodes" target="_blank">Codes</a>
                 </li>
                 <li>
-                    <a href="#patients">Patienten</a>
+                    <a href="#therapists">Therapeuten</a>
                 </li>
                 <li>
-                    <a href="#therapists">Therapeuten</a>, und
+                    <a href="#patients">Patienten</a>, und
                 </li>
                 <li>
                     <a href="#admins">Administratoren</a>
                 </li>
             </ul>
-            <p>einsehen und neue Benutzer anlegen.</p>
+            <p>einsehen und <a href="#add_therapist">neue Therapeuten anlegen</a>.</p>
             <p>Im Notfall können Sie <a href="#reminders">anstehende Benachrichtigungen versenden</a> -
                 z.B. wenn der Mail-Server ausgefallen ist und die Benachrichtigungen nicht versendet werden konnten.</p>
+        </div>
+
+        <div class="row">
+            <hr />
+        </div>
+
+        <div class="row" id="add_therapist">
+            <h3>Therapeut anlegen</h3>
+
+            {{-- All active form content must stay in this form for frontend and backend processing --}}
+            <form id="registration-form" data-parsley-validate role="form" action="/admin/therapists/new" method="post">
+                {{ csrf_field() }}
+
+                <p>Bitte wählen Sie einen Benutzernamen (nur Buchstaben, Zahlen, <code>-</code>, <code>_</code> und <code>.</code>)und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>
+
+                <div class="form-group">
+                    <label for="name" class="control-label">Benutzername</label>
+                    <input name="name" type="text" class="form-control" placeholder="mrhyde63" required pattern="^[a-zA-Z0-9\.\-_]+$">
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="password" class="control-label">Passwort</label>
+                        <div class="input-group">
+                            <input name="password" id="password" type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2 (mindestens 6 Zeichen)" required minlength="6" aria-describedby="strength-addon">
+                            <span class="input-group-addon" id="strength-addon"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Passwort wiederholen</label>
+                        <input type="password" autocomplete="off" class="form-control width-100" placeholder="hunter2" required minlength="6" data-parsley-equalto="#password">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="email" class="control-label">E-Mail Adresse</label>
+                        <input name="email" id="email" type="email" class="form-control width-100" placeholder="w.meyer@web.de" required>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">E-Mail wiederholen</label>
+                        <input type="email" placeholder="w.meyer@web.de" class="form-control width-100" required data-parsley-equalto="#email">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 10px">
+                    <button type="submit" class="btn btn-primary pull-right"><span class="fa fa-save" aria-hidden="true"></span> &nbsp;Therapeut anlegen</button>
+                </div>
+            </form>
         </div>
 
         @foreach($infos as $role => $users)

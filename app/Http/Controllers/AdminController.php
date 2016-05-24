@@ -6,9 +6,15 @@ namespace App\Http\Controllers;
 use App\Code;
 use App\Helper;
 use App\Patient;
+use App\Therapist;
 use App\User;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 /**
  * @author dahn
@@ -71,6 +77,47 @@ class AdminController extends Controller
 		}
 
 		return view('admin.home')->with('infos', $infos);
+	}
+
+	public function create_therapist(Request $request) {
+		$validator = Validator::make($request->all(), [
+			'name' => array('Regex:/^[a-zA-Z0-9\.\-_]+$/', 'required'),
+			'email' => 'required|email'
+		]);
+
+		if ($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator)
+				->withInput();
+		}
+
+		$name = $request->input('name');
+		$password = $request->input('password');
+		$email = $request->input('email');
+
+		$emailExists = User::whereEmail($email)->exists();
+		$nameExists = User::whereName($name)->exists();
+
+		//if (Name or eMail already in use) {
+		if ($nameExists || $emailExists) {
+			$message = "Der Therapeut konnte leider nicht angelegt werden. ".
+				($nameExists ? "Bitte wählen Sie einen anderen Benutzernamen." :
+					"Bitte überprüfen Sie die eingegebene E-Mail-Adresse.");
+
+			Alert::error($message, 'Angaben nicht eindeutig')->persistent();
+		} else {
+			$therapist = new Therapist;
+			$therapist->name = $name;
+			$therapist->email = $email;
+			$therapist->password = bcrypt($password);
+			$therapist->is_random = false;
+
+			$therapist->save();
+
+			Alert::success('Der Benutzer wurde erfolgreich angelegt.')->persistent();
+		}
+
+		return Redirect::back();
 	}
 
 }
