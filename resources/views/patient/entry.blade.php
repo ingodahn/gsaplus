@@ -14,10 +14,11 @@
 
       {{ csrf_field() }}
 
-      <h2>Woche {{$EntryInfo['week']}} <small>Status:
-          {{ $EntryInfo['status_text'] }}
-          @if ($isTherapist)
-             <code>{{$EntryInfo['status']}}</code>
+      <h2>Woche {{$EntryInfo['week']}}
+        @if ($isTherapist)
+        <small>
+                    Patient: <em>{{ $PatientInfo['name'] }}</em>
+             <code>Status: {{$EntryInfo['status']}} {{ $EntryInfo['status_text'] }}</code>
           @endif
         </small></h2>
 

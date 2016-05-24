@@ -101,6 +101,10 @@
                                         </div>
                                     @endif
                                 @endfor
+                                    <div class="comment">
+                                        <h4><i class="fa fa-commenting" aria-hidden="true"></i> Rückmeldung Ihres Online-Therapeuten</h4>
+                                        <p>{!! nl2br(e($Assignments[1]['comment'])) !!}</p>
+                                    </div>
                             @endif
                         </div>
         </div>
