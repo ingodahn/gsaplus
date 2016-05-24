@@ -9,8 +9,8 @@
       <h3>Angaben gemäß § 5 TMG</h3>
       <p>
         Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie <br>
-        Universitätsmedizin der Johannes Gutenberg-Universität Mainz  <br>
-        Untere Zahlbacher Str. 8 <br>
+        Universitätsmedizin der Johannes Gutenberg-Universität Mainz<br>
+        Untere Zahlbacher Str. 8<br>
         55131 Mainz
       </p>
 
@@ -20,8 +20,8 @@
       </p>
 
       <h3>Kontakt</h3>
-      Telefon: 06131/ 17-8239 <br>
-      E-Mail: <a href="mailto:info@online-nachsorge.de">info@online-nachsorge.de</a>
+      Telefon: 06131/ 17-8239<br>
+      E-Mail: <a href="mailto:team@online-nachsorge.de">team@online-nachsorge.de</a>
 
 
       <hr>
