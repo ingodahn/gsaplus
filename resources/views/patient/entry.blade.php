@@ -14,12 +14,12 @@
 
       {{ csrf_field() }}
 
-      <h2>Woche {{$EntryInfo['week']}} <small>(
+      <h2>Woche {{$EntryInfo['week']}} <small>Status:
           {{ $EntryInfo['status_text'] }}
           @if ($isTherapist)
             , <code>{{$EntryInfo['status']}}</code>
           @endif
-        )</small></h2>
+        </small></h2>
 
       @include('patient.entry.help')
       @include('patient.entry.notizen')
