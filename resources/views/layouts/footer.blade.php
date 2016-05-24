@@ -8,11 +8,17 @@
             <li><a href="/privacy">Datenschutz</a></li>
             <li><a href="/impressum">Impressum</a></li>
           </ul>
+          @if($isLoggedIn)
+            <a href="http://www.unimedizin-mainz.de/" target="_blank">
+              <img src="/img/unimedizin-mainz-logo.svg" alt="Universitätsmedizin Mainz Logo" title="zur Website der Universitätsmedizin Mainz" class="unimed-logo-footer">
+            </a>
+          @endif
 
-          <a href="http://www.unimedizin-mainz.de/" target="_blank">
-            <img src="/img/unimedizin-mainz-logo.svg" alt="Universitätsmedizin Mainz Logo" title="zur Website der Universitätsmedizin Mainz" class="unimed-logo">
-          </a>
-          
+          @if(!$isLoggedIn)
+            <a href="http://www.unimedizin-mainz.de/" target="_blank">
+              <img src="/img/unimedizin-mainz-logo.svg" alt="Universitätsmedizin Mainz Logo" title="zur Website der Universitätsmedizin Mainz" class="unimed-logo-footer-startpage">
+            </a>
+          @endif
     </nav>
   </div>
 </footer>
