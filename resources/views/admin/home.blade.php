@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Softwaretest-Kontrollzentrum')
+@section('title', 'Administratoren Backend')
 
 @section('additional-head')
     <style>

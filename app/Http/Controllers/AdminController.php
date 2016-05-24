@@ -60,7 +60,7 @@ class AdminController extends Controller
 	}
 
 	public function admin_home() {
-		$infos = ['patient' => new Collection, 'therapist' => new Collection, 'admin' => new Collection];
+		$infos = ['therapist' => new Collection, 'patient' => new Collection, 'admin' => new Collection];
 
 		foreach (User::all() as $user) {
 			$infos[$user->type]->push($user->info());

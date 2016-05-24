@@ -14,6 +14,8 @@ use Jenssegers\Date\Date;
 use App\Code;
 use App\Patient;
 use App\Therapist;
+use App\User;
+
 use App\Helper;
 use App\Models;
 use App\Models\UserRole;
@@ -229,8 +231,8 @@ class GateController extends Controller
 		// ToDo: Check whether this is an email
 		$day = $request->input('day_of_week');
 
-		$emailExists = Patient::whereEmail($email)->exists();
-		$nameExists = Patient::whereName($name)->exists();
+		$emailExists = User::whereEmail($email)->exists();
+		$nameExists = User::whereName($name)->exists();
 
 		//if (Name or eMail already in use) {
 		if ($nameExists || $emailExists) {
