@@ -124,7 +124,7 @@
                                 <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
                                 </div>
                                 <div class="comment">
-                                    <h4><i class="fa fa-commenting" aria-hidden="true"></i> Kommentar Ihres Online-Therapeuten</h4>
+                                    <h4><i class="fa fa-commenting" aria-hidden="true"></i> Rückmeldung Ihres Online-Therapeuten</h4>
                                     <p>{!! nl2br(e($Assignments[$i]['comment'])) !!}</p>
                                 </div>
                                 @endif

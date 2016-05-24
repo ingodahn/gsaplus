@@ -87,7 +87,7 @@ class DiaryController extends Controller
         } else {
             $assignments[1]['answer']="";
         }
-        
+
         $assignments[1]['dirty']=$p_assignments[0]['dirty'];
 
         for ($i=2; $i <= $info['patientWeek']; $i++) {
@@ -106,7 +106,7 @@ class DiaryController extends Controller
             if (isset($p_assignments[$i-1]['comment']['text'])) {
                 $assignments[$i]['comment'] = $p_assignments[$i-1]['comment']['text'];
             } else {
-                $assignments[$i]['comment'] = "Nicht kommentiert";
+                $assignments[$i]['comment'] = "Keine Rückmeldung";
             }
         }
         $params['PatientName']=$name;

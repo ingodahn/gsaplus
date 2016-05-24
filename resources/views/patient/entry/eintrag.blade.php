@@ -3,9 +3,11 @@
   $editable = $isPatient && $EntryInfo['status'] < 'E040';
 ?>
 @if($visible)
-  <h3>Tagebucheintrag</h3>
+  <h3><i class="fa fa-book" aria-hidden="true"></i> Tagebucheintrag</h3>
+
   @if ($EntryInfo['week'] == 1)
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <label>Klicken Sie auf Dis Situationen, um diese auszuklappen</label>
+    <div class="panel-group m-t-1" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
           <h4 class="panel-title">

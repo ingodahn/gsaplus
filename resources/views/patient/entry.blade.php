@@ -39,9 +39,7 @@
           <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
         </p>
       @else
-        <p>
-          <a href="/Home" class="btn btn-primary">Zur Übersicht</a>
-        </p>
+      
       @endif
 
     </form>
