@@ -229,8 +229,11 @@ class TestController extends Controller
                 break;
             case UserRole::THERAPIST:
                 $info = $user->info_with('patients');
-                for ($count = 0; $count < count($info['patients']); $count++) {
-                    $this->insertNameOfAssignmentDay($info['patients'][$count], $day_map);
+
+                if (array_key_exists('patients', $info)) {
+                    for ($count = 0; $count < count($info['patients']); $count++) {
+                        $this->insertNameOfAssignmentDay($info['patients'][$count], $day_map);
+                    }
                 }
                 break;
             case UserRole::ADMIN:
