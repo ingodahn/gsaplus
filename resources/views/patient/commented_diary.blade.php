@@ -11,7 +11,10 @@
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>
 
-        <h3>Meine Gesundheit</h3>
+        <h3><i class="fa fa-heartbeat" aria-hidden="true"></i> Befinden</h3>
+
+        <h4>Meine Gesundheit</h4>
+
         <canvas id="health" ></canvas>
         <script>
             var ctx = document.getElementById("health");
@@ -34,7 +37,8 @@
                 }});
         </script>
 
-        <h3>Meine Arbeitsfähigkeit</h3>
+        <h4>Meine Arbeitsfähigkeit</h4>
+
         <canvas id="wai" ></canvas>
         <script>
             var ctx = document.getElementById("wai");
@@ -124,7 +128,7 @@
                                 <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
                                 </div>
                                 <div class="comment">
-                                    <h4><i class="fa fa-commenting" aria-hidden="true"></i> Kommentar Ihres Online-Therapeuten</h4>
+                                    <h4><i class="fa fa-commenting" aria-hidden="true"></i> Rückmeldung Ihres Online-Therapeuten</h4>
                                     <p>{!! nl2br(e($Assignments[$i]['comment'])) !!}</p>
                                 </div>
                                 @endif

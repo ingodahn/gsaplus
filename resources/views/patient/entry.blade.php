@@ -17,7 +17,7 @@
       <h2>Woche {{$EntryInfo['week']}} <small>Status:
           {{ $EntryInfo['status_text'] }}
           @if ($isTherapist)
-            , <code>{{$EntryInfo['status']}}</code>
+             <code>{{$EntryInfo['status']}}</code>
           @endif
         </small></h2>
 
@@ -39,9 +39,7 @@
           <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
         </p>
       @else
-        <p>
-          <a href="/Home" class="btn btn-primary">Zur Übersicht</a>
-        </p>
+
       @endif
 
     </form>
