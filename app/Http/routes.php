@@ -116,6 +116,9 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['web', 'auth', 'role:admin']], function () {
 	Route::get('/admin_home', 'AdminController@admin_home');
+});
+
+Route::group(['middleware' => ['web', 'auth', 'role:admin,therapist']], function () {
 	Route::get('/AdminCodes','AdminController@admin_codes');
 	Route::get('/AdminUsers','AdminController@admin_users');
 });
