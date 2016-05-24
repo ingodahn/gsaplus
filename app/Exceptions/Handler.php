@@ -10,6 +10,8 @@ use Illuminate\Foundation\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Illuminate\Support\Facades\App;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -46,12 +48,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if($this->isHttpException($e)) {
-            return response()->view('errors.other-error', ['statusCode' => $e->getStatusCode()]);
-        } else if ($e instanceof ModelNotFoundException) {
-            return response()->view('errors.model-not-found');
+        if (App::environment('local')) {
+            return parent::render($request, $e);
         } else {
-            return response()->view('errors.other-error', ['statusCode' => '']);
+            if($this->isHttpException($e)) {
+                return response()->view('errors.other-error', ['statusCode' => $e->getStatusCode()]);
+            } else if ($e instanceof ModelNotFoundException) {
+                return response()->view('errors.model-not-found');
+            } else {
+                return response()->view('errors.other-error', ['statusCode' => '']);
+            }
         }
     }
 
