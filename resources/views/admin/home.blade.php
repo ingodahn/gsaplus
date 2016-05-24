@@ -46,6 +46,9 @@
             <p>Auf dieser Seite können Sie die im System vorhandenen</p>
             <ul>
                 <li>
+                    <a href="/AdminCodes" target="_blank">Codes</a>
+                </li>
+                <li>
                     <a href="#patients">Patienten</a>
                 </li>
                 <li>

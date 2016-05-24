@@ -31,5 +31,10 @@
         </div>
       @endforeach
     </div>
+    <div>
+      <p>
+      <a class="btn btn-primary" href="/Home"><i class="fa fa-book" aria-hidden="true"></i> Administratoren-Seite</a>
+      </p>
+    </div>
   </div>
 @endsection
