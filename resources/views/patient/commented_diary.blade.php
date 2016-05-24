@@ -10,6 +10,7 @@
             </p>
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>
+
         <h3>Meine Gesundheit</h3>
         <canvas id="health" ></canvas>
         <script>
@@ -32,6 +33,7 @@
                 options: {
                 }});
         </script>
+
         <h3>Meine Arbeitsfähigkeit</h3>
         <canvas id="wai" ></canvas>
         <script>
@@ -59,7 +61,7 @@
         <div class="commentedWeek">
             <h3>Woche 1</h3>
             <div class="impuls">
-                <h4><i class="fa fa-tasks" aria-hidden="true"></i> Schreibimpuls</h4>
+                <h4><i class="fa fa-flag" aria-hidden="true"></i> Schreibimpuls</h4>
                 {!! nl2br(e($Assignments[1]['problem'])) !!}
             </div>
             @if ($Assignments[1]['dirty'])
@@ -104,7 +106,7 @@
                 <hr/>
                 <h3>Woche {{ $i }}</h3>
                 <div class="impuls">
-                    <h4><i class="fa fa-tasks" aria-hidden="true"></i> Schreibimpuls</h4>
+                    <h4><i class="fa fa-flag" aria-hidden="true"></i> Schreibimpuls</h4>
                     <p>{!! nl2br(e($Assignments[$i]['problem'])) !!}</p>
                 </div>
                 @if ($Assignments[$i]['dirty'])
