@@ -6,7 +6,7 @@
   <h3><i class="fa fa-book" aria-hidden="true"></i> Tagebucheintrag</h3>
 
   @if ($EntryInfo['week'] == 1)
-  <label>Klicken Sie auf Dis Situationen, um diese auszuklappen</label>
+  <label>Klicken Sie auf die Situationen, um diese auszuklappen</label>
     <div class="panel-group m-t-1" id="accordion" role="tablist" aria-multiselectable="true">
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
