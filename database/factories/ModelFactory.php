@@ -26,7 +26,10 @@ $factory->define(App\Patient::class, function (Faker\Generator $faker) use ($fac
     $user = $factory->raw(App\User::class);
 
     return array_merge($user, [
-        'code' => strtoupper(str_random(6)),
+        'code' => strtoupper(str_random(4)).'-'
+                    .strtoupper(str_random(4)).'-'
+                    .strtoupper(str_random(4)).'-'
+                    .strtoupper(str_random(4)),
         'assignment_day' => $faker->numberBetween($min = 0, $max = 4),
         'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3)
     ]);
