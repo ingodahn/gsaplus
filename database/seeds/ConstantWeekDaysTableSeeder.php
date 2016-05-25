@@ -15,7 +15,7 @@ class ConstantWeekDaysTableSeeder extends Seeder
         $this->call(RandomWeekDaysTableSeeder::class);
 
         foreach (WeekDay::all() as $day) {
-            $day->free_time_slots = $day->number + 1;
+            $day->free_time_slots = 10;
             $day->save();
         }
     }
