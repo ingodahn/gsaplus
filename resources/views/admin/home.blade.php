@@ -170,8 +170,8 @@
                         <th>Name</th>
                         <th>E-Mail</th>
                         @if($role == UserRole::PATIENT)
-                            <th>Code</th>
                             <th>Status</th>
+                            <th>Code</th>
                         @endif
                     </tr>
                     </thead>
