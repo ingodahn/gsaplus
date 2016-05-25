@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="parallax-window parallax-window-nav vertical-center" data-parallax="scroll" data-image-src="/img/bg2.jpg">
+  <div class="parallax-window parallax-window-nav vertical-center" data-parallax="scroll" data-image-src="/img/gsa-online-plus-background-1920px.jpg">
     <a href="javascript:openModal()"><i class="fa fa-youtube-play"></i></a>
   </div>
 

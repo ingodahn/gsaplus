@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
 use App\Patient;
+use App\Models\UserRole;
 
 use Validator;
 
@@ -34,7 +35,7 @@ class ContactController extends Controller
 	 */
 	public function mail_editor(Request $request)
 	{
-		// return dd($request);
+
 		$list_of_patients = $request->input('list_of_names');
 		$listS = implode(', ', $list_of_patients);
 		// return dd($list_of_patients);
@@ -43,6 +44,7 @@ class ContactController extends Controller
 
 	/**
 	 * Sendet eine Mail an eine Liste von Patienten
+	 * Nur Therapeuten und Administratoren dürfen diese Funktion nutzen
 	 *
 	 * @param list_of_names
 	 * @param mail_subject
@@ -50,6 +52,11 @@ class ContactController extends Controller
 	 */
 	public function message_to_patients(Request $request)
 	{
+		$user_role = $request->user()->type;
+		if ($user_role !== UserRole::ADMIN && $user_role !== UserRole::THERAPIST) {
+			Alert::error("Sie haben kein Recht, auf diese Seite zuzugreifen");
+			return Redirect::to('/Home');
+		}
 		$list_of_names = $request->input('list_of_names');
 		$mail_subject = $request->input('mail_subject');
 		$mail_body = $request->input('mail_body');
@@ -101,7 +108,7 @@ class ContactController extends Controller
 				->withErrors($validator)
 				->withInput();
 		}
-
+		
 		$eMail = $request->input('eMail');
 		$subject = $request->input('subject');
 		$bodyMessage = $request->input('message');
@@ -113,17 +120,8 @@ class ContactController extends Controller
 				$message->from($eMail)->to($eMailTeam, $nameTeam)->subject($subject);
 		});
 
-		// uncomment to send confirmation
-		/* Mail::send('emails.contact_mail_sent', ['bodyMessage' => $bodyMessage, 'subject' => $subject],
-			function ($message) use ($eMail, $subject) {
-				// no from part needed - the sites name and email address can be found
-				// under 'mail.from' in file config/mail.php
-				$message->to($eMail)->subject("Ihre Anfrage");
->			}); */
-
 		Alert::success('Ihre Nachricht wurde an das Projektteam übermittelt')->persistent();
-
-		return redirect("/");
+		return Redirect::to('/Home');
 	}
 
 }

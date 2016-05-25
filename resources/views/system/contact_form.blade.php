@@ -7,7 +7,7 @@
         <h2>Kontaktformular</h2>
 
         <p>
-          Nutzen sie dieses Formular um eine E-Mail an <a href="mailto:kontakt@gsa-online-plus.net">kontakt@gsa-online-plus.net</a> zu senden.
+          Nutzen sie dieses Formular um eine E-Mail an <a href="mailto:team@online-nachsorge.de">team@online-nachsorge.de</a> zu senden.
         </p>
 
         <form action="/SendMessage" method="post" data-parsley-validate>
@@ -24,7 +24,7 @@
             <label for="message" class="control-label">Nachricht</label>
             <textarea name="message" rows="5" class="form-control js-auto-size" placeholder="Beschreiben Sie Ihr Anliegen" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Absenden</button>
+          <button type="submit" class="btn btn-primary pull-right">Absenden</button>
         </form>
 
     </div>

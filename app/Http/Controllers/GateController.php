@@ -14,8 +14,11 @@ use Jenssegers\Date\Date;
 use App\Code;
 use App\Patient;
 use App\Therapist;
+use App\User;
+
 use App\Helper;
 use App\Models;
+use App\Models\UserRole;
 
 use UxWeb\SweetAlert\SweetAlert as Alert;
 // use Prologue\Alerts\Facades\Alert;
@@ -182,9 +185,10 @@ class GateController extends Controller
 	}
 
 	/**
-	 * Es werden im Profil des Patienten gespeichert:
+	 * Es wird ein Patient neu angelegt. Details siehe Klassendiagramm, User, Patient.
+	 * Gespeichert werden u.a.
 	 * <ol>
-	 * 	<li>Cookie.Code</li>
+	 * 	<li>Code</li>
 	 * 	<li>Name</li>
 	 * 	<li>Passwort1</li>
 	 * 	<li>Email1</li>
@@ -197,22 +201,38 @@ class GateController extends Controller
 	 * Days.decrease_day(gewählter Tag)
 	 * Danach wird auf die Patienten-Homepage weitergeleitet.
 	 *
-	 * @param code
-	 * @param name
-	 * @param password
-	 * @param email
-	 * @param day
+	 * Parameter aus Request:
+	 * <ol>
+	 * <li> code</li>
+	 * <li> name</li>
+	 * <li> password</li>
+	 * <li> email</li>
+	 * <li> day</li>
+	 * </ol>
 	 */
 	public function save_patient_data(Request $request)
 	{
+		$validator = Validator::make($request->all(), [
+			'name' => array('Regex:/^[a-zA-Z0-9\.\-_]+$/', 'required'),
+			'email' => 'required|email'
+		]);
+
+		if ($validator->fails()) {
+			return Redirect::back()
+				->withErrors($validator)
+				->withInput();
+		}
+
 		$code = $request->session()->get(self::CODE_SESSION_KEY);
 		$name = $request->input('name');
+		// ToDo: Check whether name is allowed
 		$password = $request->input('password');
 		$email = $request->input('email');
+		// ToDo: Check whether this is an email
 		$day = $request->input('day_of_week');
 
-		$emailExists = Patient::whereEmail($email)->exists();
-		$nameExists = Patient::whereName($name)->exists();
+		$emailExists = User::whereEmail($email)->exists();
+		$nameExists = User::whereName($name)->exists();
 
 		//if (Name or eMail already in use) {
 		if ($nameExists || $emailExists) {
@@ -328,5 +348,40 @@ class GateController extends Controller
 		return view('gate.welcome');
 	}
 
-}
+	/**
+	 * This function checks whether
+	 * <ul>
+	 * <li>$week, if provided, is an integer 1..12</li>
+	 * <li>$name is the name of a registered patient</li>
+	 * <li>in case the user is a patient, whether he tries to access his own data
+	 * @param $request
+	 * @param $name
+	 * @param null $week
+	 * @return bool
+	 */
+	public static function check_access($request,$name,$week=NULL) {
+	if ($week) {
+		if (! is_numeric($week)){
+			return false;
+		}
+		$week_int=intval($week);
+
+		if ($week_int < 1 || 12 < $week_int) {
+			return false;
+		}
+	}
+	$patient=Patient::whereName($name)->first();
+	if (! $patient) {
+		return false;
+	}
+	$user=$request->user();
+	$is_patient = ($user->type === UserRole::PATIENT);
+	if ($is_patient && $user->name !== $name){
+		return false;
+	}
+	return true;
+
+	}
+
+	}
 ?>
