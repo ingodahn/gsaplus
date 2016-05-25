@@ -109,7 +109,7 @@ $factory->define(App\WeekDay::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Code::class, function () {
    return [
-        'value' => strtoupper(str_random(3))
+        'value' => 'AAAA-AAAA-AAAA-AAAA'
     ];
 });
 
