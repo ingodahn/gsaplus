@@ -17,6 +17,39 @@ $nav-height: 100px;
 .nav-logo {
   height: $nav-height;
   padding-top: 5px;
+    @media (max-width: 640px) {
+      height: $nav-height - 10px;
+    }
+    @media (max-width: 700px) {
+      margin-left: 10px;
+    }
+}
+
+.unimed-logo-header {
+  float: right;
+  height: 45px;
+  margin-top: 30px;
+    @media (max-width: 1000px) {
+      display: none;
+    }
+}
+
+.unimed-logo-footer,
+.unimed-logo-footer-startpage {
+  float: right;
+  height: 40px;
+  margin-top: 15px;
+    @media (max-width: 1000px) {
+      float: none;
+      margin-top: 25px;
+    }
+}
+
+.unimed-logo-footer-startpage {
+  display: none;
+    @media (max-width: 1000px) {
+      display: block;
+    }
 }
 
 // Height of the top navbar
@@ -77,15 +110,17 @@ $parallax-window-height: 400px;
   min-height: $parallax-window-height;
 }
 
+// YouTube area at the homepage
 .parallax-window-nav {
   position: relative;
   $nav-total-height: $nav-height + $navbar-padding-bottom + $navbar-border;
   top: -$nav-total-height;
   margin-bottom: -$nav-total-height;
   min-height: $parallax-window-height + $nav-total-height;
-  @media (max-height: 640px) {
-    min-height: ($parallax-window-height / 2) + $nav-total-height;
-  }
+    @media (max-height: 640px) {
+      min-height: ($parallax-window-height / 2) + $nav-total-height;
+    }
+  // Button
   a {
     color: $red-youtube;
     // Offset button by half of navbar's size since it moves the percieved center
@@ -94,7 +129,11 @@ $parallax-window-height: 400px;
   a:hover {
     color: $red-youtube-hover;
   }
+  // Size of the icon
   font-size: 94pt;
+    @media (max-height: 640px) {
+    font-size: 65pt;
+    }
 }
 
 .register-login {

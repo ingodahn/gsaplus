@@ -34,7 +34,7 @@ return [
     'different'            => ':attribute und :other müssen sich unterscheiden.',
     'digits'               => ':attribute muss :digits Stellen haben.',
     'digits_between'       => ':attribute muss zwischen :min und :max Stellen haben.',
-    'email'                => ':attribute Format ist ungültig.',
+    'email'                => ':attribute: Format ist ungültig.',
     'exists'               => 'Der gewählte Wert für :attribute ist ungültig.',
     'filled'               => ':attribute muss ausgefüllt sein.',
     'image'                => ':attribute muss ein Bild sein.',
@@ -57,7 +57,7 @@ return [
     ],
     'not_in'               => 'Der gewählte Wert für :attribute ist ungültig.',
     'numeric'              => ':attribute muss eine Zahl sein.',
-    'regex'                => ':attribute Format ist ungültig.',
+    'regex'                => ':attribute: Format ist ungültig.',
     'required'             => ':attribute muss ausgefüllt sein.',
     'required_if'          => ':attribute muss ausgefüllt sein, wenn :other :value ist.',
     'required_unless'      => ':attribute muss ausgefüllt sein, wenn :other nicht :values ist.',
@@ -107,8 +107,10 @@ return [
 
     'attributes' => [
         'eMail' => 'E-Mail-Adresse',
+        'email' => 'E-Mail-Adresse',
         'subject' => 'Betreff',
-        'message' => 'Nachricht'
+        'message' => 'Nachricht',
+        'name' => 'Benutzername'
     ],
 
 ];
