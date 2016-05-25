@@ -64,10 +64,11 @@
     @endif
 
     <p>Es ist Woche <strong>{{$Diary['patient_week']}}</strong> von 12.</p>
-
+    @if ($Diary['next_assignment'] !== "")
     <div class="bs-callout bs-callout-info">
       <p>{{$Diary['next_assignment']}}</p>
     </div>
+      @endif
 
     <label>Klicken Sie auf die Wochen, um diese auszuklappen<br>
       Zum Eintrag gelangen Sie über den Link auf der rechten Seite der Zeile</label>
