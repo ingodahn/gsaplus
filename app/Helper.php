@@ -64,6 +64,8 @@ class Helper {
      *          subject of message
      * @param $view
      *          view with contents (view path separated by dots)
+     * @params $view_params
+     *          an associative array of the form ['param name' => 'value', ...]
      *
      * Please use config(...) to retrieve the settings.
      *
@@ -88,8 +90,8 @@ class Helper {
      *  - missed (versäumt): 'emails.assignment.missed'
      */
     public static function send_email_using_view($sender, $name_of_sender, $recipient,
-                                                    $name_of_recipient, $subject, $view) {
-        Mail::send($view, [],
+                                                    $name_of_recipient, $subject, $view, $view_params = []) {
+        Mail::send($view, $view_params,
             function ($message) use ($sender, $name_of_sender, $recipient, $name_of_recipient, $subject) {
                 $message->from($sender, $name_of_sender)
                     ->to($recipient, $name_of_recipient)
