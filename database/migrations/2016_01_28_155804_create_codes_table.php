@@ -14,7 +14,7 @@ class CreateCodesTable extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('value', 3)->unique();
+            $table->string('value')->unique();
         });
     }
 
