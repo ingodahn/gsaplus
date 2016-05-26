@@ -4,4 +4,8 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = "scotchbox"
     config.vm.synced_folder ".", "/var/www/gsa", :mount_options => ["dmode=775", "fmode=664"]
     config.vm.provision "shell", path: "provision.sh"
+
+    if Vagrant.has_plugin?("vagrant-cachier")
+      config.cache.scope = :box
+    end
 end
