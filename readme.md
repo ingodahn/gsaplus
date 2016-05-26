@@ -52,7 +52,7 @@ rake db_seed # Optional. Seed DB with test-data.
 
 The application should now be accessible at <http://192.168.33.10/>.
 
-The VM has an instance of Piwik running at <http://192.168.33.10/piwik>. Unfortunately, not every step of it's installation can be automated, so you'll have to go through their setup first, although this is completely optional. Just click through the thing and enter the following values, leaving everything else unchanged: For the database setup (step 3) use Login `root` with password `root` and database name `piwik`. Create a super user (step 5) with arbitrary credentials (you'll use them to login later), the email-address may be nonexistend. Setup a website (step 6) with an arbitrary name, URL `http://192.168.33.10/` and time zone `Berlin`. Untick the two checkboxes in step 8 to leave Do Not Track support disabled and not anonymize IPs.
+The VM has an instance of Piwik running at <http://192.168.33.10:8080/>. Unfortunately, not every step of it's installation can be automated, so you'll have to go through their setup first, although this is completely optional. Just click through the thing and enter the following values, leaving everything else unchanged: For the database setup (step 3) use Login `root` with password `root` and database name `piwik`. Create a super user (step 5) with arbitrary credentials (you'll use them to login later), the email-address may be nonexistend. Setup a website (step 6) with an arbitrary name, URL `http://192.168.33.10:8080/` and time zone `Berlin`. Untick the two checkboxes in step 8 to leave Do Not Track support disabled and not anonymize IPs.
 
 
 
