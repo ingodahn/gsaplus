@@ -64,7 +64,7 @@ class Helper {
      *          subject of message
      * @param $view
      *          view with contents (view path separated by dots)
-     * @params $view_params
+     * @param $view_params
      *          an associative array of the form ['param name' => 'value', ...]
      *
      * Please use config(...) to retrieve the settings.
