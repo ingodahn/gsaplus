@@ -2,24 +2,27 @@
 <html>
 <body>
 <p>
-    Sehr geehrter Patient,
+    Sehr geehrter Teilnehmer {!! $Name !!},
 </p>
 <p>
-    Sie haben sich mit dieser eMail-Adresse erfolgreich zur Teilnahme am Programm <em>GSA Online plus</em> angemeldet.
-    Wie geht es jetzt weiter?
+    herzlich Willkommen auf der Online-Plattform von GSA-Online plus!
 </p>
 <p>
-    Nachdem Ihre Klinik uns über Ihre Entlassung informiert hat, erhalten Sie Ihre erste Schreibaufgabe. Sie werden
-    darüber mit einer eMail an dem von Ihnen gewählten Wochentag informiert. Bitte bearbeiten Sie diese Aufgabe möglichst
-    noch am selben Tag.
+    Wir freuen uns, Sie die nächsten 12 Wochen bei Ihrem beruflichen Wiedereinstieg zu begleiten und zu unterstützen.
 </p>
 <p>
-    Sie erhalten dann kurzfristig eine Rückmeldung des Therapeuten zu Ihrem Beitrag, die Ihnen helfen soll, mit
-    auftretenden Problemen besser umzugehen.
+    Ihr erster Schreibimpuls wird an dem von Ihnen gewählten Schreibtag auf der Plattform im Bereich „Mein Tagebuch“
+    zur Verfügung gestellt. Wir werden Sie hierüber noch einmal rechtzeitig per Email informieren.
 </p>
 <p>
-    Wir freuen uns auf den Dialog mit Ihnen<br/>
-    Ihr Team GSA-Online Plus</p>
+    Für weitere Informationen zu uns und unserem Projekt besuchen Sie uns gerne jederzeit auf
+    <a href="{{ url("/") }}">{{ url("/") }}</a>.
+</p>
+<p>
+    Viele Grüße,
+</p>
+<p>
+    Ihr Team von GSA-Online plus
 </p>
 </body>
 </html>

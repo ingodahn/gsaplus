@@ -1,11 +1,15 @@
 <html>
 <body>
-<p>Sehr geehrter Patient,</p>
-<p>wir wollen Sie darüber informieren, dass Sie Ihren letzten Schreibimpuls noch nicht bearbeitet haben.</p>
-<p>Sie können den Tagebucheintrag bis zum nächsten Schreibtag schreiben. Wir werden uns bemühen, Ihren
-    Eintrag einzusehen und ihnen Rückmeldung zu geben.</p>
-<p>Bitte besuchen Sie unsere Website um sich den letzten Schreibimpuls anzusehen und einen Tagebucheintrag zu verfassen.</p>
+<p>Sehr geehrter Teilnehmer {!! $Name !!},</p>
+<p>
+    wir möchten Sie noch einmal daran erinnern, dass Ihr aktueller Schreibimpuls  auf der Online-Plattform
+    GSA-Online plus für Sie zur Verfügung steht.</p>
+<p>
+    Sie haben <strong>noch zwei Tage</strong> Zeit, diesen Schreibimpuls zu bearbeiten.
+</p>
+<p>Bitte besuchen Sie uns auf <a href="{{ url("/") }}">{{ url("/") }}</a>, um sich Ihren aktuellen Schreibimpuls
+    anzusehen und einen Tagebucheintrag zu verfassen.</p>
 <p>Viele Grüße,<br/>
-    Ihr Team GSA Online Plus</p>
+    Ihr Team von GSA-Online Plus</p>
 </body>
 </html>
