@@ -45,7 +45,7 @@ We use [Vagrant](https://www.vagrantup.com/) with a [VirtualBox](https://www.vir
 SSH into the VM (`vagrant ssh` or use `vagrant@192.168.33.10` with password `vagrant` with your own ssh-client). Execute the following commands sequentially for the first-time setup.
 
 ``` bash
-cd /var/www # Change to the project dir inside the VM
+cd /var/www/gsa # Change to the project dir inside the VM
 rake # Automated task to update dependencies, compile assets, etc.
 rake db_seed # Optional. Seed DB with test-data.
 ```
