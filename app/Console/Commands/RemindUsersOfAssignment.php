@@ -194,7 +194,7 @@ class RemindUsersOfAssignment extends Command
         }
 
         if ($patient !== null && $view !== null) {
-            Mail::send($view, [],
+            Mail::send($view, ['PatientName' => $patient->name],
                 function ($message) use ($patient, $subject) {
                     $message->from(config('mail.team.address'), config('mail.team.name'))
                                 ->to($patient->email, $patient->name)
