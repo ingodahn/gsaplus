@@ -205,7 +205,7 @@ class PatientController extends Controller
 		try {
 			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
 		} catch (\InvalidArgumentException $e) {
-			Alert::danger('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->persistent();
+			Alert::warning('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->persistent();
 		}
 
 		if (isset($date_from_clinics)) {
@@ -271,7 +271,7 @@ class PatientController extends Controller
 
 			Alert::success('Ihre persönlichen Informationen wurden erfolgreich gespeichert.')->persistent();
 		} else {
-			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
+			Alert::warning('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
 		}
 
 		return Redirect::back();
@@ -293,7 +293,7 @@ class PatientController extends Controller
 
 			Alert::success('Die Notizen wurden erfolgreich geändert.')->persistent();
 		} else {
-			Alert::danger('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
+			Alert::warning('Bitte geben Sie die zu speichernden Notizen an.')->persistent();
 		}
 
 		return Redirect::back();

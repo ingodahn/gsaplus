@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            Log::info('My spider-sense is tingling.');
-        })->daily();
+       $schedule->command("gsa:send-reminders --all --set-next-writing-date")
+                    ->daily()
+                    ->appendOutputTo("storage/logs/send-reminders.log");
     }
 }

@@ -31,5 +31,11 @@
         </div>
       @endforeach
     </div>
+
+    <br/>
+
+    <div class="pull-right">
+      <a class="btn btn-primary" onclick="window.close()"><i class="fa fa-close" aria-hidden="true"></i> &nbsp;Schließen</a>
+    </div>
   </div>
 @endsection

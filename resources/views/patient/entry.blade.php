@@ -14,12 +14,13 @@
 
       {{ csrf_field() }}
 
-      <h2>Woche {{$EntryInfo['week']}} <small>(
-          {{ $EntryInfo['status_text'] }}
-          @if ($isTherapist)
-            , <code>{{$EntryInfo['status']}}</code>
+      <h2>Woche {{$EntryInfo['week']}}
+        @if ($isTherapist)
+        <small>
+                    Patient: <em>{{ $PatientInfo['name'] }}</em>
+             <code>Status: {{$EntryInfo['status']}} {{ $EntryInfo['status_text'] }}</code>
           @endif
-        )</small></h2>
+        </small></h2>
 
       @include('patient.entry.help')
       @include('patient.entry.notizen')
@@ -39,9 +40,7 @@
           <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
         </p>
       @else
-        <p>
-          <a href="/Home" class="btn btn-primary">Zur Übersicht</a>
-        </p>
+
       @endif
 
     </form>

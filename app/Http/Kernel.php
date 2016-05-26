@@ -48,6 +48,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'test.date' => \App\Http\Middleware\ChangeCurrentDate::class
+        'test.date' => \App\Http\Middleware\ChangeCurrentDate::class,
+        'role' => \App\Http\Middleware\CheckUserRole::class
     ];
 }

@@ -3,7 +3,7 @@
   $editable = $isPatient && $EntryInfo['status'] < 'E040';
 ?>
 @if($visible)
-  <h3>Fragen zum Befinden</h3>
+  <h3><i class="fa fa-heartbeat" aria-hidden="true"></i> Fragen zum Befinden</h3>
   <p>
     <strong>Wir wollen herausfinden, wie gut oder schlecht Ihre Gesundheit <em>heute</em> ist:</strong>
   </p>

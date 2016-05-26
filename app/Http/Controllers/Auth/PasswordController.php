@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 
-use App\Patient;
+use App\User;
 
 class PasswordController extends Controller
 {
@@ -46,9 +46,9 @@ class PasswordController extends Controller
      */
     public function postEmail(Request $request)
     {
-        $p = Patient::whereEmail($request->input('email'))->first();
+        $u = User::whereEmail($request->input('email'))->first();
 
-        if ($p !== null && !$p->is_random) {
+        if ($u !== null) {
             return $this->sendResetLinkEmail($request);
         } else {
             return redirect()->back()->with('status', trans('passwords.sent'));

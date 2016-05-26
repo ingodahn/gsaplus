@@ -13,6 +13,7 @@ use App\Models\InfoModel;
 use Illuminate\Console\Command;
 
 use Illuminate\Database\Eloquent\Collection;
+use Log;
 
 /**
  * This command is only needed for testing and may be removed later on.
@@ -60,9 +61,14 @@ class ClearDistantData extends Command
     {
         $settings = TestSetting::first();
 
+        // unset test date
+        Date::setTestNow();
+
         if ($settings && $settings->test_date) {
             Date::setTestNow($settings->test_date->max(Date::now()));
         }
+
+        Log::info('using '.Date::now()->format('d.m.Y').' to clear data');
 
         $patients = new Collection;
 
@@ -84,18 +90,16 @@ class ClearDistantData extends Command
             $distant_assignments = $patient->ordered_assignments()->slice($index_for_next_week);
             // set writing dates to null
             $this->removeData($distant_assignments, $patient);
-            // reset intervention ended flag, clear notice from therapist, patient notes, etc. ...
+            // reset intervention ended flag, etc. ...
             $this->resetAttributesOfPatient($patient);
 
             $patient->push();
         }
-
-        Date::setTestNow();
     }
 
     protected function removeData(Collection $assignments, Patient $patient) {
         foreach ($assignments as $assignment) {
-            // only clear writing date of assignment surpassing the next assignment
+            // only clear writing date of assignments surpassing the next assignment
             if ((max($patient->patient_week, 0) + 2) <= $assignment->week) {
                 $this->removeWritingDate($assignment);
             }
@@ -107,12 +111,6 @@ class ClearDistantData extends Command
         }
     }
 
-    /**
-     * Set writing date to null.
-     *
-     * @param $assignment
-     *          assignment to process
-     */
     protected function removeWritingDate(&$assignment) {
         if ($assignment->writing_date) {
             $assignment->writing_date = null;
@@ -168,14 +166,9 @@ class ClearDistantData extends Command
     }
 
     protected function resetAttributesOfPatient(Patient &$patient) {
-        /*
-        if ($patient->patient_week == -1) {
-            $patient->date_from_clinics = null;
-        }
-
+        /* uncomment to reset notes (for ALL patients)
         $patient->notes_of_therapist = "";
         $patient->personal_information = "";
-        $patient->intervention_ended_on = null;
         */
 
         if ($patient->assignment_day_changes_left === 0) {

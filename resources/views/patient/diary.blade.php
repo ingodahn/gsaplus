@@ -42,7 +42,7 @@
     @endif
 
     <h2>Tagebuch
-      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Ihr Tagebuch" data-content="Hier kommt eine Schnellhilfe zur Bedienung des Tagebuchs.">
+      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Ihr Tagebuch" data-content="Klicken Sie auf die Wochen, die mit Pfeilen gekennzeichnet sind.">
         <i class="fa fa-question-circle"></i>
       </a>
     </h2>
@@ -64,11 +64,14 @@
     @endif
 
     <p>Es ist Woche <strong>{{$Diary['patient_week']}}</strong> von 12.</p>
-
+    @if ($Diary['next_assignment'] !== "")
     <div class="bs-callout bs-callout-info">
       <p>{{$Diary['next_assignment']}}</p>
     </div>
+      @endif
 
+    <label>Klicken Sie auf die Wochen, um diese auszuklappen<br>
+      Zum Eintrag gelangen Sie über den Link auf der rechten Seite der Zeile</label>
     <div class="panel-group diary-accordion" id="accordion" role="tablist" aria-multiselectable="true">
       @foreach($Diary['entries'] as $i => $entry)
         <?php
@@ -95,7 +98,7 @@
               </a>
               <a href="/Assignment/{{$Diary['name']}}/{{$i}}" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
             @else
-              <small>-</small> <strong>Woche {{$i}}</strong>
+              <i class="fa fa-ban" aria-hidden="true"></i> <strong>Woche {{$i}}</strong> - noch nicht verfügbar
             @endif
             </h4>
           </div>
@@ -103,7 +106,7 @@
             <div class="panel-body">
 
               @if($current)
-                <p><em>Dies ist die aktuelle Aufgabe.</em></p>
+                <p><em>Das ist der aktuelle Schreibimpuls.</em></p>
               @endif
               <p>{{$entry['problem']}}</p>
 
@@ -112,8 +115,10 @@
         </div>
       @endforeach
     </div>
+      @if ($Diary['patient_week']>1)
       <p>
-        <a class="btn btn-primary" href="/CommentedDiary/{{$Diary['name']}}" target=""_blank">Kommentiertes Tagebuch</a>
+        <a class="btn btn-primary" href="/CommentedDiary/{{$Diary['name']}}" target=""_blank"><i class="fa fa-book" aria-hidden="true"></i> Wochenrückblick</a>
       </p>
+        @endif
   </div>
 @endsection

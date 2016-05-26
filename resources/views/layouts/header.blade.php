@@ -14,6 +14,12 @@
       </a>
     </div>
 
+    @if(!$isLoggedIn)
+      <a href="http://www.unimedizin-mainz.de/" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" alt="Universitätsmedizin Mainz Logo" title="zur Website der Universitätsmedizin Mainz" class="unimed-logo-header pull-right">
+      </a>
+    @endif
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
