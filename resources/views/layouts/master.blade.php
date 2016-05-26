@@ -5,6 +5,7 @@
     @yield('additional-head')
   </head>
   <body id="body" class="role-{{$Role or "visitor"}}">
+    <noscript><p><img src="//{{config('piwik.host')}}{{config('piwik.path')}}/piwik.php?idsite={{config('piwik.site_id')}}" style="border:0; display:none;" alt="" /></p></noscript>
     @include('sweet::alert')
     {{-- show laravel specific errors (like validation errors or the cause of a failed login attempt) --}}
     @include('layouts.errors')
