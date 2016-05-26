@@ -48,7 +48,7 @@
       </p>
 
       <h3>Erfassung statistischer Daten</h3>
-      <iframe style="border: 0; width: 100%;" scrolling="no" onload="resizeIframe(this)" src="/piwik/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
+      <iframe style="border: 0; width: 100%;" scrolling="no" onload="resizeIframe(this)" src="{{config('piwik.protocol')}}://{{config('piwik.host')}}{{config('piwik.path')}}/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
 
       <h3>Cookies</h3>
       <p>
