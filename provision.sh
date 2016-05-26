@@ -13,6 +13,8 @@ echo "Installed $(phpunit --version)"
 apt-get install -y language-pack-DE
 
 if [ ! -f /home/vagrant/provisioned ]; then
+  sudo -H -u vagrant bash -c '(crontab -l ; echo "* * * * * php /var/www/gsa/artisan schedule:run >> /dev/null 2>&1") | crontab'
+
   wget --progress=bar:force -P /tmp/ http://builds.piwik.org/piwik.zip
   unzip /tmp/piwik.zip -d /var/www
   chown -R vagrant:vagrant /var/www/piwik
