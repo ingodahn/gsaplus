@@ -2,7 +2,7 @@
 <html>
 <body>
 <p>
-    Sehr geehrter Teilnehmer {!! $Name !!},
+    Sehr geehrter Teilnehmer {!! $PatientName !!},
 </p>
 <p>
     herzlich Willkommen auf der Online-Plattform von GSA-Online plus!

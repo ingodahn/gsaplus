@@ -1,6 +1,6 @@
 <html>
 <body>
-<p>Sehr geehrter Teilnehmer {!! $Name !!},</p>
+<p>Sehr geehrter Teilnehmer {!! $PatientName !!},</p>
 <p>
     wir möchten Sie noch einmal daran erinnern, dass Ihr aktueller Schreibimpuls  auf der Online-Plattform
     GSA-Online plus für Sie zur Verfügung steht.</p>

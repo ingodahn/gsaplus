@@ -2,7 +2,7 @@
 <html>
 <body>
 <p>
-    Sehr geehrter Teilnehmer {!! $Name !!},
+    Sehr geehrter Teilnehmer {!! $PatientName !!},
 </p>
 <p>
     im Rahmen der Online-Nachsorge GSA-Online plus möchten wir Sie bitten, zu Beginn und zum Ende der Nachsorge einen

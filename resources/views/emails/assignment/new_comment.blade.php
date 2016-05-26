@@ -1,7 +1,7 @@
 <!-- Mail informing about availability of new comment -->
 <html>
 <body>
-<p>Sehr geehrter Teilnehmer {!! $Name !!},</p>
+<p>Sehr geehrter Teilnehmer {!! $PatientName !!},</p>
 <p>Ihr Online-Therapeut hat Ihren Tagebuch-Beitrag kommentiert.
 </p>
 <p>Bitte melden Sie sich auf unserer Webseite <a href="{{ url("/") }}">{{ url("/") }}</a> an um diesen Kommentar zu

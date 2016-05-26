@@ -1,6 +1,6 @@
 <html>
 <body>
-<p>Sehr geehrter Teilnehmer {!! $Name !!},</p>
+<p>Sehr geehrter Teilnehmer {!! $PatientName !!},</p>
 <p>Ihr letzter Schreibimpuls wurde nicht beantwortet und die Bearbeitungsfrist ist leider abgelaufen.</p>
 <p>
     Da wir  diesen Schreibimpuls als wichtig erachten, wollen wir Ihnen gerne die Möglichkeit zur Bearbeitung geben und
