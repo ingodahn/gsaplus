@@ -143,7 +143,7 @@ class Assignment extends InfoModel
             } else {
                 // patient was reminded by system and there is still
                 // time to finish the assignment
-                return AssignmentStatus::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT;
+                return AssignmentStatus::ASSIGNMENT_WILL_BECOME_DUE_SOON;
             }
         } else if ($this->partially_answered) {
             if ($this->dirty) {

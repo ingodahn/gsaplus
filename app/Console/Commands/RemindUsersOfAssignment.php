@@ -157,7 +157,7 @@ class RemindUsersOfAssignment extends Command
             switch ($option) {
                 case self::OPTION_DUE:
                     $status_condition = $current_assignment &&
-                        $current_assignment->status() === AssignmentStatus::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT &&
+                        $current_assignment->status() === AssignmentStatus::ASSIGNMENT_WILL_BECOME_DUE_SOON &&
                             !$current_assignment->date_of_reminder;
                     break;
                 case self::OPTION_MISSED:
