@@ -142,6 +142,9 @@ class Assignment extends InfoModel
                     // patient was reminded but finished assignment
                     // in time
                    return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
+                } else if (Date::now()->gte(
+                            $this->writing_date->copy()->startOfDay()->addDays(config('gsa.missed_period_in_days')))) {
+                    return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
                 } else {
                     // patient was reminded by system and there is still
                     // time to finish the assignment
