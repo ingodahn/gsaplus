@@ -330,7 +330,7 @@ class GateController extends Controller
 				return view('gate.welcome');
 			} else {
 				// code is incorrect
-				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Hilfe zur Code-Eingabe:...')->persistent();
+				Alert::warning('Der einegegebene Code ' . $code . ' ist nicht korrekt. Ein Code besteht nur aus Großbuchstaben und Bindestrichen.')->persistent();
 				return Redirect::to('/Login');
 			}
 		} else {
