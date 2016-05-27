@@ -23,7 +23,7 @@
     </div>
 
     {{-- All active form content must stay in this form for frontend and backend processing --}}
-    <form id="registration-form" data-parsley-validate role="form" action="/SavePatientData" method="post">
+    <form id="registration-form" data-parsley-validate role="form" action="/registration/form" method="post">
       <!-- TODO: better URLs
         <form ... action="/registration/form">
       -->

@@ -344,9 +344,11 @@ class GateController extends Controller
 	 * Zeigt die Willkommensseite. Mit Hilfe dieser Methode kann die
 	 * Seite direkt aufgerufen werden.
 	 */
+	/* Not needed
 	public function show_welcome() {
 		return view('gate.welcome');
 	}
+	*/
 
 	/**
 	 * This function checks whether
