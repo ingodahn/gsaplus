@@ -1,5 +1,11 @@
 <!-- purpose: reset password -->
 @extends('layouts.master')
+
+@section('additional-head')
+  <script src="/js/zxcvbn.js" charset="utf-8"></script>
+  <script src="/js/zxcvbn-evaluate.js" charset="utf-8"></script>
+@endsection
+
 @section('title', 'Passwort Wiederherstellung - Schritt 2')
 
   @section('content')
@@ -16,7 +22,10 @@
 
         <div class="form-group">
           <label for="password">Passwort</label>
-          <input name="password" type="password" class="form-control" placeholder="Passwort" required>
+          <div class="input-group">
+            <input name="password" id="password" type="password" class="form-control" placeholder="Passwort" required minlength="6" aria-describedby="strength-addon">
+            <span class="input-group-addon" id="strength-addon"></span>
+          </div>
         </div>
 
         <div class="form-group">
