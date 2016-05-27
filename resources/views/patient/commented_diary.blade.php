@@ -26,7 +26,7 @@
         data: {
           labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
           datasets: [{
-            label: 'Gesundheit (-1: Keine Angabe)',
+            label: 'Gesundheit',
             fill: false,
             data: [
               @for ($w=1; $w <= $Week; $w++)
@@ -50,7 +50,7 @@
         data: {
           labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
           datasets: [{
-            label: 'Arbeitsfähigkeit (-1: Keine Angabe)',
+            label: 'Arbeitsfähigkeit',
             fill: false,
             data: [
               @for ($w=1; $w <= $Week; $w++)
