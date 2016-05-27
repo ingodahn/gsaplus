@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'reminder_period_in_days' => env('REMINDER_PERIOD', 5),
+    'reminder_period_in_days' => env('REMINDER_PERIOD', 3),
 
     // for testing: change current date
     'current_date' => env('CURRENT_DATE', 'now'),
