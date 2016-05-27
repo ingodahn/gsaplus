@@ -124,20 +124,19 @@
                         @else
                             <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag (nicht eingereicht)</h4>
                             <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
-                            </div>
                         @endif
-                            @else
-                            <div class="answer">
-                                <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
-                                <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
-                                </div>
-                                <div class="comment">
-                                    <h4><i class="fa fa-commenting" aria-hidden="true"></i> Rückmeldung Ihres Online-Therapeuten</h4>
-                                    <p>{!! nl2br(e($Assignments[$i]['comment'])) !!}</p>
-                                </div>
-                                @endif
                     </div>
-    @endfor
-</div>
-
+                @else
+                    <div class="answer">
+                        <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
+                        <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
+                    </div>
+                    <div class="comment">
+                        <h4><i class="fa fa-commenting" aria-hidden="true"></i> Rückmeldung Ihres Online-Therapeuten</h4>
+                        <p>{!! nl2br(e($Assignments[$i]['comment'])) !!}</p>
+                    </div>
+                @endif
+            </div>
+        @endfor
+    </div>
 @endsection

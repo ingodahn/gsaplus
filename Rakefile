@@ -114,7 +114,7 @@ task db_reset: [:dotenv] do
   sh "php artisan migrate"
 end
 
-desc "seed codes, week days and test data"
+desc "seed codes, week days, settings and test data"
 task :db_seed do
   sh "php artisan db:seed"
 end
@@ -124,3 +124,17 @@ task db_refresh_and_seed: [:db_refresh, :db_seed]
 
 desc "apply major db changes and seed test data - all data will be removed"
 task db_reset_and_seed: [:db_reset, :db_seed]
+
+desc "seed codes, week days and settings"
+task :db_seed_base do
+  sh "php artisan db:seed --class=CodesTableSeeder"
+  sh "php artisan db:seed --class=ConstantWeekDaysTableSeeder"
+  sh "php artisan db:seed --class=TestSettingsTableSeeder"
+  sh "php artisan db:seed --class=DefaultAdminTableSeeder"
+end
+
+desc "apply minor db changes and seed base data - all data will be removed"
+task db_refresh_and_seed_base: [:db_refresh, :db_seed_base]
+
+desc "apply major db changes and seed base data - all data will be removed"
+task db_reset_and_seed_base: [:db_reset, :db_seed_base]
