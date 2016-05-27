@@ -20,9 +20,9 @@ class Assignment extends InfoModel
 
     protected static $singleTableSubclasses = [SituationSurvey::class, Task::class];
 
-    protected static $persisted = ['dirty', 'week', 'date_of_reminder', 'patient_id', 'is_random'];
+    protected static $persisted = ['dirty', 'week', 'date_of_reminder', 'date_of_missed_reminder', 'patient_id', 'is_random'];
 
-    protected $dates = ['created_at', 'updated_at', 'writing_date', 'date_of_reminder'];
+    protected $dates = ['created_at', 'updated_at', 'writing_date', 'date_of_reminder', 'date_of_missed_reminder'];
 
     protected $casts = ['dirty' => 'boolean'];
 
@@ -123,33 +123,27 @@ class Assignment extends InfoModel
                 // therapist provided comment to patients answer
                 return AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             }
-        } else if ($this->date_of_reminder) {
-            if ($this->week < $this->patient->patient_week) {
-                if ($this->partially_answered && $this->dirty === false) {
-                    // patient was reminded but finished the assignment
-                    return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
-                } else {
-                    // patient was reminded by system and didn't submit a text
-                    return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
-                }
-            } else if ($this->week == $this->patient->patient_week) {
-                // check if intervention ended
-                if ($this->week == 12 && $this->writing_date->copy()->addWeek()->isPast()) {
-                    // intervention ended, patient was reminded of
-                    // the last assignment but didn't submit a text
-                    return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
-                } else if ($this->partially_answered && !$this->dirty) {
-                    // patient was reminded but finished assignment
-                    // in time
-                   return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
-                } else if (Date::now()->gte(
-                            $this->writing_date->copy()->startOfDay()->addDays(config('gsa.missed_period_in_days')))) {
-                    return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
-                } else {
-                    // patient was reminded by system and there is still
-                    // time to finish the assignment
-                    return AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
-                }
+        } else if ($this->week < $this->patient->patient_week && $this->date_of_reminder) {
+            if ($this->partially_answered && $this->dirty === false) {
+                // patient was reminded but finished the assignment
+                return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
+            } else {
+                // patient was reminded by system and didn't submit a text
+                return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
+            }
+        } else if ($this->week == $this->patient->patient_week && $this->writing_date &&
+                        Date::now()->gte($this->writing_date->copy()->addDays(config('gsa.reminder_period_in_days')))) {
+            if ($this->partially_answered && !$this->dirty) {
+                // patient finished the assignment
+                return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
+            } else if (Date::now()->gte(
+                        $this->writing_date->copy()->startOfDay()->addDays(config('gsa.missed_period_in_days')))) {
+                // patient didn't finish assignment and deadline is over
+                return AssignmentStatus::PATIENT_MISSED_ASSIGNMENT;
+            } else {
+                // patient was reminded by system and there is still
+                // time to finish the assignment
+                return AssignmentStatus::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT;
             }
         } else if ($this->partially_answered) {
             if ($this->dirty) {

@@ -416,7 +416,7 @@ abstract class PatientsTableBaseSeeder extends Seeder
                 $current_assignment->date_of_reminder = null;
                 $this->fill_in_answers($current_assignment, false);
                 break;
-            case PatientStatus::SYSTEM_REMINDED_OF_ASSIGNMENT:
+            case PatientStatus::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT:
                 $current_assignment->dirty = true;
                 $current_assignment->date_of_reminder =
                     $this->faker->dateTimeBetween($current_assignment->writing_date, 'now');

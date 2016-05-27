@@ -20,7 +20,7 @@ class PatientStatus
 
     const PATIENT_GOT_ASSIGNMENT = "P030";
     const PATIENT_EDITED_ASSIGNMENT = "P040";
-    const SYSTEM_REMINDED_OF_ASSIGNMENT = "P045";
+    const SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT = "P045";
     const PATIENT_FINISHED_ASSIGNMENT = "P050";
     const THERAPIST_COMMENTED_ASSIGNMENT = "P060";
     const PATIENT_RATED_COMMENT = "P065";
@@ -40,7 +40,7 @@ class PatientStatus
         self::DATE_OF_DEPARTURE_SET => "Entlassungsdatum erfasst",
         self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls erhalten",
         self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag bearbeitet",
-        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Tagebucheintrag in Kürze fällig",
+        self::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT => "Tagebucheintrag in Kürze fällig",
         self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
         self::THERAPIST_COMMENTED_ASSIGNMENT => "Tagebucheintrag mit Rückmeldung versehen",
         self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",

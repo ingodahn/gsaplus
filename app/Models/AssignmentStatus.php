@@ -17,7 +17,7 @@ class AssignmentStatus
     const THERAPIST_SAVED_ASSIGNMENT = "E015";
     const PATIENT_GOT_ASSIGNMENT = "E020";
     const PATIENT_EDITED_ASSIGNMENT = "E030";
-    const SYSTEM_REMINDED_OF_ASSIGNMENT = "E035";
+    const SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT = "E035";
     const PATIENT_FINISHED_ASSIGNMENT = "E040";
     const THERAPIST_COMMENTED_ASSIGNMENT = "E050";
     const PATIENT_RATED_COMMENT = "E060";
@@ -32,7 +32,7 @@ class AssignmentStatus
         self::THERAPIST_SAVED_ASSIGNMENT => "Schreibimpuls definiert",
         self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls gegeben",
         self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag bearbeitet",
-        self::SYSTEM_REMINDED_OF_ASSIGNMENT => "Tagebucheintrag in Kürze fällig",
+        self::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT => "Tagebucheintrag in Kürze fällig",
         self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
         self::THERAPIST_COMMENTED_ASSIGNMENT => "Tagebucheintrag mit Rückmeldung versehen",
         self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",
@@ -47,8 +47,8 @@ class AssignmentStatus
                 return PatientStatus::PATIENT_GOT_ASSIGNMENT;
             case AssignmentStatus::PATIENT_EDITED_ASSIGNMENT:
                 return PatientStatus::PATIENT_EDITED_ASSIGNMENT;
-            case AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT:
-                return PatientStatus::SYSTEM_REMINDED_OF_ASSIGNMENT;
+            case AssignmentStatus::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT:
+                return PatientStatus::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT;
             case AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT:
                 return PatientStatus::PATIENT_FINISHED_ASSIGNMENT;
             case AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT:

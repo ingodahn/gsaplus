@@ -275,7 +275,7 @@ class Patient extends User
         foreach ($past_assignments as $assignment) {
             $status = $assignment->assignment_status;
 
-            if ($status === AssignmentStatus::SYSTEM_REMINDED_OF_ASSIGNMENT ||
+            if ($status === AssignmentStatus::SYSTEM_SHOULD_REMIND_OF_ASSIGNMENT ||
                 $status < AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT) {
                 $overdue++;
             }
