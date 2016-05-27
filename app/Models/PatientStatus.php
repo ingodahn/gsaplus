@@ -24,6 +24,7 @@ class PatientStatus
     const PATIENT_FINISHED_ASSIGNMENT = "P050";
     const THERAPIST_COMMENTED_ASSIGNMENT = "P060";
     const PATIENT_RATED_COMMENT = "P065";
+    const PATIENT_MISSED_ASSIGNMENT = "P070";
 
     const COLLABORATION_ENDED = "P130";
     const INTERVENTION_ENDED = "P140";
@@ -43,6 +44,7 @@ class PatientStatus
         self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
         self::THERAPIST_COMMENTED_ASSIGNMENT => "Tagebucheintrag mit Rückmeldung versehen",
         self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",
+        self::PATIENT_MISSED_ASSIGNMENT => "Schreibimpuls verpasst",
         self::COLLABORATION_ENDED => "Mitarbeit beendet",
         self::INTERVENTION_ENDED => "Interventionszeit beendet",
         self::UNKNOWN => "Unbekannt"
