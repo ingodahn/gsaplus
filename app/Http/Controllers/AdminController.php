@@ -21,7 +21,7 @@ use UxWeb\SweetAlert\SweetAlert as Alert;
  * @version 1.0
  * @created 02-Feb-2016 04:08:29
  */
-class AdminController extends Controller
+class AdminController extends TestController
 {
 	
 	/**

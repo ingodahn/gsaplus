@@ -35,7 +35,7 @@
       @if($submittable)
         <hr>
         <p>
-          @if($isPatient)
+          @if($isPatient && $EntryInfo['status'] < "E050")
             <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
           @endif
           <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>

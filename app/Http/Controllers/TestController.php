@@ -208,7 +208,7 @@ class TestController extends Controller
         return Redirect::back();
     }
 
-    protected function dumpInfo(User $user) {
+    public function dumpInfo(User $user) {
         return view('test.info-dump')->with('info', $this->getInfo($user));
     }
 
