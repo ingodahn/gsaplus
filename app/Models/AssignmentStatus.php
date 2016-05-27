@@ -55,6 +55,8 @@ class AssignmentStatus
                 return PatientStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             case AssignmentStatus::PATIENT_RATED_COMMENT:
                 return PatientStatus::PATIENT_RATED_COMMENT;
+            case AssignmentStatus::PATIENT_MISSED_ASSIGNMENT:
+                return PatientStatus::PATIENT_MISSED_ASSIGNMENT;
         }
 
         return PatientStatus::UNKNOWN;
