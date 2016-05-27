@@ -16,7 +16,7 @@
 
     <h3><i class="fa fa-heartbeat" aria-hidden="true"></i> Befinden</h3>
 
-    <h4>Meine Gesundheit</h4>
+    <h4>Gesundheit &amp; Arbeitsfähigkeit</h4>
 
     <canvas id="health" ></canvas>
     <script>
@@ -28,30 +28,17 @@
           datasets: [{
             label: 'Gesundheit',
             fill: false,
+            borderColor: "#2196F3",
             data: [
               @for ($w=1; $w <= $Week; $w++)
                 {{ $Health[$w] }},
               @endfor
               {{ $Health[$Week] }}
             ]
-          }]
-        },
-        options: {}
-      });
-    </script>
-
-    <h4>Meine Arbeitsfähigkeit</h4>
-
-    <canvas id="wai" ></canvas>
-    <script>
-      var ctx = document.getElementById("wai");
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
-          datasets: [{
+          }, {
             label: 'Arbeitsfähigkeit',
             fill: false,
+            borderColor: "#8BC34A",
             data: [
               @for ($w=1; $w <= $Week; $w++)
                 {{ $Wai[$w] }},
@@ -63,6 +50,7 @@
         options: {}
       });
     </script>
+
     <div class="commentedWeek">
       <h3>Woche 1</h3>
       <div class="impuls">
