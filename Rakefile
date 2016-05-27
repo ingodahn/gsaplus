@@ -72,11 +72,21 @@ task :css do
 end
 
 desc "Delete published assets"
-task :clean do
+task :clean_assets do
   `rm -rf public/css/`
   `rm -rf public/fonts/`
   `rm -rf public/js/`
   `rm -rf public/img/`
+end
+
+desc "Delete everything automated except the VM"
+task clean: [:clean_assets] do
+  sh "rm -rf vendor"
+  sh "rm -rf bower_components"
+  sh "rm -rf .sass-cache"
+  sh "rm -f storage/framework/sessions/*"
+  sh "rm -f storage/framework/views/*"
+  sh "rm -f storage/logs/*"
 end
 
 desc "Executes bower install"
