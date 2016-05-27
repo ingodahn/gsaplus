@@ -199,8 +199,9 @@
                             <th>Login</th>
                             @if($role == UserRole::PATIENT)
                                 <th>Status</th>
-                                <th class="text-center">Zum Fristende</th>
-                                <th class="text-center">Zum nächsten Schreibdatum</th>
+                                <th class="text-center">Erinnerungsdatum</th>
+                                <th class="text-center">Fristende</th>
+                                <th class="text-center">Nächstes Schreibdatum</th>
                             @endif
                         </tr>
                     </thead>
@@ -247,24 +248,36 @@
                                     <td class="text-center">
                                         <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
                                             {{ csrf_field() }}
-                                            <input class="btn-link" value="Zum {{$user['dateOfReminder']}} springen" type="submit" />
+                                            <input class="btn-link" value="Zum {{$user['dateOfReminder']}}" type="submit" />
                                         </form>
                                     </td>
                                 @else
                                     <td class="text-center">
-                                        <small><em>... kein Schreibimpuls ...</em></small>
+                                        <small><em>kein Schreibimpuls</em></small>
+                                    </td>
+                                @endif
+                                @if(isset($user['dateOfDeadline']) && $user['patientStatus'] < 'P130')
+                                    <td class="text-center">
+                                        <form method="POST" action="/test/next-deadline/{{ $user['name'] }}">
+                                            {{ csrf_field() }}
+                                            <input class="btn-link" value="Zum {{$user['dateOfDeadline']}}" type="submit" />
+                                        </form>
+                                    </td>
+                                @else
+                                    <td class="text-center">
+                                        <small><em>kein Schreibimpuls</em></small>
                                     </td>
                                 @endif
                                 @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
                                     <td class="text-center">
                                         <form method="POST" action="/test/next-date/{{ $user['name'] }}">
                                             {{ csrf_field() }}
-                                            <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
+                                            <input class="btn-link" value="Zum {{$user['nextWritingDate']}}" type="submit" />
                                         </form>
                                     </td>
                                 @else
                                     <td class="text-center">
-                                        <small><em>... kein Folgedatum ...</em></small>
+                                        <small><em>kein Folgedatum</em></small>
                                     </td>
                                 @endif
                             @endif
