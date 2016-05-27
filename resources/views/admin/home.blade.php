@@ -170,8 +170,8 @@
                         <th>Name</th>
                         <th>E-Mail</th>
                         @if($role == UserRole::PATIENT)
-                            <th>Code</th>
                             <th>Status</th>
+                            <th>Code</th>
                         @endif
                     </tr>
                     </thead>
@@ -179,7 +179,7 @@
                     @foreach($users as $user)
                         <tr>
                             <td>
-                                <a href="/test/dump-info/{{$user['name'] }}" target="_blank">
+                                <a href="/admin/dump-info/{{$user['name'] }}" target="_blank">
                                     {{ $user['name'] }}
                                 </a>
                             </td>
@@ -240,7 +240,7 @@
                         Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren ersten Schreibtag haben.
                     </td>
                     <td>
-                        <form method="POST" action="/test/send-reminders/first">
+                        <form method="POST" action="/admin/send-reminders/first">
                             {{ csrf_field() }}
                             <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
                         </form>
@@ -252,7 +252,7 @@
                         Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren neuen Schreibtag haben.
                     </td>
                     <td>
-                        <form method="POST" action="/test/send-reminders/new">
+                        <form method="POST" action="/admin/send-reminders/new">
                             {{ csrf_field() }}
                             <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
                         </form>
@@ -264,7 +264,7 @@
                         Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.
                     </td>
                     <td>
-                        <form method="POST" action="/test/send-reminders/due">
+                        <form method="POST" action="/admin/send-reminders/due">
                             {{ csrf_field() }}
                             <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
                         </form>
