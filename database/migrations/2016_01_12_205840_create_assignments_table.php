@@ -26,6 +26,7 @@ class CreateAssignmentsTable extends Migration
             $table->string('answer');
 
             $table->dateTime('date_of_reminder')->nullable();
+            $table->dateTime('date_of_missed_reminder')->nullable();
 
             // attributes for situations
             // none (link is hasOne in model -> id is stored in situations table)
