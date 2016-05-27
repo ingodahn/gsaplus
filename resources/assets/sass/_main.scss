@@ -280,8 +280,9 @@ textarea {
   }
 }
 
-.panel-group .panel-heading a:focus,a:hover {
+.panel-group .panel-heading a,a:focus,a:hover {
   text-decoration: none;
+  color: $text-color;
 }
 
 .role-therapist .navbar-default {
