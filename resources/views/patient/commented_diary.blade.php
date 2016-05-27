@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Kommentiertes Tagebuch')
 
+@section('additional-head')
+  <script src="/js/Chart.min.js" charset="utf-8"></script>
+@endsection
+
 @section('content')
   <div class="container">
     <h2>Ihr Tagebuch</h2>
@@ -9,7 +13,6 @@
         Dies ist das Tagebuch von <em>{{ $PatientName }}</em>.
       </p>
     @endif
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.2/Chart.min.js"></script>
 
     <h3><i class="fa fa-heartbeat" aria-hidden="true"></i> Befinden</h3>
 

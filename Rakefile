@@ -49,6 +49,8 @@ task :js do
   `cp bower_components/zxcvbn/dist/zxcvbn.js public/js/`
 
   `cp bower_components/textarea-autosize/dist/jquery.textarea_autosize.min.js public/js/`
+
+  `cp bower_components/Chart.js/dist/Chart.min.js public/js/`
 end
 
 desc "Publish all font assets"
