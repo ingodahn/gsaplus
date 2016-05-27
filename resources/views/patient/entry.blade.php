@@ -9,23 +9,24 @@
 
       <?php
         $submittable = $isPatient && in_array($EntryInfo['status'], ["E020", "E030", "E035", "E050"])
-                || $isTherapist;
+                       || $isTherapist;
       ?>
 
       {{ csrf_field() }}
 
       <h2>Woche {{$EntryInfo['week']}}
         @if ($isTherapist)
-        <small>
-                    Patient: <em>{{ $PatientInfo['name'] }}</em>
-             <code>Status: {{$EntryInfo['status']}} {{ $EntryInfo['status_text'] }}</code>
-          @endif
-        </small></h2>
+          <small>
+            Patient: <em>{{ $PatientInfo['name'] }}</em>.
+            Status: <code>{{ $EntryInfo['status'] }}</code>, {{ $EntryInfo['status_text'] }}
+          </small>
+        @endif
+      </h2>
 
       @include('patient.entry.help')
       @include('patient.entry.notizen')
       @include('patient.entry.impuls')
-        @include('patient.entry.eintrag')
+      @include('patient.entry.eintrag')
       <hr>
       @include('patient.entry.befinden')
       @include('patient.entry.rückmeldung')
