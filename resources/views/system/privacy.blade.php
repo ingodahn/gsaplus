@@ -1,5 +1,12 @@
 @extends('layouts.master')
 @section('title', 'Datenschutz')
+@section('additional-head')
+  <script language="javascript" type="text/javascript">
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+  </script>
+@endsection
 
 @section('content')
     <div class="container">
@@ -40,6 +47,9 @@
         Wenn Sie mit uns per E-Mail in Kontakt treten möchten, weisen wir Sie darauf hin, dass die Vertraulichkeit der übermittelten Informationen auf dem Übertragungsweg durch das Internet nicht gewährleistet ist. Der Inhalt von E-Mails kann von Dritten eingesehen werden. Wir empfehlen Ihnen daher, uns telefonisch zu kontaktieren, wenn Sie uns vertrauliche Informationen zukommen lassen.
       </p>
 
+      <h3>Erfassung statistischer Daten</h3>
+      <iframe style="border: 0; width: 100%;" scrolling="no" onload="resizeIframe(this)" src="{{config('piwik.protocol')}}://{{config('piwik.host')}}{{config('piwik.path')}}/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
+
       <h3>Cookies</h3>
       <p>
         Die Internetseiten verwenden teilweise sogenannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert.
@@ -48,7 +58,7 @@
         Die meisten der von uns verwendeten Cookies sind sogenannte „Session-Cookies“. Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen.
       </p>
       <p>
-        Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein. 
+        Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
       </p>
 
     </div>
