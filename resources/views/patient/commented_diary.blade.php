@@ -71,17 +71,18 @@
       </div>
       @if ($Assignments[1]['dirty'])
         <div class="answerNotSubmitted">
-        @else
+            <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag (nicht eingereicht)</h4>
+            @else
           <div class="answer">
+              <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
           @endif
-          <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
           @if ($isTherapist && $Assignments[1]['dirty'])
             Nicht eingereicht.
           @elseif($Assignments[1]['answer']=="")
             Nicht bearbeitet
           @else
             @for ($j=1;$j<=2;$j++)
-              @if (isset($Assignments[1]['answer'][$j-1]['description']))
+              @if (isset($Assignments[1]['answer'][$j-1]['description']) && $Assignments[1]['answer'][$j-1]['description'] !== "")
                 <div class="situation">
                   <h4><i class="fa fa-sitemap" aria-hidden="true"></i> Situation {!! $j !!}</h4>
                   <div class="sitPart">
@@ -130,7 +131,11 @@
           @else
             <div class="answer">
               <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
-              <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
+                @if (nl2br(e($Assignments[$i]['answer'])) == "")
+                    <p>Nichts eingereicht</p>
+                @else
+                    <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
+                @endif
             </div>
             <div class="comment">
               <h4><i class="fa fa-commenting" aria-hidden="true"></i> Rückmeldung Ihres Online-Therapeuten</h4>
