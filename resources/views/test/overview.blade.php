@@ -9,6 +9,7 @@
 
         th {
             white-space : nowrap;
+            vertical-align:middle !important;
         }
         
         ul.nav {
@@ -17,6 +18,11 @@
 
         hr {
             border-top: 1px dashed #8c8b8b;
+        }
+
+        .btn-link, th {
+            margin-bottom: 4px;
+            white-space: normal;
         }
     </style>
 @endsection
@@ -199,9 +205,9 @@
                             <th>Login</th>
                             @if($role == UserRole::PATIENT)
                                 <th>Status</th>
-                                <th class="text-center">Erinnerungsdatum</th>
-                                <th class="text-center">Fristende</th>
-                                <th class="text-center">Nächstes Schreibdatum</th>
+                                <th class="text-center">Zum Erinnerungs&shy;datum</th>
+                                <th class="text-center">Zum Fristende</th>
+                                <th class="text-center">Zum nächsten Schreibdatum</th>
                             @endif
                         </tr>
                     </thead>
@@ -225,7 +231,7 @@
                                 </form>
                             </td>
                             @if($role == UserRole::PATIENT)
-                                <td>
+                                <td style="white-space: nowrap !important">
                                     <em>{{ $user['patientStatus']  }}</em>
                                     <a href="javascript:void(0)" data-toggle="popover" data-placement="right"
                                        data-html="true" data-trigger="focus" title="Es gibt folgende Patienten-Status (P)"
