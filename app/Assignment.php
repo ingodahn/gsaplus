@@ -123,7 +123,7 @@ class Assignment extends InfoModel
                 // therapist provided comment to patients answer
                 return AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             }
-        } else if ($this->week < $this->patient->patient_week && $this->notified_due) {
+        } else if ($this->week < $this->patient->patient_week) {
             if ($this->partially_answered && $this->dirty === false) {
                 // patient was reminded but finished the assignment
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;
