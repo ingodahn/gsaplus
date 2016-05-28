@@ -9,6 +9,8 @@ use App\Models\PatientStatus;
 use Illuminate\Database\Eloquent\Collection;
 use Jenssegers\Date\Date;
 
+use Log;
+
 class Patient extends User
 {
 
@@ -103,11 +105,17 @@ class Patient extends User
         if ($current_assignment && $current_assignment->week < 12) {
             // day is changed during intervention period
 
-            // leave patient at least one week time complete the current assignment
-            $next_writing_date = Date::now()->next($this->assignment_day)->addWeek();
+            // leave patient at least 5 days time to complete the current assignment
+            $next_writing_date = Date::now()->next($assignment_day);
+
+            if (Date::now()->startOfDay()->diffInDays($next_writing_date) < config('gsa.buffer_between_assignments')) {
+                $next_writing_date->addWeek();
+            }
 
             $next_assignment = $this->next_assignment();
             $next_assignment->writing_date = $next_writing_date;
+
+            $next_assignment->save();
         }
 
         $this->attributes['assignment_day'] = $assignment_day;
@@ -126,9 +134,16 @@ class Patient extends User
                 $reference_date = $date_from_clinics->copy();
             }
 
-            // give patient at least a week before the first assignment starts
-            $first_assignment->writing_date = $reference_date->copy()->startOfDay()
-                ->addWeek()->next($this->assignment_day);
+            $reference_date = $reference_date->startOfDay();
+
+            // leave patient at least 5 days time to complete the current assignment
+            $next_writing_date = $reference_date->copy()->next($this->assignment_day);
+
+            if ($reference_date->diffInDays($next_writing_date) < config('gsa.buffer_between_assignments')) {
+                $next_writing_date->addWeek();
+            }
+
+            $first_assignment->writing_date = $next_writing_date;
             $first_assignment->save();
         }
 
