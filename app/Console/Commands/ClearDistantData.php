@@ -159,6 +159,7 @@ class ClearDistantData extends Command
 
         $assignment->dirty = false;
         $assignment->notified_due = false;
+        $assignment->notified_missed = false;
 
         $this->info("Reset assignment attributes".$this->getAssignmentContextString($assignment));
 
