@@ -225,20 +225,19 @@ class GateController extends Controller
 
 		$code = $request->session()->get(self::CODE_SESSION_KEY);
 		$name = $request->input('name');
-		// ToDo: Check whether name is allowed
 		$password = $request->input('password');
 		$email = $request->input('email');
-		// ToDo: Check whether this is an email
 		$day = $request->input('day_of_week');
 
 		$emailExists = User::whereEmail($email)->exists();
 		$nameExists = User::whereName($name)->exists();
-
-		//if (Name or eMail already in use) {
-		if ($nameExists || $emailExists) {
+		$codeExists = User::whereCode($code)->exists();
+		//if (Name or eMail or Code already in use) {
+		if ($nameExists || $emailExists || $codeExists) {
 			$message = "Ihre Registrierung ist leider fehlgeschlagen.".
-				($nameExists ? "Bitte wählen Sie einen anderen Benutzernamen." :
-					"Bitte überprüfen Sie die eingegebene E-Mail-Adresse.");
+				($nameExists ? "Bitte wählen Sie einen anderen Benutzernamen." :"").
+			($emailExists ? "Bitte wählen Sie eine andere eMail-Adresse." : "").
+				($codeExists ? "Der Code ist bereits registriert" : "");
 
 			$days = new Days;
 			$day_of_week=$days->get_available_days();
