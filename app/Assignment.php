@@ -20,11 +20,11 @@ class Assignment extends InfoModel
 
     protected static $singleTableSubclasses = [SituationSurvey::class, Task::class];
 
-    protected static $persisted = ['dirty', 'week', 'date_of_reminder', 'date_of_missed_reminder', 'patient_id', 'is_random'];
+    protected static $persisted = ['dirty', 'week', 'patient_id', 'notified_due', 'notified_missed', 'is_random'];
 
-    protected $dates = ['created_at', 'updated_at', 'writing_date', 'date_of_reminder', 'date_of_missed_reminder'];
+    protected $dates = ['created_at', 'updated_at', 'writing_date'];
 
-    protected $casts = ['dirty' => 'boolean'];
+    protected $casts = ['dirty' => 'boolean', 'notified_due' => 'boolean', 'notified_missed' => 'boolean'];
 
     /*
      * hide ids from list of attributes
@@ -123,7 +123,7 @@ class Assignment extends InfoModel
                 // therapist provided comment to patients answer
                 return AssignmentStatus::THERAPIST_COMMENTED_ASSIGNMENT;
             }
-        } else if ($this->week < $this->patient->patient_week && $this->date_of_reminder) {
+        } else if ($this->week < $this->patient->patient_week && $this->notified_due) {
             if ($this->partially_answered && $this->dirty === false) {
                 // patient was reminded but finished the assignment
                 return AssignmentStatus::PATIENT_FINISHED_ASSIGNMENT;

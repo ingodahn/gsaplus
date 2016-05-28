@@ -158,12 +158,12 @@ class RemindUsersOfAssignment extends Command
                 case self::OPTION_DUE:
                     $status_condition = $current_assignment &&
                         $current_assignment->status() === AssignmentStatus::ASSIGNMENT_WILL_BECOME_DUE_SOON &&
-                            !$current_assignment->date_of_reminder;
+                            !$current_assignment->notified_due;
                     break;
                 case self::OPTION_MISSED:
                     $status_condition = $current_assignment &&
                         $current_assignment->status() === AssignmentStatus::PATIENT_MISSED_ASSIGNMENT &&
-                            !$current_assignment->date_of_missed_reminder;
+                            !$current_assignment->notified_missed;
                     break;
             }
 
@@ -174,9 +174,9 @@ class RemindUsersOfAssignment extends Command
 
                 // save date of reminder (don't send reminder twice...)
                 if ($option === self::OPTION_DUE) {
-                    $current_assignment->date_of_reminder = Date::now();
+                    $current_assignment->notified_due = true;
                 } else {
-                    $current_assignment->date_of_missed_reminder = Date::now();
+                    $current_assignment->notified_missed = true;
                 }
 
                 $current_assignment->save();
