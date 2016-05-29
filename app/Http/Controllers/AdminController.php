@@ -139,7 +139,7 @@ class AdminController extends TestController
 						'Benutzt' => $used_codes->contains($code->value) ? "Ja" : "Nein");
 		}
 
-		Excel::create('Code Export am_'.date('d-m-Y'), function($excel) use ($array) {
+		Excel::create('Code Export am '.date('d-m-Y'), function($excel) use ($array) {
 			// Set the title
 			$excel->setTitle('Codeliste');
 
