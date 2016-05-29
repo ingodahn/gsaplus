@@ -1,6 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Codes')
 
+@section('additional-head')
+  <style>
+    ul.nav {
+      display: none;
+    }
+  </style>
+@endsection
+
 @section('content')
   <div class="container">
     <h2>Codes</h2>
