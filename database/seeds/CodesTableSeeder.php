@@ -15,7 +15,7 @@ class CodesTableSeeder extends Seeder
     {
         $codes = [];
 
-        foreach (range('A','C') as $first_letter) {
+        foreach (range('A','D') as $first_letter) {
             $code_count = 0;
 
             while ($code_count < 120) {
