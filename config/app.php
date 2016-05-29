@@ -232,7 +232,7 @@ return [
         'Alert'     => UxWeb\SweetAlert\SweetAlert::class,
         'Date'      => Jenssegers\Date\Date::class,
         'Datatables' => Yajra\Datatables\Datatables::class,
-
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

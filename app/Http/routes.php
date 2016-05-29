@@ -124,6 +124,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:admin']], function () {
 	Route::post('/admin/therapists/new', 'AdminController@create_therapist');
 	Route::get('/admin/dump-info/{user}', 'AdminController@dumpInfo');
 	Route::post('/admin/send-reminders/{option}', 'AdminController@sendReminders');
+	Route::get('/admin/codes-as-csv', 'AdminController@export_code_list');
 });
 
 Route::group(['middleware' => ['web', 'auth', 'role:admin,therapist']], function () {
