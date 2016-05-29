@@ -140,10 +140,8 @@ class AdminController extends TestController
 		}
 
 		Excel::create('Code Export am '.date('d-m-Y'), function($excel) use ($array) {
-			// Set the title
-			$excel->setTitle('Codeliste');
 
-			// Call them separately
+			$excel->setTitle('Codeliste');
 			$excel->setDescription('Eine Liste aller im System bekannten Codes');
 
 			// create a sheet for every clinic
@@ -163,7 +161,7 @@ class AdminController extends TestController
 					$sheet->fromArray($array[$clinic]);
 
 					$sheet->cell('A1:B1', function($cell) {
-						// headers: send font width to bold
+						// headers: set font weight to bold
 						$cell->setFont(array(
 							'family'     => 'Calibri',
 							'size'       => '16',
@@ -182,7 +180,7 @@ class AdminController extends TestController
 						$cell->setAlignment('center');
 					});
 
-					for ($i=0; $i<count($array[$clinic]);$i++) {
+					for ($i=0; $i<count($array[$clinic]); $i++) {
 						// mark codes as used / unused
 						if ($array[$clinic][$i]['Benutzt'] == "Ja") {
 							$background = '#ff8080';
@@ -196,6 +194,7 @@ class AdminController extends TestController
 					}
 				});
 			}
+
 		})->download('xlsx');
 	}
 
