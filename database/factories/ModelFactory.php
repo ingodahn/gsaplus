@@ -122,6 +122,7 @@ $factory->define(App\TestSetting::class, function() {
        'first_reminder' => true,
        'new_reminder' => true,
        'due_reminder' => true,
+       'missed_reminder' => true,
        'calc_next_writing_date' => true
    ];
 });

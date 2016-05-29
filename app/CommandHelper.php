@@ -70,6 +70,10 @@ class CommandHelper
             $options[] = RemindUsersOfAssignment::OPTION_DUE;
         }
 
+        if ($settings->missed_reminder) {
+            $options[] = RemindUsersOfAssignment::OPTION_MISSED;
+        }
+
         return $options;
     }
 
