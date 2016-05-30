@@ -27,6 +27,7 @@ class CreateAssignmentsTable extends Migration
 
             $table->boolean('notified_due')->default(false);
             $table->boolean('notified_missed')->default(false);
+            $table->boolean('notified_new')->default(false);
 
             // attributes for situations
             // none (link is hasOne in model -> id is stored in situations table)
