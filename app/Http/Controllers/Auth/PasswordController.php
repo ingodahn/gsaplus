@@ -35,6 +35,8 @@ class PasswordController extends Controller
     // redirect to /Home when procedure is complete
     protected $redirectTo = '/Home';
 
+    protected $subject = 'Rücksetzen Ihres Passworts für GSA-Online Plus';
+
     /**
      * Create a new password controller instance.
      *
