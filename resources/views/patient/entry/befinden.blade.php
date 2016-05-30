@@ -19,7 +19,7 @@
         @for($i=0; $i <= 10; $i++)
           <div class="col-md-1">
             <label class="radio-inline big-radio">
-              <input type="radio" name="health" value="{{$i}}" {{$EntryInfo['survey']['health'] == $i ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$i}}
+              <input type="radio" name="health" value="{{$i}}" {{$EntryInfo['survey']['health'] == $i ? "checked" : ""}} {{$editable ? "required" : "disabled"}}> {{$i}}
             </label>
           </div>
         @endfor
@@ -42,7 +42,7 @@
         @for($i=0; $i <= 10; $i++)
           <div class="col-md-1">
             <label class="radio-inline big-radio">
-              <input type="radio" name="wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$i}}
+              <input type="radio" name="wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}} {{$editable ? "required" : "disabled"}}> {{$i}}
             </label>
           </div>
         @endfor
