@@ -20,11 +20,13 @@ class Assignment extends InfoModel
 
     protected static $singleTableSubclasses = [SituationSurvey::class, Task::class];
 
-    protected static $persisted = ['dirty', 'week', 'patient_id', 'notified_due', 'notified_missed', 'is_random'];
+    protected static $persisted = ['dirty', 'week', 'patient_id',
+                                        'notified_due', 'notified_missed', 'notified_new', 'is_random'];
 
     protected $dates = ['created_at', 'updated_at', 'writing_date'];
 
-    protected $casts = ['dirty' => 'boolean', 'notified_due' => 'boolean', 'notified_missed' => 'boolean'];
+    protected $casts = ['dirty' => 'boolean', 'notified_due' => 'boolean',
+                            'notified_missed' => 'boolean', 'notified_new' => 'boolean'];
 
     /*
      * hide ids from list of attributes
