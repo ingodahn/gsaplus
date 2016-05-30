@@ -17,6 +17,11 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer('*',
             'App\Http\ViewComposers\UserInfoComposer'
         );
+
+        // always pass information about the actual environment
+        view()->composer('*',
+            'App\Http\ViewComposers\EnvironmentComposer'
+        );
     }
 
     /**
