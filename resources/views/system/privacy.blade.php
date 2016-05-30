@@ -11,7 +11,7 @@
 @section('content')
     <div class="container">
 
-      <h3>Datenschutzerklärung</h3>
+      <h2>Datenschutzerklärung</h2>
       <p>
         Vielen Dank für Ihren Besuch auf www.online-nachsorge.de. Wir nehmen den Schutz Ihrer Privatsphäre bei der Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten gemäß den gesetzlichen Bestimmungen ernst und möchten, dass Sie sich auf unserer Internetplattform nicht nur mit dem Thema 'berufsbezogene Belastungen' auseinandersetzten, sondern dass Sie sich dabei auch sicher fühlen.
       </p>
