@@ -64,10 +64,11 @@
     @endif
 
     <p>Es ist Woche <strong>{{$Diary['patient_week']}}</strong> von 12.</p>
-
+    @if ($Diary['next_assignment'] !== "")
     <div class="bs-callout bs-callout-info">
       <p>{{$Diary['next_assignment']}}</p>
     </div>
+      @endif
 
     <label>Klicken Sie auf die Wochen, um diese auszuklappen<br>
       Zum Eintrag gelangen Sie über den Link auf der rechten Seite der Zeile</label>
@@ -92,13 +93,19 @@
           <div class="panel-heading" role="tab" id="heading{{$i}}">
             <h4 class="panel-title">
               @if($isPatient && $i <= $Diary['patient_week'] || $isTherapist)
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
-                <small><i class="fa fa-chevron-{{$revealed ? "down" : "right"}} accordion-indicator" aria-hidden="true"></i></small> <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
-              </a>
-              <a href="/Assignment/{{$Diary['name']}}/{{$i}}" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-            @else
-              <i class="fa fa-ban" aria-hidden="true"></i> <strong>Woche {{$i}}</strong> - noch nicht verfügbar
-            @endif
+                <div class="row">
+                  <div class="col-xs-10 col-sm-9">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
+                      <small><i class="fa fa-chevron-{{$revealed ? "down" : "right"}} accordion-indicator" aria-hidden="true"></i></small> <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
+                    </a>
+                  </div>
+                  <div class="col-xs-2 col-md-3">
+                    <a href="/Assignment/{{$Diary['name']}}/{{$i}}" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                  </div>
+                </div>
+              @else
+                <i class="fa fa-ban" aria-hidden="true"></i> <strong>Woche {{$i}}</strong> - noch nicht verfügbar
+              @endif
             </h4>
           </div>
           <div id="collapse{{$i}}" class="panel-collapse collapse {{$revealed ? "in" : ""}}" role="tabpanel" aria-labelledby="heading{{$i}}">
@@ -116,7 +123,7 @@
     </div>
       @if ($Diary['patient_week']>1)
       <p>
-        <a class="btn btn-primary" href="/CommentedDiary/{{$Diary['name']}}" target=""_blank"><i class="fa fa-book" aria-hidden="true"></i> Wochenrückblick</a>
+        <a class="btn btn-primary" href="/CommentedDiary/{{$Diary['name']}}"><i class="fa fa-book" aria-hidden="true"></i> Wochenrückblick</a>
       </p>
         @endif
   </div>

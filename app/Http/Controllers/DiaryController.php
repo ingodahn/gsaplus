@@ -76,8 +76,8 @@ class DiaryController extends Controller
                 $wai[$i] = $p_assignments[$i - 1]['survey']['wai'];
                 $health[$i] = $p_assignments[$i - 1]['survey']['health'];
             } else {
-                $wai[$i] = -1;
-                $health[$i] = -1;
+                $wai[$i] = "null";
+                $health[$i] = "null";
             }
         }
 
@@ -120,7 +120,7 @@ class DiaryController extends Controller
         $params['Wai']=$wai;
         $params['Health']=$health;
         $params['Assignments']=$assignments;
-        
+
         return view('patient/commented_diary')->with($params);
     }
 
@@ -319,7 +319,8 @@ class DiaryController extends Controller
             } else {
                 $assignment->comment()->save($comment);
             }
-             Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email, $patient->name, 'Neuer Kommentar in Ihrem Tagebuch', 'emails.assignment.new_comment');
+             $patient_name=$patient->name;
+             Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email, $patient->name, 'Neuer Kommentar in Ihrem Tagebuch', 'emails.assignment.new_comment',['PatientName' => $patient_name]);
         }
         if ($request->has('comment_reply_satisfied') ||
         $request->has('comment_reply_helpful')) {
@@ -443,7 +444,8 @@ class DiaryController extends Controller
             $Diary['next_assignment'] = "Der erste Schreibimpuls wird nach Übermittlung des Entlassungsdatums aus der Klinik gegeben. Sie werden darüber per E-Mail informiert.";
         }
         else {
-            $Diary['next_assignment'] = "Es ist kein weiterer Schreibimpuls vorgesehen.";
+            // $Diary['next_assignment'] = "Es ist kein weiterer Schreibimpuls vorgesehen.";
+            $Diary['next_assignment'] = "";
         }
 
         $assignment_info = $info['assignments'];

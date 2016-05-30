@@ -280,10 +280,39 @@ textarea {
   }
 }
 
-.panel-group .panel-heading a:focus,a:hover {
+.panel-group .panel-heading a,a:focus,a:hover {
   text-decoration: none;
+  color: $text-color;
 }
 
 .role-therapist .navbar-default {
   background-color: $md-blue-50;
+}
+
+.slots-few {
+  span {
+    border-top-color: $brand-warning;
+    border-bottom-color: $brand-warning;
+    border-left-color: $brand-warning;
+  }
+  input {
+    background-color: $brand-warning-lighter;
+    border-top-color: $brand-warning;
+    border-right-color: $brand-warning;
+    border-bottom-color: $brand-warning;
+  }
+}
+
+.slots-none {
+  span {
+    border-top-color: $brand-danger;
+    border-bottom-color: $brand-danger;
+    border-left-color: $brand-danger;
+  }
+  input {
+    background-color: $brand-danger-lighter;
+    border-top-color: $brand-danger;
+    border-right-color: $brand-danger;
+    border-bottom-color: $brand-danger;
+  }
 }

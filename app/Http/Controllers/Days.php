@@ -54,6 +54,20 @@ class Days
 	}
 
 	/**
+	 * Die Anzahl der Slots für den Tag wird um eins erhöht.
+	 *
+	 * @param day	Carbon::MONDAY ... Carbon::SUNDAY (0..6)
+	 * 				oder der Name des Wochentags
+	 */
+	public function increase_day($day) {
+		$entry = $this->get_week_day($day);
+
+		$entry->free_time_slots++;
+
+		return $entry->save();
+	}
+
+	/**
 	 * Es wird die Liste aller der Tage T zurückgegeben für die es wenigstens einen freien Slot gibt.
 	 * Die Liste hat die Form
 	 * 		["Sonntag", ... , "Donnerstag"].

@@ -164,21 +164,26 @@ class PatientController extends Controller
 		}
 		$is_therapist = ($request->user()->type === UserRole::THERAPIST);
 
-		if ($patient->assignment_day_changes_left > 0 || $is_therapist) {
-			// Sonntag, ..., Donnerstag
-			$day_of_week = $request->input('day_of_week');
+		$old_day = $patient->assignment_day;
 
-			$day_number = Helper::generate_day_name_map()[$day_of_week];
+		$day_of_week = $request->input('day_of_week');
+		$day_number = Helper::generate_day_name_map()[$day_of_week];
 
-			if ($day_number !== null) {
-				$patient->assignment_day = $day_number;
-				$is_therapist ?: $patient->assignment_day_changes_left -= 1 ;
-				$patient->save();
+		$days = new Days;
 
-				Alert::success('Der Schreibtag wurde erfolgreich geändert.')->persistent();
-			} else {
-				Alert::error('Der angegebene Schreibtag ist ungültig.')->persistent();
-			}
+		if ($day_number === null) {
+			Alert::error('Der angegebene Schreibtag ist ungültig.')->persistent();
+		} else if (!in_array($day_of_week, $days->get_available_days())) {
+			Alert::warning('Der gewünschte Schreibtag ist leider belegt.')->persistent();
+		} else if ($patient->assignment_day_changes_left > 0 || $is_therapist) {
+			$patient->assignment_day = $day_number;
+			$is_therapist ?: $patient->assignment_day_changes_left -= 1 ;
+			$patient->save();
+
+			$days->decrease_day($day_number);
+			$days->increase_day($old_day);
+
+			Alert::success('Der Schreibtag wurde erfolgreich geändert.')->persistent();
 		} else {
 			Alert::error("Leider ist die Änderung des Schreibtages nicht mehr möglich.")->persistent();
 		}
@@ -211,6 +216,7 @@ class PatientController extends Controller
 		if (isset($date_from_clinics)) {
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
+			Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email, $patient->name, 'Einige Fragen zur Vorbereitung', 'emails.soscisurvey',['PatientName' => $patient->name]);
 
 			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->persistent();
 		}

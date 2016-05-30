@@ -10,7 +10,10 @@
     <div class="row">
       <div class="form-group col-sm-6">
         <label for="password" class="control-label">Neues Passwort</label>
-        <input name="new_password" id="password" type="password" class="form-control width-100" placeholder="hunter3 (mindestens 6 Zeichen)" required minlength="6">
+        <div class="input-group">
+          <input name="new_password" id="password" type="password" class="form-control width-100" placeholder="hunter3 (mindestens 6 Zeichen)" required minlength="6" aria-describedby="strength-addon">
+          <span class="input-group-addon" id="strength-addon"></span>
+        </div>
       </div>
       <div class="form-group col-sm-6">
         <label class="control-label">Wiederholen</label>
