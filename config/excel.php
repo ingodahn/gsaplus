@@ -58,15 +58,15 @@ return array(
     ),
 
     'properties' => array(
-        'creator'        => 'Maatwebsite',
-        'lastModifiedBy' => 'Maatwebsite',
-        'title'          => 'Spreadsheet',
-        'description'    => 'Default spreadsheet export',
-        'subject'        => 'Spreadsheet export',
+        'creator'        => 'System GSA-Online Plus',
+        'lastModifiedBy' => 'System GSA-Online Plus',
+        'title'          => 'Datenexport',
+        'description'    => 'Export von Daten aus dem System GSA-Online Plus',
+        'subject'        => 'Datenexport',
         'keywords'       => 'maatwebsite, excel, export',
         'category'       => 'Excel',
-        'manager'        => 'Maatwebsite',
-        'company'        => 'Maatwebsite',
+        'manager'        => 'Universitätsmedizin Mainz',
+        'company'        => 'Universitätsmedizin Mainz',
     ),
 
     /*
@@ -106,7 +106,7 @@ return array(
     |
     */
 
-    'creator'    => 'Maatwebsite',
+    'creator'    => 'System GSA-Online Plus',
 
     'csv'        => array(
         /*
@@ -189,7 +189,7 @@ return array(
         | Auto set alignment on merged cells
         |--------------------------------------------------------------------------
         */
-        'merged_cell_alignment'       => 'left',
+        'merged_cell_alignment'       => 'center',
 
         /*
         |--------------------------------------------------------------------------

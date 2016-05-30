@@ -1,13 +1,21 @@
 @extends('layouts.master')
 @section('title', 'Codes')
 
+@section('additional-head')
+  <style>
+    ul.nav {
+      display: none;
+    }
+  </style>
+@endsection
+
 @section('content')
   <div class="container">
     <h2>Codes</h2>
 
     <p>
       <span class="used"><code>Registriert</code></span>
-      <br>
+
       <span class="unused"><code>Nicht registriert</code></span>
     </p>
     <br>
@@ -15,12 +23,12 @@
     <div class="row">
       <?php $i = 0; ?>
       @foreach($codes as $code => $name)
-        @if($i % 12 == 0)
+        @if($i % 4 == 0)
           </div>
-          <div class="row">
+          <div class="row" style="margin-bottom:10px">
         @endif
         <?php $i++; ?>
-        <div class="col-xs-2 col-sm-1 {{$name ? "used" : "unused"}}">
+        <div class="col-xs-3 col-sm-3 {{$name ? "used" : "unused"}}">
           @if($name)
             <a href="/Profile/{{$name}}">
               <code>{{$code}}</code>

@@ -26,7 +26,10 @@ $factory->define(App\Patient::class, function (Faker\Generator $faker) use ($fac
     $user = $factory->raw(App\User::class);
 
     return array_merge($user, [
-        'code' => strtoupper(str_random(6)),
+        'code' => strtoupper(str_random(4)).'-'
+                    .strtoupper(str_random(4)).'-'
+                    .strtoupper(str_random(4)).'-'
+                    .strtoupper(str_random(4)),
         'assignment_day' => $faker->numberBetween($min = 0, $max = 4),
         'assignment_day_changes_left' => $faker->numberBetween($min = 0, $max = 3)
     ]);
@@ -109,7 +112,7 @@ $factory->define(App\WeekDay::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Code::class, function () {
    return [
-        'value' => strtoupper(str_random(3))
+        'value' => 'AAAA-AAAA-AAAA-AAAA'
     ];
 });
 
@@ -119,6 +122,7 @@ $factory->define(App\TestSetting::class, function() {
        'first_reminder' => true,
        'new_reminder' => true,
        'due_reminder' => true,
+       'missed_reminder' => true,
        'calc_next_writing_date' => true
    ];
 });

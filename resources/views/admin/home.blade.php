@@ -80,9 +80,6 @@
             <p>Auf dieser Seite können Sie die im System vorhandenen</p>
             <ul>
                 <li>
-                    <a href="/AdminCodes" target="_blank">Codes</a>
-                </li>
-                <li>
                     <a href="#therapists">Therapeuten</a>
                 </li>
                 <li>
@@ -95,6 +92,9 @@
             <p>einsehen und <a href="#add_therapist">neue Therapeuten anlegen</a>.</p>
             <p>Im Notfall können Sie <a href="#reminders">anstehende Benachrichtigungen versenden</a> -
                 z.B. wenn der Mail-Server ausgefallen ist und die Benachrichtigungen nicht versendet werden konnten.</p>
+            <p>Am Ende der Seite können Sie alle im System gespeicherten <a href="#export_codes">Codes exportieren</a>
+                (alternativ können Sie die Codes ebenso <a href="/AdminCodes" target="_blank">im Browser einsehen</a>).
+            </p>
         </div>
 
         <div class="row">
@@ -170,8 +170,8 @@
                         <th>Name</th>
                         <th>E-Mail</th>
                         @if($role == UserRole::PATIENT)
-                            <th>Code</th>
                             <th>Status</th>
+                            <th>Code</th>
                         @endif
                     </tr>
                     </thead>
@@ -179,7 +179,7 @@
                     @foreach($users as $user)
                         <tr>
                             <td>
-                                <a href="/test/dump-info/{{$user['name'] }}" target="_blank">
+                                <a href="/admin/dump-info/{{$user['name'] }}" target="_blank">
                                     {{ $user['name'] }}
                                 </a>
                             </td>
@@ -220,64 +220,90 @@
                     </a>
                 </p>
             </div>
-    @endforeach
+        @endforeach
 
-    <div class="row">
-        <h4 id="reminders">Erinnerungen</h4>
+        <div class="row">
+            <hr />
+        </div>
 
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Ereignis</th>
-                    <th>Erklärung</th>
-                    <th>Aktion</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Erhalt des ersten Schreibimpulses</td>
-                    <td>
-                        Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren ersten Schreibtag haben.
-                    </td>
-                    <td>
-                        <form method="POST" action="/test/send-reminders/first">
-                            {{ csrf_field() }}
-                            <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Erhalt eines Folge-Schreibimpulses</td>
-                    <td>
-                        Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren neuen Schreibtag haben.
-                    </td>
-                    <td>
-                        <form method="POST" action="/test/send-reminders/new">
-                            {{ csrf_field() }}
-                            <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Aktueller Schreibimpuls unbearbeitet</td>
-                    <td>
-                        Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.
-                    </td>
-                    <td>
-                        <form method="POST" action="/test/send-reminders/due">
-                            {{ csrf_field() }}
-                            <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="text-right" style="clear: both">
-            <a href="#top">Zum Seitenanfang
-                <span class="glyphicon glyphicon-arrow-up"></span>
-            </a>
-        </p>
-    </div>
+        <div class="row">
+            <h4 id="reminders">Erinnerungen</h4>
+
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Ereignis</th>
+                        <th>Erklärung</th>
+                        <th>Aktion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Erhalt des ersten Schreibimpulses</td>
+                        <td>
+                            Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren ersten Schreibtag haben.
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/send-reminders/first">
+                                {{ csrf_field() }}
+                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Erhalt eines Folge-Schreibimpulses</td>
+                        <td>
+                            Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren neuen Schreibtag haben.
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/send-reminders/new">
+                                {{ csrf_field() }}
+                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aktueller Schreibimpuls unbearbeitet</td>
+                        <td>
+                            Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/send-reminders/due">
+                                {{ csrf_field() }}
+                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="text-right" style="clear: both">
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
+        </div>
+
+        <div class="row">
+            <hr />
+        </div>
+
+        <div class="row">
+            <h4 id="export_codes">Code Export</h4>
+            <p>Speichern Sie eine Liste mit allen Codes. Die Codes sind nach Klinik sortiert. Wählen Sie in Excel
+                die entsprechende Seite indem Sie unten auf den entsprechenden Reiter klicken - z.B.
+                <em>Codes für Klinik A</em>.</p>
+            <form method="GET" action="/admin/codes-as-csv"
+                  class="pull-right floating-btn-form">
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-primary pull-right"><span class="fa fa-save" aria-hidden="true"></span> &nbsp;Codeliste speichern</button>
+            </form>
+            <p class="text-right" style="clear: both">
+                <br/>
+                <a href="#top">Zum Seitenanfang
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                </a>
+            </p>
+        </div>
 
     </div>
 @endsection
