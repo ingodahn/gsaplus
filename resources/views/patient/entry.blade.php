@@ -36,7 +36,6 @@
       @include('patient.entry.notizen')
       @include('patient.entry.impuls')
       @include('patient.entry.eintrag')
-      <hr>
       @include('patient.entry.befinden')
       @include('patient.entry.rückmeldung')
       @include('patient.entry.bewertung')

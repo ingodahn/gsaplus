@@ -17,10 +17,7 @@
     Selbstverständlich werden Ihre Angaben vertraulich und in pseudonymisierter Form ausgewertet.
 </p>
 <p>
-    Zum Fragebogen folgen Sie bitte diesem Link:
-</p>
-<p>
-    <a href="www.soscisurveylink.de">www.soscisurveylink.de</a>
+    Zum Fragebogen folgen Sie bitte diesem <a href="https://www.soscisurvey.de/studienname/?q=umfragename&s={!! $PatientCode !!}">Link</a>
 </p>
 <p>
     <strong>Herzlichen Dank für Ihre Mitarbeit! </strong>
