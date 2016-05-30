@@ -240,6 +240,11 @@ abstract class PatientsTableBaseSeeder extends Seeder
                 $assignment->dirty = false;
             }
 
+            if ($is_past_assignment) {
+                // don't send notifications when switching date on test page
+                $assignment->notified_new = true;
+            }
+
             $patient->assignments()->save($assignment);
 
             $saved = $saved && $assignment->partially_answered;
