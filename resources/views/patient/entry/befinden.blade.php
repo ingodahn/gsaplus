@@ -19,11 +19,12 @@
         @for($i=0; $i <= 10; $i++)
           <div class="col-md-1">
             <label class="radio-inline big-radio">
-              <input type="radio" name="health" value="{{$i}}" {{$EntryInfo['survey']['health'] == $i ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$i}}
+              <input type="radio" name="health" value="{{$i}}" {{$EntryInfo['survey']['health'] == $i ? "checked" : ""}} {{$editable ? "required" : "disabled"}} data-parsley-errors-container="#health-error-container"> {{$i}}
             </label>
           </div>
         @endfor
       </div>
+      <div class="row" id="health-error-container"></div>
     </div>
   </div>
   <br>
@@ -42,11 +43,12 @@
         @for($i=0; $i <= 10; $i++)
           <div class="col-md-1">
             <label class="radio-inline big-radio">
-              <input type="radio" name="wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}} {{$editable ? "" : "disabled"}}> {{$i}}
+              <input type="radio" name="wai" value="{{$i}}" {{$EntryInfo['survey']['wai'] == $i ? "checked" : ""}} {{$editable ? "required" : "disabled"}} data-parsley-errors-container="#wai-error-container"> {{$i}}
             </label>
           </div>
         @endfor
       </div>
+      <div class="row" id="wai-error-container"></div>
     </div>
   </div>
 @endif

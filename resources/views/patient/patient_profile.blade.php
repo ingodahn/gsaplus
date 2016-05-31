@@ -15,6 +15,7 @@
 
         @if($isTherapist)
         <small>
+          <br>
           Code: <code>{{ $Patient['code'] }}</code>,
           Status: <code>{{ $Patient['status'] }}</code>
         </small>
