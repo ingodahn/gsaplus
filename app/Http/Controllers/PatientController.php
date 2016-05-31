@@ -212,13 +212,13 @@ class PatientController extends Controller
 		} catch (\InvalidArgumentException $e) {
 			Alert::warning('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->persistent();
 		}
-
+		$url_code=str_replace("-","%2D",$patient->code);
 		if (isset($date_from_clinics)) {
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
 			Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email,
 				$patient->name, 'Einige Fragen zur Vorbereitung', 'emails.soscisurvey',
-				['PatientName' => $patient->name, 'PatientCode' => $patient->code]);
+				['PatientName' => $patient->name, 'PatientCode' => $url_code]);
 
 			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->persistent();
 		}

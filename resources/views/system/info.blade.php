@@ -33,7 +33,7 @@
     <div id="toc" class="list-group">
       <a href="#video-1" class="list-group-item">
         <h4 class="list-group-item-heading">Vorstellung von GSA online plus</h4>
-        <p class="list-group-item-text">Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)</p>
+        <p class="list-group-item-text">Begrüßung und Angebot der Online-Nachsorge (Intro Video von der Startseite)</p>
       </a>
     </div>
 
@@ -67,7 +67,7 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)
+        Begrüßung und Angebot der Online-Nachsorge (Intro Video von der Startseite)
       </p>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/OzGLGdZ6Y3A?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
