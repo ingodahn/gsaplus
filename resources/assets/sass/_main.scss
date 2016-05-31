@@ -269,6 +269,18 @@ textarea {
     // border-bottom: 1px solid black;
   }
 
+  .panel-heading-primary {
+    background-color: $md-blue-300;
+  }
+
+  .panel-heading-warning {
+    background-color: $md-orange-300;
+  }
+
+  .panel-heading-success {
+    background-color: $md-light-green-300;
+  }
+
   .panel-heading {
     border-radius: 0;
   }
