@@ -14,6 +14,12 @@
     <label for="comment">Ihre Rückmeldung auf den Tagebucheintrag des Patienten</label>
     @endif
 
-    <textarea class="form-control js-auto-size" id="comment" name="comment" placeholder="" {{$editable ? "" : "disabled"}}>{{$EntryInfo['comment']}}</textarea>
+    @if($editable)
+      <textarea class="form-control js-auto-size" id="comment" name="comment">{{$EntryInfo['comment']}}</textarea>
+    @else
+      <p>
+        {{$EntryInfo['comment']}}
+      </p>
+    @endif
   </div>
 @endif

@@ -1,11 +1,20 @@
 @extends('layouts.master')
 @section('title', 'Schreibaufgabe')
 
+@section('additional-head')
+  <script type="text/javascript">
+    function submitDirty() {
+      $('#entry-form').parsley().destroy();
+      $('#entry-form').submit();
+    }
+  </script>
+@endsection
+
 @section('content')
   <div class="container">
 
 
-    <form data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
+    <form id="entry-form" data-parsley-validate role="form" action="/SaveAssignment/{{ $PatientInfo['name'] }}/{{ $EntryInfo['week'] }}" method="post">
 
       <?php
         $submittable = $isPatient && in_array($EntryInfo['status'], ["E020", "E030", "E035", "E050"])
@@ -27,7 +36,6 @@
       @include('patient.entry.notizen')
       @include('patient.entry.impuls')
       @include('patient.entry.eintrag')
-      <hr>
       @include('patient.entry.befinden')
       @include('patient.entry.rückmeldung')
       @include('patient.entry.bewertung')
@@ -35,8 +43,8 @@
       @if($submittable)
         <hr>
         <p>
-          @if($isPatient)
-            <button type="submit" class="btn pull" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+          @if($isPatient && $EntryInfo['status'] < "E050")
+            <button class="btn pull" name="entryButton" value="saveDirty" onclick="submitDirty();">Zwischenspeichern</button>
           @endif
           <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
         </p>

@@ -13,7 +13,14 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Response;
 
+use Excel;
+use Maatwebsite\Excel\Collections\CellCollection;
+use Maatwebsite\Excel\Writers\CellWriter;
+use PHPExcel_Style_Alignment;
+
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use UxWeb\SweetAlert\SweetAlert as Alert;
 
 /**
@@ -118,6 +125,77 @@ class AdminController extends TestController
 		}
 
 		return Redirect::back();
+	}
+
+	public function export_code_list()
+	{
+		$codes = Code::all()->sortBy('value');
+		$used_codes = Patient::select('code','type')->get()->pluck('code');
+
+		$array = [];
+
+		foreach ($codes as $code) {
+			$array[$code->value[0]][] = array('Code' => $code->value,
+						'Benutzt' => $used_codes->contains($code->value) ? "Ja" : "Nein");
+		}
+
+		Excel::create('Code Export am '.date('d-m-Y'), function($excel) use ($array) {
+
+			$excel->setTitle('Codeliste');
+			$excel->setDescription('Eine Liste aller im System bekannten Codes');
+
+			// create a sheet for every clinic
+			foreach (range('A', 'D') as $clinic) {
+				$excel->sheet('Codes für Klinik '.$clinic, function($sheet) use($array,$clinic) {
+					// set style for data (except headers - see below)
+					$sheet->setStyle(array(
+						'font' => array(
+							'name'      =>  'Courier New',
+							'size'      =>  15,
+						)
+					));
+
+					$sheet->setAllBorders('thin');
+
+					// insert data
+					$sheet->fromArray($array[$clinic]);
+
+					$sheet->cell('A1:B1', function($cell) {
+						// headers: set font weight to bold
+						$cell->setFont(array(
+							'family'     => 'Calibri',
+							'size'       => '16',
+							'bold'       =>  true
+						));
+
+						// Set blue background
+						$cell->setBackground('##b3c6ff');
+
+						// Set alignment to center
+						$cell->setAlignment('center');
+					});
+
+					$sheet->cell('A1:B'.(count($array[$clinic]) + 1), function($cell) {
+						// align headers horizontally
+						$cell->setAlignment('center');
+					});
+
+					for ($i=0; $i<count($array[$clinic]); $i++) {
+						// mark codes as used / unused
+						if ($array[$clinic][$i]['Benutzt'] == "Ja") {
+							$background = '#ff8080';
+						} else {
+							$background = '#ccff99';
+						}
+
+						$sheet->row($i+2, function($row) use ($background) {
+							$row->setBackground($background);
+						});
+					}
+				});
+			}
+
+		})->download('xlsx');
 	}
 
 }

@@ -29,11 +29,7 @@
       <div class="col-md-4">
         <h2>Registrierung</h2>
         @if ($RegistrationPossible)
-        <form action="/StartRegistration" method="post">
-          <!-- TODO: better URLs
-            <form ... action="/register">
-          -->
-
+        <form action="/register" method="post">
           {{ csrf_field() }}
           <div class="form-group">
             <label for="Code">Persönlicher Code</label>

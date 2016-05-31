@@ -181,7 +181,7 @@
       <p>{!! nl2br(e($EntryInfo['reflection'])) !!}</p>
     @endif
   @endif
-  @if($submittable && $isPatient)
-    <button type="submit" class="btn pull m-t-1" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+  @if($submittable && $isPatient && $EntryInfo['status'] < "E050")
+    <button class="btn pull m-t-1" name="entryButton" value="saveDirty" onClick="submitDirty();">Zwischenspeichern</button>
   @endif
 @endif

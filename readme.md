@@ -67,6 +67,8 @@ There are also some tasks which are not called by the update-task, mainly the `w
 
 When using vagrant, run `vagrant reload --provision` to reload the VM and re-run the provisioning script after it was updated. Omit the `--provision` to just reload the VM. This may be necessary if the VM is unresponsive after suspending the host machine. If you modified the VM and want to revert it to the intended setup, `vagrant destroy` and `vagrant up`.
 
+If there were changes to `.env.exaple`, i.e. configuration keys were added/removed/renamed, you'll have to manually apply these changes to your `.env` as well.
+
 
 
 # Glossary

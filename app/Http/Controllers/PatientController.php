@@ -216,6 +216,9 @@ class PatientController extends Controller
 		if (isset($date_from_clinics)) {
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
+			Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email,
+				$patient->name, 'Einige Fragen zur Vorbereitung', 'emails.soscisurvey',
+				['PatientName' => $patient->name, 'PatientCode' => $patient->code]);
 
 			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->persistent();
 		}

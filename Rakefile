@@ -2,6 +2,12 @@ require 'dotenv/tasks'
 
 
 
+def bcjs(component, target=File.basename(component))
+  sh "cp bower_components/#{component} public/js/#{target}"
+end
+
+
+
 desc "Shortcut for assets-task"
 task default: %w[update]
 
@@ -27,28 +33,30 @@ task :js do
 
   `cp -r resources/assets/js/. public/js/`
 
-  `cp bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js public/js/`
-  `cp bower_components/jquery/dist/jquery.min.js public/js/`
+  bcjs("bootstrap-sass/assets/javascripts/bootstrap.min.js")
+  bcjs("jquery/dist/jquery.min.js")
 
-  `cp bower_components/parallax.js/parallax.min.js public/js/`
+  bcjs("parallax.js/parallax.min.js")
 
-  `cp bower_components/parsleyjs/dist/parsley.min.js public/js/`
-  `cp bower_components/parsleyjs/dist/i18n/de.js public/js/i18n/parsley-de.js`
+  bcjs("parsleyjs/dist/parsley.min.js")
+  bcjs("parsleyjs/dist/i18n/de.js", "i18n/parsley-de.js")
 
-  `cp bower_components/datatables.net/js/jquery.dataTables.min.js public/js/dataTables.min.js`
-  `cp bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js public/js/`
-  `cp bower_components/datatables.net-responsive/js/dataTables.responsive.min.js public/js/`
-  `cp bower_components/datatables.net-responsive-bs/js/responsive.bootstrap.js public/js/dataTables.responsive.bootstrap.js`
+  bcjs("datatables.net/js/jquery.dataTables.min.js", "dataTables.min.js")
+  bcjs("datatables.net-bs/js/dataTables.bootstrap.min.js")
+  bcjs("datatables.net-responsive/js/dataTables.responsive.min.js")
+  bcjs("datatables.net-responsive-bs/js/responsive.bootstrap.js", "dataTables.responsive.bootstrap.js")
 
-  `cp bower_components/moment/min/moment.min.js public/js/`
-  `cp bower_components/moment/locale/de.js public/js/i18n/moment-de.js`
-  `cp bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js public/js/`
+  bcjs("moment/min/moment.min.js")
+  bcjs("moment/locale/de.js", "i18n/moment-de.js")
+  bcjs("eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")
 
-  `cp bower_components/sweetalert/dist/sweetalert.min.js public/js/`
+  bcjs("sweetalert/dist/sweetalert.min.js")
 
-  `cp bower_components/zxcvbn/dist/zxcvbn.js public/js/`
+  bcjs("zxcvbn/dist/zxcvbn.js")
 
-  `cp bower_components/textarea-autosize/dist/jquery.textarea_autosize.min.js public/js/`
+  bcjs("textarea-autosize/dist/jquery.textarea_autosize.min.js")
+
+  bcjs("Chart.js/dist/Chart.min.js")
 end
 
 desc "Publish all font assets"

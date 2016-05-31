@@ -76,8 +76,8 @@ class DiaryController extends Controller
                 $wai[$i] = $p_assignments[$i - 1]['survey']['wai'];
                 $health[$i] = $p_assignments[$i - 1]['survey']['health'];
             } else {
-                $wai[$i] = -1;
-                $health[$i] = -1;
+                $wai[$i] = "null";
+                $health[$i] = "null";
             }
         }
 
@@ -357,9 +357,9 @@ class DiaryController extends Controller
             if (! $task){
                 $task= new TaskTemplate;
                 $task->name=$title;
-                $alert="Muster \"".$title."\" erstellt.";
+                $alert="Vorlage \"".$title."\" erstellt.";
             } else {
-                $alert="Muster \"".$title."\" aktualisiert.";
+                $alert="Vorlage \"".$title."\" aktualisiert.";
             }
             $task->problem = $problem;
             $task->save();
