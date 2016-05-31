@@ -13,27 +13,27 @@
 
       <h2>Datenschutzerklärung</h2>
       <p>
-        Vielen Dank für Ihren Besuch auf www.online-nachsorge.de. Wir nehmen den Schutz Ihrer Privatsphäre bei der Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten gemäß den gesetzlichen Bestimmungen ernst und möchten, dass Sie sich auf unserer Internetplattform nicht nur mit dem Thema 'berufsbezogene Belastungen' auseinandersetzten, sondern dass Sie sich dabei auch sicher fühlen.
+        Vielen Dank für Ihren Besuch der Internetplattform GSA-Online plus. Wir nehmen den Schutz Ihrer Privatsphäre bei der Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten gemäß den gesetzlichen Bestimmungen ernst und möchten, dass Sie sich auf unserer Internetplattform auch sicher fühlen.
       </p>
       <p>
-        Diese Datenschutzerklärung erläutert, welche personenbezogenen Daten wir erheben und wie wir Sie schützen.
+        Diese Datenschutzerklärung erläutert, welche personenbezogenen Daten wir erheben und wie wir diese schützen.
       </p>
 
       <h3>Begriffe und Verfahren</h3>
       <p>
-        Beim Datenschutz geht es immer um personenbezogene Daten, d.h. um Daten die direkt oder indirekt die Identifizierung Ihrer Person erlauben. Dies könnte z.B. möglich sein über den Benutzernamen, eine E-Mail-Adresse, die Adresse Ihres Rechners (IP-Adresse) aber auch durch Inhalte in Ihrem Tagebuch.
+        Beim Datenschutz geht es immer um personenbezogene Daten, d.h. um Daten, die direkt oder indirekt die Identifizierung Ihrer Person erlauben. Dies könnte z.B. möglich sein über den Benutzernamen, eine E-Mail-Adresse, die Adresse Ihres Rechners (IP-Adresse), aber auch durch Inhalte, die Sie auf unserer Internetplattform, z.B. in Ihrem Tagebuch, eintragen.
       </p>
       <p>
-        Für die Teilnahme an der Studie erhalten Sie in Ihrer Klinik einen 16-stelligen Code den Sie einmalig zu Beginn eingeben müssen. Wir erhalten von Ihrem Arzt nur den Code und Ihr Entlassungsdatum und keine weiteren Angaben zu Ihrer Person.
+        Für die Teilnahme an der Studie erhalten Sie in Ihrer Klinik einen 16-stelligen Zugangscode den Sie einmalig zu Beginn eingeben müssen. Wir erhalten von Ihrer Klinik nur den Code und Ihr Entlassungsdatum und keine weiteren Angaben zu Ihrer Person.
       </p>
       <p>
-        Zur Benutzung von www.online-nachsorge.de müssen Sie keine personenbezogenen Daten angeben. Die Anmeldung erfolgt mit dem Ihnen zugewiesenen Zugangscode und einem frei wählbaren Benutzernamen. Bei der Wahl des Benutzernamens sollten Sie ausdrücklich auf personenbezogene Bestandteile wie z.B. Vorname, Nachname, Geburtsdatum verzichten. Die Teilnahme am Online-Nachsorgeprogramm ist auf der Internetplattform durch die Wahl eines individuellen Benutzernamens anonymisiert. Eine Zuordnung zu personenbezogenen Daten ist online nicht möglich und unterliegt den generellen Datenschutzbestimmungen der Studie, ist also nur im Notfall durch den Datentreuhänder möglich. Alle studienbezogenen Daten werden pseudonymisiert (d.h. kodiert ohne Angabe von Namen, Anschrift, Initialen oder Ähnliches) erhoben, auf Datenträgern gespeichert  und durch die Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz ausgewertet. Die Weitergabe an Dritte einschließlich Publikation erfolgt ausschließlich in anonymisierter Form, d.h. die Daten können keiner einzelnen Person zugeordnet werden.
+        Zur Benutzung von GSA-Online plus müssen Sie keine personenbezogenen Daten angeben. Die Anmeldung erfolgt mit dem Ihnen zugewiesenen Zugangscode und einem frei wählbaren Benutzernamen. Bei der Wahl des Benutzernamens sollten Sie ausdrücklich auf personenbezogene Bestandteile wie z.B. Vorname, Nachname oder Geburtsdatum verzichten. Die Teilnahme am Nachsorgeprogramm GSA-Online plus ist auf der Internetplattform durch die Wahl eines individuellen Benutzernamens anonymisiert. Eine Zuordnung zu personenbezogenen Daten ist online nicht möglich und unterliegt den generellen Datenschutzbestimmungen der Studie, ist also nur im Notfall durch die Datentreuhänder in den Kliniken möglich.
       </p>
       <p>
-        Die Datenübertragung zwischen Ihrem Computer und dem GSA-Online-Plus-System erfolgt verschlüsselt und kann nach aktuellem Kenntnisstand von Dritten nicht mitgelesen werden.
+        Die Datenübertragung zwischen Ihrem Computer und dem System von GSA-Online plus erfolgt verschlüsselt und kann nach aktuellem Kenntnisstand von Dritten nicht mitgelesen werden.
       </p>
       <p>
-        Unseren Online-Therapeuten ist nur Ihr Benutzername, Ihr Code und Ihr Entlassungsdatum bekannt. Natürlich können Sie umso besser beraten werden, je mehr wir über Sie wissen. Deshalb haben Sie die Möglichkeit, uns in Ihrem Profil freiwillig mehr über sich mitzuteilen.
+        Unseren Online-Therapeuten sind nur Ihr Benutzername, Ihr Zugangscode und Ihr Entlassungsdatum bekannt. Natürlich können Sie umso besser beraten werden, je mehr wir über Sie wissen. Deshalb haben Sie die Möglichkeit, uns in Ihrem Profil freiwillig mehr über sich mitzuteilen.
       </p>
       <p>
         Ihre Einträge in Ihr Tagebuch können nur von unseren Therapeuten eingesehen werden, die der ärztlichen Schweigepflicht unterliegen. Gemäß dem Grundsatz der Datenvermeidung und Datensparsamkeit werden von uns personenbezogene Daten nur erhoben, wenn diese erforderlich sind und Sie uns diese freiwillig angeben.
@@ -41,7 +41,7 @@
 
       <h3>Verwendung von E-Mail</h3>
       <p>
-        E-Mails werden zumeist unverschlüsselt übertragen. Deshalb verwendet GSA-Online Plus Ihre E-Mail-Adresse nur um Sie kurz über wichtige Ereignisse, wie etwa neue Schreibimpulse, zu informieren. Weitere Informationen finden Sie dann nach Anmeldung in unserem geschützten System. Auch wenn Sie unser Kontaktformular verwenden sind Ihre Eingaben sicher, jedoch erfolgt die Antwort in der Regel unverschlüsselt an die dabei angegebene E-Mail-Adresse. Wenn Sie dies nicht wünschen, so nehmen Sie telefonisch Kontakt zu unserem Team auf oder geben statt einer E-Mail-Adresse Ihren Benutzernamen an, so dass Ihr Online-Therapeut auf Ihr Anliegen im Rahmen seiner Kommentare eingehen kann.
+        E-Mails werden zumeist unverschlüsselt übertragen. Deshalb verwendet GSA-Online plus Ihre E-Mail-Adresse nur um Sie kurz über wichtige Ereignisse, wie etwa neue Schreibimpulse, zu informieren. Weitere Informationen finden Sie dann nach Anmeldung in unserem geschützten System. Auch wenn Sie unser Kontaktformular verwenden sind Ihre Eingaben sicher, jedoch erfolgt die Antwort in der Regel unverschlüsselt an die dabei angegebene E-Mail-Adresse. Wenn Sie dies nicht wünschen, so nehmen Sie telefonisch Kontakt zu unserem Team auf oder geben statt einer E-Mail-Adresse Ihren Benutzernamen an, so dass Ihr Online-Therapeut auf Ihr Anliegen im Rahmen seiner Kommentare eingehen kann.
       </p>
 
       <h3>Verwendung von Verbindungsdaten</h3>
@@ -49,7 +49,7 @@
         Jeder Zugriff auf das Internet-Angebot der Universitätsmedizin der Johannes Gutenberg Universität, Mainz, wird protokolliert – dabei werden automatisiert bestimmte Verbindungsdaten gespeichert. Diese Protokolldatei ist notwendig, um einen ordnungsgemäßen technischen Betrieb garantieren zu können. Die gespeicherten Daten werden nur für statistische Zwecke ausgewertet und sobald sie nicht mehr benötigt werden, überschrieben; spätestens nach drei Monaten.
       </p>
       <p>
-        Die Auswertung erzeugt aggregierte Informationen wie z.B. Anzahl der Besucher/pro Monat oder Anzahl der aufgerufenen Seiten u.a. Auf diese Weise zusammengefasste Daten sind anonym, sie können bestimmten Personen nicht zugeordnet werden. Eine Zusammenführung von Verbindungsdaten mit anderen Datenquellen wird von uns nicht vorgenommen.
+        Die Auswertung erzeugt aggregierte Informationen wie z.B. die Anzahl der Besucher pro Monat oder die Anzahl der aufgerufenen Seiten u.a. Auf diese Weise zusammengefasste Daten sind anonym, sie können bestimmten Personen nicht zugeordnet werden. Eine Zusammenführung von Verbindungsdaten mit anderen Datenquellen wird von uns nicht vorgenommen.
       </p>
 
       <h3>Cookies</h3>
@@ -71,7 +71,7 @@
 
       <h3>Auskunft, Löschung, Sperrung</h3>
       <p>
-        Sollten Sie Fragen zum Thema des Datenschutzes bei der Nutzung der Internetplattform haben, können Sie sich jederzeit unter der im <a href="impressum">Impressum</a> angegebenen Adresse an uns wenden.
+        Sollten Sie Fragen zum Thema des Datenschutzes bei der Nutzung der Internetplattform GSA-Online plus haben, können Sie sich jederzeit unter der im <a href="impressum">Impressum</a> angegebenen Adresse an uns wenden.
       </p>
 
       <hr>
