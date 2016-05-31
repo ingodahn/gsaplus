@@ -182,6 +182,6 @@
     @endif
   @endif
   @if($submittable && $isPatient && $EntryInfo['status'] < "E050")
-    <button type="submit" class="btn pull m-t-1" name="entryButton" value="saveDirty">Zwischenspeichern</button>
+    <button class="btn pull m-t-1" name="entryButton" value="saveDirty" onClick="submitDirty();">Zwischenspeichern</button>
   @endif
 @endif

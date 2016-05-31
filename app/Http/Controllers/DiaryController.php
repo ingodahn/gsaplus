@@ -357,9 +357,9 @@ class DiaryController extends Controller
             if (! $task){
                 $task= new TaskTemplate;
                 $task->name=$title;
-                $alert="Muster \"".$title."\" erstellt.";
+                $alert="Vorlage \"".$title."\" erstellt.";
             } else {
-                $alert="Muster \"".$title."\" aktualisiert.";
+                $alert="Vorlage \"".$title."\" aktualisiert.";
             }
             $task->problem = $problem;
             $task->save();

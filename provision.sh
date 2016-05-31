@@ -29,5 +29,5 @@ if [ ! -f /home/vagrant/provisioned ]; then
   service apache2 restart
   mysql -uroot -proot -e "create database piwik"
   touch /home/vagrant/provisioned
-  echo "Visit /piwik to complete the installation"
+  echo "Visit 192.168.33.10:8080 to complete the installation"
 fi
