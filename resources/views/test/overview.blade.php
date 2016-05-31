@@ -9,6 +9,7 @@
 
         th {
             white-space : nowrap;
+            vertical-align:middle !important;
         }
         
         ul.nav {
@@ -17,6 +18,11 @@
 
         hr {
             border-top: 1px dashed #8c8b8b;
+        }
+
+        .btn-link, th {
+            margin-bottom: 4px;
+            white-space: normal;
         }
     </style>
 @endsection
@@ -199,6 +205,7 @@
                             <th>Login</th>
                             @if($role == UserRole::PATIENT)
                                 <th>Status</th>
+                                <th class="text-center">Zum Erinnerungs&shy;datum</th>
                                 <th class="text-center">Zum Fristende</th>
                                 <th class="text-center">Zum nächsten Schreibdatum</th>
                             @endif
@@ -224,7 +231,7 @@
                                 </form>
                             </td>
                             @if($role == UserRole::PATIENT)
-                                <td>
+                                <td style="white-space: nowrap !important">
                                     <em>{{ $user['patientStatus']  }}</em>
                                     <a href="javascript:void(0)" data-toggle="popover" data-placement="right"
                                        data-html="true" data-trigger="focus" title="Es gibt folgende Patienten-Status (P)"
@@ -247,24 +254,36 @@
                                     <td class="text-center">
                                         <form method="POST" action="/test/next-reminder/{{ $user['name'] }}">
                                             {{ csrf_field() }}
-                                            <input class="btn-link" value="Zum {{$user['dateOfReminder']}} springen" type="submit" />
+                                            <input class="btn-link" value="Zum {{$user['dateOfReminder']}}" type="submit" />
                                         </form>
                                     </td>
                                 @else
                                     <td class="text-center">
-                                        <small><em>... kein Schreibimpuls ...</em></small>
+                                        <small><em>kein Schreibimpuls</em></small>
+                                    </td>
+                                @endif
+                                @if(isset($user['dateOfDeadline']) && $user['patientStatus'] < 'P130')
+                                    <td class="text-center">
+                                        <form method="POST" action="/test/next-deadline/{{ $user['name'] }}">
+                                            {{ csrf_field() }}
+                                            <input class="btn-link" value="Zum {{$user['dateOfDeadline']}}" type="submit" />
+                                        </form>
+                                    </td>
+                                @else
+                                    <td class="text-center">
+                                        <small><em>kein Schreibimpuls</em></small>
                                     </td>
                                 @endif
                                 @if($user['nextWritingDate'] && $user['patientStatus'] < 'P130')
                                     <td class="text-center">
                                         <form method="POST" action="/test/next-date/{{ $user['name'] }}">
                                             {{ csrf_field() }}
-                                            <input class="btn-link" value="Zum {{$user['nextWritingDate']}} springen" type="submit" />
+                                            <input class="btn-link" value="Zum {{$user['nextWritingDate']}}" type="submit" />
                                         </form>
                                     </td>
                                 @else
                                     <td class="text-center">
-                                        <small><em>... kein Folgedatum ...</em></small>
+                                        <small><em>kein Folgedatum</em></small>
                                     </td>
                                 @endif
                             @endif

@@ -8,7 +8,10 @@ use App\TestSetting;
 use App\Console\Commands\RemindUsersOfAssignment;
 use App\Console\Commands\ClearDistantData;
 
+use Illuminate\Support\Facades\Storage;
+
 use Artisan;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class CommandHelper
 {
@@ -33,8 +36,7 @@ class CommandHelper
         $successful = true;
 
         foreach ($options as $option) {
-            $arguments = ['--'.$option => 'default',
-                '--quiet' => 'default'];
+            $arguments = ['--'.$option => 'default'];
 
             if ($settings->calc_next_writing_date) {
                 $arguments['--'.RemindUsersOfAssignment::OPTION_SET_NEXT_WRITING_DATE] = 'default';
@@ -42,6 +44,8 @@ class CommandHelper
 
             $successful = (Artisan::call('gsa:send-reminders',
                         $arguments) === 0) && $successful;
+
+            Storage::append('output/send-reminders.log', Artisan::output());
         }
 
         return $successful;
@@ -68,6 +72,10 @@ class CommandHelper
 
         if ($settings->due_reminder) {
             $options[] = RemindUsersOfAssignment::OPTION_DUE;
+        }
+
+        if ($settings->missed_reminder) {
+            $options[] = RemindUsersOfAssignment::OPTION_MISSED;
         }
 
         return $options;

@@ -41,6 +41,8 @@ class TestController extends Controller
                 if ($current_assignment && $current_assignment->writing_date) {
                     $info['dateOfReminder'] = $current_assignment->writing_date
                             ->copy()->addDays(config('gsa.reminder_period_in_days'))->format('d.m.Y');
+                    $info['dateOfDeadline'] = $current_assignment->writing_date
+                        ->copy()->addDays(config('gsa.missed_period_in_days'))->format('d.m.Y');
                 }
             }
 
@@ -85,6 +87,16 @@ class TestController extends Controller
         return Redirect::back();
     }
 
+    public function setDateOfCurrentDeadline(Request $request, Patient $patient) {
+        $current_assignment = $patient->current_assignment();
+
+        if ($current_assignment && $current_assignment->writing_date) {
+            $this->setDateAndSendReminders($request, $current_assignment->writing_date->copy()
+                ->addDays(config('gsa.missed_period_in_days')));
+        }
+
+        return Redirect::back();
+    }
     public function setRelativeTestDate(Request $request) {
         $relative_date_string = $request->input('relative_date_string');
 
@@ -208,7 +220,7 @@ class TestController extends Controller
         return Redirect::back();
     }
 
-    protected function dumpInfo(User $user) {
+    public function dumpInfo(User $user) {
         return view('test.info-dump')->with('info', $this->getInfo($user));
     }
 

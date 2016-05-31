@@ -15,20 +15,56 @@ class CodesTableSeeder extends Seeder
     {
         $codes = [];
 
-        foreach (range(0,100) as $num) {
-            $codes[] = strtoupper(str_random(3));
+        foreach (range('A','D') as $first_letter) {
+            $code_count = 0;
+
+            while ($code_count < 120) {
+                $code = $this->generateCode($first_letter);
+
+                if (in_array($code, $codes)) {
+                    continue;
+                } else {
+                    $codes[] = $code;
+                    $code_count++;
+                }
+            }
         }
 
-        foreach (range('A','Z') as $letter) {
-            $codes[] = str_repeat($letter, 3);
-        }
-
-        $unique_codes = array_unique($codes);
-
-        foreach ($unique_codes as $unique_code) {
-            $code = new Code;
-            $code->value = $unique_code;
-            $code->save();
+        foreach ($codes as $code) {
+            $entry = new Code;
+            $entry->value = $code;
+            $entry->save();
         }
     }
+
+    protected function generateCode($first_letter = null) {
+        $code = '';
+
+        for ($i=0; $i<4; $i++) {
+            if ($first_letter && $i === 0) {
+                $code.=$this->generateCodeFragment($first_letter);
+            } else {
+                $code.=$this->generateCodeFragment();
+            }
+
+            $code = ($i === 3 ? $code : $code.'-');
+        }
+
+        return $code;
+    }
+
+    protected function generateCodeFragment($first_letter = null) {
+        $fragment = '';
+
+        for ($i=0; $i<4; $i++) {
+            if ($first_letter && $i === 0) {
+                $fragment.=$first_letter;
+            } else {
+                $fragment.=range('A','Z')[rand(0,25)];
+            }
+        }
+
+        return $fragment;
+    }
+
 }

@@ -3,39 +3,7 @@
 
 @section('additional-head')
   <script src="/js/zxcvbn.js" charset="utf-8"></script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      evaluate();
-      $("#password").keyup(function (event) {
-        evaluate();
-      });
-
-      function evaluate() {
-        var password = $("#password").val();
-        if (password) {
-          var result = zxcvbn(password);
-          switch (result.score) {
-            case 0:
-              updateText("Sehr schwach"); break;
-            case 1:
-              updateText("Schwach"); break;
-            case 2:
-              updateText("Ok"); break;
-            case 3:
-              updateText("Stark"); break;
-            case 4:
-              updateText("Sehr stark"); break;
-          }
-        } else {
-          updateText("-");
-        }
-
-        function updateText(text) {
-          $("#strength-addon").text(text);
-        }
-      }
-    });
-  </script>
+  <script src="/js/zxcvbn-evaluate.js" charset="utf-8"></script>
 @endsection
 
 @section('content')
@@ -55,7 +23,7 @@
     </div>
 
     {{-- All active form content must stay in this form for frontend and backend processing --}}
-    <form id="registration-form" data-parsley-validate role="form" action="/SavePatientData" method="post">
+    <form id="registration-form" data-parsley-validate role="form" action="/registration/form" method="post">
       <!-- TODO: better URLs
         <form ... action="/registration/form">
       -->

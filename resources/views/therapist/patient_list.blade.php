@@ -60,33 +60,46 @@
     <p>
       <form class="" action="/SetSlots" method="post">
         {{ csrf_field() }}
+
+        <?php
+          function echoIndicatorClass($openSlots) {
+            if ($openSlots <= 5) {
+              if ($openSlots == 0) {
+                echo("slots-none");
+              } else {
+                echo("slots-few");
+              }
+            }
+          }
+        ?>
+
         <div class="row space-wrapped-cols">
           <div class="col-md-2">
-            <div class="input-group">
+            <div class="input-group {{ echoIndicatorClass($Slots['Montag']) }}">
               <span class="input-group-addon day-slot"><code>Mo</code></span>
               <input name="Mo_slots"  type="number" class="form-control" value="{{$Slots['Montag']}}">
             </div>
           </div>
           <div class="col-md-2">
-            <div class="input-group">
+            <div class="input-group {{ echoIndicatorClass($Slots['Dienstag']) }}">
               <span class="input-group-addon day-slot"><code>Di</code></span>
               <input name="Di_slots"  type="number" class="form-control" value="{{$Slots['Dienstag']}}">
             </div>
           </div>
           <div class="col-md-2">
-            <div class="input-group">
+            <div class="input-group {{ echoIndicatorClass($Slots['Mittwoch']) }}">
               <span class="input-group-addon day-slot"><code>Mi</code></span>
               <input name="Mi_slots"  type="number" class="form-control" value="{{$Slots['Mittwoch']}}">
             </div>
           </div>
           <div class="col-md-2">
-            <div class="input-group">
+            <div class="input-group {{ echoIndicatorClass($Slots['Donnerstag']) }}">
               <span class="input-group-addon day-slot"><code>Do</code></span>
               <input name="Do_slots"  type="number" class="form-control" value="{{$Slots['Donnerstag']}}">
             </div>
           </div>
           <div class="col-md-2">
-            <div class="input-group">
+            <div class="input-group {{ echoIndicatorClass($Slots['Sonntag']) }}">
               <span class="input-group-addon day-slot"><code>So</code></span>
               <input name="So_slots" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
             </div>

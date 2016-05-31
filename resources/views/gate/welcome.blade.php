@@ -34,7 +34,7 @@
     Ihr Online-Therapeut</p>
 
     <div class="pull-right">
-      <a class="btn btn-accent" href="/FromWelcome"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Weiter</a>
+      <a class="btn btn-accent" href="/registration/agreement"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Weiter</a>
       <!-- TODO: better URLs
         <a ... href="/registration/agreement">
       -->

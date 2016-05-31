@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use UxWeb\SweetAlert\SweetAlert as Alert;
+
 class PasswordController extends Controller
 {
     /*
@@ -21,7 +23,9 @@ class PasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+    use ResetsPasswords {
+        getResetSuccessResponse as traitSuccessResponse;
+    }
 
     // overwrite the default views (auth.passwords. ...)
     protected $linkRequestView = 'gate.passwords.password';
@@ -30,6 +34,8 @@ class PasswordController extends Controller
 
     // redirect to /Home when procedure is complete
     protected $redirectTo = '/Home';
+
+    protected $subject = 'Rücksetzen Ihres Passworts für GSA-Online Plus';
 
     /**
      * Create a new password controller instance.
@@ -53,6 +59,20 @@ class PasswordController extends Controller
         } else {
             return redirect()->back()->with('status', trans('passwords.sent'));
         }
+    }
+
+
+    /**
+     * Get the response for after a successful password reset.
+     *
+     * @param  string  $response
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function getResetSuccessResponse($response)
+    {
+        Alert::info('Ihr Passwort wurde erfolgreich geändert.')->persistent();
+
+        return $this->traitSuccessResponse($response);
     }
 
 }

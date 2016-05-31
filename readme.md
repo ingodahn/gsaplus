@@ -45,14 +45,14 @@ We use [Vagrant](https://www.vagrantup.com/) with a [VirtualBox](https://www.vir
 SSH into the VM (`vagrant ssh` or use `vagrant@192.168.33.10` with password `vagrant` with your own ssh-client). Execute the following commands sequentially for the first-time setup.
 
 ``` bash
-cd /var/www # Change to the project dir inside the VM
+cd /var/www/gsa # Change to the project dir inside the VM
 rake # Automated task to update dependencies, compile assets, etc.
 rake db_seed # Optional. Seed DB with test-data.
 ```
 
 The application should now be accessible at <http://192.168.33.10/>.
 
-The VM has an instance of Piwik running at <http://192.168.33.10/piwik>. Unfortunately, not every step of it's installation can be automated, so you'll have to go through their setup first, although this is completely optional. Just click through the thing and enter the following values, leaving everything else unchanged: For the database setup (step 3) use Login `root` with password `root` and database name `piwik`. Create a super user (step 5) with arbitrary credentials (you'll use them to login later), the email-address may be nonexistend. Setup a website (step 6) with an arbitrary name, URL `http://192.168.33.10/` and time zone `Berlin`. Untick the two checkboxes in step 8 to leave Do Not Track support disabled and not anonymize IPs.
+The VM has an instance of Piwik running at <http://192.168.33.10:8080/>. Unfortunately, not every step of it's installation can be automated, so you'll have to go through their setup first, although this is completely optional. Just click through the thing and enter the following values, leaving everything else unchanged: For the database setup (step 3) use Login `root` with password `root` and database name `piwik`. Create a super user (step 5) with arbitrary credentials (you'll use them to login later), the email-address may be nonexistend. Setup a website (step 6) with an arbitrary name, URL `http://192.168.33.10/` and time zone `Berlin`. Untick the two checkboxes in step 8 to leave Do Not Track support disabled and not anonymize IPs. Finally, in `/var/www/piwik/config/config.ini.php` change `trusted_hosts[]` to `192.168.33.10:8080` (append `:8080`).
 
 
 
@@ -66,6 +66,8 @@ Rake is a task-runner that we use to automate repetetive tasks, like for example
 There are also some tasks which are not called by the update-task, mainly the `watch`-task (which watches the scss-scources for changes and compiles them live) or the `db_reset_`-tasks (which delete the database before migrating them). The latter need to be used manually if database-tables need to be added or removed. The developers should notify about this, but if you see related errors, they propably forgot to. Note that all `db_`-tasks *delete all data* and should be used with extreme caution on the production environment.
 
 When using vagrant, run `vagrant reload --provision` to reload the VM and re-run the provisioning script after it was updated. Omit the `--provision` to just reload the VM. This may be necessary if the VM is unresponsive after suspending the host machine. If you modified the VM and want to revert it to the intended setup, `vagrant destroy` and `vagrant up`.
+
+If there were changes to `.env.exaple`, i.e. configuration keys were added/removed/renamed, you'll have to manually apply these changes to your `.env` as well.
 
 
 

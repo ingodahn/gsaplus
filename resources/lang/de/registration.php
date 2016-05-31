@@ -8,6 +8,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'no_more_time_slots'   => 'Registrierung nicht möglich - alle verfügbaren Plätze sind bereits belegt'
+    'no_more_time_slots'   => 'Alle verfügbaren Plätze sind belegt'
 
 ];

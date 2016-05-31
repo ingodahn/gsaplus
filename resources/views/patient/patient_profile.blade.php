@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @section('title', 'Profil')
 
+  @section('additional-head')
+    <script src="/js/zxcvbn.js" charset="utf-8"></script>
+    <script src="/js/zxcvbn-evaluate.js" charset="utf-8"></script>
+  @endsection
+
 @section('content')
   <div class="container">
 
@@ -10,6 +15,7 @@
 
         @if($isTherapist)
         <small>
+          <br>
           Code: <code>{{ $Patient['code'] }}</code>,
           Status: <code>{{ $Patient['status'] }}</code>
         </small>

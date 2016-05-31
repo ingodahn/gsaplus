@@ -31,12 +31,11 @@
     _paq.push(['setUserId', '{{$Name}}']);
   @endif
   (function() {
-    var u="{{config('piwik.host')}}{{config('piwik.path')}}";
+    var u="//{{config('piwik.host')}}/{{config('piwik.path')}}";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
     _paq.push(['setSiteId', {{config('piwik.site_id')}}]);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="{{config('piwik.host')}}{{config('piwik.path')}}piwik.php?idsite={{config('piwik.site_id')}}" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->

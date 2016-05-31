@@ -4,52 +4,72 @@
 @section('content')
     <div class="container">
 
-      <h3>Datenschutzerklärung</h3>
+      <h2>Datenschutzerklärung</h2>
       <p>
-        Vielen Dank für Ihren Besuch auf <a href="www.online-nachsorge.de">www.online-nachsorge.de</a>. Wir nehmen den Schutz Ihrer Privatsphäre bei der Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten gemäß den gesetzlichen Bestimmungen ernst und möchten, dass Sie sich auf unserer Internetplattform nicht nur mit dem Thema 'berufsbezogene Belastungen' auseinandersetzten, sondern dass Sie sich dabei auch sicher fühlen.
+        Vielen Dank für Ihren Besuch der Internetplattform GSA-Online plus. Wir nehmen den Schutz Ihrer Privatsphäre bei der Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten gemäß den gesetzlichen Bestimmungen ernst und möchten, dass Sie sich auf unserer Internetplattform auch sicher fühlen.
       </p>
       <p>
-        Diese Datenschutzerklärung gibt Hinweise zu personenbezogenen Daten beim Aufrufen dieser Internetplattform, zu Cookies, zu Links und zu E-Mails.
-      </p>
-
-      <h3>Begriffe und Grundsätze</h3>
-      <p>
-        Beim Datenschutz geht es immer um personenbezogene Daten, wie zum Beispiel Name, Anschrift, E-Mail-Adressen und sonstige Daten zu einer Person.
-      </p>
-      <p>
-        Gemäß dem Grundsatz der Datenvermeidung und Datensparsamkeit werden von uns personenbezogene Daten nur erhoben, wenn diese erforderlich sind und Sie uns diese freiwillig angeben.
-      </p>
-      <p>
-        Jeder Zugriff auf das Internet-Angebot der Universitätsmedizin der Johannes Gutenberg Universität, Mainz,  wird protokolliert – dabei werden automatisiert bestimmte Verbindungsdaten gespeichert. Diese Protokolldatei ist notwendig, um einen ordnungsgemäßen technischen Betrieb garantieren zu können. Die gespeicherten Daten werden nur für statistische Zwecke ausgewertet und sobald sie nicht mehr benötigt werden, überschrieben; spätestens nach drei Monaten.
-      </p>
-      <p>
-        Die Auswertung erzeugt aggregierte Informationen wie z.B. Anzahl der Besucher/pro Monat oder Anzahl der aufgerufenen Seiten u.a. Auf diese Weise zusammengefasste Daten sind anonym, sie  können bestimmten Personen nicht zugeordnet werden. Eine Zusammenführung von Verbindungsdaten mit anderen Datenquellen wird von uns nicht vorgenommen.
-      </p>
-      <p>
-        Zur Benutzung von <a href="www.online-nachsorge.de">www.online-nachsorge.de</a> müssen Sie keine personenbezogenen Daten angeben. Die Anmeldung erfolgt mit dem Ihnen zugewiesenen Zugangscode und einem frei wählbaren Benutzernamen. Bei der Wahl des Benutzernamens sollten Sie ausdrücklich auf personenbezogene Bestandteile wie z.B. Vorname, Nachname, Geburtsdatum verzichten. Die Teilnahme am Online-Nachsorgeprogramm ist auf der Internetplattform durch die Wahl eines individuellen Benutzernamens anonymisiert. Eine Zuordnung zu personenbezogenen Daten ist online nicht möglich und unterliegt den generellen Datenschutzbestimmungen der Studie, ist also nur im Notfall durch den Datentreuhänder möglich. Alle studienbezogenen Daten werden pseudonymisiert (d.h. kodiert ohne Angabe von Namen, Anschrift, Initialen oder Ähnliches) erhoben, auf Datenträgern gespeichert  und durch die Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz ausgewertet. Die Weitergabe an Dritte einschließlich Publikation erfolgt ausschließlich in anonymisierter Form, d.h. die Daten können keiner einzelnen Person zugeordnet werden.
+        Diese Datenschutzerklärung erläutert, welche personenbezogenen Daten wir erheben und wie wir diese schützen.
       </p>
 
-      <h3>Erhebung personenbezogener Daten</h3>
+      <h3>Begriffe und Verfahren</h3>
       <p>
-        Nach der Anmeldung mit Benutzername und Passwort erfolgt die Datenübertragung verschlüsselt unter Verwendung einer 128 Bit SSL-Verschlüsselung (Secure Socket Layers), einem international anerkannten Sicherheitsstandard.
+        Beim Datenschutz geht es immer um personenbezogene Daten, d.h. um Daten, die direkt oder indirekt die Identifizierung Ihrer Person erlauben. Dies könnte z.B. möglich sein über den Benutzernamen, eine E-Mail-Adresse, die Adresse Ihres Rechners (IP-Adresse), aber auch durch Inhalte, die Sie auf unserer Internetplattform, z.B. in Ihrem Tagebuch, eintragen.
       </p>
       <p>
-        Wir weisen Sie darauf hin, dass die Eingabe Ihrer persönlichen Daten grundsätzlich freiwillig erfolgt, Sie jedoch keine persönlichen Daten im Forum angeben sollten (z.B. Name oder Geburtsdatum). Von Seiten des Studienteams werden wir Sie nie auffordern, Ihren Namen und Ihr Geburtsdatum anzugeben. Die Angabe der E-Mail Adresse ist freiwillig und erleichtert uns den Kontakt zu Ihnen. Die E-Mail ist für andere Teilnehmer nicht einsehbar und wird verschlüsselt in der Datenbank gespeichert. Die Daten werden von der Universitätsmedizin Mainz nicht an Dritte weitergegeben; weder zu kommerziellen noch zu nicht kommerziellen Zwecken.
+        Für die Teilnahme an der Studie erhalten Sie in Ihrer Klinik einen 16-stelligen Zugangscode den Sie einmalig zu Beginn eingeben müssen. Wir erhalten von Ihrer Klinik nur den Code und Ihr Entlassungsdatum und keine weiteren Angaben zu Ihrer Person.
       </p>
       <p>
-        Wenn Sie mit uns per E-Mail in Kontakt treten möchten, weisen wir Sie darauf hin, dass die Vertraulichkeit der übermittelten Informationen auf dem Übertragungsweg durch das Internet nicht gewährleistet ist. Der Inhalt von E-Mails kann von Dritten eingesehen werden. Wir empfehlen Ihnen daher, uns telefonisch zu kontaktieren, wenn Sie uns vertrauliche Informationen zukommen lassen.
+        Zur Benutzung von GSA-Online plus müssen Sie keine personenbezogenen Daten angeben. Die Anmeldung erfolgt mit dem Ihnen zugewiesenen Zugangscode und einem frei wählbaren Benutzernamen. Bei der Wahl des Benutzernamens sollten Sie ausdrücklich auf personenbezogene Bestandteile wie z.B. Vorname, Nachname oder Geburtsdatum verzichten. Die Teilnahme am Nachsorgeprogramm GSA-Online plus ist auf der Internetplattform durch die Wahl eines individuellen Benutzernamens anonymisiert. Eine Zuordnung zu personenbezogenen Daten ist online nicht möglich und unterliegt den generellen Datenschutzbestimmungen der Studie, ist also nur im Notfall durch die Datentreuhänder in den Kliniken möglich.
+      </p>
+      <p>
+        Die Datenübertragung zwischen Ihrem Computer und dem System von GSA-Online plus erfolgt verschlüsselt und kann nach aktuellem Kenntnisstand von Dritten nicht mitgelesen werden.
+      </p>
+      <p>
+        Unseren Online-Therapeuten sind nur Ihr Benutzername, Ihr Zugangscode und Ihr Entlassungsdatum bekannt. Natürlich können Sie umso besser beraten werden, je mehr wir über Sie wissen. Deshalb haben Sie die Möglichkeit, uns in Ihrem Profil freiwillig mehr über sich mitzuteilen.
+      </p>
+      <p>
+        Ihre Einträge in Ihr Tagebuch können nur von unseren Therapeuten eingesehen werden, die der ärztlichen Schweigepflicht unterliegen. Gemäß dem Grundsatz der Datenvermeidung und Datensparsamkeit werden von uns personenbezogene Daten nur erhoben, wenn diese erforderlich sind und Sie uns diese freiwillig angeben.
+      </p>
+
+      <h3>Verwendung von E-Mail</h3>
+      <p>
+        E-Mails werden zumeist unverschlüsselt übertragen. Deshalb verwendet GSA-Online plus Ihre E-Mail-Adresse nur um Sie kurz über wichtige Ereignisse, wie etwa neue Schreibimpulse, zu informieren. Weitere Informationen finden Sie dann nach Anmeldung in unserem geschützten System. Auch wenn Sie unser Kontaktformular verwenden sind Ihre Eingaben sicher, jedoch erfolgt die Antwort in der Regel unverschlüsselt an die dabei angegebene E-Mail-Adresse. Wenn Sie dies nicht wünschen, so nehmen Sie telefonisch Kontakt zu unserem Team auf oder geben statt einer E-Mail-Adresse Ihren Benutzernamen an, so dass Ihr Online-Therapeut auf Ihr Anliegen im Rahmen seiner Kommentare eingehen kann.
+      </p>
+
+      <h3>Verwendung von Verbindungsdaten</h3>
+      <p>
+        Jeder Zugriff auf das Internet-Angebot der Universitätsmedizin der Johannes Gutenberg Universität, Mainz, wird protokolliert – dabei werden automatisiert bestimmte Verbindungsdaten gespeichert. Diese Protokolldatei ist notwendig, um einen ordnungsgemäßen technischen Betrieb garantieren zu können. Die gespeicherten Daten werden nur für statistische Zwecke ausgewertet und sobald sie nicht mehr benötigt werden, überschrieben; spätestens nach drei Monaten.
+      </p>
+      <p>
+        Die Auswertung erzeugt aggregierte Informationen wie z.B. die Anzahl der Besucher pro Monat oder die Anzahl der aufgerufenen Seiten u.a. Auf diese Weise zusammengefasste Daten sind anonym, sie können bestimmten Personen nicht zugeordnet werden. Eine Zusammenführung von Verbindungsdaten mit anderen Datenquellen wird von uns nicht vorgenommen.
       </p>
 
       <h3>Cookies</h3>
       <p>
-        Die Internetseiten verwenden teilweise sogenannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert.
+        Die von dieser Seite verwendeten Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Außer der Internetprotokoll-Adresse werden keinerlei persönliche Daten des Nutzers gespeichert. Die meisten der von uns verwendeten Cookies sind so genannte „Session-Cookies“. Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen. Dadurch kann Ihr Browser Sie z.B. – wenn Sie dies wünschen – automatisch am GSA-Online-Plus-System anmelden.
       </p>
       <p>
-        Die meisten der von uns verwendeten Cookies sind sogenannte „Session-Cookies“. Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen.
-      </p>
-      <p>
-        Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein. 
+        Sie können die Verwendung der Cookies durch eine entsprechende Einstellung Ihrer Browser Software verhindern, es kann jedoch sein, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website voll umfänglich nutzen können.
       </p>
 
+      <h3>Datenschutzerklärung für die Protokollierung der Seitenbesuche</h3>
+      <p>
+        Unsere Website verwendet <a href="https://piwik.org/" target="_blank">Piwik</a>, dabei handelt es sich um einen sogenannten Webanalysedienst. Piwik verwendet sog. „Cookies“ (s.o.) die unsererseits eine Analyse der Benutzung der Webseite ermöglichen. Zu diesem Zweck werden die durch den Cookie erzeugten Nutzungsinformationen (einschließlich Ihrer gekürzten IP-Adresse) an unseren Server übertragen und zu Nutzungsanalysezwecken gespeichert. Ihre IP-Adresse wird bei diesem Vorgang umgehend anonymisiert, so dass Sie als Nutzer für uns anonym bleiben. Die durch den Cookie erzeugten Informationen über Ihre Benutzung dieser Webseite werden nur auf dem Server der Universitätsmedizin Mainz gespeichert und nicht an Dritte weitergegeben.
+      </p>
+      <p>
+        Wenn Sie mit der Speicherung und Auswertung dieser Daten aus Ihrem Besuch nicht einverstanden sind, dann können Sie der Speicherung und Nutzung nachfolgend per Mausklick jederzeit widersprechen. In diesem Fall wird in Ihrem Browser ein sogenannter Opt-Out-Cookie abgelegt, was zur Folge hat, dass Piwik keinerlei Sitzungsdaten erhebt. Achtung: Wenn Sie Ihre Cookies löschen, so hat dies zur Folge, dass auch das Opt-Out-Cookie gelöscht wird und ggf. von Ihnen erneut aktiviert werden muss.
+      </p>
+      <iframe id="opt-out-frame"  src="{{config('piwik.protocol')}}://{{config('piwik.host')}}{{config('piwik.path')}}/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
+
+      <h3>Auskunft, Löschung, Sperrung</h3>
+      <p>
+        Sollten Sie Fragen zum Thema des Datenschutzes bei der Nutzung der Internetplattform GSA-Online plus haben, können Sie sich jederzeit unter der im <a href="impressum">Impressum</a> angegebenen Adresse an uns wenden.
+      </p>
+
+      <hr>
+      <p>
+        Nach: <a href="https://www.datenschutzbeauftragter-info.de/" target="_blank">www.datenschutzbeautragter-info.de</a>
+      </p>
     </div>
 @endsection

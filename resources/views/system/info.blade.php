@@ -31,6 +31,13 @@
     </p>
 
     <div id="toc" class="list-group">
+      <a href="#video-1" class="list-group-item">
+        <h4 class="list-group-item-heading">Vorstellung von GSA online plus</h4>
+        <p class="list-group-item-text">Begrüßung und Angebot der Online-Nachsorge (Intro Video von der Startseite)</p>
+      </a>
+    </div>
+
+    <div id="toc" class="list-group">
       <a href="#video-2" class="list-group-item">
         <h4 class="list-group-item-heading">Rückkehr an den Arbeitsplatz</h4>
         <p class="list-group-item-text">Warum onlinebasierte Unterstützung bei der Wiedereingliederung?</p>
@@ -48,19 +55,24 @@
         <p class="list-group-item-text">Eine ganz normale Wiedereingliederung</p>
       </a>
       <a href="#video-6" class="list-group-item">
-        <h4 class="list-group-item-heading">Am Ball Bleiben</h4>
+        <h4 class="list-group-item-heading">Am Ball bleiben</h4>
         <p class="list-group-item-text">Warum ist es wichtig dabei zu bleiben?</p>
       </a>
     </div>
 
 
-    <div id="toc" class="list-group">
-      <a href="#video-1" class="list-group-item">
-        <h4 class="list-group-item-heading">Vorstellung von GSA online plus</h4>
-        <p class="list-group-item-text">Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)</p>
-      </a>
+    <div class="info-video" id="video-1">
+      <h3>Vorstellung von GSA online plus</h3>
+      <div class="pull-right">
+        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
+      </div>
+      <p>
+        Begrüßung und Angebot der Online-Nachsorge (Intro Video von der Startseite)
+      </p>
+      <div class="videoWrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/OzGLGdZ6Y3A?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
-
 
     <div class="info-video" id="video-2">
       <h3>Rückkehr an den Arbeitsplatz</h3>
@@ -71,7 +83,7 @@
         Warum onlinebasierte Unterstützung bei der Wiedereingliederung?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Pa_rhIynxeg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/5YYf_efA4kk?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -84,7 +96,7 @@
         Wie läuft die online Nachsorge ab?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/OIb2lFeh8d4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/BoLAubdcuDc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -97,7 +109,7 @@
         Welche Grundlage hat die online Nachsorge?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ciaBwB2nKmA?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/jXDLs5M0Zes?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -123,21 +135,7 @@
         Warum ist es wichtig dabei zu bleiben?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/wZX7cabk0uo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-
-
-    <div class="info-video" id="video-1">
-      <h3>Vorstellung von GSA online plus</h3>
-      <div class="pull-right">
-        <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
-      </div>
-      <p>
-        Begrüßung und Angebot der online Nachsorge (Intro Video von der Startseite)
-      </p>
-      <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/15PsRxp3J_w?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/HPTYbmDSTII?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 

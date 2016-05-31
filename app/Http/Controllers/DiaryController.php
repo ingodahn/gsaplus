@@ -76,8 +76,8 @@ class DiaryController extends Controller
                 $wai[$i] = $p_assignments[$i - 1]['survey']['wai'];
                 $health[$i] = $p_assignments[$i - 1]['survey']['health'];
             } else {
-                $wai[$i] = -1;
-                $health[$i] = -1;
+                $wai[$i] = "null";
+                $health[$i] = "null";
             }
         }
 
@@ -319,7 +319,8 @@ class DiaryController extends Controller
             } else {
                 $assignment->comment()->save($comment);
             }
-             Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email, $patient->name, 'Neuer Kommentar in Ihrem Tagebuch', 'emails.assignment.new_comment');
+             $patient_name=$patient->name;
+             Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email, $patient->name, 'Neuer Kommentar in Ihrem Tagebuch', 'emails.assignment.new_comment',['PatientName' => $patient_name]);
         }
         if ($request->has('comment_reply_satisfied') ||
         $request->has('comment_reply_helpful')) {
@@ -356,9 +357,9 @@ class DiaryController extends Controller
             if (! $task){
                 $task= new TaskTemplate;
                 $task->name=$title;
-                $alert="Muster \"".$title."\" erstellt.";
+                $alert="Vorlage \"".$title."\" erstellt.";
             } else {
-                $alert="Muster \"".$title."\" aktualisiert.";
+                $alert="Vorlage \"".$title."\" aktualisiert.";
             }
             $task->problem = $problem;
             $task->save();

@@ -230,23 +230,19 @@ abstract class PatientsTableBaseSeeder extends Seeder
             }
 
             if (!$saved && $is_past_assignment) {
-                $date_of_reminder = $assignment->writing_date
-                    ->addDays(config('gsa.reminder_period_in_days'));
-
                 if ($assignment->answer === "") {
                     $assignment->dirty = false;
                 } else {
                     $assignment->dirty = true;
                 }
-
-                if ($date_of_reminder->isPast()) {
-                    $assignment->date_of_reminder = $date_of_reminder;
-                } else {
-                    $assignment->date_of_reminder =
-                        $this->faker->dateTimeBetween($assignment->writing_date, 'now');
-                }
+                $assignment->notified_due = true;
             } else {
                 $assignment->dirty = false;
+            }
+
+            if ($is_past_assignment) {
+                // don't send notifications when switching date on test page
+                $assignment->notified_new = true;
             }
 
             $patient->assignments()->save($assignment);
@@ -408,34 +404,33 @@ abstract class PatientsTableBaseSeeder extends Seeder
                 break;
             case PatientStatus::PATIENT_GOT_ASSIGNMENT:
                 $current_assignment->dirty = false;
-                $current_assignment->date_of_reminder = null;
+                $current_assignment->notified_due = false;
                 $this->fill_in_answers($current_assignment, true);
                 break;
             case PatientStatus::PATIENT_EDITED_ASSIGNMENT:
                 $current_assignment->dirty = true;
-                $current_assignment->date_of_reminder = null;
+                $current_assignment->notified_due = false;
                 $this->fill_in_answers($current_assignment, false);
                 break;
-            case PatientStatus::SYSTEM_REMINDED_OF_ASSIGNMENT:
+            case PatientStatus::ASSIGNMENT_WILL_BECOME_DUE_SOON:
                 $current_assignment->dirty = true;
-                $current_assignment->date_of_reminder =
-                    $this->faker->dateTimeBetween($current_assignment->writing_date, 'now');
+                $current_assignment->notified_due = true;
                 $this->fill_in_answers($current_assignment, false);
                 break;
             case PatientStatus::PATIENT_FINISHED_ASSIGNMENT:
                 $current_assignment->dirty = false;
-                $current_assignment->date_of_reminder = null;
+                $current_assignment->notified_due = false;
                 $this->fill_in_answers($current_assignment, false);
                 break;
             case PatientStatus::THERAPIST_COMMENTED_ASSIGNMENT:
                 $current_assignment->dirty = false;
-                $current_assignment->date_of_reminder = null;
+                $current_assignment->notified_due = false;
                 $this->fill_in_answers($current_assignment, false);
                 $this->add_comment($current_assignment);
                 break;
             case PatientStatus::PATIENT_RATED_COMMENT:
                 $current_assignment->dirty = false;
-                $current_assignment->date_of_reminder = null;
+                $current_assignment->notified_due = false;
                 $this->fill_in_answers($current_assignment, false);
                 $this->add_comment($current_assignment);
                 $this->add_comment_reply($current_assignment->comment);
