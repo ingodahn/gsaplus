@@ -94,14 +94,12 @@
             <h4 class="panel-title">
               @if($isPatient && $i <= $Diary['patient_week'] || $isTherapist)
                 <div class="row">
-                  <div class="col-xs-10 col-sm-9">
+                  <div class="col-xs-11">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$i}}" aria-controls="collapse{{$i}}">
                       <small><i class="fa fa-chevron-{{$revealed ? "down" : "right"}} accordion-indicator" aria-hidden="true"></i></small> <strong>Woche {{$i}}</strong> - {{$entry['entry_status']}}
                     </a>
                   </div>
-                  <div class="col-xs-2 col-md-3">
-                    <a href="/Assignment/{{$Diary['name']}}/{{$i}}" class="pull-right">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-                  </div>
+                  <a href="/Assignment/{{$Diary['name']}}/{{$i}}" class="pull-right" style="margin-right: 10px;">Zum Eintrag <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                 </div>
               @else
                 <i class="fa fa-ban" aria-hidden="true"></i> <strong>Woche {{$i}}</strong> - noch nicht verfügbar
