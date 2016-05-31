@@ -265,10 +265,22 @@
                     <tr>
                         <td>Aktueller Schreibimpuls unbearbeitet</td>
                         <td>
-                            Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.
+                            Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 2 Tage lang nicht bearbeitet haben.
                         </td>
                         <td>
                             <form method="POST" action="/admin/send-reminders/due">
+                                {{ csrf_field() }}
+                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aktueller Schreibimpuls überfällig</td>
+                        <td>
+                            Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/send-reminders/missed">
                                 {{ csrf_field() }}
                                 <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
                             </form>
