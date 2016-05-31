@@ -1,7 +1,3 @@
-require 'dotenv/tasks'
-
-
-
 def bcjs(component, target=File.basename(component))
   sh "cp bower_components/#{component} public/js/#{target}"
 end
@@ -114,6 +110,7 @@ end
 
 desc "apply major db changes - all data will be removed - run if tables were added or removed"
 task db_reset: [:dotenv] do
+  require 'dotenv/tasks'
   sh "mysql "\
     "-u#{ENV['DB_USERNAME']} "\
     "-p#{ENV['DB_PASSWORD']} "\

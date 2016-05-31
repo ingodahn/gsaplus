@@ -328,3 +328,18 @@ textarea {
     border-bottom-color: $brand-danger;
   }
 }
+
+#opt-out-frame {
+  border: 0px;
+  width: 100%;
+  height: 320px;
+  @media (max-width: 1000px) {
+    height: 400px;
+  }
+  @media (max-width: 680px) {
+    height: 500px;
+  }
+  @media (max-width: 480px) {
+    height: 760px;
+  }
+}

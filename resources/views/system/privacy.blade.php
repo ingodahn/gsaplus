@@ -1,12 +1,5 @@
 @extends('layouts.master')
 @section('title', 'Datenschutz')
-@section('additional-head')
-  <script language="javascript" type="text/javascript">
-    function resizeIframe(obj) {
-      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-    }
-  </script>
-@endsection
 
 @section('content')
     <div class="container">
@@ -67,7 +60,7 @@
       <p>
         Wenn Sie mit der Speicherung und Auswertung dieser Daten aus Ihrem Besuch nicht einverstanden sind, dann können Sie der Speicherung und Nutzung nachfolgend per Mausklick jederzeit widersprechen. In diesem Fall wird in Ihrem Browser ein sogenannter Opt-Out-Cookie abgelegt, was zur Folge hat, dass Piwik keinerlei Sitzungsdaten erhebt. Achtung: Wenn Sie Ihre Cookies löschen, so hat dies zur Folge, dass auch das Opt-Out-Cookie gelöscht wird und ggf. von Ihnen erneut aktiviert werden muss.
       </p>
-      <iframe style="border: 0; width: 100%;" scrolling="no" onload="resizeIframe(this)" src="{{config('piwik.protocol')}}://{{config('piwik.host')}}{{config('piwik.path')}}/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
+      <iframe id="opt-out-frame"  src="{{config('piwik.protocol')}}://{{config('piwik.host')}}{{config('piwik.path')}}/index.php?module=CoreAdminHome&action=optOut&idsite=1&language=de"></iframe>
 
       <h3>Auskunft, Löschung, Sperrung</h3>
       <p>
