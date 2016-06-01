@@ -212,7 +212,7 @@ class PatientController extends Controller
 		} catch (\InvalidArgumentException $e) {
 			Alert::warning('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->persistent();
 		}
-		$url_code=str_replace("-","%2D",$patient->code);
+		$url_code=str_replace("-","",$patient->code);
 		if (isset($date_from_clinics)) {
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
