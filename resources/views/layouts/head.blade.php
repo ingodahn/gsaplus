@@ -31,7 +31,7 @@
     _paq.push(['setUserId', '{{$Name}}']);
   @endif
   (function() {
-    var u="//{{config('piwik.host')}}/{{config('piwik.path')}}";
+    var u="//{{config('piwik.host')}}{{config('piwik.path')}}/";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
     _paq.push(['setSiteId', {{config('piwik.site_id')}}]);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
