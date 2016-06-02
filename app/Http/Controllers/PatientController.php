@@ -44,7 +44,13 @@ class PatientController extends Controller
 		}
 		$patient->intervention_ended_on = Date::now();
 		$patient->save();
-
+		$url_code=str_replace("-","",$patient->code);
+		Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email,
+			$patient->name, 'Abschluss Ihrer Teilnahme an GSA-Online Plus', 'emails.cancel_intervention',
+			[
+				'PatientName' => $patient->name,
+				'PatientCode' => $url_code,
+			]);
 		Alert::success('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->persistent();
 
 		return Redirect::back();
@@ -206,19 +212,23 @@ class PatientController extends Controller
 		}
 		// format: dd.mm.yyyy
 		$date_from_clinics_string = $request->input('date_from_clinics');
-
 		try {
 			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
 		} catch (\InvalidArgumentException $e) {
 			Alert::warning('Das Format des angegebenen Entlassungsdatums ist unbekannt.')->persistent();
 		}
-		$url_code=str_replace("-","%2D",$patient->code);
+		$url_code=str_replace("-","",$patient->code);
 		if (isset($date_from_clinics)) {
 			$patient->date_from_clinics = $date_from_clinics;
 			$patient->save();
 			Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email,
 				$patient->name, 'Einige Fragen zur Vorbereitung', 'emails.soscisurvey',
-				['PatientName' => $patient->name, 'PatientCode' => $url_code]);
+				[
+					'PatientName' => $patient->name,
+					'PatientCode' => $url_code,
+					'AssignmentDay' => Helper::generate_day_number_map()[$patient->assignment_day],
+					'NextWritingDate' => $patient->next_assignment()->writing_date->format('d.m.Y')
+				]);
 
 			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->persistent();
 		}
