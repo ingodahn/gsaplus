@@ -131,8 +131,8 @@ class RemindUsersOfAssignment extends Command
                                             !$current_assignment->notified_due;
                     break;
                 case self::OPTION_MISSED:
-                    $status_condition = $current_assignment->status() === AssignmentStatus::PATIENT_MISSED_ASSIGNMENT &&
-                                            !$current_assignment->notified_missed;
+                    $status_condition = $patient_status === PatientStatus::PATIENT_MISSED_ASSIGNMENT &&
+                                            $patient_week < 12 && !$current_assignment->notified_missed;
                     break;
             }
 
