@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Assignment;
 use App\Models\AssignmentStatus;
 use App\Models\InfoModel;
+use App\Models\PatientStatus;
 use Illuminate\Console\Command;
 
 use App\Patient;
@@ -104,33 +105,29 @@ class RemindUsersOfAssignment extends Command
 
     protected function sendRemindersForOption($option, $patients) {
         foreach ($patients as $patient) {
-            // current assignment may be null if patient is in week 0
-            // (patient left the clinic but the first assignments writing
-            // date is in the future)
+            $patient_status = $patient->status();
 
-            // the current assignment always has a writing date (in fact the latest
-            // assignment with writing date < current date is returned - see docs in
-            // class Patient)
-            $current_assignment = $patient->current_assignment();
-
-            if (!$current_assignment) {
+            if ($patient_status < PatientStatus::PATIENT_GOT_ASSIGNMENT) {
                 // nothing to be done
                 continue;
             }
+
+            $patient_week = $patient->patient_week();
+            $current_assignment = $patient->current_assignment();
 
             $status_condition = false;
 
             switch ($option) {
                 case self::OPTION_FIRST:
-                    $status_condition = $current_assignment->status() === AssignmentStatus::PATIENT_GOT_ASSIGNMENT &&
-                                            $patient->patient_week() === 1 && !$current_assignment->notified_new;
+                    $status_condition = $patient_status === PatientStatus::PATIENT_GOT_ASSIGNMENT &&
+                                            $patient_week === 1 && !$current_assignment->notified_new;
                     break;
                 case self::OPTION_NEW:
-                    $status_condition = $current_assignment->status() === AssignmentStatus::PATIENT_GOT_ASSIGNMENT &&
+                    $status_condition = $patient_status === PatientStatus::PATIENT_GOT_ASSIGNMENT &&
                                             !$current_assignment->notified_new;
                     break;
                 case self::OPTION_DUE:
-                    $status_condition = $current_assignment->status() === AssignmentStatus::ASSIGNMENT_WILL_BECOME_DUE_SOON &&
+                    $status_condition = $patient_status === PatientStatus::ASSIGNMENT_WILL_BECOME_DUE_SOON &&
                                             !$current_assignment->notified_due;
                     break;
                 case self::OPTION_MISSED:
