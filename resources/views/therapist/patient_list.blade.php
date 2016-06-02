@@ -77,31 +77,31 @@
           <div class="col-md-2">
             <div class="input-group {{ echoIndicatorClass($Slots['Montag']) }}">
               <span class="input-group-addon day-slot"><code>Mo</code></span>
-              <input name="Mo_slots"  type="number" class="form-control" value="{{$Slots['Montag']}}">
+              <input name="Mo_slots" min="0" type="number" class="form-control" value="{{$Slots['Montag']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group {{ echoIndicatorClass($Slots['Dienstag']) }}">
               <span class="input-group-addon day-slot"><code>Di</code></span>
-              <input name="Di_slots"  type="number" class="form-control" value="{{$Slots['Dienstag']}}">
+              <input name="Di_slots" min="0" type="number" class="form-control" value="{{$Slots['Dienstag']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group {{ echoIndicatorClass($Slots['Mittwoch']) }}">
               <span class="input-group-addon day-slot"><code>Mi</code></span>
-              <input name="Mi_slots"  type="number" class="form-control" value="{{$Slots['Mittwoch']}}">
+              <input name="Mi_slots" min="0" type="number" class="form-control" value="{{$Slots['Mittwoch']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group {{ echoIndicatorClass($Slots['Donnerstag']) }}">
               <span class="input-group-addon day-slot"><code>Do</code></span>
-              <input name="Do_slots"  type="number" class="form-control" value="{{$Slots['Donnerstag']}}">
+              <input name="Do_slots" min="0" type="number" class="form-control" value="{{$Slots['Donnerstag']}}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group {{ echoIndicatorClass($Slots['Sonntag']) }}">
               <span class="input-group-addon day-slot"><code>So</code></span>
-              <input name="So_slots" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
+              <input name="So_slots" min="0" type="number" class="form-control" value="{{$Slots['Sonntag']}}">
             </div>
           </div>
           <div class="col-md-2">
@@ -122,10 +122,11 @@
         <li>Entlassungsdatum erfasst (P025)</li>
         <li>Schreibimpuls erhalten (P030)</li>
         <li>Tagebucheintrag bearbeitet (P040)</li>
-        <li>Tagebucheintrag gemahnt (P045)</li>
+        <li>Tagebucheintrag in Kürze fällig (P045)</li>
         <li>Tagebucheintrag abgeschickt (P050)</li>
         <li>Tagebucheintrag mit Rückmeldung versehen (P060)</li>
         <li>Rückmeldung bewertet (P065)</li>
+        <li>Aufgabe verpasst (P070)</li>
         <li>Mitarbeit beendet (P130)</li>
         <li>Interventionszeit beendet (P140)</li>
       </ul>
