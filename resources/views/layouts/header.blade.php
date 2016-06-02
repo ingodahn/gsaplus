@@ -34,7 +34,7 @@
           @if($isTherapist)
             <li><a href="/Home">Patientenliste</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin-Tools <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Werkzeuge <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 @if($isLocal)
                   <li><a href="/test" target="_blank">Konrollzentrum</a></li>
