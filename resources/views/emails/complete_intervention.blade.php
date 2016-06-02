@@ -5,7 +5,11 @@
     Sehr geehrter Teilnehmer {!! $PatientName !!},
 </p>
 <p>
-    Sie haben sich entschieden, die Online-Nachsorge nicht mehr weiter fortzuführen.</br>
+    Sie haben die Online-Nachsorge GSA-Online plus nun erfolgreich beendet.
+    Zum Abschluss der Nachsorge möchten wir Sie noch einmal bitten, sich ca. 45 Minuten Zeit zu nehmen und
+    einen Online-Fragenbogen zu beantworten.
+</p>
+<p>
     Wir möchten unsere Online-Nachsorge gerne weiter verbessern und möglichst zielgerichtet interessierten
     Rehabilitanden zu empfehlen. Daher ist es für uns von Interesse, wie sich Ihre berufliche Situation und
     Ihre Gesundheit im Laufe der Nachsorge verändert haben und welche Verbesserungsvorschläge und Anregungen Sie
