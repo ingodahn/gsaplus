@@ -215,9 +215,11 @@
                     </tbody>
                 </table>
                 <p class="text-right">
-                    <a href="#top">Zum Seitenanfang
-                        <span class="glyphicon glyphicon-arrow-up"></span>
-                    </a>
+                    <small>
+                        <a href="#top">Zum Seitenanfang
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                    </small>
                 </p>
             </div>
         @endforeach
@@ -227,71 +229,25 @@
         </div>
 
         <div class="row">
-            <h4 id="reminders">Erinnerungen</h4>
-
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th>Ereignis</th>
-                        <th>Erklärung</th>
-                        <th>Aktion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Erhalt des ersten Schreibimpulses</td>
-                        <td>
-                            Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren ersten Schreibtag haben.
-                        </td>
-                        <td>
-                            <form method="POST" action="/admin/send-reminders/first">
-                                {{ csrf_field() }}
-                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Erhalt eines Folge-Schreibimpulses</td>
-                        <td>
-                            Gilt für alle Patienten die heute (bzw. zum Testdatum) Ihren neuen Schreibtag haben.
-                        </td>
-                        <td>
-                            <form method="POST" action="/admin/send-reminders/new">
-                                {{ csrf_field() }}
-                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Aktueller Schreibimpuls unbearbeitet</td>
-                        <td>
-                            Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 2 Tage lang nicht bearbeitet haben.
-                        </td>
-                        <td>
-                            <form method="POST" action="/admin/send-reminders/due">
-                                {{ csrf_field() }}
-                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Aktueller Schreibimpuls überfällig</td>
-                        <td>
-                            Gilt für alle Patienten die Ihren aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.
-                        </td>
-                        <td>
-                            <form method="POST" action="/admin/send-reminders/missed">
-                                {{ csrf_field() }}
-                                <input class="btn-link" value="Benachrichtigungen versenden" type="submit" />
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="text-right" style="clear: both">
-                <a href="#top">Zum Seitenanfang
-                    <span class="glyphicon glyphicon-arrow-up"></span>
-                </a>
+            <h4 id="reminders">Benachrichtigungen</h4>
+            <p>Versenden Sie anstehende Benachrichtigungen. Patienten werden benachrichtigt falls</p>
+            <ul>
+                <li>sie den ersten bzw. einen neuen <em>Schreibimpuls erhalten</em> haben.</li>
+                <li>der aktuelle <em>Schreibimpuls in Kürze fällig</em> ist.</li>
+                <li>der aktuelle <em>Schreibimpuls überfällig</em> ist.</li>
+            </ul>
+            <p><strong>Achtung:</strong> Benachrichtigungen werden nur einmal verschickt.</p>
+            <form method="POST" action="/admin/send-reminders/all"
+                  class="pull-right floating-btn-form">
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-primary pull-right">Benachrichtigungen versenden</button>
+            </form>
+            <p class="text-right" style="clear: both; padding-top:20px">
+                <small>
+                    <a href="#top">Zum Seitenanfang
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                    </a>
+                </small>
             </p>
         </div>
 
@@ -309,11 +265,12 @@
                 {{ csrf_field() }}
                 <button type="submit" class="btn btn-primary pull-right"><span class="fa fa-save" aria-hidden="true"></span> &nbsp;Codeliste speichern</button>
             </form>
-            <p class="text-right" style="clear: both">
-                <br/>
-                <a href="#top">Zum Seitenanfang
-                    <span class="glyphicon glyphicon-arrow-up"></span>
-                </a>
+            <p class="text-right" style="clear: both; padding-top:20px">
+                <small>
+                    <a href="#top">Zum Seitenanfang
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                    </a>
+                </small>
             </p>
         </div>
 
