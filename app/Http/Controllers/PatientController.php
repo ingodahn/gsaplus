@@ -44,7 +44,13 @@ class PatientController extends Controller
 		}
 		$patient->intervention_ended_on = Date::now();
 		$patient->save();
-
+		$url_code=str_replace("-","",$patient->code);
+		Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email,
+			$patient->name, 'Abschluss Ihrer Teilnahme an GSA-Online Plus', 'emails.cancel_intervention',
+			[
+				'PatientName' => $patient->name,
+				'PatientCode' => $url_code,
+			]);
 		Alert::success('Zusammenarbeit mit Patient '.$patient->name.' wurde beendet.')->persistent();
 
 		return Redirect::back();
