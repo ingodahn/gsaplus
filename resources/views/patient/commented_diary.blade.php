@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Kommentiertes Tagebuch')
+@section('title', 'Wochenrückblick')
 
 @section('additional-head')
   <script src="/js/Chart.min.js" charset="utf-8"></script>
@@ -7,10 +7,10 @@
 
 @section('content')
   <div class="container">
-    <h2>Ihr Tagebuch</h2>
+    <h2>Ihr Wochenrückblick</h2>
     @if($isTherapist)
       <p>
-        Dies ist das Tagebuch von <em>{{ $PatientName }}</em>.
+        Dies ist der Wochenrückblick von <em>{{ $PatientName }}</em>.
       </p>
     @endif
 
@@ -59,10 +59,10 @@
       </div>
       @if ($Assignments[1]['dirty'])
         <div class="answerNotSubmitted">
-            <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag (nicht eingereicht)</h4>
+            <h4><i class="fa fa-book" aria-hidden="true"></i> Tagebucheintrag (nicht eingereicht)</h4>
             @else
           <div class="answer">
-              <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
+              <h4><i class="fa fa-book" aria-hidden="true"></i> Tagebucheintrag</h4>
           @endif
           @if ($isTherapist && $Assignments[1]['dirty'])
             Nicht eingereicht.
@@ -112,13 +112,13 @@
               @if ($isTherapist)
                 <p>Nicht eingereicht.</p>
               @else
-                <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag (nicht eingereicht)</h4>
+                <h4><i class="fa fa-book" aria-hidden="true"></i> Tagebucheintrag (nicht eingereicht)</h4>
                 <p>{!! nl2br(e($Assignments[$i]['answer'])) !!}</p>
               @endif
             </div>
           @else
             <div class="answer">
-              <h4><i class="fa fa-book" aria-hidden="true"></i> Wocheneintrag</h4>
+              <h4><i class="fa fa-book" aria-hidden="true"></i> Tagebucheintrag</h4>
                 @if (nl2br(e($Assignments[$i]['answer'])) == "")
                     <p>Nichts eingereicht</p>
                 @else
