@@ -206,7 +206,6 @@ class PatientController extends Controller
 		}
 		// format: dd.mm.yyyy
 		$date_from_clinics_string = $request->input('date_from_clinics');
-
 		try {
 			$date_from_clinics = Date::createFromFormat('d.m.Y', $date_from_clinics_string);
 		} catch (\InvalidArgumentException $e) {
@@ -218,7 +217,12 @@ class PatientController extends Controller
 			$patient->save();
 			Helper::send_email_using_view(config('mail.team.address'), config('mail.team.name'), $patient->email,
 				$patient->name, 'Einige Fragen zur Vorbereitung', 'emails.soscisurvey',
-				['PatientName' => $patient->name, 'PatientCode' => $url_code]);
+				[
+					'PatientName' => $patient->name,
+					'PatientCode' => $url_code,
+					'AssignmentDay' => Helper::generate_day_number_map()[$patient->assignment_day],
+					'NextWritingDate' => $patient->next_assignment()->writing_date->format('d.m.Y')
+				]);
 
 			Alert::success('Das Entlassungsdatum wurde erfolgreich geändert.')->persistent();
 		}

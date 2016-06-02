@@ -5,7 +5,12 @@
     Sehr geehrter Teilnehmer {!! $PatientName !!},
 </p>
 <p>
-    im Rahmen der Online-Nachsorge GSA-Online plus möchten wir Sie bitten, zu Beginn und zum Ende der Nachsorge einen
+    Bald geht es los - im Rahmen der Online-Nachsorge GSA-Online plus werden Sie am
+    {!! $AssignmentDay !!}, {!! $NextWritingDate !!}, Ihren ersten Schreibimpuls
+    erhalten.
+</p>
+<p>
+    Zur Vorbereitung möchten wir Sie bitten, einen
     Online-Fragenbogen zu beantworten. Das Ausfüllen des Fragebogens wird ca. 45 Minuten in Anspruch nehmen.
 </p>
 <p>
