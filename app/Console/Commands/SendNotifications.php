@@ -15,22 +15,22 @@ use App\Helper;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Mail;
 
-class SendReminders extends Command
+class SendNotifications extends Command
 {
-    const OPTION_FIRST = 'first';
-    const OPTION_NEW = 'new';
-    const OPTION_DUE = 'due';
-    const OPTION_MISSED = 'missed';
+    const OPTION_FIRST_ASSIGNMENT = 'first-assignment';
+    const OPTION_NEW_ASSIGNMENT = 'new-assignment';
+    const OPTION_DUE_ASSIGNMENT = 'due-assignment';
+    const OPTION_MISSED_ASSIGNMENT = 'missed-assignment';
     const OPTION_INTERVENTION_END = 'intervention-end';
     const OPTION_ALL = 'all';
     const OPTION_SET_NEXT_WRITING_DATE = 'set-next-writing-date';
 
     const VIEW_DIR = 'emails';
 
-    protected $views = [self::OPTION_FIRST => self::VIEW_DIR.'.assignment.first',
-                        self::OPTION_NEW => self::VIEW_DIR.'.assignment.new',
-                        self::OPTION_DUE => self::VIEW_DIR.'.assignment.due',
-                        self::OPTION_MISSED => self::VIEW_DIR.'.assignment.missed',
+    protected $views = [self::OPTION_FIRST_ASSIGNMENT => self::VIEW_DIR.'.assignment.first',
+                        self::OPTION_NEW_ASSIGNMENT => self::VIEW_DIR.'.assignment.new',
+                        self::OPTION_DUE_ASSIGNMENT => self::VIEW_DIR.'.assignment.due',
+                        self::OPTION_MISSED_ASSIGNMENT => self::VIEW_DIR.'.assignment.missed',
                         self::OPTION_INTERVENTION_END => self::VIEW_DIR.'.complete_intervention'];
 
     /**
@@ -38,13 +38,13 @@ class SendReminders extends Command
      *
      * @var string
      */
-    protected $signature = 'gsa:send-reminders
-                                {--'.self::OPTION_FIRST.' : Remind of first assignment}
-                                {--'.self::OPTION_NEW.' : Remind of new assignment}
-                                {--'.self::OPTION_DUE.' : Remind of due assignment}
-                                {--'.self::OPTION_MISSED.' : Remind of missed assignment}
-                                {--'.self::OPTION_INTERVENTION_END.' : Remind of intervention end}
-                                {--'.self::OPTION_ALL.' : Send all reminders}
+    protected $signature = 'gsa:send-notifications
+                                {--'.self::OPTION_FIRST_ASSIGNMENT.' : Notify of first assignment}
+                                {--'.self::OPTION_NEW_ASSIGNMENT.' : Notify of new assignment}
+                                {--'.self::OPTION_DUE_ASSIGNMENT.' : Notify of due assignment}
+                                {--'.self::OPTION_MISSED_ASSIGNMENT.' : Notify of missed assignment}
+                                {--'.self::OPTION_INTERVENTION_END.' : Notify of intervention end}
+                                {--'.self::OPTION_ALL.' : Send all notifications}
                                 {--'.self::OPTION_SET_NEXT_WRITING_DATE.' : set next writing date}';
 
     /**
@@ -71,7 +71,7 @@ class SendReminders extends Command
      */
     public function handle()
     {
-        $this->info(Date::now().': call to gsa:send-reminders.');
+        $this->info(Date::now().': call to gsa:send-notifications.');
 
         $settings = TestSetting::first();
 
@@ -79,10 +79,10 @@ class SendReminders extends Command
             Date::setTestNow($settings->test_date);
         }
 
-        $this->sendReminders();
+        $this->sendNotifications();
     }
 
-    protected function sendReminders() {
+    protected function sendNotifications() {
         // get patients whose
         // - intervention didn't end
         // - hospital stay is over
@@ -90,28 +90,28 @@ class SendReminders extends Command
             ->whereNotNull('date_from_clinics')
             ->get();
 
-        if ($this->option(self::OPTION_FIRST) || $this->option(self::OPTION_ALL)) {
-            $this->sendRemindersForOption(self::OPTION_FIRST, $patients);
+        if ($this->option(self::OPTION_FIRST_ASSIGNMENT) || $this->option(self::OPTION_ALL)) {
+            $this->sendNotificationsForOption(self::OPTION_FIRST_ASSIGNMENT, $patients);
         }
 
-        if ($this->option(self::OPTION_NEW) || $this->option(self::OPTION_ALL)) {
-            $this->sendRemindersForOption(self::OPTION_NEW, $patients);
+        if ($this->option(self::OPTION_NEW_ASSIGNMENT) || $this->option(self::OPTION_ALL)) {
+            $this->sendNotificationsForOption(self::OPTION_NEW_ASSIGNMENT, $patients);
         }
 
-        if ($this->option(self::OPTION_DUE) || $this->option(self::OPTION_ALL)) {
-            $this->sendRemindersForOption(self::OPTION_DUE, $patients);
+        if ($this->option(self::OPTION_DUE_ASSIGNMENT) || $this->option(self::OPTION_ALL)) {
+            $this->sendNotificationsForOption(self::OPTION_DUE_ASSIGNMENT, $patients);
         }
 
-        if ($this->option(self::OPTION_MISSED) || $this->option(self::OPTION_ALL)) {
-            $this->sendRemindersForOption(self::OPTION_MISSED, $patients);
+        if ($this->option(self::OPTION_MISSED_ASSIGNMENT) || $this->option(self::OPTION_ALL)) {
+            $this->sendNotificationsForOption(self::OPTION_MISSED_ASSIGNMENT, $patients);
         }
 
         if ($this->option(self::OPTION_INTERVENTION_END) || $this->option(self::OPTION_ALL)) {
-            $this->sendRemindersForOption(self::OPTION_INTERVENTION_END, $patients);
+            $this->sendNotificationsForOption(self::OPTION_INTERVENTION_END, $patients);
         }
     }
 
-    protected function sendRemindersForOption($option, $patients) {
+    protected function sendNotificationsForOption($option, $patients) {
         foreach ($patients as $patient) {
             $patient_status = $patient->status();
 
@@ -126,19 +126,19 @@ class SendReminders extends Command
             $status_condition = false;
 
             switch ($option) {
-                case self::OPTION_FIRST:
+                case self::OPTION_FIRST_ASSIGNMENT:
                     $status_condition = $patient_status === PatientStatus::PATIENT_GOT_ASSIGNMENT &&
                                             $patient_week === 1 && !$current_assignment->notified_new;
                     break;
-                case self::OPTION_NEW:
+                case self::OPTION_NEW_ASSIGNMENT:
                     $status_condition = $patient_status === PatientStatus::PATIENT_GOT_ASSIGNMENT &&
                                             !$current_assignment->notified_new;
                     break;
-                case self::OPTION_DUE:
+                case self::OPTION_DUE_ASSIGNMENT:
                     $status_condition = $patient_status === PatientStatus::ASSIGNMENT_WILL_BECOME_DUE_SOON &&
                                             !$current_assignment->notified_due;
                     break;
-                case self::OPTION_MISSED:
+                case self::OPTION_MISSED_ASSIGNMENT:
                     $status_condition = $patient_status === PatientStatus::PATIENT_MISSED_ASSIGNMENT &&
                                             $patient_week < 12 && !$current_assignment->notified_missed;
                     break;
@@ -148,21 +148,21 @@ class SendReminders extends Command
                     break;
             }
 
-            // don't send reminder if no assignment is given / the patient already edited
-            // the assignment / was reminded by system (depends on $option)
+            // don't send notification if no assignment is given / the patient already edited
+            // the assignment / was already notified by system (depends on $option)
             if ($status_condition) {
                 $this->sendEMail($patient, $option);
 
-                // save if reminder has been sent (avoid duplicates)
+                // save if notification has been sent (avoid duplicates)
                 if ($option === self::OPTION_INTERVENTION_END) {
                     $patient->notified_of_intervention_end = true;
                     $patient->save();
                 } else {
-                    if ($option === self::OPTION_DUE) {
+                    if ($option === self::OPTION_DUE_ASSIGNMENT) {
                         $current_assignment->notified_due = true;
-                    } else if ($option === self::OPTION_MISSED) {
+                    } else if ($option === self::OPTION_MISSED_ASSIGNMENT) {
                         $current_assignment->notified_missed = true;
-                    } else if ($option === self::OPTION_FIRST || $option === self::OPTION_NEW) {
+                    } else if ($option === self::OPTION_FIRST_ASSIGNMENT || $option === self::OPTION_NEW_ASSIGNMENT) {
                         $current_assignment->notified_new = true;
                     }
 
@@ -183,29 +183,28 @@ class SendReminders extends Command
     }
 
     /*
-     * Sends a reminder to the given patient. The reminders type may be
-     * 'first', 'new', 'due' or 'missed'.
+     * Sends a notification to the given patient.
      *
-     * This method is called multiple times if reminders should be
+     * This method is called multiple times if notifications should be
      * sent for different types.
      */
-    protected function sendEMail(Patient $patient, $type_of_reminder) {
-        $view = $this->views[$type_of_reminder];
+    protected function sendEMail(Patient $patient, $type_of_notification) {
+        $view = $this->views[$type_of_notification];
 
         $subject = null;
         $parameters = ['PatientName' => $patient->name];
 
-        switch ($type_of_reminder) {
-            case self::OPTION_FIRST:
+        switch ($type_of_notification) {
+            case self::OPTION_FIRST_ASSIGNMENT:
                 $subject = 'Erster Schreibimpuls gegeben';
                 break;
-            case self::OPTION_NEW:
+            case self::OPTION_NEW_ASSIGNMENT:
                 $subject = 'Neuer Schreibimpuls vorhanden';
                 break;
-            case self::OPTION_DUE:
+            case self::OPTION_DUE_ASSIGNMENT:
                 $subject = 'Letzter Schreibimpuls unbeantwortet';
                 break;
-            case self::OPTION_MISSED:
+            case self::OPTION_MISSED_ASSIGNMENT:
                 $subject = 'Letzter Tagebucheintrag versäumt';
 
                 $parameters['AssignmentDay'] = Helper::generate_day_number_map()[$patient->assignment_day];
@@ -228,9 +227,24 @@ class SendReminders extends Command
         }
 
         if(count(Mail::failures()) > 0) {
-            $this->info(Date::now().': failed to send reminder for '.$type_of_reminder.' assignment - patient: '.$patient->name.'.');
+            $this->info(Date::now().': failed to send notification for '.$this->getLogString($type_of_notification).' - patient: '.$patient->name.'.');
         } else {
-            $this->info(Date::now().': sent reminder for '.$type_of_reminder.' assignment - patient: '.$patient->name.'.');
+            $this->info(Date::now().': sent notification for '.$this->getLogString($type_of_notification).' - patient: '.$patient->name.'.');
+        }
+    }
+
+    protected function getLogString($option) {
+        switch ($option) {
+            case self::OPTION_FIRST_ASSIGNMENT:
+                return "first assignment";
+            case self::OPTION_NEW_ASSIGNMENT:
+                return "new assignment";
+            case self::OPTION_DUE_ASSIGNMENT:
+                return "due assignment";
+            case self::OPTION_MISSED_ASSIGNMENT:
+                return "missed assignment";
+            case self::OPTION_INTERVENTION_END:
+                return "intervention end";
         }
     }
 }

@@ -70,7 +70,7 @@ class TestController extends Controller
         $next_assignment = $patient->next_assignment();
 
         if ($next_assignment && $next_assignment->writing_date) {
-            $this->setDateAndSendReminders($request, $next_assignment->writing_date->copy());
+            $this->setDateAndSendNotifications($request, $next_assignment->writing_date->copy());
         }
 
         return Redirect::back();
@@ -80,7 +80,7 @@ class TestController extends Controller
         $current_assignment = $patient->current_assignment();
 
         if ($current_assignment && $current_assignment->writing_date) {
-            $this->setDateAndSendReminders($request, $current_assignment->writing_date->copy()
+            $this->setDateAndSendNotifications($request, $current_assignment->writing_date->copy()
                     ->addDays(config('gsa.reminder_period_in_days')));
         }
 
@@ -91,7 +91,7 @@ class TestController extends Controller
         $current_assignment = $patient->current_assignment();
 
         if ($current_assignment && $current_assignment->writing_date) {
-            $this->setDateAndSendReminders($request, $current_assignment->writing_date->copy()
+            $this->setDateAndSendNotifications($request, $current_assignment->writing_date->copy()
                 ->addDays(config('gsa.missed_period_in_days')));
         }
 
@@ -106,12 +106,12 @@ class TestController extends Controller
             Date::setTestNow($settings->test_date);
         }
 
-        $this->setDateAndSendReminders($request, Date::parse($relative_date_string));
+        $this->setDateAndSendNotifications($request, Date::parse($relative_date_string));
 
         return Redirect::back();
     }
 
-    protected function setDateAndSendReminders(Request $request, $date) {
+    protected function setDateAndSendNotifications(Request $request, $date) {
         $settings = $this->settings();
 
         // backup test date
@@ -137,9 +137,9 @@ class TestController extends Controller
         $save_successful = $settings->save();
 
         $clear_successful = !$should_clear_data || CommandHelper::clearDistantData();
-        $reminders_successful = CommandHelper::sendAutomaticReminders();
+        $notifications_successful = CommandHelper::sendAutomaticNotifications();
 
-        if ($save_successful && $clear_successful && $reminders_successful) {
+        if ($save_successful && $clear_successful && $notifications_successful) {
             Alert::success('Das Datum wurde erfolgreich auf den '.
                 $settings->test_date->format('d.m.Y').' geändert. ')->persistent();
         } else {
@@ -147,7 +147,7 @@ class TestController extends Controller
                 Alert::warning('Die Einstellungen konnten leider nicht gespeichert werden.')->persistent();
             } else if (!$clear_successful) {
                 Alert::warning('Nicht alle Daten konnten bereinigt werden.')->persistent();
-            } else if (!$reminders_successful) {
+            } else if (!$notifications_successful) {
                 Alert::warning('Nicht alle Benachrichtigungen konnten versendet werden.')->persistent();
             } else {
                 Alert::warning('Das Datum konnte leider nicht geändert werden.')->persistent();
@@ -170,7 +170,7 @@ class TestController extends Controller
     }
 
     protected function saveSettings(Request $request) {
-        $this->setDateAndSendReminders($request, Date::createFromFormat('d.m.Y', $request->input('test_date')));
+        $this->setDateAndSendNotifications($request, Date::createFromFormat('d.m.Y', $request->input('test_date')));
 
         return Redirect::back();
     }
@@ -189,12 +189,12 @@ class TestController extends Controller
         CommandHelper::clearDistantData();
     }
 
-    public function sendReminders($option) {
-        return $this->sendRemindersFor($option);
+    public function sendNotifications($option) {
+        return $this->sendNotificationsFor($option);
     }
 
-    public function sendRemindersFor(...$options) {
-        $successful = CommandHelper::sendReminders(...$options);
+    public function sendNotificationsFor(...$options) {
+        $successful = CommandHelper::sendNotifications(...$options);
 
         if ($successful) {
             Alert::success('Alle Benachrichtigungen wurden verschickt.')->persistent();

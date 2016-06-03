@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Inspire::class,
-        Commands\SendReminders::class,
+        Commands\SendNotifications::class,
         Commands\ClearDistantData::class
     ];
 
@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-       $schedule->command("gsa:send-reminders --all --set-next-writing-date")
+       $schedule->command("gsa:send-notifications --all --set-next-writing-date")
                     ->daily()
                     ->appendOutputTo("storage/logs/send-reminders.log");
     }
