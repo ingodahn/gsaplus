@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 
 class SendNotifications extends Command
 {
+    const OPTION_REGISTRATION_SUCCESSFUL = 'successful-registration';
     const OPTION_FIRST_ASSIGNMENT = 'first-assignment';
     const OPTION_NEW_ASSIGNMENT = 'new-assignment';
     const OPTION_DUE_ASSIGNMENT = 'due-assignment';
@@ -27,7 +28,8 @@ class SendNotifications extends Command
 
     const VIEW_DIR = 'emails';
 
-    protected $views = [self::OPTION_FIRST_ASSIGNMENT => self::VIEW_DIR.'.assignment.first',
+    protected $views = [self::OPTION_REGISTRATION_SUCCESSFUL => self::VIEW_DIR.'.confirm_registration',
+                        self::OPTION_FIRST_ASSIGNMENT => self::VIEW_DIR.'.assignment.first',
                         self::OPTION_NEW_ASSIGNMENT => self::VIEW_DIR.'.assignment.new',
                         self::OPTION_DUE_ASSIGNMENT => self::VIEW_DIR.'.assignment.due',
                         self::OPTION_MISSED_ASSIGNMENT => self::VIEW_DIR.'.assignment.missed',
@@ -44,6 +46,7 @@ class SendNotifications extends Command
                                 {--'.self::OPTION_DUE_ASSIGNMENT.' : Notify of due assignment}
                                 {--'.self::OPTION_MISSED_ASSIGNMENT.' : Notify of missed assignment}
                                 {--'.self::OPTION_INTERVENTION_END.' : Notify of intervention end}
+                                {--'.self::OPTION_REGISTRATION_SUCCESSFUL.' : Notify of successful registration}
                                 {--'.self::OPTION_ALL.' : Send all notifications}
                                 {--'.self::OPTION_SET_NEXT_WRITING_DATE.' : set next writing date}';
 
@@ -109,13 +112,17 @@ class SendNotifications extends Command
         if ($this->option(self::OPTION_INTERVENTION_END) || $this->option(self::OPTION_ALL)) {
             $this->sendNotificationsForOption(self::OPTION_INTERVENTION_END, $patients);
         }
+
+        if ($this->option(self::OPTION_REGISTRATION_SUCCESSFUL) || $this->option(self::OPTION_ALL)) {
+            $this->sendNotificationsForOption(self::OPTION_REGISTRATION_SUCCESSFUL, $patients);
+        }
     }
 
     protected function sendNotificationsForOption($option, $patients) {
         foreach ($patients as $patient) {
             $patient_status = $patient->status();
 
-            if ($patient_status < PatientStatus::PATIENT_GOT_ASSIGNMENT) {
+            if ($patient_status < PatientStatus::PATIENT_LEFT_CLINIC) {
                 // nothing to be done
                 continue;
             }
@@ -126,6 +133,10 @@ class SendNotifications extends Command
             $status_condition = false;
 
             switch ($option) {
+                case self::OPTION_REGISTRATION_SUCCESSFUL:
+                    $status_condition = $patient_status === PatientStatus::PATIENT_LEFT_CLINIC &&
+                                            !$patient->confirmed_registration;
+                    break;
                 case self::OPTION_FIRST_ASSIGNMENT:
                     $status_condition = $patient_status === PatientStatus::PATIENT_GOT_ASSIGNMENT &&
                                             $patient_week === 1 && !$current_assignment->notified_new;
@@ -154,10 +165,7 @@ class SendNotifications extends Command
                 $this->sendEMail($patient, $option);
 
                 // save if notification has been sent (avoid duplicates)
-                if ($option === self::OPTION_INTERVENTION_END) {
-                    $patient->notified_of_intervention_end = true;
-                    $patient->save();
-                } else {
+                if ($this->isAssignmentRelatedOption($option)) {
                     if ($option === self::OPTION_DUE_ASSIGNMENT) {
                         $current_assignment->notified_due = true;
                     } else if ($option === self::OPTION_MISSED_ASSIGNMENT) {
@@ -165,8 +173,14 @@ class SendNotifications extends Command
                     } else if ($option === self::OPTION_FIRST_ASSIGNMENT || $option === self::OPTION_NEW_ASSIGNMENT) {
                         $current_assignment->notified_new = true;
                     }
-
                     $current_assignment->save();
+                } else {
+                    if ($option === self::OPTION_INTERVENTION_END) {
+                        $patient->notified_of_intervention_end = true;
+                    } else if ($option === self::OPTION_REGISTRATION_SUCCESSFUL) {
+                        $patient->confirmed_registration = true;
+                    }
+                    $patient->save();
                 }
             }
 
@@ -174,7 +188,7 @@ class SendNotifications extends Command
             // one and no future date is set
             $next_assignment = $patient->next_assignment();
 
-            if ($this->option(self::OPTION_SET_NEXT_WRITING_DATE) &&
+            if ($this->option(self::OPTION_SET_NEXT_WRITING_DATE) && $current_assignment &&
                 $current_assignment->writing_date && $next_assignment && $next_assignment->writing_date === null) {
                 $next_assignment->writing_date = $current_assignment->writing_date->startOfDay()->addWeek();
                 $next_assignment->save();
@@ -195,6 +209,9 @@ class SendNotifications extends Command
         $parameters = ['PatientName' => $patient->name];
 
         switch ($type_of_notification) {
+            case self::OPTION_REGISTRATION_SUCCESSFUL:
+                $subject = 'Ihre Registrierung';
+                break;
             case self::OPTION_FIRST_ASSIGNMENT:
                 $subject = 'Erster Schreibimpuls gegeben';
                 break;
@@ -235,6 +252,8 @@ class SendNotifications extends Command
 
     protected function getLogString($option) {
         switch ($option) {
+            case self::OPTION_REGISTRATION_SUCCESSFUL:
+                return "successful registration";
             case self::OPTION_FIRST_ASSIGNMENT:
                 return "first assignment";
             case self::OPTION_NEW_ASSIGNMENT:
@@ -245,6 +264,18 @@ class SendNotifications extends Command
                 return "missed assignment";
             case self::OPTION_INTERVENTION_END:
                 return "intervention end";
+        }
+    }
+
+    protected function isAssignmentRelatedOption($option) {
+        switch ($option) {
+            case self::OPTION_FIRST_ASSIGNMENT:
+            case self::OPTION_NEW_ASSIGNMENT:
+            case self::OPTION_DUE_ASSIGNMENT:
+            case self::OPTION_MISSED_ASSIGNMENT:
+                return true;
+            default:
+                return false;
         }
     }
 }
