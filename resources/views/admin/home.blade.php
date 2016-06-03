@@ -90,7 +90,7 @@
                 </li>
             </ul>
             <p>einsehen und <a href="#add_therapist">neue Therapeuten anlegen</a>.</p>
-            <p>Im Notfall können Sie <a href="#reminders">anstehende Benachrichtigungen versenden</a> -
+            <p>Im Notfall können Sie <a href="#notifications">anstehende Benachrichtigungen versenden</a> -
                 z.B. wenn der Mail-Server ausgefallen ist und die Benachrichtigungen nicht versendet werden konnten.</p>
             <p>Am Ende der Seite können Sie alle im System gespeicherten <a href="#export_codes">Codes exportieren</a>
                 (alternativ können Sie die Codes ebenso <a href="/AdminCodes" target="_blank">im Browser einsehen</a>).
@@ -229,7 +229,7 @@
         </div>
 
         <div class="row">
-            <h4 id="reminders">Benachrichtigungen</h4>
+            <h4 id="notifications">Benachrichtigungen</h4>
             <p>Versenden Sie anstehende Benachrichtigungen. Patienten werden benachrichtigt falls</p>
             <ul>
                 <li>sie den ersten bzw. einen neuen <em>Schreibimpuls erhalten</em> haben.</li>
@@ -237,7 +237,7 @@
                 <li>der aktuelle <em>Schreibimpuls überfällig</em> ist.</li>
             </ul>
             <p><strong>Achtung:</strong> Benachrichtigungen werden nur einmal verschickt.</p>
-            <form method="POST" action="/admin/send-reminders/all"
+            <form method="POST" action="/admin/send-notifications/all"
                   class="pull-right floating-btn-form">
                 {{ csrf_field() }}
                 <button type="submit" class="btn btn-primary pull-right">Benachrichtigungen versenden</button>

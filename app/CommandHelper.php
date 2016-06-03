@@ -39,7 +39,7 @@ class CommandHelper
             $successful = (Artisan::call('gsa:send-notifications',
                         $arguments) === 0) && $successful;
 
-            Storage::append('output/send-reminders.log', Artisan::output());
+            Storage::append('output/send-notifications.log', Artisan::output());
         }
 
         return $successful;

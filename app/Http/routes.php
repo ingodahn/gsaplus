@@ -88,7 +88,7 @@ Route::group(['middleware' => ['web']], function () {
 			Route::post('login/{user}', 'TestController@loginAs');
 			Route::post('settings', 'TestController@changeSettings');
 
-			Route::post('send-reminders/{option}', 'TestController@sendReminders');
+			Route::post('send-notifications/{option}', 'TestController@sendNotifications');
 			Route::post('remove-distant-data', 'TestController@clearDistantData');
 
 			/*
@@ -123,7 +123,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:admin']], function () {
 	Route::get('/admin_home', 'AdminController@admin_home');
 	Route::post('/admin/therapists/new', 'AdminController@create_therapist');
 	Route::get('/admin/dump-info/{user}', 'AdminController@dumpInfo');
-	Route::post('/admin/send-reminders/{option}', 'AdminController@sendReminders');
+	Route::post('/admin/send-notifications/{option}', 'AdminController@sendNotifications');
 	Route::get('/admin/codes-as-csv', 'AdminController@export_code_list');
 });
 

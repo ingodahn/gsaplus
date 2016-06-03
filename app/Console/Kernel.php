@@ -29,6 +29,6 @@ class Kernel extends ConsoleKernel
     {
        $schedule->command("gsa:send-notifications --all --set-next-writing-date")
                     ->daily()
-                    ->appendOutputTo("storage/logs/send-reminders.log");
+                    ->appendOutputTo("storage/logs/send-notifications.log");
     }
 }
