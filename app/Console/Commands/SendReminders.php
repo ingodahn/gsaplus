@@ -10,6 +10,7 @@ use Illuminate\Console\Command;
 
 use App\Patient;
 use App\TestSetting;
+use App\Helper;
 
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Mail;
@@ -176,6 +177,7 @@ class SendReminders extends Command
         $view = $this->views[$type_of_reminder];
 
         $subject = null;
+        $parameters = ['PatientName' => $patient->name];
 
         switch ($type_of_reminder) {
             case self::OPTION_FIRST:
@@ -189,11 +191,14 @@ class SendReminders extends Command
                 break;
             case self::OPTION_MISSED:
                 $subject = 'Letzter Tagebucheintrag versäumt';
+
+                $parameters['AssignmentDay'] = Helper::generate_day_number_map()[$patient->assignment_day];
+                $parameters['NextWritingDate'] = $patient->next_assignment()->writing_date->format('d.m.Y');
                 break;
         }
 
         if ($patient !== null && $view !== null) {
-            Mail::send($view, ['PatientName' => $patient->name],
+            Mail::send($view, $parameters,
                 function ($message) use ($patient, $subject) {
                     $message->from(config('mail.team.address'), config('mail.team.name'))
                                 ->to($patient->email, $patient->name)
