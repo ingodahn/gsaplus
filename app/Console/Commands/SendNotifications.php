@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 
 class SendNotifications extends Command
 {
-    const OPTION_REGISTRATION_SUCCESSFUL = 'successful-registration';
+    const OPTION_WELCOME = 'welcome-message';
     const OPTION_FIRST_ASSIGNMENT = 'first-assignment';
     const OPTION_NEW_ASSIGNMENT = 'new-assignment';
     const OPTION_DUE_ASSIGNMENT = 'due-assignment';
@@ -28,7 +28,7 @@ class SendNotifications extends Command
 
     const VIEW_DIR = 'emails';
 
-    protected $views = [self::OPTION_REGISTRATION_SUCCESSFUL => self::VIEW_DIR.'.confirm_registration',
+    protected $views = [self::OPTION_WELCOME => self::VIEW_DIR.'.soscisurvey',
                         self::OPTION_FIRST_ASSIGNMENT => self::VIEW_DIR.'.assignment.first',
                         self::OPTION_NEW_ASSIGNMENT => self::VIEW_DIR.'.assignment.new',
                         self::OPTION_DUE_ASSIGNMENT => self::VIEW_DIR.'.assignment.due',
@@ -46,7 +46,7 @@ class SendNotifications extends Command
                                 {--'.self::OPTION_DUE_ASSIGNMENT.' : Notify of due assignment}
                                 {--'.self::OPTION_MISSED_ASSIGNMENT.' : Notify of missed assignment}
                                 {--'.self::OPTION_INTERVENTION_END.' : Notify of intervention end}
-                                {--'.self::OPTION_REGISTRATION_SUCCESSFUL.' : Notify of successful registration}
+                                {--'.self::OPTION_WELCOME.' : Send welcome message}
                                 {--'.self::OPTION_ALL.' : Send all notifications}
                                 {--'.self::OPTION_SET_NEXT_WRITING_DATE.' : set next writing date}';
 
@@ -113,8 +113,8 @@ class SendNotifications extends Command
             $this->sendNotificationsForOption(self::OPTION_INTERVENTION_END, $patients);
         }
 
-        if ($this->option(self::OPTION_REGISTRATION_SUCCESSFUL) || $this->option(self::OPTION_ALL)) {
-            $this->sendNotificationsForOption(self::OPTION_REGISTRATION_SUCCESSFUL, $patients);
+        if ($this->option(self::OPTION_WELCOME) || $this->option(self::OPTION_ALL)) {
+            $this->sendNotificationsForOption(self::OPTION_WELCOME, $patients);
         }
     }
 
@@ -133,9 +133,9 @@ class SendNotifications extends Command
             $status_condition = false;
 
             switch ($option) {
-                case self::OPTION_REGISTRATION_SUCCESSFUL:
+                case self::OPTION_WELCOME:
                     $status_condition = $patient_status === PatientStatus::PATIENT_LEFT_CLINIC &&
-                                            !$patient->confirmed_registration;
+                                            !$patient->sent_welcome_message;
                     break;
                 case self::OPTION_FIRST_ASSIGNMENT:
                     $status_condition = $patient_status === PatientStatus::PATIENT_GOT_ASSIGNMENT &&
@@ -177,8 +177,8 @@ class SendNotifications extends Command
                 } else {
                     if ($option === self::OPTION_INTERVENTION_END) {
                         $patient->notified_of_intervention_end = true;
-                    } else if ($option === self::OPTION_REGISTRATION_SUCCESSFUL) {
-                        $patient->confirmed_registration = true;
+                    } else if ($option === self::OPTION_WELCOME) {
+                        $patient->sent_welcome_message = true;
                     }
                     $patient->save();
                 }
@@ -209,8 +209,12 @@ class SendNotifications extends Command
         $parameters = ['PatientName' => $patient->name];
 
         switch ($type_of_notification) {
-            case self::OPTION_REGISTRATION_SUCCESSFUL:
-                $subject = 'Ihre Registrierung';
+            case self::OPTION_WELCOME:
+                $subject = 'Online-Nachsorge GSA-Online plus';
+
+                $parameters['AssignmentDay'] = Helper::generate_day_number_map()[$patient->assignment_day];
+                $parameters['NextWritingDate'] = $patient->next_assignment()->writing_date->format('d.m.Y');
+                $parameters['PatientCode'] = $patient->code;
                 break;
             case self::OPTION_FIRST_ASSIGNMENT:
                 $subject = 'Erster Schreibimpuls gegeben';
@@ -252,8 +256,8 @@ class SendNotifications extends Command
 
     protected function getLogString($option) {
         switch ($option) {
-            case self::OPTION_REGISTRATION_SUCCESSFUL:
-                return "successful registration";
+            case self::OPTION_WELCOME:
+                return "intervention start";
             case self::OPTION_FIRST_ASSIGNMENT:
                 return "first assignment";
             case self::OPTION_NEW_ASSIGNMENT:

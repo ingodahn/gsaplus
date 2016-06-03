@@ -28,7 +28,7 @@ class Patient extends User
         'intervention_ended_on',
         'last_login',
         'notified_of_intervention_end',
-        'confirmed_registration'
+        'sent_welcome_message'
     ];
 
     /*
@@ -62,7 +62,7 @@ class Patient extends User
 
     protected $casts = [
         'notified_of_intervention_end' => 'boolean',
-        'confirmed_registration' => 'boolean'
+        'sent_welcome_message' => 'boolean'
     ];
 
     /*
