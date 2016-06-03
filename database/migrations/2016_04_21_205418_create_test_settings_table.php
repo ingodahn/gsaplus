@@ -16,12 +16,6 @@ class CreateTestSettingsTable extends Migration
             $table->increments('id');
 
             $table->date('test_date')->nullable();
-
-            $table->boolean('first_reminder')->default(false);
-            $table->boolean('new_reminder')->default(false);
-            $table->boolean('due_reminder')->default(false);
-            $table->boolean('missed_reminder')->default(false);
-            $table->boolean('calc_next_writing_date')->default(false);
         });
     }
 

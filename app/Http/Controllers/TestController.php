@@ -170,22 +170,7 @@ class TestController extends Controller
     }
 
     protected function saveSettings(Request $request) {
-        $settings = $this->settings();
-
-        $settings->first_reminder = $request->input('first_reminder', '0');
-        $settings->new_reminder = $request->input('new_reminder', '0');
-        $settings->due_reminder = $request->input('due_reminder', '0');
-        $settings->calc_next_writing_date = $request->input('calc_next_writing_date', '0');
-
-        $successful = $settings->save();
-
-        if ($request->has('test_date')) {
-            $this->setDateAndSendReminders($request, Date::createFromFormat('d.m.Y', $request->input('test_date')));
-        } else if ($successful) {
-            Alert::success('Die neuen Einstellungen wurden gespeichert.')->persistent();
-        } else {
-            Alert::warning('Die neuen Einstellungen konnten leider nicht gespeichert werden.')->persistent();
-        }
+        $this->setDateAndSendReminders($request, Date::createFromFormat('d.m.Y', $request->input('test_date')));
 
         return Redirect::back();
     }

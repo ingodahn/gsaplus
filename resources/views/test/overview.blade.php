@@ -88,64 +88,32 @@
                 {{ csrf_field() }}
                 <table class="table table-striped table-bordered table-hover" style="margin-bottom: 1em;">
                     <thead class="hide">
-                    <tr>
-                        <th>Einstellung</th>
-                        <th>Wert</th>
-                    </tr>
+                        <tr>
+                            <th>Einstellung</th>
+                            <th>Wert</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="col-xs-7">Testdatum (leer = aktuelles Datum)</td>
-                        <td>
-                            <div class='input-group date' id='datetimepicker'>
-                                <input name="test_date" type='text' value="{{ $settings['testDate'] }}" class="form-control">
-                                            <span class="input-group-addon">
-                                              <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                </input>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker').datetimepicker({
-                                        locale: 'de',
-                                        format: 'DD.MM.YYYY'
+                        <tr>
+                            <td class="col-xs-7">Testdatum (leer = aktuelles Datum)</td>
+                            <td>
+                                <div class='input-group date' id='datetimepicker'>
+                                    <input name="test_date" type='text' value="{{ $settings['testDate'] }}" class="form-control">
+                                                <span class="input-group-addon">
+                                                  <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                    </input>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker').datetimepicker({
+                                            locale: 'de',
+                                            format: 'DD.MM.YYYY'
+                                        });
                                     });
-                                });
-                            </script>
-                        </td>
-                    </tr>
-                    <tr class="hide">
-                        <td>
-                            Automatisch an ersten Schreibimpuls erinnern
-                        </td>
-                        <td>
-                            <input type="checkbox" class="pull-right" name="first_reminder" value="1" {{ $settings['firstReminder'] ? 'checked' : ''}}>
-                        </td>
-                    </tr>
-                    <tr class="hide">
-                        <td>
-                            Automatisch an neuen Schreibimpuls erinnern
-                        </td>
-                        <td>
-                            <input type="checkbox" class="pull-right" name="new_reminder" value="1" {{ $settings['newReminder'] ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr class="hide">
-                        <td>
-                            Automatisch an Schreibimpuls erinnern, der in Kürze fällig ist
-                        </td>
-                        <td>
-                            <input type="checkbox" class="pull-right" name="due_reminder"  value="1" {{ $settings['dueReminder'] ? 'checked' : ''}}>
-                        </td>
-                    </tr>
-                    <tr class="hide">
-                        <td>
-                            Bei einer Erinnerung automatisch den nächsten Schreibtag berechnen
-                        </td>
-                        <td>
-                            <input type="checkbox" class="pull-right" name="calc_next_writing_date"  value="1" {{ $settings['calcNextWritingDate'] ? 'checked' : ''}}>
-                        </td>
-                    </tr>
+                                </script>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <p class="pull-right">
