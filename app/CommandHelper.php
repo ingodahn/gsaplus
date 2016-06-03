@@ -5,7 +5,7 @@ namespace App;
 use App\Patient;
 use App\TestSetting;
 
-use App\Console\Commands\RemindUsersOfAssignment;
+use App\Console\Commands\SendReminders;
 use App\Console\Commands\ClearDistantData;
 
 use Illuminate\Support\Facades\Storage;
@@ -39,7 +39,7 @@ class CommandHelper
             $arguments = ['--'.$option => 'default'];
 
             if ($settings->calc_next_writing_date) {
-                $arguments['--'.RemindUsersOfAssignment::OPTION_SET_NEXT_WRITING_DATE] = 'default';
+                $arguments['--'.SendReminders::OPTION_SET_NEXT_WRITING_DATE] = 'default';
             }
 
             $successful = (Artisan::call('gsa:send-reminders',
@@ -63,19 +63,19 @@ class CommandHelper
         $options = [];
 
         if ($settings->first_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_FIRST;
+            $options[] = SendReminders::OPTION_FIRST;
         }
 
         if ($settings->new_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_NEW;
+            $options[] = SendReminders::OPTION_NEW;
         }
 
         if ($settings->due_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_DUE;
+            $options[] = SendReminders::OPTION_DUE;
         }
 
         if ($settings->missed_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_MISSED;
+            $options[] = SendReminders::OPTION_MISSED;
         }
 
         return $options;

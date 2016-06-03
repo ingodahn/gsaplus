@@ -14,7 +14,7 @@ use App\TestSetting;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Mail;
 
-class RemindUsersOfAssignment extends Command
+class SendReminders extends Command
 {
     const OPTION_FIRST = 'first';
     const OPTION_NEW = 'new';
@@ -48,7 +48,7 @@ class RemindUsersOfAssignment extends Command
      *
      * @var string
      */
-    protected $description = 'Notify users of their first, new, due or missed assignment';
+    protected $description = 'Notify users of their progress';
 
     /**
      * Create a new command instance.
