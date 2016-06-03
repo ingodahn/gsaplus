@@ -27,6 +27,8 @@ class Patient extends User
         'therapist_id',
         'intervention_ended_on',
         'last_login',
+        'notified_of_intervention_end',
+        'confirmed_registration'
     ];
 
     /*
@@ -56,6 +58,11 @@ class Patient extends User
         'patient_week',
         'overdue',
         'next_writing_date'
+    ];
+
+    protected $casts = [
+        'notified_of_intervention_end' => 'boolean',
+        'confirmed_registration' => 'boolean'
     ];
 
     /*
