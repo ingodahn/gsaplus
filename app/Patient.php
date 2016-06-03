@@ -360,7 +360,6 @@ class Patient extends User
         switch ($patient_week) {
             case -1:
                 // patient resides in clinic
-            case 0:
                 if ($this->date_from_clinics !== null) {
                     // date of departure is set
                     return PatientStatus::DATE_OF_DEPARTURE_SET;
@@ -368,6 +367,8 @@ class Patient extends User
                     // date of departure isn't set but patient is registered
                     return PatientStatus::REGISTERED;
                 }
+            case 0:
+                return PatientStatus::PATIENT_LEFT_CLINIC;
             case 12:
                 if ($this->current_assignment()->writing_date->copy()->addWeek()->isPast()) {
                     return PatientStatus::INTERVENTION_ENDED;
