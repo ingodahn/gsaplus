@@ -70,8 +70,18 @@
             <p>Es ist möglich sich im Namen eines bestimmten Benutzers einzuloggen, die Mails eines
                 Benutzers einzusehen und das Datum auf ein in der Zukunft liegendes Schreibdatum zu ändern
                 (falls der Benutzer ein Patient ist).<br/></p>
-            <p>Patienten werden automatisch benachrichtigt falls Sie den ersten bzw. einen Folge-Schreibimpuls
-                erhalten oder den aktuellen Schreibimpuls 5 Tage lang nicht bearbeitet haben.</p>
+            <p>Patienten werden (in der Regel am Folgetag) automatisch benachrichtigt
+                <ul>
+                    <li>falls sie sich neu registrieren</li>
+                    <li>einen Tag nach dem Entlassungsdatum</li>
+                    <li>falls Sie den ersten bzw. einen Folge-Schreibimpuls
+                erhalten oder </li>
+                <li>den aktuellen Schreibimpuls 2 Tage lang nicht beantwortet haben oder</li>
+                <li>den aktuellen Schreibimpuls 5 Tage lang nicht beantwortet haben oder</li>
+                <li>die 12. Woche abgelaufen ist oder</li>
+                <li>der Therapeut den Abbruch der Intervention bestätigt.</li>
+                </ul>
+            </p>
             <p>Die zukünftige Historie der Nutzer wird automatisch gelöscht, wenn Sie ein älteres Datum setzen
                 und dieses nicht in der Vergangenheit liegt. Dabei werden zukünftige Kommentare, Rückmeldungen,
                 etc. entfernt. Die aktuelle Aufgabe bleibt von der Aktion unberührt <strong><em>(!)</em></strong>.</p>
