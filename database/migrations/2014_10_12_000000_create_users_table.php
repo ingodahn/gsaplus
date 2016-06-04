@@ -32,6 +32,9 @@ class CreateUsersTable extends Migration
             $table->text('personal_information');
             $table->text('notes_of_therapist');
 
+            $table->boolean('notified_of_intervention_end')->default(false);
+            $table->boolean('sent_welcome_message')->default(false);
+
             // patient status should be determined - not cached
             // $table->enum('patient_status', ['P010', 'P020', 'P025', 'P030', 'P040', 'P045', 'P050', 'P060',
             //    'P065', 'P070', 'P075', 'P080', 'P090', 'P095', 'P100', 'P110', 'P115', 'P120', 'P130', 'P140']);

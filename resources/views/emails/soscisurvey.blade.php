@@ -21,7 +21,7 @@
     Selbstverständlich werden Ihre Angaben vertraulich und in pseudonymisierter Form ausgewertet.
 </p>
 <p>
-    Bitte folgen Sie diesem Link, um zum Fragebogen zu gelangen: <a href="https://www.soscisurvey.de/GSAonlineplus/?q=GSA_T1&s={!! $PatientCode !!}">Fragebogen ausfüllen</a>
+    Bitte folgen Sie diesem Link, um zum Fragebogen zu gelangen: <a href="https://www.soscisurvey.de/GSAonlineplus/?q=GSA_T1&s={!! str_replace("-","",$PatientCode) !!}">Fragebogen ausfüllen</a>
 </p>
 <p>
     <strong>Herzlichen Dank für Ihre Mitarbeit! </strong>
