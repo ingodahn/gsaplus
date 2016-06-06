@@ -93,7 +93,7 @@
             <p>Im Notfall können Sie <a href="#notifications">anstehende Benachrichtigungen versenden</a> -
                 z.B. wenn der Mail-Server ausgefallen ist und die Benachrichtigungen nicht versendet werden konnten.</p>
             <p>Am Ende der Seite können Sie alle im System gespeicherten <a href="#export_codes">Codes exportieren</a>
-                (alternativ können Sie die Codes ebenso <a href="/AdminCodes" target="_blank">im Browser einsehen</a>).
+                (alternativ können Sie die <a href="/AdminCodes" target="_blank">Codes im Browser einsehen</a>).
             </p>
         </div>
 

@@ -1,7 +1,7 @@
 <hr>
 <h3>Schreibtag</h3>
 <p>
-  Der aktuelle Schreibtag ist <strong>{{ $Patient['assignmentDay'] }}</strong> und es
+  Ihr aktueller Schreibtag ist <strong>{{ $Patient['assignmentDay'] }}</strong>. Es
   @if($Patient['assignmentDayChangesLeft'] == 1)
     verbleibt
   @else
@@ -10,9 +10,9 @@
   @if($Patient['assignmentDayChangesLeft'] > 0)
     noch <strong>{{$Patient['assignmentDayChangesLeft']}}</strong>
     @if($Patient['assignmentDayChangesLeft'] == 1)
-      Änderung.
+      Änderung Ihres Schreibtages.
     @else
-      Änderungen.
+      Änderungen Ihres Schreibtages.
     @endif
   @else
     <strong>keine</strong> Änderungen mehr.

@@ -7,6 +7,6 @@
     anzusehen und einen Tagebucheintrag zu verfassen.
 </p>
 <p>Viele Grüße,<br/>
-    Ihr Team von GSA Online Plus</p>
+    Ihr Team von GSA-Online Plus</p>
 </body>
 </html>

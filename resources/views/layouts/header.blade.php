@@ -46,7 +46,7 @@
           @endif
 
           {{-- Common --}}
-          <li><a href="/info">Experteninformationen</a></li>
+          <li><a href="/info">Hintergrundinformation</a></li>
 
           {{-- User-Related --}}
           <li class="dropdown">
