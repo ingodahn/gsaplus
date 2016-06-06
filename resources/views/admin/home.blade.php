@@ -194,6 +194,7 @@
                                        data-content="<ul>
                                         <li>Registriert (<strong>P020</strong>)</li>
                                         <li>Entlassungsdatum erfasst (<strong>P025</strong>)</li>
+                                        <li>Entlassen (<strong>P028</strong>)</li>
                                         <li>Schreibimpuls erhalten (<strong>P030</strong>)</li>
                                         <li>Tagebucheintrag bearbeitet (<strong>P040</strong>)</li>
                                         <li>Tagebucheintrag gemahnt (<strong>P045</strong>)</li>
