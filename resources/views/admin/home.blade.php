@@ -230,12 +230,19 @@
 
         <div class="row">
             <h4 id="notifications">Benachrichtigungen</h4>
-            <p>Versenden Sie anstehende Benachrichtigungen. Patienten werden benachrichtigt falls</p>
-            <ul>
-                <li>sie den ersten bzw. einen neuen <em>Schreibimpuls erhalten</em> haben.</li>
-                <li>der aktuelle <em>Schreibimpuls in Kürze fällig</em> ist.</li>
-                <li>der aktuelle <em>Schreibimpuls überfällig</em> ist.</li>
-            </ul>
+            <p>Versenden Sie anstehende Benachrichtigungen. Patienten werden (in der Regel am Folgetag) benachrichtigt falls</p>
+                <ul>
+                    <li>Sie sich <em>neu registriert</em> haben</li>
+                    <li>Sie aus der Klinik <em>entlassen</em> wurden</li>
+                    <li>Sie den ersten bzw. einen Folge-<em>Schreibimpuls</em>
+                        <ul>
+                            <li><em>erhalten</em> oder</li>
+                            <li>2 bzw. 5 Tage lang <em>nicht beantwortet</em> haben</li>
+                        </ul>
+                    <li>Sie die <em>Intervention erfolgreich abgeschlossen</em> haben oder</li>
+                    <li>der Therapeut den <em>Abbruch der Intervention</em> bestätigt hat.</li>
+                </ul>
+            </p>
             <p><strong>Achtung:</strong> Benachrichtigungen werden nur einmal verschickt.</p>
             <form method="POST" action="/admin/send-notifications/all"
                   class="pull-right floating-btn-form">
