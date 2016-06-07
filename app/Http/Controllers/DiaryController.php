@@ -439,9 +439,9 @@ class DiaryController extends Controller
         $patient_week=$Diary['patient_week'];
         $next_assignment_date=$patient->next_assignment() ? $patient->next_assignment()->writing_date : null;
         if ($next_assignment_date) {
-            $Diary['next_assignment'] = "Der nächste Schreibimpuls wird am ".$next_assignment_date->format('d.m.Y')." gegeben.";
+            $Diary['next_assignment'] = "Sie erhalten Ihren nächsten Schreibimpuls am ".$next_assignment_date->format('d.m.Y').".";
         } elseif ($info['patientStatus'] == 'P020') {
-            $Diary['next_assignment'] = "Der erste Schreibimpuls wird nach Übermittlung des Entlassungsdatums aus der Klinik gegeben. Sie werden darüber per E-Mail informiert.";
+            $Diary['next_assignment'] = "Sie erhalten Ihren ersten Schreibimpuls nach der Übermittlung Ihres Entlassungsdatums aus der Klinik. Wir werden Sie darüber per E-Mail informieren.";
         }
         else {
             // $Diary['next_assignment'] = "Es ist kein weiterer Schreibimpuls vorgesehen.";

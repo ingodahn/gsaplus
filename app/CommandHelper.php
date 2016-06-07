@@ -5,7 +5,7 @@ namespace App;
 use App\Patient;
 use App\TestSetting;
 
-use App\Console\Commands\RemindUsersOfAssignment;
+use App\Console\Commands\SendNotifications;
 use App\Console\Commands\ClearDistantData;
 
 use Illuminate\Support\Facades\Storage;
@@ -30,55 +30,23 @@ class CommandHelper
         return $successful;
     }
 
-    public static function sendReminders(...$options) {
-        $settings = TestSetting::first();
-
+    public static function sendNotifications(...$options) {
         $successful = true;
 
         foreach ($options as $option) {
-            $arguments = ['--'.$option => 'default'];
+            $arguments = ['--'.$option => 'default', '--'.SendNotifications::OPTION_SET_NEXT_WRITING_DATE => 'default'];
 
-            if ($settings->calc_next_writing_date) {
-                $arguments['--'.RemindUsersOfAssignment::OPTION_SET_NEXT_WRITING_DATE] = 'default';
-            }
-
-            $successful = (Artisan::call('gsa:send-reminders',
+            $successful = (Artisan::call('gsa:send-notifications',
                         $arguments) === 0) && $successful;
 
-            Storage::append('output/send-reminders.log', Artisan::output());
+            Storage::append('output/send-notifications.log', Artisan::output());
         }
 
         return $successful;
     }
 
-    public static function sendAutomaticReminders() {
-        $options = self::getReminderOptionsFromSettings();
-
-        return sizeof($options) == 0 ?: self::sendReminders(...$options);
-    }
-
-    protected static function getReminderOptionsFromSettings() {
-        $settings = TestSetting::first();
-
-        $options = [];
-
-        if ($settings->first_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_FIRST;
-        }
-
-        if ($settings->new_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_NEW;
-        }
-
-        if ($settings->due_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_DUE;
-        }
-
-        if ($settings->missed_reminder) {
-            $options[] = RemindUsersOfAssignment::OPTION_MISSED;
-        }
-
-        return $options;
+    public static function sendAutomaticNotifications() {
+        return self::sendNotifications(SendNotifications::OPTION_ALL);
     }
 
 }

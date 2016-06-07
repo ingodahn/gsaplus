@@ -6,23 +6,17 @@
 </p>
 <p>
     Sie haben die Online-Nachsorge GSA-Online plus nun erfolgreich beendet.
-    Zum Abschluss der Nachsorge möchten wir Sie noch einmal bitten, sich ca. 45 Minuten Zeit zu nehmen und
-    einen Online-Fragenbogen zu beantworten.
-</p>
-<p>
-    Wir möchten unsere Online-Nachsorge gerne weiter verbessern und möglichst zielgerichtet interessierten
-    Rehabilitanden zu empfehlen. Daher ist es für uns von Interesse, wie sich Ihre berufliche Situation und
-    Ihre Gesundheit im Laufe der Nachsorge verändert haben und welche Verbesserungsvorschläge und Anregungen Sie
-    uns noch mit auf den Weg geben möchten.
-</p>
-<p>
-    Wir bitten Sie daher, sich ca. 45 Minuten Zeit zu nehmen und einen Online-Fragebogen zu beantworten.
+    Zum Abschluss der Nachsorge möchten wir Sie noch einmal bitten einen Online-Fragenbogen zu beantworten.
+    Unser Anliegen ist es die Online-Nachsorge  weiter zu verbessern,  um sie möglichst zielgerichtet interessierten
+    Rehabilitanden empfehlen zu können. Daher ist es für uns von Interesse, wie sich Ihre berufliche Situation und
+    Ihre Gesundheit im Laufe der Nachsorge verändert haben und welche Verbesserungsvorschläge und Anregungen Sie uns
+    noch mit auf den Weg geben möchten.
 </p>
 <p>
     Selbstverständlich werden Ihre Angaben vertraulich und in pseudonymisierter Form ausgewertet.
 </p>
 <p>
-    Zum Fragebogen folgen Sie bitte diesem <a href="https://www.soscisurvey.de/GSAonlineplus/?q=GSA_T14&s={!! $PatientCode !!}">Link</a>
+    Zum Fragebogen folgen Sie bitte diesem <a href="https://www.soscisurvey.de/GSAonlineplus/?q=GSA_T14&s={!! str_replace("-","",$PatientCode) !!}">Link</a>
 </p>
 <p>
     <strong>Herzlichen Dank für Ihre Mitarbeit! </strong>

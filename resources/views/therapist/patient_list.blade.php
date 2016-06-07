@@ -120,6 +120,7 @@
       <ul>
         <li>Registriert (P020)</li>
         <li>Entlassungsdatum erfasst (P025)</li>
+        <li>Entlassen (P028)</li>
         <li>Schreibimpuls erhalten (P030)</li>
         <li>Tagebucheintrag bearbeitet (P040)</li>
         <li>Tagebucheintrag in Kürze fällig (P045)</li>

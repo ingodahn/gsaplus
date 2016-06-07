@@ -17,6 +17,7 @@ class PatientStatus
     const UNREGISTERED = "P010";
     const REGISTERED = "P020";
     const DATE_OF_DEPARTURE_SET = "P025";
+    const PATIENT_LEFT_CLINIC = "P028";
 
     const PATIENT_GOT_ASSIGNMENT = "P030";
     const PATIENT_EDITED_ASSIGNMENT = "P040";
@@ -38,6 +39,7 @@ class PatientStatus
     public static $STATUS_INFO = array(
         self::REGISTERED => "Registriert",
         self::DATE_OF_DEPARTURE_SET => "Entlassungsdatum erfasst",
+        self::PATIENT_LEFT_CLINIC => "Entlassen",
         self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls erhalten",
         self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag bearbeitet",
         self::ASSIGNMENT_WILL_BECOME_DUE_SOON => "Tagebucheintrag in Kürze fällig",

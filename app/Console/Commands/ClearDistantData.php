@@ -189,6 +189,9 @@ class ClearDistantData extends Command
             $patient->intervention_ended_on = null;
         }
 
+        $patient->notified_of_intervention_end = false;
+        $patient->sent_welcome_message = false;
+
         $this->info("Reset attributes".$this->getPatientContextString($patient));
     }
 

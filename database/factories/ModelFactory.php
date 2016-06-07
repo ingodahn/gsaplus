@@ -118,11 +118,6 @@ $factory->define(App\Code::class, function () {
 
 $factory->define(App\TestSetting::class, function() {
    return [
-       'test_date' => null,
-       'first_reminder' => true,
-       'new_reminder' => true,
-       'due_reminder' => true,
-       'missed_reminder' => true,
-       'calc_next_writing_date' => true
+       'test_date' => null
    ];
 });

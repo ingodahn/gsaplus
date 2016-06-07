@@ -10,19 +10,18 @@
     erhalten.
 </p>
 <p>
-    Zur Vorbereitung möchten wir Sie bitten, einen
-    Online-Fragenbogen zu beantworten. Das Ausfüllen des Fragebogens wird ca. 45 Minuten in Anspruch nehmen.
+    Wir möchten wir Sie bitten, zu Beginn und zum Ende der Nachsorge einen Online-Fragenbogen zu beantworten.
 </p>
 <p>
-    Um unsere Online-Nachsorge künftig möglichst zielgerichtet interessierten Rehabilitanden zu empfehlen, ist es
-    für uns von Interesse, wie sich Ihre Rehabilitationsbehandlung auf Ihre berufliche Situation und Ihre Gesundheit
-    ausgewirkt hat und wie häufig und gerne Sie das Internet nutzen.
+    Um unsere Online-Nachsorge künftig möglichst zielgerichtet interessierten Rehabilitanden zu empfehlen,
+    ist es für uns von Interesse, wie sich Ihre Rehabilitationsbehandlung auf Ihre berufliche Situation und
+    Ihre Gesundheit ausgewirkt hat und wie häufig und gerne Sie das Internet nutzen.
 </p>
 <p>
     Selbstverständlich werden Ihre Angaben vertraulich und in pseudonymisierter Form ausgewertet.
 </p>
 <p>
-    Bitte folgen Sie diesem Link, um zum Fragebogen zu gelangen: <a href="https://www.soscisurvey.de/GSAonlineplus/?q=GSA_T1&s={!! $PatientCode !!}">Fragebogen ausfüllen</a>
+    Bitte folgen Sie diesem Link, um zum Fragebogen zu gelangen: <a href="https://www.soscisurvey.de/GSAonlineplus/?q=GSA_T1&s={!! str_replace("-","",$PatientCode) !!}">Fragebogen ausfüllen</a>
 </p>
 <p>
     <strong>Herzlichen Dank für Ihre Mitarbeit! </strong>
