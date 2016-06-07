@@ -44,10 +44,6 @@ class Assignment extends InfoModel
         'partially_answered'
     ];
 
-    public function getDateOfReminderAttribute($date) {
-        return $date === null ? null : new Date($date);
-    }
-
     /**
      * Relationship to the patient (who should answer the assignment).
      * Please use $assignment->patient to access the patient.

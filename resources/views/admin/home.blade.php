@@ -90,10 +90,10 @@
                 </li>
             </ul>
             <p>einsehen und <a href="#add_therapist">neue Therapeuten anlegen</a>.</p>
-            <p>Im Notfall können Sie <a href="#reminders">anstehende Benachrichtigungen versenden</a> -
+            <p>Im Notfall können Sie <a href="#notifications">anstehende Benachrichtigungen versenden</a> -
                 z.B. wenn der Mail-Server ausgefallen ist und die Benachrichtigungen nicht versendet werden konnten.</p>
             <p>Am Ende der Seite können Sie alle im System gespeicherten <a href="#export_codes">Codes exportieren</a>
-                (alternativ können Sie die Codes ebenso <a href="/AdminCodes" target="_blank">im Browser einsehen</a>).
+                (alternativ können Sie die <a href="/AdminCodes" target="_blank">Codes im Browser einsehen</a>).
             </p>
         </div>
 
@@ -194,6 +194,7 @@
                                        data-content="<ul>
                                         <li>Registriert (<strong>P020</strong>)</li>
                                         <li>Entlassungsdatum erfasst (<strong>P025</strong>)</li>
+                                        <li>Entlassen (<strong>P028</strong>)</li>
                                         <li>Schreibimpuls erhalten (<strong>P030</strong>)</li>
                                         <li>Tagebucheintrag bearbeitet (<strong>P040</strong>)</li>
                                         <li>Tagebucheintrag gemahnt (<strong>P045</strong>)</li>
@@ -229,15 +230,22 @@
         </div>
 
         <div class="row">
-            <h4 id="reminders">Benachrichtigungen</h4>
-            <p>Versenden Sie anstehende Benachrichtigungen. Patienten werden benachrichtigt falls</p>
-            <ul>
-                <li>sie den ersten bzw. einen neuen <em>Schreibimpuls erhalten</em> haben.</li>
-                <li>der aktuelle <em>Schreibimpuls in Kürze fällig</em> ist.</li>
-                <li>der aktuelle <em>Schreibimpuls überfällig</em> ist.</li>
-            </ul>
+            <h4 id="notifications">Benachrichtigungen</h4>
+            <p>Versenden Sie anstehende Benachrichtigungen. Patienten werden (in der Regel am Folgetag) benachrichtigt falls</p>
+                <ul>
+                    <li>Sie sich <em>neu registriert</em> haben</li>
+                    <li>Sie aus der Klinik <em>entlassen</em> wurden</li>
+                    <li>Sie den ersten bzw. einen Folge-<em>Schreibimpuls</em>
+                        <ul>
+                            <li><em>erhalten</em> oder</li>
+                            <li>2 bzw. 5 Tage lang <em>nicht beantwortet</em> haben</li>
+                        </ul>
+                    <li>Sie die <em>Intervention erfolgreich abgeschlossen</em> haben oder</li>
+                    <li>der Therapeut den <em>Abbruch der Intervention</em> bestätigt hat.</li>
+                </ul>
+            </p>
             <p><strong>Achtung:</strong> Benachrichtigungen werden nur einmal verschickt.</p>
-            <form method="POST" action="/admin/send-reminders/all"
+            <form method="POST" action="/admin/send-notifications/all"
                   class="pull-right floating-btn-form">
                 {{ csrf_field() }}
                 <button type="submit" class="btn btn-primary pull-right">Benachrichtigungen versenden</button>

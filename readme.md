@@ -1,4 +1,4 @@
-GSA Online Plus is a Laravel-based Webapplication for psychological post-rehab support. Over the course of 12 weeks, patients complete serveral writing-tasks, which are assigned and reviewed by therapists.
+GSA-Online plus is a Laravel-based Webapplication for psychological post-rehab support. Over the course of 12 weeks, patients complete serveral writing-tasks, which are assigned and reviewed by therapists.
 
 This document describes how to set up the required server-stack and how to update to new versions.
 

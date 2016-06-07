@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Experteninformationen')
+@section('title', 'Hintergrundinformation')
 
 
 
@@ -24,45 +24,45 @@
   </script>
 
   <div class="container">
-    <h2>Hintergrundinformationen zum GSA online plus</h2>
+    <h2>Hintergrundinformation zum GSA-Online plus</h2>
 
     <p>
-      In Form von kurzen Videos erhalten Sie auf dieser Seite Hintergrundinformationen zum GSA online plus.
+      In Form von kurzen Videos erhalten Sie auf dieser Seite Hintergrundinformation zum GSA-Online plus.
     </p>
 
     <div id="toc" class="list-group">
       <a href="#video-1" class="list-group-item">
-        <h4 class="list-group-item-heading">Vorstellung von GSA online plus</h4>
-        <p class="list-group-item-text">Begrüßung und Angebot der Online-Nachsorge (Intro Video von der Startseite)</p>
+        <h4 class="list-group-item-heading">Vorstellung von GSA-Online plus</h4>
+        <p class="list-group-item-text">Begrüßung und Angebot der Online-Nachsorge (Intro-Video von der Startseite)</p>
       </a>
     </div>
 
     <div id="toc" class="list-group">
       <a href="#video-2" class="list-group-item">
         <h4 class="list-group-item-heading">Rückkehr an den Arbeitsplatz</h4>
-        <p class="list-group-item-text">Warum onlinebasierte Unterstützung bei der Wiedereingliederung?</p>
+        <p class="list-group-item-text">Warum kann eine Online-Nachsorge beim beruflichen Wiedereinstieg hilfreich sein?</p>
       </a>
       <a href="#video-3" class="list-group-item">
         <h4 class="list-group-item-heading">Ablauf und Durchführung</h4>
-        <p class="list-group-item-text">Wie läuft die online Nachsorge ab?</p>
+        <p class="list-group-item-text">Wie läuft die Online-Nachsorge ab?</p>
       </a>
       <a href="#video-4" class="list-group-item">
         <h4 class="list-group-item-heading">Die ZBKT Methode</h4>
-        <p class="list-group-item-text">Welche Grundlage hat die online Nachsorge?</p>
+        <p class="list-group-item-text">Auf welchem Konzept basiert die Online-Nachsorge?</p>
       </a>
       <a href="#video-5" class="list-group-item">
         <h4 class="list-group-item-heading">Ein Beispiel</h4>
-        <p class="list-group-item-text">Eine ganz normale Wiedereingliederung</p>
+        <p class="list-group-item-text">Wie kann die Rückkehr an den Arbeitsplatz ablaufen?</p>
       </a>
       <a href="#video-6" class="list-group-item">
         <h4 class="list-group-item-heading">Am Ball bleiben</h4>
-        <p class="list-group-item-text">Warum ist es wichtig dabei zu bleiben?</p>
+        <p class="list-group-item-text">Warum ist es wichtig, regelmäßig und 12 Wochen lang an der Online-Nachsorge teilzunehmen?</p>
       </a>
     </div>
 
 
     <div class="info-video" id="video-1">
-      <h3>Vorstellung von GSA online plus</h3>
+      <h3>Vorstellung von GSA-Online plus</h3>
       <div class="pull-right">
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>

@@ -1,7 +1,7 @@
 @if($isTherapist)
   <hr>
   <h3>Entlassungsdatum</h3>
-  @if($Patient['status'] >= "P030")
+  @if($Patient['status'] >= "P028")
     <p>
       Das Entlassungsdatum war {{ $Patient['dateFromClinics'] }}.
     </p>
