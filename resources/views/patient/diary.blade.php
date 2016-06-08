@@ -76,21 +76,11 @@
           $current = $i == $Diary['patient_week'];
           $revealed = $isPatient && $current;
           $class = $current ? "diary-panel-current" : "diary-panel";
-          switch($entry['entry_status_code']) {
-            case "E010": $displayState = "default"; break; // Schreibimpuls nicht definiert
-            case "E015": $displayState = "default"; break; // Schreibimpuls definiert
-            case "E020": $displayState = "primary"; break; // Schreibimpuls gegeben
-            case "E030": $displayState = "primary"; break; // Tagebucheintrag bearbeitet
-            case "E040": $displayState = "primary"; break; // Tagebucheintrag abgeschickt
-            case "E050": $displayState = "primary"; break; // Tagebucheintrag mit Rückmeldung versehen
-            case "E060": $displayState = "success"; break; // Rückmeldung bewertet
-            case "E070": $displayState = "primary"; break; // Tagebucheintrag überfällig
-            default: $displayState = "default"; break;
-          }
+          $statusCode = $entry['entry_status_code'];
         ?>
 
-        <div class="panel panel-{{$displayState}} {{$class}}" id="accordion-diary">
-          <div class="panel-heading panel-heading-{{$displayState}}" role="tab" id="heading{{$i}}">
+        <div class="panel panel-@include('patient.status-color') {{$class}}" id="accordion-diary">
+          <div class="panel-heading panel-heading-@include('patient.status-color')" role="tab" id="heading{{$i}}">
             <h4 class="panel-title">
               @if($isPatient && $i <= $Diary['patient_week'] || $isTherapist)
                 <div class="row">

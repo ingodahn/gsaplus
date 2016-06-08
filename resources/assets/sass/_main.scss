@@ -343,3 +343,19 @@ textarea {
     height: 760px;
   }
 }
+
+.commentedWeek {
+  padding-left: 8px;
+}
+
+.commentedWeek-primary {
+  border-left: 5px solid $md-blue-300;;
+}
+
+.commentedWeek-success {
+  border-left: 5px solid $md-light-green-300;
+}
+
+.commentedWeek-default {
+  border-left: 5px solid $gray-lighter;
+}
