@@ -77,6 +77,8 @@
           $revealed = $isPatient && $current;
           $class = $current ? "diary-panel-current" : "diary-panel";
           switch($entry['entry_status_code']) {
+            case "E010": $displayState = "primary"; break; // Schreibimpuls nicht definiert
+            case "E015": $displayState = "primary"; break; // Schreibimpuls definiert
             case "E020": $displayState = "primary"; break; // Schreibimpuls gegeben
             case "E030": $displayState = "primary"; break; // Tagebucheintrag bearbeitet
             case "E040": $displayState = "primary"; break; // Tagebucheintrag abgeschickt
