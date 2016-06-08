@@ -269,16 +269,20 @@ textarea {
     // border-bottom: 1px solid black;
   }
 
-  .panel-heading-primary {
+  .panel-heading-current {
     background-color: $md-blue-300;
   }
 
-  .panel-heading-warning {
-    background-color: $md-orange-300;
+  .panel-heading-done {
+    background-color: $md-light-green-300;
   }
 
-  .panel-heading-success {
-    background-color: $md-light-green-300;
+  .panel-heading-overdue {
+    background-color: $gray-lighter;
+  }
+
+  .panel-heading-undefined {
+    background-color: white;
   }
 
   .panel-heading {
@@ -348,14 +352,18 @@ textarea {
   padding-left: 8px;
 }
 
-.commentedWeek-primary {
+.commentedWeek-current {
   border-left: 5px solid $md-blue-300;;
 }
 
-.commentedWeek-success {
+.commentedWeek-done {
   border-left: 5px solid $md-light-green-300;
 }
 
-.commentedWeek-default {
+.commentedWeek-overdue {
   border-left: 5px solid $gray-lighter;
+}
+
+.commentedWeek-undefined {
+  border-left: 5px solid white;
 }
