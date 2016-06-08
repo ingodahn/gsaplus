@@ -8,7 +8,7 @@
     herzlich Willkommen auf der Online-Plattform von GSA-Online plus!
 </p>
 <p>
-    Wir freuen uns, Sie die nächsten 12 Wochen bei Ihrem beruflichen Wiedereinstieg zu begleiten und zu unterstützen.
+    Wir freuen uns, Sie bei Ihrem beruflichen Wiedereinstieg zu begleiten und zu unterstützen.
 </p>
 <p>
     Ihr erster Schreibimpuls wird an dem von Ihnen gewählten Schreibtag auf der Plattform im Bereich „Mein Tagebuch“
