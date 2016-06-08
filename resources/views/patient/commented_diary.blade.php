@@ -100,8 +100,8 @@
       </div>
 
       @for ($i=2;$i<=$Week; $i++)
+        <hr/>
         <div class="commentedWeek">
-          <hr/>
           <h3>Woche {{ $i }}</h3>
           <div class="impuls">
             <h4><i class="fa fa-flag" aria-hidden="true"></i> Schreibimpuls</h4>
