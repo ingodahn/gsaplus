@@ -15,8 +15,8 @@
     zur Verfügung gestellt. Wir werden Sie hierüber noch einmal rechtzeitig per Email informieren.
 </p>
 <p>
-    Für weitere Informationen zu uns und unserem Projekt besuchen Sie uns gerne jederzeit auf
-    <a href="{{ url("/") }}">{{ url("/") }}</a>.
+    Für weitere Informationen zu uns und unserem Projekt besuchen Sie uns gerne jederzeit auf der
+    <a href="{{ url("/") }}">Webseite von GSA-Online plus</a>.
 </p>
 <p>
     Viele Grüße,
