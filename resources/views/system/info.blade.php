@@ -24,10 +24,10 @@
   </script>
 
   <div class="container">
-    <h2>Hintergrundinformation zum GSA-Online plus</h2>
+    <h2>Hintergrundinformation zu GSA-Online plus</h2>
 
     <p>
-      In Form von kurzen Videos erhalten Sie auf dieser Seite Hintergrundinformation zum GSA-Online plus.
+      In Form von kurzen Videos erhalten Sie auf dieser Seite Hintergrundinformation zu GSA-Online plus.
     </p>
 
     <div id="toc" class="list-group">
@@ -80,7 +80,7 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Warum onlinebasierte Unterstützung bei der Wiedereingliederung?
+        Warum kann eine Online-Nachsorge beim beruflichen Wiedereinstieg hilfreich sein?
       </p>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/5YYf_efA4kk?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -93,7 +93,7 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Wie läuft die online Nachsorge ab?
+        Wie läuft die Online-Nachsorge ab?
       </p>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/BoLAubdcuDc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -106,7 +106,7 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Welche Grundlage hat die online Nachsorge?
+        Auf welchem Konzept basiert die Online-Nachsorge?
       </p>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/jXDLs5M0Zes?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -119,7 +119,7 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Eine ganz normale Wiedereingliederung
+        Wie kann die Rückkehr an den Arbeitsplatz ablaufen?
       </p>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/dETH09wblvc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -132,7 +132,7 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Warum ist es wichtig dabei zu bleiben?
+        Warum ist es wichtig, regelmäßig und 12 Wochen lang an der Online-Nachsorge teilzunehmen?
       </p>
       <div class="videoWrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/HPTYbmDSTII?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
