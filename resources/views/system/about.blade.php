@@ -39,7 +39,7 @@
         Die zentrale Aufgabe des Nachsorgeprogramm <em>GSA-Online plus</em> ist eine Schreibintervention: Die Teilnehmer verfassen jede Woche einen Tagebucheintrag zu einem vorgegebenen Schreibimpuls, welcher die Teilnehmer anleitet, über bestimmte Ereignisse, Gedanken und Gefühle zu schreiben. Zu Beginn des Nachsorgeprogramms können die Teilnehmer wählen, an welchem Wochentag sie ihren Eintrag regelmäßig schreiben möchten. <em>GSA-Online plus</em> kann somit problemlos in den jeweiligen Arbeitsalltag und Tagesablauf integriert werden. Die Kommunikation mit dem Onlinetherapeuten erfolgt anonym.
       </p>
       <p>
-        Nach dem Schreiben des Eintrags liest ein geschulter Online-Therapeut den Eintrag und verfasst in der Regel innerhalb von 24 Stunden eine persönliche Rückmeldung. Dabei geht der Therapeut auf die Belastungen und Probleme des Rehabilitanden ein, indem er Anregungen und Denkanstöße gibt. Das Ziel ist, dass Teilnehmer die von ihnen beschriebenen Situationen besser verstehen und auf Dauer besser mit belastenden Situationen umgehen können.
+        Nach dem Schreiben des Eintrags liest ein geschulter Onlinetherapeut den Eintrag und verfasst in der Regel innerhalb von 24 Stunden eine persönliche Rückmeldung. Dabei geht der Therapeut auf die Belastungen und Probleme des Rehabilitanden ein, indem er Anregungen und Denkanstöße gibt. Das Ziel ist, dass Teilnehmer die von ihnen beschriebenen Situationen besser verstehen und auf Dauer besser mit belastenden Situationen umgehen können.
       </p>
 
       <h3>Theoretisches Konzept der Schreibinterventionen</h3>

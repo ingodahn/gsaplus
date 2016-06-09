@@ -15,7 +15,7 @@
 <script src="/js/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
 <script src="/js/sweetalert.min.js"></script>
 <script src="/js/jquery.textarea_autosize.min.js"></script>
-<link rel="stylesheet" href="/css/app.css" media="screen" charset="utf-8">
+<link rel="stylesheet" href="/css/app.css" charset="utf-8">
 
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
