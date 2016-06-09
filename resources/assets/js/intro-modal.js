@@ -1,5 +1,5 @@
 function startVideo() {
-  var src = 'https://www.youtube.com/embed/OzGLGdZ6Y3A?html5=1&autoplay=1&showinfo=0&rel=0';
+  var src = 'https://www.youtube.com/embed/6iV0lRJdhwc?html5=1&autoplay=1&showinfo=0&rel=0';
   $('#intro-modal iframe').attr('src', src);
 }
 
