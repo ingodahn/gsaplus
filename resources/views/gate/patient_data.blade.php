@@ -96,7 +96,7 @@
       </div>
 
       <p><strong>Hinweis:</strong>
-        Speichern Sie Ihr Passwort nicht im Browser wenn andere Benutzer diesen Rechner unter dem selben Namen nutzen können.
+        Bitte speichern Sie Ihr Passwort nicht im Browser, falls andere Benutzer diesen Rechner unter demselben Namen nutzen können.
       </p>
 
       <div class="form-group">

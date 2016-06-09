@@ -44,27 +44,6 @@
     <h2>Tagebuch
       <a href="javascript:void(0)" data-toggle="popover" data-placement="bottom" data-html="true" data-trigger="focus" title="Ihr Tagebuch" data-content="
       Das Tagebuch ist in 12 Wochen untergliedert und ermöglicht Ihnen, auf den ersten Blick zu erkennen, in welcher Woche der Online-Nachsorge Sie sich aktuell befinden. Sobald Sie oder Ihr Online-Therapeut eine Aktion durchführen, wird dies entsprechend in der Übersicht vermerkt. Zusätzlich zeigen Ihnen die Farben an, ob Sie die Aufgaben der Woche abgeschlossen haben (grün), noch etwas zu bearbeiten ist (blau) oder die Bearbeitungszeit bereits abgelaufen ist (grau). So sind Sie schnell und übersichtlich über den aktuellen Stand Ihrer Online-Nachsorge informiert.<br><br>
-      <strong>Wochenübersicht und Farbsystem – Tagebuch</strong><br><br>
-      Blau
-      <ul>
-        <li>Schreibimpuls liegt für Sie bereit</li>
-        <li>Tagebucheintrag in Bearbeitung und zwischengespeichert</li>
-        <li>Tagebucheintrag abgeschickt</li>
-        <li>Ihr Online-Therapeut hat geantwortet</li>
-        <li>Bitte bewerten Sie die Rückmeldung Ihres Online-Therapeuten</li>
-      </ul>
-      Grün
-      <ul>
-        <li>Tagebucheintrag und Rückmeldung abgeschlossen</li>
-      </ul>
-      Orange
-      <ul>
-        <li>Aktion erforderlich</li>
-      </ul>
-      Grau
-      <ul>
-        <li>Es liegt noch kein Schreibimpuls vor</li>
-      </ul>
       ">
         <i class="fa fa-question-circle"></i>
       </a>
@@ -97,19 +76,11 @@
           $current = $i == $Diary['patient_week'];
           $revealed = $isPatient && $current;
           $class = $current ? "diary-panel-current" : "diary-panel";
-          switch($entry['entry_status_code']) {
-            case "E020": $displayState = "primary"; break;
-            case "E030": $displayState = "primary"; break;
-            case "E040": $displayState = "primary"; break;
-            case "E050": $displayState = "primary"; break;
-            case "E060": $displayState = "success"; break;
-            case "E070": $displayState = "warning"; break;
-            default: $displayState = "default"; break;
-          }
+          $statusCode = $entry['entry_status_code'];
         ?>
 
-        <div class="panel panel-{{$displayState}} {{$class}}" id="accordion-diary">
-          <div class="panel-heading panel-heading-{{$displayState}}" role="tab" id="heading{{$i}}">
+        <div class="panel panel-@include('patient.status-color') {{$class}}" id="accordion-diary">
+          <div class="panel-heading panel-heading-@include('patient.status-color')" role="tab" id="heading{{$i}}">
             <h4 class="panel-title">
               @if($isPatient && $i <= $Diary['patient_week'] || $isTherapist)
                 <div class="row">

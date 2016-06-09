@@ -65,7 +65,6 @@ class DiaryController extends Controller
         $patient=Patient::whereName($name)->first();
         $info=$patient->all_info();
         $p_assignments=$info['assignments'];
-
         $wai=[];
         $health=[];
         $assignments=[];
@@ -95,8 +94,10 @@ class DiaryController extends Controller
         }
 
         $assignments[1]['dirty']=$p_assignments[0]['dirty'];
+        $assignments[1]['status']=$p_assignments[0]['assignmentStatus'];
 
         for ($i=2; $i <= $info['patientWeek']; $i++) {
+            $assignments[$i]['status']=$p_assignments[$i-1]['assignmentStatus'];
             if (isset($p_assignments[$i-1]['problem'])){
                 $assignments[$i]['problem']=$p_assignments[$i-1]['problem'];
             } else {

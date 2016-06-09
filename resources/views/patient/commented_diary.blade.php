@@ -51,7 +51,8 @@
       });
     </script>
 
-    <div class="commentedWeek">
+    <?php $statusCode = $Assignments[1]['status']; ?>
+    <div class="commentedWeek commentedWeek-@include('patient.status-color')">
       <h3>Woche 1</h3>
       <div class="impuls">
         <h4><i class="fa fa-flag" aria-hidden="true"></i> Schreibimpuls</h4>
@@ -100,8 +101,9 @@
       </div>
 
       @for ($i=2;$i<=$Week; $i++)
-        <div class="commentedWeek">
-          <hr/>
+        <hr/>
+        <?php $statusCode = $Assignments[$i]['status']; ?>
+        <div class="commentedWeek commentedWeek-@include('patient.status-color')">
           <h3>Woche {{ $i }}</h3>
           <div class="impuls">
             <h4><i class="fa fa-flag" aria-hidden="true"></i> Schreibimpuls</h4>

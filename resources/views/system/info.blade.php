@@ -24,10 +24,10 @@
   </script>
 
   <div class="container">
-    <h2>Hintergrundinformation zum GSA-Online plus</h2>
+    <h2>Hintergrundinformation zu GSA-Online plus</h2>
 
     <p>
-      In Form von kurzen Videos erhalten Sie auf dieser Seite Hintergrundinformation zum GSA-Online plus.
+      In Form von kurzen Videos erhalten Sie auf dieser Seite Hintergrundinformation zu GSA-Online plus.
     </p>
 
     <div id="toc" class="list-group">
@@ -47,7 +47,7 @@
         <p class="list-group-item-text">Wie läuft die Online-Nachsorge ab?</p>
       </a>
       <a href="#video-4" class="list-group-item">
-        <h4 class="list-group-item-heading">Die ZBKT Methode</h4>
+        <h4 class="list-group-item-heading">Das therapeutische Konzept</h4>
         <p class="list-group-item-text">Auf welchem Konzept basiert die Online-Nachsorge?</p>
       </a>
       <a href="#video-5" class="list-group-item">
@@ -70,7 +70,7 @@
         Begrüßung und Angebot der Online-Nachsorge (Intro Video von der Startseite)
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/OzGLGdZ6Y3A?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/6iV0lRJdhwc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -80,10 +80,10 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Warum onlinebasierte Unterstützung bei der Wiedereingliederung?
+        Warum kann eine Online-Nachsorge beim beruflichen Wiedereinstieg hilfreich sein?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/5YYf_efA4kk?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/x6_rbdgDoKQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -93,23 +93,23 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Wie läuft die online Nachsorge ab?
+        Wie läuft die Online-Nachsorge ab?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/BoLAubdcuDc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dae7b-GeEvo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
     <div class="info-video" id="video-4">
-      <h3>Die ZBKT Methode</h3>
+      <h3>Das therapeutische Konzept</h3>
       <div class="pull-right">
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Welche Grundlage hat die online Nachsorge?
+        Auf welchem Konzept basiert die Online-Nachsorge?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/jXDLs5M0Zes?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/dB_U99INsv0?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -119,10 +119,10 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Eine ganz normale Wiedereingliederung
+        Wie kann die Rückkehr an den Arbeitsplatz ablaufen?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/dETH09wblvc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/BOJMys7gHXY?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -132,10 +132,10 @@
         <a href="#body"><span class="glyphicon glyphicon-arrow-up"></span> zum Seitenanfang</a>
       </div>
       <p>
-        Warum ist es wichtig dabei zu bleiben?
+        Warum ist es wichtig, regelmäßig und 12 Wochen lang an der Online-Nachsorge teilzunehmen?
       </p>
       <div class="videoWrapper">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/HPTYbmDSTII?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/xGzUq5rcmWw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
