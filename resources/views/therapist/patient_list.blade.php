@@ -139,6 +139,7 @@
         <li>Schreibimpuls definiert (E015)</li>
         <li>Schreibimpuls liegt für Sie bereit (E020)</li>
         <li>Tagebucheintrag in Bearbeitung und zwischengespeichert (E030)</li>
+        <li>Tagebucheintrag in Kürze fällig (E035)</li>
         <li>Tagebucheintrag abgeschickt (E040)</li>
         <li>Ihr Online-Therapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (E050)</li>
         <li>Tagebucheintrag und Rückmeldung abgeschlossen (E060)</li>
