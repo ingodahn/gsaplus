@@ -33,7 +33,7 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label for="Code">Persönlicher Code</label>
-            <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-trigger="focus" data-html="true"  title="Persönlicher Code" data-content="Die Registrierung ist nur mit einem Code möglich, den Sie im Rahmen des GSA-Online plus Programms erhalten haben.<br>Bei Problemen wenden Sie sich bitte an unser Team. Nutzen Sie hierzu den Menüpunkt 'Kontakt' unten.">
+            <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="top" data-trigger="focus" data-html="true"  title="Persönlicher Code" data-content="Die Registrierung ist nur mit einem Code möglich, den Sie im Rahmen des GSA-Online plus Programms erhalten haben.<br>Bei Problemen wenden Sie sich bitte an unser Team. Nutzen Sie hierzu den Menüpunkt 'Kontakt' unten.">
               <i class="fa fa-question-circle"></i>
             </a>
 
@@ -67,7 +67,7 @@
             <label>
               <input name="remember" type="checkbox"> Eingeloggt bleiben
             </label>
-            <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-trigger="focus" data-html="true" title="Eingeloggt bleiben" data-content="Wenn diese Funktion aktiviert wird, bleiben Sie über einen längeren Zeitraum eingeloggt und gelangen direkt auf Ihre persönliche Seite und sehen dieses Anmeldebildschirm nicht. Sie bleiben so lange eingeloggt, bis Sie sich aktiv ausloggen.<br><strong>Achtung:</strong> Wir raten davon ab, diese Funktion zu aktivieren, wenn wenn Sie sich an einem öffentlichen oder gemeinsam genutzten Gerät einloggen.">
+            <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="top" data-trigger="focus" data-html="true" title="Eingeloggt bleiben" data-content="Wenn diese Funktion aktiviert wird, bleiben Sie über einen längeren Zeitraum eingeloggt und gelangen direkt auf Ihre persönliche Seite und sehen dieses Anmeldebildschirm nicht. Sie bleiben so lange eingeloggt, bis Sie sich aktiv ausloggen.<br><strong>Achtung:</strong> Wir raten davon ab, diese Funktion zu aktivieren, wenn wenn Sie sich an einem öffentlichen oder gemeinsam genutzten Gerät einloggen.">
               <i class="fa fa-question-circle"></i>
             </a>
           </div>
