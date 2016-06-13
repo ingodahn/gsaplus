@@ -53,7 +53,7 @@
 @section('content')
   <div class="container">
     <h2>Slots
-      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden.<br><strong>Achtung:</strong> Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
+      <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="right" data-html="true" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden.<br><strong>Achtung:</strong> Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
         <i class="fa fa-question-circle"></i>
       </a>
     </h2>
@@ -115,7 +115,7 @@
   <div class="container-fluid">
     <hr/>
     <h2>Patientenliste
-      <a href="javascript:void(0)" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Alle im System registrierten Patienten mit Sortier- und Filterfunktionen" data-content="
+      <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="right" data-html="true" data-trigger="focus" title="Alle im System registrierten Patienten mit Sortier- und Filterfunktionen" data-content="
       Es gibt folgende <strong>Patienten-Status (P)</strong>
       <ul>
         <li>Registriert (P020)</li>
