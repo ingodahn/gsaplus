@@ -11,7 +11,7 @@
             white-space : nowrap;
             vertical-align:middle !important;
         }
-        
+
         ul.nav {
             display: none;
         }
@@ -212,7 +212,7 @@
                             @if($role == UserRole::PATIENT)
                                 <td style="white-space: nowrap !important">
                                     <em>{{ $user['patientStatus']  }}</em>
-                                    <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="right"
+                                    <a href="javascript:void(0)" tabindex="0" data-toggle="popover" data-placement="right"
                                        data-html="true" data-trigger="focus" title="Es gibt folgende Patienten-Status (P)"
                                        data-content="<ul>
                                         <li>Registriert (<strong>P020</strong>)</li>

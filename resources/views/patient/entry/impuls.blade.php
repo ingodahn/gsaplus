@@ -40,7 +40,7 @@
 
 <div class="panel panel-default">
 
-<div class="panel-heading">Schreibimpuls-Vorlagen auswählen und bearbeiten (optional) <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="right" data-html="true" data-trigger="focus" title="Auswahlhilfe und Editor für die Schreibimpuls-Vorlagen" data-content="
+<div class="panel-heading">Schreibimpuls-Vorlagen auswählen und bearbeiten (optional) <a href="javascript:void(0)" tabindex="0" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Auswahlhilfe und Editor für die Schreibimpuls-Vorlagen" data-content="
   Hier können Sie entweder einen Schreibimpuls aus einer Vorlage verwenden, oder eigene Schreibimpulse anlegen und bearbeiten.<br><br>
   <strong>Schreibimpuls-Vorlage auswählen</strong><br>
   Wählen Sie aus der Liste der Vorlagen die gewünschte Position aus. <strong>Achtung:</strong> Ihr möglicherweise zuvor eingegebener Schreibimpuls wird durch den Schreibimpuls aus der Vorlage überschrieben.<br><br>
