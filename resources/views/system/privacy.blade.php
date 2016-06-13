@@ -26,7 +26,7 @@
         Die Datenübertragung zwischen Ihrem Computer und dem System von GSA-Online plus erfolgt verschlüsselt und kann nach aktuellem Kenntnisstand von Dritten nicht mitgelesen werden.
       </p>
       <p>
-        Unseren Online-Therapeuten sind nur Ihr Benutzername, Ihr Zugangscode und Ihr Entlassungsdatum bekannt. Natürlich können Sie umso besser beraten werden, je mehr wir über Sie wissen. Deshalb haben Sie die Möglichkeit, uns in Ihrem Profil freiwillig mehr über sich mitzuteilen.
+        Unseren Onlinetherapeuten sind nur Ihr Benutzername, Ihr Zugangscode und Ihr Entlassungsdatum bekannt. Natürlich können Sie umso besser beraten werden, je mehr wir über Sie wissen. Deshalb haben Sie die Möglichkeit, uns in Ihrem Profil freiwillig mehr über sich mitzuteilen.
       </p>
       <p>
         Ihre Einträge in Ihr Tagebuch können nur von unseren Therapeuten eingesehen werden, die der ärztlichen Schweigepflicht unterliegen. Gemäß dem Grundsatz der Datenvermeidung und Datensparsamkeit werden von uns personenbezogene Daten nur erhoben, wenn diese erforderlich sind und Sie uns diese freiwillig angeben.
@@ -34,7 +34,7 @@
 
       <h3>Verwendung von E-Mail</h3>
       <p>
-        E-Mails werden zumeist unverschlüsselt übertragen. Deshalb verwendet GSA-Online plus Ihre E-Mail-Adresse nur um Sie kurz über wichtige Ereignisse, wie etwa neue Schreibimpulse, zu informieren. Weitere Informationen finden Sie dann nach Anmeldung in unserem geschützten System. Auch wenn Sie unser Kontaktformular verwenden sind Ihre Eingaben sicher, jedoch erfolgt die Antwort in der Regel unverschlüsselt an die dabei angegebene E-Mail-Adresse. Wenn Sie dies nicht wünschen, so nehmen Sie telefonisch Kontakt zu unserem Team auf oder geben statt einer E-Mail-Adresse Ihren Benutzernamen an, so dass Ihr Online-Therapeut auf Ihr Anliegen im Rahmen seiner Kommentare eingehen kann.
+        E-Mails werden zumeist unverschlüsselt übertragen. Deshalb verwendet GSA-Online plus Ihre E-Mail-Adresse nur um Sie kurz über wichtige Ereignisse, wie etwa neue Schreibimpulse, zu informieren. Weitere Informationen finden Sie dann nach Anmeldung in unserem geschützten System. Auch wenn Sie unser Kontaktformular verwenden sind Ihre Eingaben sicher, jedoch erfolgt die Antwort in der Regel unverschlüsselt an die dabei angegebene E-Mail-Adresse. Wenn Sie dies nicht wünschen, so nehmen Sie telefonisch Kontakt zu unserem Team auf oder geben statt einer E-Mail-Adresse Ihren Benutzernamen an, so dass Ihr Onlinetherapeut auf Ihr Anliegen im Rahmen seiner Kommentare eingehen kann.
       </p>
 
       <h3>Verwendung von Verbindungsdaten</h3>
