@@ -125,7 +125,7 @@
         <li>Tagebucheintrag in Bearbeitung und zwischengespeichert (P040)</li>
         <li>Tagebucheintrag in Kürze fällig (P045)</li>
         <li>Tagebucheintrag abgeschickt (P050)</li>
-        <li>Ihr Online-Therapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (P060)</li>
+        <li>Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (P060)</li>
         <li>Tagebucheintrag und Rückmeldung abgeschlossen (P065)</li>
         <li>Aufgabe verpasst (P070)</li>
         <li>Mitarbeit beendet (P130)</li>
@@ -141,7 +141,7 @@
         <li>Tagebucheintrag in Bearbeitung und zwischengespeichert (E030)</li>
         <li>Tagebucheintrag in Kürze fällig (E035)</li>
         <li>Tagebucheintrag abgeschickt (E040)</li>
-        <li>Ihr Online-Therapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (E050)</li>
+        <li>Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (E050)</li>
         <li>Tagebucheintrag und Rückmeldung abgeschlossen (E060)</li>
         <li>Kein Tagebucheintrag vorhanden (E070)</li>
         <li>Kein aktueller Schreibimpuls (E100)</li>

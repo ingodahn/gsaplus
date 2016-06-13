@@ -35,14 +35,14 @@
       <div class="bs-callout bs-callout-info">
         <p>Bitte wählen Sie einen Wochentag, an dem Sie in den nächsten 12 Wochen regelmäßig Zeit haben werden, Ihren persönlichen Tagebucheintrag zu schreiben und einige kurze Fragen zu beantworten.  Sie haben unter „Mein Profil“ auch später noch die Gelegenheit, Ihren Schreibtag einmalig auf einen anderen Tag zu verlegen.</p>
 
-        <p>Wenn Sie Ihren Tagebucheintrag an Ihrem gewählten Schreibtag verfassen, wird Ihnen Ihr Online-Therapeut  in der Regel innerhalb von 24 Stunden auf Ihren Eintrag antworten.</p>
+        <p>Wenn Sie Ihren Tagebucheintrag an Ihrem gewählten Schreibtag verfassen, wird Ihnen Ihr Onlinetherapeut  in der Regel innerhalb von 24 Stunden auf Ihren Eintrag antworten.</p>
       </div>
 
       <p>Ich verfasse meinen Tagebucheintrag in Zukunft wöchentlich am:</p>
 
       <div class="form-group">
         <label for="day_of_week" class="control-label">Wochentag</label>
-        <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-trigger="focus" title="Warum sind nicht alle Wochentage wählbar?" data-content="Wir möchten, dass Sie nach dem Schreiben Ihres Tagebuchs möglichst innerhalb von 24 h eine Rückmeldung Ihres Online-Therapeuten erhalten. Da wir dies jedoch nur von Montag bis Freitag mit begrenzten Kapazitäten zusagen können, sind nicht alle Tage als Schreibtage wählbar.">
+        <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-trigger="focus" title="Warum sind nicht alle Wochentage wählbar?" data-content="Wir möchten, dass Sie nach dem Schreiben Ihres Tagebuchs möglichst innerhalb von 24 h eine Rückmeldung Ihres Onlinetherapeuten erhalten. Da wir dies jedoch nur von Montag bis Freitag mit begrenzten Kapazitäten zusagen können, sind nicht alle Tage als Schreibtage wählbar.">
           <i class="fa fa-question-circle"></i>
         </a>
         <select name="day_of_week" class="form-control" required>
@@ -58,7 +58,7 @@
       <div class="bs-callout bs-callout-info">
         <p><strong>Bleiben Sie anonym!</strong> Zur Wahrung des Datenschutzes ist es notwendig, dass Sie einen Benutzernamen wählen, der <em>nicht</em> Ihrem vollständigen Vor- und Zunamen entspricht.</p>
 
-        <p>Ihr Online-Therapeut wird Sie in Zukunft unter diesem Benutzernamen ansprechen und keinen Bezug zu Ihrem echten Namen herstellen können. Die angegebene E-Mail-Adresse ist für den Online-Therapeuten nicht sichtbar.</p>
+        <p>Ihr Onlinetherapeut wird Sie in Zukunft unter diesem Benutzernamen ansprechen und keinen Bezug zu Ihrem echten Namen herstellen können. Die angegebene E-Mail-Adresse ist für den Onlinetherapeuten nicht sichtbar.</p>
       </div>
 
       <p>Bitte wählen Sie einen Benutzernamen (nur Buchstaben, Zahlen, <code>-</code>, <code>_</code> und <code>.</code>)und ein Passwort und geben Sie eine gültige E-Mail Adresse ein:</p>

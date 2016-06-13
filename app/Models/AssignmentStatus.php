@@ -34,7 +34,7 @@ class AssignmentStatus
         self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag in Bearbeitung und zwischengespeichert",
         self::ASSIGNMENT_WILL_BECOME_DUE_SOON => "Tagebucheintrag in Kürze fällig",
         self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
-        self::THERAPIST_COMMENTED_ASSIGNMENT => "Ihr Online-Therapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung.",
+        self::THERAPIST_COMMENTED_ASSIGNMENT => "Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung.",
         self::PATIENT_RATED_COMMENT => "Tagebucheintrag und Rückmeldung abgeschlossen",
         self::PATIENT_MISSED_ASSIGNMENT => "Kein Tagebucheintrag vorhanden",
         self::ASSIGNMENT_IS_NOT_REQUIRED => "Kein aktueller Schreibimpuls",
