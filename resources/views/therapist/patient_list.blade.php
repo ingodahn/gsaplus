@@ -143,7 +143,7 @@
         <li>Tagebucheintrag abgeschickt (E040)</li>
         <li>Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (E050)</li>
         <li>Tagebucheintrag und Rückmeldung abgeschlossen (E060)</li>
-        <li>Kein Tagebucheintrag vorhanden (E070)</li>
+        <li>Tagebucheintrag überfällig (E070)</li>
         <li>Kein aktueller Schreibimpuls (E100)</li>
       </ul>
       Der Wert für <strong>Überfällig</strong> wird wie folgt berechnet:<br>

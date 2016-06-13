@@ -8,8 +8,8 @@ switch($statusCode) {
   case "E040": $displayState = "current"; break; // Tagebucheintrag abgeschickt
   case "E050": $displayState = "current"; break; // Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung.
   case "E060": $displayState = "done"; break; // Tagebucheintrag und Rückmeldung abgeschlossen
-  case "E070": $displayState = "overdue"; break; // Kein Tagebucheintrag vorhanden
-  case "E100": $displayState = "undefined"; break; // Kein Tagebucheintrag vorhanden
+  case "E070": $displayState = "overdue"; break; // Tagebucheintrag überfällig
+  case "E100": $displayState = "undefined"; break; // Tagebucheintrag überfällig
   default: $displayState = "undefined"; break;
 }
 echo($displayState);

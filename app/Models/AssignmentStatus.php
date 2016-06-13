@@ -36,7 +36,7 @@ class AssignmentStatus
         self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
         self::THERAPIST_COMMENTED_ASSIGNMENT => "Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung.",
         self::PATIENT_RATED_COMMENT => "Tagebucheintrag und Rückmeldung abgeschlossen",
-        self::PATIENT_MISSED_ASSIGNMENT => "Kein Tagebucheintrag vorhanden",
+        self::PATIENT_MISSED_ASSIGNMENT => "Tagebucheintrag überfällig",
         self::ASSIGNMENT_IS_NOT_REQUIRED => "Kein aktueller Schreibimpuls",
         self::UNKNOWN => "Unbekannt"
     );
