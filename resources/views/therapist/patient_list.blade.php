@@ -53,7 +53,7 @@
 @section('content')
   <div class="container">
     <h2>Slots
-      <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="right" data-html="true" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden.<br><strong>Achtung:</strong> Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
+      <a href="javascript:void(0)" tabindex="0" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Freie Slots für die Registrierung" data-content="Die aktuelle Menge der freien Slots pro Wochentag kann hier überprüft und durch Eintragen von Zahlenwerten verändert werden.<br><strong>Achtung:</strong> Wenn alle Slots auf '0' stehen, wird die Anmeldung automatisch gesperrt und Patienten erhalten auf der Startseite statt der Codeeingabe eine entsprechende Meldung und einen Link zum Kontaktformular.">
         <i class="fa fa-question-circle"></i>
       </a>
     </h2>
@@ -115,18 +115,18 @@
   <div class="container-fluid">
     <hr/>
     <h2>Patientenliste
-      <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="right" data-html="true" data-trigger="focus" title="Alle im System registrierten Patienten mit Sortier- und Filterfunktionen" data-content="
+      <a href="javascript:void(0)" tabindex="0" data-toggle="popover" data-placement="right" data-html="true" data-trigger="focus" title="Alle im System registrierten Patienten mit Sortier- und Filterfunktionen" data-content="
       Es gibt folgende <strong>Patienten-Status (P)</strong>
       <ul>
         <li>Registriert (P020)</li>
         <li>Entlassungsdatum erfasst (P025)</li>
         <li>Entlassen (P028)</li>
         <li>Schreibimpuls erhalten (P030)</li>
-        <li>Tagebucheintrag bearbeitet (P040)</li>
+        <li>Tagebucheintrag in Bearbeitung und zwischengespeichert (P040)</li>
         <li>Tagebucheintrag in Kürze fällig (P045)</li>
         <li>Tagebucheintrag abgeschickt (P050)</li>
-        <li>Tagebucheintrag mit Rückmeldung versehen (P060)</li>
-        <li>Rückmeldung bewertet (P065)</li>
+        <li>Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (P060)</li>
+        <li>Tagebucheintrag und Rückmeldung abgeschlossen (P065)</li>
         <li>Aufgabe verpasst (P070)</li>
         <li>Mitarbeit beendet (P130)</li>
         <li>Interventionszeit beendet (P140)</li>
@@ -137,13 +137,14 @@
       <ul>
         <li>Schreibimpuls nicht definiert (E010)</li>
         <li>Schreibimpuls definiert (E015)</li>
-        <li>Schreibimpuls gegeben (E020)</li>
-        <li>Tagebucheintrag bearbeitet (E030)</li>
+        <li>Schreibimpuls liegt für Sie bereit (E020)</li>
+        <li>Tagebucheintrag in Bearbeitung und zwischengespeichert (E030)</li>
+        <li>Tagebucheintrag in Kürze fällig (E035)</li>
         <li>Tagebucheintrag abgeschickt (E040)</li>
-        <li>Tagebucheintrag mit Rückmeldung versehen (E050)</li>
-        <li>Rückmeldung bewertet (E060)</li>
+        <li>Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (E050)</li>
+        <li>Tagebucheintrag und Rückmeldung abgeschlossen (E060)</li>
         <li>Tagebucheintrag überfällig (E070)</li>
-        <li>Schreibimpuls nicht erforderlich (E100)</li>
+        <li>Kein aktueller Schreibimpuls (E100)</li>
       </ul>
       Der Wert für <strong>Überfällig</strong> wird wie folgt berechnet:<br>
       Überfällig (overdue) = Wert der Form 'Anzahl der überfälligen Einträge' / 'Aktuelle Wochennr' = Anzahl der bereits gegebenen Schreibimpulse

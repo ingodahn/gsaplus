@@ -15,7 +15,7 @@
       <?php $checked = $EntryInfo['comment_reply']['satisfied']; ?>
       <div class="row">
         <div class="col-md-7">
-          <label for="comment_reply_satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Online-Therapeuten?</label>
+          <label for="comment_reply_satisfied">Wie zufrieden waren Sie mit der Rückmeldung des Onlinetherapeuten?</label>
         </div>
         @for($j = 0; $j < 4; $j++)
           <div class="col-md-1">
@@ -31,7 +31,7 @@
       <?php $checked = $EntryInfo['comment_reply']['helpful']; ?>
       <div class="row">
         <div class="col-md-7">
-          <label for="comment_reply_helpful">Wie hilfreich waren die Rückmeldungen des Online-Therapeuten?</label>
+          <label for="comment_reply_helpful">Wie hilfreich waren die Rückmeldungen des Onlinetherapeuten?</label>
         </div>
         @for($j = 0; $j < 4; $j++)
           <div class="col-md-1">
