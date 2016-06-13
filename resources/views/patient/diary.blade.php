@@ -42,7 +42,7 @@
     @endif
 
     <h2>Tagebuch
-      <a href="javascript:void(0)" data-toggle="popover" data-placement="bottom" data-html="true" data-trigger="focus" title="Ihr Tagebuch" data-content="
+      <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="bottom" data-html="true" data-trigger="focus" title="Ihr Tagebuch" data-content="
       Das Tagebuch ist in 12 Wochen untergliedert und ermöglicht Ihnen, auf den ersten Blick zu erkennen, in welcher Woche der Online-Nachsorge Sie sich aktuell befinden. Sobald Sie oder Ihr Online-Therapeut eine Aktion durchführen, wird dies entsprechend in der Übersicht vermerkt. Zusätzlich zeigen Ihnen die Farben an, ob Sie die Aufgaben der Woche abgeschlossen haben (grün), noch etwas zu bearbeiten ist (blau) oder die Bearbeitungszeit bereits abgelaufen ist (grau). So sind Sie schnell und übersichtlich über den aktuellen Stand Ihrer Online-Nachsorge informiert.<br><br>
       ">
         <i class="fa fa-question-circle"></i>
