@@ -217,7 +217,7 @@ class SendNotifications extends Command
                 $parameters['PatientCode'] = $patient->code;
                 break;
             case self::OPTION_FIRST_ASSIGNMENT:
-                $subject = 'Erster Schreibimpuls gegeben';
+                $subject = 'Erster Schreibimpuls liegt für Sie bereit';
                 break;
             case self::OPTION_NEW_ASSIGNMENT:
                 $subject = 'Neuer Schreibimpuls vorhanden';
