@@ -3,11 +3,11 @@ $displayState = "default";
 switch($statusCode) {
   case "E010": $displayState = "undefined"; break; // Schreibimpuls nicht definiert
   case "E015": $displayState = "current"; break; // Schreibimpuls definiert
-  case "E020": $displayState = "current"; break; // Schreibimpuls gegeben
-  case "E030": $displayState = "current"; break; // Tagebucheintrag bearbeitet
+  case "E020": $displayState = "current"; break; // Schreibimpuls liegt für Sie bereit
+  case "E030": $displayState = "current"; break; // Tagebucheintrag in Bearbeitung und zwischengespeichert
   case "E040": $displayState = "current"; break; // Tagebucheintrag abgeschickt
-  case "E050": $displayState = "current"; break; // Tagebucheintrag mit Rückmeldung versehen
-  case "E060": $displayState = "done"; break; // Rückmeldung bewertet
+  case "E050": $displayState = "current"; break; // Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung.
+  case "E060": $displayState = "done"; break; // Tagebucheintrag und Rückmeldung abgeschlossen
   case "E070": $displayState = "overdue"; break; // Tagebucheintrag überfällig
   case "E100": $displayState = "undefined"; break; // Tagebucheintrag überfällig
   default: $displayState = "undefined"; break;

@@ -196,11 +196,11 @@
                                         <li>Entlassungsdatum erfasst (<strong>P025</strong>)</li>
                                         <li>Entlassen (<strong>P028</strong>)</li>
                                         <li>Schreibimpuls erhalten (<strong>P030</strong>)</li>
-                                        <li>Tagebucheintrag bearbeitet (<strong>P040</strong>)</li>
+                                        <li>Tagebucheintrag in Bearbeitung und zwischengespeichert (<strong>P040</strong>)</li>
                                         <li>Tagebucheintrag gemahnt (<strong>P045</strong>)</li>
                                         <li>Tagebucheintrag abgeschickt (<strong>P050</strong>)</li>
-                                        <li>Tagebucheintrag mit Rückmeldung versehen (<strong>P060</strong>)</li>
-                                        <li>Rückmeldung bewertet (<strong>P065</strong>)</li>
+                                        <li>Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung. (<strong>P060</strong>)</li>
+                                        <li>Tagebucheintrag und Rückmeldung abgeschlossen (<strong>P065</strong>)</li>
                                         <li>Mitarbeit beendet (<strong>P130</strong>)</li>
                                         <li>Interventionszeit beendet (<strong>P140</strong>)</li>
                                         </ul>">

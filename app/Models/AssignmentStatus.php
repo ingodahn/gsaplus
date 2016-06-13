@@ -30,14 +30,14 @@ class AssignmentStatus
     public static $STATUS_INFO = array(
         self::ASSIGNMENT_IS_NOT_DEFINED => "Schreibimpuls nicht definiert",
         self::THERAPIST_SAVED_ASSIGNMENT => "Schreibimpuls definiert",
-        self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls gegeben",
-        self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag bearbeitet",
+        self::PATIENT_GOT_ASSIGNMENT => "Schreibimpuls liegt für Sie bereit",
+        self::PATIENT_EDITED_ASSIGNMENT => "Tagebucheintrag in Bearbeitung und zwischengespeichert",
         self::ASSIGNMENT_WILL_BECOME_DUE_SOON => "Tagebucheintrag in Kürze fällig",
         self::PATIENT_FINISHED_ASSIGNMENT => "Tagebucheintrag abgeschickt",
-        self::THERAPIST_COMMENTED_ASSIGNMENT => "Tagebucheintrag mit Rückmeldung versehen",
-        self::PATIENT_RATED_COMMENT => "Rückmeldung bewertet",
+        self::THERAPIST_COMMENTED_ASSIGNMENT => "Ihr Onlinetherapeut hat geantwortet - bitte bewerten Sie seine Rückmeldung.",
+        self::PATIENT_RATED_COMMENT => "Tagebucheintrag und Rückmeldung abgeschlossen",
         self::PATIENT_MISSED_ASSIGNMENT => "Tagebucheintrag überfällig",
-        self::ASSIGNMENT_IS_NOT_REQUIRED => "Schreibimpuls nicht erforderlich",
+        self::ASSIGNMENT_IS_NOT_REQUIRED => "Kein aktueller Schreibimpuls",
         self::UNKNOWN => "Unbekannt"
     );
 
