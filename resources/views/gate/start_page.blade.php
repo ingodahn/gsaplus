@@ -33,8 +33,8 @@
           {{ csrf_field() }}
           <div class="form-group">
             <label for="Code">Persönlicher Code</label>
-            <a href="javascript:void(0)" data-toggle="popover" class="btn" data-placement="top" data-trigger="focus" data-html="true"  title="Persönlicher Code" data-content="Die Registrierung ist nur mit einem Code möglich, den Sie im Rahmen des GSA-Online plus Programms erhalten haben.<br>Bei Problemen wenden Sie sich bitte an unser Team. Nutzen Sie hierzu den Menüpunkt 'Kontakt' unten.">
-              <i class="fa fa-question-circle"></i>
+            <a href="javascript:void(0)" data-toggle="popover" class="" data-placement="top" data-trigger="focus" data-html="true"  title="Persönlicher Code" data-content="Die Registrierung ist nur mit einem Code möglich, den Sie im Rahmen des GSA-Online plus Programms erhalten haben.<br>Bei Problemen wenden Sie sich bitte an unser Team. Nutzen Sie hierzu den Menüpunkt 'Kontakt' unten.">
+              <i class="btn fa fa-question-circle"></i>
             </a>
 
             <input name="Code" class="form-control" placeholder="Code">
