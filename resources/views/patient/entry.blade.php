@@ -4,7 +4,18 @@
 @section('additional-head')
   <script type="text/javascript">
     function submitDirty() {
+      document.getElementById("entryButton").value="saveDirty";
       $('#entry-form').parsley().destroy();
+      $('#entry-form').submit();
+    }
+
+    function submitEntry() {
+      document.getElementById("entryButton").value="saveEntry";
+      $('#entry-form').submit();
+    }
+
+    function newAssignment() {
+      document.getElementById("entryButton").value="newAssignment";
       $('#entry-form').submit();
     }
   </script>
@@ -22,6 +33,8 @@
       ?>
 
       {{ csrf_field() }}
+
+        <input type="hidden" name="entryButton" id="entryButton" value="save"/>
 
       <h2>Woche {{$EntryInfo['week']}}
         @if ($isTherapist)
@@ -44,9 +57,9 @@
         <hr>
         <p>
           @if($isPatient && $EntryInfo['status'] < "E050")
-            <button class="btn pull" name="entryButton" value="saveDirty" onclick="submitDirty();">Zwischenspeichern</button>
+            <button class="btn pull" onclick="submitDirty();">Zwischenspeichern</button>
           @endif
-          <button type="submit" class="btn btn-primary" name="entryButton" value="save">Abschicken</button>
+          <button class="btn btn-primary" onClick="submitEntry()">Abschicken</button>
         </p>
       @else
 

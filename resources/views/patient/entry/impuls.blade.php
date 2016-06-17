@@ -71,7 +71,7 @@
   </p>
 
   <p>
-    <button type="submit" class="btn" name="entryButton" value="newAssignment">Schreibimpuls-Vorlage erstellen/bearbeiten</button>
+    <button class="btn" onClick="newAssignment()">Schreibimpuls-Vorlage erstellen/bearbeiten</button>
   </p>
 
 </div>
