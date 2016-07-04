@@ -80,8 +80,19 @@ class DiaryController extends Controller
             }
         }
 
+        $problem_1= <<<EOD
+In der ersten Woche geht es um Ihre zwischenmenschlichen Beziehungen am Arbeitsplatz. Bitte beschreiben Sie dazu wenn möglich bis zu drei Situationen aus Ihrem Arbeitsleben, in denen Sie mit anderen Personen, z.B. Kollegen oder Vorgesetzten zusammen trafen. Jede Ihrer Beschreibungen sollte einen Kontakt behandeln, der für Sie im Positiven oder Negativen bedeutsam gewesen ist. Es sollten Ereignisse mit verschiedenen Personen sein, sowohl aus der Gegenwart als auch der Vergangenheit. 
 
-        $assignments[1]['problem']='Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.';
+Sie müssen sich beim Schreiben keine Gedanken über die Rechtschreibung, Satzstellung oder Grammatik machen. 
+Es ist lediglich wichtig, das Schreiben nach Beginn nicht zu unterbrechen.
+
+Ich freue mich sehr auf Ihren ersten Tagebucheintrag.
+Herzliche Grüße,
+Ihr Online-Therapeut
+EOD;
+
+
+        $assignments[1]['problem']=$problem_1;
         if (isset($p_assignments[0]['situations'])) {
             $assignments[1]['answer']=$p_assignments[0]['situations'];
         } else {
@@ -162,7 +173,17 @@ class DiaryController extends Controller
         $entry_info['status'] = $assignment_info['assignmentStatus'];
         $entry_info['status_text'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
        if ($week == 1) {
-            $entry_info['problem'] = "Beschreiben Sie eine oder mehrere Situationen bei der Rückkehr an Ihren Arbeitsplatz.";
+           $problem_1= <<<EOD
+In der ersten Woche geht es um Ihre zwischenmenschlichen Beziehungen am Arbeitsplatz. Bitte beschreiben Sie dazu wenn möglich bis zu drei Situationen aus Ihrem Arbeitsleben, in denen Sie mit anderen Personen, z.B. Kollegen oder Vorgesetzten zusammen trafen. Jede Ihrer Beschreibungen sollte einen Kontakt behandeln, der für Sie im Positiven oder Negativen bedeutsam gewesen ist. Es sollten Ereignisse mit verschiedenen Personen sein, sowohl aus der Gegenwart als auch der Vergangenheit. 
+
+Sie müssen sich beim Schreiben keine Gedanken über die Rechtschreibung, Satzstellung oder Grammatik machen. 
+Es ist lediglich wichtig, das Schreiben nach Beginn nicht zu unterbrechen.
+
+Ich freue mich sehr auf Ihren ersten Tagebucheintrag.
+Herzliche Grüße,
+Ihr Online-Therapeut
+EOD;
+            $entry_info['problem'] = $problem_1;            ;
             if (!array_key_exists('situations', $assignment_info)) {
                 $assignment_info['situations'] = [];
             }
@@ -451,7 +472,7 @@ class DiaryController extends Controller
 
         $assignment_info = $info['assignments'];
         $entries = [];
-        $entries[1]['problem']="Beschreiben Sie typische Situationen...";
+        $entries[1]['problem']="In der ersten Woche ...";
         $entries[1]['entry_status'] = AssignmentStatus::$STATUS_INFO[$assignment_info[0]['assignmentStatus']];
         $entries[1]['entry_status_code'] = $assignment_info[0]['assignmentStatus'];
         $weeks_to_show=$Diary['patient_week'];

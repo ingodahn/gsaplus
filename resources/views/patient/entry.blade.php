@@ -45,7 +45,7 @@
         @endif
       </h2>
 
-      @include('patient.entry.help')
+      {{-- @include('patient.entry.help') --}}
       @include('patient.entry.notizen')
       @include('patient.entry.impuls')
       @include('patient.entry.eintrag')
