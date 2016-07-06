@@ -43,9 +43,9 @@
                 </p>
               @endif
             </div>
-            <p>Nachdem Sie jetzt eine bedeutsame Situation geschildert haben, möchte ich Sie bitten Ihren Text noch
+            <p><strong>Nachdem Sie jetzt eine bedeutsame Situation geschildert haben, möchte ich Sie bitten Ihren Text noch
               einmal durchzulesen und darauf zu achten, ob Sie die drei Komponenten eines Beziehungserlebnisses
-              deutlich machen konnten.<br/>Bitte beantworten Sie dafür die folgenden drei Fragen!
+              deutlich machen konnten.<br/>Bitte beantworten Sie dafür die folgenden drei Fragen!</strong>
             </p>
             <div class="form-group">
               <label for="situation0_expectations">Was waren Ihre Wünsche und Erwartungen in dieser Situation?</label>
