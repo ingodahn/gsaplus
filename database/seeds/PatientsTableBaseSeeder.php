@@ -106,6 +106,11 @@ abstract class PatientsTableBaseSeeder extends Seeder
             $assignment->week = $week;
             $assignment->dirty = false;
 
+            if ($week > 1) {
+                $assignment->problem = '';
+                $assignment->answer = '';
+            }
+
             $patient->assignments()->save($assignment);
         }
 

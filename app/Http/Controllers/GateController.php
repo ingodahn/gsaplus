@@ -268,6 +268,11 @@ class GateController extends Controller
 					new SituationSurvey :
 					new Task;
 
+				if ($week > 1) {
+					$assignment->problem = '';
+					$assignment->answer = '';
+				}
+
 				$assignment->week = $week;
 				$assignment->dirty = false;
 
