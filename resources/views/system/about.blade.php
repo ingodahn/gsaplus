@@ -10,15 +10,6 @@
       <p>
         Das Nachsorgeprogramm <em>GSA-Online plus</em> richtet sich an beruflich belastete Rehabilitanden bzw. Rehabilitanden mit Bedarf an berufsbezogenen Nachsorgeangeboten. Die internetbasierte Nachsorge erfolgt im direkten Anschluss an die stationäre Rehabilitation  und erstreckt sich über einen Zeitraum von 12 Wochen. Zentraler Bestandteil von <em>GSA-Online plus</em> ist das regelmäßige Verfassen von Tagebucheinträgen durch die Teilnehmer und eine zeitnahe Rückmeldung durch geschulte Onlinetherapeuten.
       </p>
-      <p>
-        Das Studienzentrum bildet die Klinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz, Kooperationspartner sind das Medienzentrum der Johannes Gutenberg-Universität Mainz, das Institut für Wissensmedien der Universität Koblenz-Landau sowie drei Rehabilitationseinrichtungen:
-      </p>
-      <p>
-        Die Mittelrhein-Klinik (Bad Salzig), die Drei-Burgen-Klinik (Bad Münster am Stein) sowie die Karl-Aschoff-Klinik (Bad Kreuznach).
-      </p>
-      <p>
-        Das Projekt ist von der Deutschen Rentenversicherung Bund gefördert.
-      </p>
 
       <h3>Fragestellung und Ziel des Projekts</h3>
       <p>
@@ -218,6 +209,81 @@
         </div>
 
       </div>
-
+      <h3>Informationen zum Projekt GSA-Online plus</h3>
+      <h4>Entwicklung der Internetplattform</h4>
+      <p>
+        Grundlage der auf dieser Plattform präsentierten Inhalte, bilden die Ergebnisse und Erfahrungen des wissenschaftlich evaluierten Vorgängerprojektes GSA-Online.
+        In einer kontrollierten Studie wurde dort die Wirksamkeit von GSA-Online für Rehabilitanden aus verschiedenen Bereichen (Kardiologie, Orthopädie, Psychosomatik) nachgewiesen.
+        Um die Online-Nachsorge auch einem weiteren Kreis von Rehabilitanden anbieten zu können, wurde unter Berücksichtigung der Rückmeldungen von Teilnehmern der Online-Nachsorge und
+        des medizinischen Personals (Ärzte, Psychologen) die überarbeitete Internetplattform GSA-Online plus entwickelt.
+      </p>
+      <p>Auf Grundlage von Erfahrungsberichten präsentiert die Plattform zwei beispielhafte Patientengeschichten in denen sich zentrale Fragen der Psychosozialen Rehabilitation
+        in einfacher Form spiegeln. Die Personen und Handlungen sind frei erfunden. Ähnlichkeiten mit lebenden oder toten Personen sind rein zufällig und nicht beabsichtigt.
+      </p>
+      <p>Zudem nutzten wir die Rückmeldungen von Rehabilitanden und Mitarbeitern, um dem Nutzer auf der Internetplattform vertiefende Informationen anbieten zu können.
+        Mehrere Experten aus dem Feld der Reha-Wissenschaft vermitteln in diesem Sinne in ergänzenden Erklärvideos grundlegende Informationen zum Ablauf,
+        zur Wirksamkeit und zum theoretischen Konzept der Online-Nachsorge.
+      </p>
+      <h4>Videos</h4>
+      <p>
+        Die in den Filmen beispielhaft als Patienten, Angehörige und Arbeitskollegen auftretenden Personen wurden von Schauspielern dargestellt.
+      </p>
+      <p>
+        Die in den Filmen gezeigten Experten, sind fachkundige Psychologen und Ärzte aus dem Bereich der Psychosomatik und Rehabilitationsforschung.
+      </p>
+      <p>
+        Wir danken allen Hauptdarstellern, Nebendarstellern, Statisten und Location-Partnern für ihren Einsatz und ihre Unterstützung.
+      </p>
+      <h4>
+        Darsteller Patienten
+      </h4>
+      <p>
+        Patrick Twinem (Automechaniker)<br/>
+        Kathrin Maier (Büroangstellte)
+      </p>
+      <h4>Experten im Video</h4>
+      <dl>
+        <dt>Klinikleiter </dt><dd>Univ.-Prof. Dr. Manfred E. Beutel</dd>
+        <dt>Projektleiter</dt><dd>Dr. Dipl.-Psych. Rüdiger Zwerenz</dd>
+        <dt>Onlinetherapeutin</dt><dd>M. Sc. Psych. Katja Böhme<br/>Dipl.-Psych. Astrid Wirth</dd>
+      </dl>
+      <h4>
+        Drehorte
+      </h4>
+      <p>
+        Johannes Gutenberg-Universität Mainz
+      </p>
+      <p>
+        Universitätsmedizin der Johannes Gutenberg-Universität Mainz
+      </p>
+      <p>
+        Musterhaus „Vanilla“ der INTERHOMES AG Niederlassung Rhein-Main, Hattersheim
+      </p>
+      <p>
+        Diverse Drehorte in Mainz und Umgebung
+      </p>
+      <h4>
+        Realisierung der Videos
+      </h4>
+      <p>
+        Medienzentrum der Johannes Gutenberg-Universität Mainz
+      </p>
+      <h4>
+        Förderung und Kooperation:
+      </h4>
+      <p>
+        Die Entwicklung und Evaluation dieser Internetplattform wird von der Deutschen Rentenversicherung Bund für eine Laufzeit von 18 Monaten (08/2015-01/2017) gefördert.
+      </p>
+      <dl>
+        <dt>Studienzentrum:</dt><dd>Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</dd>
+        <dt>Audiovisuelle Konzeption und Produktion:</dt><dd>Medienzentrum der Johannes Gutenberg-Universität Mainz</dd>
+        <dt>Programmierung und Design:</dt><dd>Institut für Wissensmedien der Universität Koblenz-Landau</dd>
+        <dt>Inhaltliche Konzeption und Evaluation:</dt><dd>
+          Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz<br/>
+          Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig<br/>
+          Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten/ Orthopädie, Bad Münster am Stein<br/>
+          Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach<br/>
+        </dd>
+      </dl>
     </div>
 @endsection
