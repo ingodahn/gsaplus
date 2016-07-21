@@ -266,23 +266,52 @@
         Realisierung der Videos
       </h4>
       <p>
-        Medienzentrum der Johannes Gutenberg-Universität Mainz
+        Medienzentrum der Johannes Gutenberg-Universität Mainz <img src="/img/logo_mz.png" height="50px"/>
       </p>
       <h4>
-        Förderung und Kooperation:
+        Förderung und Kooperation <img src="/img/logo.svg" height="50px"/>:
       </h4>
       <p>
         Die Entwicklung und Evaluation dieser Internetplattform wird von der Deutschen Rentenversicherung Bund für eine Laufzeit von 18 Monaten (08/2015-01/2017) gefördert.
       </p>
       <dl>
-        <dt>Studienzentrum:</dt><dd>Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</dd>
-        <dt>Audiovisuelle Konzeption und Produktion:</dt><dd>Medienzentrum der Johannes Gutenberg-Universität Mainz</dd>
-        <dt>Programmierung und Design:</dt><dd>Institut für Wissensmedien der Universität Koblenz-Landau</dd>
-        <dt>Inhaltliche Konzeption und Evaluation:</dt><dd>
-          Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz<br/>
-          Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig<br/>
-          Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten/ Orthopädie, Bad Münster am Stein<br/>
-          Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach<br/>
+        <dt>Studienzentrum:</dt>
+        <dd>
+          <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
+            Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz
+          </a>
+            <img src="/img/unimedizin-mainz-logo.svg" height="50px"/>
+        </dd>
+        <dt>Audiovisuelle Konzeption und Produktion:</dt>
+        <dd>
+          <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">Medienzentrum der Johannes Gutenberg-Universität Mainz</a>
+          <img src="/img/logo_mz.png" height="50px"/>
+        </dd>
+        <dt>Programmierung und Design:</dt>
+        <dd>
+          <a href="https://www.uni-koblenz-landau.de/de/iwm" target="_blank">
+            Institut für Wissensmedien der Universität Koblenz-Landau
+          </a>
+          <img src="/img/IWM-Logo-2014-Flat-Design-Pfade.png" height="50px"/>
+        </dd>
+        <dt>Inhaltliche Konzeption und Evaluation:</dt>
+        <dd>
+          <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
+            Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz
+          </a>
+          <img src="/img/unimedizin-mainz-logo.svg" height="50px"/><br/>
+          <a href="http://www.mittelrhein-klinik.de/" target="_blank">
+            Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig
+          </a>
+          <img src="/img/mittelrhein-klinik.png" height="50px"/><br/>
+          <a href="http://www.drei-burgen-klinik.de/" target="_blank">
+            Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten/ Orthopädie, Bad Münster am Stein
+          </a>
+          <img src="/img/3burgen-klinik.jpg" height="50px"/><br/>
+          <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
+            Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach
+          </a>
+          <img src="/img/acura-klinik.jpg" height="50px"/><br/>
         </dd>
       </dl>
     </div>
