@@ -268,11 +268,10 @@
 
       <h4>Realisierung der Videos</h4>
 
-      <img src="/img/logo_mz.png" height="100px"/>
-      <p>
-        <small>Medienzentrum der Johannes Gutenberg-Universität Mainz</small>
-      </p>
-
+      <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
+        <img src="/img/logo_mz.png" height="100px" class="center-block"/>
+      </a>
+      
       <h4>Förderung und Kooperation</h4>
 
       <p>
@@ -280,42 +279,32 @@
       </p>
 
       <h5>Studienzentrum</h5>
-      <img src="/img/unimedizin-mainz-logo.svg" height="100px"/>
-      <p>
-        <small><a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</a></small>
-      </p>
+      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" height="100px" class="center-block"/>
+      </a>
 
       <h5>Audiovisuelle Konzeption und Produktion</h5>
-      <img src="/img/logo_mz.png" height="100px"/>
-      <p>
-        <small><a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">Medienzentrum der Johannes Gutenberg-Universität Mainz</a></small>
-      </p>
+      <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
+        <img src="/img/logo_mz.png" height="100px" class="center-block"/>
+      </a>
 
       <h5>Programmierung und Design</h5>
-      <img src="/img/IWM-Logo-2014-Flat-Design-Pfade.png" height="100px"/>
-      <p>
-        <a href="https://www.uni-koblenz-landau.de/de/iwm" target="_blank">Institut für Wissensmedien der Universität Koblenz-Landau</a>
-      </p>
+      <a href="https://www.uni-koblenz-landau.de/de/iwm" target="_blank">
+        <img src="/img/IWM-Logo-2014-Flat-Design-Pfade.png" height="100px" class="center-block"/>
+      </a>
 
       <h5>Inhaltliche Konzeption und Evaluation</h5>
-      <img src="/img/unimedizin-mainz-logo.svg" height="100px"/>
-      <p>
-        <small><a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz</a></small>
-      </p>
-
-      <img src="/img/mittelrhein-klinik.png" height="100px"/>
-      <p>
-        <small><a href="http://www.mittelrhein-klinik.de/" target="_blank">Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig</a></small>
-      </p>
-
-      <img src="/img/3burgen-klinik.jpg" height="100px"/>
-      <p>
-        <small><a href="http://www.drei-burgen-klinik.de/" target="_blank">Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten/ Orthopädie, Bad Münster am Stein</a></small>
-      </p>
-
-      <img src="/img/acura-klinik.jpg" height="100px"/>
-      <p>
-        <small><a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach</a></small>
-      </p>
+      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" height="100px" class="center-block"/><br/>
+      </a>
+      <a href="http://www.mittelrhein-klinik.de/" target="_blank">
+        <img src="/img/mittelrhein-klinik.png" height="100px" class="center-block"/><br/>
+      </a>
+      <a href="http://www.drei-burgen-klinik.de/" target="_blank">
+        <img src="/img/3burgen-klinik.jpg" height="100px" class="center-block"/><br/>
+      </a>
+      <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
+        <img src="/img/acura-klinik.jpg" height="100px" class="center-block"/>
+      </a>
     </div>
 @endsection
