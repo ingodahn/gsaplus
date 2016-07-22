@@ -98,7 +98,9 @@
           </div>
           <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
             <div class="panel-body">
-              Zu Beginn der Online-Nachsorge legen Sie einen Schreibtag fest, an welchem Sie voraussichtlich regelmäßig Zeit haben werden, zu schreiben. In Abhängigkeiten von freien Kapazitäten haben Sie die Möglichkeit, in Ihrem persönlichen Bereich diesen Schreibtag auf einen anderen Wochentag zu verlegen. Falls Sie es verpassen, an dem festgelegten Tag einen Tagebucheintrag zu schreiben, bleiben Ihnen fünf Tage Zeit, um dies nachzuholen. Nach dem fünften Tag verfällt dann der Schreibimpuls für die betroffene Woche und wird Ihnen für die Folgewoche wieder angeboten.
+              Zu Beginn der Online-Nachsorge legen Sie einen Schreibtag fest, an welchem Sie voraussichtlich regelmäßig Zeit haben werden, zu schreiben.
+              Abhängig von den verfügbaren Betreuungskapazitäten haben Sie die Möglichkeit, in Ihrem persönlichen Bereich diesen Schreibtag einmalig auf einen anderen Wochentag zu verlegen.
+              Falls Sie es verpassen, an dem festgelegten Tag einen Tagebucheintrag zu schreiben, bleiben Ihnen fünf Tage Zeit, um dies nachzuholen. Nach dem fünften Tag verfällt dann der Schreibimpuls für die betroffene Woche und wird Ihnen für die Folgewoche wieder angeboten.
             </div>
           </div>
         </div>
@@ -113,7 +115,11 @@
           </div>
           <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
             <div class="panel-body">
-              Die Themen orientieren sich an der Phase des Nachsorgeprogramms, in der Sie sich befinden. Ein typischer Schreibimpuls besteht darin, eine Situation der vorangegangenen Woche zu schildern, die Sie am meisten bewegt oder beschäftigt hat. Konkrete Anleitungen dazu könnten sein, aufzuschreiben, welche Rolle ihre Gedanken in dieser Situation spielten oder welche Stresssignale Sie in der Situation an sich feststellen konnten. Die Schreibimpulse beziehen sich auch auf Ihre vergangenen Tagebucheinträge.
+              Die Themen orientieren sich an der Phase des Nachsorgeprogramms, in der Sie sich befinden.
+              Ein typischer Schreibimpuls besteht darin, eine Situation der vorangegangenen Woche zu schildern,
+              die Sie am meisten bewegt oder beschäftigt hat. Konkrete Anleitungen dazu könnten sein, aufzuschreiben,
+              welche Rolle ihre Gedanken in dieser Situation spielten oder welche Stresssignale Sie in der Situation
+              an sich feststellen konnten. Die Schreibimpulse beziehen sich auch auf Ihre vergangenen Tagebucheinträge.
             </div>
           </div>
         </div>
@@ -128,7 +134,11 @@
           </div>
           <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
             <div class="panel-body">
-              <em>GSA-Online plus</em> richtet sich an Rehabilitanden, welche im Laufe der ersten 4 Wochen des Nachsorgeprogramms wieder beruflich einsteigen. Falls Sie zu Beginn des Projekts noch arbeitsunfähig sein sollten, können Sie sich beim Schreiben auf vergangene Situationen oder Ereignisse beziehen, die für Sie eine Rolle gespielt haben. Eine genauere Anleitung dazu finden Sie aber auch in den wöchentlichen Schreibimpulsen.
+              <em>GSA-Online plus</em> richtet sich an Rehabilitanden, welche im Laufe der ersten 4 Wochen des
+              Nachsorgeprogramms wieder beruflich einsteigen. Falls Sie zu Beginn des Projekts noch arbeitsunfähig
+              sein sollten, können Sie sich beim Schreiben auf vergangene Situationen oder Ereignisse beziehen, die
+              für Sie eine Rolle gespielt haben. Eine genauere Anleitung dazu finden Sie aber auch in den wöchentlichen
+              Schreibimpulsen.
             </div>
           </div>
         </div>
@@ -143,7 +153,10 @@
           </div>
           <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
             <div class="panel-body">
-              Nein, es geht zwar in erster Linie um die begleitende Wiedereingliederung in den Arbeitsalltag, es ist aber genauso wichtig, andere Ereignisse aus Ihrem Umfeld in Ihre Schilderungen miteinzubeziehen. Diese können ebenso Auskunft über das vorliegende Beziehungskonfliktthema (ZBKT) geben und außerdem einen Einfluss auf Ihre Belastungen am Arbeitsplatz haben.
+              Nein, es geht zwar in erster Linie um die begleitende Wiedereingliederung in den Arbeitsalltag, es ist
+              aber genauso wichtig, andere Ereignisse aus Ihrem Umfeld in Ihre Schilderungen miteinzubeziehen. Diese
+              können ebenso Auskunft über das vorliegende Beziehungskonfliktthema (ZBKT) geben und außerdem einen
+              Einfluss auf Ihre Belastungen am Arbeitsplatz haben.
             </div>
           </div>
         </div>
@@ -158,7 +171,9 @@
           </div>
           <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
             <div class="panel-body">
-              Ihr persönliches Tagebuch kann von Ihnen jederzeit eingesehen werden, auch während Sie einen Eintrag verfassen. Zudem besteht die Möglichkeit, die Kommunikationsverläufe zwischen Ihnen und Ihrem Onlinetherapeuten (Ihr Tagebuch mit allen Rückmeldungen) auszudrucken.
+              Ihr persönliches Tagebuch kann von Ihnen jederzeit eingesehen werden, auch während Sie einen Eintrag verfassen. Z
+              udem besteht die Möglichkeit, die Kommunikationsverläufe zwischen Ihnen und Ihrem Onlinetherapeuten
+              (Ihr Tagebuch mit allen Rückmeldungen) auszudrucken.
             </div>
           </div>
         </div>
@@ -173,7 +188,8 @@
           </div>
           <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
             <div class="panel-body">
-              Dem Studienteam gehören mehrere Therapeuten an. Aus dieser Gruppe von geschulten Psychologen werden Sie zu Beginn des Projekts einem Therapeuten zugewiesen, welcher Sie 12 Wochen lang begleitet.
+              Dem Studienteam gehören mehrere Therapeuten an. Zu Beginn des Projekts werden Sie einem Therapeuten aus
+              dieser Gruppe von geschulten Psychologen zugewiesen, welcher Sie dann 12 Wochen lang begleitet.
             </div>
           </div>
         </div>
@@ -188,7 +204,8 @@
           </div>
           <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
             <div class="panel-body">
-              Nur die Therapeuten, die dem Studienteam angehören, können Ihre anonymen Tagebucheinträge und die zugehörigen Rückmeldungen Ihres Onlinetherapeuten einsehen.
+              Nur die Therapeuten, die dem Studienteam angehören, können Ihre anonymen Tagebucheinträge und die
+              zugehörigen Rückmeldungen Ihres Onlinetherapeuten einsehen.
             </div>
           </div>
         </div>
@@ -203,7 +220,10 @@
           </div>
           <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
             <div class="panel-body">
-              Bei der Anmeldung auf der Online-Plattform legen Sie selbst einen Benutzernamen für sich fest. Mit diesem Namen wird Sie Ihr Onlinetherapeut Sie in den folgenden 12 Wochen anschreiben. Wir weisen darauf hin, dass Sie im Forum keine persönlichen Daten wie Namen, Geburtsdaten oder Adressen angeben sollten. Sie werden von Seiten der Therapeuten auch nicht dazu aufgefordert.
+              Bei der Anmeldung auf der Online-Plattform legen Sie selbst einen Benutzernamen für sich fest.
+              Mit diesem Namen wird Ihr Onlinetherapeut Sie in den folgenden 12 Wochen anschreiben.
+              Wir weisen darauf hin, dass Sie auf der Online-Plattform keine persönlichen Daten wie Namen, Geburtsdaten oder Adressen
+              angeben sollten. Sie werden von Seiten der Therapeuten auch nicht dazu aufgefordert.
             </div>
           </div>
         </div>
