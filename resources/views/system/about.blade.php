@@ -251,9 +251,9 @@
       <h4>Experten im Video</h4>
 
       <ul>
-        <li><strong>Klinikleiter</strong> -- Univ.-Prof. Dr. Manfred E. Beutel</li>
-        <li><strong>Projektleiter</strong> -- Dr. Dipl.-Psych. Rüdiger Zwerenz</li>
-        <li><strong>Onlinetherapeuten</strong> -- M. Sc. Psych. Katja Böhme &amp; Dipl.-Psych. Astrid Wirth</li>
+        <li><strong>Klinikleiter</strong> – Univ.-Prof. Dr. Manfred E. Beutel</li>
+        <li><strong>Projektleiter</strong> – Dr. Dipl.-Psych. Rüdiger Zwerenz</li>
+        <li><strong>Onlinetherapeuten</strong> – M. Sc. Psych. Katja Böhme &amp; Dipl.-Psych. Astrid Wirth</li>
       </ul>
 
       <h4>Drehorte</h4>
@@ -269,7 +269,7 @@
       <h4>Realisierung der Videos</h4>
 
       <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
-        <img src="/img/logo_mz.png" height="100px" class="center-block"/>
+        <img src="/img/medienzentrum-mainz-logo.png" height="90px" class="center-block">
       </a>
 
       <h4>Förderung und Kooperation</h4>
@@ -279,32 +279,32 @@
       </p>
 
       <h5>Studienzentrum</h5>
-      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
-        <img src="/img/unimedizin-mainz-logo.svg" height="75px" class="center-block"/>
+      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" height="40px" class="center-block">
       </a>
 
       <h5>Audiovisuelle Konzeption und Produktion</h5>
       <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
-        <img src="/img/logo_mz.png" height="100px" class="center-block"/>
+        <img src="/img/medienzentrum-mainz-logo.png" height="90px" class="center-block">
       </a>
 
       <h5>Programmierung und Design</h5>
-      <a href="https://www.uni-koblenz-landau.de/de/iwm" target="_blank">
-        <img src="/img/IWM-Logo-2014-Flat-Design-Pfade.png" height="75px" class="center-block"/>
+      <a href="http://iwm.ko-ld.de" target="_blank">
+        <img src="/img/iwm-logo.png" class="center-block"/>
       </a>
 
       <h5>Inhaltliche Konzeption und Evaluation</h5>
-      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
-        <img src="/img/unimedizin-mainz-logo.svg" height="75px" class="center-block"/><br/>
+      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" height="40px" class="center-block"><br>
       </a>
       <a href="http://www.mittelrhein-klinik.de/" target="_blank">
-        <img src="/img/mittelrhein-klinik.png" height="100px" class="center-block"/><br/>
+        <img src="/img/mittelrhein-klinik-logo.gif" class="center-block"><br>
       </a>
       <a href="http://www.drei-burgen-klinik.de/" target="_blank">
-        <img src="/img/3burgen-klinik.jpg" height="100px" class="center-block"/><br/>
+        <img src="/img/drei-burgen-klinik-logo.gif" class="center-block"><br>
       </a>
       <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
-        <img src="/img/acura-klinik.jpg" height="85px" class="center-block"/>
+        <img src="/img/acura-kliniken-logo.svg" height="85px" class="center-block">
       </a>
     </div>
 @endsection
