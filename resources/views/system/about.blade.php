@@ -265,7 +265,7 @@
       <h4>Förderung und Kooperation</h4>
 
       <p>
-        Die Entwicklung und Evaluation dieser Internetplattform wird von der Deutschen Rentenversicherung Bund für eine Laufzeit von 18 Monaten (08/2015 bis 01/2017) gefördert.
+        Die Entwicklung und Evaluation dieser Internetplattform wird von der <a href="https://www.deutsche-rentenversicherung.de/" target="_blank">Deutschen Rentenversicherung Bund</a> für eine Laufzeit von 18 Monaten (08/2015 bis 01/2017) gefördert.
       </p>
 
       <h5>Studienzentrum</h5>
