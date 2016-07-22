@@ -243,42 +243,37 @@
 
       <h4>Darsteller Patienten</h4>
 
-      <p>
-        Patrick Twinem (Automechaniker)<br/>
-        Kathrin Maier (Büroangstellte)
-      </p>
+      <ul>
+        <li >Patrick Twinem (Automechaniker)</li>
+        <li>Kathrin Maier (Büroangstellte)</li>
+      </ul>
 
       <h4>Experten im Video</h4>
 
-      <dl>
-        <dt>Klinikleiter </dt><dd>Univ.-Prof. Dr. Manfred E. Beutel</dd>
-        <dt>Projektleiter</dt><dd>Dr. Dipl.-Psych. Rüdiger Zwerenz</dd>
-        <dt>Onlinetherapeutin</dt><dd>M. Sc. Psych. Katja Böhme<br/>Dipl.-Psych. Astrid Wirth</dd>
-      </dl>
+      <ul>
+        <li><strong>Klinikleiter</strong> -- Univ.-Prof. Dr. Manfred E. Beutel</li>
+        <li><strong>Projektleiter</strong> -- Dr. Dipl.-Psych. Rüdiger Zwerenz</li>
+        <li><strong>Onlinetherapeuten</strong> -- M. Sc. Psych. Katja Böhme &amp; Dipl.-Psych. Astrid Wirth</li>
+      </ul>
 
       <h4>Drehorte</h4>
 
-      <p>
-        Johannes Gutenberg-Universität Mainz
-      </p>
-      <p>
-        Universitätsmedizin der Johannes Gutenberg-Universität Mainz
-      </p>
-      <p>
-        Musterhaus „Vanilla“ der INTERHOMES AG Niederlassung Rhein-Main, Hattersheim
-      </p>
-      <p>
-        Diverse Drehorte in Mainz und Umgebung
-      </p>
-      <h4>
-        Realisierung der Videos
-      </h4>
+      <ul>
+        <li>Johannes Gutenberg-Universität Mainz</li>
+        <li>Universitätsmedizin der Johannes Gutenberg-Universität Mainz</li>
+        <li>Musterhaus „Vanilla“ der INTERHOMES AG Niederlassung Rhein-Main, Hattersheim</li>
+        <li>Diverse Drehorte in Mainz und Umgebung</li>
+      </ul>
+
+
+      <h4>Realisierung der Videos</h4>
+
       <p>
         Medienzentrum der Johannes Gutenberg-Universität Mainz <img src="/img/logo_mz.png" height="50px"/>
       </p>
 
       <h4>Förderung und Kooperation <img src="/img/logo.svg" height="50px"/>:</h4>
-      
+
       <p>
         Die Entwicklung und Evaluation dieser Internetplattform wird von der Deutschen Rentenversicherung Bund für eine Laufzeit von 18 Monaten (08/2015-01/2017) gefördert.
       </p>
