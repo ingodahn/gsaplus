@@ -210,10 +210,7 @@
 
       </div>
 
-
-      <h3>Informationen zum Projekt GSA-Online plus</h3>
-
-      <h4>Entwicklung der Internetplattform</h4>
+      <h3>Entwicklung der Internetplattform</h3>
 
       <p>
         Grundlage der auf dieser Plattform präsentierten Inhalte, bilden die Ergebnisse und Erfahrungen des wissenschaftlich evaluierten Vorgängerprojektes GSA-Online.
@@ -264,13 +261,6 @@
         <li>Musterhaus „Vanilla“ der INTERHOMES AG Niederlassung Rhein-Main, Hattersheim</li>
         <li>Diverse Drehorte in Mainz und Umgebung</li>
       </ul>
-
-
-      <h4>Realisierung der Videos</h4>
-
-      <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
-        <img src="/img/medienzentrum-mainz-logo.png" height="90px" class="center-block">
-      </a>
 
       <h4>Förderung und Kooperation</h4>
 
