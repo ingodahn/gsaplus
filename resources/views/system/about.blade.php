@@ -209,8 +209,12 @@
         </div>
 
       </div>
+
+
       <h3>Informationen zum Projekt GSA-Online plus</h3>
+
       <h4>Entwicklung der Internetplattform</h4>
+
       <p>
         Grundlage der auf dieser Plattform präsentierten Inhalte, bilden die Ergebnisse und Erfahrungen des wissenschaftlich evaluierten Vorgängerprojektes GSA-Online.
         In einer kontrollierten Studie wurde dort die Wirksamkeit von GSA-Online für Rehabilitanden aus verschiedenen Bereichen (Kardiologie, Orthopädie, Psychosomatik) nachgewiesen.
@@ -224,7 +228,9 @@
         Mehrere Experten aus dem Feld der Reha-Wissenschaft vermitteln in diesem Sinne in ergänzenden Erklärvideos grundlegende Informationen zum Ablauf,
         zur Wirksamkeit und zum theoretischen Konzept der Online-Nachsorge.
       </p>
+
       <h4>Videos</h4>
+
       <p>
         Die in den Filmen beispielhaft als Patienten, Angehörige und Arbeitskollegen auftretenden Personen wurden von Schauspielern dargestellt.
       </p>
@@ -234,85 +240,71 @@
       <p>
         Wir danken allen Hauptdarstellern, Nebendarstellern, Statisten und Location-Partnern für ihren Einsatz und ihre Unterstützung.
       </p>
-      <h4>
-        Darsteller Patienten
-      </h4>
-      <p>
-        Patrick Twinem (Automechaniker)<br/>
-        Kathrin Maier (Büroangstellte)
-      </p>
+
+      <h4>Darsteller Patienten</h4>
+
+      <ul>
+        <li >Patrick Twinem (Automechaniker)</li>
+        <li>Kathrin Maier (Büroangstellte)</li>
+      </ul>
+
       <h4>Experten im Video</h4>
-      <dl>
-        <dt>Klinikleiter </dt><dd>Univ.-Prof. Dr. Manfred E. Beutel</dd>
-        <dt>Projektleiter</dt><dd>Dr. Dipl.-Psych. Rüdiger Zwerenz</dd>
-        <dt>Onlinetherapeutin</dt><dd>M. Sc. Psych. Katja Böhme<br/>Dipl.-Psych. Astrid Wirth</dd>
-      </dl>
-      <h4>
-        Drehorte
-      </h4>
+
+      <ul>
+        <li><strong>Klinikleiter</strong> – Univ.-Prof. Dr. Manfred E. Beutel</li>
+        <li><strong>Projektleiter</strong> – Dr. Dipl.-Psych. Rüdiger Zwerenz</li>
+        <li><strong>Onlinetherapeuten</strong> – M. Sc. Psych. Katja Böhme &amp; Dipl.-Psych. Astrid Wirth</li>
+      </ul>
+
+      <h4>Drehorte</h4>
+
+      <ul>
+        <li>Johannes Gutenberg-Universität Mainz</li>
+        <li>Universitätsmedizin der Johannes Gutenberg-Universität Mainz</li>
+        <li>Musterhaus „Vanilla“ der INTERHOMES AG Niederlassung Rhein-Main, Hattersheim</li>
+        <li>Diverse Drehorte in Mainz und Umgebung</li>
+      </ul>
+
+
+      <h4>Realisierung der Videos</h4>
+
+      <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
+        <img src="/img/medienzentrum-mainz-logo.png" height="90px" class="center-block">
+      </a>
+
+      <h4>Förderung und Kooperation</h4>
+
       <p>
-        Johannes Gutenberg-Universität Mainz
+        Die Entwicklung und Evaluation dieser Internetplattform wird von der Deutschen Rentenversicherung Bund für eine Laufzeit von 18 Monaten (08/2015 bis 01/2017) gefördert.
       </p>
-      <p>
-        Universitätsmedizin der Johannes Gutenberg-Universität Mainz
-      </p>
-      <p>
-        Musterhaus „Vanilla“ der INTERHOMES AG Niederlassung Rhein-Main, Hattersheim
-      </p>
-      <p>
-        Diverse Drehorte in Mainz und Umgebung
-      </p>
-      <h4>
-        Realisierung der Videos
-      </h4>
-      <p>
-        Medienzentrum der Johannes Gutenberg-Universität Mainz <img src="/img/logo_mz.png" height="50px"/>
-      </p>
-      <h4>
-        Förderung und Kooperation <img src="/img/logo.svg" height="50px"/>:
-      </h4>
-      <p>
-        Die Entwicklung und Evaluation dieser Internetplattform wird von der Deutschen Rentenversicherung Bund für eine Laufzeit von 18 Monaten (08/2015-01/2017) gefördert.
-      </p>
-      <dl>
-        <dt>Studienzentrum:</dt>
-        <dd>
-          <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
-            Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz
-          </a>
-            <img src="/img/unimedizin-mainz-logo.svg" height="50px"/>
-        </dd>
-        <dt>Audiovisuelle Konzeption und Produktion:</dt>
-        <dd>
-          <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">Medienzentrum der Johannes Gutenberg-Universität Mainz</a>
-          <img src="/img/logo_mz.png" height="50px"/>
-        </dd>
-        <dt>Programmierung und Design:</dt>
-        <dd>
-          <a href="https://www.uni-koblenz-landau.de/de/iwm" target="_blank">
-            Institut für Wissensmedien der Universität Koblenz-Landau
-          </a>
-          <img src="/img/IWM-Logo-2014-Flat-Design-Pfade.png" height="50px"/>
-        </dd>
-        <dt>Inhaltliche Konzeption und Evaluation:</dt>
-        <dd>
-          <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">
-            Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz
-          </a>
-          <img src="/img/unimedizin-mainz-logo.svg" height="50px"/><br/>
-          <a href="http://www.mittelrhein-klinik.de/" target="_blank">
-            Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig
-          </a>
-          <img src="/img/mittelrhein-klinik.png" height="50px"/><br/>
-          <a href="http://www.drei-burgen-klinik.de/" target="_blank">
-            Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten/ Orthopädie, Bad Münster am Stein
-          </a>
-          <img src="/img/3burgen-klinik.jpg" height="50px"/><br/>
-          <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
-            Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach
-          </a>
-          <img src="/img/acura-klinik.jpg" height="50px"/><br/>
-        </dd>
-      </dl>
+
+      <h5>Studienzentrum</h5>
+      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" height="40px" class="center-block">
+      </a>
+
+      <h5>Audiovisuelle Konzeption und Produktion</h5>
+      <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
+        <img src="/img/medienzentrum-mainz-logo.png" height="90px" class="center-block">
+      </a>
+
+      <h5>Programmierung und Design</h5>
+      <a href="http://iwm.ko-ld.de" target="_blank">
+        <img src="/img/iwm-logo.png" class="center-block"/>
+      </a>
+
+      <h5>Inhaltliche Konzeption und Evaluation</h5>
+      <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" height="40px" class="center-block"><br>
+      </a>
+      <a href="http://www.mittelrhein-klinik.de/" target="_blank">
+        <img src="/img/mittelrhein-klinik-logo.gif" class="center-block"><br>
+      </a>
+      <a href="http://www.drei-burgen-klinik.de/" target="_blank">
+        <img src="/img/drei-burgen-klinik-logo.gif" class="center-block"><br>
+      </a>
+      <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
+        <img src="/img/acura-kliniken-logo.svg" height="85px" class="center-block">
+      </a>
     </div>
 @endsection
