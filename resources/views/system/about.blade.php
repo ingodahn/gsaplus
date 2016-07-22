@@ -298,22 +298,22 @@
       </p>
 
       <h5>Inhaltliche Konzeption und Evaluation</h5>
-      <img src="/img/unimedizin-mainz-logo.svg" height="100px"/><br/>
+      <img src="/img/unimedizin-mainz-logo.svg" height="100px"/>
       <p>
         <small><a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/startseite.html" target="_blank">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz</a></small>
       </p>
 
-      <img src="/img/mittelrhein-klinik.png" height="100px"/><br/>
+      <img src="/img/mittelrhein-klinik.png" height="100px"/>
       <p>
         <small><a href="http://www.mittelrhein-klinik.de/" target="_blank">Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig</a></small>
       </p>
 
-      <img src="/img/3burgen-klinik.jpg" height="100px"/><br/>
+      <img src="/img/3burgen-klinik.jpg" height="100px"/>
       <p>
         <small><a href="http://www.drei-burgen-klinik.de/" target="_blank">Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten/ Orthopädie, Bad Münster am Stein</a></small>
       </p>
 
-      <img src="/img/acura-klinik.jpg" height="100px"/><br/>
+      <img src="/img/acura-klinik.jpg" height="100px"/>
       <p>
         <small><a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach</a></small>
       </p>
