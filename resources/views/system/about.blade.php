@@ -308,7 +308,7 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-sm-8">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie der Universitätsmedizin Mainz</div>
+          <div class="col-sm-8">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</div>
             <div class="col-sm-4">
               <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
                 <img src="/img/unimedizin-mainz-logo.svg" height="40px" class="center-block"><br>
