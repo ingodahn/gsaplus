@@ -209,8 +209,12 @@
         </div>
 
       </div>
+
+
       <h3>Informationen zum Projekt GSA-Online plus</h3>
+
       <h4>Entwicklung der Internetplattform</h4>
+
       <p>
         Grundlage der auf dieser Plattform präsentierten Inhalte, bilden die Ergebnisse und Erfahrungen des wissenschaftlich evaluierten Vorgängerprojektes GSA-Online.
         In einer kontrollierten Studie wurde dort die Wirksamkeit von GSA-Online für Rehabilitanden aus verschiedenen Bereichen (Kardiologie, Orthopädie, Psychosomatik) nachgewiesen.
@@ -224,7 +228,9 @@
         Mehrere Experten aus dem Feld der Reha-Wissenschaft vermitteln in diesem Sinne in ergänzenden Erklärvideos grundlegende Informationen zum Ablauf,
         zur Wirksamkeit und zum theoretischen Konzept der Online-Nachsorge.
       </p>
+
       <h4>Videos</h4>
+
       <p>
         Die in den Filmen beispielhaft als Patienten, Angehörige und Arbeitskollegen auftretenden Personen wurden von Schauspielern dargestellt.
       </p>
@@ -234,22 +240,24 @@
       <p>
         Wir danken allen Hauptdarstellern, Nebendarstellern, Statisten und Location-Partnern für ihren Einsatz und ihre Unterstützung.
       </p>
-      <h4>
-        Darsteller Patienten
-      </h4>
+
+      <h4>Darsteller Patienten</h4>
+
       <p>
         Patrick Twinem (Automechaniker)<br/>
         Kathrin Maier (Büroangstellte)
       </p>
+
       <h4>Experten im Video</h4>
+
       <dl>
         <dt>Klinikleiter </dt><dd>Univ.-Prof. Dr. Manfred E. Beutel</dd>
         <dt>Projektleiter</dt><dd>Dr. Dipl.-Psych. Rüdiger Zwerenz</dd>
         <dt>Onlinetherapeutin</dt><dd>M. Sc. Psych. Katja Böhme<br/>Dipl.-Psych. Astrid Wirth</dd>
       </dl>
-      <h4>
-        Drehorte
-      </h4>
+
+      <h4>Drehorte</h4>
+
       <p>
         Johannes Gutenberg-Universität Mainz
       </p>
@@ -268,9 +276,9 @@
       <p>
         Medienzentrum der Johannes Gutenberg-Universität Mainz <img src="/img/logo_mz.png" height="50px"/>
       </p>
-      <h4>
-        Förderung und Kooperation <img src="/img/logo.svg" height="50px"/>:
-      </h4>
+
+      <h4>Förderung und Kooperation <img src="/img/logo.svg" height="50px"/>:</h4>
+      
       <p>
         Die Entwicklung und Evaluation dieser Internetplattform wird von der Deutschen Rentenversicherung Bund für eine Laufzeit von 18 Monaten (08/2015-01/2017) gefördert.
       </p>
