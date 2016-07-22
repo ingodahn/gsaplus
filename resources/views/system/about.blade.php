@@ -269,85 +269,71 @@
       </p>
 
       <h5>Studienzentrum</h5>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</div>
-            <div class="col-sm-4">
-              <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
-                <img src="/img/unimedizin-mainz-logo.svg" height="40px" class="center-block">
-              </a>
-            </div>
-        </div>
-      </div>
+
+      <p>
+        <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</a>
+      </p>
 
       <h5>Audiovisuelle Konzeption und Produktion</h5>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">Medienzentrum der Johannes Gutenberg-Universität Mainz</div>
-            <div class="col-sm-4">
-              <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
-                <img src="/img/medienzentrum-mainz-logo.png" height="90px" class="center-block">
-              </a>
-            </div>
-        </div>
-      </div>
+
+      <p>
+        <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">Medienzentrum der Johannes Gutenberg-Universität Mainz</a>
+      </p>
 
       <h5>Programmierung und Design</h5>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">Institut für Wissensmedien der Universität Koblenz-Landau</div>
-            <div class="col-sm-4">
-              <a href="http://iwm.ko-ld.de" target="_blank">
-                <img src="/img/iwm-logo.png" class="center-block"/>
-              </a>
-            </div>
-        </div>
-      </div>
+
+      <p>
+        <a href="http://iwm.ko-ld.de" target="_blank">Institut für Wissensmedien der Universität Koblenz-Landau</a>
+      </p>
 
       <h5>Inhaltliche Konzeption und Evaluation</h5>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</div>
-            <div class="col-sm-4">
-              <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
-                <img src="/img/unimedizin-mainz-logo.svg" height="40px" class="center-block"><br>
-              </a>
-            </div>
-        </div>
+      <p>
+        <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</a>
+      </p>
+
+      <p>
+        <a href="http://www.mittelrhein-klinik.de/" target="_blank">Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig</a>
+      </p>
+
+      <p>
+        <a href="http://www.drei-burgen-klinik.de/" target="_blank">Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten / Orthopädie, Bad Münster am Stein</a>
+      </p>
+
+      <p>
+        <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach</a>
+      </p>
+
+      <div style="text-align: center; margin-top: 35px; margin-bottom: 20px;" class="center-block">
+
+        <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
+          <img src="/img/unimedizin-mainz-logo.svg" height="50px" style="margin-right: 16px; vertical-align: bottom;">
+        </a>
+
+        <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
+          <img src="/img/medienzentrum-mainz-logo.png" height="90px" style="margin-right: 20px;">
+        </a>
+
+        <a href="http://iwm.ko-ld.de" target="_blank">
+          <img src="/img/iwm-logo.svg" height="65px" style="margin-right: 16px; vertical-align: bottom;">
+        </a>
+
       </div>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig</div>
-            <div class="col-sm-4">
-              <a href="http://www.mittelrhein-klinik.de/" target="_blank">
-                <img src="/img/mittelrhein-klinik-logo.gif" class="center-block"><br>
-              </a>
-            </div>
-        </div>
-      </div>
+      <div style="text-align: center;" class="center-block">
 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten/ Orthopädie, Bad Münster am Stein</div>
-            <div class="col-sm-4">
-              <a href="http://www.drei-burgen-klinik.de/" target="_blank">
-                <img src="/img/drei-burgen-klinik-logo.gif" class="center-block"><br>
-              </a>
-            </div>
-        </div>
-      </div>
+        <a href="http://www.mittelrhein-klinik.de/" target="_blank">
+          <img src="/img/mittelrhein-klinik-logo.gif" style="margin-right: 16px; vertical-align: bottom;">
+        </a>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach</div>
-            <div class="col-sm-4">
-              <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
-                <img src="/img/acura-kliniken-logo.svg" height="85px" class="center-block">
-              </a>
-            </div>
-        </div>
+        <a href="http://www.drei-burgen-klinik.de/" target="_blank">
+          <img src="/img/drei-burgen-klinik-logo.gif" style="margin-right: 20px; vertical-align: bottom;">
+        </a>
+
+        <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
+          <img src="/img/acura-kliniken-logo.svg" height="70px" style="margin-right: 16px;">
+        </a>
+
       </div>
 
     </div>
