@@ -77,7 +77,6 @@
       <p>
         (RS): Frau A. konnte ihr Anliegen, nicht mehr 5 Tage sondern nur noch 4 Tage arbeiten zu wollen, direkt bei der Vorgesetzten anbringen. Es war ihr möglich, ihre Bedürfnisse angemessen zu äußern.
       </p>
-
       <p>
         Um die Beziehungselemente W, RO und RS zu bestimmen, ist es wichtig, dass die Teilnehmer in ihrem Tagebuch von mehreren zwischenmenschlichen Ereignissen und Begegnungen berichten. Diese Art der Betrachtung kann dem Teilnehmer und dem Therapeuten helfen, das <em>Zentrale Beziehungskonfliktthema</em> (ZBKT) des Teilnehmers zu bestimmen. Darunter versteht man die für den Teilnehmer typische Gestaltung von Beziehungen, welche sich aus den häufigsten W, den häufigsten RO und den häufigsten RS (siehe oben) schließen lässt.
       </p>
@@ -98,9 +97,7 @@
           </div>
           <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
             <div class="panel-body">
-              Zu Beginn der Online-Nachsorge legen Sie einen Schreibtag fest, an welchem Sie voraussichtlich regelmäßig Zeit haben werden, zu schreiben.
-              Abhängig von den verfügbaren Betreuungskapazitäten haben Sie die Möglichkeit, in Ihrem persönlichen Bereich diesen Schreibtag einmalig auf einen anderen Wochentag zu verlegen.
-              Falls Sie es verpassen, an dem festgelegten Tag einen Tagebucheintrag zu schreiben, bleiben Ihnen fünf Tage Zeit, um dies nachzuholen. Nach dem fünften Tag verfällt dann der Schreibimpuls für die betroffene Woche und wird Ihnen für die Folgewoche wieder angeboten.
+              Zu Beginn der Online-Nachsorge legen Sie einen Schreibtag fest, an welchem Sie voraussichtlich regelmäßig Zeit haben werden, zu schreiben. Abhängig von den verfügbaren Betreuungskapazitäten haben Sie die Möglichkeit, in Ihrem persönlichen Bereich diesen Schreibtag einmalig auf einen anderen Wochentag zu verlegen. Falls Sie es verpassen, an dem festgelegten Tag einen Tagebucheintrag zu schreiben, bleiben Ihnen fünf Tage Zeit, um dies nachzuholen. Nach dem fünften Tag verfällt dann der Schreibimpuls für die betroffene Woche und wird Ihnen für die Folgewoche wieder angeboten.
             </div>
           </div>
         </div>
@@ -115,11 +112,7 @@
           </div>
           <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
             <div class="panel-body">
-              Die Themen orientieren sich an der Phase des Nachsorgeprogramms, in der Sie sich befinden.
-              Ein typischer Schreibimpuls besteht darin, eine Situation der vorangegangenen Woche zu schildern,
-              die Sie am meisten bewegt oder beschäftigt hat. Konkrete Anleitungen dazu könnten sein, aufzuschreiben,
-              welche Rolle ihre Gedanken in dieser Situation spielten oder welche Stresssignale Sie in der Situation
-              an sich feststellen konnten. Die Schreibimpulse beziehen sich auch auf Ihre vergangenen Tagebucheinträge.
+              Die Themen orientieren sich an der Phase des Nachsorgeprogramms, in der Sie sich befinden. Ein typischer Schreibimpuls besteht darin, eine Situation der vorangegangenen Woche zu schildern, die Sie am meisten bewegt oder beschäftigt hat. Konkrete Anleitungen dazu könnten sein, aufzuschreiben, welche Rolle ihre Gedanken in dieser Situation spielten oder welche Stresssignale Sie in der Situation an sich feststellen konnten. Die Schreibimpulse beziehen sich auch auf Ihre vergangenen Tagebucheinträge.
             </div>
           </div>
         </div>
@@ -134,11 +127,7 @@
           </div>
           <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
             <div class="panel-body">
-              <em>GSA-Online plus</em> richtet sich an Rehabilitanden, welche im Laufe der ersten 4 Wochen des
-              Nachsorgeprogramms wieder beruflich einsteigen. Falls Sie zu Beginn des Projekts noch arbeitsunfähig
-              sein sollten, können Sie sich beim Schreiben auf vergangene Situationen oder Ereignisse beziehen, die
-              für Sie eine Rolle gespielt haben. Eine genauere Anleitung dazu finden Sie aber auch in den wöchentlichen
-              Schreibimpulsen.
+              <em>GSA-Online plus</em> richtet sich an Rehabilitanden, welche im Laufe der ersten 4 Wochen des Nachsorgeprogramms wieder beruflich einsteigen. Falls Sie zu Beginn des Projekts noch arbeitsunfähig sein sollten, können Sie sich beim Schreiben auf vergangene Situationen oder Ereignisse beziehen, die für Sie eine Rolle gespielt haben. Eine genauere Anleitung dazu finden Sie aber auch in den wöchentlichen Schreibimpulsen.
             </div>
           </div>
         </div>
@@ -153,10 +142,7 @@
           </div>
           <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
             <div class="panel-body">
-              Nein, es geht zwar in erster Linie um die begleitende Wiedereingliederung in den Arbeitsalltag, es ist
-              aber genauso wichtig, andere Ereignisse aus Ihrem Umfeld in Ihre Schilderungen miteinzubeziehen. Diese
-              können ebenso Auskunft über das vorliegende Beziehungskonfliktthema (ZBKT) geben und außerdem einen
-              Einfluss auf Ihre Belastungen am Arbeitsplatz haben.
+              Nein, es geht zwar in erster Linie um die begleitende Wiedereingliederung in den Arbeitsalltag, es ist aber genauso wichtig, andere Ereignisse aus Ihrem Umfeld in Ihre Schilderungen miteinzubeziehen. Diese können ebenso Auskunft über das vorliegende Beziehungskonfliktthema (ZBKT) geben und außerdem einen Einfluss auf Ihre Belastungen am Arbeitsplatz haben.
             </div>
           </div>
         </div>
@@ -171,9 +157,7 @@
           </div>
           <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
             <div class="panel-body">
-              Ihr persönliches Tagebuch kann von Ihnen jederzeit eingesehen werden, auch während Sie einen Eintrag verfassen. Z
-              udem besteht die Möglichkeit, die Kommunikationsverläufe zwischen Ihnen und Ihrem Onlinetherapeuten
-              (Ihr Tagebuch mit allen Rückmeldungen) auszudrucken.
+              Ihr persönliches Tagebuch kann von Ihnen jederzeit eingesehen werden, auch während Sie einen Eintrag verfassen. Zudem besteht die Möglichkeit, die Kommunikationsverläufe zwischen Ihnen und Ihrem Onlinetherapeuten (Ihr Tagebuch mit allen Rückmeldungen) auszudrucken.
             </div>
           </div>
         </div>
@@ -188,8 +172,7 @@
           </div>
           <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
             <div class="panel-body">
-              Dem Studienteam gehören mehrere Therapeuten an. Zu Beginn des Projekts werden Sie einem Therapeuten aus
-              dieser Gruppe von geschulten Psychologen zugewiesen, welcher Sie dann 12 Wochen lang begleitet.
+              Dem Studienteam gehören mehrere Therapeuten an. Zu Beginn des Projekts werden Sie einem Therapeuten aus dieser Gruppe von geschulten Psychologen zugewiesen, welcher Sie dann 12 Wochen lang begleitet.
             </div>
           </div>
         </div>
@@ -204,8 +187,7 @@
           </div>
           <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
             <div class="panel-body">
-              Nur die Therapeuten, die dem Studienteam angehören, können Ihre anonymen Tagebucheinträge und die
-              zugehörigen Rückmeldungen Ihres Onlinetherapeuten einsehen.
+              Nur die Therapeuten, die dem Studienteam angehören, können Ihre anonymen Tagebucheinträge und die zugehörigen Rückmeldungen Ihres Onlinetherapeuten einsehen.
             </div>
           </div>
         </div>
@@ -220,10 +202,7 @@
           </div>
           <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
             <div class="panel-body">
-              Bei der Anmeldung auf der Online-Plattform legen Sie selbst einen Benutzernamen für sich fest.
-              Mit diesem Namen wird Ihr Onlinetherapeut Sie in den folgenden 12 Wochen anschreiben.
-              Wir weisen darauf hin, dass Sie auf der Online-Plattform keine persönlichen Daten wie Namen, Geburtsdaten oder Adressen
-              angeben sollten. Sie werden von Seiten der Therapeuten auch nicht dazu aufgefordert.
+              Bei der Anmeldung auf der Online-Plattform legen Sie selbst einen Benutzernamen für sich fest. Mit diesem Namen wird Ihr Onlinetherapeut Sie in den folgenden 12 Wochen anschreiben. Wir weisen darauf hin, dass Sie auf der Online-Plattform keine persönlichen Daten wie Namen, Geburtsdaten oder Adressen angeben sollten. Sie werden von Seiten der Therapeuten auch nicht dazu aufgefordert.
             </div>
           </div>
         </div>
@@ -231,23 +210,17 @@
       </div>
 
       <h3>Entwicklung der Internetplattform</h3>
-
       <p>
-        Grundlage der auf dieser Plattform präsentierten Inhalte, bilden die Ergebnisse und Erfahrungen des wissenschaftlich evaluierten Vorgängerprojektes GSA-Online.
-        In einer kontrollierten Studie wurde dort die Wirksamkeit von GSA-Online für Rehabilitanden aus verschiedenen Bereichen (Kardiologie, Orthopädie, Psychosomatik) nachgewiesen.
-        Um die Online-Nachsorge auch einem weiteren Kreis von Rehabilitanden anbieten zu können, wurde unter Berücksichtigung der Rückmeldungen von Teilnehmern der Online-Nachsorge und
-        des medizinischen Personals (Ärzte, Psychologen) die überarbeitete Internetplattform GSA-Online plus entwickelt.
+        Grundlage der auf dieser Plattform präsentierten Inhalte, bilden die Ergebnisse und Erfahrungen des wissenschaftlich evaluierten Vorgängerprojektes GSA-Online. In einer kontrollierten Studie wurde dort die Wirksamkeit von GSA-Online für Rehabilitanden aus verschiedenen Bereichen (Kardiologie, Orthopädie, Psychosomatik) nachgewiesen. Um die Online-Nachsorge auch einem weiteren Kreis von Rehabilitanden anbieten zu können, wurde unter Berücksichtigung der Rückmeldungen von Teilnehmern der Online-Nachsorge und des medizinischen Personals (Ärzte, Psychologen) die überarbeitete Internetplattform GSA-Online plus entwickelt.
       </p>
-      <p>Auf Grundlage von Erfahrungsberichten präsentiert die Plattform zwei beispielhafte Patientengeschichten in denen sich zentrale Fragen der Psychosozialen Rehabilitation
-        in einfacher Form spiegeln. Die Personen und Handlungen sind frei erfunden. Ähnlichkeiten mit lebenden oder toten Personen sind rein zufällig und nicht beabsichtigt.
+      <p>
+        Auf Grundlage von Erfahrungsberichten präsentiert die Plattform zwei beispielhafte Patientengeschichten in denen sich zentrale Fragen der Psychosozialen Rehabilitation in einfacher Form spiegeln. Die Personen und Handlungen sind frei erfunden. Ähnlichkeiten mit lebenden oder toten Personen sind rein zufällig und nicht beabsichtigt.
       </p>
-      <p>Zudem nutzten wir die Rückmeldungen von Rehabilitanden und Mitarbeitern, um dem Nutzer auf der Internetplattform vertiefende Informationen anbieten zu können.
-        Mehrere Experten aus dem Feld der Reha-Wissenschaft vermitteln in diesem Sinne in ergänzenden Erklärvideos grundlegende Informationen zum Ablauf,
-        zur Wirksamkeit und zum theoretischen Konzept der Online-Nachsorge.
+      <p>
+        Zudem nutzten wir die Rückmeldungen von Rehabilitanden und Mitarbeitern, um dem Nutzer auf der Internetplattform vertiefende Informationen anbieten zu können. Mehrere Experten aus dem Feld der Reha-Wissenschaft vermitteln in diesem Sinne in ergänzenden Erklärvideos grundlegende Informationen zum Ablauf, zur Wirksamkeit und zum theoretischen Konzept der Online-Nachsorge.
       </p>
 
       <h4>Videos</h4>
-
       <p>
         Die in den Filmen beispielhaft als Patienten, Angehörige und Arbeitskollegen auftretenden Personen wurden von Schauspielern dargestellt.
       </p>
@@ -259,14 +232,12 @@
       </p>
 
       <h4>Darsteller Patienten</h4>
-
       <ul>
         <li >Patrick Twinem (Automechaniker)</li>
         <li>Kathrin Maier (Büroangstellte)</li>
       </ul>
 
       <h4>Experten im Video</h4>
-
       <ul>
         <li><strong>Klinikleiter</strong> – Univ.-Prof. Dr. Manfred E. Beutel</li>
         <li><strong>Projektleiter</strong> – Dr. Dipl.-Psych. Rüdiger Zwerenz</li>
@@ -274,7 +245,6 @@
       </ul>
 
       <h4>Drehorte</h4>
-
       <ul>
         <li>Johannes Gutenberg-Universität Mainz</li>
         <li>Universitätsmedizin der Johannes Gutenberg-Universität Mainz</li>
@@ -283,77 +253,61 @@
       </ul>
 
       <h4>Förderung und Kooperation</h4>
-
       <p>
         Die Entwicklung und Evaluation dieser Internetplattform wird von der <a href="https://www.deutsche-rentenversicherung.de/" target="_blank">Deutschen Rentenversicherung Bund</a> für eine Laufzeit von 18 Monaten (08/2015 bis 01/2017) gefördert.
       </p>
 
       <h5>Studienzentrum</h5>
-
       <p>
         <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</a>
       </p>
 
       <h5>Audiovisuelle Konzeption und Produktion</h5>
-
       <p>
         <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">Medienzentrum der Johannes Gutenberg-Universität Mainz</a>
       </p>
 
       <h5>Programmierung und Design</h5>
-
       <p>
         <a href="http://iwm.ko-ld.de" target="_blank">Institut für Wissensmedien der Universität Koblenz-Landau</a>
       </p>
 
       <h5>Inhaltliche Konzeption und Evaluation</h5>
-
       <p>
         <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">Klinik und Poliklinik für Psychosomatische Medizin und Psychotherapie, Universitätsmedizin der Johannes Gutenberg-Universität Mainz</a>
       </p>
-
       <p>
         <a href="http://www.mittelrhein-klinik.de/" target="_blank">Mittelrhein-Klinik: Fachklinik für Psychosomatische und Onkologische Rehabilitation, Boppard-Bad Salzig</a>
       </p>
-
       <p>
         <a href="http://www.drei-burgen-klinik.de/" target="_blank">Drei-Burgen Klinik: Fachklinik für Herz- und Kreislaufkrankheiten / Orthopädie, Bad Münster am Stein</a>
       </p>
-
       <p>
         <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">Karl- Aschoff- Klinik: Rehaklinik für Rheumatologie und Orthopädie, Bad Kreuznach</a>
       </p>
 
       <div style="text-align: center; margin-top: 35px; margin-bottom: 20px;" class="center-block">
-
         <a href="http://www.unimedizin-mainz.de/psychosomatik/startseite/" target="_blank">
           <img src="/img/unimedizin-mainz-logo.svg" height="50px" style="margin-right: 16px; vertical-align: bottom;">
         </a>
-
         <a href="https://www.medienzentrum.uni-mainz.de/" target="_blank">
           <img src="/img/medienzentrum-mainz-logo.png" height="90px" style="margin-right: 20px;">
         </a>
-
         <a href="http://iwm.ko-ld.de" target="_blank">
           <img src="/img/iwm-logo.svg" height="65px" style="margin-right: 16px; vertical-align: bottom;">
         </a>
-
       </div>
 
       <div style="text-align: center;" class="center-block">
-
         <a href="http://www.mittelrhein-klinik.de/" target="_blank">
           <img src="/img/mittelrhein-klinik-logo.gif" style="margin-right: 16px; vertical-align: bottom;">
         </a>
-
         <a href="http://www.drei-burgen-klinik.de/" target="_blank">
           <img src="/img/drei-burgen-klinik-logo.gif" style="margin-right: 20px; vertical-align: bottom;">
         </a>
-
         <a href="http://reha.acura-kliniken.com/patienten/fachbereich-rheumatologie/karl-aschoff-klinik/" target="_blank">
           <img src="/img/acura-kliniken-logo.svg" height="70px" style="margin-right: 16px;">
         </a>
-
       </div>
 
     </div>
