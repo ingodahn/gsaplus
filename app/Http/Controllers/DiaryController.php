@@ -352,7 +352,7 @@ EOD;
                 $comment_reply->helpful = $request->input('comment_reply_helpful');
             }
             if ($request->has('comment_reply_satisfied')) {
-                $comment_reply->helpful = $request->input('comment_reply_satisfied');
+                $comment_reply->satisfied = $request->input('comment_reply_satisfied');
             }
             if ($comment->comment_reply) {
                 $comment_reply->save();
