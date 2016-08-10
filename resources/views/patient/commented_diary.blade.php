@@ -47,7 +47,16 @@
             ]
           }]
         },
-        options: {}
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 10
+                    }
+                }]
+            }
+        }
       });
     </script>
 
