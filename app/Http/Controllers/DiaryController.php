@@ -88,7 +88,7 @@ Es ist lediglich wichtig, das Schreiben nach Beginn nicht zu unterbrechen.
 
 Ich freue mich sehr auf Ihren ersten Tagebucheintrag.
 Herzliche Grüße,
-Ihr Online-Therapeut
+Ihr Onlinetherapeut
 EOD;
 
 
@@ -181,7 +181,7 @@ Es ist lediglich wichtig, das Schreiben nach Beginn nicht zu unterbrechen.
 
 Ich freue mich sehr auf Ihren ersten Tagebucheintrag.
 Herzliche Grüße,
-Ihr Online-Therapeut
+Ihr Onlinetherapeut
 EOD;
             $entry_info['problem'] = $problem_1;            ;
             if (!array_key_exists('situations', $assignment_info)) {
