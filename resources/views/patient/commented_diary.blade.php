@@ -33,7 +33,6 @@
               @for ($w=1; $w <= $Week; $w++)
                 {{ $Health[$w] }},
               @endfor
-              {{ $Health[$Week] }}
             ]
           }, {
             label: 'Arbeitsfähigkeit',
@@ -43,7 +42,6 @@
               @for ($w=1; $w <= $Week; $w++)
                 {{ $Wai[$w] }},
               @endfor
-              {{ $Wai[$Week] }}
             ]
           }]
         },
