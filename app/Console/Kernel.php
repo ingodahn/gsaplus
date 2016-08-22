@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Helper;
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Log;
@@ -30,5 +32,10 @@ class Kernel extends ConsoleKernel
        $schedule->command("gsa:send-notifications --all --set-next-writing-date")
                     ->daily()
                     ->appendOutputTo("storage/logs/send-notifications.log");
+
+        // Send test mail
+        Helper::send_email_using_view(config('mail.from.address'), config('mail.from.name'),
+                                        config('mail.admin.address'), config('mail.admin.name'),
+                                        'Planmäßiger E-Mail-Versand', 'emails.cronMail');
     }
 }
