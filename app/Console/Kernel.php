@@ -28,11 +28,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule) {
        $schedule->command("gsa:send-notifications --all --set-next-writing-date")
-                    ->everyMinute()
+                    ->daily()
                     ->appendOutputTo("storage/logs/send-notifications.log");
 
         $schedule->command("gsa:send-test-mails")
-                    ->everyMinute()
+                    ->daily()
                     ->appendOutputTo("storage/logs/send-test-mails.log");
     }
 
