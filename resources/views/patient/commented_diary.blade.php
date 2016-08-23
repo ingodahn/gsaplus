@@ -77,7 +77,7 @@
           @elseif($Assignments[1]['answer']=="")
             Nicht bearbeitet
           @else
-            @for ($j=1;$j<=2;$j++)
+            @for ($j=1;$j<=3;$j++)
               @if (isset($Assignments[1]['answer'][$j-1]['description']) && $Assignments[1]['answer'][$j-1]['description'] !== "")
                 <div class="situation">
                   <h4><i class="fa fa-sitemap" aria-hidden="true"></i> Situation {!! $j !!}</h4>
