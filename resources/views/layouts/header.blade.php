@@ -27,7 +27,7 @@
 
           {{-- Patient --}}
           @if($isPatient)
-            <li><a href="/Home">Mein Tagebuch</a></li>
+            <li><a href="/Home"><i class="fa fa-book" aria-hidden="true"></i> Mein Tagebuch</a></li>
           @endif
 
           {{-- Therapist --}}
@@ -46,7 +46,7 @@
           @endif
 
           {{-- Common --}}
-          <li><a href="/info">Hintergrundinformation</a></li>
+          <li><a href="/info"><i class="fa fa-youtube-play" aria-hidden="true"></i> Info-Videos</a></li>
 
           {{-- User-Related --}}
           <li class="dropdown">
