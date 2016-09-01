@@ -81,7 +81,7 @@ class DiaryController extends Controller
         }
 
         $problem_1= <<<EOD
-In der ersten Woche geht es um Ihre zwischenmenschlichen Beziehungen am Arbeitsplatz. Bitte beschreiben Sie dazu wenn möglich bis zu drei Situationen aus Ihrem Arbeitsleben, in denen Sie mit anderen Personen, z.B. Kollegen oder Vorgesetzten zusammen trafen. Jede Ihrer Beschreibungen sollte einen Kontakt behandeln, der für Sie im Positiven oder Negativen bedeutsam gewesen ist. Es sollten Ereignisse mit verschiedenen Personen sein, sowohl aus der Gegenwart als auch der Vergangenheit. 
+In der ersten Woche geht es um Ihre zwischenmenschlichen Beziehungen am Arbeitsplatz. Bitte beschreiben Sie dazu wenn möglich bis zu drei Situationen aus Ihrem Arbeitsleben, in denen Sie mit anderen Personen, z.B. Kollegen oder Vorgesetzten zusammen trafen. Jede Ihrer Beschreibungen sollte einen Kontakt behandeln, der bei Ihnen positive oder negative Gefühle ausgelöst hat. Es sollten Ereignisse mit verschiedenen Personen sein, sowohl aus der Gegenwart als auch der Vergangenheit. 
 
 Sie müssen sich beim Schreiben keine Gedanken über die Rechtschreibung, Satzstellung oder Grammatik machen. 
 Es ist lediglich wichtig, das Schreiben nach Beginn nicht zu unterbrechen.
@@ -174,7 +174,7 @@ EOD;
         $entry_info['status_text'] = AssignmentStatus::$STATUS_INFO[$assignment_info['assignmentStatus']];
        if ($week == 1) {
            $problem_1= <<<EOD
-In der ersten Woche geht es um Ihre zwischenmenschlichen Beziehungen am Arbeitsplatz. Bitte beschreiben Sie dazu wenn möglich bis zu drei Situationen aus Ihrem Arbeitsleben, in denen Sie mit anderen Personen, z.B. Kollegen oder Vorgesetzten zusammen trafen. Jede Ihrer Beschreibungen sollte einen Kontakt behandeln, der für Sie im Positiven oder Negativen bedeutsam gewesen ist. Es sollten Ereignisse mit verschiedenen Personen sein, sowohl aus der Gegenwart als auch der Vergangenheit. 
+In der ersten Woche geht es um Ihre zwischenmenschlichen Beziehungen am Arbeitsplatz. Bitte beschreiben Sie dazu wenn möglich bis zu drei Situationen aus Ihrem Arbeitsleben, in denen Sie mit anderen Personen, z.B. Kollegen oder Vorgesetzten zusammen trafen. Jede Ihrer Beschreibungen sollte einen Kontakt behandeln, der bei Ihnen positive oder negative Gefühle ausgelöst hat. Es sollten Ereignisse mit verschiedenen Personen sein, sowohl aus der Gegenwart als auch der Vergangenheit. 
 
 Sie müssen sich beim Schreiben keine Gedanken über die Rechtschreibung, Satzstellung oder Grammatik machen. 
 Es ist lediglich wichtig, das Schreiben nach Beginn nicht zu unterbrechen.

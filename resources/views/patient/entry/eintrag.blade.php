@@ -58,7 +58,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="situation0_their_reaction">Wie haben die anderen an der Situation beteiligten reagiert?</label>
+              <label for="situation0_their_reaction">Wie hat die andere Person reagiert?</label>
               @if($editable)
                 <textarea class="form-control js-auto-size" id="situation0_their_reaction" name="situation0_their_reaction">{{$EntryInfo['answer'][0]['their_reaction']}}</textarea>
               @else
@@ -68,7 +68,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="situation0_my_reaction">Wie haben Sie auf die anderen reagiert?</label>
+              <label for="situation0_my_reaction">Wie haben Sie selbst reagiert?</label>
               @if($editable)
                 <textarea class="form-control js-auto-size" id="situation0_my_reaction" name="situation0_my_reaction">{{$EntryInfo['answer'][0]['my_reaction']}}</textarea>
               @else
@@ -113,7 +113,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="situation1_their_reaction">Wie haben die anderen an der Situation beteiligten reagiert?</label>
+              <label for="situation1_their_reaction">Wie hat die andere Person reagiert?</label>
               @if($editable)
                 <textarea class="form-control js-auto-size" id="situation1_their_reaction" name="situation1_their_reaction">{{$EntryInfo['answer'][1]['their_reaction']}}</textarea>
               @else
@@ -123,7 +123,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="situation1_my_reaction">Wie haben Sie auf die anderen reagiert?</label>
+              <label for="situation1_my_reaction">Wie haben Sie selbst reagiert?</label>
               @if($editable)
                 <textarea class="form-control js-auto-size" id="situation1_my_reaction" name="situation1_my_reaction">{{$EntryInfo['answer'][1]['my_reaction']}}</textarea>
               @else
@@ -168,7 +168,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="situation2_their_reaction">Wie haben die anderen an der Situation beteiligten reagiert?</label>
+              <label for="situation2_their_reaction">Wie hat die andere Person reagiert?</label>
               @if($editable)
                 <textarea class="form-control js-auto-size" id="situation2_their_reaction" name="situation2_their_reaction">{{$EntryInfo['answer'][2]['their_reaction']}}</textarea>
               @else
@@ -178,7 +178,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="situation2_my_reaction">Wie haben Sie auf die anderen reagiert?</label>
+              <label for="situation2_my_reaction">Wie haben Sie selbst reagiert?</label>
               @if($editable)
                 <textarea class="form-control js-auto-size" id="situation2_my_reaction" name="situation2_my_reaction">{{$EntryInfo['answer'][2]['my_reaction']}}</textarea>
               @else

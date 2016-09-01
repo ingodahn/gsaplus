@@ -88,11 +88,11 @@
                   <div class="sitPart">
                     {!! $Assignments[1]['answer'][$j-1]['expectation'] !!}
                   </div>
-                    <h5>Wie haben die anderen an der Situation beteiligten reagiert?</h5>
+                    <h5>Wie hat die andere Person reagiert?</h5>
                     <div class="sitPart">
                         {!! $Assignments[1]['answer'][$j-1]['theirReaction'] !!}
                     </div>
-                  <h5>Wie haben Sie auf die anderen reagiert?</h5>
+                  <h5>Wie haben Sie selbst reagiert?</h5>
                   <div class="sitPart">
                     {!! $Assignments[1]['answer'][$j-1]['myReaction'] !!}
                   </div>
