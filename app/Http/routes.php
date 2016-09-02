@@ -119,7 +119,7 @@ Route::group(['middleware' => ['web']], function () {
 	}
 });
 
-Route::group(['middleware' => ['web', 'auth', 'role:admin']], function () {
+Route::group(['middleware' => ['web', 'auth', 'role:admin', 'cache.validate']], function () {
 	Route::get('/admin_home', 'AdminController@admin_home');
 	Route::post('/admin/therapists/new', 'AdminController@create_therapist');
 	Route::get('/admin/dump-info/{user}', 'AdminController@dumpInfo');
@@ -127,7 +127,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:admin']], function () {
 	Route::get('/admin/codes-as-csv', 'AdminController@export_code_list');
 });
 
-Route::group(['middleware' => ['web', 'auth', 'role:admin,therapist']], function () {
+Route::group(['middleware' => ['web', 'auth', 'role:admin,therapist', 'cache.validate']], function () {
 	Route::get('/AdminCodes','AdminController@admin_codes');
 	Route::get('/AdminUsers','AdminController@admin_users');
 });
@@ -135,7 +135,7 @@ Route::group(['middleware' => ['web', 'auth', 'role:admin,therapist']], function
 /*
  *  The following routes are working with the test date (if one is specified).
  */
-Route::group(['middleware' => ['web', 'auth', 'test.date']], function () {
+Route::group(['middleware' => ['web', 'auth', 'test.date', 'cache.validate']], function () {
 	Route::get('/Home', 'AuxController@home');
 
 	Route::get('/Diary/{name?}','DiaryController@show');

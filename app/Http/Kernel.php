@@ -49,6 +49,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'test.date' => \App\Http\Middleware\ChangeCurrentDate::class,
-        'role' => \App\Http\Middleware\CheckUserRole::class
+        'role' => \App\Http\Middleware\CheckUserRole::class,
+        'cache.validate' => \App\Http\Middleware\ValidateBackHistory::class
     ];
 }
