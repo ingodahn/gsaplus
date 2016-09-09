@@ -112,7 +112,7 @@ class Patient extends User
         if ($current_assignment && $current_assignment->week < 12) {
             // day is changed during intervention period
 
-            // leave patient at least 7 days time to complete the current assignment
+            // leave patient at least 5 days time to complete the current assignment
             $next_writing_date = Date::now()->next($assignment_day);
 
             if (Date::now()->startOfDay()->diffInDays($next_writing_date) < config('gsa.buffer_between_assignments')) {
@@ -143,7 +143,7 @@ class Patient extends User
 
             $reference_date = $reference_date->startOfDay();
 
-            // leave patient at least 7 days time to complete the current assignment
+            // leave patient at least 5 days time to complete the current assignment
             $next_writing_date = $reference_date->copy()->next($this->assignment_day);
 
             if ($reference_date->diffInDays($next_writing_date) < config('gsa.buffer_between_assignments')) {

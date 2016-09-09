@@ -24,7 +24,7 @@ return [
 
     'reminder_period_in_days' => env('REMINDER_PERIOD', 2),
     'missed_period_in_days' => env('MISSED_PERIOD', 5),
-    'buffer_between_assignments' => env('BUFFER_BETWEEN_ASSIGNMENTS', 7),
+    'buffer_between_assignments' => env('BUFFER_BETWEEN_ASSIGNMENTS', 5),
 
     // for testing: change current date
     'current_date' => env('CURRENT_DATE', 'now'),
