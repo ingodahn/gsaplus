@@ -13,7 +13,7 @@
         <form action="/SendMessage" method="post" data-parsley-validate>
           {{ csrf_field() }}
           <div class="form-group">
-            <label for="eMail" class="control-label">E-Mail</label>
+            <label for="eMail" class="control-label">Ihre E-Mail</label>
             <input name="eMail" type="email" class="form-control" placeholder="mail@domain.de" required></input>
           </div>
           <div class="form-group">
