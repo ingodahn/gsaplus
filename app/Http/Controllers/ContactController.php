@@ -73,6 +73,8 @@ class ContactController extends Controller
 		$patient_names_array = $patient_names->toArray();
 
 		for ($i = 0; $i < count($patient_mails); $i++) {
+			sleep(config('mail.time_between_consecutive_mails'));
+
 			Mail::raw($mail_body, function ($message) use ($patient_names_array, $patient_mails, $i, $eMailTeam, $nameTeam, $mail_subject) {
 				// works because collections are sorted (see above)
 				$message->from($eMailTeam, $nameTeam)

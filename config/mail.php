@@ -134,4 +134,9 @@ return [
 
     'sendmail' => '/usr/sbin/sendmail -bs',
 
+    /*
+     * When sending consecutive emails: wait 5 seconds before sending next email.
+     */
+    'time_between_consecutive_mails' => env('TIME_BETWEEN_CONSECUTIVE_MAILS', 5),
+
 ];

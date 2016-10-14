@@ -239,6 +239,8 @@ class SendNotifications extends Command
         }
 
         if ($patient !== null && $view !== null) {
+            sleep(config('mail.time_between_consecutive_mails'));
+
             Mail::send($view, $parameters,
                 function ($message) use ($patient, $subject) {
                     $message->from(config('mail.team.address'), config('mail.team.name'))
