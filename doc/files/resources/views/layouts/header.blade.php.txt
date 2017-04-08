@@ -1,0 +1,69 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      @if($isLoggedIn)
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      @endif
+      <a href="/">
+        <img src="/img/logo.svg" alt="GSA Online Plus Logo" title="zur Startseite" class="nav-logo"></img>
+      </a>
+    </div>
+
+    @if(!$isLoggedIn)
+      <a href="http://www.unimedizin-mainz.de/" target="_blank">
+        <img src="/img/unimedizin-mainz-logo.svg" alt="Universitätsmedizin Mainz Logo" title="zur Website der Universitätsmedizin Mainz" class="unimed-logo-header pull-right">
+      </a>
+    @endif
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        @if($isLoggedIn)
+
+          {{-- Patient --}}
+          @if($isPatient)
+            <li><a href="/Home"><i class="fa fa-book" aria-hidden="true"></i> Mein Tagebuch</a></li>
+          @endif
+
+          {{-- Therapist --}}
+          @if($isTherapist)
+            <li><a href="/Home">Patientenliste</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Werkzeuge <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                @if($isLocal)
+                  <li><a href="/test" target="_blank">Konrollzentrum</a></li>
+                @endif
+                <li><a href="/AdminUsers" target="_blank">Alle Nutzer</a></li>
+                <li><a href="/AdminCodes" target="_blank">Alle Codes</a></li>
+              </ul>
+            </li>
+          @endif
+
+          {{-- Common --}}
+          <li><a href="/info"><i class="fa fa-youtube-play" aria-hidden="true"></i> Info-Videos</a></li>
+
+          {{-- User-Related --}}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user{{$isTherapist ? "-md" : ""}}" aria-hidden="true"></i> {{$Name}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              @if($isPatient)
+                <li><a href="/Profile/{{$Name}}">Mein Profil</a></li>
+              @endif
+              <li><a href="/Logout">Ausloggen</a></li>
+            </ul>
+          </li>
+
+        @endif
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+

@@ -1,0 +1,42 @@
+<?php
+
+namespace App;
+
+use App\Models\AssignmentStatus;
+use App\Models\AssignmentType;
+
+use Jenssegers\Date\Date;
+
+class SituationSurvey extends Assignment
+{
+
+    protected static $singleTableType = AssignmentType::SITUATION_SURVEY;
+
+    public function situations() {
+        return $this->hasMany('App\Situation');
+    }
+
+    public function getPartiallyAnsweredAttribute() {
+        $situations = $this->situations;
+
+        // did the user provide any answer?
+        $partially_answered = false;
+
+        if ($situations !== null) {
+            foreach ($situations as $situation) {
+                if ($situation->description != NULL
+                    || $situation->expectation != NULL
+                    || $situation->my_reaction != NULL
+                    || $situation->their_reaction != NULL) {
+                    // user provided some answers
+                    $partially_answered = true;
+                    break;
+                }
+            }
+        }
+
+        return $partially_answered;
+    }
+
+}
+

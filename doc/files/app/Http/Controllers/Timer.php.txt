@@ -1,0 +1,53 @@
+<?php
+
+
+namespace App\Http\Controllers;
+
+
+/**
+ * Der Timer führt nach einer konfigurierbaren Zeit ($timer_cycle) die folgenden
+ * Aktionen durch.
+ * <ol>
+ * 	<li>Registrierte Benutzer für die die Entlassungszeit eingegeben ist und für
+ * die diese Zeit erreicht ist erhalten die erste Schreibaufgabe. Der Status des
+ * Benutzers und der Aufgabe werden aktualisiert.</li>
+ * 	<li>Die vom Therapeuten gestellte Aufgabe wird für den Patienten
+ * freigeschaltet wenn dessen Schreibtag erreicht ist. Der Status der Aufgabe und
+ * des Patienten wird aktualisiert und der Patient wird per Mail benachrichtigt.
+ * </li>
+ * 	<li>Patienten, deren aktuelle Aufgabe 5 Tage nach Aufgabenstellung nicht
+ * abgeschickt ist, erhalten einmalig eine Erinnerungsnachricht. Der Status des
+ * Patienten und der Aufgabe werden aktualisiert.</li>
+ * 	<li>Aufgaben die 7 Tage nach Aufgabenstellung nicht abgeschickt wurden werden
+ * als überfällig markiert. Der Status der Aufgabe und des Patienten wird
+ * aktualisiert.</li>
+ * 	<li>Patienten werden 12 Wochen nach Erteilung der ersten Schreibaufgabe aus
+ * der Intervention herausgenommen. Ihr Status wird angepasst und für den
+ * verwendeten Wochentag wird ein Slot freigegeben.</li>
+ * </ol>
+ * @author dahn
+ * @version 1.0
+ * @created 16-Feb-2016 18:53:27
+ */
+class Timer
+{
+
+	function __construct()
+	{
+	}
+
+	function __destruct()
+	{
+	}
+
+
+
+	/**
+	 * Does periodically all specified actions . Is triggered by timer event.
+	 */
+	public function do_timer()
+	{
+	}
+
+}
+?>

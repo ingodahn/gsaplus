@@ -1,0 +1,99 @@
+<?php
+
+namespace App;
+
+use App\Models\InfoModel;
+use Nanigans\SingleTableInheritance\SingleTableInheritanceTrait;
+
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+use Jenssegers\Date\Date;
+
+class User extends InfoModel implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
+{
+    use Authenticatable, Authorizable, CanResetPassword, SingleTableInheritanceTrait;
+
+    protected $table = "users";
+
+    protected static $singleTableTypeField = 'type';
+
+    protected static $singleTableSubclasses = [Patient::class, Admin::class, Therapist::class];
+
+    protected static $persisted = ['name',
+        'email',
+        'password',
+        'is_random',
+        'remember_token'
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string the route key for the model
+     */
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password'
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'created_at',
+        'updated_at',
+        'is_random',
+        'type'
+    ];
+
+    /*
+     * The following accessors will convert every date to an instance
+     * of Jenssegers\Date\Date which supports localization.
+     *
+     * All dates are originally returned as Carbon instances. The
+     * Date class extends the Carbon class. So conversion is a
+     * piece of cake.
+     */
+
+    public function getCreatedAtAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
+
+    public function getUpdatedAtAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
+
+    public function getLastLoginAttribute($date) {
+        return $date === null ? null : new Date($date);
+    }
+
+}
+

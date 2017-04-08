@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+use App\Therapist;
+
+use App\Helper;
+
+class TherapistsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $therapists = factory(Therapist::class, 4)
+            ->make()
+            ->each(function (Therapist $t) {
+                Helper::set_developer_attributes($t, true);
+            });
+    }
+}
+

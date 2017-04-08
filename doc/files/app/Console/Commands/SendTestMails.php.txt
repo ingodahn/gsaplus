@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Helper;
+
+use Illuminate\Console\Command;
+
+use Jenssegers\Date\Date;
+use Illuminate\Support\Facades\Mail;
+
+class SendTestMails extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'gsa:send-test-mails';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Send test mails (e.g. inform admin about running cronjobs)';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        // Send test mail
+        Helper::send_email_using_view(config('mail.from.address'), config('mail.from.name'),
+            config('mail.admin.address'), config('mail.admin.name'),
+            'Planmäßiger E-Mail-Versand', 'emails.cronMail');
+
+        if(count(Mail::failures()) > 0) {
+            $this->error(Date::now().': could\'nt send test mails');
+        } else {
+            $this->info(Date::now().': sent test mails');
+        }
+    }
+
+}
+

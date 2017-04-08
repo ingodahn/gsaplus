@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateWeekDaysTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('week_days', function (Blueprint $table) {
+            // value of Carbon::MONDAY ... Carbon::SUNDAY
+            // 0...6 -> Sunday...Saturday (http://php.net/manual/en/function.date.php)
+            $table->tinyInteger('number')->unique();
+            // name of the day
+            $table->string('name')->unique();
+            // number of remaining assignments (for this day)
+            $table->smallInteger('free_time_slots');
+
+            $table->primary('number');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('week_days');
+    }
+}
+

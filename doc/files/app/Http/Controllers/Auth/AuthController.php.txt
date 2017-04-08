@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\GateController;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+
+use Session;
+use UxWeb\SweetAlert\SweetAlert as Alert;
+
+use App\Http\Controllers\Days;
+
+class AuthController extends Controller
+{
+    /*
+    |--------------------------------------------------------------------------
+    |  Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the authentication of existing users.
+    */
+
+    use AuthenticatesUsers, ThrottlesLogins;
+
+    /**
+     * Where to redirect users after login / registration.
+     */
+    protected $redirectTo = '/Home';
+
+    /**
+     * Show login page when user logged out.
+     */
+    protected $redirectAfterLogout = "/Login";
+
+    /**
+     * The view containing the login form.
+     */
+    protected $loginView = 'gate.start_page';
+
+    /**
+     * Check the name when authenticating a user.
+     *
+     * The value is equal to the column name (of the users table) and
+     * the name of the field in the login form.
+     */
+    protected $username = 'name';
+
+    /**
+     * Create a new authentication controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * Show the application login form - overwrite the default implementation and tell
+     * the view if the registration process is available.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        $days = new Days();
+
+        if ($days->day_available()) {
+            Session::put(GateController::PAGE_SESSION_KEY,
+                GateController::PAGE_STRING_MAP[GateController::PAGE_START]);
+        }
+
+        return view('gate.start_page', ['RegistrationPossible' => $days->day_available()]);
+    }
+}
+
